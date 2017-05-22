@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+			<feeds module="feeds">
+				<title>Feeds</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="feeds">
+						<title>Manage Feeds</title>
+						<sort_order>0</sort_order>
+						<action>feeds/adminhtml_feeds</action>
+					</items>
+				</children>
+			</feeds>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Angara_Feeds>
+							<title>Feeds Module</title>
+							<sort_order>10</sort_order>
+						</Angara_Feeds>
+						<system>
+							<children>
+								<config>
+									<children>
+										<feeds translate="title" module="feeds"> 
+											<title>Feeds Configuration</title>
+											<sort_order>50</sort_order>
+										</feeds>
+									</children>							
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+</config>

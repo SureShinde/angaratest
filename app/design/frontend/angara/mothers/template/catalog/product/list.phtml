@@ -1,0 +1,451 @@
+<style>
+/* Start css for tooltip on catalog page */
+.productlist li.proddetails a.tooltip-catalog {
+	cursor: pointer;
+	position: relative;
+	color: #B90000;
+	font-weight:bold;
+	padding:0 14px;
+	text-align:center;
+}
+a.tooltip-catalog span {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	width: 150px;
+	opacity: 0;
+	text-decoration: none !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow:0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	z-index:99999;
+	color: #000000;
+	display:none;
+}
+a.tooltip-catalog:hover span {
+	margin-left: 0;
+	opacity: 1;
+	font:11px Arial, Helvetica, sans-serif;
+	display:block;
+}
+.classic-catalog {
+	padding: 0.8em 1em;
+}
+.classic-catalog {
+	background: #fff;
+	border: 1px solid #999999;
+}
+/* End css for tooltip on catalog page */
+</style>
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="category-products">
+    <?php echo $this->getToolbarHtml() ?>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <ol class="productlist" id="products-list">
+    <?php foreach ($_productCollection as $_product): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">        
+            <?php // Product Image ?>
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop">
+                <div class="f-fix">
+                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+                    <?php if($_product->getRatingSummary()): ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                    <?php endif; ?>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                    <?php if($_product->isSaleable()): ?>
+                        <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onClick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+                    <?php else: ?>
+                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                    <?php endif; ?>
+                    <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                    </div>
+                    <ul class="add-to-links">
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                        <?php endif; ?>
+                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                            <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+    <?php else: ?>
+	<div class="productlist">
+	<ul id="list_results">
+    <?php // Grid Mode ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php $_columnCount = $this->getColumnCount(); ?>
+    <?php
+		$text_o = '';
+		$mother_c = '';
+		$text_o_de = '';
+		$sessionObject = Mage::getSingleton('catalog/session');
+		if(isset($sessionObject['adj_nav']) && isset($sessionObject['adj_nav']['mother_stone_count']))
+		{
+			/*$mother_c = $sessionObject['adj_nav']['mother_stone_count'];
+			$attributeOptionSingle = Mage::getResourceModel('eav/entity_attribute_option_collection')
+						->setIdFilter($mother_c)
+						->setStoreFilter()
+						->load()
+						->getFirstItem();			
+			$mother_c = $attributeOptionSingle->getDefaultValue();	*/		
+			if(isset($_REQUEST['mother_stone_count'])){	
+				switch($_REQUEST['mother_stone_count']){
+					case '1073':
+						$mother_c = '1';
+						break;
+					case '1074':
+						$mother_c = '2';
+						break;
+					case '1075':
+						$mother_c = '3';
+						break;
+					case '1076':
+						$mother_c = '4';
+						break;
+					case '1077':
+						$mother_c = '5';
+						break;
+				}
+			}	
+			//echo '<br>anil: '.$mother_c;
+			//echo '<pre>';print_r($_REQUEST['mother_stone_count']);echo '</pre>';
+		}
+		if(isset($sessionObject['adj_nav']) && isset($sessionObject['adj_nav']['metal_type_multi']))
+		{
+			$filterval = $sessionObject['adj_nav']['metal_type_multi'];
+			
+			/*$attributeOptionSingle = Mage::getResourceModel('eav/entity_attribute_option_collection')
+						->setIdFilter($filterval)
+						->setStoreFilter()
+						->load()
+						->getFirstItem();
+			
+			$text_o = $attributeOptionSingle->getDefaultValue();*/
+			
+			if(isset($_REQUEST['metal_type_multi'])){	
+				switch($_REQUEST['metal_type_multi']){
+					case '1086':
+						$text_o = 'RG';
+						$text_o_de = 'Rose Gold';
+						break;
+					case '1042':
+						$text_o = 'WG';
+						$text_o_de = 'Platinum';
+						break;
+					case '1043':
+						$text_o = 'WG';
+						$text_o_de = 'White Gold';
+						break;
+					case '1044':
+						$text_o = 'YG';
+						$text_o_de = 'Yellow Gold';
+						break;
+					case '1045':
+						$text_o = 'WG';
+						$text_o_de = 'Silver';
+						break;
+				}
+			}
+			//echo '<br>anil: '.$text_o.'---'.$text_o_de;
+			//echo '<pre>';print_r($_REQUEST['metal_type_multi']);echo '</pre>';
+			/*$text_o_de = $text_o;
+			switch($text_o){
+				case 'Silver':
+				$text_o = 'WG';
+				break;
+				case 'Yellow Gold':
+				$text_o = 'YG';
+				break;
+				case 'White Gold':
+				$text_o = 'WG';
+				break;
+				case 'Rose Gold':
+				$text_o = 'RG';
+				break;
+				case 'Platinum':
+				$text_o = 'WG';
+				break;
+			}*/
+		}
+		$urlattr = "";
+		if($text_o != '')
+		{
+			$urlattr = $urlattr . "MT=" . $text_o_de;
+		}
+		if($mother_c != '')
+		{
+			if($urlattr != "")
+			{
+				$urlattr = $urlattr . "&SC=" . $mother_c;
+			}
+			else
+			{
+				$urlattr = $urlattr . "SC=" . $mother_c;
+			}
+		}
+		if($urlattr != "")
+		{
+			$urlattr = "?" . $urlattr;
+		}
+	?>
+    <?php $i=0;$_columnCount=4; foreach ($_productCollection as $_product): ?>
+        <?php if ($i++%$_columnCount==0 && $i!=1): ?>
+        <li class="partition" style="list-style:none"><a href="#"></a></li>
+        <?php endif ?>
+            <li class="proddetails<?php if ($i%$_columnCount==0 && $i!=1): ?> last<?php endif?>">
+         <?php if($_product->getNewArrival()){ ?><span style="position:absolute;top:10px;left:10px;"><img src="/skin/frontend/angara/default/images/stamp.png" /></span><?php } ?>
+            	<?php
+					$set_prod_arr = array('SG0107S','SG0108AM','SG0111P','SG0112PAMAQ','SG0113R','SG0109CT','SG0110PT');
+					if (!in_array($_product->getSku(), $set_prod_arr)) // skip image rebuild for set products
+					{
+						/*if($_product->getSku() == 'AMPW1041' || $_product->getSku() == 'AMPW1040'){
+							$b_hp = Mage::getBlockSingleton('hprcv/hprcv');
+							$address_hp = $b_hp->getimageforproduct($_product->getId(),$text_o,$mother_c);
+						}*/
+					}
+					$imageName			=	$_product->getSku(); 
+					if($text_o != ''){
+						$imageName.="_" . $text_o;
+					}
+					if($mother_c != ''){
+						$imageName.="_" . $mother_c;
+					}
+					$imageName.='.png';
+					$resizedImage	=  Mage::helper('function')->getResizedUrl('catalog/product/images/mothers/'.$imageName,150,150);	//	New way
+					//echo 'resizedImage->'.$resizedImage;
+				?>
+                <a href="<?php echo $_product->getProductUrl() ?><?php echo $urlattr?>">                
+				<img src="<?php echo $resizedImage; ?>" width="150" height="150" title="<?php echo $_product->getShortDescription() ?>" alt="<?php echo $_product->getShortDescription() ?>" />
+                
+				 <span class="proname"><?php echo $_product->getShortDescription() ?></span>
+                 </a>
+				<?php if($_product->getDiscountPrice() != ''):?>
+				<div class="discounted-price">
+					<div class="sale-tag"></div>
+				<del><b>$<?php echo round($_product->getDiscountPrice(),2); ?></b></del>
+                <?php echo $this->getPriceHtml($_product, true) ?>
+				</div>
+				<?php else: ?>
+				<?php echo $this->getPriceHtml($_product, true) ?>
+				<?php endif; ?>
+				
+			<span class='stonecount-catalog'>
+				<?php 
+					//var_dump($_product);
+					$product = Mage::getModel('catalog/product');
+					$_product1 = $product->load($_product->getId());
+					$scarray = $_product1->getAttributeText('mother_stone_count');
+					//var_dump($scarray);
+					if($scarray[0] != $scarray[count($scarray) - 1])
+					{
+						$strsc = $scarray[0] . "-" . $scarray[count($scarray) - 1];
+					}
+					else
+					{
+						$strsc = $scarray[0];
+					}
+				?>
+				<?php echo $strsc;?> 
+				<?php
+				if(count($_product1->getAttributeText('mother_stone_count'))>1){
+					echo 'Stones';
+				}else{
+					if(trim($strsc) > 1){
+						echo 'Stones';
+					}else{
+						echo 'Stone';
+					}
+				}				
+				?>
+             </span>
+                
+                <?php /*?><div class="tip-content"><h5><a href="<?php echo $_product->getProductUrl() ?>"><?php echo $_product->getName() ?></a></h5><?php if($_product->getRatingSummary()): ?><?php echo $this->getReviewsSummaryHtml($_product, 'short') ?><?php endif; ?><div class="links"><a href="<?php echo $_product->getProductUrl() ?>">Item Details &#187;</a></div></div><?php */?>
+				
+				<!-- prod-tooltip start -->
+				<div class="prod-tooltip">
+              <h5><?php echo $_product->getShortDescription() ?></h5>
+			  <?php if($this->getReviewsSummaryHtml($_product, 'short')): ?>
+         	  <div class="customerrating"><?php echo $this->getReviewsSummaryHtml($_product, 'short') ?></div>
+			  <?php endif; ?>
+              <div class="detailsbox">
+			  <?php //$_product->load($_product->getId()); ?>
+                  <div class="proinfoheading">Product Information:</div>
+                  <div class="detail-wrapper">
+				  <div class="detailtype">Angara Item #:</div><div class="detailtypevalue"><?php echo $_product->getSku() ?></div>
+				  </div>
+				  <?php if($_product->getMetal1Type()): ?>
+          		  <div class="detail-wrapper">
+				   <div class="detailtype">Metal:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('metal1_type') ?></div>
+				   </div>
+				   <?php endif; ?>
+                       <?php if($_product->getGemstoneCaratWeight()): ?>
+               <div class="detail-wrapper">
+			   <div class="detailtype">Approx Carat Total Weight:</div><div class="detailtypevalue"><?php echo $_product->getData('gemstone_carat_weight') ?> cts</div>
+			   </div>
+     <?php endif;
+     if($_product->getGemstoneColor ()): ?>
+               <div class="detail-wrapper">
+			   <div class="detailtype">Color:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('gemstone_color') ?></div>
+			   </div>
+     <?php endif;
+     if($_product->getGemstoneDimension()): ?>
+               <div class="detail-wrapper">
+			   <div class="detailtype">Approx Dimensions:</div><div class="detailtypevalue"><?php echo $_product->getData('gemstone_dimension') ?> mm</div>
+			   </div>
+     <?php endif;?>
+				   <div class="clear"></div>
+              </div>
+			  <?php if($_product->getEmbStoneName3()): ?>
+              <div class="detailsbox">
+                  <div class="proinfoheading"><?php echo $_product->getAttributeText('emb_stone_name3')?> Information:</div>
+                  <?php if($_product->getEmbCaratWeight3()): ?>
+                  <div class="detail-wrapper">
+				  <div class="detailtype">Approx Carat Total Weight:</div><div class="detailtypevalue"><?php echo $_product->getData('emb_carat_weight3') ?> cts</div>
+				  </div>
+				  <?php endif; ?>
+                  <div class="clear"></div>
+				  <?php if($_product->getEmbQualityGrade3()): ?>
+          		  <div class="detail-wrapper">
+				  <div class="detailtype">Grade:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('emb_quality_grade3') ?></div>
+				  </div>
+				  <?php endif; ?>
+				  <div class="clear"></div>
+              </div>
+			  <?php endif; ?>
+			  <?php if($_product->getEmbStoneName2()): ?>
+              <div class="detailsbox">
+                 <div class="proinfoheading"><?php echo $_product->getAttributeText('emb_stone_name2')?> Information:</div>
+                  <?php if($_product->getEmbCaratWeight2()): ?>
+                  <div class="detail-wrapper">
+				  <div class="detailtype">Approx Carat Total Weight:</div><div class="detailtypevalue"><?php echo $_product->getData('emb_carat_weight2') ?> cts</div>
+				  </div>
+				  <?php endif; ?>
+				  <?php if($_product->getEmbQualityGrade2()): ?>
+          		  <div class="detail-wrapper">
+				  <div class="detailtype">Grade:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('emb_quality_grade2') ?></div>
+				  </div>
+				  <?php endif; ?>
+				  <div class="clear"></div>
+              </div>
+			  <?php endif; ?>
+			  <?php if($_product->getEmbStoneName()): ?>
+              <div class="detailsbox">
+                  <div class="proinfoheading"><?php echo $_product->getAttributeText('emb_stone_name')?> Information:</div>
+				  <?php if($_product->getEmbCaratWeight1()): ?>
+                  <div class="detail-wrapper">
+				  <div class="detailtype">Approx Carat Total Weight:</div><div class="detailtypevalue"><?php echo $_product->getData('emb_carat_weight1') ?> cts</div>
+				  </div>
+				  <?php endif; ?>
+				  
+				  <?php if($_product->getAttributeText('emb_stone_name')=="Diamond" && !($_product->getEmbStoneName2())): ?>
+					<?php if($_product->getAttributeText('emb_color1')): ?>
+				  		<div class="detail-wrapper">
+				  			<div class="detailtype">Min Color:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('emb_color1') ?></div>
+				  		</div>
+				  	<?php endif?>
+				  	<?php if($_product->getEmbClarity1()): ?>
+				  		<div class="detail-wrapper">
+				  			<div class="detailtype">Min Clarity:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('emb_clarity1') ?></div>
+						</div>
+				  	<?php endif?>
+				  <?php elseif($_product->getEmbQualityGrade1()): ?>
+          		  <div class="detail-wrapper">
+				  <div class="detailtype">Grade:</div><div class="detailtypevalue"><?php echo $_product->getAttributeText('emb_quality_grade1') ?></div>
+				  </div>
+				  <?php endif; ?>
+				  <div class="clear"></div>
+              </div>
+			  <?php endif; ?>
+			  
+          </div>
+				<!-- prod-tooltip end -->
+            </li>
+        <?php endforeach ?>
+    <?php endif; ?>
+		</ul>
+		<div class="clear"></div>
+        <div id="ae_extra_proddetails"></div>
+          <script type="text/javascript">
+		  jQuery(function(){
+		
+		jQuery('.col-main').height('');
+		jQuery('.catleftnav').height('');
+		/* Adjust heights of left or main column to equalize both */
+		var cm_oheight = jQuery('.col-main').outerHeight();
+		var cln_oheight = jQuery('.catleftnav').outerHeight();
+		if(cln_oheight>cm_oheight){
+			jQuery('.col-main').height(jQuery('.catleftnav').height() - 20 );
+		}
+		else{
+			jQuery('.catleftnav').height(jQuery('.col-main').height() + 20 );
+		}
+		
+		
+		/* Product Details ToolTip */
+	    
+})
+		  </script>
+    </div>
+    <div class="toolbar-bottom">
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+</div>
+<?php endif; 
+	//echo $this->getLayout()->createBlock('recentlyviewed/view')->setTemplate('recentlyviewed/footer-strip.phtml')->toHTML();
+?>

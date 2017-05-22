@@ -1,0 +1,271 @@
+.category-products .category-product-list {  -moz-box-shadow: 1px 1px 0px #e8e8e8; -webkit-box-shadow:  1px 1px 0px #e8e8e8; box-shadow:  1px 1px 0px #e8e8e8;  }
+.category-products .details { height:98px; background:#FAFAFA; overflow:hidden }
+.category-products .category-product-list .price { color:#D83D29; font-size:14px; display:inline-block; padding-top:3px; }
+.category-products .category-product-list .ratings { padding-top:3px; }
+.category-products .category-product-list:hover { -moz-box-shadow: 0px 0px 5px #b1b0b0; -webkit-box-shadow: 0px 0px 5px #b1b0b0; box-shadow: 0px 0px 5px #b1b0b0; position:relative; }
+.category-products .category-product-list:hover .details{ background:#f8f8f8; }
+.ratings span.amount { display:inline-block; margin-top:2px; }
+.catalog-filter-item { height:100px; width:11.1%; line-height:13px; font-size:11px; }
+.catalog-loader {left: 0; margin: 0 auto; position: absolute; right: 0; text-align: center; width: 100px; z-index: 1;color:#9A3633}
+
+ @media (min-width: 768px ) and (max-width: 999px) {
+
+.catalog-filter-item { width:14.2%; }
+}
+ @media (max-width: 768px) {
+.catalog-filter-item { width:24.8%; }
+
+}
+/*-----------------------------GEMSTONE AND DIAMOND QUALITY-------------------------*/
+
+.cs-sapphire .fis-filterable_stone_grades, .cs-blue-sapphire .fis-filterable_stone_grades  { max-width: 100%;background-image: url('../images/sprites/iconset-bluesapphirestone.jpg'); }
+.cs-sapphire .fi-filterable_stone_grades-a---good, .cs-blue-sapphire .fi-filterable_stone_grades-a---good { background-position: 0px -2200px; }
+.cs-sapphire .fi-filterable_stone_grades-aa---better, .cs-blue-sapphire .fi-filterable_stone_grades-aa---better { background-position: 0px -2250px; }
+.cs-sapphire .fi-filterable_stone_grades-aaa---best, .cs-blue-sapphire .fi-filterable_stone_grades-aaa---best { background-position: 0px -2300px; }
+.cs-sapphire .fi-filterable_stone_grades-aaaa---heirloom, .cs-blue-sapphire .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -2350px; }
+.cs-sapphire .fi-filterable_stone_grades-lab-created, .cs-blue-sapphire .fi-filterable_stone_grades-lab-created { background-position: 0px -2400px; }
+.cs-sapphire .fi-filterable_stone_grades-g-h-vs, .cs-blue-sapphire .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-sapphire .fi-filterable_stone_grades-h-si2, .cs-blue-sapphire .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-sapphire .fi-filterable_stone_grades-j-i2, .cs-blue-sapphire .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-sapphire .fi-filterable_stone_grades-i-i1, .cs-blue-sapphire .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-pinksapphire .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-pinksapphirestone.jpg'); }
+.cs-pinksapphire .fi-filterable_stone_grades-aa---better { background-position: 0px -400px; }
+.cs-pinksapphire .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-pinksapphire .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-pinksapphire .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-pinksapphire .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-ruby .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-rubystone.jpg'); }
+.cs-ruby .fi-filterable_stone_grades-a---good { background-position: 0px -2150px; }
+.cs-ruby .fi-filterable_stone_grades-aa---better { background-position: 0px -2200px; }
+.cs-ruby .fi-filterable_stone_grades-aaa---best { background-position: 0px -2250px; }
+.cs-ruby .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -2300px; }
+.cs-ruby .fi-filterable_stone_grades-lab-created { background-position: 0px -2350px; }
+.cs-ruby .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-ruby .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-ruby .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-ruby .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-emerald .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-emeraldstone.jpg'); }
+.cs-emerald .fi-filterable_stone_grades-a---good { background-position: 0px -2200px; }
+.cs-emerald .fi-filterable_stone_grades-aa---better { background-position: 0px -2250px; }
+.cs-emerald .fi-filterable_stone_grades-aaa---best { background-position: 0px -2300px; }
+.cs-emerald .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -2350px; }
+.cs-emerald .fi-filterable_stone_grades-lab-created { background-position: 0px -2400px; }
+.cs-emerald .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-emerald .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-emerald .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-emerald .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-tanzanite .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-tanzanitestone.jpg'); }
+.cs-tanzanite .fi-filterable_stone_grades-a---good { background-position: 0px -1850px; }
+.cs-tanzanite .fi-filterable_stone_grades-aa---better { background-position: 0px -1900px; }
+.cs-tanzanite .fi-filterable_stone_grades-aaa---best { background-position: 0px -1950px; }
+.cs-tanzanite .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -2000px; }
+.cs-tanzanite .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-tanzanite .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-tanzanite .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-tanzanite .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-amethyst .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-amethyststone.jpg'); }
+.cs-amethyst .fi-filterable_stone_grades-a---good { background-position: 0px -1500px; }
+.cs-amethyst .fi-filterable_stone_grades-aa---better { background-position: 0px -1550px; }
+.cs-amethyst .fi-filterable_stone_grades-aaa---best { background-position: 0px -1600px; }
+.cs-amethyst .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1650px; }
+.cs-amethyst .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-amethyst .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-amethyst .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-amethyst .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-aquamarine .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-aquamarinestone.jpg'); }
+.cs-aquamarine .fi-filterable_stone_grades-a---good { background-position: 0px -1450px; }
+.cs-aquamarine .fi-filterable_stone_grades-aa---better { background-position: 0px -1500px; }
+.cs-aquamarine .fi-filterable_stone_grades-aaa---best { background-position: 0px -1550px; }
+.cs-aquamarine .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1600px; }
+.cs-aquamarine .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-aquamarine .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-aquamarine .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-aquamarine .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-citrine .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-citrinestone.jpg'); }
+.cs-citrine .fi-filterable_stone_grades-a---good { background-position: 0px -1450px; }
+.cs-citrine .fi-filterable_stone_grades-aa---better { background-position: 0px -1500px; }
+.cs-citrine .fi-filterable_stone_grades-aaa---best { background-position: 0px -1550px; }
+.cs-citrine .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1600px; }
+.cs-citrine .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-citrine .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-citrine .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-citrine .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-garnet .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-garnetstone.jpg'); }
+.cs-garnet .fi-filterable_stone_grades-a---good { background-position: 0px -1500px; }
+.cs-garnet .fi-filterable_stone_grades-aa---better { background-position: 0px -1550px; }
+.cs-garnet .fi-filterable_stone_grades-aaa---best { background-position: 0px -1600px; }
+.cs-garnet .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1650px; }
+.cs-garnet .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-garnet .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-garnet .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-garnet .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-opal .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-opalstone.jpg'); }
+.cs-opal .fi-filterable_stone_grades-a---good { background-position: 0px -650px; }
+.cs-opal .fi-filterable_stone_grades-aa---better { background-position: 0px -700px; }
+.cs-opal .fi-filterable_stone_grades-aaa---best { background-position: 0px -750px; }
+.cs-opal .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -800px; }
+.cs-opal .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-opal .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-opal .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-opal .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-peridot .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-peridotstone.jpg'); }
+.cs-peridot .fi-filterable_stone_grades-a---good { background-position: 0px -1500px; }
+.cs-peridot .fi-filterable_stone_grades-aa---better { background-position: 0px -1550px; }
+.cs-peridot .fi-filterable_stone_grades-aaa---best { background-position: 0px -1600px; }
+.cs-peridot .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1650px; }
+.cs-peridot .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-peridot .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-peridot .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-peridot .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-bluetopaz .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-bluetopazstone.jpg'); }
+.cs-bluetopaz .fi-filterable_stone_grades-a---good { background-position: 0px -450px; }
+.cs-bluetopaz .fi-filterable_stone_grades-aa---better { background-position: 0px -500px; }
+.cs-bluetopaz .fi-filterable_stone_grades-aaa---best { background-position: 0px -550px; }
+.cs-bluetopaz .fi-filterable_stone_grades-g-h-vs { background-position: 0px -250px; }
+.cs-bluetopaz .fi-filterable_stone_grades-h-si2 { background-position: 0px -300px; }
+.cs-bluetopaz .fi-filterable_stone_grades-j-i2 { background-position: 0px -350px; }
+.cs-bluetopaz .fi-filterable_stone_grades-i-i1 { background-position: 0px -400px; }
+.cs-diamond .fis-filterable_stone_grades { max-width: 100%;background-image: url('../images/sprites/iconset-diamondstone.jpg'); }
+.cs-diamond .fi-filterable_stone_grades-g-h-vs { background-position: 0px -350px; }
+.cs-diamond .fi-filterable_stone_grades-h-si2 { background-position: 0px -400px; }
+.cs-diamond .fi-filterable_stone_grades-i-i1 { background-position: 0px -450px; }
+.cs-diamond .fi-filterable_stone_grades-j-i2 { background-position: 0px -500px; }
+.cs-diamond .fi-filterable_stone_grades-gh-i1 { background-position: 0px -1150px; }
+.cs-diamond .fi-filterable_stone_grades-gh-i1-i3 { background-position: 0px -1200px; }
+.cs-diamond .fi-filterable_stone_grades-gh-i2-i3 { background-position: 0px -1250px; }
+.cs-diamond .fi-filterable_stone_grades-gh-i4 { background-position: 0px -1300px; }
+.cs-diamond .fi-filterable_stone_grades-gh-si1 { background-position: 0px -1350px; }
+.cs-diamond .fi-filterable_stone_grades-g-si1 { background-position: 0px -1400px; }
+.cs-diamond .fi-filterable_stone_grades-jk-i1 { background-position: 0px -1450px; }
+.cs-diamond .fi-filterable_stone_grades-jk-i1-i3 { background-position: 0px -1500px; }
+.cs-diamond .fi-filterable_stone_grades-jk-i2-i3 { background-position: 0px -1550px; }
+
+/*-----------------------------GEMSTONE TYPE-------------------------*/
+.fis-filterable_stone_names { max-width: 100%;background-image: url('../images/sprites/iconset-gemstonetype.jpg'); }
+.fi-filterable_stone_names-aquamarine { background-position: 0px 0px; }
+.fi-filterable_stone_names-black-onyx { background-position: 0px -50px; }
+.fi-filterable_stone_names-carnelian { background-position: 0px -100px; }
+.fi-filterable_stone_names-diamond { background-position: 0px -150px; }
+.fi-filterable_stone_names-freshwater-cultured-pearl { background-position: 0px -200px; }
+.fi-filterable_stone_names-green-amethyst { background-position: 0px -250px; }
+.fi-filterable_stone_names-lapis-lazuli { background-position: 0px -300px; }
+.fi-filterable_stone_names-pink-tourmaline { background-position: 0px -350px; }
+.fi-filterable_stone_names-garnet { background-position: 0px -400px; }
+.fi-filterable_stone_names-opal { background-position: 0px -450px; }
+.fi-filterable_stone_names-peridot { background-position: 0px -500px; }
+.fi-filterable_stone_names-pink-sapphire { background-position: 0px -550px; }
+.fi-filterable_stone_names-black-tahitian-cultured-pearl { background-position: 0px -600px; }
+.fi-filterable_stone_names-rose-quartz { background-position: 0px -650px; }
+.fi-filterable_stone_names-akoya-cultured-pearl { background-position: 0px -700px; }
+.fi-filterable_stone_names-amethyst { background-position: 0px -750px; }
+.fi-filterable_stone_names-blue-sapphire { background-position: 0px -800px; }
+.fi-filterable_stone_names-blue-topaz { background-position: 0px -850px; }
+.fi-filterable_stone_names-citrine { background-position: 0px -900px; }
+.fi-filterable_stone_names-emerald { background-position: 0px -950px; }
+.fi-filterable_stone_names-blue-diamond { background-position: 0px -1000px; }
+.fi-filterable_stone_names-turquoise { background-position: 0px -1050px; }
+.fi-filterable_stone_names-yellow-sapphire { background-position: 0px -1100px; }
+.fi-filterable_stone_names-ruby { background-position: 0px -1150px; }
+.fi-filterable_stone_names-tanzanite { background-position: 0px -1200px; }
+.fi-filterable_stone_names-white-moissanite { background-position: 0px -1250px; }
+.fi-filterable_stone_names-white-sapphire { background-position: 0px -1300px; }
+.fi-filterable_stone_names-black-diamond { background-position: 0px -1350px; }
+/*-----------------------------JEWELRY STYLE-------------------------*/
+.fis-filterable_stone_shapes, .fis-filterable_metal_types, .fis-jewelry_styles, .fis-filterable_stone_grades, .jt-mixed .fis-jewelry_styles, .fis-filterable_carat_weight_ranges { max-width: 100%;background-image: url('../images/sprites/catalog-filters.jpg'); }
+.jt-earring .fi-jewelry_styles-three-stone, .jt-mixed .fi-jewelry_styles-three-stone { background-position: 0px -700px; }
+.jt-earring .fi-jewelry_styles-five-stone, .jt-mixed .fi-jewelry_styles-five-stone { background-position: 0px -750px; }
+.jt-earring .fi-jewelry_styles-dangle, .jt-mixed .fi-jewelry_styles-dangle { background-position: 0px -800px; }
+.jt-earring .fi-jewelry_styles-drop, .jt-mixed .fi-jewelry_styles-drop { background-position: 0px -850px; }
+.jt-earring .fi-jewelry_styles-fashion, .jt-mixed .fi-jewelry_styles-fashion { background-position: 0px -900px; }
+.jt-earring .fi-jewelry_styles-halo, .jt-mixed .fi-jewelry_styles-halo { background-position: 0px -950px; }
+.jt-earring .fi-jewelry_styles-heart, .jt-mixed .fi-jewelry_styles-heart { background-position: 0px -1000px; }
+.jt-earring .fi-jewelry_styles-hoops, .jt-mixed .fi-jewelry_styles-hoops { background-position: 0px -1050px; }
+.jt-earring .fi-jewelry_styles-journey, .jt-mixed .fi-jewelry_styles-journey { background-position: 0px -1100px; }
+.jt-earring .fi-jewelry_styles-knot, .jt-mixed .fi-jewelry_styles-knot { background-position: 0px -1150px; }
+.jt-earring .fi-jewelry_styles-solitaire, .jt-mixed .fi-jewelry_styles-solitaire { background-position: 0px -1200px; }
+.jt-earring .fi-jewelry_styles-studs, .jt-mixed .fi-jewelry_styles-studs { background-position: 0px -1250px; }
+.jt-earring .fi-jewelry_styles-vintage, .jt-mixed .fi-jewelry_styles-vintage { background-position: 0px -1300px; }
+.jt-earring .fi-jewelry_styles-leverback, .jt-mixed .fi-jewelry_styles-leverback { background-position: 0px -3750px; }
+.jt-pendant .fi-jewelry_styles-three-stone, .jt-mixed .fi-jewelry_styles-three-stone { background-position: 0px -1500px; }
+.jt-pendant .fi-jewelry_styles-cluster, .jt-mixed .fi-jewelry_styles-cluster { background-position: 0px -1550px; }
+.jt-pendant .fi-jewelry_styles-cross, .jt-mixed .fi-jewelry_styles-cross { background-position: 0px -1600px; }
+.jt-pendant .fi-jewelry_styles-dangle, .jt-mixed .fi-jewelry_styles-dangle { background-position: 0px -1650px; }
+.jt-pendant .fi-jewelry_styles-fashion, .jt-mixed .fi-jewelry_styles-fashion { background-position: 0px -1700px; }
+.jt-pendant .fi-jewelry_styles-halo, .jt-mixed .fi-jewelry_styles-halo { background-position: 0px -1750px; }
+.jt-pendant .fi-jewelry_styles-heart, .jt-mixed .fi-jewelry_styles-heart { background-position: 0px -1800px; }
+.jt-pendant .fi-jewelry_styles-journey, .jt-mixed .fi-jewelry_styles-journey { background-position: 0px -1850px; }
+.jt-pendant .fi-jewelry_styles-key, .jt-mixed .fi-jewelry_styles-key { background-position: 0px -1900px; }
+.jt-pendant .fi-jewelry_styles-knot, .jt-mixed .fi-jewelry_styles-knot { background-position: 0px -1950px; }
+.jt-pendant .fi-jewelry_styles-solitaire, .jt-mixed .fi-jewelry_styles-solitaire { background-position: 0px -2000px; }
+.jt-pendant .fi-jewelry_styles-vintage, .jt-mixed .fi-jewelry_styles-vintage { background-position: 0px -2050px; }
+.jt-ring .fi-jewelry_styles-three-stone, .jt-mixed .fi-jewelry_styles-three-stone { background-position: 0px -2100px; }
+.jt-ring .fi-jewelry_styles-fashion, .jt-mixed .fi-jewelry_styles-fashion { background-position: 0px -2150px; }
+.jt-ring .fi-jewelry_styles-halo, .jt-mixed .fi-jewelry_styles-halo { background-position: 0px -2200px; }
+.jt-ring .fi-jewelry_styles-wedding-bands, .jt-mixed .fi-jewelry_styles-wedding-bands { background-position: 0px -2250px; }
+.jt-ring .fi-jewelry_styles-five-stone, .jt-mixed .fi-jewelry_styles-five-stone { background-position: 0px -2300px; }
+.jt-ring .fi-jewelry_styles-seven-stone, .jt-mixed .fi-jewelry_styles-seven-stone { background-position: 0px -2350px; }
+.jt-ring .fi-jewelry_styles-nine-stone, .jt-mixed .fi-jewelry_styles-nine-stone { background-position: 0px -2400px; }
+.jt-ring .fi-jewelry_styles-bridal-sets, .jt-mixed .fi-jewelry_styles-bridal-sets { background-position: 0px -2450px; }
+.jt-ring .fi-jewelry_styles-eternity, .jt-mixed .fi-jewelry_styles-eternity { background-position: 0px -2500px; }
+.jt-ring .fi-jewelry_styles-stackables, .jt-mixed .fi-jewelry_styles-stackables { background-position: 0px -2550px; }
+.jt-ring .fi-jewelry_styles-knot, .jt-mixed .fi-jewelry_styles-knot { background-position: 0px -2600px; }
+.jt-ring .fi-jewelry_styles-solitaire, .jt-mixed .fi-jewelry_styles-solitaire { background-position: 0px -2650px; }
+.jt-ring .fi-jewelry_styles-vintage, .jt-mixed .fi-jewelry_styles-vintage { background-position: 0px -2700px; }
+.jt-ring .fi-jewelry_styles-promise, .jt-mixed .fi-jewelry_styles-promise { background-position: 0px -3600px; }
+.jt-ring .fi-jewelry_styles-heart, .jt-mixed .fi-jewelry_styles-heart { background-position: 0px -3650px; }
+.jt-ring .fi-jewelry_styles-engagement, .jt-mixed .fi-jewelry_styles-engagement { background-position: 0px -3700px; }
+.jt-mixed .fi-jewelry_styles-charm{ background-position: 0px -3800px; }
+/*-----------------------------GEMSTONE SHAPE-------------------------*/
+.fi-filterable_stone_shapes-baguette{ background-position: 0px -2750px; }
+.fi-filterable_stone_shapes-rectangle { background-position: 0px -2750px; }
+.fi-filterable_stone_shapes-ball { background-position: 0px -2800px; }
+.fi-filterable_stone_shapes-cushion { background-position: 0px -2850px; }
+.fi-filterable_stone_shapes-drop { background-position: 0px -2900px; }
+.fi-filterable_stone_shapes-emerald-cut { background-position: 0px -2950px; }
+.fi-filterable_stone_shapes-heart { background-position: 0px -3000px; }
+.fi-filterable_stone_shapes-marquise { background-position: 0px -3050px; }
+.fi-filterable_stone_shapes-oval { background-position: 0px -3100px; }
+.fi-filterable_stone_shapes-pear { background-position: 0px -3150px; }
+.fi-filterable_stone_shapes-princess { background-position: 0px -3200px; }
+.fi-filterable_stone_shapes-round { background-position: 0px -3250px; }
+.fi-filterable_stone_shapes-square { background-position: 0px -3300px; }
+.fi-filterable_stone_shapes-trillion { background-position: 0px -3350px; }
+/*-----------------------------GEMSTONE CARAT TOTAL WEIGHT-------------------------*/
+.fi-filterable_carat_weight_ranges-0-01---0-50 { background-position: 0px -350px; }
+.fi-filterable_carat_weight_ranges-0-51---1-00 { background-position: 0px -400px; }
+.fi-filterable_carat_weight_ranges-1-01---1-50 { background-position: 0px -450px; }
+.fi-filterable_carat_weight_ranges-1-51---3-00 { background-position: 0px -500px; }
+.fi-filterable_carat_weight_ranges-over-3-01 { background-position: 0px -550px; }
+/*-----------------------------GEMSTONE METAL TYPE-------------------------*/
+.fi-filterable_metal_types-rose-gold { background-position: 0px 0px; }
+.fi-filterable_metal_types-white-gold { background-position: 0px -50px; }
+.fi-filterable_metal_types-yellow-gold { background-position: 0px -100px; }
+.fi-filterable_metal_types-platinum { background-position: 0px -150px; }
+.fi-filterable_metal_types-silver { background-position: 0px -200px; }
+.fi-filterable_metal_types-two-tone-gold { background-position: 0px -250px; }
+.fi-filterable_metal_types-tricolor-gold { background-position: 0px -300px; }
+/*-----------------------------COMMON GEMSTONE QUALITY-------------------------*/
+.cs-mixed .fi-filterable_stone_grades-aaa---best { background-position: 0px -600px; }
+.cs-mixed .fi-filterable_stone_grades-aa---better { background-position: 0px -650px; }
+.cs-mixed .fi-filterable_stone_grades-a---good { background-position: 0px -1350px; }
+.cs-mixed .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1400px; }
+.cs-mixed .fi-filterable_stone_grades-lab-created { background-position: 0px -1450px; }
+.cs-mixed .fi-filterable_stone_grades-g-h-vs { background-position: 0px -3400px; }
+.cs-mixed .fi-filterable_stone_grades-h-si2 { background-position: 0px -3450px; }
+.cs-mixed .fi-filterable_stone_grades-i-i1 { background-position: 0px -3500px; }
+.cs-mixed .fi-filterable_stone_grades-j-i2 { background-position: 0px -3550px; }
+.cs-mixed .fi-filterable_stone_grades-g-si1 { background-position: 0px -3850px; }
+.cs-mixed .fi-filterable_stone_grades-gh-i1 { background-position: 0px -3900px; }
+.cs-mixed .fi-filterable_stone_grades-gh-i1-i3 { background-position: 0px -3950px; }
+.cs-mixed .fi-filterable_stone_grades-gh-i2-i3, .cs-black-diamond .fi-filterable_stone_grades-gh-i2-i3 { background-position: 0px -4000px; }
+.cs-mixed .fi-filterable_stone_grades-gh-i4 { background-position: 0px -4050px; }
+.cs-mixed .fi-filterable_stone_grades-jk-i1 { background-position: 0px -4100px; }
+.cs-mixed .fi-filterable_stone_grades-jk-i1-i3 { background-position: 0px -4150px; }
+.cs-mixed .fi-filterable_stone_grades-jk-i2-i3 { background-position: 0px -4200px; }
+.cs-diamond .fi-filterable_stone_grades-aaaa---heirloom { background-position: 0px -1400px;  background-image: url('../images/sprites/catalog-filters.jpg'); }
+.cs-diamond .fi-filterable_stone_grades-aaa---best, .cs-blue-diamond .fi-filterable_stone_grades-aaa---best  { background-position: 0px -600px;  background-image: url('../images/sprites/catalog-filters.jpg'); }
+.cs-diamond .fi-filterable_stone_grades-aa---better, .cs-blue-diamond .fi-filterable_stone_grades-aa---better, .cs-black-diamond .fi-filterable_stone_grades-aa---better  { background-position: 0px -650px; background-image: url('../images/sprites/catalog-filters.jpg');  }
+.cs-diamond .fi-filterable_stone_grades-a---good, .cs-blue-diamond .fi-filterable_stone_grades-a---good, .cs-black-diamond .fi-filterable_stone_grades-a---good   { background-position: 0px -1350px; background-image: url('../images/sprites/catalog-filters.jpg');  }
+
+
+

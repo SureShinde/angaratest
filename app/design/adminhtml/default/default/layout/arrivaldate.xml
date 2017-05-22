@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<layout version="1.1.0">
+  <arrivaldate_adminhtml_index_index>
+     <reference name="content">
+	           <block type="arrivaldate/adminhtml_daterules"  name="daterules" />	
+	 	      </reference>
+  </arrivaldate_adminhtml_index_index>  
+  <arrivaldate_adminhtml_leadtimerules_index>
+     <reference name="content">
+	           <block type="arrivaldate/adminhtml_leadtimerules"  name="leadtimerules" />	
+	 	      </reference>
+  </arrivaldate_adminhtml_leadtimerules_index>
+</layout>

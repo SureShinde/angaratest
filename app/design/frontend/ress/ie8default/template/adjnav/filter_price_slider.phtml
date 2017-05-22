@@ -1,0 +1,83 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/filter_price_slider.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+
+if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')){
+	list($min,$max) = $this->_filter->getMinMaxPriceInt();
+	list($from,$to) = explode(',', $this->_filter->getActiveState());
+}
+    
+//todo: move logic to the block
+list($min,$max) = $this->_filter->getMinMaxPriceInt();
+list($from,$to) = explode(',', $this->_filter->getActiveState());
+$from = floor(max($from, $min));
+
+if($to){
+	$to   = ceil(min($to, $max));
+}
+else{
+	$to = $max;
+}
+
+if($to<1 && $from<1){
+	$to = $max;
+}
+
+$width = 170;
+if($max){
+	if($max == $min){
+		$firstOffset = 0;
+		$secondOffset = $width;
+	}
+	else{
+		/* Exponential Customization by Hitesh */
+		$firstOffset = log($from / $min) * ($width / (log($max) - log($min)) );
+		$secondOffset = log($to / $min) * ($width / (log($max) - log($min)) );
+	}
+}
+else{
+	$firstOffset  = 0;
+	$secondOffset = 0;
+}
+
+if($to != $from){?>
+    <div class="row no-gutters max-margin-top relative-placeholder">
+        <div class="col-sm-2 col-xs-3 adj-nav-price-from-xs">
+        <input class="input-text text-center" type="text" maxlength="12" size="4" id="adj-nav-price-from---<?php echo $this->_filter->getRequestVar()?>" placeholder="<?php echo $this->getSymbol().number_format($from);//echo $this->helper('core')->currency($from,true,false);?>" onclick="if(this.value==this.name) this.value='';"  name="<?php echo $this->__('From')?>"/>
+        </div>
+		<div class="col-xs-12 col-sm-8 col-md-8 padding-gap-top-xs">
+			<div class="max-margin-left max-margin-right high-padding-right high-padding-left padding-gap-xs">
+    			<div id="adj-nav-price-slider<?php echo $this->_filter->getRequestVar();?>" class="adj-nav-slider">
+        			<div class="handle selected" style="left:<?php echo $firstOffset;?>px"></div>
+        			<div class="handle" style="left:<?php echo $secondOffset;?>px"></div>
+    			</div>
+    			<div class="max-margin-top-xs fontsize-type2">
+				<?php 
+                echo $this->__('Range: '); 
+				echo $this->getSymbol();?><span id="adj-nav-range-from<?php echo $this->_filter->getRequestVar();?>"><?php echo number_format($from);?></span> - <?php echo $this->getSymbol();?><span id="adj-nav-range-to<?php echo $this->_filter->getRequestVar();?>"><?php echo number_format($to);?></span>
+				<script type="text/javascript">
+				var adj_slider = adj_nav_create_slider(<?php echo $width.', '.$firstOffset.', '.$secondOffset.', '.$min.', '.$max.',"'.$this->_filter->getRequestVar().'"';?>);
+				</script>	
+				</div>
+    		</div>
+		</div>
+        <div class="col-sm-2 col-xs-3 adj-nav-price-to-xs">
+            <div class="low-margin-right">
+                <input class="input-text text-center " type="text" maxlength="12" size="4" id="adj-nav-price-to---<?php echo $this->_filter->getRequestVar()?>" placeholder="<?php echo $this->getSymbol().number_format($to);//echo $this->helper('core')->currency($to,true,false);?>" onclick="if(this.value==this.name) this.value='';" name="<?php echo $this->__('To')?>"/>
+            </div>
+        </div>
+		<input type="hidden" value="<?php echo $this->_filter->getRequestVar()?>" class="adj-nav-price-input-id">
+    </div>
+<?php 
+} 
+else{
+	echo $this->__('Value: ');
+	echo $this->getSymbol();?><span id="adj-nav-range-from<?php echo $this->_filter->getRequestVar();?>"><?php echo number_format($from);?></span>
+<?php 
+}?>

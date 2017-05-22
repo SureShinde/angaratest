@@ -1,0 +1,482 @@
+<style>
+	.sep{
+		position: absolute;
+		height: 1px;
+		background: #888888;
+		left: 0px;
+		right: 0px;
+		top: 50%;
+	}
+	.kh-pro{
+		font-size:23px;
+	}
+	.kh-pro .col-md-3{
+		margin-bottom:10px;
+	}
+	.kh-pro .col-md-3 a img{
+		margin-bottom:10px;
+		border:1px solid transparent;
+	}
+	.kh-pro .col-md-3 a img:hover{
+		border:1px solid #fa505a;
+	}
+	.kh-collection-banner{
+		width:33.85%; 
+		left:50%; 
+		margin-left:-16.58%;
+	}
+	.short-title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		display: block;
+	}
+	.knotty-heart-rings {
+		margin-top:90px;
+		padding:0px 6%;
+	}
+	.Mup {
+		position:relative;
+		display:block;
+	}
+	.Fv {
+		-webkit-transition:all 0.2s ease-in-out; 
+		transition:all 0.2s ease-in-out;
+	}
+	.Sv {
+		top:0px; 
+		position:absolute; 
+		left:0px; 
+		right:0px; 
+		-webkit-transition:all 0.5s ease-in-out; 
+		transition:all 0.5s ease-in-out; 
+		opacity:0;
+	}
+	.popup-close {
+		position:absolute; 
+		margin-top:-9px !important; 
+		right:-9px; 
+		cursor:pointer; 
+		background:url(/skin/frontend/ress/default/images/sprite.jpg) -229px -151px no-repeat; 
+		border-radius: 11px; 
+		height: 18px; 
+		width: 18px !important;
+	}
+	<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		.Mup:hover .Sv {
+			opacity:1;
+		}
+	<?php } ?>
+	.play {
+		width:14.417%;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		top: 50%;
+		margin-top: -32px;
+	}
+	.video-popup {
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
+		background: rgba(0,0,0,0.5);
+		z-index: 1042;
+	}
+	.video-popup div {
+		width: 640px;
+		margin: 0 auto;
+	}
+	
+	@media (max-width:1500px){
+		.kh-pro{
+			font-size:21px;
+		}
+	}
+	@media (max-width:1366px){
+		.kh-pro{
+			font-size:19px;
+		}
+	}
+	@media (max-width:1024px){
+		.kh-pro{
+			font-size:18px;
+		}
+		.knotty-heart-rings {
+			padding:0px 7%;
+		}
+	}
+	@media (max-width:768px){
+		.knotty-heart-rings {
+			padding:0px;
+		}
+	}
+	@media (max-width:767px){ 
+		.video-popup div,  .audio-popup .ap {
+			width:250px;
+		}
+		.video-popup iframe, .audio-popup audio {
+			width: 250px !important;
+		}
+	}
+</style>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+	$ipad = '-ipad';
+}else{
+	$ipad = '';
+} ?>
+<div class="relative relative-placeholder the-perfect-gift">
+		<img class="img-responsive kh-mb-1" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/kh-mb-01<?php echo $ipad; ?>.jpg" alt="Knotty Heart Jewelry From Angara" title="Celebrate Love With Knotty Heart Jewelry"/>
+		<img class="img-responsive kh-mb-2" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/kh-mb-2<?php echo $ipad; ?>.jpg" alt="Knotty Heart Jewelry From Angara" title="Celebrate Love With Knotty Heart Jewelry"/>
+	<div class="absolute absolute-placeholder kh-collection-banner" style="top:24.45%">
+		<img class="img-responsive relative-placeholder" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/kh-collection<?php echo $ipad; ?>.jpg" alt="Knotty Heart Jewelry From Angara" title="Celebrate Love With Knotty Heart Jewelry"/>
+		
+		<a href="javascript:void(0)" class="absolute-placeholder play">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/play-btn.png"/> 
+		</a>
+		
+	</div>
+	<script>
+	<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')) { ?>
+		jQuery(window).load(function(){
+				var elm = jQuery('.kh-collection-banner');
+				var elmHeight = elm.height();
+				var elmPosTop = elm.offset().top;
+				var bottomElm = jQuery('.kh-mb-2').offset().top + jQuery('.kh-mb-2').height();
+				var headHeight = jQuery('#main-head-inner').height() + 75;
+				
+				jQuery(window).scroll(function(){
+					var windowpos = jQuery(window).scrollTop();
+					var vv = ((windowpos + jQuery(window).height()) - (jQuery(window).height() - elmHeight)) + (headHeight - 75) ;
+					var ss = bottomElm - 75;
+					
+					if(windowpos >= (elmPosTop-headHeight)){
+						jQuery('.kh-collection-banner').removeAttr('style').css({'position':'fixed','top':'150px'});
+					}else {
+						jQuery('.kh-collection-banner').removeAttr('style').css({'top':'24.45%'});
+					}
+					if (vv >= ss){
+						jQuery('.kh-collection-banner').removeAttr('style').css({'bottom': '0px'});
+					}
+				});
+		});
+		
+		jQuery(window).resize(function(){	
+				var elm = jQuery('.kh-collection-banner');
+				var elmHeight = elm.height();
+				var elmPosTop = elm.offset().top;
+				//var diff = ((jQuery('.kh-mb-2').height() + jQuery('.kh-mb-2').height() ) * 11)/100;
+				//var bottomElm = jQuery('.kh-mb-2').offset().top + jQuery('.kh-mb-2').height() - diff;
+				var bottomElm = jQuery('.kh-mb-2').offset().top + jQuery('.kh-mb-2').height();
+				var headHeight = jQuery('#main-head-inner').height() + 75;
+				
+				jQuery(window).scroll(function(){
+					var windowpos = jQuery(window).scrollTop();			
+					var vv = ((windowpos + jQuery(window).height()) - (jQuery(window).height() - elmHeight)) + (headHeight - 75) ;
+					var ss = bottomElm - 75;
+					
+					if(windowpos >= (elmPosTop-headHeight)){
+						jQuery('.kh-collection-banner').removeAttr('style').css({'position':'fixed','top':'150px'});
+					}else {
+						jQuery('.kh-collection-banner').removeAttr('style').css({'top':'24.45%'});
+					}
+					if (vv >= ss){
+						jQuery('.kh-collection-banner').removeAttr('style').css({'bottom':'0px'});
+					}
+				});
+		});
+	<?php } ?>
+	</script>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-sm-12 heading text-center text-bold max-margin-top relative-placeholder" style="font-size:20px;">Collection dedicated to the love of togetherness</div>
+	<div class="absolute-placeholder heading text-center text-bold max-margin-top" style="font-size:20px;left:0;right:0;">
+		<span style="width:110px;padding:0px 15px;display:block;margin:0 auto;background:#ffffff;position: relative;z-index: 1;"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/knotty-heart.png"/></span>
+		<span class="sep"></span>
+	</div>
+<div class="clearfix"></div>
+
+<div class="col-sm-12 knotty-heart-rings relative-placeholder">
+	<div class="clearfix"></div>
+	<div class="col-sm-12 heading apricot-text text-center" style="font-size:30px; font-family:cinzelregular; letter-spacing:1px;">
+		KNOTTY HEART RINGS
+	</div>
+	<div class="clearfix"></div>
+	<div class="container kh-pro text-center max-margin-top high-margin-bottom">
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/pave-set-diamond-pretzel-knot-ring-sr1499d?icid=knottyheartpage|knotty-heart-ring|sr1499d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1499d.jpg" alt="Pave-Set Diamond Pretzel Knot Ring" title="Pave-Set Diamond Pretzel Knot Ring">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1499d-sv.jpg" alt="Pave-Set Diamond Pretzel Knot Ring" title="Pave-Set Diamond Pretzel Knot Ring">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/pave-set-diamond-pretzel-knot-ring-sr1499d?icid=knottyheartpage|knotty-heart-ring|sr1499d|02152017"  style="font-weight:300">
+				Pave-Set Diamond <br> Pretzel Knot Ring
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $789
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/two-stone-diamond-twin-heart-knot-ring-sr1501d?icid=knottyheartpage|knotty-heart-ring|sr1501d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1501d.jpg" alt="Two Stone Diamond Twin Heart Knot Ring" title="Two Stone Diamond Twin Heart Knot Ring">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1501d-sv.jpg" alt="Two Stone Diamond Twin Heart Knot Ring" title="Two Stone Diamond Twin Heart Knot Ring">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/two-stone-diamond-twin-heart-knot-ring-sr1501d?icid=knottyheartpage|knotty-heart-ring|sr1501d|02152017"  style="font-weight:300">
+				Two Stone Diamond <br> Twin Heart Knot Ring
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $589
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/pave-set-diamond-knotted-heart-ring-sr1500d?icid=knottyheartpage|knotty-heart-ring|sr1500d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1500d.jpg" alt="Pave-Set Diamond Knotted Heart Ring" title="Pave-Set Diamond Knotted Heart Ring">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1500d-sv.jpg" alt="Pave-Set Diamond Knotted Heart Ring" title="Pave-Set Diamond Knotted Heart Ring">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/pave-set-diamond-knotted-heart-ring-sr1500d?icid=knottyheartpage|knotty-heart-ring|sr1500d|02152017"  style="font-weight:300">
+				Pave-Set Diamond <br> Knotted Heart Ring
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $719
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/split-diamond-knotted-twin-heart-ring-sr1502d?icid=knottyheartpage|knotty-heart-ring|sr1502d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1502d.jpg" alt="Split Diamond Knotted Twin Heart Ring" title="Split Diamond Knotted Twin Heart Ring">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1502d-sv.jpg" alt="Split Diamond Knotted Twin Heart Ring" title="Split Diamond Knotted Twin Heart Ring">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/split-diamond-knotted-twin-heart-ring-sr1502d?icid=knottyheartpage|knotty-heart-ring|sr1502d|02152017"  style="font-weight:300">
+				Split Diamond Knotted <br> Twin Heart Ring
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $1,009
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/round-diamond-classic-halo-ring-with-pretzel-heart-motif-sr1504d?icid=knottyheartpage|knotty-heart-ring|sr1504d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1504d.jpg" alt="Round Diamond Classic Halo Ring With Pretzel Heart-Motif" title="Round Diamond Classic Halo Ring With Pretzel Heart-Motif">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1504d-sv.jpg" alt="Round Diamond Classic Halo Ring With Pretzel Heart-Motif" title="Round Diamond Classic Halo Ring With Pretzel Heart-Motif">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/round-diamond-classic-halo-ring-with-pretzel-heart-motif-sr1504d?icid=knottyheartpage|knotty-heart-ring|sr1504d|02152017"  style="font-weight:300">
+				Round Diamond Classic <br> Halo Ring With Pretzel Heart-Motif
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $1,529
+			</span>
+		</div>
+
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/round-diamond-classic-solitaire-ring-with-pretzel-heart-motif-sr1505d?icid=knottyheartpage|knotty-heart-ring|sr1505d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1505d.jpg" alt="Round Diamond Classic Solitaire Ring With Pretzel Heart-Motif" title="Round Diamond Classic Solitaire Ring With Pretzel Heart-Motif">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1505d-sv.jpg" alt="Round Diamond Classic Solitaire Ring With Pretzel Heart-Motif" title="Round Diamond Classic Solitaire Ring With Pretzel Heart-Motif">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/round-diamond-classic-solitaire-ring-with-pretzel-heart-motif-sr1505d?icid=knottyheartpage|knotty-heart-ring|sr1505d|02152017"  style="font-weight:300">
+				Round Diamond Classic <br>Solitaire Ring With Pretzel Heart-Motif
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $1,039
+			</span>
+		</div>
+
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/solitaire-diamond-split-shank-ring-with-knotted-heart-motif-sr1503d?icid=knottyheartpage|knotty-heart-ring|sr1503d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1503d.jpg" alt="Solitaire Diamond Split Shank Ring With Knotted Heart-Motif" title="Solitaire Diamond Split Shank Ring With Knotted Heart-Motif">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sr1503d-sv.jpg" alt="Solitaire Diamond Split Shank Ring With Knotted Heart-Motif" title="Solitaire Diamond Split Shank Ring With Knotted Heart-Motif">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/solitaire-diamond-split-shank-ring-with-knotted-heart-motif-sr1503d?icid=knottyheartpage|knotty-heart-ring|sr1503d|02152017"  style="font-weight:300">
+				Solitaire Diamond Split <br> Shank Ring With Knotted Heart-Motif
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $2,189
+			</span>
+		</div>	
+		
+	</div>
+</div>
+<div class="clearfix"></div>
+	<div class="absolute-placeholder heading text-center text-bold max-margin-top" style="font-size:20px;left:0;right:0;">
+		<span style="width:110px;padding:0px 15px;display:block;margin:0 auto;background:#ffffff;position: relative;z-index: 1;"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/knotty-heart.png"/></span>
+		<span class="sep"></span>
+	</div>
+<div class="clearfix"></div>
+
+<div class="col-sm-12 knotty-heart-rings">
+	<div class="clearfix"></div>
+	<div class="col-sm-12 heading apricot-text text-center" style="font-size:30px; font-family:cinzelregular; letter-spacing:1px;">
+		KNOTTY HEART PENDANTS
+	</div>
+	<div class="clearfix"></div>
+	<div class="container kh-pro text-center max-margin-top high-margin-bottom">
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/prong-set-diamond-knotted-infinity-heart-pendant-sp1122d?icid=knottyheartpage|knotty-heart-pendant|sp1122d|02152017">
+				<img class="Fv" style="max-width:100%;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1122d.jpg" alt="Prong-Set Diamond Knotted Infinity Heart Pendant" title="Prong-Set Diamond Knotted Infinity Heart Pendant">
+				<img class="Sv" style="max-width:100%;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1122d-sv.jpg" alt="Prong-Set Diamond Knotted Infinity Heart Pendant" title="Prong-Set Diamond Knotted Infinity Heart Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/prong-set-diamond-knotted-infinity-heart-pendant-sp1122d?icid=knottyheartpage|knotty-heart-pendant|sp1122d|02152017"  style="font-weight:300">
+				Prong-Set Diamond <br> Knotted Infinity Heart Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $739
+			</span>
+		</div>
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/eternal-diamond-open-twin-heart-necklace-sp1121d?icid=knottyheartpage|knotty-heart-pendant|sp1121d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1121d.jpg" alt="Eternal Diamond Open Twin Heart Necklace" title="Eternal Diamond Open Twin Heart Necklace">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1121d-sv.jpg" alt="Eternal Diamond Open Twin Heart Necklace" title="Eternal Diamond Open Twin Heart Necklace">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/eternal-diamond-open-twin-heart-necklace-sp1121d?icid=knottyheartpage|knotty-heart-pendant|sp1121d|02152017"  style="font-weight:300">
+				Eternal Diamond Open <br> Twin Heart Necklace
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $729
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/solitaire-heart-dangle-diamond-pretzel-knot-pendant-sp1123d?icid=knottyheartpage|knotty-heart-pendant|sp1123d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1123d.jpg" alt="Solitaire Heart Dangle Diamond Pretzel Knot Pendant" title="Solitaire Heart Dangle Diamond Pretzel Knot Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1123d-sv.jpg" alt="Solitaire Heart Dangle Diamond Pretzel Knot Pendant" title="Solitaire Heart Dangle Diamond Pretzel Knot Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/solitaire-heart-dangle-diamond-pretzel-knot-pendant-sp1123d?icid=knottyheartpage|knotty-heart-pendant|sp1123d|02152017"  style="font-weight:300">
+				Solitaire Heart Dangle <br> Diamond Pretzel Knot Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $939
+			</span>
+		</div>
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/entwined-diamond-tilted-heart-knot-pendant-sp1128d?icid=knottyheartpage|knotty-heart-pendant|sp1128d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1128d.jpg" alt="Entwined Diamond Tilted Heart Knot Pendant" title="Entwined Diamond Tilted Heart Knot Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1128d-sv.jpg" alt="Entwined Diamond Tilted Heart Knot Pendant" title="Entwined Diamond Tilted Heart Knot Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/entwined-diamond-tilted-heart-knot-pendant-sp1128d?icid=knottyheartpage|knotty-heart-pendant|sp1128d|02152017"  style="font-weight:300">
+				Entwined Diamond Tilted <br> Heart Knot Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $719
+			</span>
+		</div>
+		
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/round-diamond-interlocking-heart-dangle-pendant-sp1124d?icid=knottyheartpage|knotty-heart-pendant|sp1124d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1124d.jpg" alt="Round Diamond Interlocking Heart Dangle Pendant" title="Round Diamond Interlocking Heart Dangle Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1124d-sv.jpg" alt="Round Diamond Interlocking Heart Dangle Pendant" title="Round Diamond Interlocking Heart Dangle Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/round-diamond-interlocking-heart-dangle-pendant-sp1124d?icid=knottyheartpage|knotty-heart-pendant|sp1124d|02152017"  style="font-weight:300">
+
+				Round Diamond Interlocking <br> Heart Dangle Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $749
+			</span>
+		</div>
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/prong-set-diamond-concentric-heart-pendant-sp1125d?icid=knottyheartpage|knotty-heart-pendant|sp1125d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1125d.jpg" alt="Prong-Set Diamond Concentric Heart Pendant" title="Prong-Set Diamond Concentric Heart Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1125d-sv.jpg" alt="Prong-Set Diamond Concentric Heart Pendant" title="Prong-Set Diamond Concentric Heart Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/prong-set-diamond-concentric-heart-pendant-sp1125d?icid=knottyheartpage|knotty-heart-pendant|sp1125d|02152017"  style="font-weight:300">
+
+				Prong-Set Diamond <br> Concentric Heart Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $879
+			</span>
+		</div>
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/entwined-diamond-ribbon-heart-pendant-sp1126d?icid=knottyheartpage|knotty-heart-pendant|sp1126d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1126d.jpg" alt="Entwined Diamond Ribbon Heart Pendant" title="Entwined Diamond Ribbon Heart Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1126d-sv.jpg" alt="Entwined Diamond Ribbon Heart Pendant" title="Entwined Diamond Ribbon Heart Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/entwined-diamond-ribbon-heart-pendant-sp1126d?icid=knottyheartpage|knotty-heart-pendant|sp1126d|02152017"  style="font-weight:300">
+
+				Entwined Diamond Ribbon <br> Heart Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $729
+			</span>
+		</div>
+		<div class="col-sm-4 col-md-3 text-center">
+			<a class="Mup" href="/p/prong-set-diamond-interlocking-twin-heart-pendant-sp1127d?icid=knottyheartpage|knotty-heart-pendant|sp1127d|02152017">
+				<img class="Fv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1127d.jpg" alt="Prong-Set Diamond Interlocking Twin Heart Pendant" title="Prong-Set Diamond Interlocking Twin Heart Pendant">
+				<img class="Sv" style="max-width:100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/knotty-heart/products/sp1127d-sv.jpg" alt="Prong-Set Diamond Interlocking Twin Heart Pendant" title="Prong-Set Diamond Interlocking Twin Heart Pendant">
+			</a>
+			<div class="clearfix"></div>
+			<a class="short-title" href="/p/prong-set-diamond-interlocking-twin-heart-pendant-sp1127d?icid=knottyheartpage|knotty-heart-pendant|sp1127d|02152017"  style="font-weight:300">
+				Prong-Set Diamond <br>Interlocking Twin Heart Pendant
+			</a>
+			<div class="clearfix"></div>
+			<span class="apricot-text"   style="font-weight:500">
+				From $729
+			</span>
+		</div>
+		
+	</div>
+</div>
+
+
+<div class="video-popup hidden">
+	<div class="relative-placeholder">
+		<div class="popup-close"></div>
+		<video id="video" width="640" controls autoplay>
+		  <source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/video/knoty-hearts.mp4" type="video/mp4">
+		  Your browser does not support HTML5 video.
+		</video>
+	</div>
+</div>
+
+<script language="javascript">
+jQuery(function(){
+	var video = jQuery('#video').get(0);
+	video.pause();
+	jQuery('.play').click(function(){
+		var winheight = jQuery(window).height();
+		var videoheight = jQuery('.video-popup div').height();
+		var toppadding = (winheight-videoheight)/2;
+		jQuery(".video-popup").removeClass('hidden').find('.relative-placeholder').css({'padding-top': toppadding+'px'});
+		jQuery('body').css({'overflow-y':'hidden'});
+		video.play();
+	});
+	jQuery('.video-popup').on('click', function(ev) {
+		if(ev.target.id != 'video'){
+			jQuery(this).addClass('hidden');
+			jQuery('body').css({'overflow-y':'auto'});
+			video.pause();
+		}
+	});
+});
+</script>

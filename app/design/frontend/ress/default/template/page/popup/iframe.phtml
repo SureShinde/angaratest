@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<style>
+.modal-backdrop.in{opacity: 0.5; filter: alpha(opacity=50);}
+.modal{ overflow-y:auto;}
+.matchingband-container{ display:none;}
+</style>
+</head>
+<body class="iframe-popup<?php echo $this->getBodyClass()?$this->getBodyClass() : ''?>">
+<div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+	<div class="loading-indicator hide text-center">
+    	<div class="modal-backdrop fade in"></div>
+		<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    </div>
+</div>
+<div class="fontsize-type2">
+	<div class="showcase-bg-white"> 
+		<?php echo $this->getChildHtml('after_body_start') ?>
+		<?php echo $this->getChildHtml('content') ?>
+		<?php echo $this->getChildHtml('before_body_end') ?>
+		<?php echo $this->getAbsoluteFooter() ?>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inchoo_QuoteItemRule>
+            <version>1.0.0.0</version>
+        </Inchoo_QuoteItemRule>
+    </modules>
+    <global>
+        <models>
+            <salesrule>
+                <rewrite>
+                    <rule_condition_product>Inchoo_QuoteItemRule_Model_SalesRule_Rule_Condition_Product</rule_condition_product>
+                </rewrite>
+            </salesrule>
+        </models>
+		
+		<!--Creating a observer for custom discount on cart page by Vaseem-->
+		<!--<events>
+			<sales_quote_collect_totals_after>
+				<observers>
+					<set_custom_discount_suagrcode>
+						<type>singleton</type>
+						<class>Inchoo_QuoteItemRule_Model_Observer</class>
+						<method>setDiscount</method>
+					</set_custom_discount_suagrcode>
+				</observers>
+			</sales_quote_collect_totals_after>             
+	  	</events>-->
+		
+		<!--<events>
+            <checkout_cart_product_add_after>
+                <observers>
+                    <unique_event_name>
+                        <class>Inchoo_QuoteItemRule_Model_Observer</class>
+                        <method>modifyPrice</method>
+                    </unique_event_name>
+                </observers>
+            </checkout_cart_product_add_after>
+        </events>-->
+		
+    </global>
+</config>

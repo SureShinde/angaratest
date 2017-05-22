@@ -1,0 +1,45 @@
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+
+if($this->getCollection()->getSize()):
+	//if($this->getFirstNum() == 1): ?>
+		<div class="max-margin-bottom text-center showcase-bg-white">
+			<div class="showcase-border-thin">
+				<div class="row no-margin">
+					<div class="col-xs-8 padding-type-8 text-left">
+                    	<span class="fa fa-sort fa-fw"></span>Sort By: <a onclick="catalogSortByChange('Most Popular');" href="<?php echo $this->getOrderUrl('position', 'asc') ?>" class="<?php echo ($this->isOrderCurrent('position') || $this->isOrderCurrent('relevance'))?"active":""; ?>"><span>Most Popular</span></a><span class="low-padding-left low-padding-right">|</span><a onclick="catalogSortByChange('Price: Low to High');" href="<?php echo $this->getOrderUrl('price', 'asc') ?>" class="<?php echo ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc')?"active":""; ?>"><span>Price Low To High</span></a><span class="low-padding-left low-padding-right">|</span><a onclick="catalogSortByChange('Price: High to Low');" href="<?php echo $this->getOrderUrl('price', 'desc') ?>" class="<?php echo ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc')?"active":""; ?>"><span>Price High To Low</span></a>
+                    </div>
+					<?php 
+					if($this->isEnabledViewSwitcher()): ?>
+						<div class="col-xs-4 pull-right text-right padding-type-8">
+                            <span class="low-padding-right"><?php echo $this->getCollection()->getSize().' Items';?></span>
+                            <?php 
+							if($this->isModeActive('grid')): ?>
+                            	<span class="fa fa-th fa-fw  fontcolor-type1"></span>
+                            <?php 
+							else: ?>
+                            	<a href="<?php echo $this->getModeUrl('grid') ?>"><span class="fa fa-th fa-fw text-primary"></span></a>
+                            <?php 
+							endif;
+							if($this->isModeActive('list')): ?>
+                            	<span class="fa fa-list fa-fw fontcolor-type1"></span>
+                            <?php 
+							else: ?>
+                            	<a href="<?php echo $this->getModeUrl('list') ?>"><span class="fa fa-list fa-fw text-primary"></span></a>
+                            <?php 
+							endif; ?>
+                        </div>
+					<?php 
+					endif; ?>
+				</div>
+			</div>
+		</div>
+	<?php //	endif; ?>
+	<div class="toolbar hidden">
+		<div class="pager"><?php echo $this->getPagerHtml(); ?></div>
+	</div>
+<?php endif; ?>

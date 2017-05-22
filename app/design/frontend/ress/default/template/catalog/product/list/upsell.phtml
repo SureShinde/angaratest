@@ -1,0 +1,77 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$_coreHelper = $this->helper('core');
+
+if(count($this->getItemCollection()->getItems())): ?>
+	<div class="upsell low-padding-bottom" style="padding:15px 0px;">	
+		<div class="block-sub-heading high-padding-bottom">People Who Saw This Also Saw</div>
+        <div class="upsell-jewelry padding-type-0 text-center" id="upsell-jewelry">
+        	<div id="upsell-product-table">
+			<?php 
+            $this->resetItemsIterator();
+			$rw_count_prod = 0;
+            for($_i=0;$_i<$this->getRowCount();$_i++):
+                for($_j=0;$_j<$this->getColumnCount();$_j++):
+                    if($_link=$this->getIterableItem()): ?>
+                        <div class="upsell-item pro-extra-item">
+                            <div class="pro-extra-item-box">  
+                                <a href="<?php echo $_link->getProductUrl(); ?>?icid=cwv-widget-08082014" title="<?php echo $this->htmlEscape($_link->getShortDescription()); ?>" style="display:block">
+									<img  width="200" class="img-responsive" data-org="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(200); ?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" alt="<?php echo $this->htmlEscape($_link->getShortDescription()); ?>" style="margin:0 auto" />
+								</a>
+								<div class="pro-extra-item-detail-box">
+									<a href="<?php echo $_link->getProductUrl() ?>?icid=cwv-widget-08082014" title="<?php echo $this->htmlEscape($_link->getShortDescription()) ?>" class="fontsize-type3">
+										<?php echo $this->htmlEscape($_link->getShortDescription()) ?>
+									</a>
+									<div class="regular-price">
+										<?php echo $this->getPriceHtml($_link, true, '-upsell'); ?>
+									</div>
+								</div>
+                            </div>
+                        </div> 
+                    <?php 
+                    else: ?>
+                    	<div class="empty">&nbsp;</div>
+                    <?php 
+                    endif;
+                endfor;
+			$rw_count_prod++;	
+            endfor; ?>
+    		</div>
+    		<script type="text/javascript">decorateTable('upsell-product-table')</script>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#upsell-product-table').slick({
+					arrows			: 	true,
+					slidesToShow	: 	5,
+					slidesToScroll	: 	1
+				});
+			});
+			</script>
+		</div>
+    </div>
+	<div class="clearfix"></div>
+<?php 
+endif; ?>

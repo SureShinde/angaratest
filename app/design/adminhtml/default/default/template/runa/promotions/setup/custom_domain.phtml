@@ -1,0 +1,39 @@
+<span id="<?php echo $this->getHtmlId() ?>_container">
+    <input  type="text" id="<?php echo $this->getHtmlId() ?>" value="<?php echo $this->getValue() ?>"  class="input-text" name="<?php echo $this->name ?>"git pu/>
+    << Add Domain
+</span>
+<script>
+    hideAllMerchetIdTbs();
+    showDomainBox();
+    Event.observe(window, 'load', function() {
+        showDomainBox();
+    });
+
+    function hideAllMerchetIdTbs(){
+        $('sales_runa_promote_merchant_id_DEV').up().up().hide();
+        $('sales_runa_promote_merchant_id_CUSTOM_DOMAIN').up().up().hide();
+        $('sales_runa_promote_merchant_id_STAGE').up().up().hide();
+        $('sales_runa_promote_merchant_id_PROD').up().up().hide();
+        $('sales_runa_promote_runa_api_timeout').up().up().hide();
+    }
+
+    function showDomainBox(){
+
+        hideAllMerchetIdTbs();
+        $('sales_runa_promote_merchant_id_'+$('sales_runa_promote_mode').value).up().up().show();
+
+        if($('sales_runa_promote_mode').value != "CUSTOM_DOMAIN"){
+            $('sales_runa_promote_custom_domain').up().up().up().hide();
+            $('<?php echo $this->getHtmlId() ?>').value = "";
+
+        }else{
+            $('sales_runa_promote_custom_domain').up().up().up().show();
+        }
+
+        $('sales_runa_promote_mode').observe('change',function(){
+            showDomainBox();
+        });
+    }
+
+
+</script>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  	<buildyourown_ring_diamonds>
+		<reference name="root">   
+			<action method="setTemplate">
+				<template>page/1column.phtml</template>
+			</action>   
+		</reference>
+		<reference name="head">
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/jquery-ui.min.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/build-your-own.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/ui.jqgrid-bootstrap.css</name>
+			</action>
+			<action method="addItem">
+					<type>skin_js</type>
+					<name>js/buildyourown/jquery-ui.js</name>
+			</action>
+			<action method="addItem">
+					<type>skin_js</type>
+					<name>js/buildyourown/grid.locale-en.js</name>
+			</action>
+			<action method="addItem">
+					<type>skin_js</type>
+					<name>js/buildyourown/jquery.jqGrid.min.js</name>
+			</action>
+		</reference>
+		<reference name="content">   
+			<block type="buildyourown/list" name="buildyourown_list" template="buildyourown/ring/list.phtml">
+				<block type="buildyourown/header" name="buildyourown_header" template="buildyourown/header.phtml"></block>
+			</block>
+		</reference>   
+  	</buildyourown_ring_diamonds>
+	<buildyourown_pendant_diamonds>
+		<reference name="root">   
+			<action method="setTemplate">
+				<template>page/1column.phtml</template>
+			</action>   
+		</reference>
+		<reference name="head">
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/jquery-ui.min.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/build-your-own.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>css/buildyourown/ui.jqgrid-bootstrap.css</name>
+			</action>
+			<action method="addItem">
+					<type>skin_js</type>
+					<name>js/buildyourown/jquery-ui.js</name>
+			</action>
+			<action method="addItem">s
+					<type>skin_js</type>
+					<name>js/buildyourown/grid.locale-en.js</name>
+			</action>
+			<action method="addItem">
+					<type>skin_js</type>
+					<name>js/buildyourown/jquery.jqGrid.min.js</name>
+			</action>
+		</reference>
+		<reference name="content">   
+			<block type="buildyourown/list" name="buildyourown_list" template="buildyourown/pendant/list.phtml">
+				<block type="buildyourown/header" name="buildyourown_header" template="buildyourown/header.phtml"></block>
+			</block>
+		</reference>   
+  	</buildyourown_pendant_diamonds>
+</layout>	

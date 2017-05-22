@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<feeds_generate translate="label">
+			<label>Angara Feeds</label>
+			<sort_order>251</sort_order>
+		</feeds_generate>
+	</tabs>
+	<sections>
+		<feeds translate="label" module="feeds">
+			<label>Feeds Configuration</label>
+			<tab>feeds_generate</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>999</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+				<label>Feeds Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+						<is_test_sku_enabled translate="label">
+                            <label>Enabled To Generate feeds For Test Sku</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_test_sku_enabled>
+						<test_sku translate="label">
+                            <label>Enter Test Sku's</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+							<comment>* Comma Seprated Sku's</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </test_sku>
+					</fields>
+				</settings>
+				<amazon_feeds translate="label comment">
+                    <label>Configuration For Amazon Feeds(US)</label>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<categories translate="label">
+							<label>Please Select Categories</label>
+							<frontend_type>select</frontend_type>
+							<source_model>feeds/system_config_source_category</source_model>
+							<sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</categories>
+						<feeds_qty translate="label">
+                            <label>Set Quantity For All Products</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </feeds_qty>
+                       <target_audience1 translate="label">
+                            <label>Set Target Audience 1 For Ring,Earrings,Pendant(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience1>
+						<target_audience2 translate="label">
+                            <label>Set Target Audience 2 For Ring,Earrings,Pendant(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience2>
+						<target_audience3 translate="label">
+                            <label>Set Target Audience 3 For Ring,Earrings,Pendant(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience3>
+						<display_diameter translate="label">
+                            <label>Set Item Display Diameter For Earrings,Pendant,Brecelet</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_diameter>
+						<display_height translate="label">
+                            <label>Set Item Display Height For Earrings,Pendant,Brecelet</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_height>
+						<display_width translate="label">
+                            <label>Set Item Display Width For Earrings,Pendant,Brecelet</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_width>
+						<display_length translate="label">
+                            <label>Set Item Display Length For Earrings,Pendant,Brecelet</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_length>
+						<lead_time translate="label">
+                            <label>Add Vendor Lead Time</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lead_time>
+						<update_delete translate="label">
+                            <label>Set Update/Delete Products</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </update_delete>
+						<target_audience1_bres translate="label">
+                            <label>Set Target Audience 1 For Bracelet(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience1_bres>
+						<target_audience2_bres translate="label">
+                            <label>Set Target Audience 2 For Bracelet(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience2_bres>
+						<target_audience3_bres translate="label">
+                            <label>Set Target Audience 3 For Bracelet(US feeds)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </target_audience3_bres>
+                    </fields>
+                </amazon_feeds>
+				<uk_feeds translate="label comment">
+                    <label>Configuration For Amazon Feeds(UK)</label>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_uk_enabled translate="label">
+                            <label>Enabled UK Feed To Generate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_uk_enabled>
+						<conversion_rate translate="label">
+							<label>Set Conversion Rate</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_rate>
+						<tax_rate translate="label">
+							<label>Set Tax Rate</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</tax_rate>
+						<season_uk translate="label">
+							<label>Set Season</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</season_uk>
+					</fields>
+				</uk_feeds>
+			</groups>
+		</feeds>
+	</sections>
+</config>

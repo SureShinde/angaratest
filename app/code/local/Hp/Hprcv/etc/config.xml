@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+		<modules>
+                <Hp_Hprcv>
+                        <version>0.1.0</version>
+                </Hp_Hprcv>
+        </modules>
+		<blocks>
+            <hprcv>
+                <rewrite>
+				 <hprcv>Hp_Hprcv_Block_hprcv</hprcv>
+				</rewrite>
+            </hprcv>
+		
+		</blocks>
+		<models>
+			<hprcv>
+                <class>Hp_Hprcv_Model</class>
+                <resourceModel>hprcv_hprcv</resourceModel>
+            </hprcv>
+		</models>
+		<!-- <events>
+			 <checkout_cart_save_after>
+				<observers>
+					<hprcv>
+						<type>singleton</type>
+                        <class>hprcv/hprcv</class>
+                        <method>couponadded</method>
+					</hprcv>
+				</observers>
+			</checkout_cart_save_after> 
+		</events> -->
+    </global>
+   <frontend>
+			<routers>
+					<hprcv>
+							<use>standard</use>
+							<args>
+								  <module>Hp_Hprcv</module>
+								  <frontName>hprcv</frontName>
+							</args>
+					</hprcv>
+			</routers>
+	<layout>
+		<updates>
+			<hprcv>
+				  <file>hprcv.xml</file>
+			</hprcv>
+		</updates>
+		</layout>
+	</frontend>
+			
+</config>

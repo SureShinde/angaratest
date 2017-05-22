@@ -1,0 +1,28 @@
+<?php
+if($this->getCountryCount()>1): ?>
+
+<span class="country-dropdown-list-container">
+	<a class="country-dropdown-list-trigger low-padding-left" href="javascript:void(0)">
+	<span class="country-flag country-<?php echo strtolower($this->getCurrentCountryCode()); ?>-smallf country-name-with-flag">
+		<?php if($this->getCurrentCountryCode()=='GS'): ?>
+			<?php echo 'SGSSI'; ?>
+		<?php else: ?>
+			<?php echo $this->getCurrentCountryName(); ?>
+		<?php endif; ?>
+	</span>
+	<i class="fa fa-chevron-down pull-right low-padding-top low-padding-right"></i>
+	</a>
+	<span class="country-dropdown-list border-focus hidden" tabindex="-1">
+		<ul class="root">
+			<?php foreach ($this->getCountries() as $_code => $_name): ?>
+			<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl($_code) ?>');">
+				<span class="country-list-item country-flag country-<?php echo strtolower($_code); ?>-smallf">
+					<?php echo $_name; ?>
+				</span>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</span>
+</span>
+<?php 
+endif; ?>

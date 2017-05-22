@@ -1,0 +1,58 @@
+<style>
+.cat-banner-link {
+	height:75px;
+	width:960px;
+	display:block;
+}
+#catpagestaticbanner{ display:none!important;}
+</style>
+<?php
+$bannerCollection = $this->getBannerCatalogCollection();
+$i = 0;
+$timeDelay = $this->getDelayTime();
+$showdesc = $this->isShowDescription();
+$listStyle = $this->getListStyle();
+$imagewidth = $this->getImageWidth();
+$imageheight = $this->getImageHeight(); 
+
+$bannerCollection 	= $this->getLayout()->createBlock('bannerslider/bannerslider')->getBannerCatalogCollection();
+
+if(count($bannerCollection) > 0){ ?>   
+<div id="catpagestaticbanner">	
+        <div style="width:960px; display:block; position:relative; cursor:default; height:110px;" class="promotions">
+		<?php 
+		$i = 0;
+		$bannerTitle = $bannerCollection[0]['title'];
+		
+		// S: Catalog Page Banner Sign Up by Pankaj
+		if(trim($bannerTitle) == 'catalog'){
+			$referrer = $_SERVER['HTTP_REFERER'];
+			if(!(empty($referrer)) && stripos($referrer, '26qd') !== false){
+				$thankCatalogReqValues = $this->getRequest()->getParams();
+				if(isset($thankCatalogReqValues['newslettertype']) && $thankCatalogReqValues['newslettertype'] !='' && $thankCatalogReqValues['newslettertype'] == 'catalog-banner-Sign-Up' && $thankCatalogReqValues['email'] != ''){?>
+					<script>
+					jQuery(function(){
+						if(document.getElementById("thanks-wrapper")){
+							document.getElementById("thanks-wrapper").style.display = "block" ;
+							document.getElementById("layoverlayer").style.display = "block" ;
+						}
+					});
+					</script>
+				<?php
+				}	
+			}
+		}
+		// E: Catalog Page Banner Sign Up by Pankaj
+		 
+		foreach ($bannerCollection as $banner): 
+			$i++; 
+			echo $banner['content'];?>
+                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$banner['filename']?>" id="catalog-banner-image" width="960" height="110"/>
+        <?php 
+		break; 
+		endforeach; ?>                
+        </div>
+    </div>
+<?php 
+} ?>
+<div id="mbpd" ></div>

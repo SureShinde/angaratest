@@ -1,0 +1,71 @@
+<div class="row no-gutters">
+	<div class="label fl pull-left">Shipping: </div>
+    <div class="shipping-option fr">
+	<?php 
+	$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();				// Base Currency
+	$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();			// Current Currency
+	$shipment_hp 			= 	'';
+	if(Mage::getSingleton('checkout/session')->getData('shipment')){
+		$shipment_hp 		= 	Mage::getSingleton('checkout/session')->getData('shipment');
+	}
+    if($currentCurrencyCode == $baseCurrencyCode){ 
+        //$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId(); 
+        $availableShippingMethods	=	Mage::helper('function')->getAvailableShippingMethods();
+        
+        //$freeInternationalShippingAmount	=	1000;		//	Added by Vaseem		?>
+        <select id="custom_estimate_method" class="col-sm-9 select_shipping pull-right" name="estimate_method" onchange="postCart()">
+            <?php 
+                if(count($availableShippingMethods)){
+                    foreach($availableShippingMethods as $_method){?>
+                        <option value="<?php echo $_method['code']?>"<?php if($shipment_hp == $_method['code']){echo ' selected="selected" ';}?>><?php echo $_method['title']?></option>
+            <?php 	}
+                }	
+            ?>
+        </select>
+    <?php }else{?>
+            <select id="custom_estimate_method" class="pull-right" name="estimate_method">
+                <option value="angnonusflatrate_angnonusflatrate"<?php if($shipment_hp=='angnonusflatrate_angnonusflatrate'){echo ' selected="selected" ';}?>>
+                <?php 
+				$subTotalWithoutEasyEmi				= 	Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();
+				$freeInternationalShippingAmount	=	Mage::getStoreConfig("carriers/angnonusflatrate/min_cart_value_for_free_shipping");
+                if($subTotalWithoutEasyEmi >= $freeInternationalShippingAmount){ 
+                    $_title 	= 	Mage::getStoreConfig("carriers/angnonusflatrate/title");
+					echo 'Free '.$_title; 
+                } 
+                else { 
+					$price		=	Mage::getStoreConfig("carriers/angnonusflatrate/price");
+                    echo 'International Shipping $'.$price; 
+                } ?>
+                </option>
+            </select>
+    <?php }?>
+	</div>
+</div>
+
+	<?php /*?><?php if(!empty($customerId) && Mage::getSingleton('customer/session')->isLoggedIn()){?>
+        <option value="freeshipping_freeshipping"<?php if($shipment_hp=='freeshipping_freeshipping'){echo ' selected="selected" ';}?>>Free Express Shipping</option>
+		<option value="ang2dayflatrate_ang2dayflatrate"<?php if($shipment_hp=='ang2dayflatrate_ang2dayflatrate'){echo ' selected="selected" ';}?>>2 Day Shipping <?php echo $twoDayText;?></option>
+    <?php }else{
+				if($grandtotalwithout_easy < 2000){?>
+        			<option value="freeshipping_freeshipping"<?php if($shipment_hp=='freeshipping_freeshipping'){echo ' selected="selected" ';}?>>Free Express Shipping</option>
+					<option value="ang2dayflatrate_ang2dayflatrate"<?php if($shipment_hp=='ang2dayflatrate_ang2dayflatrate'){echo ' selected="selected" ';}?>>2 Day Shipping <?php echo $twoDayText;?></option>
+    			<?php }else{?>
+    				<option value="freeshipping_freeshipping"<?php if($shipment_hp=='freeshipping_freeshipping'){echo ' selected="selected" ';}?>>Free Express Shipping</option>
+					<option value="ang2dayflatrate_ang2dayflatrate"<?php if($shipment_hp=='ang2dayflatrate_ang2dayflatrate'){echo ' selected="selected" ';}?>>2 Day Shipping <?php echo $twoDayText;?></option>
+    				<?php }
+		}?>
+            
+    	<option value="angnonusflatrate_angnonusflatrate"<?php if($shipment_hp=='angnonusflatrate_angnonusflatrate'){echo ' selected="selected" ';}?>>
+			<?php 
+            if($grandtotalwithout_easy >= $freeInternationalShippingAmount){ 
+                echo 'Free International Shipping'; 
+            } else { 
+                echo 'International Shipping $39.99'; 
+            } ?>
+    	</option>
+        
+    	<option value="angovernightflatrate_angovernightflatrate"<?php if($shipment_hp=='angovernightflatrate_angovernightflatrate'){echo ' selected="selected" ';}?>>Priority Overnight $21.95</option>
+        
+    	<option value="flatrate_flatrate"<?php if($shipment_hp=='flatrate_flatrate'){echo ' selected="selected" ';}?>>Saturday Delivery $32.95</option><?php */?>
+        
+

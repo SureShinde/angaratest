@@ -1,0 +1,69 @@
+<?php
+$_coreHelper = $this->helper('core');
+$totalPro = $this->getItems()->getSize();
+if($this->getItems()->getSize()): ?>
+	<div id="similar-items" class="full-width pull-left showcase-border-left-1px text-center">
+		<div class="block-sub-heading high-padding-bottom pull-left full-width text-bold">Similar Items</div>
+		<div class="visible-md">	
+			<div id="similar-item-holder" class="item-holder full-width pull-left">	
+				<div class="low-padding low-margin-bottom col-md-12 col-sm-12">
+					<?php 
+					$rw_count_prod = 0;					
+					foreach($this->getItems() as $_item): 
+						if($rw_count_prod <= 5):?>                
+							<div>
+								<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" title="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" style="display:block; max-width:100%">
+									<img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(150); ?>" alt="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" width="150" class="img-responsive"  style="margin:0 auto" />
+								</a>
+								<div class="fontsize-type0 text-bold low-padding-top text-uppercase">
+									<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014"><?php echo Mage::helper('core/string')->truncate($this->helper('catalog/output')->productAttribute($_item, $this->htmlEscape($_item->getShortDescription()) , 'name'), $length = 35, $etc = '...');?></a>
+								</div>
+								<div class="regular-price"><?php echo $this->getPriceHtml($_item, true, '-related'); ?></div>
+								<div class="text-center low-padding-top hidden">
+									<button href="/catalog/ajax_product/view/id/<?php echo $_item->getId(); ?>" onclick="quickView(this, '<?php echo "si-widget|".$_item->getSku(); ?>')" class="btn btn-sm quickview">Quick View</button>
+									<div class="clearfix"></div>
+								</div>
+							</div>							
+						<?php
+						endif;
+						$rw_count_prod++;
+					endforeach;?>           
+				</div>
+			</div>
+			<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+		</div>
+		
+		<div class="visible-sm">	
+			<div id="similar-item-holder-ipad" class="item-holder full-width pull-left text-center">	
+				<?php 
+				$rw_count_prod = 0;
+				foreach($this->getItems() as $_item):  ?>                
+				<div class="low-padding low-margin-bottom col-sm-3">
+					<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" title="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" style="display:inline-block; max-width:100%"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(150); ?>" alt="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" width="150" class="img-responsive" /></a>
+					<div class="fontsize-type0 text-bold low-padding-top text-uppercase">
+						<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014"><?php echo Mage::helper('core/string')->truncate($this->helper('catalog/output')->productAttribute($_item, $this->htmlEscape($_item->getShortDescription()) , 'name'), $length = 35, $etc = '...');?></a>
+					</div>
+					<div class="regular-price"><?php echo $this->getPriceHtml($_item, true, '-related'); ?></div>
+					<div class="text-center low-padding-top hidden">
+						<button href="/catalog/ajax_product/view/id/<?php echo $_item->getId(); ?>" onclick="quickView(this, '<?php echo "si-widget|".$_item->getSku(); ?>')" class="btn btn-sm quickview">Quick View</button>
+						<div class="clearfix"></div>
+					</div>
+				</div>							
+				<?php
+				$rw_count_prod++;
+				endforeach; ?>           
+			</div>
+			<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#similar-item-holder-ipad').slick({
+					arrows			: 	true,
+					slidesToShow	: 	4,
+					slidesToScroll	: 	1
+				});
+			});
+			</script>
+		</div>		
+	</div> 
+<?php 
+endif; ?>

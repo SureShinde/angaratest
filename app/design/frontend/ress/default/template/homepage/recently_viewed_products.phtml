@@ -1,0 +1,70 @@
+<?php 
+$products = $this->CollectRecentlyViewed();
+
+foreach($products as $product){	
+	$_product = Mage::getModel('catalog/product');
+	$_product->load($product);
+	$productCategories = $_product->getCategoryIds();
+	/*if($_product && in_array(454, $productCategories)):
+		unset($products[array_search($product,$products)]);
+	endif;*/	
+}
+
+if(count($products) > 0):?>
+<div class="clearfix high-margin-top"></div>
+<div class="heading text-center full-width max-margin-top max-margin-bottom px22">
+	Recently Viewed Products
+</div>
+<div class="clearfix"></div>
+<div id="home-recently-viewed-box" class="col-sm-12 no-padding">
+<?php 
+$rw_count_home = 0;
+foreach($products as $_product):
+	if($rw_count_home <= 7):
+		$_product = Mage::getModel('catalog/product')->load($_product);
+		if($_product): ?>
+			<div class="viewed-pro high-margin-bottom padding-type-5">
+				<div class="showcase-border-thin padding-type-5">
+					<div class="img text-center">
+						<a rel="nofollow" href="<?php echo $_product->getProductUrl(); ?>?icid=home|rv-widget|05152015" style="display:block; margin:0 auto; max-width:100%">
+							<img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(200)->setQuality(60); ?>" alt="<?php echo $this->htmlEscape($_product->getShortDescription()); ?>" title="<?php echo $this->htmlEscape($_product->getShortDescription()); ?>" width="200" class="img-responsive"/>
+						</a>
+					</div>
+					<div class="detail text-center high-padding-bottom">
+						<a rel="nofollow" href="<?php echo $_product->getProductUrl(); ?>?icid=home|rv-widget|05152015">
+							<p class="fontsize-type1 low-margin-bottom" style="line-height: 15px;"><?php echo  Mage::helper('core/string')->truncate($this->stripTags($_product->getShortDescription(), null, true), $length = 45, $etc = '...'); ?></p>
+						</a>
+						<span class="pro-price"><strong><?php echo $this->helper('core')->currency($_product->getPrice(),true,false) ?></strong></span>
+					</div>
+				</div>
+			</div>
+		<?php endif;
+	endif;
+	$rw_count_home++;
+endforeach; ?>
+</div>
+<?php endif; ?>
+<?php 
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#home-recently-viewed-box').slick({
+			arrows			: 	true,
+			slidesToShow	: 	4,
+			slidesToScroll	: 	1
+		});
+	});
+	</script>
+<?php 
+} else { ?>
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#home-recently-viewed-box').slick({
+			arrows			: 	true,
+			slidesToShow	: 	6,
+			slidesToScroll	: 	1
+		});
+	});
+	</script>
+<?php 
+} ?>

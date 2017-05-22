@@ -1,0 +1,72 @@
+.jcarousel-skin-tango .jcarousel-container-vertical {
+    width: 74px;
+    height:320px;
+    padding:15px 0;
+}
+.jcarousel-skin-tango .jcarousel-clip {
+    overflow: hidden;
+}
+.jcarousel-skin-tango .jcarousel-clip-vertical {
+    width:74px;
+    height:320px;
+}
+
+/**
+ *  Vertical Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-vertical {
+    position: absolute;
+    bottom:0px;
+	width:74px;
+	height:15px;
+	background:url(../images/downslidearrow.jpg) center no-repeat;
+	cursor:pointer;
+}
+
+.jcarousel-skin-tango .jcarousel-next-vertical:hover,
+.jcarousel-skin-tango .jcarousel-next-vertical:focus {
+   background:url(../images/downslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-next-vertical:active {
+    background:url(../images/downslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical,
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:focus,
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:active {
+    cursor: default;
+	background:url(../images/downslidearrow.jpg) center no-repeat;
+	opacity:.2;
+	filter:alpha(opacity=20);
+    }
+
+.jcarousel-skin-tango .jcarousel-prev-vertical {
+    position:absolute;
+    top:0px;    
+	width:74px;
+	height:15px;
+	background:url(../images/upslidearrow.jpg) center no-repeat;
+	cursor:pointer;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-vertical:hover,
+.jcarousel-skin-tango .jcarousel-prev-vertical:focus {
+   background:url(../images/upslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-vertical:active {
+    background:url(../images/upslidearrow.jpg) center no-repeat;
+	
+}
+
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical,
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:hover,
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:focus,
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:active {
+    cursor: default;
+	background:url(../images/upslidearrow.jpg) center no-repeat;
+	opacity:.2;
+	filter:alpha(opacity=20);
+}

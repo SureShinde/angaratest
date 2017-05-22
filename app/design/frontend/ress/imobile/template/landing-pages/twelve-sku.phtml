@@ -1,0 +1,224 @@
+<style type="text/css">
+.bizrate img {vertical-align:initial !important;}
+.catalog-page-price-box{display: block !important;}
+.mp-box:nth-child(4n+1) {clear:none !important;}
+
+.mp-box{width:50%; float:left;}
+.mp-box	.category-product-list{border: 1px solid #e1e3df;  border-radius: 2px; overflow: hidden; border-bottom: 1px solid #cbccc9;  background: #ffffff;}
+.product-name{font-size:12px!important;}
+.price-box .price{color:#fa505a !important; margin-bottom:7px; font-size:14px; font-weight:bold}
+.product-retail-price-toptwenty {color: #999999 !important;}
+
+.product-retail-price-range-toptwenty,
+.price-extra-text-toptwenty{display: none!important;}
+
+.product-price-toptwenty {
+    display: none!important;
+}
+
+@media (max-width: 1000px){
+.mp-box:nth-child(3n+1) {clear: none!important;}
+}
+@media (max-width: 1000px){
+.mp-box:nth-child(2n+1) {clear:left!important;}
+}
+</style>
+<?php 
+$_helper 			= 	$this->helper('catalog/output');
+$todaysCouponCode	=	Mage::helper('function')->getTodaysCouponCode();
+$twelveSku			=	Mage::helper('function')->getSkuFromCoupon();
+//echo '<pre>';print_r($twelveSku);
+if(count($twelveSku) > 0){
+?>
+<div class="banner text-center full-width max-padding-bottom relative-placeholder">
+	<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/special-offer-catalogue-<?php echo strtolower($todaysCouponCode);?>.jpg" alt="Explore Natural Sapphire Jewelry" title="Explore Natural Sapphire Jewelry">
+	<!--<p>Here goes the banner with todays applicable coupon code <strong><?php echo $todaysCouponCode;?></strong></p>-->
+
+	<?php /* Ticker Start */
+	$tickerHtml		=	Mage::helper('function')->getOfferCatalogTickerHtml();
+	if($tickerHtml){ ?>
+		<style>
+			.tickr-width{width:100%; position:absolute; float:left; top:0%; left:0px; right:0px;}
+			.tickr-holder{}
+			.tickr-style{
+			font-weight: bold;
+			font-size: 15px;
+			position: absolute;
+			right: 14.5%;
+			margin-top: 4px;
+			color: #000000;
+			background:transparent;
+			text-align: center;
+			width: 186px;
+			margin-left: -93px;
+			transform:scale(0.6);
+			-webkit-transform:scale(0.6);
+			-moz-transform:scale(0.6);
+			}
+			.ofrend, .text-format {display:block; padding: 0px 0px 0px;}
+			.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+			.ofrend{font-size: 18px; font-weight: normal; display:none; /* position: absolute; left: -170px; top: 11px; */}
+			.daydigits{display:none;}
+			.hourdigits, .minutedegites, .secondigits{
+			height: 40px;
+			width: 50px;
+			display: inline-block;
+			text-align: center;
+			line-height: 40px;
+			color: #ffffff;
+			background: #000000;
+			font-size: 35px;
+			font-weight: normal;
+			}
+			.text-format span{float:left}
+			span.daydigits + span { display: none;}
+			span.hourdigits + span, span.minutedegites + span{width: 18px; display: block; float: left; font-size: 28px; line-height: 40px;} 
+			.text-format + span span{width:50px; float:left; margin-right:18px; font-weight:300; font-size:10px;}
+			.text-format + span span:last-child{margin-right:0px;}
+
+			@media(max-width:414px){ .tickr-width{top:-6%;} .tickr-style{transform:scale(0.5); -webkit-transform:scale(0.5); -moz-transform:scale(0.5); right:11.5%} }
+			@media(max-width:375px){ .tickr-width{top:-12%;} .tickr-style{transform:scale(0.45); -webkit-transform:scale(0.45); -moz-transform:scale(0.45); right:8.5%} }
+			@media(max-width:360px){  .tickr-width{top:-12%;} .tickr-style{transform:scale(0.45); -webkit-transform:scale(0.45); -moz-transform:scale(0.45); right:7.5%} }
+			@media(max-width:320px){ .tickr-width{top:0%;} .tickr-style{transform:scale(0.4); -webkit-transform:scale(0.4); -moz-transform:scale(0.4); right:1.5%} }
+		</style>
+		<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+		<div class="product-page-ticker fl full-width">
+			<?php echo $tickerHtml; ?>
+		</div>
+		<script>
+			jQuery(window).load(function(){
+				jQuery('.ofrend').show().text("Today's Deal Ends In");
+			});
+		</script>
+	<?php 
+	} 
+	/* Ticker Ends */ ?>	
+
+</div>
+<div class="clearfix"></div>
+<section class="container">
+	<?php 
+	//if($productCollection){
+		$i=1;
+		foreach($twelveSku as $sku){
+			$i++;
+			$checkProductId = Mage::getModel('catalog/product')->getIdBySku(trim($sku));
+			if($checkProductId){
+				$_product = Mage::getModel('catalog/product')->loadByAttribute('sku',trim($sku));
+			?>	
+			<div class="col-md-3 col-sm-4 max-margin-bottom mp-box">
+				<div class="category-product-list showcase-bg-white relative" item itemscope itemtype="http://schema.org/Product">
+					<div class="absolute" style="left:3px; top:3px;"><img width="40" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/deal-of-the-day.png"/> </div>
+					<a id="gemcolor_a_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl();?>?icid=splhday20dod|top12prod|<?php echo $_product->getSku();?>|07122016" class="product-image center-block">
+						<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/angara-place-holder.jpg" data-org="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" width="200" height="200" alt="<?php echo $_product->getShortDescription(); ?>" title="<?php echo $_product->getShortDescription(); ?>" class="img-responsive center-block"/>
+					</a>
+					<div class="padding-type-10 padding-type-5-xs details relative-placeholder">
+						<a href="<?php echo $_product->getProductUrl();?>?icid=splhday20dod|top12prod|<?php echo $_product->getSku();?>|07122016" id="gemcolor_desc_<?php echo $_product->getId(); ?>">
+							<p id="gemcolor_desc_p_<?php echo $_product->getId(); ?>" class="product-name" itemprop="name"><?php echo Mage::helper('function')->truncateOnWord($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), 35);?></p>
+						</a>
+						<?php 
+						if(strtolower($countryCode)=='us'){						  
+						   echo '<div id="gemcolor_price_'.$_product->getId().'">';						  				  	
+						}else{
+							 echo '<div id="gemcolor_price_'.$_product->getId().'" class="reduce-price-size">';							
+						}?>
+						<?php echo $this->getPriceHtml($_product, true, '-toptwenty'); ?>
+						<?php echo '</div>';?>	
+						
+						<div class="clearfix"></div>
+						<div class="block-inline-display apricot-text fontsize-type3 text-left col-sm-12 no-padding">
+							<?php echo Mage::helper('function')->getOfferTextForOfferSku(); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+            <?php $i++;
+			} ?>
+	<?php
+		}
+	//}?>
+</section>
+<div class="clearfix"></div>
+<section class="container">
+	<div class="col-sm-12 no-padding max-margin-top">
+		<p>This holiday season add some sparkle to your wardrobe by making the most of Angara’s special holiday deal of the day. To make your celebrations even more exciting, we’re offering you a whopping 20% off on selected jewelry items every day. Each piece has been selected from our assortment of best sellers. The jewelry pieces on sale change every day at 12 am PST, so if you like something do pick it right away.</p>
+		
+		<p>No matter what you choose, we’ll ensure that the order is delivered to you before Christmas. Apart from special savings, you also get free FedEx 2Day on your purchases. A certificate of authentication is shipped with all orders for added assurance. We also have easy pay installments to help you purchase your favorite pieces and pay at ease. If for any reason, you aren’t happy with the item, you can return it to us within <?php echo Mage::helper('function')->freeReturnDays();?> days of purchase. Simply use the relevant code at cart and avail of the special holiday deals now.</p>
+	</div>
+	
+</section>
+	
+<script type="text/javascript">
+/* Gemstone Colors */
+/* Start */
+function changegemstonecolors(gemcolorprodid,prodid,sku) {
+	//	S:VA
+	if(gemcolorprodid == prodid){
+		jQuery('#wishlist_product_'+prodid).removeClass('hidden');	
+	}else{
+		jQuery('#wishlist_product_'+prodid).addClass('hidden');	
+	}
+	//	E:VA
+	
+	/*  Product url changes */
+	if(document.getElementById('gemcolor_a_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_a_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	if(document.getElementById('gemcolor_desc_shop'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_shop'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	
+	/*  Image changes */
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_src_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).src = document.getElementById('gem_img_src_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_alt_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).alt = document.getElementById('gem_img_alt_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Toggle image changes */
+	if(document.getElementById('gemcolor_img_toggle_'+prodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = 'none';
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = document.getElementById('gem_toggle_img_src_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_alt_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = document.getElementById('gem_toggle_img_alt_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	}
+	
+	/* Product name/description changes */
+	if(document.getElementById('gemcolor_desc_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	if(document.getElementById('gemcolor_desc_p_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_'+prodid).innerHTML = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	if(document.getElementById('gemcolor_desc_p_d_'+prodid) && document.getElementById('gem_desc_p_d_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_d_'+prodid).innerHTML = document.getElementById('gem_desc_p_d_'+gemcolorprodid).innerHTML;
+	
+	/* Product price name */
+	if(document.getElementById('gemcolor_price_'+prodid) && document.getElementById('gem_price_'+gemcolorprodid))
+		document.getElementById('gemcolor_price_'+prodid).innerHTML = document.getElementById('gem_price_'+gemcolorprodid).innerHTML;
+	
+	/* Review template changes */
+	if(document.getElementById('gemcolor_review_'+prodid) && document.getElementById('gem_review_'+gemcolorprodid))
+		document.getElementById('gemcolor_review_'+prodid).innerHTML = document.getElementById('gem_review_'+gemcolorprodid).innerHTML;	
+	
+}
+/* End */
+</script>
+<?php } else{
+	echo 'There are no sku in the coupon code'	;
+}?>

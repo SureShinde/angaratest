@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+		<AngaraCustom_Function>
+			<active>true</active>
+			<codePool>local</codePool>
+		</AngaraCustom_Function>
+    </modules>
+</config>

@@ -1,0 +1,167 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<div class="wrapper">
+  	<form action="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>" method="post" enctype="multipart/form-data" name="prodpage" id="prodpage">
+    <input type="hidden" name="build_step" id="build_step" value="select_metal_type" />
+    <input type="hidden" name="build_step_last" id="build_step_last" value="select_side_stone" />
+  <div class="shares">
+    <ul>
+      <li class="share">Share:</li>
+      <li class="email"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" target="_new"></a></li>
+      <li class="facebook"><a href="http://www.facebook.com/Angaradotcom" target="_blank"></a></li>
+      <li class="twiter"><a href="http://www.twitter.com/Angara" target="_blank"></a></li>
+    </ul>
+  </div>
+  <div class="wrapperthumb">
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb customize_tabsel"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb nonemargin"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+  </div>
+  <div class="wrapperbyo">
+    <div class="pagetitle">Select Stone Quality</div>
+    <div class="clear"></div>
+    <div class="alldetailbox1">
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+      <div class="selectoptions"><img src="/skin/frontend/angara/default/images/build-your-own/stonetype.jpg"/>
+        <div class="selectoptionsprice">
+          <div class="flexisize">5X4mm</div>
+          <div class="flexiprice">+$550</div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="productimg"><img src="/skin/frontend/angara/default/images/build-your-own/productimg.jpg" /></div>-->
+    <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+    <div class="productimg">
+        <?php
+            $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </div>
+    <?php else: ?>
+    <div class="productimg">
+        <?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </div>
+    <?php endif; ?>
+    <div class="multioption">
+      <div class="promoreview">
+        <div class="viewmore">Price</div>
+        <div class="flexipricebold">$369.99</div>
+        <div class="expecteship"><?php echo $this->__('Estimated ship date') ?> 
+            <span class="exshipdate">
+				<?php
+                // set the default timezone to use. Available since PHP 5.1
+                //date_default_timezone_set('EST');
+                $j=1;
+                if($_product->getVendorLeadTime())$j=$_product->getVendorLeadTime();
+                if(date("w",strtotime("+".$j." weekdays"))==0)echo date('l\, F j',strtotime("-2 days", strtotime("+".$j." weekdays"))).'<br/>';
+                else echo date('l\, F j',strtotime("+".$j." weekdays")).'<br/>';
+                ?>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="actionbutton">
+    	<a href="javascript:document.prodpage.submit();">
+        	<img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /> 
+        </a>
+        <a href="javascript:document.prodpage.submit();">    
+        	<img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" />
+        </a>
+    </div>
+    <div class="clear"></div>
+  </div>
+	</form>
+</div>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?> 
+
+<!--
+/**
+ * added by Asheesh
+ */
+-->
+
+<layout>
+	<adminhtml_catalog_product_matchingband>
+		<block type="core/text_list" name="root">
+			<block type="matchingband/catalog_product_edit_tab_matchingband" name="catalog.product.edit.tab.matchingband"/>
+			<block type="adminhtml/widget_grid_serializer" name="upsell_grid_serializer">
+				<reference name="upsell_grid_serializer">
+					<action method="initSerializerBlock">
+						<grid_block_name>catalog.product.edit.tab.matchingband</grid_block_name>
+						<data_callback>getSelectedMatchingbandProducts</data_callback>
+						<hidden_input_name>links[matchingband]</hidden_input_name>
+						<reload_param_name>products_matchingband</reload_param_name>
+					</action>
+					<action method="addColumnInputName">
+						<input_name>position</input_name>
+					</action>
+				</reference>
+			</block>
+		</block>
+	</adminhtml_catalog_product_matchingband>
+
+	<adminhtml_catalog_product_matchingbandgrid>
+		<block type="core/text_list" name="root">
+			<block type="matchingband/catalog_product_edit_tab_matchingband" name="catalog.product.edit.tab.matchingband"/>
+		</block>
+	</adminhtml_catalog_product_matchingbandgrid>
+	
+	<adminhtml_sales_order_view>
+		<reference name="order_tab_info">
+			<block type="adminhtml/sales_order_view_oktoship" name="order_oktoship" template="sales/order/view/oktoship.phtml"></block>
+			<block type="adminhtml/sales_order_view_extracomment" name="order_extracomment" template="sales/order/view/extracomment.phtml"></block>		
+		</reference>
+	</adminhtml_sales_order_view>
+</layout>

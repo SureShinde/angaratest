@@ -1,0 +1,618 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$scripts = array();
+$images = array();
+if(!isset($_COOKIE['popupvisitor'])):?>	
+	<div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+    	<div class="loading-indicator hide text-center">
+        	<div class="modal-backdrop fade in"></div>
+			<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    	</div>
+	</div>
+<?php 
+endif;
+if($_COOKIE['popupvisitor'] !='2'):?>
+	<div class="modal fade" id="newsletterModalWithSticker" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+    	<div class="loading-indicator hide text-center">
+        	<div class="modal-backdrop fade in"></div>
+			<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    	</div>
+	</div>
+<?php 
+endif;?>
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+	<div class="loading-indicator hide text-center">
+    	<div class="modal-backdrop fade in"></div>
+		<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    </div>
+</div>
+<div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+	<div class="loading-indicator hide text-center">
+    	<div class="modal-backdrop fade in"></div>
+		<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    </div>
+</div>
+<footer id="footer" role="contentinfo">
+	<?php 
+	echo $this->getChildHtml('body_end_footer');
+	echo $this->getChildHtml('whyshop');
+	echo $this->getChildHtml('footer_showcase'); ?>
+  	<div class="footer-badge-block showcase-bg-white high-padding-top checkout-footer-top-border">
+    	<div class="container">
+      		<div class="row">
+        		<div class="col-md-12 text-center">
+          			<ul class="list-inline low-margin-bottom low-margin-top">
+					<?php 
+					if(Mage::app()->getRequest()->getModuleName() != 'onepagecheckout'): ?>
+                        <li class="valign-top low-margin-bottom" style="margin-top:-5px;">
+                            <table width="120" border="0" cellpadding="0" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                            <tr>
+                            <td width="120" align="center" valign="top"><script type='text/javascript' src='https://seal.verisign.com/getseal?host_name=www.angara.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en'></script>
+                            <a href="http://www.symantec.com/verisign/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a></td>
+                            </tr>
+                            </table>
+                        </li>
+						<li><?php /* https://www.bbb.org/losangelessiliconvalley/business-reviews/jewelers-retail/angaracom-in-los-angeles-ca-100082531#bbbseal */ ?>
+						<a id="bbblink" class="rbhzbus" href="javascript:void(0)" title="Angara.com, Jewelers Retail, Los Angeles, CA" style="display: block;position: relative;overflow: hidden; width: 100px; height: 48px; margin: 0px; padding: 0px; cursor: default;"><img style="padding: 0px; border: none;" id="bbblinkimg" src="/skin/frontend/ress/default/images/seal-for-100082531.png" width="200" height="48" alt="Angara.com, Jewelers Retail, Los Angeles, CA" /></a></li>
+                        <?php /*<li class="valign-top low-margin-bottom"> 
+                          <script type="text/javascript">var bizrate = {small:"true"};</script> 
+                          <?php $scripts[] = 'https://medals.bizrate.com/medals/js/150815_medal.js'; ?>
+                          <a class="br-button" rel="nofollow"> <img data-src="https://medals.bizrate.com/medals/dynamic/small/150815_medal.gif" width="112" height="37" border="0" usemap="#150815_medal" alt="See Angara Reviews at Bizrate.com"/>
+                          <map name="150815_medal">
+                            <area shape="poly" coords="1,0,1,36,61,36,61,20,111,20,111,0" href="http://www.bizrate.com/ratings_guide/merchant_detail__mid--150815.html?rf=sur" title="See Angara Reviews at Bizrate.com" target="_blank"  rel="nofollow"/>
+                            <area shape="rect" coords="62,21,111,36" href="http://www.bizrate.com/?rf=sur" title="Bizrate" target="_blank"  rel="nofollow"/>
+                          </map>
+                          </a> 
+						</li>*/?>            
+                    <?php 
+					endif; ?>
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="cards-badge"></li>           
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="paypal-badge"></li>
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="fedex-badge"></li>
+          			</ul>
+                  	<address>&copy; <?php echo date('Y');?> Angara.com. All Rights Reserved.</address>
+                </div>
+      		</div>
+    	</div>
+  	</div>
+	
+	
+	<script>
+		//load images on document ready
+		var wH = jQuery(window).height();
+		function lazyLoad(){
+			jQuery('img').each(function(){
+				var orgSrc = jQuery(this).attr('data-org');
+				if (typeof orgSrc !== typeof undefined && orgSrc !== false) {
+					var pos = jQuery(this).offset();
+					if(pos.top <= wH){
+						jQuery(this).attr('src',orgSrc);
+						jQuery(this).removeAttr("data-org");
+					}
+				}
+			});
+		}
+		lazyLoad();
+		//load images on scroll
+		jQuery(window).scroll(function(){
+			jQuery('img').each(function(){
+				var orgSrc = jQuery(this).attr('data-org');
+				if (typeof orgSrc !== typeof undefined && orgSrc !== false) {
+					var pos = jQuery(this).offset();
+					var sTpos = jQuery(window).scrollTop();
+					if(pos.top >= wH){
+						var val = pos.top-(wH+sTpos);
+						if(val <= 0){
+							jQuery(this).attr('src',orgSrc);
+							jQuery(this).removeAttr("data-org");
+						}
+					}
+				}
+			});
+		});
+	</script>
+	
+	
+	
+	
+  	<script>
+	(function(w, d, s) {
+	  function go(){
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		  if (d.getElementById(id)) {return;}
+		  js = d.createElement(s); js.src = url; js.id = id;
+		  fjs.parentNode.insertBefore(js, fjs);
+		};
+		<?php foreach($scripts as $key => $script):?>
+		load('<?php echo $script; ?>', 'script<?php echo $key; ?>');
+		<?php endforeach; ?>
+	  }
+	  if (w.addEventListener) { w.addEventListener("load", go, false); }
+	  else if (w.attachEvent) { w.attachEvent("onload",go); }
+	}(window, document, 'script'));
+	</script>
+	
+    <?php //BEGIN LivePerson Monitor. ?>
+    <script type="text/javascript"> window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){window.lpTag={site:'609151'||'',section:lpTag.section||'',autoStart:lpTag.autoStart===false?false:true,ovr:lpTag.ovr||{},_v:'1.5.1',_tagCount:1,protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn);},0);},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json);},1);}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn);}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn);}else{this._defL=this._defL||[];this._defL.push(fn);}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id);},0);},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site;}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id);}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s);},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady');});}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady');},false);window.addEventListener('load',function(){that._domReady('domReady');},false);}if(typeof(window._lptStop)=='undefined'){this.load();}},start:function(){this.autoStart=true;},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n});}this._timing[n]=(new Date()).getTime();},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],ev:lpTag.ev||[]};lpTag.init();}else{window.lpTag._tagCount+=1;} </script>
+    <?php //END LivePerson Monitor. HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries?>
+	
+	<?php
+	//Start Google Code for Remarketing Tag
+	/*Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup*/
+	if(($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index') || ($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'index')){  	
+		$cartHelper = Mage::helper('checkout/cart')->getQuote();
+		$baseGrandTotal = $cartHelper->getBaseGrandTotal();
+		$items = $cartHelper->getAllVisibleItems();
+		$skulist = '';
+		foreach($items as $item) {
+			if($item->getProduct()->getPrice() > 0) {
+				$pro_skus = $item->getProduct()->getData('sku');
+				//$_prod = Mage::getModel('catalog/product')->loadByAttribute('sku', $pro_skus);
+				if($skulist == ''){
+					$skulist = "'".$pro_skus."'";
+				}
+				else{
+					$skulist .=",'".$pro_skus."'";
+				}		
+			}
+		}?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: [<?php echo $skulist; ?>],
+		ecomm_pagetype: '<?php echo (($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index') ? "cart" : "checkout");?>',
+		ecomm_totalvalue: <?php echo (($baseGrandTotal) ? $baseGrandTotal : 0); ?>
+		};
+		</script>
+	<?php
+	}
+	else if($this->getRequest()->getControllerName() == 'product' && $this->getRequest()->getModuleName() == 'catalog' && $this->getRequest()->getActionName() == 'view'){
+		if($product = Mage::registry('current_product')){
+			$sku = $product->getSku();
+			$price = $product->getPrice(); ?>
+			<script type="text/javascript">
+			var google_tag_params = {
+				ecomm_prodid: '<?php echo $sku; ?>',
+				ecomm_pagetype: 'product',
+				ecomm_totalvalue: <?php echo $price; ?>
+			};
+			</script>
+		<?php
+		}
+	}
+	else if($this->getRequest()->getControllerName() == 'category' && $this->getRequest()->getModuleName() == 'catalog' && $this->getRequest()->getActionName() == 'view'){
+		if (Mage::registry('current_category')){
+		  $catalogCategoryName = str_replace("'", "", trim(Mage::registry('current_category')->getName()));
+		} ?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: <?php echo (($catalogCategoryName) ? "'".$catalogCategoryName."'" : 'catalog');?>,
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'cms' && $this->getRequest()->getActionName() == 'index'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'home',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'result' && $this->getRequest()->getModuleName() == 'catalogsearch' && $this->getRequest()->getActionName() == 'index'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'searchresults',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'account' && $this->getRequest()->getModuleName() == 'customer' && $this->getRequest()->getActionName() == 'create'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'sign up',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'account' && $this->getRequest()->getModuleName() == 'customer' && $this->getRequest()->getActionName() == 'login'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'sign in',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'account' && $this->getRequest()->getModuleName() == 'customer' && $this->getRequest()->getActionName() == 'index'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'my account',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'wishlist' && $this->getRequest()->getActionName() == 'index'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'wishlist',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php	
+	}
+	else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){
+		$sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+		$oOrder = Mage::getModel('sales/order')->load($sOrderId);
+		
+		$items = $oOrder->getAllVisibleItems();
+		$skulist = '';
+		foreach($items as $item) {
+			if($item->getProduct()->getPrice() > 0) {
+				$pro_skus = $item->getProduct()->getData('sku');
+				//$_prod = Mage::getModel('catalog/product')->loadByAttribute('sku', $pro_skus);
+				if($skulist == ''){
+					$skulist = "'".$pro_skus."'";
+				}
+				else{
+					$skulist .=",'".$pro_skus."'";
+				}		
+			}
+		}?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: [<?php echo $skulist; ?>],
+		ecomm_pagetype: 'success',
+		ecomm_totalvalue: <?php echo round($oOrder->getBaseSubtotal() + $oOrder->getBaseDiscountAmount(), 2); ?>
+		};
+		</script>
+	<?php
+	}
+	else if($this->getRequest()->getControllerName() == 'page' && $this->getRequest()->getModuleName() == 'cms' && $this->getRequest()->getActionName() == 'view'){?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'cms',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php
+	}
+	else{?>
+		<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'other',
+		ecomm_totalvalue: 0
+		};
+		</script>
+	<?php
+	}?>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		var google_conversion_id = 1064978809;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		var google_conversion_format = 3;
+	/* ]]> */
+	</script>
+	<?php //$scripts[] = '//www.googleadservices.com/pagead/conversion.js';?>  
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1064978809/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+	<?php //Google Code for Remarketing Tag ?>      
+</footer>
+
+<?php //S:main navigation management - RV ?>
+<script>
+	jQuery(function() {
+		var s = jQuery("#main-menu");
+		var pos = s.position();                    
+		jQuery(window).scroll(function(){
+			var windowpos = jQuery(window).scrollTop();
+			if(jQuery("body").hasClass("cms-home") || jQuery("body").hasClass("catalog-category-view")){			
+				if (windowpos >= pos.top) {
+					s.addClass("set-go-with-page");
+					s.css({"top":"0px","z-index":"10"});
+					jQuery(".cat-offer-banner").addClass("set-go-with-page");
+					jQuery(".cat-offer-banner").css({"top":"40px","z-index":"10"});
+				} else {
+					s.removeClass("set-go-with-page"); 
+					s.css({"top":"125px","z-index":"initial"});
+					jQuery(".cat-offer-banner").removeClass("set-go-with-page");
+					jQuery(".cat-offer-banner").css({"top":"initial","z-index":"initial"});
+				}
+			}
+		});
+	});
+</script>
+<?php //E:main navigation management - RV ?>
+
+<?php //Start of Neustar Real User Measurements code ?>
+<script src='//rum.monitis.com/get/jsbenchmark.min.js?id=115038' type='text/javascript' async='async'></script>
+<?php //End of Neustar Real User Measurements code ?>
+
+<?php /* S:VA Load third party functions after page load */ ?>
+<script type="text/javascript">
+jQuery(window).load(function() {
+	(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4021092"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+});
+</script>
+<noscript><img src="//bat.bing.com/action/0?ti=4021092&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /></noscript>   
+
+<?php //Start Facebook Pixel Code ?>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '583174048479877');
+fbq('track', "PageView");
+
+<?php 
+if($product = Mage::registry('current_product')){
+	// Listen for 'AddToCart' event, and tag ?>
+	jQuery('#addtocart-btn').click(function(e) {
+		_fbq.push('track', 'AddToCart', {
+		  	content_ids: ['<?php echo $product->getSku();?>'],
+		  	content_type: 'product'
+		});
+	});
+	
+	<?php 
+	// Listen for 'ViewContent' event, and tag 
+	//$productObject = Mage::getModel('catalog/product')->load($product->getId()); 
+	$productObject = Mage::getModel('catalog/product')->loadByAttribute('entity_id', $product->getId());
+	$prodShDesc = str_replace("'", "", trim($productObject->getShortDescription()));
+	$prodMasCat = str_replace("'", "", trim($product->getMasterCategory())); ?>
+	_fbq('track', 'ViewContent', {
+		content_name: '<?php echo $prodShDesc;?>',
+  		content_category: '<?php echo $prodMasCat;?>',
+		content_ids: ['<?php echo $product->getSku();?>'],
+  		content_type: 'product',
+		value: '<?php echo round($product->getPrice(), 2);?>',
+		currency: 'USD'
+ 	});
+<?php		
+}
+
+if($wishlistSku = Mage::getSingleton('core/session')->getWishlistProductSku()){
+	// Listen for 'AddToWishlist' event, and tag ?>	
+	_fbq.push('track', 'AddToWishlist', {
+	  	content_ids: ['<?php echo $wishlistSku;?>'],
+	  	content_type: 'product'
+	});
+<?php
+Mage::getSingleton('core/session')->setWishlistProductSku('');
+}
+else if($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index'){
+	$cartHelper = Mage::helper('checkout/cart');
+	$items = $cartHelper->getCart()->getItems();
+	$skulist = '';
+	foreach($items as $item) {
+		$isVisibleProduct = $item->getProduct()->isVisibleInSiteVisibility();
+		if($item->getProduct()->getPrice() > 0 && $isVisibleProduct) {
+			$pro_skus = $item->getProduct()->getData('sku');
+			//$_prod = Mage::getModel('catalog/product')->loadByAttribute('sku', $pro_skus);
+			if($skulist == ''){
+				$skulist = "'".$pro_skus."'";
+			}
+			else{
+				$skulist .=",'".$pro_skus."'";
+			}					
+		}
+	}
+	// Listen for 'InitiateCheckout' event, and tag ?>	
+	jQuery('#cart-top-checkout-button, #cart-bottom-checkout-button').click(function(e) {
+		_fbq.push('track', 'InitiateCheckout', {
+			content_ids: [<?php echo $skulist; ?>],
+			content_type: 'product'
+		});
+	});
+<?php 
+}
+else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){
+	$sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+	$oOrder = Mage::getModel('sales/order')->load($sOrderId);?>	
+	_fbq.push('track', 'Purchase', {
+		value: '<?php echo round($oOrder->getBaseSubtotal() + $oOrder->getBaseDiscountAmount(), 2); ?>', 
+		currency: 'USD'
+	});
+<?php 
+}?>
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=583174048479877&ev=PageView&noscript=1"/></noscript>
+<?php //End Facebook Pixel Code ?>
+
+<?php //Start Twitter Pixel Code 
+/*if(($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index') || ($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success')){?>
+	<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<?php
+}
+if($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index'){
+	$quote = Mage::getModel('checkout/cart')->getQuote();
+	$pricelist = number_format($quote->getBaseSubtotalWithDiscount(), 2);
+	$itemQty = (($quote->getItemsQty())?$quote->getItemsQty():0); ?>
+	<script type="text/javascript">twttr.conversion.trackPid('nu379', { tw_sale_amount: '<?php echo $pricelist;?>', tw_order_quantity: <?php echo $itemQty;?> });</script>
+	<noscript>
+	<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=nu379&p_id=Twitter&tw_sale_amount=<?php echo $pricelist;?>&tw_order_quantity=<?php echo $itemQty;?>" />
+	<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=nu379&p_id=Twitter&tw_sale_amount=<?php echo $pricelist;?>&tw_order_quantity=<?php echo $itemQty;?>" />
+	</noscript>
+<?php
+}
+else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){
+	$sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+	$oOrder = Mage::getModel('sales/order')->load($sOrderId); 
+	$orderItemQty = (($oOrder->getTotalQtyOrdered())?$oOrder->getTotalQtyOrdered():0); ?>
+	<script type="text/javascript">twttr.conversion.trackPid('nu315', { tw_sale_amount: '<?php echo round($oOrder->getBaseSubtotal() + $oOrder->getBaseDiscountAmount(), 2); ?>', tw_order_quantity: <?php echo $orderItemQty;?> });</script>
+	<noscript>
+	<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=nu315&p_id=Twitter&tw_sale_amount=<?php echo round($oOrder->getBaseSubtotal() + $oOrder->getBaseDiscountAmount(), 2); ?>&tw_order_quantity=<?php echo $orderItemQty;?>" />
+	<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=nu315&p_id=Twitter&tw_sale_amount=<?php echo round($oOrder->getBaseSubtotal() + $oOrder->getBaseDiscountAmount(), 2); ?>&tw_order_quantity=<?php echo $orderItemQty;?>" />
+	</noscript>
+<?php 
+}*/?>
+<?php //End Twitter Pixel Code ?>
+
+<?php //Start Google Analytics Code ?>
+<?php echo $this->getChildHtml('google_analytics');?>
+<?php //End Google Analytics Code ?>
+<?php
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+	$platform = "t";
+}
+else{
+	$platform = "d";
+}?>
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<?php
+if(($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout' && $this->getRequest()->getActionName() == 'index')){ 	
+	$cartHelper = Mage::helper('checkout/cart')->getQuote();
+	$items = $cartHelper->getAllVisibleItems();
+	$itemList = '';
+	foreach($items as $item) {
+		if($item->getProduct()->getPrice() > 0) {
+			$itemProdSku = $item->getProduct()->getData('sku');
+			$itemPrice = round($item->getPrice(), 2);
+			$itemQty = $item->getQty();
+			if($itemList == ''){
+				$itemList = '{ id: "'.$itemProdSku.'", price: '.$itemPrice.', quantity: '.$itemQty.' }';
+			}
+			else{
+				$itemList .= ',{ id: "'.$itemProdSku.'", price: '.$itemPrice.', quantity: '.$itemQty.' }';
+			}		
+		}
+	}?>
+	<script type="text/javascript">
+	window.criteo_q = window.criteo_q || [];
+	window.criteo_q.push(
+		{ event: "setAccount", account: 32612 },
+		{ event: "setEmail", email: "" },
+		{ event: "setSiteType", type: "<?php echo $platform; ?>" },
+		{ event: "viewBasket", item: [ <?php echo $itemList;?> ]}
+	);
+	</script>
+<?php
+}
+else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){
+	$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+	$oOrder = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+	$items = $oOrder->getAllVisibleItems();
+	$itemList = '';
+	foreach($items as $item) {
+		if($item->getProduct()->getPrice() > 0) {
+			$itemProdSku = $item->getProduct()->getData('sku');
+			$itemPrice = round($item->getPrice(), 2);
+			$itemQty = round($item->getQtyOrdered());
+			
+			$itemDiscountedPrice = ($itemPrice * $itemQty) - (($itemPrice * $itemQty) * 15/100);
+			if($itemList == ''){
+				$itemList = '{ id: "'.$itemProdSku.'", price: '.$itemDiscountedPrice.', quantity: '.(($itemQty)?$itemQty:0).' }';
+			}
+			else{
+				$itemList .= ',{ id: "'.$itemProdSku.'", price: '.$itemDiscountedPrice.', quantity: '.(($itemQty)?$itemQty:0).' }';
+			}
+		}
+	}?>
+	<script type="text/javascript">
+	window.criteo_q = window.criteo_q || [];
+	window.criteo_q.push(
+		{ event: "setAccount", account: 32612 },
+		{ event: "setEmail", email: "" },
+		{ event: "setSiteType", type: "<?php echo $platform; ?>" },
+		{ event: "trackTransaction", id: "<?php echo $orderId; ?>", item: [ <?php echo $itemList;?> ]}
+	);
+	</script>
+<?php 
+}
+else if($this->getRequest()->getControllerName() == 'product' && $this->getRequest()->getModuleName() == 'catalog' && $this->getRequest()->getActionName() == 'view'){
+	if($product = Mage::registry('current_product')){
+		$productSku = $product->getSku();?>
+		<script type="text/javascript">
+		window.criteo_q = window.criteo_q || [];
+		window.criteo_q.push(
+			{ event: "setAccount", account: 32612 },
+			{ event: "setEmail", email: "" },
+			{ event: "setSiteType", type: "<?php echo $platform; ?>" },
+			{ event: "viewItem", item: "<?php echo $productSku; ?>" }
+		);
+		</script>
+	<?php
+	}
+}
+else if($this->getRequest()->getControllerName() == 'category' && $this->getRequest()->getModuleName() == 'catalog' && $this->getRequest()->getActionName() == 'view'){
+	if(Mage::registry('itemList')){	
+		$itemList = Mage::registry('itemList');
+		$itemListDetails == '';
+		foreach($itemList as $product){
+			if($itemListDetails == ''){
+				$itemListDetails = '"'.$product.'"';
+			}
+			else{
+				$itemListDetails .= ',"'.$product.'"';
+			}
+		}
+	Mage::unregister('itemList');	
+	} ?>
+	<script type="text/javascript">
+	window.criteo_q = window.criteo_q || [];
+	window.criteo_q.push(
+		{ event: "setAccount", account: 32612 },
+		{ event: "setEmail", email: "" },
+		{ event: "setSiteType", type: "<?php echo $platform; ?>" },
+		{ event: "viewList", item:[ <?php echo $itemListDetails; ?> ]}
+	);
+	</script>
+<?php	
+}
+else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'cms' && $this->getRequest()->getActionName() == 'index'){?>
+	<script type="text/javascript">
+	window.criteo_q = window.criteo_q || [];
+	window.criteo_q.push(
+		{ event: "setAccount", account: 32612 },
+		{ event: "setEmail", email: "" },
+		{ event: "setSiteType", type: "<?php echo $platform; ?>" },
+		{ event: "viewHome" }
+	);
+	</script>
+<?php	
+}
+/* E: Integrate Criteo */?>

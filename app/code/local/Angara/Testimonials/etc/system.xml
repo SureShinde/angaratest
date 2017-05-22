@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <testimonials translate="label">
+            <label>Angara Testimonials</label>
+            <tab>angara</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+					<label>A Sample Group</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+                    <fields>
+						<itemscount>
+                            <label>Items to show</label>
+                            <comment>no. of testimonials to show on the page.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </itemscount>
+						<reviewscount>
+                            <label>Items to show</label>
+                            <comment>no. of reviews to show on the page.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </reviewscount>		
+						
+						<!--Added by Vaseem to show product reviews based on category starts-->
+						<reviews_count_per_category>
+                            <label>No. of Reviews per Category</label>
+                            <comment>No. of reviews to show on individual Category page.</comment>
+							<sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </reviews_count_per_category>
+						<reviews_category_ids>
+                            <label>Category Ids for Testimonials</label>
+                            <comment>Comma separated Category ids.</comment>
+							<sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </reviews_category_ids>
+						<!--<other_reviews_category_ids>
+                            <label>Others Category Ids</label>
+                            <comment>Comma separated Category ids.</comment>
+                            <sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </other_reviews_category_ids>-->
+						<!--Added by Vaseem to show product reviews based on category ends-->			
+                    </fields>
+                </general>
+            </groups>
+        </testimonials>
+    </sections>
+</config>

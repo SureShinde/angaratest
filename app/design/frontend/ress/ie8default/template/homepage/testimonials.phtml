@@ -1,0 +1,61 @@
+<?php $reviews	= $this->getReviews()->getItems(); ?>
+
+<div class="row">
+	<div class="col-xs-12">
+		<p class="hp-block-title text-center px22 fontcolor-type1 high-padding-top">
+			Latest Jewelry Reviews
+		</p>
+	</div>
+	<div id="latest-reviews" class="col-xs-12 has-slider">
+		<div class="showcase-bg-white padding-type-10" style="height:306px;">
+			<div class="" style="height:252px">
+				<div id="homepage-latest-reviews">
+					<?php 
+					#todo don't load complete product each time. store the product image with review itself.
+					foreach($reviews as $review):
+						$_product	= Mage::getModel('catalog/product')->load($review->getEntityPkValue()); ?>
+						<div style="min-height:252px" class="pull-left">
+							<div class="row">
+								<div class="col-sm-4 text-center">
+                                	<a href="<?php echo $_product->getProductUrl();?>?icid=home|rr-widget|05152015" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="center-block text-center">
+										<img src="<?php echo str_replace('www.','cdn.',Mage::helper('catalog/image')->init($_product, 'image')->resize(175)->setQuality(80)); ?>" title="<?php echo $this->htmlEscape($_product->getName()); ?>" alt="<?php echo $this->htmlEscape($_product->getName()); ?>"/>
+									</a>
+									<?php 
+									$_percentRating = 0;
+									foreach($review->getRatingVotes() as $_vote){
+										$_percentRating = $_percentRating + $_vote->getPercent();
+									}
+									$_percentRating = $_percentRating / count($review->getRatingVotes()); ?>
+									<div class="rating-box center-block low-margin-bottom">
+										<div style="width:<?php echo $_percentRating; ?>%;" class="rating"></div>
+									</div>
+									<p class="no-margin fontsize-type2 text-bold text-uppercase low-margin-bottom">- <?php echo $this->htmlEscape($review->getNickname()); ?></p>
+									<p class="no-margin fontsize-type0"><?php echo Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);?></p>
+								</div>
+								<div class="col-sm-8">
+                                    <div class="high-margin-top high-margin-left">
+                                        <p class="text-uppercase fontsize-type4 text-bold"><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getTitle()), null, true), $length = 50, $etc = '...');?></p>
+                                        <p class="fontsize-type2"><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getDetail()), null, true), $length = 380, $etc = '...');?></p>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					<?php 
+					endforeach; ?>
+				</div>
+			</div>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#homepage-latest-reviews').slick({
+					arrows			: 	false,
+					dots: true,
+					slidesToShow	: 	1,
+					slidesToScroll	: 	1,
+					autoplay: true,
+					autoplaySpeed: 5000
+				});
+			});
+			</script>
+		</div>
+	</div>
+</div>

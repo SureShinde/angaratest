@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <ship_adminhtml_ship_index>
+	<reference name="content">
+	  <block type="ship/adminhtml_ship" name="ship" />
+	</reference>
+  </ship_adminhtml_ship_index>
+</layout>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<!--<default>
+		<reference name="head">
+            <block type="core/text" name="PaymentWidgets.js"><action method="setText"><text><![CDATA[<script type="text/javascript" src="https://payments.amazon.com/cba/js/PaymentWidgets.js"></script>]]></text></action></block>
+			<block type="core/template" name="amazon_payments.script" template="amazon_payments/script.phtml" />
+		</reference>
+	</default>-->
+	<checkout_cart_index>
+		<remove name="PaymentWidgets.js"/>
+	</checkout_cart_index>
+	<checkout_onepage_index>
+		<remove name="PaymentWidgets.js"/>
+	</checkout_onepage_index>
+	<onepagecheckout_index_index>
+		<remove name="PaymentWidgets.js"/>
+	</onepagecheckout_index_index>
+	<fancycart_ajax_index>
+		<block type="fancycart/view" name="root" template="fancycart/cart.phtml" />
+		<block type="core/template" name="amazon_payments.script" template="amazon_payments/script.phtml" />
+	</fancycart_ajax_index>
+</layout>

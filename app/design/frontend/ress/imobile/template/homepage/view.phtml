@@ -1,0 +1,288 @@
+<?php //Variable declared for ticker on/off
+$mobhpTicker = false; ?>
+<?php //ticker code start here
+$tickerHtml		=	Mage::helper('function')->getOfferCatalogTickerHtml();
+ if($mobhpTicker == true){ ?>
+<style>
+.slider{position:relative}
+<?php //if(!$tickerHtml){ ?>
+.tickr-width{width:100%; max-width:1500px; margin: 0 auto; position:relative;}
+.tickr-holder{    margin-right: 0px; position: absolute; top: 135px; left: 116px; bottom: 0px; right: 0px;}
+.tickr-style{font-weight:bold;font-size:15px;float:left; position:absolute; right:5px; color:#000000; background:transparent;text-align: center; width:186px;}
+.ofrend, .text-format {display:block; padding: 10px 0px 3px;}
+.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+.ofrend{    font-size: 12px; margin-top: 5px; position: absolute; left: -94px; display:none;}
+.daydigits{display:none;}
+.hourdigits, .minutedegites, .secondigits{
+	height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px;
+    color: #000000;
+    background: transparent;
+    font-size: 30px;
+    font-weight: normal;
+}
+.text-format span{float:left}
+span.daydigits + span { display: none;}
+span.hourdigits + span, span.minutedegites + span{width: 13px; display: block; float: left; font-size: 28px; line-height: 50px;} 
+.text-format + span span{width:50px; float:left; margin-right:13px; font-weight:300; font-size:14px;}
+.text-format + span span:last-child{margin-right:0px;}
+
+<?php //} ?>
+@media(max-width:767px){
+	.tickr-holder{ top:50px; left:0px;}
+	.tickr-style{
+	    width: 102px;
+		left: 50%;
+		margin-left: -51px;
+		zoom: 0.9;
+	}
+	.hourdigits, .minutedegites, .secondigits{
+		width: 25px;
+		height: 25px;
+		line-height: 25px;
+		font-size: 20px;
+	}
+	span.hourdigits + span, span.minutedegites + span{
+		line-height:25px;
+	}
+	.ofrend, .text-format{
+		padding:1px 0px 0px;
+	}
+	.text-format + span span{
+		width: 25px;
+		font-size: 7px;
+	}
+	.ofrend {
+		font-size: 12px;
+		margin-top: 5px;
+	}
+}
+@media(max-width:414px){
+	.tickr-holder{top:41px;}
+}
+@media(max-width:375px){
+	.tickr-holder{top:40px; zoom:0.9;}
+}
+@media(max-width:360px){
+	.tickr-holder{top:38px;}
+}
+@media(max-width:320px){
+	.tickr-holder{top:37px; zoom:0.8;}
+}
+</style>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/js/countdown-timer.js"></script>
+<?php } //ticker code End here ?>
+<?php
+$channel = Mage::getSingleton('core/session')->getVisitorChannel();?>
+<div class="slider relative" style="border-bottom: 2px solid #FA505A;">
+	<?php if($channel && $channel->getHomeHeroBannerMobile()): ?>
+		<?php $bannerMobile = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerMobile()); ?>
+		<?php if($bannerMobile): ?>			           	
+			<div>			
+				<?php if($bannerMobile->getUrl() != ''):?>
+                <a href="<?php echo $bannerMobile->getUrl(); ?>">
+           	 	<?php endif;?>	
+					
+					<?php //ticker code start here
+					if($mobhpTicker == true){ ?>
+							<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerMobile->getTickerTime());?>
+					<?php } //ticker code End here ?>
+					<?php echo $bannerMobile->getHtml(); ?>
+					
+                <?php if($bannerMobile->getUrl() != ''):?>    
+				</a>
+                <?php endif;?>
+			</div>
+		<?php endif; ?>
+	<?php endif; ?>
+</div>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('.slider').slick({
+			dots	: 	true,
+			arrows	: 	false
+		});
+		jQuery('.slider').find('div .hidden').removeClass('hidden');	//show the remaining slides after slider initialised
+	});
+</script>
+
+<div id="home-nav">
+	<div id="home-menu">
+		<?php echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu.phtml')->toHTML(); ?>
+	</div>
+</div>
+<script>
+jQuery(window).load(function(){
+	jQuery('#home-menu ul.level0 li.level0').each(function(){
+		var posTop = jQuery(this).offset().top - jQuery('header').height();
+		jQuery(this).attr('data-pos',posTop);
+	})
+});
+jQuery('#home-menu a.level0 , #home-menu a.level1').unbind("click").click(function( e ){
+	e.preventDefault();
+	
+	jQuery(this).parents('#home-menu').find('li a').removeClass('active');
+	jQuery(this).parent('li').siblings().find('ul').slideUp();
+	jQuery(this).parent('li').siblings().find('a .fa').removeClass('fa-minus');
+	jQuery(this).parent('li').siblings().find('a .fa').addClass('fa-plus');
+	jQuery(this).parent('li').siblings().find('a .fa-chevron-right').removeClass('fa-plus fa-minus');
+	
+	jQuery(this).toggleClass('active').next('ul').slideToggle();
+	jQuery(this).find('.fa-minus, .fa-plus').toggleClass('fa-minus fa-plus');
+	
+	//To Manage focus
+	if(jQuery(this).hasClass('active')){
+		var sPos = jQuery(this).parents('li.level0').data('pos');
+		jQuery('html, body').animate({scrollTop:sPos}, '500');
+	}
+	
+	//to manage more link in last level menu
+	jQuery('#home-menu .view-more').slideDown();
+	jQuery('#home-menu .view-more').nextAll('li.level2').hide();
+});
+
+jQuery(document).ready(function(){
+	//to hide all last level menu after more link
+	jQuery('#home-menu .view-more').nextAll('li.level2').hide();
+});
+jQuery('#home-menu .view-more a').click(function(){
+	//to show all last level menu after more link
+	jQuery(this).parent('li').slideUp();
+	jQuery(this).parent('li').nextAll('li.level2').slideDown();
+});		
+/* jQuery('a.level0').click(function(){
+	var scroll = jQuery(window).scrollTop();	
+	jQuery('html, body').animate({
+	scrollTop: jQuery('#home-menu').offset().top - 84 }, 1000);
+});	*/	
+</script>
+<section id="best-sellers" class="white-bg mB5">
+	<div class="container">
+		<div id="collection-slider">
+			<div class="relative-placeholder"> 
+				<a href="/collection/infinity-jewelry?icid=home|mobile|main|inf-collec|shpnow|03102017">
+					<img class="img-responsive mewe-default-img hidden" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/new-skeleton/infinity-01-071836.jpg" alt="Explore Infinity Collection" title="Explore Infinity Collection"/>
+				</a>
+			</div>
+			<div class="relative-placeholder"> 
+				<a href="/collection/knotty-heart-jewelry?icid=home|mobile|main|knotty-h-collec|shpnow|03102017">
+					<img class="img-responsive mewe-default-img hidden" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/new-skeleton/knotty-1-006005.jpg" alt="Explore Knotty Heart Collection" title="Explore Knotty Heart Collection"/>
+				</a>
+			</div>
+			<div class="relative-placeholder"> 
+				<a href="/jewelry/coffee-diamond-jewelry?icid=home|mobile|main|coffee-d-collec|shpnow|03102017">
+					<img class="img-responsive mewe-default-img hidden" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/new-skeleton/coffee-1-056659.jpg" alt="Explore Coffee Diamond Collection" title="Explore Coffee Diamond Collection"/>
+				</a>
+			</div>
+			<div class="relative-placeholder"> 
+				<a href="/collection/wear-your-luck?icid=home|mobile|main|wearurluck-collec|shpnow|04032017">
+					<img class="img-responsive mewe-default-img hidden" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/new-skeleton/wearyourluck-mob-04032017.jpg" alt="Explore Wear Your Luck Collection" title="Explore Wear Your Luck Collection"/>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		jQuery(function(){
+			jQuery('#collection-slider').slick({
+				arrows			: 	true,
+				dots			: 	false,
+				slidesToShow	: 	1,
+				slidesToScroll	: 	1,
+				autoplay		: 	true,
+				autoplaySpeed	: 	5000
+			});
+			jQuery('#collection-slider img').removeClass('hidden');
+		});
+		</script>
+	</div>
+</section>
+<?php //skeleton ?>
+<div id="skeleton">
+	<div class="row">
+		<div class="title mT10">Rings</div>
+		<div class="content">
+			<div class="image fl">
+				<a href="/rings?icid=home|mobile|rings|01272017"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/1.jpg" alt=""></a>
+			</div>
+			<div class="links fl">
+				<a href="/rings/gemstone-rings?icid=home|mobile|rings-gemstone|01272017">Gemstone Rings<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/rings/diamond-rings?icid=home|mobile|rings-diamond|01272017">Diamond Rings<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/wedding-rings/wedding-bands?icid=home|mobile|rings-wedding|01272017">Wedding Rings<i class="fr fa fa-chevron-right"></i></a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="title mT10">Necklaces</div>
+		<div class="content">
+			<div class="image fl">
+				<a href="/pendants?icid=home|mobile|pendants|01272017"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/2.jpg" alt=""></a>
+			</div>
+			<div class="links fl">
+				<a href="/pendants/gemstone-necklace-pendants?icid=home|mobile|pendant-gemstone|01272017">Gemstone Pendants<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/pendants/diamond-necklace-pendants?icid=home|mobile|pendant-diamond|01272017">Diamond Pendants<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/pendants/colored-diamond-necklace-pendants?icid=home|mobile|pendant-colordiamond|01272017"> Colored-Diamond Pendants <i class="fr fa fa-chevron-right"> </i> </a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="title mT10">Earrings</div>
+		<div class="content">
+			<div class="image fl">
+				<a href="/earrings?icid=home|mobile|earrings|01272017"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/homepage/3.jpg" alt=""></a>
+			</div>
+			<div class="links fl">
+				<a href="/earrings/gemstone-earrings?icid=home|mobile|earrings-gemstone|01272017">Gemstone Earrings<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/earrings/diamond-earrings?icid=home|mobile|earrings-diamond|01272017">Diamond Earrings<i class="fr fa fa-chevron-right"></i></a>
+				<a href="/earrings/stud-earrings?icid=home|mobile|earrings-studs|01272017">Stud Earrings<i class="fr fa fa-chevron-right"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="review-slider customer-stories-box">
+	<div class="cs-hldr">
+		<div class="testimonial-heading uppercase mT10">Customer Stories</div>
+		<div class="col-sm-12">
+			<div id="customer-stories" style="padding:0px;">
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-1.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-001.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-2.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-3.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-4.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-5.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-6.jpg" alt="" class="img-responsive"/></a>
+				</div>
+				<div class="padding-type-5">
+					<a href="/customer-stories"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/customer-reviews/cs-7.jpg" alt="" class="img-responsive"/></a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#customer-stories').slick({
+				arrows			: 	true,
+				slidesToShow	: 	3,
+				slidesToScroll	: 	2
+			});
+		});
+		</script>
+		</div>
+	</div>
+</div>

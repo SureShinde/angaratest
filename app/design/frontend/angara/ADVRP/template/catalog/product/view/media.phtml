@@ -1,0 +1,188 @@
+<?php
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<style>
+.more-views li {
+	position:relative;
+}
+.more-views li img.playvideothumb {
+	height:56px;
+	width:56px;
+	cursor: pointer;
+	position:absolute;
+	top:1px;
+	left:1px;
+	z-index:10;
+	filter:alpha(opacity=80);
+	opacity:0.8;
+}
+.more-views li img.playvideothumb:hover {
+	filter:alpha(opacity=100);
+	opacity:1;
+}
+</style>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+<div class="product-image product-image-zoom" style="position:relative;">
+  <?php
+		//if() check if image is available
+		//echo ($_product->getWhiteGoodImage());
+		//echo ($this->helper('catalog/image')->init($_product, 'white_good_image'));
+		//exit();
+		/*$shortSku = $_product->getSku();
+		if(substr($shortSku, -1)=="H" || substr($shortSku, -1)=="B" || substr($shortSku, -1)=="G"){
+			$shortSku = substr($shortSku, 0, -1);
+		}*/
+		//$newSku = $shortSku.'_W';
+		//for($i=0; $i<4; $i++){
+			//$newSku .= 'A';
+			//if(@file_exists(Mage::getBaseDir().'/media/variations/'.$newSku.'.jpg')){
+			if($_product->getWhiteGoodImage()!= 'no_selection' && $_product->getWhiteGoodImage()){
+				$_img = '<img class="variation-image" id="white_good_image" src="'.$this->helper('catalog/image')->init($_product, 'white_good_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Good Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Good Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'white_good_image');
+			}
+			if($_product->getWhiteBetterImage()!= 'no_selection' && $_product->getWhiteBetterImage()){
+				$_img = '<img class="variation-image" id="white_better_image" src="'.$this->helper('catalog/image')->init($_product, 'white_better_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Better Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Better Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'white_better_image');
+			}
+			if($_product->getWhiteBestImage()!= 'no_selection' && $_product->getWhiteBestImage()){
+				$_img = '<img class="variation-image" id="white_best_image" src="'.$this->helper('catalog/image')->init($_product, 'white_best_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Best Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Best Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'white_best_image');
+			}
+			if($_product->getWhiteHeirloomImage()!= 'no_selection' && $_product->getWhiteHeirloomImage()){
+				$_img = '<img class="variation-image" id="white_heirloom_image" src="'.$this->helper('catalog/image')->init($_product, 'white_heirloom_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Heirloom Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in White Metal of Heirloom Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'white_heirloom_image');
+			}
+			if($_product->getYellowGoodImage()!= 'no_selection' && $_product->getYellowGoodImage()){
+				$_img = '<img class="variation-image" id="yellow_good_image" src="'.$this->helper('catalog/image')->init($_product, 'yellow_good_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Good Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Good Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'yellow_good_image');
+			}
+			if($_product->getYellowBetterImage()!= 'no_selection' && $_product->getYellowBetterImage()){
+				$_img = '<img class="variation-image" id="yellow_better_image" src="'.$this->helper('catalog/image')->init($_product, 'yellow_better_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Better Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Better Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'yellow_better_image');
+			}
+			if($_product->getYellowBestImage()!= 'no_selection' && $_product->getYellowBestImage()){
+				$_img = '<img class="variation-image" id="yellow_best_image" src="'.$this->helper('catalog/image')->init($_product, 'yellow_best_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Best Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Best Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'yellow_best_image');
+			}
+			if($_product->getYellowHeirloomImage()!= 'no_selection' && $_product->getYellowHeirloomImage()){
+				$_img = '<img class="variation-image" id="yellow_heirloom_image" src="'.$this->helper('catalog/image')->init($_product, 'yellow_heirloom_image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Heirloom Quality Stone" title="'.$this->htmlEscape($this->getImageLabel()).' in Yellow Metal of Heirloom Quality Stone" />';
+				echo $_helper->productAttribute($_product, $_img, 'yellow_heirloom_image');
+			}
+		//}
+		//$newSku = $shortSku.'_Y';
+		//for($i=0; $i<4; $i++){
+			//$newSku .= 'A';
+			//if(@file_exists(Mage::getBaseDir().'/media/variations/'.$newSku.'.jpg')){
+				//echo '<img id="'.$newSku.'" class="variation-image" src="/media/variations/'.$newSku.'.jpg" />';
+			//}
+		//}
+		
+        $_img = '<img style="display:block" height="350" width="350" class="variation-image" id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+  <?php if($_product->getAttributeSetId() == '12'){?>
+  <div class="chaintxt">
+  	<?php
+    $exclude_chain_prod_arr=array('SP0359PR','SP0358PR','SP0357PR','SP0355PR','SP0137R','SP0137S','SP0138R','SP0138S','SP0139R','SP0139S','SPY0138R','SP0373D','SP0352PR','SP0371D');
+    if (!in_array($_product->getSku(), $exclude_chain_prod_arr)) // skip chain message for selected products Ticket: #500
+    {
+	?>	
+  		(<?php echo $_product->getAttributeText('pendant_chain_length') ?> inch <span id="pendantmsg"><?php echo $_product->getAttributeText('metal') ?></span> chain shipped FREE with pendant)
+    <?php    
+	}
+	?>
+  </div>
+  <?php }else {?>
+  <div class="chaintxt" style="display:none;"><span id="pendantmsg"></span></div>
+  <?php }?>
+  <div id="sample-image-text" style="padding:0 0 20px 6px;display:none">Note: Image shown for alternate view design illustration purposes only.  Not shown in the quality or metal selected.</div>
+</div>
+<?php else: ?>
+<div class="product-image">
+  <?php
+        $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+</div>
+<?php endif; ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<?php 
+$tmp_main_img_path = ''; 
+$p=0; 
+$moreimg_file_arr = array();
+?>
+<div id="moreviews" class="more-views">
+  <ul>
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+    <?php if(!stripos($_image->getFile(),'variations')) :?>
+    <?php //if(preg_match('/_reg\d.jpg/i', $_image->getFile())) :?>
+    <?php 		
+			if($p==0){	
+				$tmp_main_img_path = 'media/catalog/product'.$_image->getFile(); 
+				$tmp_main_img_dir = dirname($tmp_main_img_path);
+				$tmp_main_img_label = $_image->getLabel();
+				$p++;			
+			}
+			$moreimg_file_arr[] = basename($_image->getFile());
+			?>
+    <?php
+			if(@file_exists(Mage::getBaseDir().'/media/catalog/product'.$_image->getFile())){
+			?>
+    <li> <img onclick="$('image').src = '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>'; return false;" title='<?php echo $this->htmlEscape($_image->getLabel()); ?>' src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt='<?php echo $this->htmlEscape($_image->getLabel()) ?>' /> </li>
+    <?php
+			}
+			?>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    <?php if($tmp_main_img_path!=''){
+		$main_img_name = basename($tmp_main_img_path);
+		list($imname,$ext) = explode('.',$main_img_name);
+		for($x=1;$x<=6;$x++){			
+			$new_img_name = $imname.'_'.$x.'.'.$ext;
+			if (in_array($new_img_name, $moreimg_file_arr)) {
+				continue;
+			}
+			if(@file_exists(Mage::getBaseDir().'/'.$tmp_main_img_dir.'/'.$new_img_name)){				
+			?>
+    <li> <img onclick="$('image').src = 'http://<?php echo $_SERVER['HTTP_HOST'];?>/<?php echo $tmp_main_img_dir.'/'.$new_img_name; ?>'; return false;" title='<?php echo $this->htmlEscape($_image->getLabel()); ?>' src="http://<?php echo $_SERVER['HTTP_HOST'];?>/image_thumb.php?width=56&height=56&image=http://<?php echo $_SERVER['HTTP_HOST'];?>/<?php echo $tmp_main_img_dir.'/'.$new_img_name; ?>" width="56" height="56" alt='<?php echo $this->htmlEscape($tmp_main_img_label) ?>' /> </li>
+    <?php	
+			}
+			//echo '<br><br>'.Mage::getBaseDir().'/'.$tmp_main_img_dir.'/'.$new_img_name;
+		}
+	?>
+    <?php } ?>
+    <?php
+		$newmediaval = $_helper->productAttribute($_product, $this->htmlEscape($_product->getNewmedia()), 'newmedia');	
+		if($newmediaval!=''){
+			$video_arr = explode("|",$newmediaval);
+			$number_of_videos = count($video_arr);
+			$thumbPath = Mage::getBaseURL('media').'productVideos/';
+			for ($i=0; $i < count($video_arr); $i++)
+			{
+				list($videoName,$thumbName) = explode(',',$video_arr[$i]);
+				//if($i==0){continue;}
+				//echo $newmediaval;
+				?>
+    <li> <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"> <img title='' src="/image_thumb.php?width=56&height=56&image=<?php echo $thumbPath."thumb/".$thumbName; ?>" width="56" height="56" /> <img src="/skin/frontend/angara/default/images/play-video-thumb.png" width="56" height="56"  class="playvideothumb" alt="Play Video" title="Play Video" /> </a> </li>
+    <?php	
+				break;
+			}
+		}
+		?>
+        <li id="pckImg" rel="advrp"></li>
+  </ul>
+</div>
+<?php endif; ?>
+<style>
+#moreviews li img{width:56px; height:56px;}
+</style>

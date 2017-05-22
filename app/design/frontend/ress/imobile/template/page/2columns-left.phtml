@@ -1,0 +1,49 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html>
+<!--[if IE 8]> 
+<html class="ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang(); ?>" lang="<?php echo $this->getLang(); ?>">
+<![endif]-->
+<!--[if !IE]><!--> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang(); ?>" lang="<?php echo $this->getLang(); ?>">
+<!--<![endif]-->
+
+
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="showcase-bg-light '.$this->getBodyClass().'"':'';?>>
+	<div class="mboxDefault"></div>
+	<?php /*?><script type="text/javascript">mboxCreate('tntGlobal');</script><?php */?>
+	<?php 
+	echo $this->getChildHtml('after_body_start');
+	echo $this->getChildHtml('header');
+	echo $this->getChildHtml('global_notices');
+	echo $this->getChildHtml('breadcrumbs');?>
+    <div class="container showcase-bg-white">
+        <div class="layout layout-2-cols ">
+            <aside role="complementary" class="max-padding-top">
+                <?php echo $this->getChildHtml('left');?>
+            </aside>
+            <div role="main" class="showcase-bg-white padding-type-16 showcase-border-md-full-gutter-left">
+                <?php echo $this->getChildHtml('global_messages');?>
+                <?php echo $this->getChildHtml('content');?>
+            </div>
+        </div>
+    </div>
+    <?php 
+	echo $this->getChildHtml('footer');
+	echo $this->getChildHtml('before_body_end');
+	echo $this->getAbsoluteFooter();?>
+</body>
+</html>

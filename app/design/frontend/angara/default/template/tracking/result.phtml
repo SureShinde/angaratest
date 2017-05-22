@@ -1,0 +1,80 @@
+<?php
+/**
+ * Customy
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Customy EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.customy.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@customy.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.customy.com/ for more information
+ * or send an email to sales@customy.com
+ *
+ * @copyright  Copyright (c) 2011 Triple Dev Studio (http://www.customy.com/)
+ * @license    http://www.customy.com/LICENSE-1.0.html
+ */
+
+$_tracks = $this->getTrackingData();
+$_details = $this->getOrderDetails();
+?>
+<?php /*?><h4><?php echo $_status; ?></h4><?php */?>
+<?php if(empty($_details)){
+	echo 'invalid';
+}
+else{
+	if(empty($_tracks)) { ?>
+	<div class="status-title">Your Order Status:</div>
+<?php } else { ?>    
+	<div class="status-title">Your Order Status:</div>
+    <div class="content order-detail-table">
+        <table width="100%" class="data-table">
+        	<thead>
+            <tr class="first last">
+            	<th><strong><?php echo $this->__('ORDER NO.') ?></strong></th>
+                <th><strong><?php echo $this->__('TRACKING NO.') ?></strong></th>
+                <th><strong><?php echo $this->__('CARRIER') ?></strong></th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($_tracks as $track) : ?>
+
+
+<?php 
+//Mage::log($track);?>
+			
+			<?php $popup = 'onclick="popWin(\'' . $this->getCarrierUrl($track['carrier_code'],$track['title']) . $track['number'] . '\',\'trackorder\',\'width=800,height=600,resizable=yes,scrollbars=yes\'); return false"'; ?>
+            <tr class="<?php echo $track['carrier_code'] ?>">
+                 <td>#<?php echo $_details['id']?></td>
+                <td>
+                    <a href="<?php echo $this->getCarrierUrl($track['carrier_code'],$track['title']).$track['number'] ?>" <?php echo $popup ?> >
+                        <?php echo $track['number'] ?>
+                    </a>
+                </td>
+                <td><?php echo $track['title'] ?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php /* <div class="backtohome"><a href="<?php echo $this->getUrl('') ?>"><?php echo $this->__('Back to homepage') ?></a></div> */ ?>
+    </div>
+<?php } ?>
+    <div class="tracking-status-strip">
+            <div class="order-approval">approval</div>
+            <div class="order-processing <?php echo ($_details['status'] == 'complete')?"order-processed":"order-under-processing";?>">processing</div>
+            <div class="order-shipping <?php echo ($_details['status'] == 'complete')?"order-shipped":"";?>">shipping</div>        
+        </div>
+	<?php if($_details['estimated_shippingdate'] != 'NA' && strtotime($_details['estimated_shippingdate']) > time()):?>
+    <div class="order-estimated-ship-date"><span class="ship-title">Estimated ship date: </span><?php echo date('l, F j',strtotime($_details['estimated_shippingdate']));;//Tuesday, December 3?></div>
+	<?php endif;?>
+<?php } ?>

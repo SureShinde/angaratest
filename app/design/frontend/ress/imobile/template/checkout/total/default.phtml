@@ -1,0 +1,93 @@
+<?php
+$pageType = Mage::helper('function')->getPageType();
+
+$getDiscountText		=	$this->getTotal()->getTitle();			//	Get the discount text	-	Discount (most10)	or Discount (most10, Additional Discount)
+$getTotalDiscountValue	=	$this->getTotal()->getValue();			//	Get the discount value	- 	$50
+$totalCouponCodeInCart	=	explode(',',$getDiscountText);		//	If customer cancel the auto applied code then we dont need to show special discount
+$actualDiscount			=	1;
+//if( strstr( $getDiscountText, 'Additional Discount') && Mage::helper('function')->getExtraDiscount()){
+if( strstr( $getDiscountText, 'Additional Discount')){
+	$specialDiscountAmount	=	'50';
+
+	$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();			// Base Currency
+	$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();		// Current Currency
+	if( $baseCurrencyCode != $currentCurrencyCode ){
+		// Allowed currencies
+		$allowedCurrencies 	= 	Mage::getModel('directory/currency')->getConfigAllowCurrencies();
+		$rates 				= 	Mage::getModel('directory/currency')->getCurrencyRates($baseCurrencyCode, array_values($allowedCurrencies));
+		//echo '<br>$rates currentCurrencyCode->'.$rates[$currentCurrencyCode];
+		$specialDiscountAmount	=	$specialDiscountAmount * $rates[$currentCurrencyCode];	
+	}else{
+		$specialDiscountAmount	=	$specialDiscountAmount;
+	}
+
+	if(count($totalCouponCodeInCart)>1){
+		$getDiscountText		=	str_replace(", Additional Discount", '', $getDiscountText);			//	This will be modified discount text
+		$getDiscountValue		=	($getTotalDiscountValue + $specialDiscountAmount) * (-1);
+	}else{
+		$actualDiscount			=	0;
+	}
+	$specialDiscount		=	1;
+}elseif( strstr( $getDiscountText, 'Additional Discount') ){
+	$getDiscountText		=	str_replace(", Additional Discount", '', $getDiscountText);			//	This will be modified discount text
+	//$getDiscountValue		=	$this->getTotal()->getValue() * (-1);		
+	$getDiscountValue		=	$this->getTotal()->getValue();
+}
+else{
+	//$getDiscountValue		=	$this->getTotal()->getValue() * (-1);
+	$getDiscountValue		=	$this->getTotal()->getValue();		
+}
+if($actualDiscount!=0){
+?>
+<tr>
+    <td colspan="<?php echo $this->getColspan(); ?>" <?php if($pageType == 'cart'){?>data-class="discount" <?php }?> style="cursor: pointer; <?php echo $this->getTotal()->getStyle() ?>" class="a-left">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php echo $getDiscountText;//echo $this->escapeHtml($getDiscountText); ?>  <?php if($pageType == 'cart'){?><i class="fa fa-angle-down"></i><?php }?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+        <?php /*?><?php if( $specialDiscount ){?>
+            <del>(<?php echo $this->helper('checkout')->formatPrice($getDiscountValue * (-1)) ?>)</del>
+        <?php }else{?><?php */?>
+        	<?php /* <span class="text-green"><?php echo $this->helper('checkout')->formatPrice($getDiscountValue); ?></span> */?>
+			<span class="text-green"><?php if($getDiscountValue != 0) { ?>(<?php echo $this->helper('checkout')->formatPrice($getDiscountValue); ?>)<?php } ?></span>
+        <?php //} ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong>
+		<?php endif; ?>
+    </td>
+</tr>
+<?php }?>
+<?php 
+//if( $specialDiscount  && Mage::helper('function')->getExtraDiscount() ){
+if( $specialDiscount){
+	//$timerEndTime			=	Mage::helper('function')->getPromotionTime();
+	$offerDiscountAmount	=	Mage::helper('core')->currency('50');?>
+<tr>
+    <td colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-left">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php echo $offerDiscountAmount." Additional Discount"; ?>: 
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right text-green">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            (<?php //echo Mage::helper('core')->currency($offerDiscountAmount) ;
+			echo $offerDiscountAmount; ?>)
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+</tr>
+<?php } 
+
+if($pageType == 'cart'){ ?>
+	<tr data-class="open-discount" style="display:none">
+		<td>
+		<?php 
+		$customerCoupon = Mage::helper('function')->getCustomerCoupon(); 
+		if($customerCoupon != 'CUSTOMORDER'): ?>
+			<div class="discount-code-block max-margin-bottom high-margin-top padding-type-5"><?php echo $this->getLayout()->createBlock('checkout/cart_coupon')->setTemplate('checkout/cart/coupon.phtml')->toHtml();//echo $this->getChildHtml('coupon'); ?></div>
+		<?php 
+		endif;?>
+		</td>	
+	</tr>
+<?php 
+}?>	

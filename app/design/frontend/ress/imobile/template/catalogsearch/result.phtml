@@ -1,0 +1,219 @@
+<style>
+.product-retail-price-range, .price-extra-text, .product-retail-price { display:none !important; }
+</style>
+<style>
+.sort-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 999;
+}
+.close-nav {
+    width: 45px;
+    height: 45px;
+    background: url(/skin/frontend/ress/imobile/images/icon.png) no-repeat center -253px;
+}
+.option-holder .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 45px;
+}
+.option-holder {
+    position: absolute;
+    background: #ffffff;
+    width: 84%;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+    top: 30%;
+    min-height:170px;
+    border-radius: 3px;
+}
+.sort-options .radio-btn {
+    height:16px;
+    width:16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #fa505a;
+}
+.radio-active {
+    height: 10px;
+    width: 10px;
+    background:#fa505a;
+    border-radius: 50%;
+    margin: 3px auto;
+    display: block;
+}
+.sort-txt {
+    font-size: 15px;
+    margin-left: 8px;
+    color: #616161;
+}
+.ActBtn {
+	display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.Act-Btn {
+	padding: 10px;
+    font-weight: 500;
+}
+.sort-icon {background: url(/skin/frontend/ress/imobile/images/sort-icon.png) no-repeat center center;background-size:100%;height:13px;width:19px;}
+</style>
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */ ?>
+ 
+<div class="container showcase-bg-white high-padding-top cs-mixed jt-mixed">
+<?php
+if($this->getResultCount()):
+	echo $this->getMessagesBlock()->getGroupedHtml();?>
+	<?php 
+	/*$refinedQueries = $this->getRefinedQueries();
+	if($refinedQueries):?>
+		<div class="high-padding-bottom">
+			<span class="h4 low-padding-right">Refine your search </span>
+			<?php 
+			foreach(explode(',', $refinedQueries) as $refinedQuery): ?>
+				| <a class="text-underline" href="/catalogsearch/result/?q=<?php echo urlencode($refinedQuery);?>"><?php echo ucwords($refinedQuery); ?></a> 
+			<?php 
+			endforeach; ?>
+		</div>
+	<?php 
+	endif;*/?>
+	<div class="page-title high-margin-bottom">
+	<?php 
+	if($this->helper('rss/catalog')->getTagFeedUrl()): ?>
+		<a href="<?php echo $this->helper('rss/catalog')->getTagFeedUrl() ?>" class="nobr link-rss"><?php echo $this->__('Subscribe to Feed') ?></a>
+	<?php 
+	endif; ?>
+		<h1 class="no-margin">
+		<?php 
+		if(Mage::app()->getRequest()->getParam('showdeal') == 'true')
+			echo '2015 Valentine\'s Day Deals - Find the perfect <span class="text-capitalize">'.$this->helper('catalogsearch')->getEscapedQueryText().' for the ones you love.</span>';
+		else
+			echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()); ?>
+		<span id="pro-count-destination"><small></small></span></h1>
+	</div>
+	<?php 
+	// Sorting snippet for mobile
+    $setting_dir=Mage::getBlockSingleton('catalog/product_list_toolbar');?>
+	<div id="catalog-filter-controller" class="mT10 mB10" data-filter-panel-display-state="none" data-filter-panel-current-tab-index="0"><?php echo $this->getChildHtml('catalogsearch_filter');?><div id="sort-title" class="sort-title center-align"><i class="fa sort-icon fa-fw"></i>Sort</a></div></div>
+	<?php // ap: sorting box ?>
+	<?php $dir		=	$this->getRequest()->getParam('dir');
+	      $order	=	$this->getRequest()->getParam('order');
+		  //echo 'order->'.$order;
+		  if($order==''){	$activeClass	=	'radio-active';	}
+	?>  
+		<div class="sort-container hidden">
+			<div class="option-holder">
+				<div class="sort-title full-width">
+					<span class="title fl mL10">Sort Options</span>
+				</div>
+				<div class="sort-options full-width mL10">
+					<div class="full-width"><a id="most-popular" href="<?php echo $setting_dir->getOrderUrl('position', 'asc') ?>" class="fl"><span class="radio-btn fl"><?php if($dir=="asc" && $order=="position"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn <?php echo $activeClass;?>">
+                <?php endif;?></span></span><div class="fl sort-txt">Most Popular</div></a></div>
+					<div class="full-width pT10 mT10"><a id="low-high" href="<?php echo $setting_dir->getOrderUrl('price', 'asc') ?>" class="fl"><span class="radio-btn fl"><?php if($dir=="asc" && $order=="price"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn">
+                <?php endif;?></span></span><div class="fl sort-txt">Price Low To High</div></a></div>
+				<div class="full-width pT10 mT10"><a id="high-low" href="<?php echo $setting_dir->getOrderUrl('price', 'desc') ?>" class="fl"><span class="radio-btn fl"><?php if($dir=="desc" && $order=="price"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn">
+                <?php endif;?></span></span><div class="fl sort-txt">Price High To Low</div></a></div>
+				</div>
+				<div class="full-width ActBtn">
+					<div class="fr close-icon apricot-text Act-Btn">Cancel</div>
+					<div class="App-btn apricot-text Act-Btn"><a class="apricot-text" style="text-decoration: none !important;" href="">Apply</a></div>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript">
+	jQuery(function(){
+		jQuery("#sort-title").click(function() {
+			jQuery(".sort-container").removeClass('hidden');
+		});		
+		jQuery( ".sort-container .close-icon" ).click(function() {
+			jQuery(".sort-container").addClass('hidden');
+		});
+		jQuery(".sort-options a").click(function() {
+			jQuery(".iner-btn").removeClass('radio-active');
+			jQuery(this).find(".iner-btn").addClass('radio-active');						
+		});
+		//S:AP
+		jQuery(".sort-options a").click(function( event ) {
+			event.preventDefault();
+			var AppUrl = jQuery(this).attr('href');
+			jQuery('.App-btn a').attr('href', AppUrl);
+			jQuery('.catalog-loader').addClass('hide');
+		});
+		jQuery(".sort-container").click(function(event) {
+				var target = jQuery(event.target);
+				if ( target.is(this) ) {
+					jQuery(this).addClass('hidden');
+				}
+		});
+		//E:AP
+	});
+	</script>
+	<?php // ap: sorting box ?>
+    <?php 
+	if($messages = $this->getNoteMessages()):?>
+    	<p class="note-msg">
+		<?php 
+		foreach ($messages as $message):
+			echo $message?><br />
+		<?php 
+		endforeach;?>
+    	</p>
+    <?php 
+	endif;
+	
+	echo $this->getProductListHtml();
+else: ?>
+	<div class="page-title high-padding-left">
+		<h1><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText());?></h1>
+	</div>
+	<p class="note-msg">
+		<?php 
+		echo ($this->getNoResultText()) ? $this->getNoResultText() : $this->__("We did not find match for '%s'", $this->helper('catalogsearch')->getEscapedQueryText());
+		if($messages = $this->getNoteMessages()):
+			foreach($messages as $message):?>
+				<br /><?php echo $message;?>
+			<?php 
+			endforeach;
+		endif;?>		
+	</p>
+	<div>
+		<p class="high-padding-left">We recommend searching for another keyword or </br> checking the keyword spelling.</p>
+		<br>
+		<p class="high-padding-left" style="font-size:160%;">Looking for more options?</p>
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('search_empty')->toHtml(); ?>
+	</div>
+<?php 
+endif;?>
+</div>

@@ -1,0 +1,1284 @@
+body, p, h1, input {
+	padding:0;
+	margin:0;
+	font:12px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#535353;
+}
+body {
+	z-index:1
+}
+
+.certspanbox input {
+	border:0;
+	padding:0;
+	margin:0;
+	vertical-align:top;
+}
+.grayeffect {
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:9998;
+	background-color:#000000;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+}
+a, img {
+	border:none;
+	outline:none;
+}
+
+.wrapper {
+	width:960px;
+	margin:0 auto;
+}
+.wrappermain {
+	width:918px;
+	border:solid 1px #d3d3d3;
+	padding:10px 20px 20px 20px;
+	position:relative;
+	margin:0 auto;
+	margin-top:12px;
+	min-height:790px;
+	height:auto!important;
+	height:790px;
+}
+
+h1 {
+	color:#000;
+	font:15px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	text-align:left;
+	padding-bottom:8px;
+}
+h1 a {
+	color:#000;
+	text-decoration:none;
+}
+
+.productalldetail {	
+	padding:15px;
+	background-color:#fff;
+	border:solid 1px #d3d3d3;
+	min-height:171px;
+	height:auto !important;
+	height:171px;
+}
+
+
+
+
+
+#detailstab {
+	position:relative;	
+	height:28px;
+}
+#detailstab ul {
+	position:absolute;
+	top:2px;
+	left:0;
+	width:845px;
+	height:27px;
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+#detailstab li.alltab {
+	float:left;
+	width:159px;
+	height:27px;
+	margin-right:5px;
+}
+#detailstab li.alltab a {
+	padding-top:4px;
+	text-align:center;
+	display:block;
+	width:157px;
+	height:21px;
+	border:solid 1px #d3d3d3;
+	color:#535353;
+	text-decoration:none;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+	background:url(../images/tabbg.jpg) repeat-x;
+}
+#detailstab li.activeted1 {
+	margin-right:5px;
+	float:left;
+	padding-top:4px;
+	width:157px;
+	height:22px;
+	border:solid 1px #d3d3d3;
+	border-bottom:none;
+	background:#fff;
+}
+#detailstab li.activeted1 a {
+	text-align:center;
+	display:block;
+	color:#535353;
+	text-decoration:none;
+	font:13px ProximaNova_Bold, Arial, Helvetica, sans-seri;
+}
+#detailstab li.difference {
+	float:left;
+	width:178px;
+	height:27px;
+	margin-right:5px;
+}
+#detailstab li.difference a {
+	padding-top:4px;
+	text-align:center;
+	display:block;
+	width:176px;
+	height:21px;
+	color:#535353;
+	text-decoration:none;
+	border:solid 1px #d3d3d3;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+	background:url(../images/tabbg.jpg) repeat-x;
+}
+#detailstab li.activeted2 {
+	margin-right:5px;
+	float:left;
+	padding-top:4px;
+	width:176px;
+	height:22px;
+	border:solid 1px #d3d3d3;
+	background:#fff;
+	border-bottom:none;
+}
+#detailstab li.activeted2 a {
+	text-align:center;
+	display:block;
+	color:#535353;
+	text-decoration:none;
+	font:13px ProximaNova_Bold, Arial, Helvetica, sans-seri;
+}
+.descriptiontab {
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+	line-height:18px;
+	color:#535353;
+	display:none;
+}
+.productdetailtab {
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+	line-height:18px;
+	color:#535353;
+}
+.details-heading {
+	color:#535353;
+	font:13px ProximaNova_Bold, Arial, Helvetica, sans-seri;
+	padding-bottom:5px;
+}
+
+.col2-left-layout .col-main {
+	float: none;
+	width: auto;
+}
+.producttxtlink
+{
+font:13px ProximaNova, Arial, Helvetica, sans-seri;
+	line-height:18px;
+	color:#535353;
+}
+
+.ratings-table th {
+	margin-top:15px;
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+	width:90px;
+	color:#535353;
+	padding-right:5px;
+}
+.ratings-table th, .ratings-table td {
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+}
+.ppreview
+{
+margin-bottom:15px;
+}
+
+
+h2 {
+	font:13px ProximaNova_bold, Arial, Helvetica, sans-serif;	
+	color:#000;
+}
+h4 {
+	padding-top:20px;
+	font:13px ProximaNova_bold, Arial, Helvetica, sans-serif;	
+	color:#000;
+}
+
+.form-add, .form-list {
+	padding-top:15px;
+}
+.data-table {
+	border: 1px solid #d3d3d3;
+	border-right:none;
+	width:500px;
+}
+.data-table td {
+	width:50px;
+}
+.buttons-set {
+	border:none;
+	margin:0;
+}
+.buttons-set button.button {
+	float:left;
+}
+.data-table thead th {
+	background:none #f0f0f0;
+	border-right: 1px solid #d3d3d3;
+}
+.data-table tbody th, .data-table tbody td {
+	background:#FFFFFF;
+	border-top: 1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+}
+.data-table td.last, .data-table th.last {
+	border-right: 1px solid #d3d3d3;
+}
+.form-list label {
+	color: #000;
+}
+.main-container {
+	background:none;
+	position:relative;
+}
+#instaplancombo {
+	height:20px
+}
+
+.buttons-set .submit-review-btn {
+	background: url("../images/allbuttonbgleft.jpg") no-repeat scroll left top transparent;
+	height: 31px;
+}
+.buttons-set .submit-review-btn span {
+	background: url("../images/allbuttonbgright.jpg") no-repeat scroll right top transparent;
+	border: medium none;
+	height: 31px;
+}
+
+/*********************product details css*****************/
+.item-details-box-wrapper { }
+#details-heading-top { float:left;padding-right:18px;}
+.detail-box-title { color: #000000; font:13px ProximaNova_Bold, Arial, Helvetica, sans-serif; padding-bottom: 5px; padding-left:15px;}
+#details-heading-top .detail-box-title{padding-left:0}
+.stones-details-box {float:left; font:13px ProximaNova, Arial, Helvetica, sans-serif; width:678px;position:relative}
+.stone-detail-box { float:right;  margin-bottom:20px;padding-bottom:3px;position:absolute;right:0;top:0}
+.stone-detail-box-odd { float:left;  border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; margin-bottom:20px;padding-bottom:3px}
+#details-heading-top .field { border-bottom:1px dotted #d3d3d3; }
+.stone-detail-box .field { margin:0 0 0 18px; border-bottom:1px dotted #d3d3d3;}
+.stone-detail-box-odd .field { margin:0 18px 0 18px; border-bottom:1px dotted #d3d3d3;}
+#details-heading-top .fieldtitle {float:left; padding:3px 0; }
+#details-heading-top .fieldtitle { float:left; padding:3px 0; 	}
+#details-heading-top .fieldvalue { width:100px; float:right; text-align:right ;padding:3px 0;}
+.stone-detail-box .fieldtitle { width:199px; float:left;padding:3px 0; }
+.stone-detail-box .fieldvalue { width:123px; float:left; text-align:right;padding:3px 0;}
+.stone-detail-box-odd .fieldtitle { width:201px; float:left;padding:3px 0; }
+.stone-detail-box-odd .fieldvalue { width:102px; float:left;text-align:right;padding:3px 0;}
+.help-icon{width:12px;height:12px;background:url(../images/help-icon.jpg) center center no-repeat;display:block;display:inline-block;vertical-align:middle;cursor:pointer;position:relative}
+#help-icon-tooltip, .help-icon-tooltip{position:absolute;right:11px;top:11px;z-index:6001;background:#fff;border:1px solid #333;padding:10px;width:260px;display:none}
+#help-content,.help-content{text-align:left;font-size:10px}
+.stone-detail-box-odd #help-icon-tooltip{left:11px}
+#pricesection .price{margin-top:20px;display:block;color:#000000}
+#pricesection .final-price{color:#B32D2C}
+#overlayText{ position:absolute;top:0; z-index:9999;left:auto; display:none;}
+.write-review-btn{border:none; outline:none; width:66px; height:18px; cursor:pointer; margin-left:8px;}
+#mid-part-right dt,
+#mid-part-right dd{float:left;height:21px;line-height:21px;margin-right:4px}
+.more-option-product #help-icon-tooltip{left:11px;right:auto}
+.popupicon{width:12px;height:12px;background:url(../images/help-icon.jpg) center center no-repeat;display:block;display:inline-block;vertical-align:middle;cursor:pointer;position:relative}
+.pricepopupicon{width:13px;height:13px;background:url(../images/priceknowmore.jpg) center center no-repeat;display:block;display:inline-block;vertical-align:middle;cursor:pointer;position:relative;}
+
+.heading2 { color:#000; font:15px ProximaNova_Bold, Arial, Helvetica, sans-serif; text-align:left; padding-bottom:6px; }
+.heading2 a { color:#000; text-decoration:none; }
+
+/*********************product details css*****************/
+/*********************new product page css*****************/
+
+@font-face {
+ font-family: 'ProximaNova';
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.eot');
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.woff') format('woff'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.svg#ProximaNova') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'ProximaNova_Bold';
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.eot');
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.woff') format('woff'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.svg#ProximaNova_Bold') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+#product-page-inner {
+	border:1px solid #d4d4d4;
+	width:958px;
+	background-color:#fff;	
+	margin-top:15px;
+	padding-bottom:15px;
+}
+#product-page-upper {
+	position:relative;
+	/*padding-bottom:15px;*/
+}
+#product-page-upper-left {
+	float:right;
+	margin:0 15px 0 0;	
+}
+#product-details-overview {
+	float:left;
+	position:relative;	
+	width:348px;
+	padding:12px 12px 50px 12px;
+	background-color:#f7f7f7;
+	margin-top:45px;
+}
+#product-page-upper-right {
+	float:left;
+	width:531px;
+	margin:45px 0 0 15px;
+}
+.more-views {
+	width:58px;
+	float:left;
+	margin:0 15px 0 0;
+}
+.more-views ul {
+	width:58px;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.more-views li {
+	border:solid 1px #d3d3d3;
+	height:56px;
+	width:56px;
+	margin:0 0 10px 0;
+	cursor: pointer;
+	position:relative;
+}
+#product-about h1 {
+	font:22px ProximaNova_Bold, Arial, Helvetica, sans-seri;
+	text-transform:uppercase;
+	color:#535353;
+}
+.ratings {
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#535353;
+}
+.appraisalcertimg {
+	width:378px;
+	height:502px;
+	background:url(/skin/frontend/angara/ADVRP/images/appraisalcertificate.jpg) no-repeat;
+	font:16px ProximaNova_Bold, Arial, Helvetica, sans-seri;
+	color:#000;
+}
+.rating-box {
+	width:69px;
+	height:13px;
+	font-size:0;
+	line-height:0;
+	background:url(../images/bkg_rating.gif) 0 0 repeat-x;
+	text-indent:-999em;
+	overflow:hidden;
+}
+.rating-box .rating {
+	float:left;
+	height:13px;
+	background:url(../images/bkg_rating.gif) 0 100% repeat-x;
+}
+.ratings .rating-box {
+	float:left;
+	margin-right:3px;
+}
+.ratings-table th, .ratings-table td {
+	padding:3px 0;
+}
+.ratings-table th {
+	font-weight:bold;
+	padding-right:8px;
+	font:13px ProximaNova, Arial, Helvetica, sans-seri;
+}
+.small-title {
+	font:17px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#535353;
+	text-transform:uppercase;
+}
+.review-block {
+	padding-bottom:20px;
+}
+.custom-option-img {
+	width:78px;
+	height:70px;
+	border:1px solid #a9a9a9;
+}
+.custom-option-value {
+	width:80px;
+	height:25px;
+	background-color:#3b3b3b;
+}
+/*
+Metal and quality
+-----------------
+*/
+
+ .customize-block {
+	width:80px;
+	height:97px;
+	margin-right:7px;
+	float:left;
+}
+.customize-block .custom-option-img {
+	width:78px;
+	height:70px;
+	border:1px solid #a9a9a9;
+	display:block;
+	background-color:#FFF;
+	text-align:center;
+}
+.customize-block .custom-option-value {
+	width:77px;
+	height:20px;
+	background-color:#3b3b3b;
+	font:11px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#fff;
+	padding:5px 0 0 3px;
+	display:block;
+}
+.customize-block:hover .custom-option-value {
+	width:77px;
+	height:20px;
+	font:11px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#fff;
+	padding:5px 0 0 3px;
+	background:url(../images/selected-option.png) #f36232 65px 6px no-repeat;
+	display:block;
+}
+.customize-block-active {
+	width:80px;
+	height:97px;
+	margin-right:7px;
+	float:left;
+}
+.customize-block-active .custom-option-img {
+	width:78px;
+	height:70px;
+	border:1px solid #a9a9a9;
+	display:block;
+	background-color:#fff;
+	text-align:center;
+}
+.customize-block-active .custom-option-value {
+	width:77px;
+	height:20px;
+	font:11px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#fff;
+	padding:5px 0 0 3px;
+	background:url(../images/selected-option.png) #f36232 65px 6px no-repeat;
+	display:block;
+}
+.metaldescription {
+	display:none;
+	margin-top:8px;
+}
+.qualitydescription {
+	display:none;
+	margin-top:8px;
+	font:12px ProximaNova, Arial, Helvetica, sans-seri;
+	color:#5b5b5b;
+	padding-right:12px;
+	min-height:80px;
+	height:auto!important;
+	height:80px;
+}
+
+#gemstonesizedesc.qualitydescription {	
+	min-height:50px;
+	height:auto!important;
+	height:50px;
+}
+
+
+#product-page-lower {
+	padding:15px;
+}
+h3 {
+	font:24px ProximaNova, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color:#808080;
+}
+.pointlist {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.pointlist li {
+	color:#808080;
+	height:35px;
+	font:14px/35px ProximaNova, Arial, Helvetica, sans-serif;
+	background:url(../images/right-mark.jpg) left no-repeat;
+	padding-left:25px;
+}
+.customerreviewsection {
+	width:928px;
+	margin:15px 0;
+}
+.productcustomreview {
+	height:300px;
+	overflow:auto;
+}
+
+#product-page-breadcrumb {
+	
+	width:395px;
+	height:30px;
+	position:absolute;	
+	top:15px;
+	left:15px;
+	z-index:1;
+}
+.breadcrumb-item {
+	float:left;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+}
+.breadcrumb-item .crumbarrow {
+	padding:0 6px;
+}
+.breadcrumb-item.last-item {
+	font-weight:normal;	
+}
+.breadcrumb-item.last-item .crumbarrow {
+	display:none;
+}
+.producr-price-block {
+	padding:5px 0 0 0;
+}
+.breadcrumbs {
+	display:none
+}
+.retailpriceblock {
+	display:inline-block;
+	margin-right:20px;
+}
+.retailpriceblock .retailfinalprice {
+	color:#939393;
+	font:18px ProximaNova, Arial, Helvetica, sans-serif;
+	display:inline-block;
+	text-decoration:line-through;
+}
+.angarapriceblock {
+	display:inline-block
+}
+.angarapriceblock .angarafinalprice {
+	color:#1e1e1e;
+	font:30px ProximaNova, Arial, Helvetica, sans-serif;
+	display:inline-block
+}
+#product-price-details {
+	float:left;	
+}
+#easy-pay-text-block {
+	color:#1e1e1e;
+	font:18px ProximaNova, Arial, Helvetica, sans-serif;
+	padding:5px 5px 15px 0;
+	margin-bottom:15px;
+	border-bottom:1px solid #ababab;
+	display:inline-block;
+}
+#product-page-action {
+	float:right;
+	margin-top:5px;
+}
+#product-selection-continue-button {
+	background-color:#f2602f;
+	/*background:url(/skin/frontend/angara/ultimate/images/continue-arrow.jpg) #f2602f right no-repeat;*/
+	display:inline-block;
+	width:195px;
+	height:43px;
+	font:20px/43px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	text-align:center;
+	color:#fff;
+	cursor:pointer;
+}
+
+#product-selection-continue-button:hover
+{
+background-color:#ff7a22;
+}
+#product-selection-back-button {
+	display:inline-block;
+	font:16px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	text-align:center;
+	color:#c9c9c9;
+	display:none;
+	cursor:pointer;
+}
+
+#product-selection-back-button:hover {
+color:#a6a6a6;
+}
+.easypayoption {
+	color:#1e1e1e;
+	font:14px ProximaNova, Arial, Helvetica, sans-serif;
+	padding-top:5px;
+	margin-bottom:30px;
+	margin-right:4px;
+	display:none;
+}
+.estimatedtime {
+	font:16px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+}
+#expected-shipping-date-original {
+	font:16px ProximaNova, Arial, Helvetica, sans-serif;
+}
+.know-more-icon {
+	width:16px;
+	height:16px;
+	background:url(/skin/frontend/angara/ultimate/images/mouseovericon.jpg) center no-repeat;
+	display:inline-block;
+	vertical-align:baseline;
+	cursor:pointer;
+	position:relative;
+}
+
+#product-page-upper-right #easy-pay-block .know-more-icon {
+vertical-align:baseline;
+}
+
+#product-price-details .know-more-icon {
+vertical-align:middle;
+}
+
+#product-price-details .estimatedtime .know-more-icon {
+vertical-align:baseline;
+}
+
+.popupbox-block {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	background-color:#fff;
+	-moz-box-shadow:0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	border:1px solid #d8d8d8;
+	display: none;
+	left:-243px;
+	position: absolute;
+	top:16px;
+	z-index:50;
+	width:310px;
+	padding:10px;
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+}
+
+#knowmoreeasypay{left:7px;}
+#knowmoreappraisal{left:-246px;}
+#knowmorewarranty{left:-133px;}
+#estimatedtime-popup{left:7px;}
+
+
+.popupbox-block .popup-heading {
+	font:bold 13px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	display:block;
+	padding-bottom:15px;
+}
+ul.easypaypoint {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+ul.easypaypoint li {
+
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	list-style:disc outside;
+	padding-bottom:8px;
+	text-align:left;
+	margin:0 0 0 24px;
+}
+.custom-option-img.metaltype-YG {
+	width:78px;
+	height:70px;
+	background:url(/skin/frontend/angara/ultimate/images/yellow-gold-thumb.png) center no-repeat;
+	display:block;
+}
+.custom-option-img.metaltype-SL, .custom-option-img.metaltype-WG, .custom-option-img.metaltype-PT {
+	width:78px;
+	height:70px;
+	background:url(/skin/frontend/angara/ultimate/images/white-gold-thumb.png) center no-repeat;
+	display:block;
+}
+#big-product-img {
+	width:450px;
+	height:450px;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	float:right;
+}
+#easyopt input, select, textarea, button {
+	font:14px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+}
+#customer-reviews {
+	font:14px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+}
+.product-add-to-cart {
+	background:#FF6600;
+	display:block;
+	height:54px;
+	font:28px/54px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	text-align:center;
+	color:#fff;
+	width:100%;
+	cursor:pointer;
+	outline:none;
+	border:none;
+}
+.product-add-to-cart:hover {
+	background:#ff7a22;
+	}
+	
+.engravingwrapper-ultimate
+{
+ padding:0!important;
+/* visibility:hidden;*/
+}
+#detailsection
+{
+ margin-right:0;
+ width:auto;
+}
+ 
+/* css before continue button pressed */
+
+
+.addcart {
+	margin:0 auto;
+	padding-top:8px;
+	text-align:center;
+	display:none
+}
+.wishlist-block {
+	font:16px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	text-align:right;
+	text-decoration:underline;
+	display:none;
+}
+
+#ringsizemaindiv, #freeringsizer-link {
+	display:none;
+}
+
+
+
+/* css after continue button pressed */
+#product-details-overview .appraisalcert {
+	margin:20px 0 6px 0;
+	position:relative;
+	display:none;
+}
+#product-details-overview .addwarrenty {
+	margin:15px 0 6px 0;
+	position:relative;
+	display:none;
+}
+#product-details-overview #ultimate-engraving  {
+	margin:11px 0 30px 0;
+	position:absolute;
+	left:-9999px;	
+}
+#product-details-overview #spacer_engraving
+{
+	display:none;
+	height:70px;
+}
+
+#product-details-overview #knowmoreeasypay{left:-249px;}
+#product-details-overview #estimatedtime-popup{left:-159px;}
+
+.freeringsizer {
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	display:block;
+}
+.freeringsizer a {
+	color:#1e1e1e;
+	display:block;
+	text-decoration:underline;
+}
+#product-details-overview #product-price-details #freeringsizer-link {
+	display:block;
+}
+.appraisaltxt {
+	font:14px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	left:23px;
+	vertical-align:top;
+	display:inline-block;
+}
+#ringsizerguide {
+	display:none;
+	width:175px;
+	height:62px;
+	background:url(/skin/frontend/angara/ultimate/images/ring-sizer-guide.jpg) no-repeat;
+	position:absolute;
+	bottom:0px;
+	left:12px;
+}
+#ringsizerguide a {
+	width:175px;
+	height:62px;
+	display:block
+}
+#product-details-overview .addcart {
+	margin:0 auto;
+	padding-top:8px;
+	text-align:center;
+	display:block
+}
+
+
+#product-details-overview .wishlist-block {
+	font:16px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#1e1e1e;
+	text-align:right;
+	text-decoration:underline;
+	display:block;
+	margin:5px 0 30px 0;
+}
+#product-details-overview #product-price-details {
+	float:none;
+}
+#product-details-overview #product-price-details #ringsizemaindiv {
+	display:block;
+	font:bold 14px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#363636;
+}
+#product-details-overview #product-price-details #easy-pay-text-block {
+	display:none
+}
+#product-details-overview #product-price-details #easy-pay-option-block {
+	display:inline-block;
+}
+#product-details-overview #product-price-details .retailpriceblock {
+	display:none
+}
+#playvedio {
+	display:none !important
+}
+.ui-dialog .ui-dialog-buttonpane {
+	padding:0 !important;
+}
+.ui-dialog {
+	top:200px !important;
+}
+.header {
+	z-index:none;
+}
+#search_autocomplete {
+	top:24px !important;
+	z-index:9999 !important;
+}
+
+#search_autocomplete ul li {
+	font-size:11px !important;
+	text-align:left;
+}
+
+.stonerelatedreview .date, .productrelatedreview .date, small.date
+{
+display:none!important;
+}
+
+.form-list textarea {
+	border: 1px solid #B6B6B6;
+}
+select option {
+	padding-right:7px;
+}
+
+/*QUALITY BOX POPUP CSS by vishnu 08-09-2011*/
+
+.qualitypopupbox
+{
+z-index:999;
+width:915px;
+padding:12px;
+position:absolute;
+top:10px;
+left:10px;
+border:solid 1px #d4d4d4;
+min-height:500px;
+height:auto!important;
+height:500px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+.diamondpopup
+{
+z-index:999;
+position:absolute;
+top:700px;
+left:200px;
+width:513px;
+padding:12px;
+border:solid 1px #d4d4d4;
+min-height:180px;
+height:auto!important;
+height:180px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+img, h1, input
+{
+border:none;
+outline:none;
+}
+
+.popupboxcross
+{
+float:right;
+width:16px;
+height:16px;
+background:url(../images/cross-popup.jpg) no-repeat;
+display:block;
+cursor:pointer;
+}
+.popupboxcross a
+{
+width:16px;
+height:16px;
+display:block;
+}
+
+.popupboxheading
+{
+font:bold 15px Arial, Helvetica, sans-serif, Tahoma;
+width:400px;
+float:left;
+}
+
+.qualitystonerow
+{
+margin:10px 0 5px 158px;
+}
+
+.qualitystonebox
+{
+margin:3px;
+width:184px;
+float:left;
+}
+
+.clear
+{
+clear:both;
+}
+
+
+.qualitystonebox span
+{
+width:182px;
+text-align:center;
+font:bold 12px Arial, Helvetica, sans-serif, Tahoma;
+display:block;
+padding-bottom:5px;
+}
+.qualitystonebox img
+{
+border:solid 1px #d4d4d4;
+width:182px;
+height:182px;
+}
+
+.qualitydetailrow
+{
+width:auto;
+height:auto;
+padding-top:
+}
+
+.detailheading
+{
+margin-top:3px;
+width:146px;
+float:left;
+padding-right:12px;
+}
+
+.detailheading span
+{
+width:146px;
+display:block;
+line-height:16px;
+font:bold 12px Arial, Helvetica, sans-serif, Tahoma;
+color:#000;
+padding-bottom:15px;
+}
+
+.detailsdisp
+{
+margin:3px;
+width:184px;
+float:left;
+
+}
+
+.detailsdisp span
+{
+display:block;
+line-height:16px;
+padding-bottom:15px;
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+}
+
+.detailsdisp span p
+{
+margin:0;
+padding:0;
+font:11px Arial, Helvetica, sans-serif, Tahoma;
+font-style:italic;
+padding-bottom:20px;
+}
+
+.detailsdisp span p small
+{
+display:block;
+padding-top:6px;
+}
+
+.padnone
+{
+padding-bottom:0;
+}
+
+/*STONE SIZE BOX POPUP CSS*/
+
+
+.sizepopupbox
+{
+margin:0 auto;
+width:625x;
+padding:12px;
+min-height:233px;
+height:auto!important;
+height:233px;
+}
+
+.eraserpoint
+{
+width:97px;
+height:215px;
+background:url(../images/eraserpoint.jpg) no-repeat;
+float:left;
+}
+
+.stonesizebox
+{
+padding-top:45px;
+width:410px;
+padding-right:5px;
+float:right;
+}
+
+.stonesizedetails
+{
+float:left;
+padding-right:20px;
+}
+
+.stonesizedetailstxt
+{
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+padding-top:25px;
+text-align:center;
+}
+
+/*ring size BOX POPUP CSS*/
+
+.ringsizepopupbox
+{
+margin:0 auto;
+width:625x;
+padding:12px;
+min-height:233px;
+height:auto!important;
+height:233px;
+
+}
+
+.ringsizepopupbox p
+{
+margin:0;
+padding:0;
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+font-style:italic;
+padding-top:10px;
+padding-bottom:10px;
+}
+
+.ringsizepopupbox small
+{
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+display:block;
+padding-top:6px;
+font-style:italic;
+}
+
+
+
+#qualitypopup
+{
+z-index:999;
+display:none;
+}
+
+#roundstonepopup
+{
+z-index:999;
+display:none;
+position:absolute;
+top:600px;
+left:156px;
+width:649px;
+border:solid 1px #d4d4d4;
+min-height:233px;
+height:auto!important;
+height:233px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+#ovalstonepopup
+{
+z-index:999;
+display:none;
+position:absolute;
+top:350px;
+left:200px;
+width:537px;
+border:solid 1px #d4d4d4;
+min-height:233px;
+height:auto!important;
+height:233px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+#retailpricepopup
+{
+z-index:1001;
+display:none;
+position:absolute;
+top:20px;
+right:20px;
+width:649px;
+border:solid 1px #d4d4d4;
+min-height:233px;
+height:auto!important;
+height:233px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+#internetjewelerpopup
+{
+z-index:999;
+display:none;
+width:649px;
+border:solid 1px #d4d4d4;
+min-height:233px;
+height:auto!important;
+height:233px;
+position:absolute;
+top:20px;
+right:20px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+#valuequalitypopup
+{
+z-index:999;
+display:none;
+width:649px;
+border:solid 1px #d4d4d4;
+min-height:233px;
+height:auto!important;
+height:233px;
+position:absolute;
+top:20px;
+right:20px;
+background: #999; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f4f4f4'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #fff,  #f4f4f4); /* for firefox 3.6+ */ 
+}
+
+
+
+#customerreviewsblock {
+	position:relative;	
+	height:28px;
+}
+#customerreviewsblock ul {	
+	height:28px;
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+#customerreviewsblock li.review-tab {
+	float:left;	
+	height:28px;	
+	margin-right:20px;	
+		
+}
+#customerreviewsblock li.review-tab a {	
+	height:23px;	
+	color:#535353;
+	padding:0 20px 0 0;
+	text-decoration:none;
+	font:13px/23px ProximaNova, Arial, Helvetica, sans-serif;	
+	border-right:solid 1px #535353;
+	text-transform:capitalize;
+}
+#customerreviewsblock li.review-tab a:hover {
+text-decoration:underline;
+}
+
+.productalldetail1 {	
+	padding:15px;
+	background-color:#fff;
+	border-top:solid 1px #d3d3d3;	
+}
+
+.writeareviewlink
+{
+font:12px ProximaNova, Arial, Helvetica, sans-serif;
+}
+
+

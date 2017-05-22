@@ -1,0 +1,165 @@
+<?php
+$_product = $this->getProduct();
+
+$height	=	$this->helper('catalog/image')->init($_product, 'image')->getOriginalHeight();
+$width	=	$this->helper('catalog/image')->init($_product, 'image')->getOriginalWidth();
+
+if($_product->getEnableZoom()==1 || $width=='700'){
+	$widthHeight	=	'width="350px;" height="350px;"';
+}
+
+// Code Added for Pendant allign product page.
+$pendantsVariationArray = array();
+for($i=0;$i<=10;$i++){
+	$attributeSetName = "Pendant with ".$i." variation of stone"; // put your own attribute set name
+	$attribute_set = Mage::getModel('eav/entity_attribute_set')
+						->load($attributeSetName, 'attribute_set_name')
+						->getAttributeSetId();
+	$pendantsVariationArray[] = $attribute_set;
+}
+
+$currentProductAttributId = $_product->getAttributeSetId();
+if(in_array($currentProductAttributId, $pendantsVariationArray)){
+	$extra_style = ' style="vertical-align:top;"';	
+}
+else{
+	$extra_style = ' style="vertical-align:middle;"';
+	$prod_img = ' style="vertical-align:middle; line-height:350px;"';
+}
+// Code Ended for Pendant allign product page.
+
+$cids = $_product->getCategoryIds();
+$_helper = $this->helper('catalog/output');
+
+// Code Added for Product image width & height set if tajmahal
+if(in_array(352, $cids)){
+	$prodImg = 'width="350px" height="350px"';
+}
+// Code Ended for Product image width & height set if tajmahal
+
+if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+	<div class="product-image" <?php echo $prod_img;?>>
+		<?php
+		//	Code Added by Vaseem for Image Zoom
+		$_img = '<div class="big-img"><img '.$prodImg.' id="image" itemprop="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'"'.$extra_style.' "'.$widthHeight.'" /></div>';
+		echo $_helper->productAttribute($_product, $_img, 'image');
+		// Code Added by Pankaj for Chain Message on product page.
+		if($_product->getChain1Length()){?>
+			<div class="chaintxt">
+			<?php 
+			$exclude_chain_prod_arr=array('SP0359PR','SP0358PR','SP0357PR','SP0355PR','SP0137R','SP0137S','SP0138R','SP0138S','SP0139R','SP0139S','SPY0138R','SP0373D','SP0352PR','SP0371D');
+			if (!in_array($_product->getSku(), $exclude_chain_prod_arr)){ 
+				// skip chain message for selected products Ticket: #500?>
+				(<?php echo $_product->getChain1Length() ?> inch <span id="pendantmsg" class="dyn_metal1_type"><?php if($_product->getAttributeText('default_metal1_type')){ echo $_product->getAttributeText('default_metal1_type'); }else if($_product->getAttributeText('metal1_type')){ echo $_product->getAttributeText('metal1_type'); }?></span> chain shipped FREE with pendant)
+			<?php 
+			}?>
+			</div>
+		<?php 
+		}
+		else{?>
+			<div class="chaintxt" style="display:none;"><span id="pendantmsg" class="dyn_metal1_type"></span></div>
+		<?php 
+		}
+		// Code Ended by Pankaj for Chain Message on product page.
+		?>
+	</div>
+<?php
+else: ?>
+	<div class="product-image" <?php echo $prod_img;?>>
+	<?php
+	//	Code Added by Vaseem for Image Zoom
+	$_img = '<div class="big-img"><img id="image" itemprop="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" /></div>';
+		echo $_helper->productAttribute($_product, $_img, 'image');?>
+	</div>
+<?php 
+endif;
+
+if (count($this->getGalleryImages()) > 0): ?>
+	<div id="more-views-up"></div>
+	
+	<div id="moreviews" class="more-views">
+		<ul id="vertical-carousel" class="jcarousel-skin-tango">
+		<?php 
+		foreach ($this->getGalleryImages() as $_image): ?>
+        	<li>
+				<span class="thumbs">
+                <?php if($_product->getEnableZoom()==1){?>
+                	<!--Code Added by Vaseem for Image Zoom-->
+                    <img onclick="imageswitcher('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile());?>');" title='<?php echo $this->htmlEscape($_image->getLabel()); ?>' src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(63); ?>" width="63" height="63" alt='<?php echo $this->htmlEscape($_image->getLabel()) ?>' />
+                <?php }else{ ?>
+                	<img onclick="$('image').src = '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>'; return false;" title='<?php echo $this->htmlEscape($_image->getLabel()); ?>' src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(63); ?>" width="63" height="63" alt='<?php echo $this->htmlEscape($_image->getLabel()) ?>' />
+                <?php } ?>
+				</span>	
+			</li>
+		<?php
+		endforeach; 
+		
+		# @todo handle product video here		
+		$video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+		if($video != ''){
+				$video_arr = explode("|",$video);
+				//$number_of_videos = count($video_arr);
+				$thumbPath = Mage::getBaseURL('media').'productVideos/';
+				
+				for($i=0; $i < 1; $i++) {
+					list($videoName,$thumbName) = explode(',',$video_arr[$i]);?>
+					<li class="static-view">
+						<span class="thumbs" style="position:relative;">
+							<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"> 								<img title='' src="<?php echo $thumbPath."thumb/".$thumbName; ?>" width="63" height="63" />
+								<img src="/skin/frontend/angara/default/images/play-video-thumb.png" width="63" height="63"  class="playvideothumb" alt="Play Video" title="Play Video" />
+							</a>
+						</span>	
+					</li>
+				<?php
+				}
+		} ?>
+			<?php /*?><li class="static-view" id="pckImg"></li><?php */?>
+		</ul>
+	</div>
+	
+	<div id="more-views-down"></div>
+<?php
+endif;?>
+<?php /*?><?php if((bool)strpos($_SERVER['HTTP_USER_AGENT'],'iPad')!='1'){ ?>
+<?php if($_product->getEnableZoom()==1){?>
+<!--Code Added by Vaseem for Image Zoom-->
+<style type="text/css">
+.magnifyarea{ 
+    box-shadow: 5px 5px 7px #818181;
+    -webkit-box-shadow: 5px 5px 7px #818181;
+    -moz-box-shadow: 5px 5px 7px #818181;
+    filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=5, offY=5, positive=true);
+    background: white;
+	z-index:1000;
+}
+</style>
+<script language="javascript" src="<?php echo $this->helper('core/js')->getJsUrl('imagezoom/featuredimagezoomer.js'); ?>" type="text/javascript"></script>
+<script type="text/javascript">
+function imageswitcher(imagename){	
+	//alert(imagename);
+	jQuery('#image').attr('src',imagename);
+	var options	=	{
+		zoomrange: [<?php echo Mage::getStoreConfig('featurezoom/zoomrange/start');?>, <?php echo Mage::getStoreConfig('featurezoom/zoomrange/end');?>],
+		magnifiersize: [<?php echo Mage::getStoreConfig('featurezoom/magnifiersize/height');?>,<?php echo Mage::getStoreConfig('featurezoom/magnifiersize/width');?>],
+		magnifierpos: '<?php echo Mage::getStoreConfig('featurezoom/general/magnifierpos');?>',
+		cursorshade: true,		//	small zoom area border
+		largeimage: imagename 
+	}
+	jQuery('#image').addimagezoom(options);
+}
+    Event.observe(window, 'load', function() {
+        jQuery('#image').addimagezoom({	
+			zoomrange: [<?php echo Mage::getStoreConfig('featurezoom/zoomrange/start');?>, <?php echo Mage::getStoreConfig('featurezoom/zoomrange/end');?>],
+			magnifiersize: [<?php echo Mage::getStoreConfig('featurezoom/magnifiersize/height');?>,<?php echo Mage::getStoreConfig('featurezoom/magnifiersize/width');?>],
+			magnifierpos: '<?php echo Mage::getStoreConfig('featurezoom/general/magnifierpos');?>',
+			cursorshade: true,		
+			largeimage: '<?php echo $this->helper('catalog/image')->init($_product, 'image');?>' 
+		})
+    });
+</script>
+<!--Code Added by Vaseem for Image Zoom-->
+<?php }else{?>
+	<script type="text/javascript">function imageswitcher(imagename){}</script>
+<?php	}} ?><?php */?>
+
+<script type="text/javascript">function imageswitcher(imagename){}</script>

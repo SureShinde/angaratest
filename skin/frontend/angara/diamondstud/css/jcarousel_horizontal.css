@@ -1,0 +1,90 @@
+.jcarousel-skin-tango .jcarousel-direction-rtl {
+	direction: rtl;
+}
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+    padding:0 15px;
+	width: 348px;	
+}
+.jcarousel-skin-tango .jcarousel-clip {
+    overflow: hidden;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+	margin-left: 0;
+    margin-right:0;
+}
+.jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-item-horizontal {
+	margin-left:0;
+    margin-right: 0;
+}
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+    position: absolute;
+	top:0;
+	right:0;
+	width:15px;
+	height:79px;
+	background:url(../images/rightslidearrow.jpg) center no-repeat;
+	cursor:pointer;
+}
+
+.jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-next-horizontal {
+    left: 5px;
+    right: auto;
+    background-image: url(prev-horizontal.png);
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-horizontal:focus {
+   background:url(../images/rightslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal:active {
+   background:url(../images/rightslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+    cursor: default;
+    background:url(../images/rightslidearrow.jpg) center no-repeat;
+    opacity:.2;
+	filter:alpha(opacity=20);
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {   
+    position: absolute;
+	top:0;
+	left:0;
+	width:15px;
+	height:79px;
+	background:url(../images/leftslidearrow.jpg) center no-repeat;
+	cursor:pointer;
+}
+
+.jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+    left: auto;
+    right: 5px;
+    background-image: url(next-horizontal.png);
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover, 
+.jcarousel-skin-tango .jcarousel-prev-horizontal:focus {
+    background:url(../images/leftslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal:active {
+    background:url(../images/leftslidearrow.jpg) center no-repeat;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+    cursor: default;
+    background:url(../images/leftslidearrow.jpg) center no-repeat;
+    opacity:.2;
+	filter:alpha(opacity=20);
+}

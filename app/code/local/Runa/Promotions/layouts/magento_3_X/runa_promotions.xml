@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="runapromotions/track" name="promotions.track" />
+        </reference>
+    </default>
+    
+    <!--sales_email_order_items>
+        <reference name="items">
+            <action method="setTemplate">
+                <template>runa/promotions/sales/email/order/items.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_items-->
+    
+    <!--sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <remove name="runa_discount_total"/>
+            <remove name="runa_discount_shipping_total"/>
+        </reference>
+        <reference name="items">
+            <action method="setTemplate">
+                <template>runa/promotions/sales/email/order/invoice/items.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_invoice_items-->
+
+    <!--sales_order_view>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>runa/promotions/sales/order/items.phtml</template>
+            </action>
+        </reference>
+    </sales_order_view-->
+    
+    <checkout_cart_index>
+        <reference name="additional.product.info">
+            <block type="runapromotions/cart_item_extrainfo" name="runa_item_discount_messages"  />
+        </reference>
+    </checkout_cart_index>
+</layout> 

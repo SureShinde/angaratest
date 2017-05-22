@@ -1,0 +1,35 @@
+<div class="discount">
+	<div class="applied-coupon">
+    <?php
+    if($this->htmlEscape($this->getCouponCode()) != ''): 
+		/*$html = '<div><span style="color:#008000;">Total save '.$this->helper("checkout")->formatPrice($this->getQuote()->getSubtotal() - $this->getQuote()->getSubtotalWithDiscount()).'.</span></div>';
+		$coupon = Mage::getModel('promotions/coupon')->loadByCouponCode($this->htmlEscape($this->getCouponCode()));
+		if($coupon):
+			$freeGifts = Mage::getModel('promotions/offer')->getFreeProducts($coupon);
+			if($freeGifts):
+				foreach($freeGifts as $freeGift):
+					$imageFreeGift = Mage::helper('catalog/image')->init($freeGift, "image")->resize(49);					
+                    $html .= '<div class="img"><img width="35" height="35" class="img-responsive" src="'.$imageFreeGift.'" alt="'.$freeGift->getShortDescription().' - Angara.com" title="'.$freeGift->getShortDescription().'" /></div>';
+                endforeach;
+			endif;
+		endif; echo $html;die;*/ ?>
+		<span class="txt">COUPON "<span class="code text-green"><strong><?php echo $this->htmlEscape($this->getCouponCode()); ?></strong></span>" APPLIED <?php /*if($coupon):?><i id="tax-info" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="" data-original-title="<?php echo $html; ?>"></i><?php endif;*/?></span>
+		<?php /* <a id="removeCouponCode" class="remove"><i class="fa fa-trash-o"></i> REMOVE</a> */ ?>
+    <?php 
+	endif;?>
+	</div>
+	<div class="change-offer-btn">
+		<span class="btn-dark-gray btn" onClick="changeOfferClicked();" rel="nofollow" data-target="#ajaxModal" data-toggle="modal" href="/promotions/ajax/index"><?php if($this->htmlEscape($this->getCouponCode()) != ''): echo $this->__('Change Coupon Code'); else: echo $this->__('Choose Offer'); endif; ?></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(function(){
+	jQuery('#removeCouponCode').click(function(){
+		$('remove-coupone').value = "1";
+		jQuery('#discount-coupon-form').submit();
+	})
+});
+//]]>
+</script>

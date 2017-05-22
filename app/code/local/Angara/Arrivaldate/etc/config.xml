@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Arrivaldate>
+            <version>1.1.0</version>
+        </Angara_Arrivaldate>
+    </modules>	
+	<admin>
+     <routers>
+         <arrivaldate>
+            <use>admin</use>
+            <args>
+               <module>Angara_Arrivaldate</module>
+               <frontName>adminarrivaldate</frontName>
+            </args>
+         </arrivaldate>
+      </routers>
+ </admin>
+ <adminhtml>
+   <layout>
+      <updates>
+          <arrivaldate>
+              <file>arrivaldate.xml</file>
+           </arrivaldate>
+      </updates>
+   </layout>
+   <menu>
+      <arrivaldate translate="title" module="adminhtml">
+         <title>Arrival Date</title>
+         <sort_order>100</sort_order>
+         <children>
+		 	   <set_time>
+                   <title>Date Rules</title>
+                   <action>adminarrivaldate/adminhtml_index</action>
+              </set_time>
+			  <fix_time>
+                   <title>Leadtime Rules</title>
+                   <action>adminarrivaldate/adminhtml_leadtimerules</action>
+              </fix_time>			  
+          </children>
+       </arrivaldate>
+    </menu>
+	<acl>
+		<resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <arrivaldate>
+                            <title>Arrivaldate Module</title>
+                            <sort_order>10</sort_order>
+								<children>
+										<set_time>
+										   <title>Date Rules</title>
+										   <sort_order>50</sort_order>
+										   <action>adminarrivaldate/adminhtml_index</action>
+										</set_time>
+										<fix_time translate="title" module="arrivaldate">
+											<title>Leadtime Rules</title>                   
+											<sort_order>50</sort_order>
+											<action>adminarrivaldate/adminhtml_leadtimerules</action>
+										</fix_time>
+								</children>
+                        </arrivaldate>
+                    </children>
+                </admin>
+            </resources>
+	</acl>
+</adminhtml>
+	
+	
+    <global>
+		<helpers>
+            <arrivaldate>
+                <class>Angara_Arrivaldate_Helper</class>
+            </arrivaldate>
+        </helpers>
+		<blocks>
+				<arrivaldate>
+					<class>Angara_Arrivaldate_Block</class>
+				</arrivaldate>
+		</blocks>
+		<models>
+			<arrivaldate>
+    			<class>Angara_Arrivaldate_Model</class>
+     			<resourceModel>arrivaldate_mysql4</resourceModel>
+ 			</arrivaldate>		
+			<arrivaldate_mysql4>
+     		<class>Angara_Arrivaldate_Model_Mysql4</class>
+				<entities>
+					<daterules>
+						<table>angara_daterules</table>
+					</daterules>	
+					<leadtimerules>
+						<table>angara_leadtimerules</table>
+					</leadtimerules>				
+				</entities>
+			</arrivaldate_mysql4>
+		</models>
+			
+		<resources>
+        <!-- connection to write -->
+			<arrivaldate_setup>
+                <setup>
+                    <module>Angara_Arrivaldate</module>
+                </setup>
+				<connection>
+				<use>core_setup</use>
+				</connection>
+       	 </arrivaldate_setup>
+         <arrivaldate_write>
+            	<connection>
+                	<use>core_write</use>
+            	</connection>
+         </arrivaldate_write>
+        <!-- connection to read -->
+         <arrivaldate_read>
+          <connection>
+             <use>core_read</use>
+          </connection>
+         </arrivaldate_read>
+      </resources>
+       
+			
+    </global>
+    
+</config>

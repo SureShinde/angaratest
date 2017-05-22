@@ -1,0 +1,480 @@
+<?php
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+
+$product = $this->getProduct();
+$freeProdSku = array(/*'fr','fb','fe',*/'fp');
+$strLowerFreeProd = strtolower(substr($product->getSku(), 0, 2));
+$helper  = $this->helper('catalog/output');
+$userAgent = Mage::getUserAgent(); ?>
+<style>
+.slick-dots{display:none!important}
+.product-images .slick-prev:before, .product-images .slick-next:before{background-color:transparent!important}
+<?php if(strpos(strtolower($product->getAttributeText('stone1_name')),'sapphire') !== false && $product->getAttributeText('jewelry_type') == 'Ring'):?>
+<?php if($userAgent['browser_name'] != 'msie'): ?>
+@media (min-width: 999px) {
+	.product-essential .product-img-box #image{}
+}
+<?php else: ?>
+	.product-essential .product-img-box #image{}
+<?php endif; ?>
+<?php endif; ?>
+</style>
+
+<?php
+// Get the base image path
+$baseImageFile = ($product->getImage() != 'no_selection' and $product->getImage()) ? $product->getImage() : false;
+$galleryImages = array();
+
+// Process the gallery images
+foreach ($this->getGalleryImages() as $image) {
+    if ($baseImageFile and $image->getFile() === $baseImageFile) {
+        //only add images that aren't the baseImage
+        continue;
+    }
+    $galleryImages[] = $image;
+}
+
+$galleryImageSize = array(
+    'x' => 60,
+    'y' => 60,
+); 
+
+# @todo handle product video here
+$video = $helper->productAttribute($product, $this->htmlEscape($product->getVideo()), 'video');
+?>
+
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	<style type="text/css">
+		.more-views li{float:left; margin-right:10px;}
+		.more-views li img.angvideo {
+			height: 56px;
+			width: 56px;
+			cursor: pointer;
+			position: absolute;
+			top: 3px;
+			left: 2px;
+			z-index: 10;
+			filter: alpha(opacity=80);
+			opacity: 0.8;
+		}
+		.more-views li img.angvideo:hover {
+			filter: alpha(opacity=100);
+			opacity: 1;
+		}
+		.mewe {z-index:2;left:0px;}
+		.more-views-box{position:initial; width:100%;}
+		#moreviews{margin-top:0px;}
+		.simpleLens-big-image-container,
+		.social-media-icons{padding-left:0px;}
+		.mv-box ul,
+		.mv-box ul li{margin-bottom:0px !important;}
+		.mv-cntrls{
+			position: absolute;
+			top: -1px;
+			display: block;
+			width: 20px;
+			text-align: center;
+			height: 60px;
+			line-height: 60px;
+			font-size: 18px;
+			color: #333333 !important;
+			text-decoration: none !important;
+		}
+		.mv-cntrls:hover, .mv-cntrls:focus, .mv-cntrls:active{
+			color: #333333 !important;
+		}
+		video{width:100% !important;}
+		.mv-prev{left:0px;}
+		.mv-next{right:0px;}
+	</style>
+
+	<div class="simpleLens-big-image-container">
+		<div class="proimage-holder">
+		<?php if($baseImageFile): ?>
+			<div class="product-image product-image-zoom simpleLens-lens-image">
+			   <img itemprop="image" id="image" class="img-responsive simpleLens-big-image" src="<?php echo $this->helper('catalog/image')->init($product, 'image');?>" alt="<?php echo $product->getShortDescription();?> - Angara.com" title="<?php echo $product->getShortDescription();?>">
+			</div>
+		<?php 
+		endif;		
+
+		if(in_array($strLowerFreeProd, $freeProdSku)){?>
+			<div class="text-center text-light small max-padding-bottom max-padding-top">(Chain not included with purchase, chain buying options available at cart.)</div>
+		<?php
+		}
+		else{
+			if($product->getChain1Length()){?>
+				<div class="text-center small max-padding-bottom">
+				<?php 
+				$exclude_chain_prod_arr = array('SP0359PR','SP0358PR','SP0357PR','SP0355PR','SP0137R','SP0137S','SP0138R','SP0138S','SP0139R','SP0139S','SPY0138R','SP0373D','SP0352PR','SP0371D');
+				if(!in_array($product->getSku(), $exclude_chain_prod_arr)){ 
+				// skip chain message for selected products Ticket: #500?>
+					(<?php echo $product->getChain1Length(); ?> inch <span id="pendantmsg" class="dyn_chain_metal1_type"><?php 
+					if($product->getAttributeText('default_metal1_type')){ 
+						$defaultMetalType = $product->getAttributeText('default_metal1_type');
+						$metalText = (($defaultMetalType == '14K White & Yellow Gold') ? '14K White Gold' : (($defaultMetalType == '14K White & Rose Gold')? '14K White Gold' : (($defaultMetalType == '14K Yellow & White Gold')? '14K Yellow Gold' : $defaultMetalType ))); 
+					}
+					else if($product->getAttributeText('metal1_type')){ 
+						$metalType = $product->getAttributeText('metal1_type');
+						$metalText = (($metalType == '14K White & Yellow Gold') ? '14K White Gold' : (($metalType == '14K White & Rose Gold')? '14K White Gold' : (($metalType == '14K Yellow & White Gold')? '14K Yellow Gold' : $metalType )));  
+					}
+					echo $metalText; ?></span> chain comes FREE with pendant.)
+				<?php 
+				}?>
+				</div>
+		<?php 
+			} 
+		}
+				 
+		// Code Ended by Pankaj for Chain Message on product page.	
+		if(count($product->getMatchingbandProductIds()) > 0): ?>
+			<div class="text-center low-margin-top matchingband-container">
+				<div class="block-inline-display showcase-border-top low-padding-top max-padding-left max-padding-right">   
+					<div id="matchingband-link" data-target="#ajaxModal" data-toggle="modal" href="/matchingband/index/index/id/<?php echo $product->getId();?>" class="fontcolor-type1 clickable" ><i class="fa fa-plus fontsize-type0 fontcolor-type1"></i><span class="hover-underline"> <?php echo $this->getMatchingBandText();?></span></div>			
+				</div>
+			</div>
+		<?php 
+		endif; ?>
+		</div>	
+	</div>    
+	<?php 
+	# @todo handle product video here
+	if($video != ''){
+		echo '<style>video{background-color:transparent!important}</style>';
+		echo $this->getChildHtml('videoupload');
+	} ?>
+	<div class="more-views-box low-margin-top">
+		<div id="moreviews" class="more-views pull-left" style="height:auto!important; position:relative; padding:0px 15px;">
+			<div class="mv-box" style="width:278px; height:62px; overflow-x:hidden; margin:0 auto; position:relative;">
+				<ul class="list-inline" data-pos="0" data-options="" data-show-options="" style="width:290px; position:absolute; left:0px; transition:all ease 0.5; -webkit-transition:all ease 0.5">
+					<li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image'); ?>');" class="clickable active"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image')->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li>
+					<?php 
+					$imageCount = 1;
+					foreach($galleryImages as $image): 
+						$imageCount++; 
+						if($imageCount==3 && $video != ''){
+							$video_arr = explode("|",$video);
+							$thumbPath = Mage::getBaseURL('media').'productVideos/';
+							list($videoName,$thumbName) = explode(',',$video_arr[0]); ?>
+							<li class="clickable static-view relative-placeholder">
+								<a href="javascript:void(0)" onclick="playPause()"><img src="<?php echo $thumbPath."thumb/".$thumbName; ?>" width="63" height="63" class="angimage" /><img src="<?php echo Mage::getBaseURL();?>skin/frontend/angara/default/images/play-video-thumb.png" width="63" height="63" class="angvideo" alt="Play Video" title="Play Video" /></a>
+							</li>
+						<?php
+						}?>
+						<li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile()); ?>');" class="clickable"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile())->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<script>
+	jQuery(function(){
+		setTimeout(function(){
+			var showItem = 4;
+			var mvBox = jQuery('.mv-box');
+			var mvItem = jQuery('#moreviews ul li');
+			var mvItemCount = mvItem.length;
+			var mvItemWidth = mvItem.width() + 12;
+			jQuery('#moreviews ul li:eq(0)').addClass('active');
+			//mvBox.css('width',(showItem * mvItemWidth)+'px');
+			mvBox.find('ul').css('width',(mvItemCount * mvItemWidth)+'px');
+			
+			mvBox.find('ul').attr('data-pos',0);
+			mvBox.find('ul').attr('data-options',mvItemCount);
+			mvBox.find('ul').attr('data-show-options',showItem);
+			
+			if(mvItemCount > showItem){
+				mvBox.parent('#moreviews').append(jQuery('<a class="mv-cntrls clickable mv-prev">').css({'pointer-events':'none','opacity':'0.5'}).append('<i class="fa fa-angle-left"></i>').click(
+					function(){
+						var a = parseInt(mvBox.find('ul').attr('data-options'));
+						var b = parseInt(mvBox.find('ul').attr('data-show-options'));
+						var c = parseInt(mvBox.find('ul').attr('data-pos'));							
+						if(b > showItem){
+							var pos = c + mvItemWidth; //Slide Position
+							mvBox.find('ul').attr('data-show-options',b-1).parents('#moreviews').find('.mv-next').removeAttr('style');
+							mvBox.find('ul').attr('data-pos',pos);
+							mvBox.find('ul').animate({
+								left:pos+'px'
+							}, 200);
+							
+							a = parseInt(mvBox.find('ul').attr('data-options'));
+							b = parseInt(mvBox.find('ul').attr('data-show-options'));
+							if(b == showItem){
+								jQuery(this).css({'pointer-events':'none','opacity':'0.5'});
+							}
+						}
+					}
+				))
+				.append(jQuery('<a class="mv-cntrls clickable mv-next">').append('<i class="fa fa-angle-right"></i>').click(
+					function(){
+						var a = parseInt(mvBox.find('ul').attr('data-options'));
+						var b = parseInt(mvBox.find('ul').attr('data-show-options'));
+						var c = parseInt(mvBox.find('ul').attr('data-pos'));
+						if(a > b){
+							var pos = c - mvItemWidth;  //Slide Position
+							mvBox.find('ul').attr('data-show-options',b+1).parents('#moreviews').find('.mv-prev').removeAttr('style');
+							mvBox.find('ul').attr('data-pos',pos);
+							mvBox.find('ul').animate({
+								left:pos+'px'
+							}, 200);
+							
+							a = parseInt(mvBox.find('ul').attr('data-options'));
+							b = parseInt(mvBox.find('ul').attr('data-show-options'));
+							if(a == b){
+								jQuery(this).css({'pointer-events':'none','opacity':'0.5'});
+							}
+						}
+					}
+				));
+			}
+		}, 5000);
+	})
+	</script>
+	<?php if($video != ''){ ?>
+		<script> 
+			var myVideo = document.getElementById("angvideo"),
+			video = jQuery('#angvideo');
+			
+			function replayVideo(){
+				playPause();
+			}
+			function playPause() {
+				myVideo.play();
+				productVideoClicked(); //Tracking
+				jQuery('.proimage-holder').addClass('hidden');
+				jQuery('.provideo-holder').removeClass('hidden');
+				
+				//to add or remove active class from thumbs
+				jQuery('.static-view').addClass('active').siblings('li').removeClass('active');
+			}
+			function pauseVideo(){
+				myVideo.pause();
+				jQuery('.provideo-holder').addClass('hidden');
+				jQuery('.proimage-holder').removeClass('hidden');
+			}
+			jQuery(document).click(function(e){		
+				var parentTag = e.target.parentNode.nodeName.toLowerCase();
+				var parentClass = e.target.parentNode.className.toLowerCase();
+				if(parentTag == 'li' && parentClass == 'clickable active'){
+					pauseVideo();
+				}
+			}); 
+			function videoWidth(){
+				var videoWidth = jQuery('.product-image').width();		
+				myVideo.width = videoWidth - 200;
+				if(jQuery(window).width() > 768){
+					jQuery('.provideo-holder').css('padding-left','70px');
+				}
+			}
+			jQuery(function(){
+				videoWidth();		
+			});
+			jQuery(window).resize(function(){
+				videoWidth();
+			});
+			myVideo.addEventListener('play',function(){
+				jQuery('.replay-video').remove();
+			});
+			myVideo.addEventListener('ended',function(){
+				var videoHolder = jQuery('.provideo-holder')
+				videoHolder.css('position','relative').append('<div class="replay-video absolute-placeholder" onclick="playPause()" style="width:50px; height:50px; background:url(/skin/frontend/ress/default/images/play-video-thumb.png) no-repeat center center; top:50%; left:50%; margin-top:-50px; margin-left:-25px; cursor:pointer"></div>');
+			});
+		</script>
+	<?php } ?>
+<?php }else{ ?>
+	<style type="text/css">
+	.more-views li img.angvideo {
+		height: 56px;
+		width: 56px;
+		cursor: pointer;
+		position: absolute;
+		top: 3px;
+		left: 2px;
+		z-index: 10;
+		filter: alpha(opacity=80);
+		opacity: 0.8;
+	}
+	.more-views li img.angvideo:hover {
+		filter: alpha(opacity=100);
+		opacity: 1;
+	}
+	.mewe {z-index:2;left:0px;}
+	</style>
+	<div class="simpleLens-big-image-container">
+		<div class="proimage-holder">
+		<?php if($baseImageFile): ?>
+			<div class="product-image product-image-zoom simpleLens-lens-image">
+			   <img itemprop="image" id="image" class="img-responsive simpleLens-big-image" src="<?php echo $this->helper('catalog/image')->init($product, 'image');?>" alt="<?php echo $product->getShortDescription();?> - Angara.com" title="<?php echo $product->getShortDescription();?>">
+			</div>
+		<?php 
+		endif;		
+
+		if(in_array($strLowerFreeProd, $freeProdSku)){?>
+			<div class="text-center text-light small max-padding-bottom max-padding-top">(Chain not included with purchase, chain buying options available at cart.)</div>
+		<?php
+		}
+		else{
+			if($product->getChain1Length()){?>
+				<div class="text-center small max-padding-bottom">
+				<?php 
+				$exclude_chain_prod_arr = array('SP0359PR','SP0358PR','SP0357PR','SP0355PR','SP0137R','SP0137S','SP0138R','SP0138S','SP0139R','SP0139S','SPY0138R','SP0373D','SP0352PR','SP0371D');
+				if(!in_array($product->getSku(), $exclude_chain_prod_arr)){ 
+				// skip chain message for selected products Ticket: #500?>
+					(<?php echo $product->getChain1Length(); ?> inch <span id="pendantmsg" class="dyn_chain_metal1_type"><?php 
+					if($product->getAttributeText('default_metal1_type')){ 
+						$defaultMetalType = $product->getAttributeText('default_metal1_type');
+						$metalText = (($defaultMetalType == '14K White & Yellow Gold') ? '14K White Gold' : (($defaultMetalType == '14K White & Rose Gold')? '14K White Gold' : (($defaultMetalType == '14K Yellow & White Gold')? '14K Yellow Gold' : $defaultMetalType ))); 
+					}
+					else if($product->getAttributeText('metal1_type')){ 
+						$metalType = $product->getAttributeText('metal1_type');
+						$metalText = (($metalType == '14K White & Yellow Gold') ? '14K White Gold' : (($metalType == '14K White & Rose Gold')? '14K White Gold' : (($metalType == '14K Yellow & White Gold')? '14K Yellow Gold' : $metalType )));  
+					}
+					echo $metalText; ?></span> chain comes FREE with pendant.)
+				<?php 
+				}?>
+				</div>
+		<?php 
+			} 
+		}
+				 
+		// Code Ended by Pankaj for Chain Message on product page.	
+		if(count($product->getMatchingbandProductIds()) > 0): ?>
+			<div class="text-center low-margin-top matchingband-container">
+				<div class="block-inline-display showcase-border-top low-padding-top max-padding-left max-padding-right">   
+					<div id="matchingband-link" data-target="#ajaxModal" data-toggle="modal" href="/matchingband/index/index/id/<?php echo $product->getId();?>" class="fontcolor-type1 clickable" ><i class="fa fa-plus fontsize-type0 fontcolor-type1"></i><span class="hover-underline"> <?php echo $this->getMatchingBandText();?></span></div>			
+				</div>
+			</div>
+		<?php 
+		endif; ?>
+		</div>	
+	</div>    
+	<?php 
+	# @todo handle product video here
+	if($video != ''){
+		echo '<style>video{background-color:transparent!important}</style>';
+		echo $this->getChildHtml('videoupload');
+	} ?>
+	<div class="more-views-box low-margin-top">
+		<div id="more-views-left" class="pull-left"><i class="fa fa-angle-left low-padding-left hide clickable"></i></div>	
+		<div id="moreviews" class="more-views pull-left" style="height:auto!important">
+			<div class="mv-box" style="width:62px; height:300px;">
+				<ul class="list-inline">
+					<li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image'); ?>');" class="clickable active"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image')->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li>
+					<?php 
+					$imageCount = 1;
+					foreach($galleryImages as $image): 
+						$imageCount++; 
+						if($imageCount==3 && $video != ''){
+							$video_arr = explode("|",$video);
+							$thumbPath = Mage::getBaseURL('media').'productVideos/';
+							list($videoName,$thumbName) = explode(',',$video_arr[0]); ?>
+							<li class="clickable static-view relative-placeholder">
+								<a href="javascript:void(0)" onclick="playPause()"><img src="<?php echo $thumbPath."thumb/".$thumbName; ?>" width="63" height="63" class="angimage" /><img src="<?php echo Mage::getBaseURL();?>skin/frontend/angara/default/images/play-video-thumb.png" width="63" height="63" class="angvideo" alt="Play Video" title="Play Video" /></a>
+							</li>
+						<?php
+						}?>
+						<li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile()); ?>');" class="clickable"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile())->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+		<div id="more-views-right" class="pull-right"><i class="fa fa-angle-right low-padding-left hide clickable"></i></div>
+		<div class="clearfix"></div>
+	</div>
+	<script>
+	jQuery(function(){
+		setTimeout(function(){
+			var showItem = 4;
+			var moveItem = showItem;
+			var mvItem = jQuery('#moreviews ul li');
+			var mvItemCount = mvItem.length;
+			var mvItemHeight = mvItem.height() + 17;
+			
+			if(mvItemCount > showItem){
+				jQuery('#moreviews').css('position','relative');
+				jQuery('#moreviews .mv-box').css({'height': mvItemHeight*showItem+'px','overflow-y':'hidden','width':'62px','position':'relative'});
+				jQuery('#moreviews .mv-box ul').css({'position':'absolute','top':'0px','transition':'all .25s ease .1s','-webkit-transition':'all .25s ease .1s'});
+				jQuery('#moreviews').append('<a href="javascript:void(0)" style="font-size:18px; position:absolute; bottom:-30px; left:0px; right:0px; text-align:center;" class="down"><i class="fa fa-angle-down"></i></a>');
+				jQuery('#moreviews').prepend('<a href="javascript:void(0)" style="font-size:18px; position:absolute; top:-30px; left:0px; right:0px; text-align:center; display:none" class="up"><i class="fa fa-angle-up"></i></a>');
+			}
+			
+			jQuery('a.down').on('click',function(){
+				var ulPos = jQuery('#moreviews ul').position().top;
+				jQuery('#moreviews a.up').show();	
+				if(moveItem != mvItemCount){
+					jQuery('#moreviews .mv-box ul').css('top',ulPos-mvItemHeight+'px');
+					moveItem++;
+				}
+			})
+			
+			jQuery(document).on('click','a.up',function(){
+				var ulPos = jQuery('#moreviews ul').position().top;
+				if(ulPos+mvItemHeight == 0){
+					jQuery(this).hide();
+				}
+				if(moveItem != showItem){
+					jQuery('#moreviews .mv-box ul').css('top',ulPos+mvItemHeight+'px');
+					moveItem--;
+				}
+			});
+		}, 5000);
+	})
+	</script>
+	<?php 
+	if($video != ''){?>
+	<script> 
+	var myVideo = document.getElementById("angvideo"),
+	video = jQuery('#angvideo');
+	
+	function replayVideo(){
+		playPause();
+	}
+	function playPause() {
+		myVideo.play();
+		productVideoClicked(); //Tracking
+		jQuery('.proimage-holder').addClass('hidden');
+		jQuery('.provideo-holder').removeClass('hidden');
+		
+		//to add or remove active class from thumbs
+		jQuery('.static-view').addClass('active').siblings('li').removeClass('active');
+	}
+	function pauseVideo(){
+		myVideo.pause();
+		jQuery('.provideo-holder').addClass('hidden');
+		jQuery('.proimage-holder').removeClass('hidden');
+	}
+	jQuery(document).click(function(e){		
+		var parentTag = e.target.parentNode.nodeName.toLowerCase();
+		var parentClass = e.target.parentNode.className.toLowerCase();
+		if(parentTag == 'li' && parentClass == 'clickable active'){
+			pauseVideo();
+		}
+	}); 
+	function videoWidth(){
+		var videoWidth = jQuery('.product-image').width();		
+		myVideo.width = videoWidth - 200;
+		if(jQuery(window).width() > 768){
+			jQuery('.provideo-holder').css('padding-left','70px');
+		}
+	}
+	jQuery(function(){
+		videoWidth();		
+	});
+	jQuery(window).resize(function(){
+		videoWidth();
+	});
+	myVideo.addEventListener('play',function(){
+		jQuery('.replay-video').remove();
+	});
+	myVideo.addEventListener('ended',function(){
+		var videoHolder = jQuery('.provideo-holder')
+		videoHolder.css('position','relative').append('<div class="replay-video absolute-placeholder" onclick="playPause()" style="width:50px; height:50px; background:url(/skin/frontend/ress/default/images/play-video-thumb.png) no-repeat center center; top:'+ videoHolder.height()/2 +'px; left:'+ videoHolder.width()/2 +'px; margin-top:-25px; margin-left:45px; cursor:pointer"></div>');
+	});
+	</script>
+	<?php 
+	}
+} ?>

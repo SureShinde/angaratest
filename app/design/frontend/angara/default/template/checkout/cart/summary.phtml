@@ -1,0 +1,113 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart totals template
+ *
+ * @see Mage_Checkout_Block_Cart_Totals
+ */
+?>
+<?php if (Mage::getSingleton("customer/session")->isLoggedIn()){ ?>
+	<div id="memberpricetooltip">Special discounted pricing only for Angara members.</div>
+<?php }else{ ?>
+	<div id="memberpricetooltip">Angara members enjoy a special discounted price. <a href="/customer/account/login/">Sign Up Now >></a></div>
+<?php } ?>
+<script>
+jQuery(function(){
+	jQuery('.angaramempricecart').hover(
+		function(e){
+			e.stopPropagation();
+			e.preventDefault();
+			jQuery(this).append(jQuery('#memberpricetooltip').show());
+		},
+		function(){
+			jQuery('#memberpricetooltip').hide();
+		}
+	)
+})
+</script>
+<div>
+  <div class="special-title">
+    <h2>Order Summary <img id="order-summary-progress" src="/skin/frontend/angara/default/images/ajax-loader.gif" align="right" style="display:none"></h2>
+  </div>
+  <div class="checkout-right-gray-box" id="order-summary">
+    <table id="shopping-cart-totals-table" class="order-summary">
+      <col />
+      <col width="1" />
+      <tfoot>
+        <?php echo  $this->renderTotals('footer'); ?>
+      </tfoot>
+      <tbody>
+        <?php echo $this->renderTotals(); ?>
+      </tbody>
+    </table>
+     
+    <div style="margin:10px 0 6px; white-space:nowrap; font-size:11px">Sales tax applies only to orders shipped to NY, NJ & CA.</div>
+    <div style="font-size:11px">Customs, Duties, Taxes and other charges to your international order are the responsibility of the recipient.</div>
+  </div>
+  <div class="normal-title">
+    <h2>Respecting Your Privacy</h2>
+  </div>
+  <div class="checkout-right-gray-box">
+    <ul>
+      <li>We never share your personal information.</li>
+      <li class="padnone">We adhere to a strict <a target="_new" href="/privacy-and-security.html">Privacy Policy</a>.</li>      
+    </ul>
+  </div>
+  <div class="normal-title">
+    <h2>Keeping Your Info Safe</h2>
+  </div>
+  <div class="checkout-right-gray-box">
+   <div class="contenttxt">We use the strongest security measures available to keep your information safe.</div>
+    <ul>
+      <li>All credit card data is encrypted.</li>
+      <li>Credit Card information is not stored on our systems.</li>
+       <li>Our secure order processing system uses 256-bit (SSL) encryption for your protection.</li>
+    </ul>
+    <div class="bottomcontent">
+     <script type="text/javascript">// <![CDATA[
+function vrsn_splash(){sw=window.open('https://seal.verisign.com/splash?form_file=fdf/splash.fdf&dn=WWW.ANGARA.COM&lang=en','VRSN_Splash','location=yes,status=yes,resizable=yes,scrollbars=yes,width=560,height=500');sw.focus();}
+// ]]></script>
+    <img src="/skin/frontend/angara/default/images/verisigncx.gif"  align="left" onclick="vrsn_splash();" style="cursor:pointer;" alt="Click to Verify - This site has chosen a VeriSign SSL Certificate to improve Web site security">
+    
+<img src="/skin/frontend/angara/default/images/32cx.gif" style="padding-top:15px;" alt="McAfee Secure" align="right"></div>
+    <div style="clear:both;"></div>
+  </div>
+  <div class="normal-title">
+    <h2>The Angara Difference</h2>
+  </div>
+  <div class="checkout-right-gray-box">
+    <ul>
+      <li><strong>The Internet's Family Jeweler:</strong> Each and every gemstone is hand selected.  No detail is overlooked.</li>
+      <li><strong>Direct from the source:</strong> We manufacture most jewelry ourselves to save you 30-40%.</li>
+      <li><strong>Exceptional Value and Quality, Guaranteed by a 110% Refund Policy:</strong> We will refund up to 110% of the purchase price if an accredited, GIA trained jewelry appraiser, values your jewelry for less than 125% of the purchase price up to a dollar amount of $250.</li>
+      <li><strong>30-Day Money Back Guarantee:</strong> If you don't love it, simply send it back in its original condition for a 100% refund. A FREE return/exchange shipping label will be emailed to you upon request (only for US domestic orders). If you don't love it, simply send it back in its original condition for a 100% refund.</li> 
+           
+    </ul>      
+    <div style="clear:both;"></div>
+  </div>
+</div>

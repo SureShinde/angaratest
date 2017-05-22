@@ -1,0 +1,73 @@
+<?php if(Mage::helper('feedback')->canShowFeedback()){?><style>
+.feedback{position:fixed; right:0px; top:100px; z-index:2}
+.feedback i.fa-times{background-color: #888888; width: 20px; height: 20px; line-height: 20px; border-radius: 15px; border: 1px solid #333333; font-size: 11px; color: #ffffff; position: absolute; right: -6px;    top: -6px;}
+.feedback i.fa-times:before{position: absolute; right: 3px; top: -1px;}
+
+#ajaxData{width:0px;}
+.loading{background:#ffffff; width:100%; float:left; text-align:center; height:101px; padding-top:32px; border:1px solid #dedede; margin-top:124px; box-shadow: 0px 0px 5px 0px #dedede;}
+#feedbackFrm{padding: 10px; border: 1px solid #dedede; width: 100%; float: left; box-shadow: 0px 0px 5px 0px #dedede; background-color: #ffffff;}
+#show_feedback, #showfeedback{ -ms-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); position: absolute; left: -65px; top: 160px; font-size: 14px; letter-spacing: 1px; width:100px; line-height: 30px; height: 30px; text-align: center; border-radius: 5px 5px 0px 0px; background: #6d6b6c; background: -moz-linear-gradient(top, #6d6b6c 0%, #3d3d3d 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6d6b6c), color-stop(100%,#3d3d3d)); background: -webkit-linear-gradient(top, #6d6b6c 0%,#3d3d3d 100%); background: -o-linear-gradient(top, #6d6b6c 0%,#3d3d3d 100%); background: -ms-linear-gradient(top, #6d6b6c 0%,#3d3d3d 100%); background: linear-gradient(to bottom, #6d6b6c 0%,#3d3d3d 100%); color: #ffffff;}
+#show_feedback:hover, #show_feedback:focus, #show_feedback:active{text-decoration:none;}
+#showfeedback:hover, #showfeedback:focus, #showfeedback:active{text-decoration:none;}
+#feedbackFrm .input-box{width:100%; float:left;}
+#feedbackFrm .input-box label{width:100%; float:left; display:block; font-weight:bold}
+#feedbackFrm .input-box label span{color:red}
+#feedbackFrm .input-box input[type="text"], #feedbackFrm .input-box input[type="email"], #feedbackFrm .input-box select{width:100%; float:left; height:30px; border: 1px solid #dedede; padding: 0px 5px; margin-top: 3px;}
+#feedbackFrm .input-box textarea{width:100%; float:left; height:100px; border: 1px solid #dedede; padding: 0px 5px; margin-top: 3px;}
+.progress-ind{font-size: 6px; top: -14px; left: 85px;}
+
+
+ @media (max-width: 768px) {
+	 .feedback{display:none}
+ }
+</style>
+<!--[if IE 8]>
+	<style>
+		.feedback{display:none}
+	</style>
+<![endif]-->
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		var dataLoaded	=	'';							
+		jQuery('#show_feedback').click(function() {
+
+			if(jQuery(this).hasClass('fdbk')){
+				jQuery(this).next('#ajaxData').animate({width: '0px'});
+				jQuery(this).removeClass('fdbk');
+				jQuery(this).children('i').addClass('hidden');
+				jQuery("#ajaxData").html('<div class="loading"></div>');
+				jQuery(this).parent('.feedback').css('z-index','2');
+			}else{
+				jQuery.ajax({
+					type: 'GET',
+					url: '<?php echo Mage::getBaseUrl();?>feedback/index/ajax',
+					context: document.body,
+					cache: false,
+					beforeSend: function ( xhr ) {
+					   jQuery("#ajaxData").html('<div class="loading">Loading<br>please wait...</div>');
+					   jQuery( "#ajaxData" ).animate({ width: "400px" });
+					},
+					success: function(htmldata){
+						//alert( "Data Saved: " + htmldata );
+						jQuery("#ajaxData").html();
+						jQuery("#ajaxData").html(htmldata);
+						dataLoaded	=	1;
+					},
+					error: function()
+					{
+						jQuery("#ajaxData").html('Error occurred.');
+					}
+				});
+				jQuery(this).addClass('fdbk');
+				jQuery(this).parent('.feedback').css('z-index','1030');
+				jQuery(this).children('i').removeClass('hidden');
+			}
+		});
+	});
+</script>
+
+<div class="feedback">
+	<a id="show_feedback" href="javascript:void(0);">Feedback <i class="fa fa-times hidden"></i></a>
+	<div id="ajaxData"></div>
+</div>
+<?php } ?>

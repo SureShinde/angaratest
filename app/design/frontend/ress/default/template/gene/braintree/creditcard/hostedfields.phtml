@@ -1,0 +1,93 @@
+<?php
+/* @var $this Gene_Braintree_Block_Creditcard */
+$_code = $this->getMethodCode()
+?>
+<div id="payment_form_<?php echo $_code ?>" style="display:none;" class="form-list">
+
+    <?php echo $this->getSavedChildHtml(); ?>
+
+    <div id="credit-card-form"<?php echo ($this->hasSavedDetails() && $this->getMethod()->isVaultEnabled() ? ' style="display: none;"' : ''); ?> class="loading">
+        <div class="credit-card-loading">
+            <img src="<?php echo $this->getSkinUrl('images/gene/loader.gif'); ?>" />
+            <p><?php echo $this->__('Loading Payment Method'); ?></p>
+        </div>
+        <ul class="form-list braintree-hostedfield">
+
+            <?php if($this->getHostedDescriptor()): ?>
+                <li>
+                    <p><?php echo $this->escapeHtml( $this->getHostedDescriptor() ); ?></p>
+                </li>
+            <?php endif; ?>
+            <?php if($this->showAcceptedCards()): ?>
+            <li id="braintree-accepted-cards">
+                <label for="card-number">
+                   
+                    <div>
+                        <?php foreach($this->getAllowedCards() as $card): ?>
+                            <img src="<?php echo $this->getSkinUrl('images/gene/braintree/' . $card['value'] . '.png') ?>" alt="<?php echo $card['label']; ?>" />
+                        <?php endforeach; ?>
+                    </div>
+                </label>
+            </li>
+            <?php endif; ?>
+            <li class="max-margin-top full-width pull-left">
+                <div class="input-box">
+                    <label class="ielabel hidden" for="<?php echo $_code ?>_cc_owner"><?php echo $this->__('Name on Card') ?></label>
+                    <input type="text" title="<?php echo $this->__('Name on Card') ?>" placeholder="<?php echo $this->__('Name on Card') ?>" class="input-text" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner]" value="<?php echo $this->htmlEscape($this->getInfoData('cc_owner')) ?>" />
+                </div>
+            </li>
+            
+            <li>
+                <label class="ielabel hidden">Card Number</label>
+                <div class="card-input braintree-card-input-field max-margin-top full-width pull-left">
+                    <div class="card-type"><img src="<?php echo $this->getSkinUrl('images/gene/braintree/card.png') ?>" id="card-type-image" /></div>
+                    <div id="card-number"></div>
+                    <div id="bt_cardnumber"></div>
+                </div>
+            </li>
+            <li>
+				<label class="ielabel hidden ie-margin">Expiration Date</label>
+                <div id="braintree-expiration-container">
+					<div class="braintree-expiration" style="margin-right:4%">
+						<div id="expiration-month" class="braintree-input-field full-width"></div>
+						<div id="bt_expmonth" class="full-width"></div>
+					</div>
+					<div class="braintree-expiration">
+						<div id="expiration-year" class="braintree-input-field"></div>
+						<div id="bt_expyear" class="full-width"></div>
+					</div>
+                </div>
+            </li>
+            <?php echo $this->getChildHtml() ?>
+            <?php if($this->hasVerification()): ?>
+                <li>
+					<label class="ielabel hidden">Security Code</label>
+					<div class="braintree-cvv">
+						<div id="cvv" class="braintree-input-field" style="padding:0px 4px;"></div>
+						<div id="bt_cvv" class="full-width"></div>
+					</div>
+                    <a href="#" class="cvv-what-is-this">
+						<i class="fa fa-question-circle apricot-text" aria-hidden="true"></i>
+					</a>
+                </li>
+            <?php endif; ?>
+            <?php if ($this->canSaveCard()): ?>
+                <li id="<?php echo $_code ?>_store_in_vault_div">
+                    <input type="checkbox" title="<?php echo $this->__('Save this card for future use') ?>"
+                           class="input-checkbox" id="<?php echo $_code ?>_store_in_vault" name="payment[save_card]"
+                           value="1"/>
+                    <label for="<?php echo $_code ?>_store_in_vault" style="float:none;"><?php echo $this->__(
+                            'Save this card for future use'
+                        ) ?></label>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <div id="braintree-hosted-submit-container">&nbsp;</div>
+</div>
+
+<script type="text/javascript">
+    if(typeof vzero !== 'undefined') {
+        vzero.creditCardLoaded();
+    }
+</script>

@@ -1,0 +1,100 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/layer.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+<?php if($this->canShowOptions()): 
+if($category = 	Mage::registry('current_category')){
+	$categoryId = 	$category->getId();
+}?>
+
+<div class="low-margin-bottom text-center">
+	<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+	<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+	<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+	<div class="showcase-bg-darkest text-on-dark">
+		<?php /* <div class="row no-margin">
+			<?php if ($state[1] AND $this->bNeedClearAll()): ?>
+			<div class="col-xs-8 col-md-10 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i>Narrow your Selection</div>
+			<div class="col-xs-4 col-md-2 pull-right text-right padding-type-8 clickable"><a class="adj-nav-clearall text-on-dark no-underline block-inline-display" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><div class="hidden-xs"><i class="fa fa-refresh fa-fw"></i>Reset Filters</div><div class="visible-xs"><i class="fa fa-refresh fa-fw"></i>Reset</div></a></div>
+			<?php else: ?>
+			<div class="col-xs-12 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i>Narrow your Selection<span id="catalog-filter-toggle"><i class="fa fa-angle-down fa-fw pull-right"></i></span></div>
+			<?php endif ?>
+		</div> */ ?>
+		<!--<div class="shine-effect"></div>-->
+	</div>
+	<div id="filter-panel" class="hide high-margin-bottom">
+		<?php $_filters = $this->getFilters() ?>
+		<div class="row max-margin-top no-gutters showcase-border-top-1px showcase-border-bottom-1px">
+			<div class="col-sm-1" style="color:#DE513E;line-height: 37px;font-weight: bold;">
+				Filter By:
+			</div>
+			<div class="col-sm-11">
+				<?php foreach ($_filters as $_filter): ?>
+				<?php if($_filter->getName() != 'Category'): ?>
+				<?php $colSize = 2; if($_filter->getName() == 'Price' || $_filter->getName() == 'Style') $colSize = 1;?>
+				<div class="catalog-filter clickable col-sm-<?php echo $colSize;?>">
+					<div class="padding-type-5 high-padding-top high-padding-bottom min-margin-right text-on-light catalog-filter-nav-item">
+					<?php 
+					/* Added to show Static Text for Pearl */
+					$pearlCategories = array('482','483','484','485','211');
+					if(in_array($categoryId, $pearlCategories)){ 
+						if($_filter->getName() == 'Gemstone'){ 
+							$filterName = 'Pearl Type';
+						} 					
+						else if($_filter->getName() == 'Gemstone Shape'){ 
+							$filterName = 'Pearl Shape'; 
+						}
+						else{
+							$filterName = $_filter->getName();
+						}
+					}
+					else { 
+						$filterName = $_filter->getName();	
+					} 
+					echo $filterName; //echo $_filter->getName();?></div>
+				</div>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<div class="row low-padding-top no-gutters">
+			<div class="col-xs-12">
+				<div class="showcase-bg-white min-margin-right min-padding-bottom clearfix">
+					<?php foreach ($_filters as $_filter): ?>
+					<?php if($_filter->getName() != 'Category'): ?>
+					<div id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="catalog-filter-content clearfix hide"> <?php echo $_filter->getHtml() ?> </div>
+					<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="applied-filter-list-container" class="row high-margin-top no-gutters text-left small hidden">
+		<div class="col-md-1 col-sm-2">
+				<div class="low-padding-top low-padding-left nowrap text-bold">Applied Filters: </div>
+		</div>
+		<div class="col-md-11  col-sm-10">
+				<div id="applied-filter-list"></div>
+				<?php if ($state[1] AND $this->bNeedClearAll()){ ?>
+					<div class="pull-left padding-type-5 showcase-bg-dark high-margin-left high-padding-left high-padding-right low-margin-bottom text-bold clickable" style="background: #666666; color: #ffffff;"><a class="adj-nav-clearall text-on-dark no-underline block-inline-display" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><div><i class="fa fa-refresh fa-fw"></i>Clear All</div></a></div>
+				<?php } ?>
+		</div>
+	</div>
+	<script type="text/javascript">adj_nav_init();</script> 
+</div>
+<?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+		if ('function' == typeof(sns_layer_add_attr)){
+			sns_layer_add_attr();
+		}
+		adj_nav_toolbar_init();
+	</script> 

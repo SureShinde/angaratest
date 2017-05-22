@@ -1,0 +1,321 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+
+$_item = $this->getItem();
+$isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
+$_recInfo = $this->getRecurringInfo();
+
+$_options = $this->getOptionList();
+
+$product = Mage::getModel('catalog/product');
+$_product = $product->load($_item->getProductId());
+$mothersflag = 0;
+$categoryIds = $_product->getCategoryIds();
+foreach($categoryIds as $categoryId) {
+	$category = Mage::getModel('catalog/category')->load($categoryId);
+	$url = $category->getUrlPath();
+	if($url == "mothers-jewelry.html") {
+		$mothersflag = 1;
+	}
+}
+
+$imgurl = '';
+if($mothersflag == 1) {
+	$b_hp = Mage::getBlockSingleton('hprcv/hprcv');
+	$b_hp->getimageforcartproduct($_item,$this->getOptionList());
+	$imgurl="/media/catalog/product/images/mothers/cartproducts/" . $_item->getId() . "_thumb.png";
+}
+// HPRAHI CODES CUSTOMISATION END
+?>
+<div class="showcase-border-bottom-1px <?php /*if($_item->getCalculationPrice() == 0){ echo 'free-gifts-block'; }*/ ?>">
+	<div class="row no-gutters">
+        <div class="col-xs-2 cart-product-image high-padding-top high-padding-bottom">
+		<?php 
+        if($mothersflag==1){
+            $set_prod_arr = array('SG0107S','SG0108AM','SG0111P','SG0112PAMAQ','SG0113R','SG0109CT','SG0110PT');
+            if(!in_array($_item->getProduct()->getData('sku'), $set_prod_arr)) {
+            	// skip mother type image for set products ?>
+            	<img src="<?php echo $imgurl;?>" width="100" height="100" alt="<?php echo $this->htmlEscape($_product->getProductName());?>"  class="img-responsive"/>
+            <?php	
+            } 
+			else {?>
+            	<img src="<?php echo $this->getProductThumbnail()->resize(100);?>" width="100" height="100" alt="<?php echo $this->htmlEscape($this->getProductName());?>" class="img-responsive" />
+            <?php
+            }
+		}
+		elseif($product->getSku() == 'ANGCBYO007'){
+			$diamondShape = '';
+			foreach($_options as $_option){
+				if($_option['label'] == 'SecureInformation'){
+					$diamondInfo = unserialize($_option['value']);
+					$diamondShape = $diamondInfo['diamond']['shape'];
+					$stockNumber = strrev('ANG'.$diamondInfo['diamond']['diamond_id']);
+				}
+			}
+			?>
+			<img src="/skin/frontend/ress/default/images/buildyourown/diamond/<?php echo $diamondShape; ?>_top_diamond.jpg" width="100" height="100" alt="<?php echo $this->htmlEscape($this->getProductName());?>" class="img-responsive" />
+        <?php 
+		}
+		else{?>
+            <img src="<?php echo $this->getProductThumbnail()->resize(100);?>" width="100" height="100" alt="<?php echo $this->htmlEscape($this->getProductName());?>" class="img-responsive" />
+        <?php 
+		}?>
+            <div class="img-action-btn">
+                <?php // Code added by Vaseem
+				if($_item->getCalculationPrice() > 1){ ?>
+                    <small class="text-light hidden-xs">
+                        <?php 
+						if($this->hasProductUrl()):?>
+                            <a href="<?php echo $this->getProductUrl();?>" title="<?php echo $this->htmlEscape($this->getProductName());?>">View</a> |
+                        <?php 
+						endif;?>
+                        <?php if($_item->getSku()=='OP0001SC' || $_item->getSku()=='EMOP0001SC'){?>
+                        	<a class="remove-item" href="<?php echo $this->getUrl('checkout/cart');?>removechain/sku/<?php echo $_item->getSku();?>" title="<?php echo $this->__('Remove item');?>">Remove</a>
+						<?php } else {?>
+                        	<a class="remove-item" href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo $this->__('Remove item');?>">Remove</a>
+                        <?php }?>
+                    </small>
+                    <small class="text-light visible-xs">
+                        <?php 
+						if ($this->hasProductUrl()):?>
+                            <a href="<?php echo $this->getProductUrl();?>" title="<?php echo $this->htmlEscape($this->getProductName());?>"><i class="fa fa-eye"></i></a> |
+                        <?php 
+						endif;?>
+                        <?php if($_item->getSku()=='OP0001SC' || $_item->getSku()=='EMOP0001SC'){?>
+                        	<a class="remove-item" href="<?php echo $this->getUrl('checkout/cart');?>removechain/sku/<?php echo $_item->getSku();?>" title="<?php echo $this->__('Remove item');?>"><i class="fa fa-trash-o"></i></a>
+						<?php } else {?>
+                        	<a class="remove-item" href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo $this->__('Remove item');?>"><i class="fa fa-trash-o"></i></a>
+                        <?php } ?>
+                        
+                    </small>
+                <?php 
+				}else{
+					$giftIdsData 	= 	Mage::helper('gifts')->getGiftsIds();
+					$giftIds 		= 	$giftIdsData['ids'];
+					//echo '<pre>';print_r($giftIds);die;
+					if(is_array($giftIds) && count($giftIds) && Mage::helper('gifts')->isGiftUsed()){?> 
+                	<small class="text-light hidden-xs">
+                        <?php 
+						if($this->hasProductUrl()):?>
+                            <a href="<?php echo $this->getProductUrl();?>" title="<?php echo $this->htmlEscape($this->getProductName());?>">View</a> |
+                        <?php 
+						endif;?>
+                        <?php if($_item->getSku()=='OP0001SC' || $_item->getSku()=='EMOP0001SC'){?>
+                        	<a class="remove-item" href="<?php echo $this->getUrl('checkout/cart');?>removechain/sku/<?php echo $_item->getSku();?>" title="<?php echo $this->__('Remove item');?>">Remove</a>
+						<?php } else {?>
+                        	<a class="remove-item" href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo $this->__('Remove item');?>">Remove</a>
+                        <?php }?>
+                    </small>
+                    <small class="text-light visible-xs">
+                        <?php 
+						if($this->hasProductUrl()):?>
+                            <a href="<?php echo $this->getProductUrl();?>" title="<?php echo $this->htmlEscape($this->getProductName());?>"><i class="fa fa-eye"></i></a> |
+                        <?php 
+						endif;?>
+                        <?php if($_item->getSku()=='OP0001SC' || $_item->getSku()=='EMOP0001SC'){?>
+                        	<a class="remove-item" href="<?php echo $this->getUrl('checkout/cart');?>removechain/sku/<?php echo $_item->getSku();?>" title="<?php echo $this->__('Remove item');?>"><i class="fa fa-trash-o"></i></a>
+						<?php } else {?>
+                        	<a class="remove-item" href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo $this->__('Remove item');?>"><i class="fa fa-trash-o"></i></a>
+                        <?php }?>
+                    </small>
+                 <?php } 
+					}	?>               
+                
+            </div>
+        </div>
+        <div class="col-xs-8 col-sm-5 cart-product-details">
+            <div class="detail-part">
+            	<div class="showcase-border-thin-white padding-type-10">
+                	<h2 class="product-name min-padding-bottom">
+                    <?php 
+					if((strtolower(substr($_item->getProduct()->getData('sku'), 0, 2)) == 'by')){
+						$additionalTextByo = '<span class="text-light fontsize-type0">(Setting Only)</span>';
+					}
+					else{
+						$additionalTextByo = '';
+					}
+                    if($this->hasProductUrl()):
+                        if($_item->getCalculationPrice() > 0){?>
+                            <a href="<?php echo $this->getProductUrl();?>"><?php echo $_item->getName();//echo $_product->getShortDescription();?></a>
+                        <?php 
+                        }
+                        else{
+                            echo $this->htmlEscape($this->getProductName());
+                        }
+                    else:
+                        echo $this->htmlEscape($this->getProductName());
+                    endif; 
+					
+					echo $additionalTextByo;?>
+               		</h2>
+                	<div class="cart-product-sku high-padding-bottom">
+                        <span>
+                        <?php 
+						if($_item->getProduct()->getData('sku') == 'ANGCBYO007'){?>						
+                            <small class="text-light"><i>Stock Number: <?php echo $stockNumber;?></i></small>
+						<?php
+						}
+						else{?>						
+                            <small class="text-light"><i>SKU: <?php echo $_item->getProduct()->getData('sku');?></i></small>
+						<?php 
+						}?>
+                        </span>
+                        <small class="visible-xs text-light"><i>Qty: <?php echo $this->getQty();?></i></small>
+                    </div>
+                <?php
+				if(strtolower( substr($_item->getProduct()->getData('sku'), 0, 2)) == 'fr'){				
+					if(stristr($_item->getProduct()->getName(), "pendant")){
+					 	if(!Mage::getSingleton('checkout/session')->getData('ChainAdded')): ?>
+                        <?php // Code added by Vaseem ?>
+							<a class="fontsize-type2 addchain" href="<?php echo $this->getUrl('checkout/cart');?>addchain/sku/op0001sc">Add Silver Chain for <?php echo $this->helper('core')->currency(25);?></a>
+                            <br />
+							<a class="fontsize-type2 addchain" href="<?php echo $this->getUrl('checkout/cart');?>addchain/sku/emop0001sc">Add Gold Chain for <?php echo $this->helper('core')->currency(99);?></a>
+						<?php 
+						else: ?>
+							<?php /*?><a id="removechain" class="fontsize-type2" href="<?php echo $this->getUrl('checkout/cart');?>removechain">Remove Silver Chain</a><?php */?>
+						<?php 
+						endif; 
+					}
+				} 
+				
+				if($_options):?>
+                	<div>
+                    <?php 
+					foreach($_options as $_option) :
+						if($_option['label'] != 'ItemType' && $_option['label'] != 'SecureInformation'):
+							$_formatedOptionValue = $this->getFormatedOptionValue($_option);
+							if($this->htmlEscape($_option['label']) != 'Center Diamond Size'):
+								if($this->htmlEscape($_option['label']) == 'Accent Stone 1 Grade'):?>
+									<div class="pull-left min-padding-right"><small><?php if($this->htmlEscape($_option['label'])=='Free Jewelry Appraisal'){echo 'Jewelry Appraisal';}else{echo $this->htmlEscape("Diamond 2 Grade");}?>:</small></div>
+								<?php 
+								else:?>
+									<div class="pull-left min-padding-right"><small><?php if($this->htmlEscape($_option['label'])=='Free Jewelry Appraisal'){echo 'Jewelry Appraisal';}else{echo $this->htmlEscape($_option['label']);}?>:</small></div>
+								<?php
+								endif;?>
+								<div class="pull-left text-light">
+									<small>
+									<?php 
+									if(isset($_formatedOptionValue['full_view'])):
+										echo $_formatedOptionValue['full_view'];
+									else:
+										echo $_formatedOptionValue['value'];
+									endif;
+									
+									if(($this->htmlEscape($_option['label'])=='Engraving' || $this->htmlEscape($_option['label'])=='Free Jewelry Appraisal') && ($this->htmlEscape($_option['price'])=='0.00' || $this->htmlEscape($_option['price'])=='0' || $this->htmlEscape($_option['price'])=='0.0'))
+										echo '<span class="fontcolor-type1"> (Free)</span>';?>
+									</small>
+								</div>
+								<div class="clearfix"></div>
+                    		<?php 	
+							endif;
+						endif;
+					endforeach;?>
+               	 	</div>
+                <?php 
+				endif;
+				
+				if($_recInfo):
+					if(Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()):
+						$am_hp = ($_item->getCalculationPrice()+$_item->getWeeeTaxAppliedAmount()+$_item->getWeeeTaxDisposition());
+					else:
+						$am_hp =  ($_item->getCalculationPrice());
+					endif;
+                	
+					$ItemInstallmentAmt = Mage::getBlockSingleton('checkout/cart')->getCartItemInstallmentWithDiscAmount($_item->getCalculationPrice(),$_item->getNoOfInstallment(),$_recInfo['qty'],$_item->getDiscountAmount());
+                	$am_hp = $ItemInstallmentAmt;?>
+                    <div class="space max-padding-top">
+                        <div class="pull-left min-padding-right"><small>You Selected:</small></div>
+                        <div class="pull-left text-light"><small><?php echo $_item->getNoOfInstallment();?> payments of <?php echo $this->helper('checkout')->formatPrice($ItemInstallmentAmt);?></small></div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="pay-today-text" class="fontcolor-type1">
+                        <div class="pull-left min-padding-right"><small class="text-red">Pay Now:</small></div>
+                        <div class="pull-left"><small><?php echo $this->helper('checkout')->formatPrice($am_hp);?>
+                            <span class="text-light" style="font-size:10px">
+                                (Order processes today for shipment)
+                            </span></small>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                	<div>
+                    <?php 
+					if($_item->getNoOfInstallment() == 3):?>
+                    	<div class="pull-left min-padding-right"><small>Amount to be charged on<?php echo date("m/d/Y",strtotime("+1 months"));?>:</small></div>
+                    	<div class="pull-left text-light"><small><?php echo $this->helper('checkout')->formatPrice($ItemInstallmentAmt);?></small></div>
+                    	<div class="clearfix"></div>
+                    	<div class="pull-left min-padding-right"><small>Amount to be charged on <?php echo date("m/d/Y",strtotime("+2 months"));?>:</small></div>
+                    	<div class="pull-left text-light"><small><?php echo $this->helper('checkout')->formatPrice($ItemInstallmentAmt);?></small></div>
+                    	<div class="clearfix"></div>
+                    <?php 
+					else: ?>
+                        <div class="pull-left min-padding-right"><small>Amount to be charged on <?php echo date("m/d/Y",strtotime("+1 months"));?>:</small></div>
+                        <div class="pull-left text-light"><small><?php echo $this->helper('checkout')->formatPrice($ItemInstallmentAmt);?></small></div>
+                        <div class="clearfix"></div>
+                    <?php 
+					endif; ?>
+                </div>
+                <?php 
+				endif;
+				
+				if($messages = $this->getMessages()):
+					foreach($messages as $message):?>
+                		<p class="item-msg <?php echo $message['type'] ?>">* <?php echo $message['text'];?></p>
+                	<?php 
+					endforeach;
+				endif;
+				
+				if($addtInfoBlock = $this->getProductAdditionalInformationBlock()):
+					echo $addtInfoBlock->setItem($_item)->toHtml();
+				endif;?>
+            	</div>
+            </div>
+        </div>
+        <div class="col-sm-3 hidden-xs high-padding-top editable-qty-box">        	
+			<div class="item-edit-holder hide"><span class="qtlable">Qty:</span> <input type="text" class="input-text block-inline-display" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" style="width:26px; padding:0 0 0 4px" id="qtyeditor" /><button type="submit" class="btn btn-primary block-inline-display" href="#"><i class="fa fa-refresh"></i></button></div>
+			<?php if(!$_product->getIsBuildYourOwn() && $product->getSku() != 'ANGCBYO007'): ?>
+				<div class="item-edit-holder-default">Qty: <span class="item-qty"><?php echo $this->getQty();?></span><?php if($_item->getCalculationPrice() > 1): ?><i class="fa fa-fw low-padding-left text-light fa-pencil item-qty-edit clickable" title="Edit" onclick="customLinkTracking('Cart Item Edit Clicked');"></i><?php endif; ?></div>
+			<?php endif; ?>
+        </div>
+        <div class="col-xs-2 col-sm-2 text-right cart-price high-padding-top">
+            <?php 
+			if($_recInfo):
+				echo $this->helper('core')->currency($_item->getProduct()->getFinalPrice() * $this->getQty());
+			elseif(Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()):
+				echo $this->helper('checkout')->formatPrice($_item->getRowTotal()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition());
+			else:
+				if($_item->getCalculationPrice() > 0){	
+                	echo $this->helper('checkout')->formatPrice($_item->getRowTotal());
+                }else{
+                	echo '<span class="text-green"><strong>FREE</strong></span>';
+                }
+			endif; ?>
+        </div>
+    </div>
+</div>
+<?php
+$currentCurrencyCode =  Mage::app()->getStore()->getCurrentCurrencyCode();
+$baseCurrencyCode = Mage::app()->getStore()->getBaseCurrencyCode();?>

@@ -1,0 +1,118 @@
+<config>
+
+    <tabs>
+        <ayasoftware translate="label" module="spp">
+            <label>Ayasoftware modules</label>
+            <sort_order>100</sort_order>
+        </ayasoftware>
+    </tabs>
+   <sections>
+        <spp translate="label" module="spp">
+            <label>Simple Product Pricing</label>
+            <tab>ayasoftware</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>12</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <about translate="label">
+                    <label>About This Extension</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                            
+                        <notice translate="label">
+                            <label>Extension Information Provided By Ayasoftware</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>spp/system_html</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notice>   
+                    </fields>
+                </about>
+                
+                 <setting translate="label">
+                  <label>Extension settings</label>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <show translate="label">
+                            <label>Show out of Stock? </label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>168</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                       </show>
+                      <absprice translate="label">
+                            <label>Use absolute price? </label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>178</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </absprice>
+                     
+                     <hideprices translate="label">
+                            <label>Hide price from dropdowns </label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>188</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </hideprices>
+                     
+                     <customstockdisplay translate="label">
+                            <label>Display Simple Product Stock Availability</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>198</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </customstockdisplay>
+                     
+                      <productname translate="label">
+                            <label>Update Simple Product Name</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>208</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </productname>
+                     
+                      <description translate="label">
+                            <label>Update Product Description</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>218</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </description>
+                      <shortdescription translate="label">
+                            <label>Update Product Short Description</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>228</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                     </shortdescription>
+                     
+                     
+                    </fields>
+               </setting>
+            </groups>
+        </spp>
+    </sections>
+</config>

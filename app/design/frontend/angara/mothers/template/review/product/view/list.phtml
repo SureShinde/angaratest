@@ -1,0 +1,163 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<style>
+small.date
+{
+font-size:11px;
+}
+.reviewdivider
+{
+padding-bottom:15px;
+}
+
+.ppreview
+{
+margin-top: 15px;
+position: relative;
+}
+
+.ppreviewby
+{
+-moz-border-radius:3px;
+border-radius:3px;
+background-color:#f4f4f4;
+padding:5px 10px;
+float:right;
+}
+
+.pprating
+{
+-moz-border-radius:3px;
+border-radius:3px;
+background-color:#f4f4f4;
+padding:5px 10px;
+float:left;
+}
+
+.ppreviewholder
+{
+padding-bottom:15px;
+margin-bottom:15px;
+background:url(/skin/frontend/angara/default/images/ppreviewdivider.jpg) bottom left repeat-x; 
+}
+
+.ppreviewheading
+{
+background-color:#dcdcdc;
+height:30px;
+}
+.previewtitle
+{
+font:bold 14px/30px Arial, Helvetica, sans-serif;
+background:url(/skin/frontend/angara/default/images/ppreviewbg.jpg) right no-repeat; 
+display:inline-block;
+padding:0 42px 0 10px;
+}
+
+#write-your-own-review-text{ font:bold 14px Arial, Helvetica, sans-serif, Tahoma; color:000;  padding-bottom:10px; margin-top:20px;}
+
+
+
+
+</style>
+<?php $_product = $this->getProduct(); ?>
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews" >
+
+   <div id="customerreviewsblock">
+      	<ul>
+		<?php if (count($_items)):?> 
+            <li id="default-customer-reviews-link" class="review-tab"><a href="#default-customer-reviews">Customer Reviews</a></li>
+		<?php endif; ?>          
+		  <li id="write-reviews-link" class="review-tab"><a href="#cross-reviews" class="writeareviewlink" style="border:none">Write your own review</a></li>
+        </ul>
+    </div>
+        
+        <div class="productalldetail1">
+        <div id="default-customer-reviews">
+        	<?php if (count($_items)):?> 
+			  <?php echo $this->getChildHtml('toolbar') ?>
+              <div class="reviewdivider">
+                <?php foreach ($_items as $_review):?>
+                <dl class="ppreviewholder">
+                <dt>
+                  <?php $_votes = $_review->getRatingVotes(); ?>
+                  <?php if (count($_votes)): ?>
+                  <div class="ppreview">
+                  <span class="ppreviewby">            
+                    <span style="padding-right:4px;"><strong>Review by: </strong></span>
+                    <span> <?php echo '<span>'.$this->htmlEscape($_review->getNickname()).'</span>' ?> <small class="date"><?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></small></span>                                   
+               
+               </span>
+                    <span class="pprating">
+                    <table class="ratings-table">
+                      <col width="1" />
+                      <col />
+                      <tbody>
+                        <?php foreach ($_votes as $_vote): ?>
+                        <tr>
+                          <th  class="review-headings"><?php echo $this->escapeHtml($_vote->getRatingCode()) ?>:</th>
+                          <td nowrap="nowrap" style="padding:4px 0 0 0"><div class="rating-box">
+                              <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                            </div>
+                          <td valign="middle" style="padding:5px 0 0 5px"><?php printf("%.1f",($_vote->getPercent()* .05))?></td>
+                          </td>
+                        </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                    </span>
+                    <div style="clear:both"></div>
+                  </div>
+                  <?php endif; ?>
+                </dt>    
+                <dd></dd> 
+                <dt>
+                <div style="float:left; width:152px; padding-left:10px;">
+                 <div class="review-headings"> <strong>Summary</strong> </div>
+                 <div><?php echo $this->htmlEscape($_review->getTitle()) ?></div>
+                </div>    
+                <div  style="float:right; width:636px; padding-right:10px;">
+                 <div class="review-headings"><strong>Review</strong></div>
+                <div> <?php echo nl2br($this->htmlEscape($_review->getDetail())) ?> </div>
+                </div>
+                <div style="clear:both"></div>
+                </dt>
+                <dd></dd>    
+                </dl> 
+                <?php endforeach; ?>
+              </div>
+              <?php echo $this->getChildHtml('toolbar') ?>
+              <?php endif;?>
+       </div>
+    
+    	<div id="write-customer-reviews">
+        	 <?php echo $this->getChildHtml('review_form') ?>  
+      </div>
+        </div>
+   </div>
+

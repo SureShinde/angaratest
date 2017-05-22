@@ -1,0 +1,197 @@
+<?php if($this->hasOffer()):?>
+<?php $products = $this->getProducts();?>
+<?php if($products):?>
+<?php $offerMinimized = $this->isOfferMinimized();?>
+<style>
+#offer-choose-your-gift{
+	border-top: 1px solid #000000;
+	position:relative;
+	z-index:2;
+	background:#fff;
+	margin-bottom:15px;
+	<?php echo $offerMinimized?'margin-left: 0;':'margin-left: 158px;';?>
+	<?php echo $offerMinimized?'margin-right: 0;':'margin-right: -172px;';?>
+}
+#offer-choose-your-gift .gift-box-header{
+	background: none repeat scroll 0 0 #422F2A;
+    border-color: #824F4A #624F4A;
+    border-style: solid;
+    border-width: 1px;
+	height:20px;
+    padding: 10px;
+}
+.gift-box-title{color: #FFFFFF;position:absolute;z-index:5;top:12px;<?php echo $offerMinimized?'left:16px;':'left:122px;';?>text-shadow: 0 2px 2px #000000;}
+.offer-choose-your-gift-content{
+	border-color: #000000;
+    border-style: solid dashed dashed;
+    border-width: 1px;
+    padding-top: 6px;
+	min-height: 152px;
+	<?php echo $offerMinimized?'display:none;':'';?>
+}
+.cart-offer-product{
+	float:right;
+	margin-right:15px;
+	text-align:center;
+	width:140px;
+	padding-bottom:8px;
+}
+.cart-offer-product img{
+	clear:both;
+}
+.cart-offer-product-title{
+	display:block;
+	min-height:51px;
+	height:auto!important;
+	height:51px;
+}
+#fancy-ribbon{
+	background:url("/skin/frontend/angara/default/images/fancy-ribbon.png") no-repeat center center transparent;
+	width:255px;
+	height:329px;
+	position:absolute;
+	top:-85px;
+	left:-51px;
+	<?php echo $offerMinimized?'display:none;':'';?>
+}
+a.offer-select-button{
+	background:#920;
+	color:#fff;
+	position:relative;
+	z-index:10;
+	text-shadow: 0 1px 1px #300302;
+	width:100px;
+	font-family:open_sanssemibold,Arial,Helvetica,sans-serif;
+	text-decoration:none;
+	padding:5px;
+	display:block;
+	cursor:pointer;
+	margin:5px auto 0;
+	text-transform:uppercase;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMjM3LCA0NywgNDkpIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSJyZ2IoMjE2LCA4MSwgNjIpIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYigyMTYsIDgxLCA2MikiIC8+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+	background-image: -webkit-gradient(radial, 100% 100%, 0, 100% 100%, 227, color-stop(0%, rgb(237, 47, 49)), color-stop(100%, rgb(216, 81, 62)));
+	background-image: -webkit-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+	background-image: -moz-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+	background-image: -ms-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+	background-image: -o-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+	background-image: radial-gradient(farthest-side at right bottom, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+}
+a.offer-select-button:hover{
+	color:#770000;
+	text-shadow: 0 1px 1px #FB9392;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZDg1MTNlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWQyZjMxIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlZDJmMzEiIC8+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+	background-image: -webkit-gradient(radial, 100% 100%, 0, 100% 100%, 227, color-stop(0%, #d8513e), color-stop(100%, #ed2f31));
+	background-image: -webkit-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+	background-image: -moz-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+	background-image: -ms-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+	background-image: -o-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+	background-image: radial-gradient(farthest-side at right bottom, #d8513e 0%, #ed2f31 100%);
+}
+.showhide-offer-arrow {
+    background: url("/skin/frontend/angara/default/images/choose-offer-strip-arrow-in.png") no-repeat ;
+    top:7px;
+    cursor: pointer;
+    height:29px;
+    right:7px;
+    position: absolute;
+    width:29px;
+}
+.offer-hiiden .showhide-offer-arrow {
+  background: url("/skin/frontend/angara/default/images/choose-offer-strip-arrow-out.png") no-repeat ;
+}
+</style>
+<div id="offer-choose-your-gift-shadow" style="-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85); filter: alpha(opacity=60); 	-moz-opacity: 0.6; -khtml-opacity: 0.6; opacity: 0.6; background:#999; position:absolute;
+top:0; right:0; bottom:0; left:0; z-index:1;<?php echo $offerMinimized?'display:none;':'';?>"></div>
+<div id="offer-choose-your-gift" class="clear">
+	<div id="fancy-ribbon"></div>
+	<div class="gift-box-header"></div>
+	<h3 class="gift-box-title">Click and Choose your own Free Gift</h3>
+	<div class="offer-choose-your-gift-content">
+		<?php foreach($products as $product):?>
+		<div class="cart-offer-product">
+			<img width="100" height="100" alt="<?php echo $product->getName();?>" src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(100); ?>">
+			<span class="cart-offer-product-title"><?php echo $product->getShortDescription();?></span>
+			<a class="offer-select-button" href="/fancycart/ajax/selectOfferProduct/sku/<?php echo $product->getSku();?>">Select</a>
+		</div>
+		<?php endforeach;?>
+		<div class="clear"></div>
+	</div>
+	<div class="showhide-offer-arrow"></div>
+</div>
+<script>
+jQuery(function(){
+	jQuery('.offer-select-button').click(function(){
+		var url = jQuery(this).attr('href');
+		showProgressBar();
+		jQuery.get(url,function(){
+				jQuery.get('/fancycart/ajax/index', function(cartHtml){
+				hideProgressBar();
+				updateCartPopup(cartHtml);
+				updateCartSummary();
+			}) 
+		})
+		return false;
+	})
+	<?php if($offerMinimized):?>
+	jQuery('.showhide-offer-arrow').toggle(
+		function(){
+			jQuery('.offer-choose-your-gift-content, #fancy-ribbon').show();
+			jQuery('#offer-choose-your-gift').animate({
+				marginLeft:158,
+				marginRight:-172
+			})
+			jQuery('.gift-box-title').animate({
+				left:122
+			})
+			jQuery('#offer-choose-your-gift-shadow').fadeIn('fast');
+			jQuery('#offer-choose-your-gift').removeClass('offer-hiiden');
+			jQuery.post('/offers/coupon/offerMinimized/minimized/0')
+		},
+		function(){
+			jQuery('.offer-choose-your-gift-content, #fancy-ribbon').hide();
+			jQuery('#offer-choose-your-gift').animate({
+				marginLeft:0,
+				marginRight:0
+			})
+			jQuery('.gift-box-title').animate({
+				left:16
+			})
+			jQuery('#offer-choose-your-gift-shadow').fadeOut('fast');
+			jQuery('#offer-choose-your-gift').addClass('offer-hiiden');
+			jQuery.post('/offers/coupon/offerMinimized/minimized/1')
+		}
+	)
+	<?php else: ?>
+	jQuery('.showhide-offer-arrow').toggle(
+		function(){
+			jQuery('.offer-choose-your-gift-content, #fancy-ribbon').hide();
+			jQuery('#offer-choose-your-gift').animate({
+				marginLeft:0,
+				marginRight:0
+			})
+			jQuery('.gift-box-title').animate({
+				left:16
+			})
+			jQuery('#offer-choose-your-gift-shadow').fadeOut('fast');
+			jQuery('#offer-choose-your-gift').addClass('offer-hiiden');
+			jQuery.post('/offers/coupon/offerMinimized/minimized/1')
+		},
+		function(){
+			jQuery('.offer-choose-your-gift-content, #fancy-ribbon').show();
+			jQuery('#offer-choose-your-gift').animate({
+				marginLeft:158,
+				marginRight:-172
+			})
+			jQuery('.gift-box-title').animate({
+				left:122
+			})
+			jQuery('#offer-choose-your-gift-shadow').fadeIn('fast');
+			jQuery('#offer-choose-your-gift').removeClass('offer-hiiden');
+			jQuery.post('/offers/coupon/offerMinimized/minimized/0')
+		}
+	)
+	<?php endif; ?>
+})
+</script>
+<?php endif; ?>
+<?php endif; ?>

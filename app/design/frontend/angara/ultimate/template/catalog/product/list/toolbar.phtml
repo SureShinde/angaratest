@@ -1,0 +1,71 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+?>
+<script type="text/javascript">
+function adj_nav_toolbar_make_request_hp(val)
+{
+	setLocation(val);
+}
+function setLocation_hp(val)
+{
+	setLocation(val);
+}
+</script>
+<?php if($this->getCollection()->getSize()): ?>
+<div class="displayoption">
+    <?php if( $this->isExpanded() ): ?>
+    <?php echo $this->getPagerHtml() ?>
+    <div class="sortbytxt">Sort&nbsp;By</div>
+	<div class="relevance">
+            <select onchange="setLocation_hp(this.value)" class="relevanceselectsrt">
+            <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+            	<?php if($_key=='price'): ?>
+            	<option value="<?php echo $this->getCurrentOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key) && $this->getCurrentDirection() == 'asc'): ?>selected="selected"<?php endif; ?>>
+                    <?php echo $this->__('Price: Low to High') ?>
+                </option>
+            	<option value="<?php echo $this->getCurrentOrderUrl($_key, 'desc') ?>"<?php if($this->isOrderCurrent($_key) && $this->getCurrentDirection() == 'desc'): ?>selected="selected"<?php endif; ?>>
+                    <?php echo $this->__('Price: High to Low') ?>
+                </option>
+                <?php elseif($_key!='name'): ?>
+                <option value="<?php echo $this->getCurrentOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                    <?php if($_key=='position'): ?><?php echo $this->__('Best Sellers') ?><?php else: ?><?php echo $this->__($_order) ?><?php endif; ?>
+                </option>
+                <?php endif;?>
+            <?php endforeach; ?>
+            	
+            </select>
+    </div>
+    </div><!-- end of sortby div opened in pager.phtml -->
+    <?php endif; ?>
+</div>
+<?php endif ?>

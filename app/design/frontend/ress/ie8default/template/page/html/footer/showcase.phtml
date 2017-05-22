@@ -1,0 +1,132 @@
+<style type="text/css">.country-dropdown-list-container { white-space: normal;}.social-list-inline li{display:inline-block;padding-left:5px;padding-right:2px;float:left} .social-list-inline .ficon{padding-left:0px;}</style>
+<div class="container">
+    <div class="high-padding-right-md high-padding-top">
+        <div class="padding-type-2 showcase-bg-white row" id="footer-email-signup">
+            <div class="low-padding-top visible-md"></div>
+            <div class="block-heading col-md-6 col-xs-12 col-sm-8 text-center high-margin-top high-margin-bottom min-padding-top"> Get Exclusive Angara Offers Instantly In Your Inbox! </div>
+            <div class="col-md-6">
+                <form id="subscription-form-footer" method="post" action="<?php echo ((Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://').Mage::app()->getRequest()->getHttpHost().'/newsletter/subscriber/confirmed/';?>" onsubmit="return checkFormFooter(this);">
+                    <div class="padding-type-10">
+                        <div class="row">
+                            <div class="col-md-8 col-xs-8 col-sm-8">
+                                <input id="footerEmail" type="text" name="email" class="input-text required-entry validate-email showcase-border-thick" placeholder="Enter your email address" title="<?php echo $this->__('Email Address');?>">
+                                <input type="hidden" value="<?php echo $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>" name="return_url">
+                                <input type="hidden" value="03-footer" name="newslettertype">
+                                <div class="visible-md"></div>
+                            </div>
+                            <div class="col-md-4 col-xs-4 col-sm-4">
+                                <input type="submit" value="JOIN" class="btn btn-block btn-primary visible-xs subscribe-button">
+                                <input type="submit" value="SUBSCRIBE" class="btn btn-block btn-primary hidden-xs subscribe-button">
+                            </div>
+                        </div>
+                        <div class="row low-margin-top">
+                            <div class="col-sm-12 small text-left">We will never publish, share, or sell your information in any way. <a href="/privacy-and-security.html" class="text-underline" target="_blank">Privacy Policy</a></div>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                //&lt;![CDATA[
+                var dataFormFooter = new VarienForm('subscription-form-footer', false);
+                function checkFormFooter(frm) {
+                    var regFooter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                    if(frm.footerEmail.value != '' && regFooter.test(frm.footerEmail.value) !== false) {
+                        return true;												
+                    }
+                    return false;
+                }
+                //]]&gt;
+                </script> 
+            </div>
+            <div class="low-margin-bottom visible-md"></div>
+        </div>
+    </div>
+</div>
+<div class="showcase-bg-dark showcase-border-top showcase-border-bottom low-padding-top low-padding-bottom showcase-border-thick">
+	<div class="container">
+    	<div class="row no-gutters">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="navigations low-padding-left-md ress-accordion-xs">
+                 	<p class="low-margin-top low-margin-bottom"><strong>Blog Post</strong></p>
+                 	<p class="showcase-border-bottom-1px max-margin-right"></p>
+                  	<?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('recent_blog_post')->toHtml();?>
+                </div>
+            	<div class="row">
+                	<?php 
+					//	Showing dynamic related links in footer
+					if($category = Mage::registry('current_category')){
+						echo Mage::helper('function')->getRelatedLinks($category->getId());
+					}else{
+						echo Mage::helper('function')->getRelatedLinks();
+					}
+					?>
+                </div>
+			</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="navigations low-padding-left-md ress-accordion-xs max-margin-left-xs">
+			  		<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Policies</strong></p>
+			 		<ul class="hidden-xs footer-links">
+						<li><a href="/return-policy.html">Return Policies</a></li>
+						<li><a href="/privacy-and-security.html">Privacy and Security</a></li>
+						<li><a href="/term-of-use.html">Terms of Use</a></li>
+						<li><a href="/shipping.html">Shipping</a></li>
+						<li><a href="/international-policies.html">International Shipping Policies</a></li>
+						<li><a href="/total-protection-warranty.html">Warranty Plan</a></li>
+				  	</ul>
+				</div>
+				<div class="navigations low-padding-left-md ress-accordion-xs max-margin-top max-margin-bottom max-margin-left-xs">
+			  		<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Partner with Angara</strong></p>
+					<ul class="hidden-xs footer-links">
+						<li><a href="/ls-index.html">Affiliate Program</a></li>
+						<li><a href="/site-map.html">Sitemap</a></li>
+					</ul>
+				</div>	
+				<?php /*<div class="navigations low-padding-left-md ress-accordion-xs max-margin-left-xs">
+					<p class="low-margin-bottom hidden-xs low-margin-top"><strong>Shipping Destination:</strong></p>
+					<ul class="hidden-xs">
+						<li>
+							<div><?php echo $this->getChildHtml('country'); ?></div>
+						</li>
+					</ul>
+				</div>*/?>			
+		 	</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="navigations last max-margin-left-md max-padding-left-md max-padding-left-sm ress-accordion-xs nowrap">
+					<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Get to Know Us</strong></p>
+					<ul class="hidden-xs footer-links">
+						<li><a href="/about-us.html">About Angara</a></li>
+                        <li><a href="http://blog.angara.com/">Blog</a></li>
+						<li><a href="/faq.html">FAQ's</a></li>
+						<li><a href="/angara-in-the-press.html">Angara in the News</a></li>
+						<li><a href="/customer-testimonials.html">Customer Testimonials</a></li>
+					</ul>
+				</div>
+				<div class="navigations last max-margin-left-md max-padding-left-md max-padding-left-sm ress-accordion-xs nowrap">
+					<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Contact Us</strong></p>
+					<ul class="hidden-xs footer-links">
+                    	<?php /*?><li><div id="LP_DIV_1434090335997"></div></li><?php */?>
+                        <li><a href="javascript:;" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link">Live Chat</a></li>
+						<li><a href="mailto:customer.service@angara.com">Email Us</a></li>
+                        <li><a href="/awrma/guest_rma/index/">Online Returns</a></li>
+                        <li><a href="/tracking">Track Your Order</a></li>
+						<li><a href="/contact-us.html" class="block-inline-display">Call Us: 1-888-926-4272 <span style="color:#008906"> </span></a></li>
+                        <?php /*?><li><a href="<?php echo (Mage::getSingleton('customer/session')->isLoggedIn())? '/awrma/customer_rma/index/' : '/awrma/guest_rma/index/';?>">Request RMA</a></li><?php */?>
+					</ul>
+				</div>
+				<div class="navigations max-margin-left-md max-padding-left-md max-padding-left-sm ress-accordion-xs nowrap">
+					<p class="low-margin-top low-margin-bottom hidden-xs low-margin-top"><strong>Connect with Us</strong></p>
+					<ul class="socialicons hidden-xs social-list-inline">
+						<li class="ficon social-icons-footer"><a href="https://www.facebook.com/Angaradotcom"><i class="fa px32 fa-facebook-square" style="color:#314987"></i></a></li>
+						<li class="pinticon social-icons-footer"><a href="https://www.pinterest.com/angarajewelry/"><i class="fa px32 fa-pinterest-square" style="color:#cb2026"></i></a></li>
+						<li class="twiticon social-icons-footer"><a href="https://twitter.com/angara"><i class="fa px32 fa-twitter-square" style="color:#38b7da"></i></a></li>
+						<li class="gplusicon social-icons-footer"><a href="https://plus.google.com/+Angara"><i class="fa px32 fa-google-plus-square" style="color:#c53113"></i></a></li>
+						<li class="utubeicon social-icons-footer"><a href="http://www.youtube.com/user/angarainc"><i class="fa px32 fa-youtube" style="color:#c80b07"></i></a></li>
+						<li class="blogicon social-icons-footer blog-icon"> <a href="http://blog.angara.com/"> </a></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+    	</div>
+ 	</div>
+</div>

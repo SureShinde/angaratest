@@ -1,0 +1,14 @@
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+	<FilesMatch "\.(gif|jpg|png)$">
+		Header set Cache-Control "max-age=60480, public"
+		#ExpiresDefault "access plus 24 hours"
+		ExpiresDefault "access plus 6 days"
+		Header unset Last-Modified
+	</FilesMatch>
+
+</IfModule>

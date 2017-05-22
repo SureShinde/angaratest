@@ -1,0 +1,242 @@
+<script type="text/javascript">
+function switchTab(index) {
+    jQuery(".switchTab").addClass('hidden');
+    jQuery(".switchTab:eq(" + index + ")").removeClass('hidden');
+	
+    jQuery(".tab-pills li").find('a').removeClass('activee');
+	jQuery(".tab-pills li:eq(" + index + ")").find('a').addClass('activee');
+}
+</script>
+<div class="education-main-banner relative-placeholder max-margin-bottom max-padding-bottom"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/education-main-banner.jpg" alt="">
+		<div class="absolute-placeholder banner-txt">
+			<h1>All About<br/>Pearls</h1>
+			<p>Nature’s Exquisite Beauty</p>
+		</div>
+</div>
+<div class="clearfix"></div>
+<section class="container">
+	<div class="col-xs-12 no-padding full-width max-margin-top max-padding-top slide">
+		<div class="col-sm-12 col-md-3 col-xs-12 max-width">
+			<ul class="nav tab-pills">
+				<li class="max-padding-top max-padding-bottom"><a class="activee" href="#Symbolism">Symbolism</a></li>
+				<li class="max-padding-top max-padding-bottom"><a class="" href="#PearlTypes">Pearl Types</a></li>
+				<li class="max-padding-top max-padding-bottom"><a class="" href="#QualityGrading">Quality & Grading</a></li>
+				<li class="max-padding-top max-padding-bottom"><a class="" href="#IdentifyingPearls">Identifying Pearls</a></li>
+				<li class="max-padding-top max-padding-bottom"><a class="" href="#CareInstructions">Care Instructions</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-9 col-xs-12 max-width">
+			<div class="col-sm-12 col-md-12 col-xs-12 no-padding switchTab table-row" id="Symbolism">
+				<div class="col-sm-12 col-md-12 no-padding">
+					<h1>Symbolism</h1> </div>
+				<div class="col-sm-12 col-md-12 no-padding">
+					<div class="col-sm-6 col-md-6 no-padding table-cell">
+						<p>The pearl, since ancient times, has been valued for its fine luster and unmatched beauty. This captivating gem of the sea has often been associated with spiritual transformation, purity, clarity, and wisdom. In several ancient societies, the pearl was believed to represent the moon and regarded to possess magical powers. This beautiful gem was also considered to symbolize water and women.</p>
+						<p>Pearls are known to soothe emotions, enhance peace of mind and develop concentration. This iridescent gem represents integrity and faith and is considered to make the wearer feel calm. It is also believed to strengthen relationships. Pearls can offer protection, stimulate femininity and help promote self acceptance. These exquisite gems are also said to attract wealth and luck.</p>
+						<p>According to ancient Chinese civilizations, pearls protected the wearer from dragons and fire. The pearl is also one of the eight emblems of the Chinese tradition. On the other hand, the ancient Japanese believed that these alluring gems were formed from the tears of mythical beings such as angels, mermaids, and nymphs.</p>
+						<p>Pearl is also regarded to be the birthstone for those born in the month of June. While pristine white pearls are associated with innocence, beauty and new beginnings, gold and black pearls stand for wealth and prosperity. A symbol of purity, these lustrous gems are often sewn into wedding gowns or worn by the bride as jewelry.</p>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding table-cell"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/symbolism-two.jpg" alt=""> </div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 col-md-12 col-xs-12 no-padding switchTab hidden ptype" id="PearlTypes">
+				<div class="col-sm-12 col-md-12 no-padding">
+					<h1>Pearl Types</h1> </div>
+				<div class="col-sm-12 col-md-12 no-padding">
+					<div class="col-sm-6 col-md-6 no-padding">
+						<P>The birth of a pearl is an absolutely miraculous and awe-inspiring event. It all begins when a grain of sand or any foreign body lodges itself in the shell of an oyster or mussel. In order to ease the irritant, the oyster or mussel deposits layers of nacre, calcium carbonate in a minute crystalline form, over it. As time passes by, the irritant is completely enveloped by the crystalline coating, resulting in the birth of a lustrous pearl.</P>
+						<P>In recent years, cultured pearls have gained popularity as they are easier to cultivate. An irritant is carefully implanted in the oyster and the shell is left to naturally create its miracle from there on. There are various types of cultured pearls available. They include Akoya, Freshwater, South Sea, and Tahitian pearls. </P>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/Pearl-types-main.jpg" alt=""> </div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6 col-md-6 no-padding">
+						<h2 class="max-padding-top">Akoya Cultured Pearls</h2>
+						<P>Akoya cultured pearls are produced by a type of saltwater oyster called pinctada fucata martensii. This type of oyster is particularly small in size. The pearls formed are also small, ranging from 2mm to 10mm. For the longest time, Akoya cultured pearls were the most coveted type of pearls. These pearls are mostly popular for their perfectly round shape, white color and sharp, reflective luster.</P>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding max-margin-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/akoya-cultured-pearls.jpg" alt=""> </div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6 col-md-6 no-padding">
+						<h2 class="max-padding-top">Tahitian Cultured Pearls </h2>
+						<P>The Tahitian pearl or black pearl is produced by black lip oysters called pinctada margaritifera. These dark, exotic pearls are primarily cultivated in the islands of French Polynesia. They come not just in black, but also in dark green, blue and purple, and range from 8mm to 18mm in size. The shapes include round, teardrop, baroque and oval. </P>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding max-margin-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/tahitian-cultured-pearls.jpg" alt=""> </div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6 col-md-6 no-padding">
+						<h2 class="max-padding-top">South Sea Cultured Pearls </h2>
+						<P>South Sea cultured pearls are among the rarest and most exquisite pearls available today. They have a rich satin-like luster unlike any other pearl type, and they come in white, silver, pink and champagne or golden hues. South Sea pearls are produced by the white-lipped variety of the pinctada maxima oyster. This oyster is much larger than the oysters that produce Akoya and Freshwater pearls. The pearls produced by the pinctada maxima oyster are also much larger, often ranging from 8mm to 22mm in size. </P>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding max-margin-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/south-sea-cultured-pearls.jpg" alt=""> </div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6 col-md-6 no-padding">
+						<h2 class="max-padding-top">Freshwater Cultured Pearls</h2>
+						<P>Freshwater cultured pearls are produced by mussels in lakes, ponds and rivers. With each mussel producing up to 50 pearls, the supply is plentiful. These pearls have a soft luster and great durability. Their colors range from soft pink, lavender and white to shades of peacock and black. They have an off-round shape and are produced mainly in the US and in China. Their sizes range from 4mm to 14mm and their surface is usually clean.</P>
+					</div>
+					<div class="col-sm-6 col-md-6 no-padding max-margin-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/freshwater-cultured-pearls.jpg" alt=""> </div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 col-md-12 col-xs-12 no-padding switchTab hidden" id="QualityGrading">
+				<div class="col-sm-12 col-md-12 no-padding">
+					<h1>Quality & Grading</h1> </div>
+				<div class="col-sm-6 col-md-6 no-padding">
+					<P>To make an informed decision while buying pearls, it is important to know and understand the various grades of these beautiful gems. Pearls are graded based on quality factors such as luster, nacre, surface, shape, color, and size. The two major grading systems predominant are the AAA system and the A-D system.</P>
+					<P>In the AAA system, the A grade is given to a pearl with superior luster, mirror-like reflection, blemish-free surface, over 0.5mm nacre, and a perfect round shape. The AA grade is given to a pearl that is almost round with at least 75% blemish-free surface, very high luster and clear reflection, while A graded pearls are less than 75% clean, have a chalky appearance, are less round and have thin nacre.</P>
+					<P>The A to D system is used in French Polynesia to grade Tahitian pearls. A, being the highest grade, represents premium-quality pearls with very high luster and only minor imperfections. B graded pearls have high or medium luster and may have some visible imperfections. C pearls have medium luster with some surface defects. D graded pearls have many slight defects spread over 60% of its surface.</P>
+				</div>
+				<div class="col-sm-6 col-md-6 no-padding">
+					<div class="col-sm-12 col-md-12"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/A.png" alt="">
+						<div class="qty-grade">A</div>
+					</div>
+					<div class="col-sm-12 col-md-12 max-padding-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/AA.png" alt="">
+						<div class="qty-grade">AA</div>
+					</div>
+					<div class="col-sm-12 col-md-12 max-padding-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/AAA.png" alt="">
+						<div class="qty-grade">AAA</div>
+					</div>
+					<div class="col-sm-12 col-md-12 max-padding-top"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/AAAA.png" alt="">
+						<div class="qty-grade">AAAA</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 col-md-12 col-xs-12 no-padding switchTab hidden idfp" id="IdentifyingPearls">
+				<div class="col-sm-6 col-md-6 no-padding">
+					<h1>Identifying Pearls</h1>
+					<P>Versatile and timeless, pearls infuse a touch of luxury to any ensemble. The growing demand for these lustrous gems has led to the increase of fakes in the market. Here are some tips to help you identify real pearls.</P>
+					<P>Grown naturally, real pearls are rarely perfect and have surface ridges that can be viewed under a magnifying glass.</P>
+					<P>They have an overtone (a subtle color that appears on the outer surface) that’s beautiful, lustrous and appealing.</P>
+					<P>Real pearls are extremely reflective in light. However, low-quality real pearls might appear slightly chalky like faux pearls.</P>
+					<P>They will be of slightly different sizes and shapes, while fake pearls will appear identical.</P>
+					<P>They feel cold when you touch them, but warm up to your body temperature once you put them on.</P>
+					<P>They are slightly heavier than fake pearls.</P>
+					<P>When rubbed against your teeth, real pearls will feel gritty, while fake pearls usually feel smooth.</P>
+					<P>When you knock a strand of pearls together, the real pearls will have a softer sound, while the fakes will sound tinny.</P>
+					<P>Chipping or cracking of the top layer is a sure sign that the pearl is a fake.</P>
+					<P>An x-radiograph test will reveal the variations in density and the characteristic shapes of drill holes, if any. Drill holes in real pearls are usually drilled from both sides, to meet in the center. At the cross section in the center, the hole is wider than at the outer edges. </P>
+					<P>The sun test is an easy and inexpensive test to perform. In natural sunlight, you will be able to see variations in iridescence and color. If the pearls are perfectly matched for color and overtones, they are probably fake.</P>
+				</div>
+				<div class="col-sm-6 col-md-6 no-padding">
+					<div class="col-sm-12 col-md-12"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/identifying-pearls-two.png" alt=""> </div>
+					<div class="col-sm-12 col-md-12 idfp2"> <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/identifying-pearls-one.jpg" alt=""> </div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 col-md-12 col-xs-12 no-padding switchTab hidden" id="CareInstructions">
+				<div class="col-sm-12 col-md-12 no-padding">
+					<h1>Care Instructions</h1>
+					<p>Pearls are organic and require proper care. Here are some dos and don’ts to help
+						<br/> preserve the beauty of your lovely pearls.</P>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12 col-md-12 no-padding care-instructions">
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">1</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Pearls can be easily harmed by chemicals found in perfumes, cosmetics and hair and cleansing products. To avoid contact with these products, put on your pearls as a final touch after applying your makeup and styling your hair, and take them off as soon as you get back home.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/1.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row relative-placeholder">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">2</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Toothbrushes and any kind of abrasive material will harm your pearls. So will any commercial cleaning agent, even those termed as gentle.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/2.png" alt=""> </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">3</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Detergents and powdered cleansers, baking soda, chlorine bleach, vinegar, tarnish remover, any type of jewelry cleaner or ammonia (including Windex) shouldn’t be used to clean pearls.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/3.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">4</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Do not use steam or ultrasonic cleaners to clean your pearls.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/4.png" alt=""> </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">5</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Avoid plastic bags and containers since they emit chemicals that cause the pearl to deteriorate.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/5.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">6</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Keep your pearls away from direct sunlight, heat and hot surfaces such as a fireplace mantle, television or stove.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/6.png" alt=""> </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">7</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Pearls can get scratched by contact with other gemstones or any sharp object. Prevent tangles and scratches by putting them first in a soft silk or velvet bag and then in a compartmentalized jewelry box.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/7.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">8</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Water does not affect the color and luster of pearls. You can moisten a soft cloth with water and wipe your pearls after use.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/8.png" alt=""> </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">9</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Accidental spills could happen to reverse the damage, soak your pearls in lukewarm water with gentle natural soap. Rinse well and wrap them in a cotton cloth to dry.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/9.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">10</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Pearls can also be harmed by perspiration. Take them off in hot and humid situations.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/10.png" alt=""> </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">11</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">You need not store your pearls in a very dry room or in a safe deposit box. Like our skin, pearls need some moisture to rehydrate and need to be taken out from time to time. This helps improve their luster and glow.</div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/11.png" alt=""> </div>
+					</div>
+					<div class="col-sm-12 col-md-6 max-padding-top max-padding-bottom table-row last-row">
+						<div class="col-sm-1 col-md-1 no-padding text-center table-cell">12</div>
+						<div class="col-sm-7 col-md-7 txt-justify table-cell">Pearls set in rings, earrings, necklaces and bracelets can be easily scratched. It is advisable to wear them on special occasions and not on a daily basis. </div>
+						<div class="col-sm-4 col-md-4 table-cell"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/12.png" alt=""> </div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12 col-md-12 no-padding">
+					<p class="center">It’s the remarkable luster and classic beauty of pearls that draw us towards them. Taking good care
+						<br/> of them will help retain their allure for a long period of time.</P>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</section>
+
+<script language="javascript">
+jQuery(function() {
+	var url = window.location.href;
+	var id = url.substring(url.lastIndexOf('#') + 1);
+	var HeadHight = jQuery("#main-head-inner").outerHeight();
+	var idoffset = jQuery(".slide").offset().top - 20;
+	var RealScroll = idoffset - HeadHight;
+	
+	if(id != url){
+		jQuery(".switchTab").addClass('hidden');
+		jQuery("#" + id).removeClass('hidden');
+		jQuery('.tab-pills li').find('a').removeClass('activee');
+		
+		jQuery('.tab-pills li').each(function(){
+		 var val = jQuery(this).find('a').attr('href');
+		 if(val == '#'+id){
+			jQuery(this).find('a').addClass('activee');
+		 }
+		});
+	}
+
+	jQuery(window).load(function() {
+		jQuery('html, body').animate({scrollTop: RealScroll}, 'fast');
+	});
+	
+	jQuery(".tab-pills li").click(function() {
+		jQuery('html, body').animate({scrollTop: RealScroll}, 'fast');
+        var index = jQuery(this).index();
+        switchTab(index);	
+    });
+
+});
+</script>

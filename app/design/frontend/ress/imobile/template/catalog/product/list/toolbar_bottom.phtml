@@ -1,0 +1,69 @@
+<style text="type/css">
+.toolbar-bottom .pages {
+    text-align: center;
+    background: #eee;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+.toolbar-bottom .pages ol li a.view-all {
+    width: auto;
+    padding: 0px 10px;
+	display:none;
+}
+.checkout-cart-index .quick-access .cart-icon-wrap,
+.toolbar-bottom .pages strong {
+    display: none
+}
+.toolbar-bottom .pages ol {
+    margin: 0px;
+	padding:0px;
+}
+.toolbar-bottom .pages ol li {
+    display: inline-block
+}
+.toolbar-bottom .pages ol li a,
+.toolbar-bottom .pages ol li span {
+    width: 30px;
+    height: 30px;
+    display: block;
+    line-height: 30px;
+    margin: 3px
+}
+.toolbar-bottom .pages ol li a {
+    border: 1px solid #bbbbbb;
+    background: #fff;
+    color: #fa505a
+}
+.toolbar-bottom .pages ol li a:hover {
+    border: 1px solid #999999;
+    text-decoration: none
+}
+.toolbar-bottom .pages ol li a:focus {
+    text-decoration: none
+}
+.toolbar-bottom .pages ol li span {
+    border: 1px solid #ccc;
+    background: #eee;
+    color: #999;
+    text-decoration: none
+}
+</style>
+<?php 
+//prd(get_class_methods($this));
+//echo $this->getTotalNum();
+//echo $this->getLastPageNum();die;
+if($this->getLastPageNum() > 1 ){
+	/*if($this->getCurrentPage()=='1'){?>
+		<div class="prev disabled"><i class="fa fa-long-arrow-left"></i> Previous</div>
+	<?php } else{?>
+		<div class="prev"><a href="<?php echo $this->getPreviousPageUrl();?>"><i class="fa fa-long-arrow-left"></i> Previous</a></div>
+	<?php } ?>
+	
+	<?php if($this->isLastPage()){?>
+		<div class="next disabled">Next <i class="fa fa-long-arrow-right"></i></div>
+	<?php } else { ?>
+		<div class="next"><a href="<?php echo $this->getNextPageUrl();?>">Next <i class="fa fa-long-arrow-right"></i></a></div>
+	<?php } */
+	echo $this->getPagerHtml();
+}?>

@@ -1,0 +1,326 @@
+body{margin:0;padding:0;background-color:#FFFFFF;}
+p{
+margin:0;
+padding:0 0 15px 0;
+}
+img,a{border:0;}
+.deals-week-top{width:790px;height:41px;}
+.deals-week-left{width:10px;height:41px;float:left;}
+.deals-week-mid{width:770px;height:41px;float:left;background:url(http://www.angara.com/store/images/deals-week-mid.jpg) repeat-x;}
+.deals-week-right{width:10px;height:41px;float:left;}
+#middleparthome{width:960px;clear:both;margin:0 auto;background-color:#FFFFFF;}
+#midbodyhome{width:790px;height:auto;float:left;margin-left:10px;}
+#flash{width:581px;height:355px;float:left;text-align:center;}
+#sponsor{width:194px;height:355px;margin-left:15px;float:left;}
+#sponsorheading{width:194px;height:42px;background:url(http://www.angara.com/store/images/angara-in-news-top.jpg) no-repeat;}
+#sponsorname{width:194px;height:313px;}
+#gemstone-jewelry-top{width:790px;height:10px;}
+.gemstone-jewelry-mid{width:790px;background:url(http://www.angara.com/store/images/gemstone-jewelry-mid.jpg) repeat-y;}
+.gemstone-jewelry-mid1{width:790px;background:url(http://www.angara.com/store/images/gemstone-jewelry-mid.jpg) repeat-y; padding:10px 0 0 0}
+.gemstone-jewelry-bottom{width:790px;height:10px;}
+.gemstone-jewelry{width:790px; height:759px;}
+.home-contant-txt{color:#67323A;font-family:Arial, Helvetica, sans-serif;font-size:12px;height:124px!important; height:126px; padding:5px 15px 0px 15px; margin:0 15px 0 0;  overflow:auto;}
+.home-contant-txt1{color:#67323A;font-family:Arial, Helvetica, sans-serif;font-size:12px;height:74px; padding:14px 15px 10px 15px;}
+.home-contant-txt a{color:#E75D14;text-decoration:none;}
+.home-contant{margin-top:15px;width:790px;}
+.testimonial-marq{width:760px;height:74px;}
+.testimonial-home{width:760px;height:74px;overflow:hidden;}
+.searchpading{padding:10px 0 0 0;margin-left:10px;}
+.txt-box{width:133px;font-family:Arial, Helvetica, sans-serif;font-size:12px;height:20px;margin-bottom:5px;color:#000000;border:solid 1px #9a9790;}
+.link-heading{padding:0 0 13px 5px;}
+.navleft{width:141px;background:url(http://www.angara.com/store/images/symbols.jpg) no-repeat left; padding-left:8px;}
+.navleft a{width:141px;text-decoration:none;color:#e46c0a;font-size:11px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;color:#67323A;line-height:16px;}
+.navleft li a:hover{color:#67323A;}
+h2{font-family:Arial, Helvetica, sans-serif;font-size:12px;font-weight:bold;color:#67323A;clear:both;margin:0px;padding:0px;text-decoration:none;width:145px;}
+h2 a{text-decoration:none;color:#67323A;}
+.leftnav-heading{font:bold 12px Arial, Helvetica, sans-serif; color:#67323A;clear:both;text-decoration:none;width:145px;}
+.leftnav-heading a{text-decoration:none;color:#67323A;}
+#leftnav{width:155px;float:left;margin-right:5px;}
+#search{width:155px;height:106px;margin-bottom:15px;}
+#search-by{width:155px;height:150px;margin-bottom:15px;}
+.search-by-mid{width:155px;height:111px;background:url(http://www.angara.com/store/images/left-mid-bg.jpg) repeat-y;}
+.search-top{width:155px;height:28px;background:url(http://www.angara.com/store/images/left-top-bg.jpg) no-repeat bottom;}
+.heading-txt{font-family:tahoma;font-size:12px;color:#67323A;font-weight:bold;padding:9px 0 0 10px;}
+.search-mid{width:155px;height:66px;background:url(http://www.angara.com/store/images/left-mid-bg.jpg) repeat-y;}
+.search-bottom{width:155px;height:11px;}
+.dropdown{width:155px;height:auto;}
+.dropdown-top{width:155px;height:9px;}
+.dropdown-mid{width:155px;height:925px!important; height:926px;background:url(http://www.angara.com/store/images/drop-down-mid.jpg) repeat-y;}
+.knowledge-center{margin-top:15px;width:155px;height:auto;}
+.knowledge-center-top{width:155px;height:50px;}
+.knowledge-center-bottom{width:155px;height:11px;background:url(http://www.angara.com/store/images/knowledge-centre-bottom.jpg) no-repeat;}
+.premiumjewelrybox{margin-top:15px;width:155px;height:130px;background:url(http://www.angara.com/store/images/premiumbg.jpg) no-repeat;color:#FFFFFF;}
+.premiumheading{padding:8px 0 10px 10px;font:bold 14px Arial, Helvetica, sans-serif;}
+.premiumlink{margin:0 0 4px 10px;font:12px Arial, Helvetica, sans-serif;background:url(http://www.angara.com/store/images/premiumarrow.jpg) no-repeat left;}
+.premiumlink a{margin-left:8px;text-decoration:none;color:#FFFFFF;}
+.mainbodyhome-b{width:960px;height:auto;margin:0 auto;}
+#header{height:67px;width:960px;clear:both;}
+#logo{width:213px;height:67px;float:left;}
+.freeshiping{line-height:25px;height:25px;padding-left:78px;width:359px;float:left;margin-top:20px;}
+#topnavpart{width:310px;float:right;height:67px;}
+.topnavtxt{color: #000000; float:right;  font:bold 12px Arial,Helvetica,sans-serif; margin-top:10px; }
+.topnavtxt a, .topnavtxt a:link, .topnavtxt a:visited{text-decoration:none;color:#ff7900;}
+.topnavtxt a:hover{color:#ff7900;text-decoration:underline;}
+.customer-service{font:18px Arial, Helvetica, sans-serif; color:#581616; margin-top:8px; float:right;}
+.customer-service a{color:#581616; text-decoration:none; padding-top:3px;}
+.customer-service a:hover{ text-decoration:underline;}
+.livechatlink{margin-right:8px;}
+#nav-main{width:960px;height:33px;}
+.midpart{width:960px;height:33px;float:left;background:url(http://www.angara.com/store/images/top-nav-bg.jpg) no-repeat;}
+#navigation{list-style:none;padding:0 6px 0 7px;margin:0;width:947px;}
+#navigation li{float:left;display:block;margin-top:2px;padding:0px;position:relative;}
+#navigation .clearence{padding:0px;position:relative;}
+#navigation .clearence a{font-weight:bold;color:#FF0000;padding-left:8px;}
+#navigation .clearence a:hover, #navigation .clearence a.selected{font-weight:bold;padding-left:8px;}
+#navigation a{color:#6f3720;line-height:28px;text-decoration:none;height:29px;font-family:Arial, Helvetica, sans-serif;font-size:14px;padding-left:7px;}
+#navigation a span{padding-right:16px;line-height:28px;}
+#navigation a, #navigation a span{display:block;float:left;}
+#navigation a:hover, #navigation a.selected{color:#fff;background:#6f3720 url("http://www.angara.com/store/images/left-tab.jpg") left no-repeat;text-decoration:none;height:29px;padding-left:7px;line-height:28px;cursor:pointer;}
+#navigation a:hover span, #navigation a.selected span{background:url("http://www.angara.com/store/images/right-tab.jpg") right no-repeat;padding-right:16px;height:29px;line-height:28px;cursor:pointer;}
+.define-nav1{width:154px;height:175px;float:left;background:url(http://www.angara.com/store/images/dropdown-background1.jpg) no-repeat;}
+.define-nav2{width:154px;height:175px;float:left;background:url(http://www.angara.com/store/images/dropdown-background2.jpg) no-repeat;}
+.partition{width:1px;background:url(http://www.angara.com/store/images/partition.jpg) no-repeat;float:left;height:175px;}
+.navdropdown{width:154px;height:30px;margin:0px;padding:0px;}
+.navdropdown li{margin:0px;padding:0px;list-style:none;width:154px;min-height:19px!important;min-height:23px;line-height:18px!important;line-height:16px;display:block;}
+.navdropdown a{display:block;text-decoration:none;color:#4c2625;font-size:10px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;padding-left:11px;width:143px;padding-bottom:0px!important;padding-bottom:2px;}
+.navdropdown li a:hover{background-color:#6f3720;color:#ffffff;}
+.navdropdownheading-second{font-size:11px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;text-indent:0em;color:#4c2625;width:149px;padding-top:18px!important;padding-top:2px;margin:5px 0px 2px 5px;}
+h4{font-size:11px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;text-indent:0em;color:#4c2625;width:149px;margin:5px 0px 2px 5px;}
+.dropmenudiv{position:absolute;top:0px;z-index:100;visibility:hidden;height:175px;border-left:solid 1px #c1bcb6;border-right:solid 1px #c1bcb6;border-bottom:solid 1px #c1bcb6;}
+#bnav-sign-home
+{
+width:790px;
+margin:0 auto;
+height:42px;
+padding:15px 0 15px 0!important; 
+padding-top:12px;
+clear:both;}
+.bnavsign-home-left{width:11px;height:42px;float:left;background:url(http://www.angara.com/store/images/bnav-sign-home-left.jpg) repeat-x;}
+.bnavsign-home-mid{width:768px;height:42px;font-family:Arial, Helvetica, sans-serif;font-size:12px;background:url(http://www.angara.com/store/images/bnav-sign-home-mid.jpg) repeat-x;float:left;}
+.bnavsign-home-right{width:11px;height:42px;float:left;background:url(http://www.angara.com/store/images/bnav-sign-home-right.jpg) repeat-x;}
+img{border:none;}
+.trustseal-mid{width:960px;height:auto;background:url(http://www.angara.com/store/images/trustseal-mid.jpg) repeat-y;}
+.trustseal-top{width:960px;height:11px;background:url(http://www.angara.com/store/images/trustseal-top.jpg) no-repeat bottom;}
+#trustgap{margin-top:15px !important;margin-top:11px;}
+.trustseal-bottom{width:960px;height:11px;}
+#text{height:auto;width:885px;margin:0 auto;}
+#text ul{width:auto;height:auto;margin:0;padding:0;}
+#text li{padding:0px 4px 0 3px;float:left;list-style:none;text-align:center;text-decoration:none;font-family:tahoma;font-size:11px;color:#000000;}
+#text li a{color:#000000;text-decoration:none;}
+#text li a:hover{color:#e46c0a;}
+#copyright{clear:both;width:960px;margin:0 auto;padding-top:10px;padding-bottom:10px;list-style:none;text-align:center;text-decoration:none;color:#000000;font-family:tahoma;font-size:12px;}
+
+.jewelrypart
+{
+width:581px;
+float:left;
+height:759px;
+background:url(http://www.angara.com/store/images/jewelry-sectionbg.jpg) no-repeat;
+}
+
+.todaydealpart
+{
+width:194px;
+float:right;
+height:759px;
+}
+
+.todaydealsection
+{
+height:370px;
+width:194px;
+}
+
+
+.jewelrydetail
+{
+width:181px;
+float:left;
+padding:12px 6px 12px 6px;
+}
+
+.pad
+{
+padding-bottom:10px;
+}
+
+h1 {
+font:normal 18px Georgia, "Times New Roman", Times, serif;
+color:#8a4832;
+width:154px;
+text-align:center;
+padding:0;
+margin:0 auto;
+}
+
+h1 a {
+
+color:#8A4832;
+text-decoration:none;
+}
+
+.jewelryimg
+{
+margin:5px 0 5px 0;
+width:181px;
+height:150px;
+text-align:center;
+}
+
+.jewelry-discrip
+{
+width:168px;
+font:12px Arial, Helvetica, sans-serif;
+color:#67323A;
+height:65px;
+margin:0 auto;
+}
+
+.jewelrylink, .jewelrylink ul
+{
+width:168px;
+margin:0;
+margin:0 auto;
+padding:0;
+}
+
+.sectionbox
+{
+height:378px;
+clear:both;
+}
+
+.jewelrylink li
+{
+padding:0;
+margin:0;
+list-style:none;
+line-height:15px;
+}
+
+.jewelrylink li a
+{
+font:12px Arial, Helvetica, sans-serif;
+color:#E75D14;
+text-decoration:none;
+line-height:17px;
+}
+
+.jewelrylink li a:hover
+{
+color:#E75D14;
+text-decoration:underline;
+}
+
+.todaydeal-box
+{
+height:233px;
+padding:0 10px 0 10px;
+width:174px;
+}
+
+.monthgemstone
+{
+margin-top:15px;
+height:374px;
+width:194px;
+}
+
+
+.todatdeal-heading
+{
+font:normal 18px Georgia, "Times New Roman", Times, serif;
+color:#8a4832;
+padding:12px 10px 3px 10px;
+width:174px;
+text-align:center;
+}
+
+.timer
+{
+width:117px;
+height:23px;
+margin:0 auto;
+padding:35px 0 5px 5px;
+}
+
+
+
+.bestseller
+{
+position:absolute;
+top:0;
+left:175px;
+}
+
+
+.todaydeal-discrip a
+{
+color:#67323A;
+text-decoration:none;
+}
+
+.todaydeal-discrip a:hover
+{
+color:#67323A;
+text-decoration:underline;
+}
+
+
+
+
+
+.globalsearch
+{
+position:relative;
+height:35px;
+}
+
+.loginboxdiv{
+margin:0px;
+height:20px;
+width:122px;
+background:url(http://www.angara.com/store/images/search-bg.jpg) no-repeat top;
+position:relative;
+
+}
+
+.loginbox
+{
+background:none;
+border:0;
+width:116px;
+height:14px;
+margin:0;
+padding:0px 2px 0px 4px;
+font:12px Arial, Helvetica, sans-serif;
+color:#999999;
+position:absolute;
+top:2px;
+left:0px;
+}
+
+
+.go-button
+{
+width:30px;
+height:20px;
+float:right;
+}
+
+.knowledge-center-mid{width:155px;height:281px; background:url(http://www.angara.com/store/images/knowledge-centre-mid.jpg) repeat-y;}
+
+.facebookraffle
+{
+width:155px;
+height:40px;
+margin-bottom:15px;
+}
+
+
+
+
+
+
+
+

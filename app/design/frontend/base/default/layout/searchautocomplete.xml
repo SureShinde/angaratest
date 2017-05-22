@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    	<reference name="head">
+    		<action method="addCss"><stylesheet>css/mirasvit_searchautocomplete.css</stylesheet></action>
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/core/underscore.js</script></action>
+            <action method="addJs"><script>mirasvit/core/backbone.js</script></action>
+            <action method="addJs"><script>mirasvit/code/searchautocomplete/form.js</script></action>
+            <action method="addJs"><script>mirasvit/code/searchautocomplete/autocomplete.js</script></action>
+    	</reference>
+        <reference name="header">
+            <block type="searchautocomplete/form" name="top.search" as="topSearch" template="searchautocomplete/form.phtml"/>
+        </reference>
+        <reference name="top.bar">
+            <block type="searchautocomplete/form" name="top.search" as="topSearch" template="searchautocomplete/form.phtml"/>
+        </reference>
+    </default>
+</layout>

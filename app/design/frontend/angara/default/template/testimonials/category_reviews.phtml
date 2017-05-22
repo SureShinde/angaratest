@@ -1,0 +1,165 @@
+<div class="breadcrumbs">
+  <ul>
+    <li style="list-style:none;" class="crumb1"><a href="<?php echo Mage::helper('core/url')->getHomeUrl();?>">Home</a> </li>
+    <li style="list-style:none;" class="crumb2"><a><b>Jewelry Reviews</b></a></li>   
+    <li style="list-style:none;" class="crumbblank"><a></a></li>
+  </ul>
+</div>
+<div id="land-wrapper">
+  <h1 id="pagemain-heading">Angara Jewelry Reviews</h1>
+<?php 
+$categoryIdArray	=	$this->getReviewCategoryIds();
+//$categoryIdArray	=	array('324','323');
+//echo '<pre>'; print_r($categoryIdArray); die;
+
+$categoryIdArray	=	explode(',',$categoryIdArray);
+//echo '<pre>'; print_r($categoryIdArray); die;
+
+foreach($categoryIdArray as $categoryId){
+	$review	= $this->getReviewsForCategory($categoryId,1);
+	//echo '<pre>'; print_r($review); die;
+	if(count($review) > 0) {
+		$category = Mage::getModel('catalog/category')->load($categoryId);
+			foreach($review as $testimonial){
+				$pro		=	Mage::getModel('catalog/product');
+				$_product	=	$pro->load($testimonial->getEntityPkValue());
+			?>
+                <div id="review-main">
+                    <div class="reviewpart-heading"><?php echo $category->getName().' Reviews'; ?></div>
+                    <div class="product-review-part">
+                        <div class="product-review-part-img">
+                        <?php if($categoryId=='406'){?>
+                        	<img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>">
+                        <?php } else{ ?>
+                        	<a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=testimonials"><img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>"></a>
+                        <?php } ?>
+                            <div class="star-img">
+								<?php
+								$averageRating = 0;
+								$ratings = array();
+								foreach($testimonial->getRatingVotes() as $vote) {
+									$ratings[] = $vote->getPercent();
+								}
+								$averageRating = array_sum($ratings)/count($ratings);
+								if($averageRating){ ?>
+                                    <div class="rating-box" style="float:left;">
+                                      <div class="rating" style="width: <?php echo ceil($averageRating) ; ?>%;"></div>
+                                    </div>
+                                <div class="rating-digit" ><?php printf("%.1f",($averageRating* .05))?></div>
+                                <?php } ?>
+                          	</div>
+                            <div class="dated"><span class="reviewername"><?php echo $this->htmlEscape($testimonial->getNickname());?></span><span> 
+                            <?php //	Review date
+							//echo $testimonial->getCreatedAt();
+							$toDateFormat = 'l, F j, Y';	//	Friday, August 30, 2013
+							echo $formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($testimonial->getCreatedAt()));
+							
+							/*if(strtotime('1 month ago') < strtotime($testimonial->getCreatedAt())) {
+								list($fromDate,$fromTime) = explode(' ',$testimonial->getCreatedAt());
+								$toDateFormat = 'D, F j, Y';
+								$formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($fromDate));
+								echo $formattedDate;
+							}
+							else {
+								echo 'Older than a month';
+							} */?>
+							</span></div>
+                        </div>
+                        <div class="product-review-part-rvw">
+                        <div class="testimonial-arrow"></div>
+                            <h2>
+                            <?php 
+								$testi_title = $this->htmlEscape($testimonial->getTitle());
+								if (strlen($testi_title) > 50) {
+									$testi_title = substr($testi_title, 0, 50);
+									$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+									$testi_title .= '...';
+								}
+								echo $testi_title;
+								//$_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL;
+							?>
+                            </h2>
+                            
+                            <div class="contant"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></div>
+                            
+                            <div class="morebutton">
+                                <div class="moreback-right"><a href="<?php echo Mage::getUrl("testimonials/index/morereviews/id/".$category->getId()."") ?>">View all <?php echo $category->getName(); ?> Reviews +</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+			<?php 
+			} ?>      
+	<?php
+	} else{
+		//echo 'Sorry! There are no reviews in this category. Please browse other categories.';	
+	}
+}	//	end foreach
+?>
+
+<?php /*?><?php	//	Logic to rendor Others Products
+$otherCategoryIds		=	$this->getOtherCategoryIds();
+$otherCategoryIdArray	=	explode(',',$otherCategoryIds);
+//echo '<pre>'; print_r($otherCategoryIdArray); die;
+
+foreach($otherCategoryIdArray as $otherCategoryId){
+	$review	= $this->getReviewsForCategory($otherCategoryId,1);
+	//echo '<pre>'; print_r($review); die;
+	if(count($review) > 0) {
+		//$category = Mage::getModel('catalog/category')->load($categoryId);
+		foreach($review as $testimonial){
+			$testimonialId	=	$testimonial->getEntityPkValue(); 
+			$testimonialIdArray[]	=	$testimonialId;
+		}
+	}
+	//echo count($testimonialIdArray); 
+	if(count($testimonialIdArray)>1){
+		break;	
+	}
+}
+
+array_shift($testimonialIdArray);
+
+foreach($testimonialIdArray as $testimonialId){
+	$pro		=	Mage::getModel('catalog/product');
+	$_product	=	$pro->load($testimonialId);
+	$status		=	$_product->getStatus();
+	$skuProduct	=	$_product->getSku();
+	$productID	=	$_product->getID();
+?>
+    <div id="review-main">
+        <div class="reviewpart-heading">Others</div>
+        <div class="product-review-part">
+            <div class="product-review-part-img">
+                <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=testimonials"><img  width="213" height="213" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(213, 213);?>"></a>
+            </div>
+            <div class="product-review-part-rvw">
+                <h2>
+                <?php 
+                    $testi_title = $this->htmlEscape($testimonial->getTitle());
+                    if (strlen($testi_title) > 50) {
+                        $testi_title = substr($testi_title, 0, 50);
+                        $testi_title = substr($testi_title,0,strrpos($testi_title," "));
+                        $testi_title .= '...';
+                    }
+                    echo $testi_title;
+                ?>
+                </h2>
+                <div class="contant"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></div>
+                <div class="dated"><?php echo $this->htmlEscape($testimonial->getNickname());?><span> /   
+                <?php //	Review date
+                //echo $testimonial->getCreatedAt();
+                $toDateFormat = 'l, F j, Y';	//	Friday, August 30, 2013
+                    echo $formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($testimonial->getCreatedAt()));
+                ?>
+                </span></div>
+                <div class="morebutton">
+                    <div class="moreback-right"><a href="<?php echo Mage::getUrl("testimonials/index/morereviews/id/other") ?>">+ View all Other Jewelry Reviews</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+<?php } ?><?php */?>
+</div>

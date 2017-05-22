@@ -1,0 +1,50 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="box-account box-recent">
+<?php $_orders = $this->getOrders(); ?>
+    <div class="box-head full-width pL10 pR10 mB10">
+        <h2 class="fl"><?php echo $this->__('Recent Orders') ?></h2>
+        <?php if( sizeof($_orders->getItems()) > 0 ): ?><a class="view-all btn-gray fr" href="<?php echo $this->getUrl('sales/order/history') ?>"><?php echo $this->__('View All') ?></a><?php endif; ?>
+    </div>
+<?php if( sizeof($_orders->getItems()) > 0 ): ?>
+    <div class="data-table full-width" id="my-orders-table">
+		<?php foreach ($_orders as $_order): ?>
+			<div class="order-item full-width pL10 pR10 pB10">
+				<div class="order-item-holder full-width">
+					<div class="top full-width pB5">
+						<div class="fl order-detail">
+							<span class="full-width order-no">Order No: <strong><?php echo $_order->getRealOrderId() ?></strong></span>
+							<span class="full-width date">Placed on <?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span>
+						</div>
+						<div class="fr status uppercase">
+							<span class="full-width"><?php echo $_order->getStatusLabel() ?></span>
+						</div>
+					</div>
+					<div class="mid full-width">
+						<span class="fl ship-to"><strong>Ship to</strong>: <?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;' ?></span>
+						<span class="fr order-total color-of-action"><strong><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></strong></span>
+					</div>
+					<div class="bottom full-width">
+						<a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
+					<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+						<a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+					<?php endif ?>
+					<?php if( $_order->getStatusLabel()!='' ){?>
+						<a href="<?php echo $this->getTrackingUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>
+					<?php } ?>
+					</div>
+				</div>
+			</div>
+		<?php endforeach; ?>
+    </div>
+    <script type="text/javascript">decorateTable('my-orders-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif; ?>
+</div>

@@ -1,0 +1,120 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="col2-set">
+    <?php echo $this->getChildHtml('login_before')?>
+    <div class="col-1">
+    	<div class="yellow-title">
+        <h3><?php if( $this->getQuote()->isAllowedGuestCheckout() ): ?><?php echo $this->__('Checkout as Guest') ?><?php else: ?><?php echo $this->__('Register to Create an Account') ?><?php endif; ?></h3>
+        </div>
+        <div class="grad-login-box">
+        <?php if( $this->getQuote()->isAllowedGuestCheckout() ): ?>
+        	<p>You can setup an account later.</p>
+            <p></p>
+            <div id="logincart-continue" class="continue-button"></div>
+            <ul class="form-list" style="display:none">
+                <?php if( $this->getQuote()->isAllowedGuestCheckout() ): ?>
+                <li class="control">
+                    <input type="radio" name="checkout_method" id="login:guest" value="guest"  checked="checked" class="radio" /><label for="login:guest"><?php echo $this->__('Checkout as Guest') ?></label>
+                </li>
+                <?php endif; ?>
+                <li class="control">
+                    <input type="radio" name="checkout_method" id="login:register" value="register" class="radio" /><label for="login:register"><?php echo $this->__('Register') ?></label>
+                </li>
+            </ul>
+        <?php else: ?>
+            <input type="hidden" name="checkout_method" id="login:register" value="register" checked="checked" />
+        <?php endif; ?>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="yellow-title">
+        <h3> <?php echo $this->__('Checkout with your Angara Account') ?></h3>
+       	</div>
+        <div class="grad-login-box">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        <form id="login-form" action="<?php echo $this->getPostAction() ?>" method="post">
+        <fieldset>
+            <p>Sign in for faster checkout</p>
+            <ul class="form-list">
+                <li>
+                	<p style="padding-bottom:3px"><?php echo $this->__('Please enter your E-mail Address:') ?></p>
+                    <div class="input-box">
+                        <input type="text" class="input-text required-entry validate-email" id="login-email" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <p style="padding-bottom:3px"><?php echo $this->__('My Password is:') ?></p>
+                    <div class="input-box" style="float:left">
+                        <input type="password" class="input-text required-entry" id="login-password" name="login[password]" />
+                    </div><a href="<?php echo $this->getUrl('customer/account/forgotpassword') ?>" class="f-left" style="margin-left:8px;margin-top:4px;color:#888"><?php echo $this->__('Forgot your password?') ?></a>
+                </li>
+            </ul>
+            <div id="logincart-login" class="continue-button"></div>
+        </fieldset>
+        </form>
+        </div>
+    </div>
+	<div class="col-1" style="width:928px;padding-top:10px;">
+    	<div class="yellow-title">
+        	<h3>Checkout with your Facebook Account</h3>
+        </div>
+		<div class="grad-fbconnect-checkout-box">	
+			<div class="buttons-set">
+				<a rel="facebook-connect" title="Connect with Facebook"><img src="/skin/frontend/angara/default/images/fb_login-button.png" /></a>			
+			</div>
+		</div>	
+    </div>	
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var loginForm = new VarienForm('login-form', true);
+    $('login-email').observe('keypress', bindLoginPost);
+    $('login-password').observe('keypress', bindLoginPost);
+    function bindLoginPost(evt){
+        if (evt.keyCode == Event.KEY_RETURN) {
+            loginForm.submit();
+        }
+    }
+    function onepageLogin(button)
+    {
+        if(loginForm.validator && loginForm.validator.validate()){
+            button.disabled = true;
+            loginForm.submit();
+        }
+    }
+//]]>
+</script>
+<style>
+.grad-fbconnect-checkout-box {
+	border-style: none solid solid;
+    border-width: medium 1px 1px;
+    color: #EBEBEB;
+    height: auto !important;
+    min-height: 50px;
+    padding: 16px;
+}	
+</style>

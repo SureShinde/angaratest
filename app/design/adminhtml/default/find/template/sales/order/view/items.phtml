@@ -1,0 +1,81 @@
+<?php 
+$_order = $this->getOrder();
+$_items = $this->getItemsCollection(); ?>
+<div class="grid np">
+  <div class="hor-scroll">
+    <table cellspacing="0" class="data order-tables">
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+		<col width="1" />        
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->helper('sales')->__('Product') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Item Status') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Original Price') ?></span></th>
+                <th><?php echo $this->helper('sales')->__('Price') ?></th>
+                <th class="a-center"><?php echo $this->helper('sales')->__('Qty') ?></th>
+                <th><?php echo $this->helper('sales')->__('Subtotal') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Amount') ?></span></th>
+				<?php /* Angara Modification Start */ ?>
+				<th><span class="nobr"><?php echo $this->helper('sales')->__('Tax %') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Discount') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Row Total') ?></span></th>
+                <th class="last"><span class="nobr"><?php echo $this->helper('sales')->__('O.S.') ?></span></th>
+				<?php /* Angara Modification End */ ?>              
+            </tr>
+        </thead>
+        <?php 
+		$i=0;
+		
+		$shippingMethodCode = $_order['shipping_method'];
+		$shippingMethodShortForm = Mage::helper('function')->shippingShortForm($shippingMethodCode);
+		$leadTimeShippingMethod	= Mage::helper('function')->getShippingDays($shippingMethodShortForm);
+		$orderCompleteDate  = Mage::helper('sales')->formatDate($_order['created_at'], 'medium', true);
+		//$scheduleLeadTime = Mage::helper('function')->scheduleLeadTime($orderCompleteDate);
+		$leadTimeDateRules = Mage::helper('function')->getLeadTimeDateRules($shippingMethodCode);
+		$leadTimeAddons = 0;
+		foreach ($_items as $_item):
+			if ($_item->getParentItem()) continue; else $i++;?>
+            <tbody class="<?php echo $i%2?'even':'odd' ?>">
+                <?php echo $this->getItemHtml($_item) ?>
+                <?php echo $this->getItemExtraInfoHtml($_item) ?>
+            </tbody>            
+            <?php
+			$checkFreeProduct = Mage::helper('function')->checkFreeProductBySku($_item);
+			if(!$checkFreeProduct){
+				if($_item->getVendorLeadTime()){
+					$itemLeadTime = $_item->getVendorLeadTime();
+				}
+				$leadTimeAddons = Mage::helper('function')->checkProductForLeadTimeAdmin($_item);
+				$leadTime =	$itemLeadTime + $leadTimeAddons + $leadTimeShippingMethod /*+ $scheduleLeadTime*/ + $leadTimeDateRules;
+				$estimatedArrivalDate[] = Mage::helper('function')->shipDateAdmin($orderCompleteDate, $leadTime);
+			}	
+		endforeach;
+		
+		$laterArrivalTime = 0;
+		foreach($estimatedArrivalDate as $arriveDate){
+			$curArrivalTime = strtotime($arriveDate);
+			if ($curArrivalTime > $laterArrivalTime) {
+				$laterArrivalTime 		= 	$curArrivalTime;
+				$estimatedArrivalDate 	= 	$arriveDate;
+			}		  
+		} ?>
+        </table>
+        <table cellspacing="0" class="data order-tables" style="margin-top:20px;">
+			<tr>
+				<td colspan="11">
+				 <?php echo "<strong style='color:green'>Estimated Delivery Date: " . $estimatedArrivalDate."</strong>";?>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br />

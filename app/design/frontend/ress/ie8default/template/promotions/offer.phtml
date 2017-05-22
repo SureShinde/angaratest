@@ -1,0 +1,38 @@
+<?php 
+// get applicable platform
+$platform = Mage::helper('promotions')->getPlatform();
+
+$coupons = $this->getApplicableCoupons($platform);
+if(count($coupons) > 0):?>
+    <div class="coupon-code">
+	<?php 
+	foreach ($coupons as $coupon):
+		echo $this->getCouponHtml($coupon);
+    endforeach;?>
+	</div>
+	<?php 
+endif; ?>
+<script>
+jQuery(function(){
+	jQuery('.coupon-block:first .toggle-icon i').removeClass('fa-plus').addClass('fa-minus');
+	jQuery('.coupon-block .heading').click(function(){
+		var couponBlock = jQuery(this);
+		couponBlock.next('.detail').slideToggle(function(){
+			if(couponBlock.next('.detail').css('display') == 'block'){
+				couponBlock.find('.toggle-icon i').removeClass('fa-plus').addClass('fa-minus');
+			}
+			else{
+				couponBlock.find('.toggle-icon i').removeClass('fa-minus').addClass('fa-plus');
+			}
+		});
+		couponBlock.parent('.coupon-block').siblings().find('.detail').slideUp(function(){
+			if(couponBlock.parent('.coupon-block').siblings().find('.detail').css('display') == 'block'){
+				couponBlock.parent('.coupon-block').siblings().find('.toggle-icon i').removeClass('fa-plus').addClass('fa-minus');
+			}
+			else{
+				couponBlock.parent('.coupon-block').siblings().find('.toggle-icon i').removeClass('fa-minus').addClass('fa-plus');
+			}
+		});
+	});
+});
+</script>

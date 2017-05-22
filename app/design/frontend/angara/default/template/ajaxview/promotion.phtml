@@ -1,0 +1,218 @@
+<?php 
+//echo '<br>time->'.$this->showTimer();
+//echo '<br>total->'.$this->getCartTotal();
+if($this->getCartTotal()>1000 ){
+	if($this->showTimer()>0){ 
+	//echo 'i m in';?>
+<style type="text/css">
+#lightboxBO {
+	display:none;
+	background: #000000;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 100;
+	background: url(/skin/frontend/angara/default/images/lay-over-transperent-img.png);		
+}
+#lightboxC {
+	display:none;
+	position:fixed;
+	top:100px;
+	left:50%;
+	margin-left:-284px;
+	width:538px;
+	min-height:262px;
+	height: auto!important;
+	height:262px;
+	background-color: #fff;
+	-moz-box-shadow: 0px 0px 6px 2px #000;
+	-webkit-box-shadow: 0px 0px 6px 2px #000;
+	box-shadow: 0px 0px 6px 2px #000;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	z-index:1001;
+}
+/* Css for timer	*/ 
+.hourdigits{display:inline-block; min-width:12px; padding-left:5px; color:#fff; }
+.minutedegites{display:inline-block; min-width:12px; color:#fff;}
+.secondigits{display:inline-block; min-width:12px; color:#fff;}
+.colondigit{display:inline-block; font-size:24px; color:#fff;}
+</style>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	<?php	//	Check cookie
+	$cookieval = Mage::getModel('core/cookie');	
+	$cookieValue 	= 	$cookieval->get('cartPopUpStatus');
+	if($cookieValue==''){ ?>
+		//alert('Showing popup');
+		jQuery("#lightboxBO, #lightboxC").fadeIn(300);
+		<?php 
+			$cookieval->set('cartPopUpStatus', '1', 1200);			// 	Set cookie of 20 mins (1200 seconds)
+	} else { ?>
+		//alert('Show Footer Strip');
+		jQuery("#exclusiveOfferFooter").show();
+	<?php } ?>
+	
+	jQuery("a#closeLB, #lightboxBO").click(function(){
+		jQuery("#lightboxBO, #lightboxC").fadeOut(300);
+		//	Show Footer Strip
+		jQuery("#exclusiveOfferFooter").show();
+	})
+	
+	jQuery('#offerArrow').click(function(){
+		if (jQuery('#offerArrow').attr('class') == 'deactive'){
+			jQuery(this).removeClass("deactive");			
+			jQuery(this).addClass("active");
+			jQuery('#exclusiveOfferFooter').animate({'height':'133px'}, 500, 'easeInOutQuint');
+		}else{
+			jQuery(this).removeClass("active");			
+			jQuery(this).addClass("deactive");
+			jQuery('#exclusiveOfferFooter').animate({'height':'40px'}, 500, 'easeInOutQuint');
+		}
+	})
+})
+	//	Js for Timer	
+	var diff = <?php echo $this->showTimer(); ?>;
+	var diff2 = <?php echo $this->showTimer(); ?>;
+	//alert(diff);						//	55751195
+	// ticker work
+	function zeroPad (number) {
+		// Pad a number with a zero, to make it 2 digits
+		return ((number < 10) ? "0" : "") + String(number);
+	}
+	
+	<?php if($cookieValue=='1'){ ?>
+	var tickerFooterPromo2;
+	<?php } else{ ?>
+	var tickerFooterPromo;
+	var tickerFooterPromo2;
+	<?php } ?>
+	
+	jQuery(function(){
+		tickerFooterPromo = jQuery('#countdowntickerF');
+		tickerFooterPromo2 = jQuery('#countdowntickerFooter');
+		<?php if($cookieValue=='1'){ ?>
+		convertTickerF2();
+		<?php } else{ ?>
+		convertTickerF();
+		convertTickerF2();
+		<?php } ?>
+	})
+	
+	<?php if($cookieValue=='1'){ ?>
+	function convertTickerF2(){
+		markupTickerF2();
+	}
+	function markupTickerF2(){
+		tickerFooterPromo2.minutes = jQuery('<span class="minutedegites"></span>');
+		tickerFooterPromo2.seconds = jQuery('<span class="secondigits"></span>');
+		tickerFooterPromo2.append(jQuery('<span>Time Left: </span>'));
+		tickerFooterPromo2.append(tickerFooterPromo2.minutes);
+		tickerFooterPromo2.append(jQuery('<span class="colondigit"> :</span>'));
+		tickerFooterPromo2.append(tickerFooterPromo2.seconds);
+		updateTickerF2();
+	}
+	function updateTickerF2(){
+		diff2-=1000;
+		if(diff2 > 0){
+			tickerFooterPromo2.minutes.text( zeroPad(parseInt(diff2/(1000*60))%60) );
+			tickerFooterPromo2.seconds.text( zeroPad(parseInt(diff2/(1000))%60) );
+			setTimeout(function(){updateTickerF2()},1000);
+		}
+		else{
+			tickerFooterPromo2.hide();
+			jQuery("#exclusiveOfferFooter").hide();
+		}
+	}
+	<?php } else{ ?>
+	function convertTickerF(){
+		markupTickerF();
+	}
+	function convertTickerF2(){
+		markupTickerF2();
+	}
+	function markupTickerF(){
+		tickerFooterPromo.minutes = jQuery('<span class="minutedegites"></span>');
+		tickerFooterPromo.seconds = jQuery('<span class="secondigits"></span>');
+		tickerFooterPromo.append(jQuery('<span>Time Left: </span>'));
+		tickerFooterPromo.append(tickerFooterPromo.minutes);
+		tickerFooterPromo.append(jQuery('<span class="colondigit"> :</span>'));
+		tickerFooterPromo.append(tickerFooterPromo.seconds);
+		updateTickerF();
+	}
+	function markupTickerF2(){
+		tickerFooterPromo2.minutes = jQuery('<span class="minutedegites"></span>');
+		tickerFooterPromo2.seconds = jQuery('<span class="secondigits"></span>');
+		tickerFooterPromo2.append(jQuery('<span>Time Left: </span>'));
+		tickerFooterPromo2.append(tickerFooterPromo2.minutes);
+		tickerFooterPromo2.append(jQuery('<span class="colondigit"> :</span>'));
+		tickerFooterPromo2.append(tickerFooterPromo2.seconds);
+		updateTickerF2();
+	}
+
+	function updateTickerF(){
+		diff-=1000;
+		if(diff > 0){
+			tickerFooterPromo.minutes.text( zeroPad(parseInt(diff/(1000*60))%60) );
+			tickerFooterPromo.seconds.text( zeroPad(parseInt(diff/(1000))%60) );
+			setTimeout(function(){updateTickerF()},1000);
+		}
+		else{
+			tickerFooterPromo.hide();
+			jQuery("#exclusiveOfferFooter").hide();
+		}
+	}
+	function updateTickerF2(){
+		diff2-=1000;
+		if(diff2 > 0){
+			tickerFooterPromo2.minutes.text( zeroPad(parseInt(diff2/(1000*60))%60) );
+			tickerFooterPromo2.seconds.text( zeroPad(parseInt(diff2/(1000))%60) );
+			setTimeout(function(){updateTickerF2()},1000);
+		}
+		else{
+			tickerFooterPromo2.hide();
+			jQuery("#exclusiveOfferFooter").hide();
+		}
+	}
+	<?php } ?>
+	
+</script>
+
+<!--<a id="showLB" href="javascript:void(0);">Show Popup</a>-->
+<?php if($cookieValue=='1'){ ?>
+<div class="offer-accross-site" id="exclusiveOfferFooter" style="display:none;">
+  <div class="offer-strip-bottom "><a href="javascript:void(0);" id="offerArrow" class="deactive">Exclusive Offer</a></div>
+  <div class="offers-detail-box" >
+    <div class="offer-details-left-block">
+      <div class="offer-title" style="margin:35px 10px 0 0; float:left;">Get an <span class="highlighted-offer" style="font-size:18px;">Additional 15% OFF</span> on all orders above $1,000</div>
+      <div id="countdowntickerFooter" class="ticker-box" style="float:left; margin-top:26px"></div>
+    </div>
+    <div class="use-code-txt" style="float:right;">Use discount code: <span class="highlighted-offer"><?php echo $this->couponCodes();?></span></div>
+  </div>
+</div>
+<?php } else{ ?>
+<div id="lightboxC">
+  <div class="close-accross-site-popup"></div>
+  <div class="offer-title">Get an <span class="highlighted-offer">Additional 15% OFF</span> on all orders above $1,000</div>
+  <div class="offer-sub-title">Offer exclusively for you! (Expires in the next 20 mins)</div>
+  <div id="countdowntickerF" class="ticker-box"></div>
+  <div class="use-code-txt">Use discount code: <span class="highlighted-offer"><?php echo $this->couponCodes();?></span></div>
+  <a id="closeLB" class="close-accross-site-popup" href="javascript:void(0);"></a>
+</div>
+<div class="offer-accross-site" id="exclusiveOfferFooter" style="display:none;">
+  <div class="offer-strip-bottom "><a href="javascript:void(0);" id="offerArrow" class="deactive">Exclusive Offer</a></div>
+  <div class="offers-detail-box" >
+    <div class="offer-details-left-block">
+      <div class="offer-title" style="margin:35px 10px 0 0; float:left;">Get an <span class="highlighted-offer" style="font-size:18px;">Additional 15% OFF</span> on all orders above $1,000</div>
+      <div id="countdowntickerFooter" class="ticker-box" style="float:left; margin-top:26px"></div>
+    </div>
+    <div class="use-code-txt" style="float:right;">Use discount code: <span class="highlighted-offer"><?php echo $this->couponCodes();?></span></div>
+  </div>
+</div>
+<?php } ?>
+
+<div id="lightboxBO"></div>	<!--div for black overlay-->
+<?php } 
+} ?>

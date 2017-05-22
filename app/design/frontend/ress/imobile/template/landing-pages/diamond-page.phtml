@@ -1,0 +1,294 @@
+<style>
+.banner, .strip{width:100%; max-width:100%;margin:0 auto;}
+.strip{background:#f5f5f5;}
+.strip img{margin:0 auto; float:none;}
+.slick-dots {text-align:center !important;bottom:10% !important;}
+.slick-dots li button:before{font-size:10px!important}
+h2.review-slider{font-size:20px;color:#404141;margin:initial;}
+#review-slider .title{font-size:32px;color:#404141;}
+
+#diamond-slider img {max-width:80%;margin:0 auto;}
+.slick-slider {margin-bottom:initial !important;}
+
+.link-icon span.icon{display:inline-block; width:30px; height:30px; background:#fa505a; color:#ffffff; text-align:center; line-height:33px; border-radius:20px;}
+.link-icon span.text{display:inline-block; font-size:16px; color:#555555; text-decoration:underline;}
+.link-icon:hover{color:#ffffff!important; opacity:1!important}
+
+.three-banner{width:100%; max-width:1500px; margin:0 auto;}
+.ring-pendant-link a{font-size:20px; font-weight:300; text-decoration:underline; color:#fff}
+.ring-pendant-link a:hover{color:#fff!important}
+
+@media (max-width:1368px ){
+	.three-banner{width:100%; max-width:1100px; margin:0 auto;}
+}
+@media (max-width:1024px ){
+	#review-slider .title {font-size:28px;}
+}
+@media (max-width: 768px ) {
+	#review-slider .title{font-size:22px;}
+	#review-slider p {font-size:16px;}
+	.slick-dots {bottom:0% !important;text-align:center !important;}
+} 
+</style>
+
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+<script type="text/javascript">
+function switchTab(index){
+	jQuery(".stonebox").addClass('hidden');
+	jQuery(".stonebox:eq("+index+")").removeClass('hidden');
+}
+</script>
+<div id="main-banner" class="banner full-width col-sm-12 no-padding high-margin-bottom relative-placeholder pull-left">
+	<div>
+		<a href="/rings/diamond-rings?icid=diamond|home|hb|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/main-image-1.jpg" alt="Diamond Engagement Rings" title="Better Together" /></a>
+	</div>
+	<div>
+		<a href="/wedding-rings/womens-diamond-wedding-bands?icid=diamond|home|banner1-Bands|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/main-image-2.jpg" alt="Diamond Wedding Rings" title="When Yes Means Forever" /></a>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#main-banner').slick({
+			arrows			: 	false,
+			dots: true,
+			slidesToShow	: 	1,
+			slidesToScroll	: 	1,
+			autoplay: true,
+			autoplaySpeed: 5000
+		});
+	});
+</script>
+<div class="strip col-sm-12 no-padding pull-left">
+	<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/featured.jpg" alt="Angara in News" title="" />
+</div>
+<?php /* <div class="banner col-sm-12 high-margin-bottom relative-placeholder pull-left" style="padding:10px 0px">
+	<div class="col-sm-12 text-center pT10" style="font-size:16px;">
+		<div class="half-width bizrate pR5 mT10 mB10">
+			<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/bizrate.png" style="height:48px"/><br>Bizrate gives Angara 9.1 on a scale of 10
+		</div>
+		<div class="half-width bbb pL5 mT10 mB10">
+			<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/bbb.png" style="height:48px"/><br>Our business is rated A+ by BBB.
+		</div>
+	</div>
+</div> */ ?>
+<div class="banner col-sm-12 no-padding high-margin-bottom relative-placeholder pull-left">
+	<div id="three-stone" class="three-stone full-width fl">
+		<div><a href="/products?order=position&dir=asc&no_cache=true&jewelry_styles=4195&filterable_stone_names=4130&icid=diamond|home|banner4-TSJ|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/three-stone.jpg" alt="Three-Stone Diamond Jewelry" title="Three-Stone Diamond Jewelry" />	</a></div>
+		<div><a href="/products?order=position&dir=asc&no_cache=true&jewelry_styles=4191&filterable_stone_names=4130&icid=diamond|home|banner2-SJ|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/solitaire.jpg" alt="Solitaire Diamond Jewelry" title="Solitaire Diamond Jewelry" /></a></div>
+		<div><a href="/products?jewelry_styles=4183&order=position&dir=asc&no_cache=true&filterable_stone_names=4130&icid=diamond|home|banner3-HJ|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/halo-jewelry.jpg" alt="Halo Diamond Jewelry" title="Halo Diamond Jewelry" /></a></div>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#three-stone').slick({
+				arrows			: 	true,
+				dots: false,
+				slidesToShow	: 	1,
+				slidesToScroll	: 	1,
+				autoplay: true,
+				autoplaySpeed: 5000
+			});
+		});
+	</script>
+	<div class="mewe fl">
+		<a href="/jewelry/two-stone-jewelry?filterable_stone_names=4130&icid=diamond|home|banner5-ME|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/mewe-collection.jpg" alt="Me We Collection" title="Me We Collection" /></a>
+	</div>
+</div>
+<div class="banner col-sm-12 high-margin-bottom relative-placeholder pull-left" style="padding:10px 0px">
+	<div class="full-width no-padding text-center ang-diff-title">
+		<span style="font-size:25px; padding-bottom:10px; display:inline-block">The Angara Difference</span>
+	</div>
+	<div class="full-width pull-left ang-diff" style="padding-bottom:10px">
+		<div class="full-width">
+			<div class="half-width text-center">
+				<img class="img-responsive" width="80" style="margin:0 auto" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/angara-diff-1.jpg" alt="" title=""/>
+				<span style="font-size:16px">110% Refund Policy</span>
+			</div>
+			<div class="half-width text-center">
+				<img class="img-responsive" width="80" style="margin:0 auto" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/angara-diff-2.jpg" alt="" title=""/>
+				<span style="font-size:16px">100% Conflict Free</span>
+			</div>
+			<div class="half-width text-center pT10" style="clear:left">
+				<img class="img-responsive" width="80" style="margin:0 auto" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/angara-diff-3.jpg" alt="" title=""/>
+				<span style="font-size:16px"><?php echo Mage::helper('function')->freeReturnDays();?> Day Returns</span>
+			</div>
+			<div class="half-width text-center pT10">
+				<img class="img-responsive" width="80" style="margin:0 auto" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/angara-diff-4.jpg" alt="" title=""/>
+				<span style="font-size:16px">Free Shipping</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="banner col-sm-12 no-padding high-margin-bottom relative-placeholder pull-left">
+	<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/trio-1.jpg" alt="Diamond Jewelry From Angara" title="Diamond Jewelry From Angara"/>
+	<a class="absolute-placeholder link-icon" style="left:50%; top:11%; margin-left:-29px;" href="/earrings/diamond-earrings?icid=diamond|home|banner6-earrings|12032016"><span class="text">Earrings</span></a>
+	<a class="absolute-placeholder link-icon" style="left:62%; top:22%; opacity:0.8" href="/p/round-diamond-leverback-earrings-se0929d?icid=diamond|home|banner6-earrings|12032016"><span class="icon"><i class="fa fa-link" class="earring-link"></i></span></a>
+	<a class="absolute-placeholder link-icon" style="right:50%; top:46%; margin-right:-34px;" href="/pendants/diamond-necklace-pendants?icid=diamond|home|banner6-pendants|12032016"><span class="text">Pendants</span></a>
+	<a class="absolute-placeholder link-icon" style="right:15%; top:58%; opacity:0.8" href="/p/sideways-infinity-diamond-two-stone-pendant-necklace-sp0881d?icid=diamond|home|banner6-pendants|12032016"><span class="icon"><i class="fa fa-link" class="pendant-link"></i></span></a>
+	<a class="absolute-placeholder link-icon" style="left:50%; bottom:19.5%; margin-left:-34px;" href="/bracelets/diamond-bracelets?icid=diamond|home|banner6-bracelets|12032016"><span class="text">Bracelets</span></a>
+	<a class="absolute-placeholder link-icon" style="left:13.5%; bottom:15.4%; opacity:0.8" href="/p/infinity-cross-diamond-linear-bracelet-sb0157d?stone1_grade=6546&metal1_type=4044&icid=diamond|home|banner6-bracelets|12032016"><span class="icon"><i class="fa fa-link" class="bracelet-link"></i></span></a>
+</div>
+
+<div class="banner col-sm-12 max-margin-top max-padding-top relative-placeholder pull-left max-padding-bottom mT10">
+	<div class="full-width three-banner">
+		<div class="full-width">
+			<div class="dyo full-width relative no-padding">
+				<img class="img-responsive max-margin-left pull-right pB10" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/black-1.jpg" alt="Design Your Own Diamond Ring and Pendant" title="Design Your Own Diamond Ring and Pendant"/>
+				<div class="ring-pendant-link absolute text-center" style="top:110px; left:0px; right:0px;">
+					<a href="/buildyourown/ring/?icid=diamond|home|banner7-BR|12032016">RINGS</a><br>
+					<a href="/buildyourown/pendant/?icid=diamond|home|banner7-BP|12032016">PENDANTS</a>
+				</div>
+			</div>
+			<script>
+				jQuery(window).load(function(){
+					var h = jQuery('.dyo img').height();
+					var posTop = h*25/100;
+					jQuery('.dyo .ring-pendant-link').css({'top':posTop+'px'});
+				});
+				jQuery(window).resize(function(){
+					var h = jQuery('.dyo img').height();
+					var posTop = h*25/100;
+					jQuery('.dyo .ring-pendant-link').css({'top':posTop+'px'});
+				});
+			</script>
+			<div class="full-width no-padding">
+				<a href="/jewelry-guide/diamond?icid=diamond|home|banner8-KYD|12032016"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/black-2.jpg" alt="Diamond Education" title="Diamond Education"/></a>
+			</div>
+		</div>
+		<div class="full-width pT10">
+			<a href="/products?order=position&dir=asc&no_cache=true&filterable_stone_names=4130&icid=diamond|home|banner9-Joy|12032016">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/diamond/black-3.jpg" alt="Diamond Jewelry Gifts " title="Diamond Jewelry Gifts "/></a>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="container mB10 pB10">
+	<div class="col-sm-12 no-padding-LR max-padding-bottom rview">
+		<h2 class="review-slider heading max-padding-top text-center pB10">100,000 Happy Stories and Counting…</h2>
+		<div id="review-slider" class="review-slider">
+			<div class="col-sm-12 no-padding pull-left white-bg">
+				<div class="col-sm-4">
+						<div class="fullmargin">
+							<a href="/p/floral-style-halo-milgrain-diamond-pendant-sp0709d">
+								<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/recent-reviews/1.jpg" alt=""/>
+							</a>
+						</div>
+				</div>
+				<div class="col-sm-8 PL">
+					<div class="col-sm-12 no-padding max-margin-bottom max-padding-bottom">
+						<div class="title max-padding-top high-margin-top max-padding-bottom">The necklace arrived last week, and I absolutely love it!
+							<div class="rating-box center-align">
+									<div class="rating" style="width:100%;"></div>
+							</div>
+						</div>
+						<p>The necklace arrived last week, and I absolutely love it! (Apologies for the delay in letting you know. My husband and I were celebrating our 40th wedding anniversary, and this is the first chance I've had to sit down at a computer).</p>
+						<div class="full-width high-padding-top">
+							<span style="display:block;"><strong>Susan</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 no-padding pull-left white-bg">
+				<div class="col-sm-4">
+						<div class="fullmargin">
+								<a href="/p/open-infinity-knot-sideways-diamond-pendant-sp0718d">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/recent-reviews/2.jpg" alt=""/>
+								</a>
+						</div>
+				</div>
+				<div class="col-sm-8 PL">
+					<div class="col-sm-12 no-padding max-margin-bottom max-padding-bottom">
+						<div class="title max-padding-top high-margin-top max-padding-bottom">Great Customer Service!
+							<div class="rating-box center-align">
+									<div class="rating" style="width:100%;"></div>
+							</div>
+						</div>
+						<p>I bought this pendant from my wife last year, but needed it to be rush ordered with expedited shipping. Angara advisor was beyond helpful and provided one of the best customer experiences that I have ever had. As for the pendant, my wife loved it, and it also came in a nice box.</p>
+						<div class="full-width high-padding-top">
+							<span style="display:block;"><strong>Shelton</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 no-padding pull-left white-bg">
+				<div class="col-sm-4">
+						<div class="fullmargin">
+								<a href="/p/round-diamond-halo-engagement-ring-sr0722d">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/recent-reviews/3.jpg" alt=""/>
+								</a>
+						</div>
+				</div>
+				<div class="col-sm-8 PL">
+					<div class="col-sm-12 no-padding max-margin-bottom max-padding-bottom">
+						<div class="title max-padding-top high-margin-top max-padding-bottom">More beautiful in person!!! Gorgeous ring!!!
+							<div class="rating-box center-align">
+									<div class="rating" style="width:100%;"></div>
+							</div>
+						</div>
+						<p>First I would like to add to the many compliments given to Angara. This was my first time ordering this type of jewelry from the internet. It was delivered on time and was beautiful, and the right size...</p>
+						<div class="full-width high-padding-top">
+							<span style="display:block;"><strong>Nickie and Yaya</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 no-padding pull-left white-bg">
+				<div class="col-sm-4">
+						<div class="fullmargin">
+								<a href="/p/round-diamond-hoop-earrings-se0957d">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/recent-reviews/4.jpg" alt=""/>
+								</a>
+						</div>
+				</div>
+				<div class="col-sm-8 PL">
+					<div class="col-sm-12 no-padding max-margin-bottom max-padding-bottom">
+						<div class="title max-padding-top high-margin-top max-padding-bottom">Absolutely Beautiful!
+							<div class="rating-box center-align">
+									<div class="rating" style="width:100%;"></div>
+							</div>
+						</div>
+						<p>Had the appraisal done at home and definitely worth the money! Will definitely purchase from Angara again.</p>
+						<div class="full-width high-padding-top">
+							<span style="display:block;"><strong>Mary</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 no-padding pull-left white-bg">
+				<div class="col-sm-4">
+						<div class="fullmargin">
+								<a href="/p/tulip-bud-inspired-rocking-solitaire-diamond-pendant-sd-sp0761d">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/diamond/recent-reviews/5.jpg" alt=""/>
+								</a>
+						</div>
+				</div>
+				<div class="col-sm-8 PL">
+					<div class="col-sm-12 no-padding max-margin-bottom max-padding-bottom">
+						<div class="title max-padding-top high-margin-top max-padding-bottom">JUST AS ADVERTISED
+							<div class="rating-box center-align">
+									<div class="rating" style="width:100%;"></div>
+							</div>
+						</div>
+						<p>Very pretty but a little small. I don't like the tiny chain that comes with it. I wish they would have forgot the chain & made the tulip bud a tad bit larger. The diamond is good size.</p>
+						<div class="full-width high-padding-top">
+							<span style="display:block;"><strong>Cinciti</strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#review-slider').slick({
+					arrows			: 	false,
+					dots: true,
+					slidesToShow	: 	1,
+					slidesToScroll	: 	1,
+					autoplay: true,
+					autoplaySpeed: 5000
+				});
+			});
+		</script>
+	</div>
+</div>

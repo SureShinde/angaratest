@@ -1,0 +1,399 @@
+<?php
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+?>
+<style>
+.ui-in-progress {
+	cursor:default !important;
+}
+</style>
+<?php 
+$cumbs= $this->getLayout()->getBlock('breadcrumbs'); $cumbs=$cumbs->_crumbs; $count_cumbs =  count($cumbs);
+if($cumbs && is_array($cumbs)) {
+	$i=1;$tracCategory;
+   	foreach($cumbs as $_crumbName=>$_crumbInfo){
+		if($_crumbInfo['link']){
+			if($i!=$count_cumbs-1){$i = $i+1; } else {$tracCategory= $_crumbInfo['label'] ; $i = $i+1;}
+	  	}
+   	}
+} 
+$_helper = $this->helper('catalog/output'); 
+$_product = $this->getProduct(); 
+?>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-wrapper-studs">
+	<?php echo $this->getLayout()->getBlock('breadcrumbs')->toHtml()?>
+	<div id="page-header" itemscope itemtype="http://schema.org/Product">
+		<h1 class="heading" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+	</div>
+	<div id="page-mid"> <?php echo $this->getChildHtml('media');?> 
+		<?php
+        # @todo handle product video here
+        $video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+        if($video != ''){
+            echo $this->getChildHtml('videoupload');
+        }
+        ?>
+		<!--Add to cart form starts-->
+		<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+			<div class="no-display">
+				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+				<input type="hidden" name="related_product" id="related-products-field" value="" />
+				<input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/>
+			</div>
+			<?php echo $this->getChildHtml('addtocart'); ?> 
+			<!--Add to cart form ends-->
+			
+			<div id="customization-block-wrapper">
+				<div class="customization-block-tilte">Build Your Own</div>
+				<script>
+	ie = (function(){
+		var undef, v = 3, div = document.createElement('div');
+	
+		while (
+			div.innerHTML = '<!--[if gt IE '+(++v)+']><i></i><![endif]-->',
+			div.getElementsByTagName('i')[0]
+		);
+	
+		return v> 4 ? v : undef;
+	}());
+	
+	if(ie){
+		if(ie < 9){
+			jQuery(function(){
+				jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+			});
+		}
+		else{
+			jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+		}
+	}
+	else{
+		jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+	}
+	
+</script> 
+				<script>
+		jQuery(function() {
+			/*jQuery( "#accordion" ).accordion({ 
+				header		: 	'div.customize-block-slide',//	Main div of accordion tab	
+				collapsible	: 	true,
+				heightStyle	: 	"content",					//	Controls the height of accordion content.	auto,	content,	fill
+				icons		:	false
+			});
+			
+			//	Diamond Weight Starts
+			jQuery( "#slider_dw" ).slider({
+				range: false,
+				//values: [ 17, 67 ]
+				min: 1,
+				max: jQuery('#attribute360').find('option').length,
+				value: jQuery('#attribute360')[0].selectedIndex + 1,
+				slide: function( event, ui ) {
+					jQuery('#attribute360')[0].selectedIndex = ui.value - 1;
+				}
+			});
+			
+			//	Diamond Quality Starts
+			jQuery( "#slider_dq" ).slider({
+				range: false,
+				min: 1,
+				max: jQuery('#attribute272').find('option').length,
+				value: jQuery('#attribute272')[0].selectedIndex + 1,
+				slide: function( event, ui ) {
+					jQuery('#attribute272')[0].selectedIndex = ui.value - 1;
+				}
+			});*/
+		});
+	</script>
+				<div id="variations-container" class="<?php echo $_product->getAttributeText('diamond_color');?>-diamond">
+					<div id="diamond-weight-customizer">
+						<div class="customize-block-slide">
+							<div class="customize-slide-title">Diamond Weight</div>
+							<div class="view-active-range-option"></div>
+						</div>
+						<div id="diamond-weight-customization-block" class="customization-block-style">
+							<div class="slider_wrapper">
+								<div id="slider_dw">
+								</div>
+								<div id="slider-dw-range-block" class="selection-range-block">
+									<div style="clear:both">
+										<span style="white-space:nowrap">(Carat Total Weight)</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="selected-user-option-description">
+							</div>
+							<div class="action-button-block">
+								<div class="cancel"><a href="#">Cancel</a></div>
+								<div class="done">Done</div>
+								<div class="clear"></div>
+							</div>
+							<div class="more-info-text-link"><a href="#dwinfo" name="modal">More info about Diamond Carat tw</a></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div id="diamond-quality-customizer">
+						<div class="customize-block-slide">
+							<div class="customize-slide-title">Diamond Quality</div>
+							<div class="view-active-range-option"></div>
+						</div>
+						<div id="diamond-quality-customization-block" class="customization-block-style" style="display:none;">
+							<div class="slider_wrapper">
+								<div id="slider_dq">
+								</div>
+								<div id="slider-dq-range-block" class="selection-range-block">
+									<span>
+										(Color/Clarity)
+									</span>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="selected-user-option-description">
+							</div>
+							<div class="action-button-block">
+								<div class="cancel"><a href="#">Cancel</a></div>
+								<div class="done">Done</div>
+								<div class="clear"></div>
+							</div>
+							<div class="more-info-text-link"><a href="#dqinfo" name="modal">More info about Diamond Quality</a></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div id="diamond-shape-customizer">
+						<div class="customize-block-slide">
+							<div class="customize-slide-title">Diamond Shape</div>
+							<div class="view-active-option"></div>
+						</div>
+						<div id="diamond-shape-customization-block" class="customization-block-style" style="display:none;">
+							<div class="user-option-block">
+								<div class="clear"></div>
+							</div>
+							<div class="selected-user-option-description"></div>
+							<div class="action-button-block">
+								<div class="cancel"><a href="#">Cancel</a></div>
+								<div class="done">Done</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div id="metal-type-customizer">
+						<div class="customize-block-slide">
+							<div class="customize-slide-title">Metal Type</div>
+							<div class="view-active-option"></div>
+						</div>
+						<div id="metal-type-customization-block" class="customization-block-style" style="display:none;">
+							<div class="user-option-block">
+								<div class="clear"></div>
+							</div>
+							<div class="selected-user-option-description">
+							</div>
+							<div class="action-button-block">
+								<div class="cancel"><a href="#">Cancel</a></div>
+								<div class="done">Done</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div id="setting-style-customizer">
+						<div class="customize-block-slide rmvborder">
+							<div class="customize-slide-title">Setting Style</div>
+							<div class="view-active-option"></div>
+						</div>
+						<div id="setting-style-customization-block" class="customization-block-style" style="display:none;">
+							<div class="user-option-block">
+								<div class="clear"></div>
+							</div>
+							<div class="selected-user-option-description">
+							</div>
+							<div class="action-button-block">
+								<div class="cancel"><a href="#">Cancel</a></div>
+								<div class="done">Done</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Custom option sliders code starts-->
+			<div class="clear" style="display:none">
+				<?php 
+					if ($_product->isSaleable() && $this->hasOptions()){
+						echo $this->getChildChildHtml('container2', '', true, true); 
+					}
+				 ?>
+			</div>
+			<!--Custom option sliders code ends-->
+		</form>
+		<div class="clear"></div>
+	</div>
+	<div id="page-footer">
+		<div id="angara_selection" style="display:none;">
+			<div class="selection-process-main-heading">The Angara Selection Process is Superior</div>
+			<div class="selections-details-block">
+				<div class="selection-process-heading">COLOR</div>
+				<div class="selection-process-img-block">
+					<div class="accepted-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-best-quality-diamond-color.png" width="147" height="170" alt="Accepted color in diamond" class="diamond-selections stud-grade-best" id="accepted-best-quality-diamond-color" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-heirloom-quality-diamond-color.png" width="147" height="170" alt="Accepted color in diamond" class="diamond-selections  stud-grade-heirloom" id="accepted-heirloom-quality-diamond-color" style="display:none;" />
+						accepted Diamond</div>
+					<div class="rejected-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-best-quality-diamond-color.png" width="147" height="170" alt="Rejected color in diamond" class="diamond-selections stud-grade-best" id="rejected-best-quality-diamond-color" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-heirloom-quality-diamond-color.png" width="147" height="170" alt="Rejected color in diamond" class="diamond-selections stud-grade-heirloom" id="rejected-heirllom-quality-diamond-color" style="display:none;" />
+						Rejected Diamond</div>
+					<div class="clear"></div>
+				</div>
+				<div class="selection-process-content-block stud-grade-best" id="accepted-best-quality-diamond-color-content">Not all color H's are the same, Angara selects only the premium H's with NO tinge of Brown.</div>
+				<div class="selection-process-content-block stud-grade-heirloom" id="accepted-heirloom-quality-diamond-color-content" style="display:none;">Not all color H's are the same, Angara selects only the premium H's with NO tinge of Brown.</div>
+			</div>
+			<div class="selections-details-block" style="background:none;">
+				<div class="selection-process-heading">CLARITY</div>
+				<div class="selection-process-img-block">
+					<div class="accepted-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-best-quality-diamond-clarity.png" width="147" height="170" alt="Accepted clarity in diamond" class="diamond-selections stud-grade-best" id="accepted-best-quality-diamond-clarity" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-heirloom-quality-diamond-clarity.png" width="147" height="170" alt="Accepted clarity in diamond" class="diamond-selections stud-grade-heirloom" id="accepted-heirloom-quality-diamond-clarity" style="display:none;" />
+						Inclusion on side is accepted</div>
+					<div class="rejected-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-best-quality-diamond-clarity.png" width="147" height="170" alt="Rejected clarity in diamond" class="diamond-selections stud-grade-best" id="rejected-best-quality-diamond-clarity" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-heirloom-quality-diamond-clarity.png" width="147" height="170" alt="Rejected clarity in diamond" class="diamond-selections stud-grade-heirloom" id="rejected-heirllom-quality-diamond-clarity" style="display:none;" />
+						Inclusion towards center is rejected</div>
+					<div class="clear"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="selection-process-content-block stud-grade-best" id="accepted-best-quality-diamond-clarity-content">Not all SI2's are the same. Angara selects ONLY premium SI2's which are center clean so as to maximize brilliance.</div>
+				<div class="selection-process-content-block stud-grade-heirloom" id="accepted-heirloom-quality-diamond-clarity-content" style="display:none;">Not all VS2's are the same. Angara selects ONLY premium VS2's which maximize brilliance.</div>
+			</div>
+			<div class="selections-details-block">
+				<div class="selection-process-heading">CUT</div>
+				<div class="selection-process-img-block">
+					<div class="accepted-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-best-quality-diamond-cut.png" width="147" height="170" alt="Accepted cut in diamond" class="diamond-selections stud-grade-best" id="accepted-best-quality-diamond-cut" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/selected-heirloom-quality-diamond-cut.png" width="147" height="170" alt="Accepted cut in diamond" class="diamond-selections stud-grade-heirloom" id="accepted-heirloom-quality-diamond-cut" style="display:none;" />
+						maximum brilliance</div>
+					<div class="rejected-image-box">
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-best-quality-diamond-cut.png" width="147" height="170" alt="Rejected cut in diamond" class="diamond-selections stud-grade-best" id="rejected-best-quality-diamond-cut" />
+						<img src="<?php echo $skinUrl ?>frontend/angara/diamondstud/images/rejected-heirloom-quality-diamond-cut.png" width="147" height="170" alt="Rejected cut in diamond" class="diamond-selections stud-grade-heirloom" id="rejected-heirllom-quality-diamond-cut" style="display:none;" />
+						brilliance is affected due to Higher crown</div>
+					<div class="clear"></div>
+				</div>
+				<div class="selection-process-content-block stud-grade-best" id="accepted-best-quality-diamond-cut-content">Not all cuts of a diamond are the same. Angara selects ONLY those diamonds whose crown v/s depth proportions that maximize brilliance.</div>
+				<div class="selection-process-content-block stud-grade-heirloom" id="accepted-heirloom-quality-diamond-cut-content" style="display:none;">Not all cuts of a diamond are the same. Angara selects ONLY those diamonds whose crown v/s depth proportions that maximize brilliance.</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-message">Note: - Image of product may have been enlarged and/or enhanced.</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function trackShoppingCart(res, form){
+	if(res){
+		_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart', "<?php echo $_product->getSku() ?>", undefined,true]);
+	}
+}
+	
+var productAddToCartForm = new VarienForm('product_addtocart_form');
+_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview', "<?php echo $_product->getSku() ?>", undefined, true]);
+var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+
+productAddToCartForm.submit = function(button, url) {
+	if (this.validator.validate()) {
+		var form = this.form;
+		var oldUrl = form.action;
+
+		if (url) {
+		   form.action = url;
+		}
+		var e = null;
+		try {
+			this.form.submit();
+		} catch (e) {
+		}
+		this.form.action = oldUrl;
+		if (e) {
+			throw e;
+		}
+
+		if (button && button != 'undefined') {
+			button.disabled = true;
+		}
+	}
+}.bind(productAddToCartForm);
+
+productAddToCartForm.submitLight = function(button, url){
+	if(this.validator) {
+		var nv = Validation.methods;
+		delete Validation.methods['required-entry'];
+		delete Validation.methods['validate-one-required'];
+		delete Validation.methods['validate-one-required-by-name'];
+		if (this.validator.validate()) {
+			if (url) {
+				this.form.action = url;
+			}
+			this.form.submit();
+		}
+		Object.extend(Validation.methods, nv);
+	}
+}.bind(productAddToCartForm);
+//]]>
+</script> 
+
+<!--start tracking for number of clicks by user-->
+<script type="text/javascript">
+function track(url, callback) {  
+        var xhr;  
+          
+        if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();  
+        else {  
+            var versions = ["MSXML2.XmlHttp.5.0",   
+                            "MSXML2.XmlHttp.4.0",  
+                            "MSXML2.XmlHttp.3.0",   
+                            "MSXML2.XmlHttp.2.0",  
+                            "Microsoft.XmlHttp"]  
+  
+             for(var i = 0, len = versions.length; i < len; i++) {  
+                try {  
+                    xhr = new ActiveXObject(versions[i]);  
+                    break;  
+                }  
+                catch(e){}  
+             } // end for  
+        }  
+          
+        xhr.onreadystatechange = ensureReadiness;  
+          
+        function ensureReadiness() {  
+            if(xhr.readyState < 4) {  
+                return;  
+            }  
+              
+            if(xhr.status !== 200) {  
+                return;  
+            }  
+  
+            // all is well    
+            if(xhr.readyState === 4) {  
+                callback(xhr);  
+            }             
+        }  
+          
+        xhr.open('GET', url, false);  
+        xhr.send('');  
+    } 
+</script>
+<!--End tracking for number of clicks by user-->
+
+<!--Script Added for mbox and adobe tracking starts--> 
+<script type="text/javascript">
+	var curid = <?php echo $_product->getId(); ?>;
+	var cursku = "<?php echo $_product->getSku(); ?>";
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	
+	if(typeof(s)!='undefined')
+			s.t();
+</script> 
+
+<!--Script Added for mbox and adobe tracking ends-->

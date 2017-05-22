@@ -1,0 +1,51 @@
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+
+<?php //echo $this->getChildHtml('media') ?>
+<?php //echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+<?php //echo $_product->getId() ?>
+<?php //echo $this->getChildHtml('product_type_data') ?>								
+
+						<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+							<?php if ($_product->getDescription()): ?>
+							<?php echo $_product->getDescription() ?>
+							<?php endif ?>
+					<?php
+					
+					/* Certificate work started by hitesh */
+					/*$cert = new stdClass();
+					$cert->name = $_product->getName();
+					$cert->description = $_product->getDescription();
+					$cert->sku = $_helper->productAttribute($_product, $_product->getSku(), 'sku');
+					$cert->metal = $_product->getAttributeText('metal');
+					$cert->sone1 = array();
+					$cert->sone1['name'] = $_product->getAttributeText('emb_stone_name');
+					$cert->sone1['count'] = $_product->getData('emb_number_of_stones1');
+					$cert->sone1['shape'] = $_product->getAttributeText('emb_shape1');
+					$cert->sone1['dimension'] = $_product->getData('emb_dimension1');
+					$cert->sone1['weight'] = $_product->getData('emb_carat_weight1');
+					$cert->sone1['grade'] = $_product->getAttributeText('emb_quality_grade1');
+					$cert->sone1['setting'] = $_product->getAttributeText('emb_setting_type1');
+					$cert->sone2 = array();
+					$cert->sone2['name'] = $_product->getAttributeText('emb_stone_name2');
+					$cert->sone2['count'] = $_product->getData('emb_number_of_stones2');
+					$cert->sone2['shape'] = $_product->getAttributeText('emb_shape2');
+					$cert->sone2['dimension'] = $_product->getData('emb_dimension2');
+					$cert->sone2['weight'] = $_product->getData('emb_carat_weight2');
+					$cert->sone2['grade'] = $_product->getAttributeText('emb_quality_grade2');
+					$cert->sone2['setting'] = $_product->getAttributeText('emb_setting_type2');
+					$cert->sone3 = array();
+					$cert->sone3['name'] = $_product->getAttributeText('emb_stone_name3');
+					$cert->sone3['count'] = $_product->getData('emb_number_of_stones3');
+					$cert->sone3['shape'] = $_product->getAttributeText('emb_shape3');
+					$cert->sone3['dimension'] = $_product->getData('emb_dimension3');
+					$cert->sone3['weight'] = $_product->getData('emb_carat_weight3');
+					$cert->sone3['grade'] = $_product->getAttributeText('emb_quality_grade3');
+					$cert->sone3['setting'] = $_product->getAttributeText('emb_setting_type3');*/
+					?>
+					
+<?php 
+	
+?>

@@ -1,0 +1,306 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.searchautocomplete {
+  height:24px;
+  line-height:24px; 
+  display: block;
+  
+}
+.searchautocomplete .sprite {
+  background: url('../images/mirasvit/sprite.png');
+}
+.searchautocomplete > label {
+  float: left;
+  margin-right: 10px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 8px;
+}
+.searchautocomplete .nav { 
+  height: 24px;
+  width:auto;
+  background:none;
+}
+.searchautocomplete .nav .nav-search-in {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 11;
+}
+.searchautocomplete .nav .nav-search-in .category {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  background: white;
+  border: 1px solid #DDD;
+  color: black;
+  cursor: pointer;
+  height: 29px;
+  left: 5px;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  visibility: visible;
+  width: auto;
+}
+.searchautocomplete .nav .nav-search-in .category-fake {
+
+  border-right: 1px solid #dddddd;
+  color: #777;
+  cursor: pointer;
+  float: left;
+  font-size: 11px;
+  height: 27px;
+  line-height: 27px;
+  margin: 4px 0px 0px 2px;
+  padding: 0px 25px 0px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+.searchautocomplete .nav .nav-search-in .nav-down-arrow {
+  background: url('../images/mirasvit/sprite.png');
+  width: 9px;
+  height: 5px;
+  background-position: -26px -34px;
+  display: block;
+  right: 10px;
+  top: 16px;
+  position: absolute;
+}
+.searchautocomplete .nav .nav-search-in:hover .category-fake {
+  background-color: #eeeeee;
+  background-image: -moz-linear-gradient(top, #f7f7f7, #e1e1e1);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7), to(#e1e1e1));
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #e1e1e1);
+  background-image: -o-linear-gradient(top, #f7f7f7, #e1e1e1);
+  background-image: linear-gradient(to bottom, #f7f7f7, #e1e1e1);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff7f7f7', endColorstr='#ffe1e1e1', GradientType=0);
+}
+.searchautocomplete .nav .nav-search-in:hover .nav-down-arrow {
+  background-position: -6px -34px;
+}
+.searchautocomplete .nav .nav-input {
+}
+.searchautocomplete .nav .nav-input:before,
+.searchautocomplete .nav .nav-input:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.searchautocomplete .nav .nav-input:after {
+  clear: both;
+}
+.searchautocomplete .nav .nav-input input { 
+  padding: 0px;
+  height: 16px;
+  line-height:16px;
+  border: 0px; 
+  font-size: 11px;
+  background-color:#F6F6F6;
+  color: #949494;
+  outline: 0px;
+  padding:4px 0 4px 0;
+  margin:0 4px;  
+  vertical-align:top;
+  width:84%;
+}
+.searchautocomplete .nav .nav-input input.suggest {
+  display: none;
+  color: #999;
+  z-index: 9;
+}
+.searchautocomplete .nav-submit-button {
+  background: url(/skin/frontend/angara/default/images/search-btn.jpg) 3px 3px no-repeat; 
+  height:24px;
+  width:25px;  
+  position:absolute;
+  top:0;
+  right:0;
+    background-color:#F6F6F6;
+  
+}
+.searchautocomplete .nav-submit-button .button {
+	width:24px;
+	height:24px;
+	cursor:pointer;
+}
+.searchautocomplete .nav-submit-button .button:hover {
+}
+.searchautocomplete .searchautocomplete-placeholder {
+  background: #FFF;
+  border: 1px solid #ccc; 
+  position: absolute;
+  right:0px;
+  top:23px;
+  width:99.3%;
+  max-height:300px;
+  overflow:auto;
+  z-index: 102;
+}
+.searchautocomplete .searchautocomplete-placeholder:before {
+  border-color: transparent transparent #CCC transparent;
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 5px;
+  height: 0;
+  width: 0;
+  top: -11px;
+  left: 30px;
+}
+.searchautocomplete .searchautocomplete-placeholder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li {
+  *zoom: 1;
+  text-align: left;
+  padding:3px;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li:before,
+.searchautocomplete .searchautocomplete-placeholder ul li:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li:after {
+  clear: both;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li a {
+  text-decoration: none;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li a strong {
+  font-weight:normal;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li a .pull-right {
+  float: right;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li.active {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li.active a {
+  text-decoration: none;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li .searchautocomlete-image {
+  float: left;
+  margin: 0px 3px 5px 0px;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box {
+  font-weight: bold;
+  font-size: 13px;
+  color: #C76200;
+  float: right;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box .regular-price .price-label,
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box .old-price .price-label,
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box .special-price .price-label {
+  display: none;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box .price-label {
+  font-weight: normal;
+  color: #999;
+}
+.searchautocomplete .searchautocomplete-placeholder ul li .price-box .old-price .price {
+  font-size: 0.9em;
+  color: #999;
+}
+.searchautocomplete .searchautocomplete-placeholder .index-title {
+  text-align: right;
+  color: #0A263C;
+  border-bottom: 1px solid #CCC;
+  padding: 2px 5px;
+}
+.searchautocomplete .searchautocomplete-placeholder .index-title span {
+  color: #666;
+  font-size: 0.9em;
+}
+.searchautocomplete .searchautocomplete-placeholder .all {
+  text-align: right;
+  margin: 10px 10px 5px 10px;
+}
+.searchautocomplete .searchautocomplete-loader {
+  position:absolute;
+  top:3px;
+  right:26px;
+  width: 16px;
+  height: 16px;
+  background: url('../images/mirasvit/loader.gif');
+}
+.searchautocomplete-widget {
+  position: relative;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  right: auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.searchautocomplete-placeholder .name
+{
+	font-size:11px;
+	line-height:14px;
+}
+.searchautocomplete-placeholder .catalog-price-bold span.price
+{
+	color:#CE0000;
+	font-size:14px;
+	font-weight:normal;
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	display:block;	
+	line-height:11px;
+}
+
+.searchautocomplete-placeholder .search_pro-details
+{
+	float:left;
+	width:129px;
+	overflow:hidden;
+}
+
+.searchautocomplete-placeholder .easy-pay-price
+{
+	color:#000!important;
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size:11px;
+}
+
+.searchautocomplete-placeholder .all a
+{
+	text-decoration:underline;
+	color:#CE0000;
+}
+
+.search_pro-details .regular-price, .search_pro-details .easy-pay-price
+{
+	padding:0;
+}

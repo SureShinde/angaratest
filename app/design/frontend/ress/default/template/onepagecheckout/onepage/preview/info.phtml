@@ -1,0 +1,117 @@
+<div id="checkout-preview-table-wrapper">
+    <table class="order-products-table table table-condensed table-no-border" id="checkout-preview-table">
+		<?php	//	S:VA
+            $checkout = Mage::getSingleton('checkout/session')->getQuote();
+            $billing = $checkout->getBillingAddress();
+            $shipping = $checkout->getShippingAddress();
+			
+			$bill_data = $this->getRequest()->getPost('shipping', array());
+			//echo '<pre>';print_r($bill_data);die;
+			$same_as_billing	=	$bill_data['same_as_billing'];
+			if($same_as_billing==1){
+				$billing	=	$shipping;
+			}
+        ?> 
+		<div class="step-heading">
+			<div class="pull-left">Shipping</div>
+			<a class="pull-right edit-btn1" href="javascript:void(0)" data-id="opc-step1">Edit</a>
+		</div>
+		<div class="col-sm-12 shipping-detail opc-step1">
+			<div class="col-sm-6 max-margin-top">
+				<strong><?php echo 'Shipping Address'; ?></strong><br>
+				<div class="clearfix"></div>
+				<div class="high-margin-top shipping-address">
+					<?php echo $shipping->format("pdf"); ?>
+				</div>
+			</div>
+			<div class="col-sm-6 max-margin-top">
+				<strong><?php echo 'Shipping Method'; ?></strong>
+				<div class="clearfix"></div>
+				<div class="high-margin-top">
+				<?php if ($checkout) {
+						echo $checkout->getShippingAddress()->getShippingDescription();
+				} ?>
+				</div>
+			</div>
+		</div>
+        <div class="step-heading max-margin-top">
+			<div class="pull-left">Payment</div>
+			<a class="pull-right edit-btn1" href="javascript:void(0)" data-id="opc-step2">Edit</a>
+		</div>
+		<div class="col-sm-12 Billing-detail opc-step2">
+			<div class="col-sm-6 max-margin-top">
+				<strong><?php echo 'Billing Address'; ?></strong><br>
+				<div class="clearfix"></div>
+				<div class="high-margin-top billing-address">
+					<?php echo $billing->format("pdf"); ?>
+				</div>
+			</div>
+			<div class="col-sm-6 max-margin-top">
+				<strong><?php echo 'Payment Method'; ?></strong>
+				<div class="clearfix"></div>
+				<?php 
+				$paymentData = $this->getRequest()->getPost('payment', array());
+				//echo '<pre>';print_r($paymentData);
+				$method = '';
+				if($paymentData){
+					$method		=	$paymentData['cc_type'];
+					$ccNumber	=	substr($paymentData['cc_number'],-4,4);
+					$ccExpMonth	=	$paymentData['cc_exp_month'];
+					if(strlen($ccExpMonth)==1){
+						$ccExpMonth	=	'0'.$ccExpMonth;
+					}
+					$ccExpYear	=	substr($paymentData['cc_exp_year'],-2,2);
+					$payment_method = isset($paymentData['method'])?$paymentData['method']:'';
+				}
+				?>
+					<?php if($payment_method != 'gene_braintree_creditcard'){?>
+						<div class="clearfix high-margin-top" style="color:#555555">Credit Card</div>
+						<div class="cards low-margin-top low-margin-bottom clearfix">
+							<?php if($method == 'AE'){
+								$card = 'amex';
+							}elseif($method == 'VI'){
+								$card = 'visa';
+							}elseif($method == 'MC'){
+								$card = 'master';
+							}elseif($method == 'DI'){
+								$card = 'discover';
+							} ?>
+							<span class="text-center payment-cards">
+								<?php if($card){ ?>
+								<img src="/skin/frontend/ress/default/images/cards/<?php echo $card; ?>.png" alt="<?php echo $card; ?>" style="max-height:50px; margin:0px auto 10px;"/>
+								<?php } ?>
+								<?php echo '<span class="card-number small" style="color:#555555"><br>************'.$ccNumber.'</span>'; ?>
+							</span>
+						</div>
+						<div class="clearfix" style="color:#555555">
+							<?php echo 'Exp. '.$ccExpMonth.'/'.$ccExpYear; ?>
+						</div>
+					<?php } else if($payment_method == 'gene_braintree_creditcard') { ?>
+					    <div class="clearfix high-margin-top" style="color:#555555">Credit Card</div>
+					    <div class="cards low-margin-top low-margin-bottom clearfix">	
+						    <span class="text-center payment-cards">
+								
+								<img id="braintree_cards" src="" alt="Credit Card" style="max-height:50px; margin:0px auto 10px;"/>
+									
+							</span>
+						</div>
+						
+					<?php } ?>
+					
+
+					<script>
+					if(document.getElementById("braintree_cards"))
+						document.getElementById("braintree_cards").src = braintree_cards;
+					</script>
+                    <div class="clearfix" style="color:#555555">
+						<?php 
+						$_coreHelper 	= 	$this->helper('core');
+						$cartTotal		=	$this->helper('checkout')->formatPrice(Mage::getSingleton('checkout/session')->getQuote()->getGrandTotal());
+						echo 'Amount: '. $cartTotal;?>
+					</div>
+					<div class="clearfix">
+						</div>
+			</div>
+		</div>	
+    </table>
+</div>

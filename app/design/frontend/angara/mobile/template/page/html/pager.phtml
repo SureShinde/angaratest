@@ -1,0 +1,87 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Pager template
+ *
+ * @see Mage_Page_Block_Html_Pager
+ */
+
+if($this->getCollection()->getSize()): 
+	if($this->getLastPageNum()>1): ?>
+		<div class="pages">
+			<ol>
+			<?php 
+			if(!$this->isFirstPage()): ?>
+				<li>
+					<a class="pre previous<?php if(!$this->getAnchorTextForPrevious()): ?> i-previous<?php endif;?>" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo $this->__('Previous') ?>">
+						<?php /*if(!$this->getAnchorTextForPrevious()): ?>
+							<img src="<?php echo $this->getSkinUrl('images/pager_arrow_left.gif') ?>" alt="<?php echo $this->__('Previous') ?>" class="v-middle" />
+						<?php else: ?>
+							<?php echo $this->getAnchorTextForPrevious() ?>
+						<?php endif;*/?>
+					</a>
+				</li>
+			<?php 
+			else: ?>
+				<li class="preDisable">Previous</li>
+			<?php 
+			endif; ?>
+			
+			<li class="pageno">Page <?php echo $this->getCurrentPage() ?> of <?php echo $this->getLastPageNum(); ?></li>
+			<?php 
+			if (!$this->isLastPage()): ?>
+				<li>
+					<a class="next<?php if(!$this->getAnchorTextForNext()): ?> i-next<?php endif; ?>" href="<?php echo $this->getNextPageUrl() ?>" title="<?php echo $this->__('Next') ?>">
+						<?php /*if(!$this->getAnchorTextForNext()): ?>
+							<img src="<?php echo $this->getSkinUrl('images/pager_arrow_right.gif') ?>" alt="<?php echo $this->__('Next') ?>" class="v-middle" />
+						<?php else: ?>
+							<?php echo $this->getAnchorTextForNext() ?>
+						<?php endif;*/?>
+					</a>
+				</li>
+			<?php 
+			else: ?>
+				<li class="nextDisable">Next</li>
+			<?php 
+			endif ?>
+			</ol>
+		</div>
+	<?php 
+	endif; ?>
+	<?php /*?><div class="sortby"> <!-- is closed in toolbar.phtml -->
+		<div class="relevance">
+			<select onchange="setLocation(this.value);catalogItemsNumberChange(this.options[this.selectedIndex].text);" class="relevanceselect">
+				<?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+				<option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+					<?php echo $_limit ?> <?php echo $this->__('per page') ?>
+				</option>
+				<?php endforeach; ?>
+			</select>
+		</div><?php */?>
+<?php 
+endif;?>
+<!-- end of pager.phtml -->

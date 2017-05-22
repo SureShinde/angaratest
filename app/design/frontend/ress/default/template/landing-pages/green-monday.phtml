@@ -1,0 +1,121 @@
+<?php	//	Check form submission
+	$submit	=	Mage::getSingleton('core/session')->getData('frm_submit');	//	get the session
+	//Mage::getSingleton('core/session')->setData('frm_submit',false);		//	expire the session
+?>
+<style>
+.messages{display:none!important}
+
+.col-4{
+	width:33.33333%;
+	padding-left:8px;
+	padding-right:8px;
+	float:left;
+	position:relative;
+	cursor:pointer;
+}
+.col-4 span.btn{
+	background: transparent;
+    border: 1px solid #333333;
+    border-radius: 2px;
+    text-shadow: none;
+    color: #333333;
+    position: absolute;
+    left: 50%;
+    margin-left: -45px;
+	bottom: 44%;
+	cursor:pointer;
+}
+.col-4:hover span.btn{
+	border: 1px solid #fa505a;
+	color: #fa505a;
+}
+.col-4 span.btn.hd{
+	bottom: 9%;
+}
+
+.mob, .ipad{display:none}
+
+@media (max-width:1024px){
+	.col-4 span.btn{bottom:42%;}
+	.col-4 span.btn.hd{bottom:6%;}
+}
+
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+@media (max-width:1024px){
+	.col-4 span.btn{color:#fa505a; border:1px solid #fa505a;}
+}
+@media (max-width:768px){
+	.ipad{display:block}
+	.des{display:none}
+	.col-4 span.btn.hd{bottom:11%;}
+	.col-4 span.btn.hdsb{bottom:24%;}
+	.col-4 span.btn.mdb{bottom:38%;}
+}
+<?php } ?>
+@media (max-width:500px){
+	.thankyou-msg{clear:both}
+	.black-cyber .signup-box .text{padding:16px;}
+	.footer-newsletter{display:none!important}
+	.footer-links{border-top:1px solid #efefef}
+	.footer-links ul.links{margin-bottom:0px}
+}
+</style>
+<div class="container showcase-bg-white min-padding-top relative-placeholder">
+	<div class="black-friday black-cyber">
+		<div class="col-sm-12 no-padding">
+			<div class="col-sm-12 head-banner high-margin-top">
+				<img class="img-responsive des" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/gm-main-banner.jpg" alt="Green Monday"/>
+				<img class="img-responsive ipad" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/gm-main-banner-ipad.jpg" alt="Green Monday"/>
+				<img class="img-responsive mob" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/gm-main-banner-mobile.jpg" alt="Green Monday"/>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 high-margin-bottom">
+				<ul class="breadcrumb high-padding-top" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+					<li class="home" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+						<a itemprop="item" href="http://www.angara.com/" title="Go to Home Page"><span itemprop="name">Home</span></a>
+						<meta itemprop="position" content="1">
+					</li>
+					<li class="cms_page" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+						<strong itemprop="name">Green Monday Deals</strong>
+						<meta itemprop="position" content="2">
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 page-title category-title" style="border-bottom: 2px solid #fa505a;">
+				<h1 class="no-margin high-padding-bottom text-center pull-left">
+					<span class="pull-left">2016 Green Monday Deals</span>
+				</h1>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 high-margin-top">
+				<p>Fine jewelry shopping just got more exciting! Make the most of Angara’s Green Monday Deals to get your hands on exquisitely crafted jewelry, including rings, earrings, pendants and bracelets, at amazing prices. Whether you are looking to expand your collection or gift something unique to a special someone, what could be better than Angara’s Green Monday Deals to satiate your thirst from some bling? Cheers to shopping your heart out!</p>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 no-padding high-margin-top">
+				<div class="col-4 high-margin-top">
+					<a href="/deal-of-the-day?cid=gm-page|dod|20off|12112016">
+						<img class="img-responsive des" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/holiday-special.jpg" alt="Green Monday"/>
+						<img class="img-responsive ipad" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/holiday-special-ipad.jpg" alt="Green Monday"/>
+						<span class="btn hd">Shop Now</span>
+					</a>
+				</div>
+				<div class="col-4 high-margin-top">
+					<a href="/products?cid=gm-page|offer|15off|12112016">
+						<img class="img-responsive des" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/holiday-special-sale.jpg" alt="Green Monday"/>
+						<img class="img-responsive ipad" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/holiday-special-sale-ipad.jpg" alt="Green Monday"/>
+						<span class="btn hdsb">Shop Now</span>
+					</a>
+				</div>
+				<div class="col-4 high-margin-top">
+					<a href="/coupons?cid=gm-page|deals|more|12112016">
+						<img class="img-responsive des" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/more-deals.jpg" alt="Green Monday"/>
+						<img class="img-responsive ipad" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/green-monday/more-deals-ipad.jpg" alt="Green Monday"/>
+						<span class="btn mdb" style="margin-left:-64px;">Select Your Deal</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

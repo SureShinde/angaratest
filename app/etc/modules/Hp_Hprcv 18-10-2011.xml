@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<modules>
+		<Hp_Hprcv>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Hp_Hprcv>
+		<Hp_Bredcrums>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Hp_Bredcrums>
+	</modules>
+</config>

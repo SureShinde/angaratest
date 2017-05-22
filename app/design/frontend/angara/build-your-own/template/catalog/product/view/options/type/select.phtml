@@ -1,0 +1,215 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php /* @var $this Mage_Catalog_Block_Product_View_Options_Type_Select */ ?>
+<?php $_option = $this->getOption() ?>
+<?php  $sel = ''; ?>
+<?php
+if(isset($_REQUEST['build_step_last']))
+{
+	if(isset($_REQUEST['options']) && !empty($_REQUEST['options'])){
+		foreach($_REQUEST['options'] as $ky=>$val){
+			$rsize = $val;
+		}
+	}	
+?>	
+	<div style="display:none;">
+	<?php
+    $optionType = $_option->getType();
+	//echo $optionType.'<br><br>';
+    if ($optionType == 'drop_down')
+	{
+    	$values = $_option->getValues();
+    ?>
+    <dt>
+        <label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><!--<?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>--><?php echo $_option->getTitle() ?></label>
+        <?php echo $this->getFormatedPrice() ?>
+    </dt>
+    <dd>
+    	<select class="required-entry product-custom-option" id="<?php echo $_option->getId() ?>" name="options[<?php echo $_option->getid() ?>]" onchange="opConfig.reloadPrice()">
+            <option value="">Select</option>
+            <?php
+            foreach ($values as $k => $v):        	
+                if($rsize==$v->getOptionTypeId()){
+                    $sel = 'selected="selected"';
+                }else{
+                    $sel = '';
+                }
+            ?>
+            <option value="<?php echo $v->getOptionTypeId() ?>" <?php echo $sel;?>><?php echo $v->getDefaultTitle()?></option>
+            <?php
+            endforeach;
+            ?>
+        </select>
+    </dd>
+    <?php
+	}elseif ($optionType == 'radio')
+	{
+		$values = $_option->getValues();
+	?>
+    	<?php		
+		$product_option_type = '';	
+		if(count($values)>0)
+		{
+			foreach ($values as $k => $v):				
+				if (stripos($v->getSku(), 'CS') !== false) {					
+					$product_option_type = 'stone_size';
+					$display_on_load = 'style="display:block;"';
+					$s1 = 1;
+				}elseif (stripos($v->getSku(), 'SS') !== false) {
+					$product_option_type = 'side_stone';	
+					$display_on_load = 'style="display:none;"';
+					$s2 = 1;
+				}elseif (stripos($v->getSku(), 'SQ') !== false) {
+					$product_option_type = 'stone_quality';
+					$display_on_load = 'style="display:none;"';
+					$s3 = 1;
+				}elseif (stripos($v->getSku(), 'MT') !== false) {
+					$product_option_type = 'metal_type';
+					$display_on_load = 'style="display:none;"';		
+					$s4 = 1;
+				}else {
+					$product_option_type = 'ring_size';
+					$display_on_load = 'style="display:none;"';
+				}
+			endforeach;
+		}		
+		?>   
+        <div class="pagetitle" id="pageheading"><?php echo $_option->getTitle() ?></div><div class="clear"></div>
+        <?php echo $this->getFormatedPrice() ?>
+	<?php
+		$x=1;
+        foreach ($values as $k => $v):
+		//print_r($v);
+        	if($product_option_type=='stone_size'){
+				if(stripos($_SESSION['code_arr']['product_default_stone_size'], trim(str_replace('mm','',$v->getDefaultTitle()))) !== false) {
+					$sel = 'checked="checked"';					
+				}else{
+					$sel = '';
+				}
+			}elseif($product_option_type=='side_stone'){
+				if(trim($_SESSION['code_arr']['product_side_stone_val']) == trim($v->getDefaultTitle())) {
+					$sel = 'checked="checked"';					
+				}else{
+					$sel = '';
+				}
+			}elseif($product_option_type=='stone_quality'){
+				if(trim($_SESSION['code_arr']['product_default_grade']) == trim($v->getDefaultTitle())) {
+					$sel = 'checked="checked"';					
+				}else{
+					$sel = '';
+				}
+			}elseif($product_option_type=='metal_type'){		
+				if(stripos($_SESSION['code_arr']['product_default_metal'], trim($v->getDefaultTitle())) !== false) {
+					$sel = 'checked="checked"';					
+				}else{
+					$sel = '';
+				}
+			}			
+		?>
+        <input <?php echo $sel;?> type="radio" price="<?php echo $v->getPrice() ?>" id="options_<?php echo $_option->getId() ?>_<?php echo $x; ?>" name="options[<?php echo $_option->getid() ?>]" onclick="opConfig.reloadPrice()" class="validate-one-required-by-name product-cust" value="<?php echo $v->getOptionTypeId() ?>"><?php echo $v->getDefaultTitle()?>
+		<?php
+        	$x++;
+		endforeach;
+        ?>
+    <?php	
+	}
+    ?>
+    </div>  
+<?php
+}else{
+?>  
+    <?php
+    $optionType = $_option->getType();
+    if ($optionType == 'drop_down'):
+    $values = $_option->getValues();
+    ?>
+    <div style="height:30px; ">
+    <span class="ringsize" style="padding-bottom:6px;"><?php echo $_option->getTitle() ?>:</span>
+        <?php echo $this->getFormatedPrice() ?>
+    
+    <span style="padding-bottom:6px;"><select class="required-entry product-custom-option lestselect" id="<?php echo $_option->getId() ?>" name="options[<?php echo $_option->getid() ?>]" onchange="opConfig.reloadPrice()">
+        <option value="">Select</option>
+        <?php
+        foreach ($values as $k => $v):
+        ?>    
+        <option value="<?php echo $v->getOptionTypeId() ?>"><?php echo $v->getDefaultTitle()?></option>
+        <?php
+        endforeach;
+        ?>
+        </select>
+    </span>
+    </div>
+    <?php
+    endif;
+    ?>
+<?php
+}
+?>	
+
+<!-- custom html -->
+
+<?php  $sel = ''; ?>
+<?php
+/*
+if(isset($_REQUEST['build_step_last']))
+{
+	if(isset($_REQUEST['options']) && !empty($_REQUEST['options'])){
+		foreach($_REQUEST['options'] as $ky=>$val){
+			$rsize = $val;	
+		}
+	}	
+?>
+	<?php $optionType = $_option->getType(); ?>    
+    <?php
+	if ($optionType == 'radio')
+	{
+		$values = $_option->getValues();
+	?>
+        <div class="pagetitle" id="pageheading"><?php echo $_option->getTitle() ?></div><div class="clear"></div>
+        <?php echo $this->getFormatedPrice() ?>
+	<?php
+		$x=1;
+        foreach ($values as $k => $v):			
+        	if($x==2){
+				$sel = 'checked="checked"';
+			}else{
+				$sel = '';
+			}
+		?>
+        <input <?php echo $sel;?> type="radio" price="<?php echo $v->getPrice() ?>" id="options_<?php echo $_option->getId() ?>_<?php echo $x; ?>" name="options[<?php echo $_option->getid() ?>]" onclick="opConfig.reloadPrice()" class="validate-one-required-by-name product-cust" value="<?php echo $v->getOptionTypeId() ?>"><?php echo $v->getDefaultTitle()?>		
+		<?php
+        	$x++;
+		endforeach;
+        ?>
+    <?php	
+	}
+    ?>
+<?php
+}
+*/
+?>

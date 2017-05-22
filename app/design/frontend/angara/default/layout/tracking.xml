@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <tracking_index_index>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="tracking/form" name="tracking_form" template="tracking/form.phtml" />
+        </reference>
+    </tracking_index_index>
+    
+    <tracking_index_search>
+        <reference name="content">
+            <block type="tracking/result" name="tracking_result" template="tracking/result.phtml" />
+        </reference>
+    </tracking_index_search>
+    
+    <tracking_index_ajax>
+         <block type="tracking/result" name="root" template="tracking/result.phtml" />
+    </tracking_index_ajax>
+</layout>

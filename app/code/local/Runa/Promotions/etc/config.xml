@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Runa_Promotions>
+            <version>2.8.0</version>
+        </Runa_Promotions>
+    </modules>
+    <frontend>
+        <!--frontend routs config-->
+        <routers>
+            <runapromotions>
+                <use>standard</use>
+                <args>
+                    <module>Runa_Promotions</module>
+                    <frontName>runa</frontName>
+                </args>
+            </runapromotions>
+        </routers>
+        <layout>
+            <updates>
+                <runapromotions>
+                    <file>../../../../../code/local/Runa/Promotions/layouts/magento_4_X/runa_promotions.xml</file>
+                </runapromotions>
+                <runapromotions_3_X>
+                    <file>../../../../../code/local/Runa/Promotions/layouts/magento_3_X/runa_promotions.xml</file>
+                </runapromotions_3_X>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <runapromotions>
+                    <files>
+                        <default>Runa_Promotions.csv</default>
+                    </files>
+                </runapromotions>
+            </modules>
+        </translate>
+
+         <!--event config-->
+        <events>
+
+           <!--product add event listner just to register the item being added -->
+          
+            <sales_quote_item_save_after>
+                <observers>
+                    <runa_item_save>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Item_Add</class>
+                        <method>sendItemToRuna</method>
+                    </runa_item_save>
+                </observers>
+            </sales_quote_item_save_after>
+
+
+              <!--product add event listner just to register the item being added -->
+            <sales_quote_item_save_before>
+                <observers>
+                    <runa_item_save>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Item_Add</class>
+                        <method>registerItemQuantity</method>
+                    </runa_item_save>
+                </observers>
+            </sales_quote_item_save_before>
+
+            <!--event listner tat triggers runa delete product call-->
+            <sales_quote_remove_item>
+                <observers>
+                    <runa_product_delete_after>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Item_Delete</class>
+                        <method>sendItemToRuna</method>
+                    </runa_product_delete_after>
+                </observers>
+            </sales_quote_remove_item>
+
+           <!--event listner to sebd updated item to runa-->
+            <checkout_cart_update_items_after>
+                <observers>
+                    <runa_cart_update>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Cart_Update</class>
+                        <method>sendItemsToRuna</method>
+                    </runa_cart_update>
+                </observers>
+            </checkout_cart_update_items_after>
+
+           <!-- event listener to listen for a successfull cart purchase -->
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <addinfo_order_success>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Cart_Buy</class>
+                        <method>buyCart</method>
+                    </addinfo_order_success>
+                </observers>
+            </checkout_onepage_controller_success_action>
+
+            <catalog_block_product_list_collection>
+                <observers>
+                    <runa_product_list_tags>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Category_View</class>
+                        <method>addRunaTags</method>
+                    </runa_product_list_tags>
+                </observers>
+            </catalog_block_product_list_collection>
+
+            <controller_action_layout_render_before_catalog_product_view>
+                <observers>
+                    <runa_product_view_tag>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Product_View</class>
+                        <method>addRunaProductTag</method>
+                    </runa_product_view_tag>
+                </observers>
+            </controller_action_layout_render_before_catalog_product_view>
+            
+            
+            <core_layout_update_updates_get_after>
+                <observers>
+                    <add_runa_totals_to_email>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_Layout_Select</class>
+                        <method>selectFrontendLayout</method>
+                    </add_runa_totals_to_email>
+                </observers>
+            </core_layout_update_updates_get_after>
+
+        </events>
+    </frontend>
+
+    <admin>
+        <routers>
+            <runapromotions>
+                <use>admin</use>
+                <args>
+                    <module>Runa_Promotions</module>
+                    <frontName>runa_promotions</frontName>
+                </args>
+            </runapromotions>
+        </routers>  
+    </admin>
+    <adminhtml>
+        <events>
+            <core_layout_update_updates_get_after>
+                <observers>
+                    <add_runa_totals_to_admin>
+                        <type>singleton</type>
+                        <class>Runa_Promotions_Model_Events_layout_Select</class>
+                        <method>selectAdminLayout</method>
+                    </add_runa_totals_to_admin>
+                </observers>
+            </core_layout_update_updates_get_after>    
+        </events>
+        <layout>
+            <updates>
+                <runapromotions_admin>
+                    <file>../../../../../code/local/Runa/Promotions/layouts/magento_4_X/runa_promotions_admin.xml</file>
+                </runapromotions_admin>
+                <runapromotions_admin_3_X>
+                    <file>../../../../../code/local/Runa/Promotions/layouts/magento_3_X/runa_promotions_admin.xml</file>
+                </runapromotions_admin_3_X>
+            </updates>
+        </layout>
+    </adminhtml>
+  
+    <global>
+
+         <!--Convertitng the quote "runa_discount" into order "runa_discount"-->
+        <fieldsets>
+            <sales_convert_quote>
+                <runa_discount_total>
+                    <to_order>*</to_order>
+                </runa_discount_total>
+                <runa_discount_shipping>
+                    <to_order>*</to_order>
+                </runa_discount_shipping>
+            </sales_convert_quote>
+           
+            <sales_convert_quote_item>
+                <runa_item_discount_total>
+                    <to_order_item>*</to_order_item>
+                </runa_item_discount_total>
+            </sales_convert_quote_item>
+            
+            <sales_convert_order>
+                <runa_discount_total>
+                    <to_invoice>*</to_invoice>
+                </runa_discount_total>
+                <runa_discount_shipping>
+                    <to_invoice>*</to_invoice>
+                </runa_discount_shipping>
+            </sales_convert_order>
+             
+            <sales_convert_order_item>
+                <runa_item_discount_total>
+                    <to_invoice_item>*</to_invoice_item>
+                </runa_item_discount_total>
+            </sales_convert_order_item>
+        </fieldsets>
+
+        <!--update the order total based on runa api sendcart call-->
+        <sales>
+            <quote>
+                <totals>
+                    <!--update total by requesting runa-->
+                    <runa_update_totals>
+                        <class>Runa_Promotions_Model_Events_Cart_View</class>
+                        <after>tax,grand_total</after>
+                    </runa_update_totals>
+                         <!--add runa discount-->
+                    <special_discount_runa>
+                        <class>Runa_Promotions_Model_Totals_Runa_Discount_Total</class>
+                        <after>runa_update_totals</after>
+                    </special_discount_runa>
+                      <!--add runa shipping discount-->
+                    <special_shpping_discount_runa>
+                        <class>Runa_Promotions_Model_Totals_Runa_Discount_Shipping</class>
+                        <after>special_discount_runa</after>
+                    </special_shpping_discount_runa>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <!--adjust the grand total in the invoice-->
+                    <special_discount_runa>
+                        <class>Runa_Promotions_Model_Totals_Runa_Discount_Invoice_Grand</class>
+                        <after>tax</after>
+                    </special_discount_runa>
+                </totals>
+            </order_invoice>
+        </sales>
+   
+        <!--model config-->
+        <models>
+            <runapromotions>
+                <class>Runa_Promotions_Model</class>
+                <resourceModel>runapromotions_mysql4</resourceModel>
+            </runapromotions>
+            <runapromotions_mysql4>
+                <class>Runa_Promotions_Model_Mysql4</class>
+                <entities>
+                    <debug_log>
+                        <table>runa_debug_log</table>
+                    </debug_log>
+                    <service_log>
+                        <table>runa_service_log</table>
+                    </service_log>
+                </entities>
+            </runapromotions_mysql4>
+          
+          <!--for magento 1.3.X-->
+            <sales>
+                <rewrite>
+                    <quote_address_total_discount>Runa_Promotions_Model_Totals_Discount</quote_address_total_discount>
+                </rewrite>    
+            </sales>
+            
+            <!--for magento 1.4.X and above-->
+            <salesrule>
+                <rewrite>
+                    <quote_discount>Runa_Promotions_Model_Totals_Latest_Discount</quote_discount>    
+                </rewrite>    
+            </salesrule>
+            
+            
+        </models>
+        <!--setup config-->
+        <resources>
+            <runapromotions_setup>
+                <setup>
+                    <module>Runa_Promotions</module>
+                    <class>Mage_Sales_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </runapromotions_setup>
+            <runapromotions_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </runapromotions_write>
+            <runapromotions_write>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </runapromotions_write>
+        </resources>
+        
+        <blocks>
+            <runapromotions>
+                <class>Runa_Promotions_Block</class>
+            </runapromotions>
+        </blocks>
+        <helpers>
+            <runapromotions>
+                <class>Runa_Promotions_Helper</class>
+            </runapromotions>
+        </helpers>
+    </global>
+    
+    <default>
+
+        <sales>
+
+            <totals_sort>
+                <runa_update_totals>101</runa_update_totals>
+                <special_discount_runa>102</special_discount_runa>
+                <special_shpping_discount_runa>103</special_shpping_discount_runa>
+            </totals_sort>
+        
+            <runa_promote>
+                <debug_mode>0</debug_mode>
+                <mode>PROD</mode>
+                <shipping_discount_prefix>Free</shipping_discount_prefix>
+                <default_discount_text>Special Offer Discount</default_discount_text>
+                <runa_api_timeout>2</runa_api_timeout>>
+            </runa_promote>
+        </sales>
+    </default>
+    
+    <crontab>
+        <jobs>
+            <runa_debuglog_clean>
+                <schedule>
+                    <cron_expr>*/10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>runapromotions/log_debug::clean</model>
+                </run>
+            </runa_debuglog_clean>
+        </jobs>
+    </crontab>
+</config>

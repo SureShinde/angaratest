@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 
+<html class="ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang(); ?>" lang="<?php echo $this->getLang(); ?>">
+<![endif]-->
+<!--[if !IE]><!--> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang(); ?>" lang="<?php echo $this->getLang(); ?>">
+<!--<![endif]-->
+
+<head><?php echo $this->getChildHtml('head');?></head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':''?>>
+<div class="mboxDefault"></div>
+<?php /*?><script type="text/javascript">	mboxCreate('tntGlobal');</script><?php */?>
+<?php 
+$userAgent 	= 	Mage::getUserAgent();
+$pageType	=	Mage::helper('function')->getPageType();
+if(!isset($_COOKIE['returningvisitor'])):?>
+<div class="modal fade" id="fetchcountry" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1"></div>
+<?php
+endif; 
+/*if(!isset($_COOKIE['popupvisitor'])):?>	
+	<div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+    	<div class="loading-indicator hide text-center">
+        	<div class="modal-backdrop fade in"></div>
+			<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    	</div>
+	</div>
+<?php 
+endif;*/	
+if($_COOKIE['popupvisitor'] !='2'):?>
+	<?php /*?><div class="modal fade" id="newsletterModalWithSticker" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+    	<div class="loading-indicator hide text-center">
+        	<div class="modal-backdrop fade in"></div>
+			<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    	</div>
+	</div><?php */?>
+    
+	<?php
+    $coupon = Mage::helper('function')->getCustomerCoupon();
+    if(!empty($coupon)){
+        $oCoupon = Mage::getModel('salesrule/coupon')->load($coupon, 'code');
+        if($oCoupon->getId()){
+            $oRule = Mage::getModel('salesrule/rule')->load($oCoupon->getRuleId());
+            if($oRule->getId()){
+                $discountPercent = (int) $oRule->getDiscountAmount();	
+                //	S:VA	Modified so that the 5 states sticker show no matter the coupon code discount percentage is
+                //$visitorState	=	Mage::getSingleton("checkout/session")->getData("visitor_state");		
+                if($discountPercent < 15 || $visitorState!=''){?>    
+                    <?php
+                //	S:VA
+                $visitorState	=	Mage::getSingleton("checkout/session")->getData("visitor_state");
+                if( $visitorState=='in' ){			//indiana = in, ?>
+                    <div class="valentines_heart indiana spoffer-5-state" style="display:none">
+                        <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"><span>INDIANA</span></a>
+                    </div>
+                <?php }else if( $visitorState=='pa' ){	//	pennsylvania = pa, ?>
+                    <div class="valentines_heart pennsylvania spoffer-5-state" style="display:none">
+                        <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"><span>PENNSYLVANIA</span></a>
+                    </div>
+                <?php }else if( $visitorState=='wi' ){	//	wisconsin = wi, ?>
+                    <div class="valentines_heart wisconsin spoffer-5-state" style="display:none">
+                        <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"><span>WISCONSIN</span></a>
+                    </div>
+                <?php }else if( $visitorState=='nc' ){	//	north carolina = nc, ?>
+                    <div class="valentines_heart north-carolina spoffer-5-state" style="display:none">
+                        <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"><span style="top:48px;">NORTH<br>CAROLINA</span></a>
+                    </div>
+                <?php }else if( $visitorState=='mi' ){	//	michigan = mi, ?>
+                    <div class="valentines_heart michigan spoffer-5-state" style="display:none">
+                        <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"><span>MICHIGAN</span></a>
+                    </div>
+                <?php }else{ ?>
+                    <?php /* <div class="valentines_heart" style="display:none">
+						<?php /* <a href="javascript:void(0)" onClick="newsLetter()" class="clickable-area" alt="Extra 15% OFF - Angara.com"></a>
+                     </div> */ ?>
+					
+                <?php } ?>
+                <?php 
+                }
+            }
+        }
+    }
+
+//	S:VA	Extra 15% text in header
+if($pageType!='checkout'){?>
+	<?php /* <div id="extra-off" style="font-size: 16px; line-height: 36px;">Do You Want <span style="color:#D83D29" >15% Off?</span> <a href="javascript:void(0)" onClick="newsLetter()" class="clickable" alt="Extra 15% OFF - Angara.com">Click Here ></a></div> */ ?>
+<script>
+	setTimeout(function() {
+		if(jQuery(window).width() > 1650){
+			jQuery('.valentines_heart').show(100);
+		}
+	}, 15000);
+	function newsLetter(){
+		customLinkTracking('Sticker Clicked');
+		showNewsletterPopupSticker();
+	}
+</script>
+<?php }
+//	E:VA
+
+endif;
+$this->getLayout()->createBlock('bannerslider/bannerslider')->getBannerCatalogCollection();
+echo $this->getChildHtml('after_body_start'); 
+echo $this->getChildHtml('header'); 
+if($pageType=='home'){
+	echo $this->getChildHtml('global_messages');
+}
+echo $this->getChildHtml('content_showcase');
+
+if(Mage::app()->getRequest()->getControllerName() == 'category'): ?>
+	</div>
+<?php 
+endif;
+
+echo $this->getChildHtml('global_notices'); 
+echo $this->getChildHtml('breadcrumbs'); ?>
+<div class="layout layout-1-col">
+	<div role="main">
+		<div class="container"><?php if($pageType!='home'){echo $this->getChildHtml('global_messages'); } ?></div>
+		<?php 		
+		try{
+			$cacheHelper = Mage::helper('helloworld');
+			$cachingEnabled = array('catalog');
+			$key = md5(Mage::helper('core/url')->getCurrentUrl().Mage::getModel('countrymapping/country')->getCountryParamCode().$userAgent['browser_name'].$userAgent['operating_system']);
+			$jewelryModel = Mage::registry('byoJewelryModel');
+			$currentModule = Mage::app()->getRequest()->getModuleName();
+			if (in_array($currentModule, $cachingEnabled) && Mage::helper('adjnav')->getParams(true, Mage::getBlockSingleton('page/html_pager')->getPageVarName()) == '' && !$jewelryModel) {
+				if ($content = $cacheHelper->getDataFromCache($key)) { 
+					//nothing to do as $content now has the data
+				} 
+				else {
+					$content = $this->getChildHtml('content');
+					$cacheHelper->setKey($key)->setData($content)->saveDataInCache();
+				}
+			} 
+			else {
+				$content = $this->getChildHtml('content');
+			} ?>
+			<!-- cache code added by hitesh -->
+			<?php echo $content;
+		}
+		catch(Exception $e){
+			echo $this->getChildHtml('content');
+		}
+		echo $this->getChildHtml('feedback_index');			//	feedback widget
+		//echo $this->getChildHtml('content');?>
+	</div>
+</div>
+
+
+<?php echo $this->getChildHtml('top_menu_block') ; ?>
+
+
+<?php 
+echo $this->getChildHtml('footer'); 
+echo $this->getChildHtml('before_body_end'); 
+echo $this->getAbsoluteFooter(); ?>
+</body>
+</html>

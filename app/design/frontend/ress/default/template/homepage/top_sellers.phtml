@@ -1,0 +1,74 @@
+<?php 
+if(($_products = Mage::helper('function')->getProductsFromCategory('453')) && $_products->getSize()){ ?>
+	<style>
+		#top-sellers .slick-prev{left:8px!important; top: 80px!important;}
+		#top-sellers .slick-next{right:8px!important; top: 80px!important;}
+		#top-sellers .pro-detail{box-shadow:none!important;}
+	</style>
+	
+	
+	<div class="row top-sellers max-margin-top hidden-xs">
+    	<div class="heading text-center full-width max-margin-top max-margin-bottom" style="font-size:25px;">Shop Seasons Trending Deals and Save Big!</div>
+		<div id="top-sellers" class="padding-type-3 full-width">
+		<?php 
+		$_columnCount = $this->getColumnCount();
+		$i=0; 
+		$percentClaim = array('40','69','72','90','15');
+		$count = 0;
+		foreach($_products->getItems() as $_product){ ?>			   
+			<div class="top-sellers-item clickable pro-box padding-type-5 relative-placeholder item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?><?php if($count > 4){?> disabled<?php }?>">
+				<a rel="nofollow" href="<?php echo $_product->getProductUrl(); ?>?icid=home|sec|deals|11222015&resetChannel=true"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(175); ?>" class="img-responsive showcase-border-thin" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" /></a>
+				<div class="pro-detail text-center">
+					<a rel="nofollow" href="<?php echo $_product->getProductUrl(); ?>?icid=home|sec|deals|11222015&resetChannel=true">
+						<p class="fontsize-type1 low-margin-bottom" style="line-height: 15px;"><?php echo  Mage::helper('core/string')->truncate($this->stripTags($_product->getShortDescription(), null, true), $length = 45, $etc = '...'); ?></p>
+					</a>
+					<span class="price-box"><strong class="price"><?php echo $this->helper('core')->currency($_product->getPrice(),true,false) ?></strong> <span style="color:#d83d29;">(15% Off)</span></span>
+					<div class="high-padding-top high-padding-bottom">
+						<a class="fontcolor-type1 btn-dark-gray" style="background-color:#7b7b7b; color: #ffffff; padding: 2px 8px; border-radius: 2px;" href="<?php echo $_product->getProductUrl(); ?>?icid=home|sec|deals|11222015&resetChannel=true" tabindex="0">Shop Now</a>
+					</div>
+					<div class="clearfix"></div>
+					<?php if($count < 5){?>
+					<div style="width:100%; float:left; height:4px; background:#cccccc;">
+						<div style="width:<?php echo $percentClaim[$count]?>%; float:left; background:#000000; height:4px;"></div>
+					</div>
+					<?php }?>
+					<div class="clearfix"></div>
+					<div class="low-margin-top">
+					<?php if($count < 5){?>
+						<small><?php echo $percentClaim[$count]?>% Claimed</small>
+					<?php }?>
+					</div>
+					<div class="clearfix"></div>					
+					<div class="low-margin-top">
+						<small <?php if($count > 4){?>class="text-green"<?php }?>><?php if($count < 5){?>Ends In<?php }else{?>Starts for You In<?php }?><span class="text-format min-padding-left" data-countdown="<?php echo date('m');?>/<?php echo date('d');?>/<?php echo date('Y');?> 00:00:00" data-until="<?php echo date('m');?>/<?php echo (date('d')+1);?>/<?php echo date('Y');?> 23:59:59"></span></small>
+					</div>
+				</div>
+			</div>
+		<?php
+		$count++; 
+		}?>
+		</div>
+		<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			<script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery('#top-sellers').slick({
+                    arrows			: 	true,
+                    slidesToShow	: 	4,
+                    slidesToScroll	: 	1
+                });
+            });
+            </script>
+        <?php } else { ?>
+            <script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery('#top-sellers').slick({
+                    arrows			: 	true,
+                    slidesToShow	: 	7,
+                    slidesToScroll	: 	1
+                });
+            });
+            </script>
+        <?php } ?>
+	</div>
+<?php 
+} ?>

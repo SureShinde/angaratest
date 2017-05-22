@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+  <config>
+     <modules>
+        <Angara_Digger>
+          <version>1.5.1</version>
+        </Angara_Digger>
+     </modules>     
+	<admin>
+     <routers>
+         <digger>
+            <use>admin</use>
+            <args>
+               <module>Angara_Digger</module>
+               <frontName>admindigger</frontName>
+            </args>
+         </digger>
+      </routers>
+ </admin>
+ <adminhtml>
+   <layout>
+      <updates>
+          <digger>
+              <file>digger.xml</file>
+           </digger>
+      </updates>
+   </layout>
+   <menu>
+      <digger translate="title" module="adminhtml">
+         <title>Search Rule</title>
+         <sort_order>100</sort_order>
+         <children>
+		 	   <set_time>
+                   <title>Add Synonyms</title>
+                   <action>admindigger/adminhtml_index</action>
+              </set_time>
+			  <fix_time>
+                   <title>Add Grammar Rules</title>
+                   <action>admindigger/adminhtml_grammar</action>
+              </fix_time>
+			  
+          </children>
+       </digger>
+    </menu>
+	
+	<!--S:VA	Adding ACL	-->
+	<acl>
+		<resources>
+			<all>
+			  <title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<digger translate="title" module="digger">
+						<title>Search Rule</title>
+						<sort_order>1000</sort_order>
+						<children>
+							<set_time translate="title">
+								<title>Manage Synonyms</title>
+								<sort_order>0</sort_order>
+							</set_time>
+							<!--S:VA3	Define new menu item for acl for multiple grid-->
+							<fix_time translate="title">
+								<title>Manage Grammar Rules</title>
+								<sort_order>1</sort_order>
+							</fix_time>
+						</children>
+					</digger>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<!--E:VA	Adding ACL	-->
+	
+</adminhtml>
+	<global>
+			<blocks>
+				<digger>
+					<class>Angara_Digger_Block</class>
+				</digger>
+			</blocks>
+			
+			
+			<events>
+			<controller_action_predispatch_catalog_product_view>
+				<observers>
+				  <angara_ConfigurableProductRedirect_observer>
+					<class>Angara_Digger_Model_Product_Observer</class>
+					<method>redirectProductView</method>
+				  </angara_ConfigurableProductRedirect_observer>
+				</observers>
+			  </controller_action_predispatch_catalog_product_view>
+
+			  <controller_action_predispatch_catalog_ajax_product_view>
+				<observers>
+				  <angara_AjaxConfigurableProductRedirect_observer>
+					<class>Angara_Digger_Model_Product_Observer</class>
+					<method>redirectAjaxProductView</method>
+				  </angara_AjaxConfigurableProductRedirect_observer>
+				</observers>
+			 </controller_action_predispatch_catalog_ajax_product_view>
+			 <catalog_product_attribute_update_before>
+				<observers>
+				  <angara_digger_index_catalog_product_attribute_update_before>
+					<type>singleton</type>
+					<class>Angara_Digger_Model_Product_Observer</class>
+					<method>requireReIndex</method>
+				  </angara_digger_index_catalog_product_attribute_update_before>
+				</observers>
+			 </catalog_product_attribute_update_before>
+			 <catalog_product_website_update>
+				<observers>
+				  <angara_digger_index_catalog_product_website_update>
+					<type>singleton</type>
+					<class>Angara_Digger_Model_Product_Observer</class>
+					<method>requireReIndex</method>
+				  </angara_digger_index_catalog_product_website_update>
+				</observers>
+			 </catalog_product_website_update>
+			 <catalog_product_save_after>
+                <observers>
+                   <angara_digger_index_catalog_product_save_before>
+                 	  <type>singleton</type>
+                      <class>Angara_Digger_Model_Product_Observer</class>
+                      <method>requireReIndexOfParent</method>
+                   </angara_digger_index_catalog_product_save_before>
+               </observers>
+            </catalog_product_save_after>
+		</events>
+			
+			<models>
+			<digger>
+    			<class>Angara_Digger_Model</class>
+     			<resourceModel>digger_mysql4</resourceModel>
+ 			</digger>
+		<digger_mysql4>
+     		<class>Angara_Digger_Model_Mysql4</class>
+     		<entities>
+         		<synonym>
+           			<table>digger_keyword_synonym</table>
+         		</synonym>
+				<grammar>
+					<table>digger_grammar_rule</table>
+					</grammar>				
+      		</entities>
+		</digger_mysql4>
+		</models>
+			
+		<resources>
+        <!-- connection to write -->
+			<digger_setup>
+                <setup>
+                    <module>Angara_Digger</module>
+                </setup>
+				<connection>
+				<use>core_setup</use>
+				</connection>
+       	 </digger_setup>
+         <digger_write>
+            	<connection>
+                	<use>core_write</use>
+            	</connection>
+         </digger_write>
+        <!-- connection to read -->
+         <digger_read>
+          <connection>
+             <use>core_read</use>
+          </connection>
+         </digger_read>
+      </resources>
+	</global>
+</config>

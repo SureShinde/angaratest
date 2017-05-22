@@ -1,0 +1,10 @@
+<?php 
+$coupon = $this->getCoupon(); 
+$productId = $this->getRequest()->getParam('productId');
+$product = Mage::getModel('catalog/product')->load($productId);
+$additionalCost = $this->getRequest()->getParam('additionalCost');
+$_coreHelper = Mage::helper('core');
+if(!$product->getIsBuildYourOwn()){ ?>
+	<span style="font-size: 18px; color: #d83d29;"><?php echo $_coreHelper->currency($this->getAfterDiscountProductPrice($productId, $additionalCost),true,false);?></span>
+<?php 
+} ?>

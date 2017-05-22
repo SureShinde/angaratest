@@ -1,0 +1,32 @@
+<?php
+/* @var $this Mage_Core_Block_Template */
+/* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
+$catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+
+<style>
+.topsearcheslink, .topsearcheslink a {
+	font-size: 9px !important;
+}
+</style>
+<div class="search-cntnr">
+	<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl();?>" method="get">
+		<div class="form-search">
+			<div class="has-feedback min-padding-bottom">            
+				<input id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName();?>" placeholder="Search" value="<?php if(Mage::app()->getRequest()->getParam('showdeal') != 'true') echo $catalogSearchHelper->getEscapedQueryText();?>" class="input-text form-control box-shadow-none" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>">  
+				<input type="hidden" name="dir" value="asc" />          
+				<button type="submit" title="<?php echo $this->__('Search');?>" class="fa fa-search form-control-feedback"></button>
+			</div>
+			<div id="search_autocomplete" class="search-autocomplete"></div>
+			<script type="text/javascript">
+			//<![CDATA[
+				var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
+				searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl();?>', 'search_autocomplete');
+			//]]>
+			</script>
+		</div>
+		<?php /*?><div class="topsearcheslink hidden-xs">
+			<span class="text-green pull-left low-padding-right"><strong>Top Searches:</strong></span>
+			<span><a href="/rings/sapphire-rings.html?icid=topsearches|sap-rings|09032015" class="text-light">Sapphire Rings</a>, <a class="text-light" href="/rings/ruby-rings.html?icid=topsearches|ruby-rings|09032015">Ruby Rings</a>, <a class="text-light" href="/pendants/ruby-necklace-pendants.html?icid=topsearches|ruby-pendants|09032015">Ruby Pendants</a>, <a class="text-light" href="/earrings/ruby-earrings.html?icid=topsearches|ruby-earrings|09032015">Ruby Earrings</a>, <a class="text-light" href="/wedding-rings/wedding-bands.html?icid=topsearches|bands|09032015">Bands</a></span>
+		</div><?php */?>
+	</form>
+</div>

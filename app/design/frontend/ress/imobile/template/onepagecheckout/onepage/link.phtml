@@ -1,0 +1,36 @@
+<?php if ($this->isOnepageCheckoutAllowed()):?>
+
+<button type="button" id="cart-bottom-checkout-button" title="<?php echo $this->__('Checkout') ?>" class="hidden-xs btn-primary-apricot btn-proceed-checkout fontsize-type5 btn-block btn-checkout<?php if (!$this->checkEnable()){ echo 'no-checkout'; }?>"<?php if (!$this->checkEnable()){ echo ' disabled="disabled" ';} ?> onclick="jQuery(this).addClass('disabled'); pushOPGA(); gotocheckout();">
+	<span>
+		<span>
+			<?php /* if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+				<i class="fa fa-lock" style="text-indent: 99px;background: url(/skin/frontend/ress/default/images/lock-white.png) no-repeat center center;width: 20px;line-height: 24px;margin-bottom: -4px;display: inline-block;background-size: auto 99%;overflow: hidden;"></i>
+			<?php } */ ?>
+			<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+				echo $this->__('Checkout');
+			}else{
+				echo $this->__('Proceed to Secure Checkout');
+			} ?>
+		</span>
+	</span>
+</button>
+<button type="button" id="cart-bottom-checkout-button" style="text-transform: none !important;" title="<?php echo $this->__('Proceed to Checkout') ?>" class="visible-xs btn-primary-apricot btn-proceed-checkout fontsize-type5 btn-block btn-checkout<?php if (!$this->checkEnable()){ echo 'no-checkout'; }?>"<?php if (!$this->checkEnable()){ echo ' disabled="disabled" ';} ?> onclick="jQuery(this).addClass('disabled'); jQuery('#cart-top-checkout-button').addClass('disabled'); pushOPGA(); gotocheckout();"><span><span><?php echo $this->__('Proceed to Checkout') ?></span></span></button>
+<?php endif?>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	<span style="width:100%; float:left; text-align:center; margin-bottom:10px;">
+		<img src="/skin/frontend/ress/default/images/trust-seal.jpg"/>
+	</span>
+<?php } ?>
+<script>
+	jQuery(window).load(function(){
+		jQuery('.btn-proceed-checkout').removeClass('disabled');
+	});
+	
+	function gotocheckout() {
+		var shipmentDefault = 'freeshipping_freeshipping';
+		if(typeof jQuery('#shipping_option_box input[name=estimate_method]:checked').val() != 'undefined') {
+			shipmentDefault = jQuery('#shipping_option_box input[name=estimate_method]:checked').val();
+		}
+		window.location='<?php echo $this->getUrl('onepagecheckout/index/index',array('_secure'=>true)); ?>shipment/'+shipmentDefault;
+	}
+</script>

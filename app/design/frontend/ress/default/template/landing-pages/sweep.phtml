@@ -1,0 +1,77 @@
+<style>
+    .banner {
+        max-width: 1500px;
+        margin: 0px auto;
+    }
+    .banner-txt {
+        top: 34%;
+        left: 10%;
+        font-size: 32px;
+        display:none;
+    }
+    .align-txt p {
+        text-align: justify;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    .align-txt div a {
+        font-size: 18px;
+    }
+	<?php /* html[data-useragent*='MSIE 9.0'] iframe,
+	html[data-useragent*='MSIE 10.0'] iframe */ ?>
+	html[data-useragent*='rv:11.0'] iframe{
+		height:380px!important;
+		width:420px!important;
+	}
+	@media (max-width:768px){
+		.sptr {display:none;}
+		.align-txt div a:last-child{padding-top: 10px;}
+	}
+	@media (max-width:767px){
+		.align-txt p {
+			text-align: justify;
+			line-height: 22px;
+			font-size: 14px;
+		}
+		.align-txt div a {
+			font-size: 14px;
+		}
+		.sptr {display:block;}
+		.align-txt div a:last-child{padding-top:initial;}
+	}
+</style>
+
+<div class="banner relative-placeholder max-margin-bottom max-padding-bottom"> 
+
+<?php if (Mage::helper('function')->isMobile() > 0) { ?>
+	<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/Sweepstakes_banner.jpg" alt="" /> 
+<?php }else{ ?>
+	<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/Sweepstakes_banner.jpg" alt="" />
+<?php } ?>
+	<div class="absolute-placeholder banner-txt">
+		<p class="text-center">Enter for a Chance to win a</p>
+                 <p class="text-bold">gorgeous vintage-inspired sapphire ring </p>
+                  <p class="text-center">worth $3000</p>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="container">
+	<div class="col-sm-6 col-md-8 align-txt max-margin-top">
+               <p>Enter today for your chance to win an Angara vintage-inspired blue sapphire ring with diamond accents, valued at $3,000. Exquisitely crafted in 14k yellow gold, this ring is adorned with a best-quality sapphire that mesmerizes with its deep blue hue. The diamond encrusted curves on the shank and the fascinating metal detailing around the center stone and the gallery add to the vintage appeal and sophistication of this piece of jewelry.</p>
+		<div class="text-bold max-padding-top">
+			<a href="/jewelry-sweepstakes-rules" target="_blank" class="pull-left ">Official Sweepstakes Rules</a> 
+			<?php if (Mage::helper('function')->isMobile() > 0) { ?>
+				<br>
+			<?php }else{ ?>
+				<span class="sptr pull-left">&nbsp; | &nbsp;</span>
+			<?php } ?>
+		
+		<a href="/privacy-and-security" target="_blank" class="pull-left "> Angara Privacy Policy</a></div>
+    </div>
+	<div class="col-sm-6 col-md-4" style="min-height:414px;">
+		<div class="pull-right">
+			<script type="text/javascript" src="https://app.viralsweep.com/vs-widget-e327e5-3449.js"></script>
+		</div>
+	</div>
+</div>
+</div>

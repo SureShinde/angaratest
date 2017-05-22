@@ -1,0 +1,23 @@
+<?php
+$_results = $this->getResults();
+?>
+
+<?php foreach ($_results as $indexCode => $index): ?>
+    <?php if (count($index->getInfoResults())): ?>
+    <table>
+        <tr>
+            <?php foreach ($index->getInfoColumns() as $_column): ?>
+                <th><?php echo $_column ?></th>
+            <?php endforeach ?>
+        </tr>
+    
+        <?php foreach ($index->getInfoResults() as $_item): ?>
+        <tr>
+            <?php foreach ($_item as $_key => $_value): ?>
+                <td><?php echo $_value ?></td>
+            <?php endforeach ?>
+        </tr>
+        <?php endforeach ?>
+    </table>
+    <?php endif ?>
+<?php endforeach ?>

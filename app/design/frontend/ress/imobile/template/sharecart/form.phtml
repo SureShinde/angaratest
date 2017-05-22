@@ -1,0 +1,61 @@
+<?php if ($this->isEnabelShareCart()): ?>
+    <div class="deals">
+        <div class="discount">
+            <?php /* <h2>Share your cart</h2> */ ?>
+            <form method="post" name="sharecart-form" action="<?php echo $this->getSharePostUrl(); ?>" id="sharecart-form">
+                <fieldset style="">
+                    <label for="emailshare">Enter an email to send.</label>                    
+                    <div class=""><input value="" name="emailshare" id="emailshare" class="input-text required-entry validate-email" style="width: 206px;" placeholder="Enter an email to send">
+                        <button class="button" onclick="sharecartForm.submit(false)" type="button" value="Apply Coupon"><span><span>Send</span></span></button></div>
+                    <?php /* <div class="buttons-set"><span class="or">or</span> <button class="button" onclick="getSharecartUrl()" type="button" value="Apply Coupon" style="width: 180px; margin: auto;"><span><span>Get the URL to share it</span></span></button></div> */ ?>
+                       <img id="sharecart-loading" src="<?php echo $this->getSkinUrl('images/loading.gif') ?>"  alt="loading" width="20" height="20" style="display: none;"/> 
+                </fieldset>                
+            </form>
+            <script type="text/javascript">
+                //&amp;amp;lt;![CDATA[
+                var sharecartForm = new VarienForm('sharecart-form');
+                sharecartForm.submit = function (isRemove) {
+                    try{
+						shareCartClicked();
+					}
+					catch(e){}
+                    return VarienForm.prototype.submit.bind(sharecartForm)();
+                }   
+                function getSharecartUrl(){
+                    jQuery('sharecart-loading').show();                  
+                    new Ajax.Request('<?php echo $this->getShareUrl() ?>', {
+                        method:'get',
+                        parameters: jQuery('sharecart-form').serialize(true),
+                        onSuccess: function(transport) {  
+                            var obj = JSON.parse(transport.responseText);
+                            var message = $('messages'); 
+                                if(message){
+                                    message.remove();                   
+                                }
+                            if(!obj.error){
+//                                $('emailshare').value = obj.message;
+//                                $('emailshare').select();
+								jQuery('#share-cart-success').html(obj.message);
+                                jQuery('.page-title').first().insert({after: '<ul class="messages" id="messages"><li class="success-msg"><ul><li>' + obj.message +  '.</li></ul></li></ul>'})    
+                            }else{                                                                 
+                                jQuery('#share-cart-exception').html(obj.message);
+                            }
+                            jQuery('sharecart-loading').hide();
+                        },
+                        onFailure: function() { alert('Something went wrong...try again later.'); }
+                      });
+                }
+				
+				jQuery(document).on('keyup','#emailshare', function(e){
+					if(e.keyCode == 13){
+						e.preventDefault();
+						sharecartForm.submit(false);
+					}
+					return false;
+				});
+
+                //]]&amp;amp;gt;
+            </script>
+        </div>
+    </div>
+<?php endif; ?>

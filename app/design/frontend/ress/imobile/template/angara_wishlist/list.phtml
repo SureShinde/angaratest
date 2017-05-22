@@ -1,0 +1,100 @@
+<?php $quickWishlist	=	Mage::helper('ajax')->getWishlistStatus(); 
+if($quickWishlist){
+$seqHttp	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');?>
+<script type="text/javascript">
+jQuery(document).on('click','.add-wishlist',function(e){
+	var ce 				= 	jQuery(this);
+	var pid 		= 	jQuery(this).data('pid');
+	var ptype 		= 	jQuery(this).data('ptype'); 
+	if(pid){
+		if ( ce.data('requestRunning') ) {	return;	}
+		ce.data('requestRunning', true);
+		jQuery.ajax({
+			type: 'POST',
+			data: { id : pid, pagetype : ptype},
+			<?php if(Mage::getSingleton('customer/session')->isLoggedIn()){?>
+			url: '<?php echo Mage::getUrl("ajax/product/add/",array('_secure'=>$seqHttp))?>',
+			<?php } else{?>
+			url: '<?php echo Mage::getUrl("ajax/product/quickview/",array('_secure'=>$seqHttp))?>',
+			beforeSend: function( xhr ) {
+				jQuery('#wishlistModal').html('<div class="loading-indicator text-center"><div class="modal-backdrop fade in"></div><div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div></div>');				
+			},
+			<?php } ?>			
+			context: document.body
+		}).done(function( html, textStatus ){
+			<?php if(Mage::getSingleton('customer/session')->isLoggedIn()){?>
+			var result		= 	JSON.parse(html);
+			var wishlist_id	=	result.wishlist_id;
+			<?php } ?>
+			if(textStatus == 'success'){
+				jQuery('#wishlistModal').html(html);
+				jQuery('input').blur();		//	prevent opening keyboard
+				<?php if(Mage::getSingleton('customer/session')->isLoggedIn()){?>
+					jQuery('#wishlist_product_'+pid).addClass('apricot-text');
+					var selHtml = jQuery('#wishlist_product_'+pid).html();
+					if(selHtml !='undefined' && selHtml != null ){			
+						jQuery('#wishlist_product_'+pid).html(selHtml.replace('Add to', 'Added to'));
+						jQuery('#wishlist_product_'+pid).removeClass('add-wishlist').addClass('remove-wishlist');
+					}
+					//	item removed from wishlist
+					if(wishlist_id==''){
+						jQuery('#wishlist_product_'+pid).removeClass('apricot-text');
+					}else{	//	item added in wishlist
+						jQuery('#wishlist_product_'+pid).addClass('apricot-text');
+						jQuery('#wishlist_product_'+pid).attr('wishlist-id', wishlist_id);
+					}
+				<?php } ?>
+			}else if(textStatus == 'error'){
+				alert(textStatus);
+			}else{			
+				jQuery('#wishlistModal').html(html);
+			}
+			ce.data('requestRunning', false);	
+		}).fail(function(jqXHR, textStatus){
+			if(textStatus === 'timeout'){  
+				jQuery('#wishlistModal').html('error');
+			}
+		});
+	}
+}); 
+
+//	Remove product from wishlist
+jQuery(document).on('click','.remove-wishlist',function(e){
+	var rm 				= 	jQuery(this);
+	var pid 		= 	jQuery(this).data('pid');
+	var ptype 		= 	jQuery(this).data('ptype'); 
+	var wishlist_id = 	jQuery(this).attr('wishlist-id');
+		
+	if(wishlist_id){
+		if ( rm.data('requestRunning') ) {	return;	}
+		rm.data('requestRunning', true);
+		jQuery.ajax({
+			type: 'POST',
+			data: { id : pid, wishlist_id : wishlist_id, pagetype : ptype },
+			url: '<?php echo Mage::getUrl("ajax/product/remove/",array('_secure'=>$seqHttp))?>',
+			context: document.body
+		}).done(function( html, textStatus ){
+			var result		= 	JSON.parse(html);
+			if(textStatus == 'success'){
+				jQuery('#wishlist_product_'+pid).removeClass('apricot-text');
+				var selHtml = jQuery('#wishlist_product_'+pid).html();
+				if(selHtml !='undefined' && selHtml != null ){			
+					jQuery('#wishlist_product_'+pid).html(selHtml.replace('Added to', 'Add to'));
+				}
+				jQuery('#wishlist_product_'+pid).removeClass('remove-wishlist').addClass('add-wishlist');
+			}else if(textStatus == 'error'){
+				alert(textStatus);
+			}else{			
+				jQuery('#wishlistModal').html(html);
+			}
+			rm.data('requestRunning', false);	
+		}).fail(function(jqXHR, textStatus){
+			if(textStatus === 'timeout'){  
+				jQuery('#wishlistModal').html('error');
+			}
+		});
+	}
+});
+</script>
+<div class="modal fade" id="wishlistModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1"></div>	
+<?php } ?>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Unbxdsearch_Ucatalog>
+            <version>0.1.0</version>
+        </Unbxdsearch_Ucatalog>
+    </modules>
+
+<!--	<global>
+		<blocks>
+                        <ucatalog>
+                                <class>Unbxdsearch_Ucatalog_Block</class>
+                        </ucatalog>
+                </blocks>
+	</global>-->
+
+	
+	  
+
+   <global>
+    <models>
+        <catalog>
+            <rewrite>
+                <layer_filter_category>Unbxdsearch_Ucatalog_Model_Layer_Filter_Category</layer_filter_category>                
+			</rewrite>
+        </catalog>
+     </models>
+     </global>
+
+</config>

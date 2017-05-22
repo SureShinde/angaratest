@@ -1,0 +1,77 @@
+<div class="container">
+  <ul class="breadcrumb">
+    <li class="home"><a href="<?php echo Mage::helper('core/url')->getHomeUrl();?>">Home</a></li>
+    <li class="category5"><strong>Jewelry Reviews</strong></li>
+  </ul>
+</div>
+<div id="land-wrapper" class="container showcase-bg-white high-padding-top">
+  <h1 class="no-margin high-padding-bottom" style="font-weight:normal; font-size:20px;">Angara Jewelry Reviews</h1>
+  <?php 
+	$categoryIdArray = $this->getReviewCategoryIds();
+	$categoryIdArray = explode(',',$categoryIdArray);
+
+	foreach($categoryIdArray as $categoryId){
+		$review	= $this->getReviewsForCategory($categoryId,1);
+		if(count($review) > 0) {
+			$category = Mage::getModel('catalog/category')->load($categoryId);
+			foreach($review as $testimonial){
+				$pro = Mage::getModel('catalog/product');
+				$_product = $pro->load($testimonial->getEntityPkValue()); ?>
+  <div class="row no-gutters">
+    <div class="col-xs-12 showcase-bg-light block-sub-heading max-margin-bottom ">
+      <div class="padding-type-8 "><?php echo $category->getName().' Reviews'; ?></div>
+    </div>
+  </div>
+  <div class="row max-margin-bottom max-padding-bottom no-gutters">
+    <div class="col-sm-2">
+      <?php 
+						if($categoryId=='406'){?>
+      <img  width="120" height="120" alt="<?php echo $_product->getShortDescription(); ?>" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>" class="center-block text-center">
+      <?php 
+						} 
+						else{ ?>
+      <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=testimonials"><img  width="120" height="120" alt="<?php echo $_product->getShortDescription(); ?>" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>" class="center-block text-center"></a>
+      <?php 
+						} ?>
+      <div class="star-img center-block  text-center">
+        <?php
+							$averageRating = 0;
+							$ratings = array();
+							foreach($testimonial->getRatingVotes() as $vote) {
+								$ratings[] = $vote->getPercent();
+							}
+							$averageRating = array_sum($ratings)/count($ratings);
+							if($averageRating){ ?>
+        <div class="rating-box center-block min-margin-bottom">
+          <div class="rating" style="width: <?php echo ceil($averageRating) ; ?>%;"></div>
+        </div>
+        <?php 
+							} ?>
+      </div>
+      <div class="dated"> <span class="reviewername center-block text-center"><strong><?php echo $this->htmlEscape($testimonial->getNickname());?></strong></span> <span class="center-block text-center small">
+        <?php
+								$toDateFormat = 'l, F j, Y';	//	Friday, August 30, 2013
+								echo $formattedDate = Mage::getModel('core/date')->date($toDateFormat,strtotime($testimonial->getCreatedAt())); ?>
+        </span> </div>
+    </div>
+    <div class="col-sm-9 col-sm-offset-1 max-margin-top">
+      <div class="fontsize-type4 max-margin-bottom"> <strong>
+        <?php 
+							$testi_title = $this->htmlEscape($testimonial->getTitle());
+							if (strlen($testi_title) > 50) {
+								$testi_title = substr($testi_title, 0, 50);
+								$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+								$testi_title .= '...';
+							}
+							echo $testi_title;
+							?>
+        </strong> </div>
+      <div><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></div>
+      <div class="max-margin-top max-padding-top"><a href="<?php echo Mage::getUrl("testimonials/index/morereviews/id/".$category->getId()."") ?>" class="apricot-text pull-left text-on-dark no-underline">View all <?php echo $category->getName(); ?> Reviews <i class="fa fa-angle-right"></i></a> </div>
+    </div>
+  </div>
+  <?php 
+			} 
+		}
+	}?>
+</div>

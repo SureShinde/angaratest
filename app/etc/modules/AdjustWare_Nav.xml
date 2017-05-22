@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AdjustWare_Nav>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Layered Navigation Pro</self_name>
+            <priority>10120</priority>
+        </AdjustWare_Nav>
+    </modules>
+</config>
+<!--
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/etc/modules/AdjustWare_Nav.xml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+-->

@@ -1,0 +1,37 @@
+<?php 
+	$relatedProductsIdsArray			= 	$this->getRelatedProductsIds();			//	Calling a function from Block/Index.php
+	if ( count ($relatedProductsIdsArray) > 0 ){ 
+		$_coreHelper 		= 	$this->helper('core');
+	?>
+		<div class="similer-pro-holder">
+            <div class="similer-pro-heading">
+                Similar Products <span class="close"><i class="fa fa-times"></i></span>
+            </div>
+            <?php 
+            foreach($relatedProductsIdsArray as $_productId){
+			$relatedProduct			= 	Mage::getModel('catalog/product')->load($_productId);
+				if ( $relatedProduct->isSaleable() ){
+				$sku					=	$relatedProduct->getSku();
+				$relatedProductName		=	$this->htmlEscape($relatedProduct->getName());
+				$relatedProductURL		=	$this->htmlEscape($relatedProduct->getProductUrl());
+				$relatedProductPrice	=	$_coreHelper->currency($this->htmlEscape($relatedProduct->getPrice()),true,false);
+				$relatedProductImage	=	$this->helper('catalog/image')->init($relatedProduct, 'image')->resize(220);
+				$icid					=	"?icid=catalog|si-widget|".$sku."|07082015";
+				?>
+				<div class="col-pro">
+					<a href="<?php echo $relatedProductURL.$icid; ?>" class="product-image center-block">
+						<img src="<?php echo $relatedProductImage; ?>" alt="<?php echo $relatedProductName; ?>" title="<?php echo $relatedProductName; ?>" class="img-responsive center-block" width="220" height="220">
+					</a>
+					<div class="padding-type-10 padding-type-5-xs">
+						<a href="<?php echo $relatedProductURL.$icid; ?>">
+							<p class="product-name"><?php echo Mage::helper('core/string')->truncate($this->helper('catalog/output')->productAttribute($relatedProduct, $this->htmlEscape($relatedProduct->getShortDescription()) , 'name'), $length = 35, $etc = '...');?></p>
+						</a>                        					
+						<div class="regular-price"><?php echo $this->getPriceHtml($relatedProduct, true, '-similar'); ?></div>	
+					</div>
+				</div>
+		<?php }
+		}?>
+		</div>
+	<?php
+	}
+?>

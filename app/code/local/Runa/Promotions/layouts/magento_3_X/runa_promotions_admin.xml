@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    
+<!--appending "block" runa discount total in admin order view-->
+   <adminhtml_sales_order_view>
+        <reference name="footer">
+            <action method="setTemplate"><template>runa/promotions/sales/order/totals/footer.phtml</template></action>
+            <block type="adminhtml/sales_order_totals_item" name="runa_total_discount_shipping" before="-" template="runa/promotions/sales/order/totals/discount_and_shipping.phtml" />
+        </reference>
+    </adminhtml_sales_order_view>
+    
+     <adminhtml_sales_order_invoice_new>
+        <reference name="footer">
+            <action method="setTemplate"><template>runa/promotions/sales/order/totals/footer.phtml</template></action>
+            <block type="adminhtml/sales_order_totals_item" name="runa_total_discount_shipping" before="-" template="runa/promotions/sales/order/totals/discount_and_shipping.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    
+     <adminhtml_sales_order_invoice_view>
+        <reference name="footer">
+            <action method="setTemplate"><template>runa/promotions/sales/order/totals/footer.phtml</template></action>
+            <block type="adminhtml/sales_order_totals_item" name="runa_total_discount_shipping" before="-" template="runa/promotions/sales/order/totals/discount_and_shipping.phtml" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    
+</layout> 

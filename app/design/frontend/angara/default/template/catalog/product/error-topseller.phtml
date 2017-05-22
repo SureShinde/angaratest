@@ -1,0 +1,66 @@
+<script type="text/javascript">// <![CDATA[
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({wrap: 'circular'});
+});
+// ]]></script>
+
+<div class="errorwrapper">
+  <div class="errormsgbox">
+    <div class="errormsg"><span class="errorimg"><img src="/skin/frontend/angara/default/images/errorimg.jpg" alt="" /></span>Seems like the tech guy on the other end messed up.. or are you trying some broken link? In any case, same techie is now working hard to make everything work fine for you and is thanking you for the patience!!</div>
+  </div>
+  <?php	$_coreHelper = Mage::helper('core');
+		$_imageHelper = Mage::helper('catalog/image');		
+		$top10jewelrySkus = array('SR0160S', 'SE0102AQ', 'SP0155R', 'SR0218E', 'SP0547S', 'SE0118E', 'SE0126S', 'SP0158T', 'SE0139R', 'SP0102E')		
+		?>
+  <div class="bottomcontentpart">
+    <div class="headingstyle">
+      <div class="contantheading">TOP SELLERS</div>
+      <ul id="mycarousel" class="jcarousel-skin-tango">
+        <?php foreach($top10jewelrySkus as $sku){ 
+			$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+		?>
+        <li> <a href="<?php echo $product->getProductUrl();?>"> <img src="<?php echo $_imageHelper->init($product, 'small_image')->resize(120); ?>" alt="<?php echo $_coreHelper->stripTags($product->getName(), null, true); ?>" width="120" height="120" /><br />
+          <span style="display:block"><?php echo $_coreHelper->currency($product->getFinalPrice() ,true,true); ?></span> </a> </li>
+        <?php } ?>
+      </ul>
+    </div>
+  </div>
+  <div class="topdisplayitems">
+    <div class="topdispalaybox">
+      <div class="contantheading">TOP SELLERS</div>
+      <div class="toplisting">
+        <ul>
+          <li><a href="/rings/sapphire-rings.html">Sapphire Ring</a></li>
+          <li><a href="/engagement-rings/diamond-engagement-rings.html">Diamond Engagement Ring</a></li>
+          <li><a href="/rings/ruby-rings.html">Ruby Rings</a></li>
+          <li><a href="/jewelry/gemstone-jewelry.html">Gemstone Jewelry</a></li>
+          <li><a href="/pendants/sapphire-necklace-pendants.html">Sapphire Pendants</a></li>
+          <li><a href="/earrings/emerald-earrings.html">Emerald Earrings</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="topdispalaybox">
+      <div class="contantheading">TOP CATEGORIES</div>
+      <div class="toplisting">
+        <ul>
+          <li><a href="/birthstone-jewelry.html">Birthstone Jewelry</a></li>
+          <li><a href="/rings.html">Rings</a></li>
+          <li><a href="/earrings.html">Earrings</a></li>
+          <li><a href="/pendants.html">Pendants</a></li>
+          <li><a href="/jewelry-gifts.html">Jewelry Gifts</a></li>          
+        </ul>
+      </div>
+    </div>
+    <div class="topdispalaybox" style="margin: 0;">
+      <div class="contantheading">DEALS &amp; OFFERS</div>
+      <div class="toplisting">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="260" height="146">
+          <param name="movie" value="/skin/frontend/angara/default/flash/error-page-banner.swf">
+          <param name="quality" value="high">
+          <embed src="/skin/frontend/angara/default/flash/error-page-banner.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="260" height="146"></embed>
+        </object>
+      </div>
+    </div>
+  </div>
+  <div style="clear: both;">&nbsp;</div>
+</div>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <angara module="recentlysold" translate="label">
+            <label>Angara Modules</label>
+            <sort_order>1000</sort_order>
+        </angara>
+    </tabs>
+    <sections>
+        <recentlysold translate="label" module="recentlysold">
+            <label>Angara Recently Sold</label>
+            <tab>angara</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<itemscount>
+                            <label>Items to show</label>
+                            <comment>no. of items to show in the widget.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </itemscount>
+						
+						
+                    </fields>
+                </general>
+            </groups>
+        </recentlysold>
+    </sections>
+</config>

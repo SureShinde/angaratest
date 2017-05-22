@@ -1,0 +1,1004 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View 
+ */
+?>
+<?php
+  $cumbs= $this->getLayout()->getBlock('breadcrumbs'); $cumbs=$cumbs->_crumbs; $count_cumbs =  count($cumbs);
+  if($cumbs && is_array($cumbs)) {
+  $i=1;$tracCategory;
+   foreach($cumbs as $_crumbName=>$_crumbInfo){
+	  if($_crumbInfo['link']){
+		if($i!=$count_cumbs-1){$i = $i+1; } else {$tracCategory= $_crumbInfo['label'] ; $i = $i+1;}
+	  }
+   }
+  } 
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<style type="text/css">
+.simple-shadow-box { position:absolute; z-index:9001; display:none; background:#000000; top:0 }
+#email-share-box { position:absolute; z-index:9005; display:none; top:100px }
+#close_1{text-decoration:none;color:#999}
+#close_1:hover{text-decoration:underline}
+</style>
+<script type="text/javascript">
+var rndnumval = Math.floor(Math.random()*11);
+	jQuery(function(){
+		jQuery('#your_message').keypress(function(e){
+			var limit = 2500;
+			var remainingChars = limit - jQuery(this).val().length;
+			jQuery('#msgCharsLeft').html('<font size="1" face="Verdana" color="#555555"><span>'+remainingChars+' characters remaining</span></font>')
+			if(remainingChars < 1){
+				e.preventDefault();
+				jQuery(this).val(jQuery(this).val().slice(0,limit)).focus();
+			}
+		})
+		
+				
+		jQuery('.qualitypopupbtn').click(function(){
+		
+			var popupstonetype = jQuery(this).attr('value');
+			
+		    jQuery('.view-more-popup-btn').show();
+			jQuery('.view-more-popup').hide();
+			jQuery('.popupboxnew').hide().html('');
+			jQuery('#qualitypopup').show();
+			//if(jQuery('#qualitypopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/'+popupstonetype+'quality.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#qualitypopup').html(matter);
+						jQuery('#qualitypopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})
+						
+						jQuery('.view-more-popup-btn').click(function(){
+							jQuery(this).parent().find('.view-more-popup').show();
+							jQuery(this).hide();
+						})
+					}
+				})
+			//}
+		})
+		
+		
+		jQuery('.stonesizeround').click(function(){	
+			jQuery('.popupboxnew').hide().html('');
+			jQuery('#roundstonepopup').show();
+			//if(jQuery('#roundstonepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/stonesize-round.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#roundstonepopup').html(matter);
+						jQuery('#roundstonepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})				
+					}
+				})
+			//}
+		})
+		
+			
+		jQuery('.stonesize').click(function(){		
+			jQuery('.popupboxnew').hide().html('');	
+			jQuery('#ovalstonepopup').show();
+			//if(jQuery('#ovalstonepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/stonesize.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#ovalstonepopup').html(matter);
+						jQuery('#ovalstonepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})				
+					}
+				})
+			//}
+		})
+		
+		
+		jQuery('.retailpricepopup').click(function(){		
+			jQuery('.popupboxnew').hide().html('');	
+			jQuery('#retailpricepopup').show();
+			//if(jQuery('#retailpricepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/retailprice.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#retailpricepopup').html(matter);
+						jQuery('#retailpricepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})				
+					}
+				})
+			//}
+		})
+		
+		
+		jQuery('.internetjeweler').click(function(){
+			jQuery('.popupboxnew').hide().html('');			
+			jQuery('#internetjewelerpopup').show();
+			//if(jQuery('#internetjewelerpopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/internetjeweler.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#internetjewelerpopup').html(matter);
+						jQuery('#internetjewelerpopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})				
+					}
+				})
+			//}
+		})
+		
+		jQuery('.valuequality').click(function(){
+			jQuery('.popupboxnew').hide().html('');
+			jQuery('#valuequalitypopup').show();
+			//if(jQuery('#valuequalitypopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/valuequality.html?rnd='+rndnumval,
+				success: function(matter){
+						jQuery('#valuequalitypopup').html(matter);
+						jQuery('#valuequalitypopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide().html('');
+						})				
+					}
+				})
+			//}
+		})
+		
+			// open review tab when user clicks on .rating
+  jQuery('#show-review-btn').click(function(){
+   showDiveSection('product-review');
+  })
+		
+	})
+</script>
+
+<script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+<form id='pdfform' action="<?php echo Mage::getBaseUrl();?>hprcv/Index/pdf" method="post" target="_blank">
+		<input id="cert_image" type="hidden" name="cert_image" value="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" />
+		<input id="cert_id" type="hidden" name="cert_id" value="<?php echo $_product->getId()?>" />
+        <input id="cert_quality" type="hidden" name="cert_quality" value="<?php echo ($_product->getEmbQualityGrade2())?$_product->getAttributeText('emb_quality_grade2'):'';  ?>" />
+        <input id="cert_metal" type="hidden" name="cert_metal" value="<?php echo ($_product->getMetal())?$_product->getAttributeText('metal'):''; ?>" />
+</form>
+<!--<div class="simple-shadow-box"></div>
+<div id="email-share-box">
+	<table cellspacing="0" cellpadding="0" align="center" style="z-index:99;position:absolute;width:320px; height:320px; border:solid 5px #d5d4d4;" id="tab_1">
+			<tbody>
+		<tr>
+			<td width="342" bgcolor="#ffffff" style="padding-left:8px;padding-right:12px;padding-top:2px;padding-bottom:5px;cursor:hand; cursor:pointer" id="drag_1"><div style="width:100%; border-bottom:solid #d5d4d4 1px; margin-top:5px;">
+					<div style="width:100%; margin:3px 0 3px 0;">
+						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td><span style="color:#000000; text-transform:uppercase; font-weight:bold; font-family:arial;">Email this product to a friend :</span></td>
+									<td valign="middle" align="right" style="text-align:right"><a onclick=" document.getElementById('cont_1').style.display='none';" class="orange-2" id="close_1" href="#">Close</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+             </td>
+		</tr>
+		<tr>
+			<td valign="top" bgcolor="#ffffff" style="padding-left:8px;padding-top:5px;"></td>
+		</tr>
+		<tr>
+			<td valign="top" bgcolor="#ffffff" style="padding-left:8px;padding-bottom:7px;"><table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+					<tbody>
+						<tr>
+							<td style="padding-bottom:7px"><input type="text" title="Enter Your Name" style="color:#999999; font-family:arial; font-size:12px; width:220px" maxlength="100" class="email_form" name="your_name" id="your_name" value="Your name" onfocus="if(this.value=='Your name'){this.value='';}" onblur="if(this.value==''){this.value='Your name';}"></td>
+							<td style="color:#FF0000; font-size:12px" id="errYourName"></td>
+						</tr>
+						<tr>
+							<td style="padding-bottom:7px"><input type="text" title="Enter Your Email Address" style="color:#999999; font-family:arial; font-size:12px; width:220px" maxlength="100" class="email_form" name="your_email" id="your_email" value="Your email address" onfocus="if(this.value=='Your email address'){this.value='';}" onblur="if(this.value==''){this.value='Your email address';}"></td>
+							<td style="color:#FF0000; font-size:12px" id="emailYourError"></td>
+						</tr>
+						<tr>
+							<td style="padding-bottom:7px"><input type="text" title="Enter Your Friend's Email Address" style="color:#999999; font-family:arial; font-size:12px; width:220px" maxlength="150" class="email_form" id="frend_email" name="frend_email" value="Your friend's email address" onfocus="if(this.value=='Your friend\'s email address'){this.value='';}" onblur="if(this.value==''){this.value='Your friend\'s email address';}" ></td>
+							<td style="color:#FF0000; font-size:12px" id="emailFriendError"></td>
+						</tr>
+						<tr>
+							<td style="padding-bottom:7px;font-family:Arial;font-size:15px;">Message:<br>
+								<textarea title="Enter Your Message" style="color:#999999; font-family:arial; font-size:12px; width:220px; height:90px;" class="email_form_text" id="your_message" name="your_message"></textarea></td>
+							<td style="color:#FF0000; font-size:12px" id="msgError"></td>
+						</tr>
+						<tr>
+							<td><div id="msgCharsLeft"></div></td>
+						</tr>
+						<tr>
+							<td style="padding:10px 0 5px 0; font-family:arial; font-size:10px;"><input type="hidden" style="margin:0px" name="not" value="true"> <input type="checkbox" onclick=" if(this.value=='false') {this.value='true';} else{ this.value='false';}" style="margin:0px" name="not_include_price" id="not_include_price" value="false"> Do not include price with Email</td>
+						</tr>
+					<tr><td><input type="hidden" id="productUIDParameter" value=""></td></tr>
+					<tr>
+						<td align="center" style="font-family:arial;font-weight:bold;font-size:10px;text-align:center;color:#ff0000" id="mailresponse"></td>
+					</tr>
+						</tbody>
+				</table></td>
+		</tr>
+		<tr>
+			<td valign="top" bgcolor="#ffffff" align="right" style="padding:0 8px 10px 8px;"><a href="javascript:void(0);"><img width="58" height="18" name="send_to_frend" alt="Send Email" title="Send Email" src="/skin/frontend/angara/default/images/send-email.jpg"></a></td>
+		</tr>
+			</tbody>
+	</table>
+</div>-->
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="wrapper">
+	<div style="position:relative;" >
+    	<div style="position:absolute; top:-15px; left:-33px; z-index:1001"><img src="/skin/frontend/angara/default/images/deal-of-the-day-stamp.png" width="125" height="102" /></div>
+		<div id="overlayText"><?php echo $this->getChildHtml('upsell_products') ?></div>
+		<div style="clear:both;"></div>
+	</div>
+	<div class="wrappermain">
+    <div id="qualitypopup" class="popupboxnew"></div>
+    <div id="roundstonepopup" class="popupboxnew"></div>
+    <div id="ovalstonepopup" class="popupboxnew"></div>
+    <div id="retailpricepopup" class="popupboxnew"></div>
+    <div id="internetjewelerpopup" class="popupboxnew"></div>
+    <div id="valuequalitypopup" class="popupboxnew"></div>
+    
+		<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+			<div class="no-display"> <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" /> <input type="hidden" name="related_product" id="related-products-field" value="" /><input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/> </div>
+			<div class="ppmid">
+				<div id="mid-part-left">					
+					<div id="wrapper" style="display: block; ">
+						<div id="fullsize">
+						<?php echo $this->getChildHtml('video') ?>
+							<div class="product-img-box">
+							<?php if($_product->getDiscountPrice() != ''):?>
+								<div class="sale-tag"></div>
+							<?php endif;?>
+							<?php echo $this->getChildHtml('media') ?></div>
+							<div style="clear:both"></div>
+						</div>
+					</div>
+				</div>
+				<div id="mid-part-right">
+					<div id="detailsection"> 
+						<h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+						
+                     <!--   <h2><?php echo $_product->getShortDescription() ?></h2>
+						<div><?php echo $this->getReviewsSummaryHtml($_product, false, true)?> </div>-->
+						<div><?php echo $this->getReviewsSummaryHtml($_product, false, true)?> </div>                       
+                       
+						<div class="spacing" style="padding-top:0px; margin-bottom:10px;">
+							<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+							<?php echo $this->getChildChildHtml('container2', '', true, true) ?><div class="ringsizer"><a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank">Ring Size Guide</a></div>
+							<?php endif;?>
+                            <div style="clear:both;"></div>
+						</div>
+                         <?php if ($_product->getDescription()): ?>
+                        <div class="small-title"><strong style="color:#000">About This Design</strong></div>
+                        <div class="prodiscrip"><?php echo $_product->getDescription() ?></div>                        
+                        <?php endif ?>
+						<div class="shares">
+							<ul>
+								<li class="share">Share:</li>
+								<li class="email"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"></a></li>
+								<li class="facebook"><a href="http://www.facebook.com/Angaradotcom" target="_blank"></a></li>
+								<li class="twiter"><a href="http://www.twitter.com/Angara" target="_blank"></a></li>
+							</ul>
+						</div>
+                        <div style="padding:10px 0 0 0;">
+                         <script type="text/javascript">
+AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','178','height','43','src','/skin/frontend/angara/default/flash/endsin','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','/skin/frontend/angara/default/flash/endsin' ); //end AC code
+</script><noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="178" height="43">
+                            <param name="movie" value="/skin/frontend/angara/default/flash/endsin.swf" />
+                            <param name="quality" value="high" />
+                            <embed src="/skin/frontend/angara/default/flash/endsin.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="178" height="43"></embed>
+                          </object></noscript>
+                        </div>
+				  </div>
+					<div id="pricesection"> <?php echo $this->getChildHtml('product_type_data') ?> 
+						<!-- 
+				<div class="or">OR</div>
+				<div class="easypay">Easy Pay!</div>
+				<div class="easypayment">3 payments of <strong>$103.33</strong></div>
+				 --> 
+						<?php echo $this->getChildHtml('addtocart') ?> </div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+		</form>
+		<script type="text/javascript">
+    //<![CDATA[
+		
+		jQuery(function(){
+			jQuery('#product_addtocart_form').submit(function(){
+				if(typeof ClickTaleExec != 'undefined'){
+					ClickTaleExec('productAddToCartForm.submit()');
+				}
+			})
+		})
+		
+	
+		function trackShoppingCart(res, form){
+			if(res){
+					_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart',"<?php echo $_product->getSku() ?>", undefined, 'true']);
+				}
+		}
+		
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+		_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview',"<?php echo $_product->getSku() ?>", undefined, 'true']);
+		var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+		
+        productAddToCartForm.submit = function(button, url) {
+			
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+</script>
+		<div class="ppbottom">
+			<div id="detailstab" style="display:block;">
+				<ul>
+					<li id="productdescription" class="activeted1"><a href="javascript:void(0);" onclick="showDiveSection('product-description');" onmouseover="showDiveSection('product-description');">Product Details</a></li>
+					<?php if(trim( $this->getChildHtml('view_more_options')) != ''): ?>
+					<li id="viewmoreoptions" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('more-options');" onmouseover="showDiveSection('more-options');">View More Options</a></li>
+					<?php endif;?>
+
+					<li id="shippingreturns" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('shipping-returns');" onmouseover="showDiveSection('shipping-returns');">Shipping &amp; Returns</a></li>
+					<li id="angaradifference" class="difference"><a href="javascript:void(0);" onclick="showDiveSection('angara-difference');" onmouseover="showDiveSection('angara-difference');">The Angara Difference</a></li>
+					<li id="productreview" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('product-review');" onmouseover="showDiveSection('product-review');">Product Reviews</a></li>
+				</ul>
+			</div>
+			<div class="productalldetail">
+				<div id="product-description" class="descriptiontab" style="display: block; ">
+					<div style="margin-bottom:25px;">
+                        <div class="heading2"><?php echo $_product->getShortDescription() ?>
+                        <!--hprahi code for review changes -->
+                        <a id="writeareviewfirsttimelink" href="javascript:writeareviewfirsttime()" style="text-decoration:underline;font-size:12px;font-weight:normal;margin-left:10px">Write a Review</a>
+                        <script>
+							function writeareviewfirsttime()
+							{
+								document.getElementById('productreview').style.display = 'block';
+								showDiveSection('product-review');
+								document.getElementById('writeareviewbtn').click();
+							}
+						</script>
+                        <!--END hprahi code for review changes -->
+                        </div>
+						 <!--<div style="padding:10px 0 0 0; font-weight:bold; text-decoration:underline;"><a href='javascript:void(0)' onclick="document.getElementById('pdfform').submit()">View Certificate Of Authenticity<img src="/skin/frontend/angara/default/images/certificate.png" width="25" height="19"></a></div>-->
+						
+						<div style="clear:both"></div>
+					</div>
+					<div class="item-details-box-wrapper">
+					<?php
+					if($_product->getGemstoneCaratWeight()){
+						$tmp_width = '290px';
+					}else{
+						$tmp_width = '180px';
+					}                    
+					?>					
+					<div id="details-heading-top" style="width:<?php echo $tmp_width?>;line-height:normal">
+							<div class="detail-box-title">Product Details:</div>
+							<div class="field">
+								<div class="fieldtitle">Angara Item #:</div>
+								<div class="fieldvalue"><?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></div>
+                                <div style="clear:both"></div>
+							</div>
+                            <?php if($_product->getPendantChainLength ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Chain Length:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('pendant_chain_length') ?> inches</div>
+                                 <div style="clear:both"></div>
+							</div>                            
+							<?php endif?>
+							<?php if($_product->getMetal()): ?>
+							<div class="field">
+								<div class="fieldtitle">Metal:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('metal') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif?>
+							<?php if($_product->getGemstoneType()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Type:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_type') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+							if($_product->getGemstoneShape ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Shape:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_shape') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+                            if($_product->getGemstoneCaratWeight()): ?>
+							<div class="field">
+								<div class="fieldtitle">Minimum Carat Total Weight:</div>
+								<div class="fieldvalue"><?php echo $_product->getData('gemstone_carat_weight') ?> cts</div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+							if($_product->getGemstoneColor ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Color:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_color') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+                            <?php endif;
+                            if($_product->getGemstoneClarity ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Clarity:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_clarity') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+							if($_product->getGemstoneDimension()): ?>
+							<div class="field">
+								<div class="fieldtitle">Approximate Dimensions:</div>
+								<div class="fieldvalue"><?php echo $_product->getData('gemstone_dimension') ?> mm</div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+							if($_product->getGemstoneBrilliance ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Brilliance:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_brilliance') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							<?php endif;
+							if($_product->getGemstoneEnhancement ()): ?>
+							<div class="field">
+								<div class="fieldtitle">Gemstone Enhancement:</div>
+								<div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_enhancement') ?></div>
+                                 <div style="clear:both"></div>
+							</div>
+							 <?php endif?>   
+							
+						     	<!--<div class="field">
+								<div class="fieldtitle">Purity:</div>
+								<div class="fieldvalue">100% Natural</div>
+                                 <div style="clear:both"></div>
+							</div>-->
+						</div>
+                        
+                     <?php if($_product->getEmbStoneName() || $_product->getEmbStoneName2() || $_product->getEmbStoneName3() ): ?>
+                            <div class="stones-details-box">
+                                <?php if($_product->getEmbStoneName3()): ?>                                                        
+                                <div class="stone-detail-box-odd">
+                                    <div class="detail-box-title"><!-- 3 -->
+                                        <?php if($_product->getAttributeText('emb_stone_name3')=="Diamond" || $_product->getAttributeText('emb_stone_name3')=="Simulated Diamond"): ?>
+                                        Diamond
+                                        <?php else:?>
+                                        Gemstone
+                                        <?php endif?>
+                                        Information:</div>
+                                    <?php if($_product->getEmbNumberOfStones3()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Number of <?php echo $_product->getAttributeText('emb_shape3') ?> <?php if($_product->getData('emb_number_of_stones3') > 1){?><?php if($_product->getAttributeText('emb_stone_name3')=="Ruby"){echo "Rubies";} elseif($_product->getAttributeText('emb_stone_name3')=="Lab Created Ruby"){echo "Lab Created Rubies";} else{echo $_product->getAttributeText('emb_stone_name3')."s";}?><?php }else{echo $_product->getAttributeText('emb_stone_name3');}?>:</div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_number_of_stones3') ?></div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbDimension3()): ?>
+                                    <div class="field">
+                                      <div class="fieldtitle">
+                                        Approximate Dimensions:
+                                        <?php if(strtolower($_product->getAttributeText('emb_stone_name3'))=="sapphire"): ?>
+                                          <span class="popupicon <?php if($_product->getAttributeText('emb_shape3')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span><?php endif?>
+                                      </div>									
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_dimension3') ?> mm</div>
+
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbCaratWeight3()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Minimum Carat Total Weight:
+                                         <?php if(strtolower($_product->getAttributeText('emb_stone_name3'))=="sapphire"): ?>
+                                          <span class="popupicon <?php if($_product->getAttributeText('emb_shape3')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span><?php endif?>
+                                        </div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_carat_weight3') ?> cts</div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbQualityGrade3()): ?>
+
+                                    <div class="field">
+
+
+                                        <div class="fieldtitle">
+                                         Quality Grade: <span class="<?php
+                                          					if(
+                                                            	strtolower($_product->getAttributeText('emb_stone_name3'))=='sapphire'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name3'))=='diamond'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name3'))=='ruby'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name3'))=='emerald'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name3'))=='tanzanite'
+                                                               ){
+                                                            	echo 'popupicon qualitypopupbtn" value="'.strtolower($_product->getAttributeText('emb_stone_name3'));}?>"></span>
+                                      </div>
+                                        <div class="fieldvalue help-text" about="<?php echo strtolower($_product->getAttributeText('emb_stone_name3').  $_product->getAttributeText('emb_quality_grade3')) ?>"><?php echo $_product->getAttributeText('emb_quality_grade3') ?></div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>								
+                                </div>							
+                                <?php endif;
+                                
+                                if($_product->getEmbStoneName2()): ?>
+                                <div class="<?php echo ($_product->getEmbStoneName3())?'stone-detail-box':'stone-detail-box-odd'; ?>">
+                                    <div class="detail-box-title"><!-- 2 -->
+                                        <?php if($_product->getAttributeText('emb_stone_name2')=="Diamond" || $_product->getAttributeText('emb_stone_name2')=="Simulated Diamond"): ?>
+                                        Diamond
+                                        <?php else:?>
+                                        Gemstone
+                                        <?php endif?>
+                                        Information:</div>
+                                    <?php if($_product->getEmbNumberOfStones2()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Number of <?php echo $_product->getAttributeText('emb_shape2') ?> <?php if($_product->getData('emb_number_of_stones2') > 1){?><?php if($_product->getAttributeText('emb_stone_name2')=="Ruby"){echo "Rubies";} elseif($_product->getAttributeText('emb_stone_name2')=="Lab Created Ruby"){echo "Lab Created Rubies";} else{echo $_product->getAttributeText('emb_stone_name2')."s";}?><?php }else{echo $_product->getAttributeText('emb_stone_name2');}?>:</div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_number_of_stones2') ?></div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbDimension2()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">
+                                        Approximate Dimensions:
+                                       <?php if(strtolower($_product->getAttributeText('emb_stone_name2'))=="sapphire"): ?>
+                                             <span class="popupicon <?php if($_product->getAttributeText('emb_shape2')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span>
+                                        <?php endif?>
+                                      </div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_dimension2') ?> mm</div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbCaratWeight2()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Minimum Carat Total Weight:
+                                         <?php if(strtolower($_product->getAttributeText('emb_stone_name2'))=="sapphire"): ?>
+                                             <span class="popupicon <?php if($_product->getAttributeText('emb_shape2')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span>
+                                        <?php endif?>
+                                        </div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_carat_weight2') ?> cts</div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbQualityGrade2()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">
+                                        Quality Grade: <span class="<?php
+                                          					if(
+                                                            	strtolower($_product->getAttributeText('emb_stone_name2'))=='sapphire'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name2'))=='diamond'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name2'))=='ruby'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name2'))=='emerald'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name2'))=='tanzanite'
+                                                               ){
+                                                            	echo 'popupicon qualitypopupbtn" value="'.strtolower($_product->getAttributeText('emb_stone_name2'));}?>"></span>
+                                      </div>
+                                        <div class="fieldvalue help-text" about="<?php echo strtolower($_product->getAttributeText('emb_stone_name2').$_product->getAttributeText('emb_quality_grade2')) ?>"><?php echo $_product->getAttributeText('emb_quality_grade2') ?></div>
+    
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                </div>                           
+                                <?php endif;
+                                
+                                if($_product->getEmbStoneName()): ?>
+                                <?php 
+                                $oddclass = ($_product->getEmbStoneName3())?'stone-detail-box-odd':(($_product->getEmbStoneName2())?'stone-detail-box':'stone-detail-box-odd'); ?>
+                                  <?php if($_product->getEmbStoneName3()){
+                                            echo '<div style="clear:both"></div>';
+                                        }
+                                ?>
+                                <div class="<?php echo $oddclass; ?>">
+                                    <div class="detail-box-title"><!-- 1 -->
+                                        <?php if($_product->getAttributeText('emb_stone_name')=="Diamond" || $_product->getAttributeText('emb_stone_name')=="Simulated Diamond"): ?>
+                                        Diamond
+                                        <?php else:?>
+                                        Gemstone
+                                        <?php endif?>
+                                        Information:</div>
+                                    <?php if($_product->getEmbNumberOfStones1()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Number of <?php echo $_product->getAttributeText('emb_shape1') ?> <?php if($_product->getData('emb_number_of_stones1') > 1){?><?php if($_product->getAttributeText('emb_stone_name')=="Ruby"){echo "Rubies";} elseif($_product->getAttributeText('emb_stone_name')=="Lab Created Ruby"){echo "Lab Created Rubies";} else{echo $_product->getAttributeText('emb_stone_name')."s";}?><?php }else{echo $_product->getAttributeText('emb_stone_name');}?>:<!--<span class="help-icon" about="<?php echo $_product->getAttributeText('emb_shape1') ?>"></span>--></div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_number_of_stones1') ?></div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbDimension1()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">
+                                        Approximate Dimensions:
+                                       <?php if(strtolower($_product->getAttributeText('emb_stone_name'))=="sapphire"): ?>
+                                             <span class="popupicon <?php if($_product->getAttributeText('emb_shape1')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span>
+                                        <?php endif ?>
+                                      </div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_dimension1') ?> mm</div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getEmbCaratWeight1()): ?>
+                                    <div class="field">
+                                        <div class="fieldtitle">Minimum Carat Total Weight:
+                                         <?php if(strtolower($_product->getAttributeText('emb_stone_name'))=="sapphire"): ?>
+                                             <span class="popupicon <?php if($_product->getAttributeText('emb_shape1')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>"></span>
+                                        <?php endif ?>
+                                        </div>
+                                        <div class="fieldvalue"><?php echo $_product->getData('emb_carat_weight1') ?> cts</div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>
+                                    <?php if($_product->getAttributeText('emb_stone_name')=="Diamond" && !($_product->getEmbStoneName2())): ?>
+                                        <?php if($_product->getEmbColor1()): ?>
+                                    <div class="field">
+                                            <div class="fieldtitle">Average Color:</div>
+                                            <div class="fieldvalue"><?php echo $_product->getAttributeText('emb_color1') ?></div>
+                                             <div style="clear:both"></div>
+                                        </div>	
+                                        <?php endif?>
+                                        <?php if($_product->getEmbClarity1()): ?>
+                                    <div class="field">
+                                            <div class="fieldtitle">Average Clarity:</div>
+                                            <div class="fieldvalue"><?php echo $_product->getAttributeText('emb_clarity1') ?></div>
+                                             <div style="clear:both"></div>
+                                    </div>
+                                        <?php endif?>
+                                    <?php elseif($_product->getEmbQualityGrade1()): ?>
+                                    <div class="field">
+                                    <div class="fieldtitle">
+                                       Quality Grade: <span class="<?php
+                                          					if(
+                                                            	strtolower($_product->getAttributeText('emb_stone_name'))=='sapphire'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name'))=='diamond'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name'))=='ruby'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name'))=='emerald'
+                                                                || strtolower($_product->getAttributeText('emb_stone_name'))=='tanzanite'
+                                                               ){
+                                                            	echo 'popupicon qualitypopupbtn" value="'.strtolower($_product->getAttributeText('emb_stone_name'));}?>"></span>
+                                      </div>
+                                        <div class="fieldvalue help-text" about="<?php echo strtolower($_product->getAttributeText('emb_stone_name').$_product->getAttributeText('emb_quality_grade1')) ?>"><?php echo $_product->getAttributeText('emb_quality_grade1') ?></div>
+                                         <div style="clear:both"></div>
+                                    </div>
+                                    <?php endif?>								
+                                    
+                                </div>
+                                <?php endif?>
+                            </div>
+                        <?php endif?>
+                        
+
+                        
+					</div>
+					<div id="help-icon-tooltip">
+						<div id="help-content"></div>
+					</div>
+					<script type="text/javascript">
+								jQuery(function(){
+									
+									
+									// view new certificate
+									function viewnewcert(product){
+										//alert(product);
+									}
+									
+									jQuery.getJSON('/skin/frontend/angara/default/staticdata/gemstones.json', function(gemstones) {
+									
+									jQuery('.help-icon, .help-text').each(function(){
+										
+										
+												var about = jQuery(this).attr('about');
+												var content = null;
+												if(about == null){
+													if(!jQuery(this).hasClass('help-text'))
+														jQuery(this).hide(); // hide this useless !@#$ crap help icon 
+												}else if(about == 'Oval'){
+													content = gemstones.shapes.oval.description;
+												}else if(about == 'Round'){ 
+													content = gemstones.shapes.round.description;
+												}else if(about == 'Pear'){
+													content = gemstones.shapes.pear.description;
+												}else if(about == 'Trillion'){
+													content = gemstones.shapes.trillion.description;
+												}else if(about == 'Marquise'){
+													content = gemstones.shapes.marquise.description;
+												}else if(about == 'Princess'){
+													content = gemstones.shapes.princess.description;
+												}else if(about == 'Emerald'){
+													content = gemstones.shapes.emerald.description;
+												}else if(about == 'Cushion'){
+													content = gemstones.shapes.cushion.description;
+												}else if(about == 'Emeraldcut'){
+													content = gemstones.shapes.emeraldcut.description;
+												}else if(about == 'Ascher'){
+													content = gemstones.shapes.ascher.description;
+												}else if(about == 'Heart'){
+													content = gemstones.shapes.heart.description;
+												}else if(about == 'Baguette'){
+													content = gemstones.shapes.baguette.description;
+												}else if(about == 'whitegold18k'){
+													content = gemstones.metals.whitegold18k.description;
+												}else if(about == 'yellowgold18k'){
+													content = gemstones.metals.yellowgold18k.description;
+												}else if(about == 'whitegold14k'){
+													content = gemstones.metals.whitegold14k.description;
+												}else if(about == 'yellowgold14k'){
+													content = gemstones.metals.yellowgold14k.description;
+												}else if(about == 'whitegold10k'){
+													content = gemstones.metals.whitegold10k.description;
+												}else if(about == 'silver'){
+													content = gemstones.metals.silver.description;
+												}else if(about == 'sterlingsilver'){
+													content = gemstones.metals.sterlingsilver.description;
+												}else if(about == 'sterlingsilver925'){
+													content = gemstones.metals.sterlingsilver925.description;
+												}else if(about == 'platinum'){
+													content = gemstones.metals.platinum.description;
+												}else if(about == 'emeralda'){
+													content = gemstones.quality.emeralda.description;
+												}else if(about == 'emeraldaa'){
+													content = gemstones.quality.emeraldaa.description;
+												}else if(about == 'emeraldaaa'){
+													content = gemstones.quality.emeraldaaa.description;
+												}else if(about == 'emeraldaaaa'){
+													content = gemstones.quality.emeraldaaaa.description;
+												}else if(about == 'rubya'){
+													content = gemstones.quality.rubya.description;
+												}else if(about == 'rubyaa'){
+													content = gemstones.quality.rubyaa.description;
+												}else if(about == 'rubyaaa'){
+													content = gemstones.quality.rubyaaa.description;
+												}else if(about == 'rubyaaaa'){
+													content = gemstones.quality.rubyaaaa.description;
+												}else if(about == 'sapphirea'){
+													content = gemstones.quality.sapphirea.description;
+												}else if(about == 'sapphireaa'){
+
+													content = gemstones.quality.sapphireaa.description;
+												}else if(about == 'sapphireaaa'){
+													content = gemstones.quality.sapphireaaa.description;
+												}else if(about == 'sapphireaaaa'){
+													content = gemstones.quality.sapphireaaaa.description;
+												}else if(about == 'tanzanitea'){
+													content = gemstones.quality.tanzanitea.description;
+												}else if(about == 'tanzaniteaa'){
+													content = gemstones.quality.tanzaniteaa.description;
+												}else if(about == 'tanzaniteaaa'){
+													content = gemstones.quality.tanzaniteaaa.description;
+												}else if(about == 'tanzaniteaaaa'){
+													content = gemstones.quality.tanzaniteaaaa.description;
+												}else if(about == 'diamonda'){
+													content = gemstones.quality.diamonda.description;
+												}else if(about == 'diamondaa'){
+													content = gemstones.quality.diamondaa.description;
+												}else if(about == 'diamondaaa'){
+													content = gemstones.quality.diamondaaa.description;
+												}else if(about == 'diamondaaaa'){
+													content = gemstones.quality.diamondaaaa.description;
+												}else if(about == 'amethysta'){
+													content = gemstones.quality.amethysta.description;
+												}else if(about == 'amethystaa'){
+													content = gemstones.quality.amethystaa.description;
+												}else if(about == 'amethystaaa'){
+													content = gemstones.quality.amethystaaa.description;
+												}else if(about == 'amethystaaaa'){
+													content = gemstones.quality.amethystaaaa.description;
+												}else if(about == 'opala'){
+													content = gemstones.quality.opala.description;
+												}else if(about == 'opalaa'){
+													content = gemstones.quality.opalaa.description;
+												}else if(about == 'opalaaa'){
+													content = gemstones.quality.opalaaa.description;
+												}else if(about == 'opalaaaa'){
+													content = gemstones.quality.opalaaaa.description;
+												}else if(about == 'garneta'){
+													content = gemstones.quality.garneta.description;
+												}else if(about == 'garnetaa'){
+													content = gemstones.quality.garnetaa.description;
+												}else if(about == 'garnetaaa'){
+													content = gemstones.quality.garnetaaa.description;
+												}else if(about == 'garnetaaaa'){
+													content = gemstones.quality.garnetaaaa.description;
+												}else if(about == 'aquamarinea'){
+													content = gemstones.quality.aquamarinea.description;
+												}else if(about == 'aquamarineaa'){
+													content = gemstones.quality.aquamarineaa.description;
+												}else if(about == 'aquamarineaaa'){
+													content = gemstones.quality.aquamarineaaa.description;
+												}else if(about == 'aquamarineaaaa'){
+													content = gemstones.quality.aquamarineaaaa.description;
+												}else if(about.indexOf('pearla',(about.length-6)) !=-1){
+													content = gemstones.quality.pearla.description;
+												}else if(about.indexOf('pearlaa',(about.length-7)) !=-1){
+													content = gemstones.quality.pearlaa.description;
+												}else if(about.indexOf('pearlaaa',(about.length-8)) !=-1){
+													content = gemstones.quality.pearlaaa.description;
+												}else if(about.indexOf('pearlaaaa',(about.length-9)) !=-1){
+													content = gemstones.quality.pearlaaaa.description;
+												}else if(about == 'peridota'){
+													content = gemstones.quality.peridota.description;
+												}else if(about == 'peridotaa'){
+													content = gemstones.quality.peridotaa.description;
+												}else if(about == 'peridotaaa'){
+													content = gemstones.quality.peridotaaa.description;
+												}else if(about == 'peridotaaaa'){
+													content = gemstones.quality.peridotaaaa.description;
+												}else if(about == 'citrinea'){
+													content = gemstones.quality.citrinea.description;
+												}else if(about == 'citrineaa'){
+													content = gemstones.quality.citrineaa.description;
+												}else if(about == 'citrineaaa'){
+													content = gemstones.quality.citrineaaa.description;
+												}else if(about == 'citrineaaaa'){
+													content = gemstones.quality.citrineaaaa.description;
+
+												}
+												else{
+													if(!jQuery(this).hasClass('help-text'))
+														jQuery(this).hide(); // hide this useless !@#$ crap help icon 
+												}
+												
+												jQuery(this).data('content',content);
+
+									})
+									
+									
+										//alert(gemstones.shapes)
+										//alert(gemstones.shapes.oval.description)
+										jQuery('.help-icon').click(
+											function(e){
+												e.stopPropagation();
+												
+												content = jQuery(this).data('content');
+												
+												jQuery('#help-icon-tooltip').find('#help-content').html(content);
+												jQuery(this).append(jQuery('#help-icon-tooltip').fadeIn())
+											}
+										)
+										
+										jQuery('.help-text').hover(
+											function(e){
+												content = jQuery(this).data('content');
+												if(jQuery.trim(content)!=''){
+													jQuery('#help-icon-tooltip').find('#help-content').html(content);
+													jQuery(this).append(jQuery('#help-icon-tooltip').show())
+												}
+											},
+											function(){
+												jQuery('#help-icon-tooltip').hide();
+											}
+										)
+									})
+									
+									jQuery('body').click(function(){
+										jQuery('#help-icon-tooltip').fadeOut();
+									})
+								})
+							</script>
+					<div style="clear:both"></div>
+				</div>
+                
+                    <?php if(trim( $this->getChildHtml('view_more_options')) != ''): ?>
+                    <div id="more-options" class="descriptiontab" style="display: none;">				
+                        <!-- Put needed Upsell products here  -->					
+                            <?php echo $this->getChildHtml('view_more_options');?>			
+                    
+                        <div style="clear:both"></div>
+                    </div>
+                    <?php endif; ?>
+					<div id="shipping-returns" class="producttxtlink" style="display: none; ">
+					<div class="headingtag"><b>Return Policy:</b></div>
+					At Angara, we take pride in customer delight and take special care to ensure that every product exceeds your expectations. However, if for any reason you are unsatisfied with your purchase and would like an exchange or refund, simply send the Angara piece back in its original condition within 30 days and follow the instructions on the <a href="/return-policy.html">Return Policy</a> page.<br>
+					<br>
+					<div class="headingtag"><b>Shipping Policy:</b></div>                    
+                    We ship FREE to over 40 countries - We offer FREE FedEx Ground Delivery within the US and FedEx International Priority Internationally. Upgraded shipping options are available at Checkout for nominal fees. If you need the item to be shipped faster than the shipping date indicated above, please call 888 926 4272 to speak to one of our Angara Advisors or click <a href="https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/">Live Chat</a>. A tracking number will be sent to your email upon shipment.
+                    </div>
+                    
+				    <div id="angara-difference" class="producttxtlink" style="display: none;"> 
+                   <div class="headingtag"><b>The Internet's Family Jeweler:</b></div>                  
+					We live and breathe gemstones and fine jewelry.  We are family owned and have been in the gemstone business for 3 generations.  As with a traditional family jeweler experience, we will work with you to find or create the jewelry piece of your dreams.  If you cannot find  the gemstone or fine jewelry piece that you are looking for on the website, simply call us at 888 926 4272 and our team will find or create your piece.  If we can't source it, it probably doesn't exist. 
+                    <span class="internetjeweler" style="cursor:pointer; text-decoration:underline;">Our Customers Say It Best</span>  
+                    <br>
+					<br>                  
+                    
+					<div class="headingtag"><b>Direct From The Source:</b></div>
+					With manufacturing and sourcing offices in  Jaipur, India (commonly known as the World's Gemstone Capital),  Thailand (where the majority of the world's rubies and sapphires are cut and polished), and the USA, we are able to source the best quality gemstones directly from the mines and manufacturers.  Further, we manufacture the large majority of our gemstone jewelry - thus, we cut out all middlemen and are able to offer unparalleled prices.  Independent appraisal tests have verified that our jewelry routinely appraises at 150-250% of purchase price.
+                    <br>
+					<br>
+                   
+                    <div class="headingtag"><b>Exceptional Value And Quality, Guaranteed By A 110% Refund Policy:</b></div>                   
+					We guarantee exceptional value and quality.  We will refund 110% of the purchase price (up to an additional $250 refund) if any accredited jewelry appraiser values the piece for less than 150% of the purchase price or writes that the craftsmanship is not of exceptional quality. <?php if(strtolower($_product->getAttributeText('emb_stone_name3'))=="sapphire" || strtolower($_product->getAttributeText('emb_stone_name2'))=="sapphire" || strtolower($_product->getAttributeText('emb_stone_name'))=="sapphire"): ?>
+                    <span class="valuequality" style="cursor:pointer; text-decoration:underline;">Our Customers Say It Best</span>
+                    <?php endif; ?> 
+                    <br>					
+					<br>
+                    
+					<div class="headingtag"><b>30 Day Money Back Guarantee:</b></div>
+					If you don't love it, simply send it back in its original condition for a full refund.
+                    <br>
+					<br>
+                    
+					<div class="headingtag"><b>Higher Quality:</b></div>
+					Our jewelry is meant to last for generations.  The focus is on maximizing beauty rather than on saving gold or gemstone weight by reducing quality.  While our competitors have reduced weight to 2-3 grams for most products as gold costs have gone up, our average product weight remains at 3-5 grams.  Even if this philosophy and commitment to fine jewelry costs us more, we believe that the customer will be much happier as a result.
+                    <br>					
+					<br>
+				</div>
+				   <div id="product-review" style="display: none;">
+					<div class="customer-review">
+						<div><?php echo $this->getChildHtml('reviews') ?></div>
+						<div style="clear:both"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

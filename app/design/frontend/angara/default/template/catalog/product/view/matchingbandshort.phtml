@@ -1,0 +1,60 @@
+<?php 
+$_product 			= 	$this->getProduct();
+$productId 			=	(int)$_product->getId();
+$relatedProductsId	=	$_product->getMatchingbandProductIds();
+$skinUrl	=	Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+if(count($relatedProductsId)>0){
+	//echo count($relatedProductsId); 
+?>
+<link rel="stylesheet" href="<?php echo Mage::getDesign()->getSkinUrl('css/matching-bands.css');?>"/>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		
+		jQuery("#lightboxContent").appendTo('body');
+		
+		jQuery("#showLB").click(function(){
+			jQuery("#lightboxBlackOverlay, #lightboxContent").fadeIn(300);
+		})
+
+		var dataLoaded	=	'';							//	Creating a varible to prevent multiple ajax request
+		jQuery('#showLB').click(function() {
+			//jQuery('#lightboxContent').show();		//	Showing loader while we fetching the data using ajax
+			//alert(dataLoaded);
+			if(dataLoaded==''){		//	Fire Ajax first time only and if data already loaded then don't fire the request again
+				jQuery.ajax({
+					type: 'GET',
+					url: '<?php echo Mage::getBaseUrl();?>matchingband/index/index/id/<?php echo $productId;?>',
+					context: document.body,
+					cache: false,
+					beforeSend: function ( xhr ) {
+					   //Add your image loader here
+					   //alert('test');
+					},
+					success: function(htmldata){
+						//alert( "Data Saved: " + htmldata );
+						jQuery("#lightboxContent").html(htmldata);
+						jQuery("#lightboxContent").find('.matching-band-product-details:first').show();
+						jQuery("#lightboxContent").find('.matching-band-thumb:first').addClass('selected');
+						jQuery("#lightboxContent").find('.matching-band-thumb').click(function(){
+							var index = jQuery(this).index();
+							jQuery("#lightboxContent").find('.matching-band-thumb').removeClass('selected');
+							jQuery("#lightboxContent").find('.matching-band-thumb:eq('+index+')').addClass('selected');
+							jQuery("#lightboxContent").find('.matching-band-product-details').hide();
+							jQuery("#lightboxContent").find('.matching-band-product-details:eq('+index+')').show();
+						})
+						dataLoaded	=	1;
+					},
+					error: function()
+					{
+						jQuery("#lightboxContent").html('Sorry we are unable to load Matching Bands. Please try again later.');
+					}
+				});
+			}
+		});
+	});
+</script>
+<div class="more-matching-jewelry"><a id="showLB" href="javascript:void(0);">Matching Band +</a></div>
+<div id="lightboxContent">
+	<div id="matchingLoader"><img src='<?php echo $skinUrl; ?>frontend/angara/default/images/logoanimatedgif.gif' style="margin:175px 0 0 378px;"></div>
+</div>
+<?php } ?>

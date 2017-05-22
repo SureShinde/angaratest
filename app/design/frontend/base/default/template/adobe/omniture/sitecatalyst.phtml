@@ -1,0 +1,11 @@
+<?php
+//$sc = Mage::getBlockSingleton('omniture/sitecatalyst');
+$sc = Mage::getModel('omniture/sitecatalyst');
+echo $sc->toJs();
+//var_dump(get_class_methods(get_class($sc)));
+//echo $this->getJs();
+//echo "<pre>";
+//print_r(get_class_methods(get_class($this->getLayout()->getBlock('breadcrumbs'))));
+//var_dump( Mage::helper('catalog')->getBreadcrumbPath());
+//echo "</pre>";
+?>

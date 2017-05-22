@@ -1,0 +1,466 @@
+<style>
+#main-menu-xs-toggler, #main-menu-search-toggler, #cart-opener{ display:none }
+.checkout-footer-top-border{border-top: 2px solid #dddddd;}
+.gifts-products-wrapper { overflow-x:hidden; overflow-y:auto; max-height:310px; }
+.gifts-products-wrapper .products-list { overflow:hidden; border-bottom:1px solid #D9DDD3; }
+.gifts-products-wrapper .products-list:last-child { border-bottom:none; }
+.gifts-products-wrapper .products-list .item { width:200px; float:left; border-bottom:none; }
+.gifts-products-wrapper .products-list .product-image { width:50px; height:auto; float:left; }
+.gifts-products-wrapper .products-list .product-details { margin-left:60px; }
+.gifts-popup-wrapper { position:fixed; left:50%; top:30%; z-index:1111; margin-left:-340px; width:650px; padding:20px; background:#fff; border:1px dashed #b5b5b5; box-shadow:0 0 5px rgba(0,0,0,0.25); }
+.gifts-popup-overlay { background:#ccc; background:rgba(0,0,0,0.3); position:fixed; top:0; left: 0; width:100%; height:100%; z-index:1000; }
+.gifts-popup-close { position:absolute; right:6px; top:4px; text-decoration:none; font-size:16px; font-weight:bold; line-height:1; color:#888; }
+.gifts-popup-close:hover { color:#444; }
+.showcase-deshed-border-bottom-1px{ border-bottom:1px dashed #D3D3D3 }
+.showcase-deshed-border-bottom-mob-1px{ border-bottom:1px dashed #D3D3D3 }
+.showcase-deshed-border-top-1px{ border-top:1px dashed #D3D3D3 }
+.row-min-height{ min-height:90px;}
+.gift-link-choice-gap{ margin-top:37px;}
+.font-size-gift-txt{ font-size:13px; padding:5px 0 5px 5px; }
+#AmazonPayButtonMethod img{ width:127px; height:26px;}
+@media (max-width: 767px) {	
+	.gift-link-choice-gap{ margin-top:7px;}
+	.gifts-popup-wrapper { position:absolute; left:50%; top:30%; z-index:1111; margin-left:-155px; width:310px; padding:20px; background:#fff; border:1px dashed #b5b5b5; box-shadow:0 0 5px rgba(0,0,0,0.25); }
+	.showcase-deshed-border-bottom-1px{ border-bottom:0; }
+	.gifts-products-wrapper {   max-height:none; }
+	.font-size-gift-txt{ font-size:11px;}
+}
+@media (min-width: 768px ) and (max-width: 999px) {
+ .gift-link-choice-gap{ margin-top:18px;}
+}
+.valentines_heart {display:none !important;}
+
+<?php /*?>.cart-page-offer.dis-offer{  background-color: #f9f9f9; opacity: 0.5;position:relative;}
+.cart-page-offer.dis-offer:after{	content:"";	position:absolute;    left: 0px;    right: 0px;    top: 0px;    bottom: 0px;}
+.cart-offer-wrapper{float: left; margin:20px 0 30px; width: 100%;}
+.cart-page-offer{width:450px;border:dashed 1px #f14c36; height:50px;position:relative;background-color:#fffbea;}
+.show-offers{display:none;}
+@media(min-width:768px) and (max-width:999px){
+	.cart-page-offer{
+		width:350px;
+	}
+	.offer-text-box{
+		font-size: 13px!important;
+		margin-left:10px!important;
+	}
+	.offer-button-box{
+		margin-right:5px!important;
+	}
+	.click-here-btn, .click-here-grey-btn{
+		min-width:95px!important;
+		padding-left:10px!important;
+		padding-right:10px!important;
+	}
+}
+@media(max-width:767px){
+	.cart-page-offer:first-child{ margin-bottom:10px; }
+	.cart-page-offer{ float:none !important; margin:0 auto; }
+}
+@media(max-width:501px){
+	.cart-offer-wrapper{
+		display:none;
+	}
+	.cart-page-offer{
+		width:100%;
+		height: 97px;
+		float:left!important;
+	}
+	.scissor-icon{
+		left:50%;
+	}
+	.offer-text-box{
+		margin:0px!important;
+		padding:10px;
+		width:100%;
+	}
+	.offer-button-box{
+		float:left!important;
+		width:100%;
+		margin:0px!important;
+		text-align:center;
+	}
+	.click-here-btn, .click-here-grey-btn{
+		display:inline-block!important;
+	}
+	.show-offers{
+		display: block!important;
+		margin: 10px 0px;
+		border: 1px dashed #999999;
+		text-align: center;
+		padding: 5px 0px;
+		cursor: pointer;
+		background: #eeeeee;
+	}
+	.show-offers:after{
+		content:"\F061";
+		font-family:FontAwesome;
+		margin-left:8px;
+	}
+	.show-offers.active:after{
+		content:"\F063";
+		font-family:FontAwesome;
+		margin-left:8px;
+	}
+}
+.scissor-icon{width:23px;height:15px;position:absolute;top:-9px; left:223px; background: url(/skin/frontend/angara/default/images/scissor-icon.png) no-repeat;}
+.click-here-btn{	outline: none;	border: solid 1px #66a100;	background-color: #66A100; 	text-transform: uppercase;	color: #fff; font-size: 12px; font-family: open_sanssemibold, Arial, Helvetica, sans-seri; cursor: pointer;	display:block;	text-align:center;	padding:6px 20px;}
+.click-here-btn{  min-width: 115px; outline: none;	border: solid 1px #66a100;	background-color: #66A100; 	text-transform: uppercase;	color: #fff; font-size: 12px; font-family: open_sanssemibold, Arial, Helvetica, sans-seri; cursor: pointer;	display:block;	text-align:center;	padding:6px 20px;}
+
+.click-here-grey-btn{  min-width: 115px; outline: none;	background-color: #7b7b7b; 	text-transform: uppercase;	color: #fff; font-size: 12px; font-family: open_sanssemibold, Arial, Helvetica, sans-seri; display:block;	text-align:center;	padding:7px 20px;}
+
+.offer-text-box{float:left; font-size:14px; line-height:18px; margin:9px 0 0 20px; text-align:center; color:#595959;}
+.offer-button-box { float:right; margin:8px 20px 0 0; }
+.offer-text-box strong{font-size:16px;font-weight:normal;}<?php */?>
+.staticlinks{display:none}
+.topnav .cart-items{ display:none;}
+</style>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+$has_recurring_item = $this->hasRecurringItem(); 
+$grandtotalwithout_easy = Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments(); ?>
+<div class="container showcase-bg-white low-padding-bottom">
+	<div class="row">
+		<div class="col-sm-12"><?php echo $this->getMessagesBlock()->getGroupedHtml(); echo $this->getChildHtml('form_before');?></div>
+	</div>	
+    <?php /*?><?php 
+	if(Mage::helper('function')->isMobile() == FALSE){
+		$defaultCoupon 		= 	Mage::helper('function')->getDefaultCoupon();
+		$promotionCoupon	=	Mage::helper('function')->getPromotionCoupon();
+		$totals 			= 	Mage::getSingleton('checkout/cart')->getQuote()->getTotals();
+		$subtotal 			= 	$totals["subtotal"]->getValue();
+		//$cseCustomer = Mage::getSingleton('core/session')->getCseCustomerSession();
+		//echo 'cseCustomer->'.$cseCustomer;
+		
+		// Base Currency
+		$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();
+		// Current Currency
+		$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();
+		
+		if( $baseCurrencyCode != $currentCurrencyCode ){
+			// Allowed currencies
+			$allowedCurrencies 	= 	Mage::getModel('directory/currency')->getConfigAllowCurrencies();
+			$rates 				= 	Mage::getModel('directory/currency')->getCurrencyRates($baseCurrencyCode, array_values($allowedCurrencies));
+			//echo '<pre>';print_r($rates);
+			$convertedSubtotal	=	$subtotal / $rates[$currentCurrencyCode];	
+		}else{
+			$convertedSubtotal	=	$subtotal;
+		}
+		$coupon_code 		= 	strtoupper(Mage::getSingleton('checkout/session')->getQuote()->getCouponCode());
+		$oCoupon 			= 	Mage::getModel('salesrule/coupon')->load($coupon_code, 'code');
+		$oRule 				= 	Mage::getModel('salesrule/rule')->load($oCoupon->getRuleId());
+		//var_dump($oRule->getData());
+		$ruleData 			= 	$oRule->getData();
+		//$ruleSimpleAction 	= 	$ruleData['simple_action'];
+		$ruleDiscountAmount	= 	(int)$ruleData['discount_amount'];
+		if( $ruleDiscountAmount != 15 || $coupon_code == $promotionCoupon){
+			$clickHere1			=	"<span class='offer-btn click-here-btn' coupon='".$defaultCoupon."'><span class='visible-md'>Click Here</span><span class='visible-sm visible-xs'>TAP HERE</span></span>";
+		$clickHere2			=	"<span class='offer-btn click-here-btn' coupon='".$promotionCoupon."'><span class='visible-md'>Click Here</span><span class='visible-sm visible-xs'>TAP HERE</span></span>";
+			if( $coupon_code == $defaultCoupon){
+				$clickHere1	=	"<span class='click-here-grey-btn'>Applied</span>";
+			}elseif( $coupon_code == $promotionCoupon){
+				$clickHere2	=	"<span class='click-here-grey-btn'>Applied</span>";
+			}
+			?>
+			<?php if($convertedSubtotal <= 1000){ $blurClass	=	'dis-offer';}?>
+			<div class="show-offers" onclick="showOffers()">Show Offers</div>
+			<div class="cart-offer-wrapper"<?php if(Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode() == 'CSEYO15'):?> style="opacity:.3;"<?php endif;?>>
+				<div class="cart-page-offer" style="float:left;<?php if(Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode() == 'CSEYO10'):?>opacity:.3;<?php endif;?>">
+					<div class="scissor-icon"></div>
+					<div class="offer-text-box"><?php echo Mage::helper('function')->getDiscountType1Text();?></div><div class="offer-button-box"><?php echo $clickHere1;?></div>
+				</div>
+				<div class="cart-page-offer <?php echo $blurClass;?>" style="float:right;">
+					<div class="scissor-icon"></div>
+					 <div class="offer-text-box">FREE $199 Garnet Studs and <br /><strong>15%</strong> discount on orders over $1000</div><div class="offer-button-box"><?php echo $clickHere2;?></div>
+				</div>
+			<div class="clear"></div>
+			<script>
+				function showOffers(){
+					var isVisible = jQuery( ".cart-offer-wrapper" ).is( ":visible" );
+					var isHidden = jQuery( ".cart-offer-wrapper" ).is( ":hidden" );
+					if(isVisible){
+						jQuery(".show-offers").removeClass("active");
+						jQuery(".cart-offer-wrapper").slideUp(300);
+					}else{
+						jQuery(".show-offers").addClass("active");
+						jQuery(".cart-offer-wrapper").slideDown(300);
+					}
+				}
+			</script>
+			</div>
+    <?php } 
+	}?><?php */?>
+   
+	<?php $customerCoupon = Mage::helper('function')->getCustomerCoupon(); ?>
+	<div class="cart-bottom-border"></div>
+	<form id="updatepost_form" action="<?php echo $this->getUrl('checkout/cart/updatePost');?>" method="post">
+		<div class="cart popup-shopping-cart high-margin-top">
+			<div class="page-title title-buttons green-title">
+				<h1><?php echo $this->__('YOUR CART');?> - <?php echo $this->helper('checkout/cart')->getSummaryCount();?> Item(s)</h1>
+				<div class="high-margin-top pull-right hidden-xs">
+				<?php 
+				if($this->getContinueShoppingUrl()): ?>
+					<button type="button" title="<?php echo $this->__('Continue Shopping');?>" class="continue-btn no-shedow-btn-sm fontsize-type2 btn-dark-gray" onClick="setLocation('<?php echo $this->getUrl();//echo $this->getContinueShoppingUrl();?>')">Continue Shopping</button>
+				<?php 
+				endif; ?>
+					<button type="button" id="cart-top-checkout-button" title="<?php echo $this->__('Checkout');?>" class="proceed-checkout-btn btn-proceed-checkout fontsize-type2 btn-primary" onclick="pushOPGA(); window.location='/onepagecheckout/index/index/shipment/'+jQuery('#custom_estimate_method').val();">Checkout</button>
+				</div>
+			</div>
+			<div class="visible-xs">
+				<button type="button" id="cart-top-checkout-button" title="<?php echo $this->__('Proceed To Checkout');?>" class="btn-block  btn-primary" onclick="pushOPGA; window.location='/onepagecheckout/index/index/shipment/'+jQuery('#custom_estimate_method').val();">Checkout</button>		</div>
+			<div class="newcart">
+				<div class="row">
+                	<div class="col-md-8 col-sm-7">
+					<style>
+						@media (max-width: 767px) {
+						.cart-price .price{	font-size:11px; }
+						}
+						.free-gifts-handler .hldr{color: #ffffff; text-transform: uppercase; font-size: 12px; padding: 6px 10px; float: left; font-weight:bold; border: 1px solid #dedede; border-radius: 4px; cursor:pointer; margin:10px 0px;}
+						.free-gifts-block{display:none;}
+					</style>
+					<?php
+                    $forEachCount=0;
+                    $scriptToDump=''; 
+					$freeGiftManager=0;
+                    $itemCount = count($this->getItems());
+                    foreach($this->getItems() as $key => $_item):
+                        $tracCategory = addslashes($_item->getBuyRequest()->getData('category'));
+                        $itemSku = $_item->getSku();
+                        if($forEachCount==0) {
+                            $scriptToDump =	"<script type='text/javascript'> function pushOPGA(){";
+                        }
+                        $scriptToDump= $scriptToDump . "_gaq.push(['_trackEvent', '$tracCategory', 'opcheckout', '$itemSku', undefined, true]);";
+                        if($forEachCount==$itemCount-1) {
+                            $scriptToDump =	$scriptToDump . "}</script>";
+                        }
+                        $currentCurrencyCode =  Mage::app()->getStore()->getCurrentCurrencyCode();
+                        $baseCurrencyCode = Mage::app()->getStore()->getBaseCurrencyCode();
+						
+						if($_item->getCalculationPrice() == 0){ 
+							if($freeGiftManager==0){
+								//echo '<div class="free-gifts-handler"><div class="hldr btn-dark-gray" onClick="viewFreeGiftClicked();"><i class="fa fa-gift"></i> Click to View Your Free Gift(s) <i style="width:10px" class="fa fa-caret-right fontsize-type2 text-right"></i></div><div class="clearfix"></div></div>';
+								echo '<div class="max-margin-bottom"><div class="max-margin-bottom"></div><div class="clearfix"></div></div>'; 
+							}
+							$freeGiftManager++;
+						}
+						echo $this->getItemHtml($_item);
+						
+                        $forEachCount = $forEachCount+1;
+						$itemPrice[]	=	$_item->getPrice();				//	Added by Vaseem
+                    endforeach;
+                    echo $scriptToDump;
+					echo $this->getChildHtml('crosssell');
+					
+					$chooseFreeGiftText	=	"Click here to choose free gift(s)";	
+					if( in_array('0',$itemPrice) ){
+						$chooseFreeGiftText	=	"Don't like your free gift(s)? Click here";	
+					}
+					?>
+					<script>
+					jQuery(function(){
+						jQuery('.item-qty-edit').click(function(){
+							jQuery(this).parent().parent().find('.item-edit-holder-default').hide();
+							jQuery(this).parent().parent().find('.item-edit-holder').removeClass('hide');
+						});
+						
+						/*jQuery('.free-gifts-handler .hldr').unbind('click').click(function(){
+							if(jQuery(this).find('i').hasClass('fa-caret-right')){
+								jQuery('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
+								jQuery('.free-gifts-handler, .free-gifts-block').addClass('showcase-border-bottom-1px');
+							}else{
+								jQuery('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
+								jQuery('.free-gifts-handler, .free-gifts-block').removeClass('showcase-border-bottom-1px');
+							}
+							jQuery('.free-gifts-block').slideToggle(500);
+						});*/
+					});
+					</script>
+					<?php
+					//	Code added by Vaseem
+					if(Mage::helper('gifts')->getGiftsStatus() ){
+						$coupon_code = Mage::getSingleton('checkout/session')->getQuote()->getCouponCode();
+						$getGiftsIds = Mage::helper('gifts')->getGiftsIds();
+						$giftIds 	 = $getGiftsIds['ids'];
+						
+						if(Mage::helper('gifts') && is_array($giftIds) && count($giftIds) && !Mage::helper('gifts')->isGiftUsed() && $coupon_code!='CUSTOMORDER'){
+							if( $this->getRequest()->getModuleName() == 'checkout' ){?>
+                                <div class="showcase-border-bottom-1px">
+                                    <div class="row">
+                                        <div class="col-xs-2 cart-product-image"><img src="/skin/frontend/ress/default/images/free-gift-icon.jpg" class="img-responsive" width="100" height="100"  /></div>
+                                        <div class="col-xs-10 col-sm-9 cart-product-details gift-link-choice-gap"><div class="gifts-link-wrapper block-inline-display" style="border:dashed 1px #b5b5b5; background-color:#fffce4;"><a href="javascript:;" onclick="jQuery('#gifts_popup').show();chooseOfferClicked(<?php echo $grandtotalwithout_easy;?>);" class="font-size-gift-txt text-uppercase text-green text-bold gifts-link"><?php echo $chooseFreeGiftText;?></a> <i class="fa fa-caret-right valign-middle text-green low-padding-right"></i></div></div>
+                                    </div>
+                                </div>
+							<?php 
+							}
+							else{?>
+                            	<div class="showcase-border-bottom-1px">
+                                    <div class="row">
+                                        <div class="col-xs-2 cart-product-image"><img src="/skin/frontend/ress/default/images/free-gift-icon.jpg" class="img-responsive" width="100" height="100"  /></div>
+                                        <div class="col-xs-10 col-sm-9 cart-product-details gift-link-choice-gap"><div class="gifts-link-wrapper block-inline-display" style="border:dashed 1px #b5b5b5; background-color:#fffce4;"><a href="javascript:;" class="font-size-gift-txt text-green text-uppercase text-bold gifts-link"><?php echo $chooseFreeGiftText;?></a> <i class="fa fa-caret-right valign-middle text-green low-padding-right"></i></div></div>
+                                    </div>
+                                </div>
+                                <div id="lightboxContentGift"></div>
+                           		<script type="text/javascript">
+								jQuery(document).ready(function(){
+									var dataLoaded	=	'';							//	Creating a varible to prevent multiple ajax request
+									jQuery('.gifts-link').click(function() {											
+										jQuery.get('/gifts/index/ajax', function(result){
+											jQuery("#gifts_popup").show();
+											jQuery(".gifts-popup-wrapper").show();
+											jQuery("#lightboxContentGift").html(result);
+										})
+										chooseOfferClicked(<?php echo $grandtotalwithout_easy;?>);
+									});
+									jQuery('.gifts-popup-close').click(function() {
+										jQuery(".gifts_popup").hide();
+									});
+								});
+								</script>
+                        	<?php 
+							} 
+						}	
+					} ?>
+                        <div class="hidden-xs">
+							<div class="trust-buildup-txt max-padding-top max-margin-top">
+								<ul>
+									<li><strong>Free Shipping Worldwide:</strong> Free Shipping within the USA. We ship FREE to 64 countries on all International orders over <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?>. International orders below <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?> are charged $39.99 each.</li>
+								
+									<li class="high-padding-top"><strong><?php echo Mage::helper('function')->freeReturnDays();?>-Day Money Back Guarantee:</strong> If you don't love it,  simply send it back in its original condition for a 100% refund. We will even send you a FREE return shipping label if you don't love your purchase (applies only to domestic orders).</li>
+									<li class="high-padding-top"><strong>Exceptional Value and Quality, Guaranteed by a 110% Refund Policy:</strong> If any certified appraiser appraises our jewelry for less than 125% of your purchase price, we will issue you a 110% refund upon return (Refund Amount up to $250 above your Purchase Price).</li>
+								</ul>
+							</div>
+							<div class="low-margin-bottom max-margin-top small">*Sales tax applies only to orders shipped to NY, NJ & CA.</div>
+   							<div class="small">For orders shipped to locations outside of the United States: International duties, customs and taxes are the responsibility of the customer.</div>
+                    	</div>
+					</div>
+					<div class="col-md-4 col-sm-5">
+						<div class="showcase-border-thin high-margin-top">
+                        	<div class="block-heading showcase-border-bottom-1px padding-type-10 max-padding-left">Cart Summary</div>
+                            <div class="padding-type-16 high-padding-top fontsize-type2">
+								<div class="cart-cell"><?php echo $this->getChildHtml('totals'); ?></div>
+								<div class="cart-cell discountsection low-padding-top max-padding-bottom">
+									<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('checkout/shipping_dropdown.phtml')->toHtml();?>
+								</div>
+								<?php 
+								if($customerCoupon != 'CUSTOMORDER'): ?>
+									<div class="discount-code-block max-margin-bottom high-margin-top padding-type-5">
+										<?php echo $this->getChildHtml('coupon'); ?>
+									</div>
+									<div class="clearfix"></div>
+								<?php 
+								endif; ?>
+								<div class="payment-method-block clearfix high-padding-top">
+									<div class="checkout-types">
+									<?php 
+                                    $methods = $this->getMethods('methods');
+                                    if( in_array('AmazonPayButtonMethod',$methods ) ){
+                                        $methods = array(0 => 'checkout.cart.methods.fire',
+                                                         1 => 'checkout.cart.methods.paypal_express.bottom',
+                                                         2 => 'AmazonPayButtonMethod');
+                                    }else{
+                                        $methods = array(0 => 'checkout.cart.methods.fire',
+                                                         1 => 'checkout.cart.methods.paypal_express.bottom',
+                                                         2 => 'checkout.cart.methods.amazon_cba');
+                                    }
+                                    $loop = 0;
+										
+									foreach($methods as $method):
+										if($methodHtml = $this->getMethodHtml($method)): ?>
+											<div<?php if(!$loop == 0):?> class="<?php if($method == 'checkout.cart.methods.paypal_express.bottom'):?>pull-left-md <?php endif;?>text-center<?php if($method == 'checkout.cart.methods.amazon_cba'){?> hidden-xs<?php }?>"<?php endif;?>>
+											<?php					
+                                            echo $methodHtml;
+                                            if($loop == 0){
+                                                if($has_recurring_item){
+                                                    echo '</div>';
+                                                    break;
+                                                }
+                                                else{
+                                                    echo '<div class="low-margin-top high-margin-bottom"><img src="/skin/frontend/ress/default/images/secure-checkout-logo.jpg" border="0" usemap="#Mapsecurecheckout" class="img-responsive center-block" /></div><div class="text-center nowrap high-margin-bottom">------- or choose -------</div>';	
+                                                }
+                                            }
+                                            $loop++; ?>
+											</div>
+										<?php 
+										endif;
+									endforeach;?>
+									</div>
+                                    <div class="clearfix"></div>
+								</div>							
+                            	<map name="Mapsecurecheckout" id="Mapsecurecheckout">
+                                	<area shape="rect" coords="116,3,162,28" href="javascript:;" onclick="vrsn_splash();" />
+                              	</map>
+								<script type="text/javascript">
+								// <![CDATA[
+								function vrsn_splash(){sw=window.open('https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.angara.com&lang=en','VRSN_Splash','location=yes,status=yes,resizable=yes,scrollbars=yes,width=560,height=500');sw.focus();}
+								// ]]>
+								</script>                             	
+                            </div>
+						</div>
+					</div>					
+				</div>
+			</div>                        
+		</div>		
+	</form>
+	<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+		<input type="hidden" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
+		<input type="hidden" name="remove" id="remove-coupone" value="0" />
+	</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var discountForm = new VarienForm('discount-coupon-form');
+discountForm.submit = function (isRemove) {
+    if (isRemove) {
+        $('remove-coupone').value = "1";
+		jQuery('#discount-coupon-form').submit();
+    } 
+	else {
+		jQuery('#coupon_code').val(jQuery.trim(jQuery('#user_coupon_code').val()));
+        $('remove-coupone').value = "0";
+		if(jQuery('#coupon_code').val() != '')
+		jQuery('#discount-coupon-form').submit();
+    }
+}
+//]]>
+</script>
+<!-- Google Code for Item in Cart Remarketing List --> 
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_conversion_language = "en";
+	var google_conversion_format = "3";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "BQ2aCOvjmgQQ-ZLp-wM"; var google_conversion_value = 0;
+	/* ]]> */
+</script> 
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline-block; position:absolute;"><img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1064978809/?value=0&amp;label=BQ2aCOvjmgQQ-ZLp-wM&amp;guid=ON&amp;script=0"/></div>
+</noscript>
+<script>
+jQuery(function(){
+	//	Code added by Vaseem to apply coupon code
+	<?php /*?>jQuery('.offer-btn').click(function(e){
+		var couponCode	=	jQuery(this).attr('coupon');
+		jQuery('#user_coupon_code').val(couponCode);
+		jQuery('#coupon_code').val(couponCode);
+		jQuery('#discount-coupon-form').submit();
+	});<?php */?>
+	
+	jQuery('#user_coupon_code').keyup(function(e){
+		if(e.keyCode == 13){
+			e.preventDefault();
+			var couponCode	=	jQuery(this).attr('coupon');
+			jQuery('#coupon_code').val(couponCode);
+			discountForm.submit(false);
+		}
+		return false;
+	})
+	.bind('keypress keydown keyup', function(e){
+       if(e.keyCode == 13) { e.preventDefault(); }
+    });
+});
+</script> 

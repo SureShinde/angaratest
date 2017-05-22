@@ -1,0 +1,169 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<a id="anchortop" href="#"></a>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<?php if(!$this->isContentMode()): ?>
+<h1 class="categoryname"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+<?php $_description=$this->getCurrentCategory()->getDescription();?>
+<?php if( trim($_helper->categoryAttribute($_category, $_description, 'description')) != ''): ?>
+<div>
+<div id="categorycontent-wrapper">
+<div id="categorycontent" class="categorycontent"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>
+</div>
+<p style="text-align:right;margin:3px 0 0; padding-bottom:0px;"><span style=" cursor: pointer; " class="view-more-content-link">View More</span></p>
+</div>
+<?php endif; ?>
+<?php endif; ?>
+
+<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if($_imgUrl): ?>
+    <?php echo $_imgHtml ?>
+<?php endif; ?>
+
+<!-- Start New code by Anil Jain - 29-08-2011 -->
+<!--<div class="jewelryselectiontype">
+    <div class="jewelrytypesection">
+      <div class="typeheading">Jewelry Type</div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Ring</span></div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Earring</span></div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Pendant</span></div>
+    </div>
+    <div class="jewelrytypesection">
+      <div class="typeheading">stone Type</div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Sapphire</span></div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Ruby</span></div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Emerald</span></div>
+      <div class="selecttype">
+        <input name="" type="checkbox" value="" class="checkboxstyle" />
+        <span class="selectiontype">Tanzanite</span></div>
+    </div>
+    <div class="jewelrytypesection" style="background:none;">
+      <div class="typeheading">stone shape</div>
+      <div class="clear"></div>
+      <div class="stoneshapebox">
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Sapphire</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Ruby</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Emerald</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Tanzanite</span></div>
+          <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Sapphire</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Ruby</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Emerald</span></div>
+        <div class="selecttype">
+          <input name="" type="checkbox" value="" class="checkboxstyle" />
+          <span class="selectiontype">Tanzanite</span></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>-->
+<!-- End New code by Anil Jain - 29-08-2011 -->
+<!-- 
+<?php //if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description std">
+        <?php //echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div>
+<?php //endif; ?>
+ -->
+<?php if($this->isContentMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+
+<?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php echo $this->getProductListHtml() ?>
+
+<?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>
+<div>
+<?php if($_artPosts=$this->getCurrentCategory()->getCategoryArticlePosts()): ?>
+<div class="accordionWrapper">
+	<div class="accordionstrip">
+	<span class="accordionButton">RECENT ARTICLE POSTS</span>
+    </div>
+	<div class="accordionContent"><?php echo $_category->getData('category_article_posts') ?></div>
+</div>
+<?php endif; ?>
+<?php if($_custReview=$this->getCurrentCategory()->getCategoryCustomerReviews()): ?>
+<div class="accordionWrapper">
+    <div class="accordionstrip">
+	 <span class="accordionButton">RECENT COSTUMER REVIEWS</span>
+    </div>
+	<div class="accordionContent"><?php echo $_category->getData('category_customer_reviews') ?></div>
+</div>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('.accordionstrip').click(
+			function(){
+				jQuery(this).find('.accordionButton').toggleClass('on');
+				jQuery(this).parent().find('.accordionContent').slideToggle(600);
+			}
+		)
+	})
+</script>

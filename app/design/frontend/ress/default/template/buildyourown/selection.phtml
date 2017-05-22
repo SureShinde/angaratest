@@ -1,0 +1,142 @@
+<?php
+$jewelryModel = $this->getJewelryModel();
+if($jewelryModel->getJewelryType() == 'ring'){
+	$jewelryType = 'RING';
+}
+else if($jewelryModel->getJewelryType() == 'earrings'){
+	$jewelryType = 'EARRINGS';
+}
+else if($jewelryModel->getJewelryType() == 'pendant'){
+	$jewelryType = 'PENDANT';
+}
+else if($jewelryModel->getJewelryType() == 'threeStoneRing'){
+	$jewelryType = 'THREE STONE RING';
+}
+$diamond = $this->getDiamond();
+$product = $this->getSetting();
+?>
+<?php if($product || $diamond): ?>
+	<div class="byo-final-selection">
+	<h1>Your Selection</h1>
+	<hr/>
+	<?php if($product): ?>
+		<h4>Setting Information</h4>
+		<div class="row high-padding-top">
+			<div class="col-xs-12">
+				<div class="row">
+					<div id="settingImg" class="col-xs-1">
+						<img src="" class="img-responsive"/>
+					</div>
+					<div class="col-xs-8">
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Metal</strong>
+							<span class="clearfix"><?php echo $product->getAttributeText('metal1_type'); ?></span>
+						</div>
+						<div class="col-xs-4 high-margin-bottom">
+							<?php if($product->getStone2Grade()): ?>
+								<strong>Diamond 2 Grade</strong>
+								<span class="clearfix"><?php echo $product->getAttributeText('stone2_grade'); ?></span>
+							<?php elseif($product->getStone3Grade()): ?>
+								<strong>Diamond 3 Grade</strong>
+								<span class="clearfix"><?php echo $product->getAttributeText('stone3_grade'); ?></span>
+							<?php endif; ?>
+						</div>
+						<?php /*?><div class="col-xs-4 high-margin-bottom">
+							<?php if($product->getCenterDiamondSize()): ?>
+								<strong>Center Diamond Size</strong>
+								<span><?php echo $product->getAttributeText('center_diamond_size'); ?></span>
+							<?php endif;  ?>
+						</div><?php */?>
+					</div>
+					<div class="col-xs-3 no-padding">
+						<div class="pull-left">
+							<div id="byo-price-holder" class="pull-left"></div>
+							<div class="pull-left low-margin-left high-margin-top"><small>(Setting Price)</small></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+	<?php if($diamond): ?>
+	<h4>Center Diamond Information</h4>
+	<div class="row high-padding-top">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="col-xs-1">
+					<img src="frontend/ress/default/images/buildyourown/diamond/<?php echo $diamond['diamond']['shape']?>_top_diamond.jpg" class="img-responsive"/>
+				</div>
+				<div class="col-xs-8">
+					<?php 
+					if($diamond['diamond']['shape'] != ''){?>
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Shape</strong>
+							<span class="clearfix"><?php echo $diamond['diamond']['shape']; ?></span>
+						</div>
+					<?php 
+					}
+					if($diamond['diamond']['size'] != ''){?>
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Carat</strong>
+							<span class="clearfix"><?php echo $diamond['diamond']['size'].'ct'; ?></span>
+						</div>
+					<?php
+					}
+					if($diamond['diamond']['cut'] != ''){?>
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Cut</strong>
+							<span class="clearfix"><?php echo $diamond['diamond']['cut']; ?></span>
+						</div>
+					<?php 
+					}
+					if($diamond['diamond']['color'] != ''){?>
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Color</strong>
+							<span class="clearfix"><?php echo $diamond['diamond']['color']; ?></span>
+						</div>
+					<?php 
+					}
+					if($diamond['diamond']['clarity'] != ''){?>
+						<div class="col-xs-4 high-margin-bottom">
+							<strong>Clarity</strong>
+							<span class="clearfix"><?php echo $diamond['diamond']['clarity']; ?></span>
+						</div>
+					<?php 
+					}?>	
+				</div>
+				<div class="col-xs-3 no-padding">
+					<div class="pull-left">
+						<div class="pull-left">
+							<div class="price-box text-right"><span class="price block-inline-display"><?php echo Mage::helper('core')->currency($diamond['diamond']['total_sales_price_in_currency']); ?></span></div>
+						</div>
+						<div class="pull-left low-margin-left high-margin-top"><small>(Diamond Price)</small></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+	</div>
+	<hr/>
+	<div class="clearfix"></div>
+	<div class="col-xs-12 no-padding">
+		<div id="v-sp-offers" class="col-xs-9 no-padding"></div>
+		<div class="col-xs-3 no-padding text-right high-margin-top">
+			<div class="pull-left">
+				<div class="pull-left">
+					<div class="price-box text-right"><span class="price" id="total-byo-price"></span></div>
+				</div>
+				<div class="pull-left low-margin-left"><small>(Total Price)</small></div>
+			</div>
+		</div>
+		<input type="hidden" id="byo-total-diamond-price" value="<?php echo Mage::helper('core')->currency($diamond['diamond']['total_sales_price_in_currency'], false, false); ?>" />
+	</div>
+	<div class="clearfix"></div>
+	<script>
+		jQuery(function(){
+			jQuery(".price-hlder .price-box").appendTo("#byo-price-holder");
+			jQuery("#view-sp-offers").appendTo("#v-sp-offers");
+			jQuery("#special-offer-details").appendTo("#special-offer-details-holder");
+		});
+	</script>
+	<?php endif; ?>

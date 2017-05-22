@@ -1,0 +1,14 @@
+<?php 
+// get applicable platform
+$platform = Mage::helper('promotions')->getPlatform();
+
+$coupons = $this->getApplicableCoupons($platform);
+if(count($coupons) > 0):
+	$i=1;
+	foreach ($coupons as $coupon):
+		if($i==1){
+			echo $this->getCouponHtml($coupon);
+		}
+		$i++;
+    endforeach;
+endif; ?>

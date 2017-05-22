@@ -1,0 +1,134 @@
+<style>
+.last-minute-shopping-tag{position:fixed;top:552px;right:-1px;}
+.nav > li > a{padding:10px 15px;}
+.p0{padding:0px;}
+.sm{display:none}
+.main-menu-box{position:absolute;top:18px;left:300px;right:110px;}
+@media (max-width:1400px ){
+.nav > li > a{padding:10px 10px;}	
+}
+
+@media (max-width:1100px ){
+	.navbar-nav>li>a{font-size:13px!important;}
+}
+@media (max-width:1024px ){
+	<?php $pageType = Mage::helper('function')->getPageType();  
+		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		<?php if($pageType == 'category'){
+			$channel = Mage::getSingleton('core/session')->getVisitorChannel();  
+			if(!$channel->getCatalogBannerTablet()){
+				echo '.snow-f{height:182px!important;}';
+			}else{
+				echo '.snow-f{height:162px!important;}';
+			}
+		}else{
+			echo '.snow-f{height:182px!important; height:0px;}';
+		} ?>
+		.main-menu-box{top:78px; left:0px; right:0px;}
+		#main-head-inner{padding-bottom:45px!important}
+	<?php } ?>
+}
+
+@media (min-width: 768px ) and (max-width: 999px) {
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	.nav > li > a{padding:10px 9px;}	
+	<?php } ?>
+	.sm{display:block}
+	.md{display:none}
+}
+
+.navbar-nav{overflow:visible;}
+.sub-nav{display:none; position:absolute; top:40px; left: 0px; min-width:100%}
+.sub-nav ul{background: #ffffff; border: 1px solid #eaeaea; border-radius: 2px; overflow-y: hidden;}
+.navbar-nav li .sub-nav li{width: 100%; float: left; display: block!important;}
+.navbar-nav li .sub-nav li a{color: #363636; padding: 10px; display: block; text-align: left; border-bottom:1px solid #eaeaea; white-space:nowrap;}
+.navbar-nav li .sub-nav li:last-child a{border-bottom:none;}
+.navbar-nav li .sub-nav li a:hover{text-decoration:none; background:#fff6f7;}
+.navbar-nav li:hover .sub-nav{display:block;}
+
+@media (max-width:768px){
+	.navbar-nav{
+		width:100%;
+		text-align:center;
+	}
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	.navbar-nav li{
+		float:none!important;
+		display: inline-block;
+		padding:0px 10px;
+	}
+	<?php } ?>
+	.navbar-nav li .sub-nav li{
+		padding:0px;
+	}
+	
+}
+</style>
+<!--[if IE 8]> 
+<style>
+.ie8-remove{display:none!important}
+</style>
+<![endif]-->
+<div id="main-menu" class="main-menu-box">
+  	<div class="hidden-xs">
+    	<div class="container-fluid">
+      		<div class="container">
+        		<div class="row">
+          			<div class="text-center">
+            			<nav id="navbar-main" class="navbar navbar-default navbar-main text-uppercase" role="navigation">
+              				<div class="primary-navbar">
+                				<ul class="nav navbar-nav">
+                  					<li data-item="jewelry-type">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Engagement</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/rings/diamond-rings?jewelry_styles=4183" onclick="categoryNavSelect('Halo Engagement|topnav diamond')">Halo</a></li>
+												<li><a href="/rings/diamond-rings?jewelry_styles=4179" onclick="categoryNavSelect('Eternity Engagement|topnav diamond')">Eternity</a></li>
+												<li><a href="/rings/diamond-rings?jewelry_styles=4191" onclick="categoryNavSelect('Solitaire Engagement|topnav diamond')">Solitaire</a></li>
+												<li><a href="/rings/diamond-rings?jewelry_styles=4195" onclick="categoryNavSelect('Three Stone Engagement|topnav diamond')">Three Stone</a></li>
+												<li><a href="/rings/diamond-rings?jewelry_styles=4169" onclick="categoryNavSelect('Cathedral Engagement|topnav diamond')">Cathedral</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="pearl-type">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Wedding</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/wedding-rings/womens-diamond-wedding-bands" onclick="categoryNavSelect('Women Wedding|topnav diamond')">Women</a></li>
+												<li><a href="/wedding-rings/mens-diamond-wedding-bands" onclick="categoryNavSelect('Men Wedding|topnav diamond')">Men</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="pearl-color">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Jewelry</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/rings/diamond-rings" onclick="categoryNavSelect('Rings Jewelry|topnav diamond')">Rings</a></li>
+												<li><a href="/pendants/diamond-necklace-pendants" onclick="categoryNavSelect('Pendants Jewelry|topnav diamond')">Pendants</a></li>
+												<li><a href="/earrings/diamond-earrings" onclick="categoryNavSelect('Earrings Jewelry|topnav diamond')">Earrings</a></li>
+												<li><a href="/bracelets/diamond-bracelets" onclick="categoryNavSelect('Bracelets Jewelry|topnav diamond')">Bracelets</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="price">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Design Your Own</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/buildyourown/ring" onclick="categoryNavSelect('Rings Design Your Own|topnav diamond')">Rings</a></li>
+												<li><a href="/buildyourown/pendant" onclick="categoryNavSelect('Pendants Design Your Own|topnav diamond')">Pendants</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="education">
+										<a href="/jewelry-guide/diamond" class="no-transition" style="pointer-events:auto;" onclick="categoryNavSelect('Education|topnav diamond')"><span class="nav-link-text no-transition">Education</span></a>
+									</li>
+                				</ul>
+              				</div>
+            			</nav>
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</div>
+

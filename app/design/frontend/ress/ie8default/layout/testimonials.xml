@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<testimonials_index_index translate="label">
+    	<label>Testimonials Customers</label>
+        <reference name="content">			
+            <block type="testimonials/items" name="testi" as="testi" template="testimonials/view.phtml" /><!--core/template-->
+        </reference>
+    </testimonials_index_index>
+	
+	<testimonials_index_category translate="label">
+    	<label>Testimonials Customers</label>
+		<reference name="content">
+            <block type="testimonials/items" name="test_category_reviews" as="test_category_reviews" template="testimonials/category_reviews.phtml" />
+        </reference>
+    </testimonials_index_category>
+	
+	<testimonials_index_morereviews translate="label">
+    	<label>Testimonials Customers</label>
+		<reference name="content">		
+            <block type="testimonials/items" name="test_category_more_reviews" as="test_category_more_reviews" template="testimonials/category_more_reviews.phtml" />
+        </reference>
+    </testimonials_index_morereviews>
+</layout>

@@ -1,0 +1,42 @@
+<?php 
+$coupon = $this->getCoupon(); 
+$productId = $this->getRequest()->getParam('productId');
+$additionalCost = $this->getRequest()->getParam('additionalCost');
+$_coreHelper = Mage::helper('core'); 
+$freeGifts = $this->getFreeGifts();
+?>
+
+<div class="coupon-block <?php if($this->isApplied()):?>active<?php endif;?>">
+    <div class="heading">
+        <div class="c-block radio-btn"><span><?php echo $this->getCode();?></span></div>
+        <div class="c-block coupon-detail">
+            <div class="discount"><?php echo $coupon->getShortDescription();?></div>
+        </div>
+        <div class="c-block">
+            <a href="<?php echo $this->getApplyUrl();?>" rel="nofollow"><?php if($this->isApplied()):?><span class="apply-btn right btn-dark-gray disabled">Applied</span><?php else:?><span class="apply-btn right btn-primary" onClick="applyCouponClicked('<?php echo $this->getCode();?>');">Apply</span><?php endif;?></a>
+        </div>
+    </div>
+    <div class="detail">
+    <?php //S:Free Gift ?>
+        <span class="arrow"></span>
+        <div class="col-md-12 col-sm-12">
+        	<?php if(!empty($freeGifts)):?>
+            <div class="col-md-4 col-sm-4 fg">
+                <div class="free-gift tAc">
+                    <div class="title"><i class="fa fa-gift" style="color: #d83d29;" ></i> Free Gift<?php if(count($freeGifts) > 1):?>(s)<?php endif;?></div>
+                    <?php 
+                    foreach($freeGifts as $freeGift):?>
+                        <div class="img"><img class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($freeGift, 'image')->resize(49);?>" alt="<?php echo $freeGift->getShortDescription();?> - Angara.com" title="<?php echo $freeGift->getShortDescription();?>" /></div>
+                    <?php 
+                    endforeach;?>    
+                </div>
+            </div>
+            <?php endif;?>
+            <div class="<?php if(!empty($freeGifts)){ ?>col-md-8 col-sm-8<?php }else{ ?>col-md-12 col-sm-12<?php } ?> tnc">
+                <span><?php echo $coupon->getLongDescription();?></span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <?php //E:Free Gift ?>		
+</div>	

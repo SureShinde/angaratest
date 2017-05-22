@@ -1,0 +1,14 @@
+<div class="row <?php echo $this->getContainerClassName()?>">
+    <div class="col-sm-6 name-firstname high-margin-bottom high-margin-top">
+        <div class="data_area half">
+			<label class="ielabel hidden">First Name</label>
+            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" placeholder="First Name" class="input-text t1 required-entry" style="margin-bottom:5px;" <?php echo $this->getFieldParams() ?> />
+        </div>
+    </div>
+    <div class="col-sm-6 name-lastname high-margin-bottom high-margin-top">
+        <div class="data_area half" style="margin-left:2%;">
+			<label class="ielabel hidden">Last Name</label>
+            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" placeholder="Last Name"  class="input-text t1 required-entry" style="margin-bottom:5px;" <?php echo $this->getFieldParams() ?> />
+        </div>
+    </div>
+</div>

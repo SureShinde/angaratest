@@ -1,0 +1,18 @@
+<?php
+/**
+ * @category   Angara
+ * @package    Angara_Gifts
+ * @copyright  Copyright (c) 2014 Angara ecommerce. (http://www.angara.com)
+ * @license    http://angara.com/LICENSE-COMMUNITY.txt
+ */
+ ?>
+ 
+<?php if ($this->isPossibleOnepageCheckout()):?>
+	<button type="button" title="<?php echo $this->__('Proceed to Checkout') ?>" class="button btn-proceed-checkout btn-checkout<?php if ($this->isDisabled()):?> no-checkout<?php endif; ?>"<?php if ($this->isDisabled()):?> disabled="disabled"<?php endif; ?> onclick="window.location='<?php echo $this->getCheckoutUrl() ?>';"><span><span><?php echo $this->__('Proceed to Checkout') ?></span></span></button>
+<?php endif?>
+
+<?php if(is_array(Mage::helper('gifts')->getGiftsIds()) && count(Mage::helper('gifts')->getGiftsIds()) && !Mage::helper('gifts')->isGiftUsed()):?>
+	<div class="gifts-link-wrapper">
+		<a href="javascript:;" onclick="$('gifts_popup').show()" class="gifts-link"><?php echo $this->__('Please select a gift link') ?></a>
+	</div>
+<?php endif;?>

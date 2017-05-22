@@ -1,0 +1,453 @@
+<style>
+.page-title{border-bottom:1px solid #fa505a; margin-bottom:20px; text-align:center;border-top:none;}
+
+.page-title .page-heading span{top:-13px; right:0px; font-size: 25px; color: #333333;}
+html[data-useragent *= 'iPhone'] .page-title .page-heading span{right:initial; left:0px;}
+.relative-box{position:relative}
+.absolute-box{position:absolute}
+.top-order-total{font-size:14px; padding:0px 8% 10px; color:#333333}
+.cart-trash, .cart-pro-remove .remove-item{background:url(/skin/frontend/ress/default/images/optionpopupclose.png) no-repeat center center; background-size:15px; font-size:0px; display:block; width:44px; height:44px;}
+.checkout-step {display: block;margin: 0 auto;background: #fa505a;height: 20px;width: 20px;color: #ffffff;border-radius: 10px;text-align: center;line-height: 22px;margin-bottom:5px;}
+.top-order-total{padding: 0px 8% 20px;}
+.dactv {color:#000000;background:#ffffff;border:1px solid #000000;}
+.marginBottom, .marginBottom1{margin-bottom:23px;}
+#shipping-faq-popup-box{
+	z-index: 12 !important;
+}
+</style>
+<?php
+/**
+ * Amazon Payments
+ *
+ * @category    Amazon
+ * @package     Amazon_Payments
+ * @copyright   Copyright (c) 2014 Amazon.com
+ * @license     http://opensource.org/licenses/Apache-2.0  Apache License, Version 2.0
+ */
+?>
+<div class="sticky-box">
+	<div class="page-title full-width">
+		<div class="page-heading relative-box">
+			<h1>Express Checkout</h1>
+			<span class="absolute-box">
+				<a href="javascript:void(0)" class="cart-trash" onClick="setLocation('<?php echo $this->getUrl(); ?>checkout/cart')">X</a>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div id="amazon-checkout" class="amazon-checkout-content">
+		<div class="info">
+			<?php echo $this->__(''); ?>
+			<?php echo $this->__('<a href="#" id="amazon-cancel"></a>'); ?>
+		</div>
+		<div id="checkout-amazon-payments" class="relative-placeholder">
+			<div id="checkout-amazon-columns">
+				<div id="col-1-amz" class="col-sm-6">
+					<div id="amazon-widget-address-wrapper" class="amazon-widget-wrapper">
+						<h2><?php echo $this->__('Shipping Address'); ?></h2>
+						<div class="amz-widget-loader" style="display:none;"></div>
+						<div id="amazon-widget-address"></div>
+					</div>
+					<?php if ($this->getChild('shipping_method')->isShow()) : ?>
+						<div id="shipping-method-wrapper">
+							<div id="shipping-method-disable" style="display:none;"></div>
+							<?php echo $this->getChildHtml('shipping_method') ?>
+						</div>
+					<?php endif; ?>
+				</div>
+
+				<div id="col-2-amz" class="col-sm-6">
+					<div id="amazon-widget-wrapper" class="amazon-widget-wrapper">
+						<h2><?php echo $this->__('Payment'); ?></h2>
+						<div class="amz-widget-loader" style="display:none;"></div>
+						<div id="amazon-widget-wallet"></div>
+					</div>
+				</div>
+
+				<div class="absolute-placeholder op-checkout-right-box pT10">
+					<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('checkout/onepage/review/button.phtml')->toHtml();  ?>
+					<div class="op-checkout-right-box-holder">
+						<div class="cart-item-block-parent">
+							<div class="step-head">
+								<div class="pull-left">Shopping Cart</div>
+								<a href="<?php echo $this->getUrl('checkout/cart'); ?>" class="pull-right">Edit</a>
+							</div>
+							<div id="amz-review-loader" style="display:none;"></div>
+							
+							<?php echo $this->getChildHtml('review') ?>
+
+							<?php if ($this->helper('amazon_payments')->isAmazonSandbox()) : ?>
+							<br />
+							<h3>Authorization Sandbox Simulation:</h3>
+							<textarea id="sandbox"></textarea>
+							Example:
+							<small>
+								{"SandboxSimulation": {"State":"Declined", "ReasonCode":"InvalidPaymentMethod"}}
+							  <br />
+							  (<a href="https://payments.amazon.com/documentation/lpwa/201749840#201750790" target="_blank">More Info</a>)<br />
+							</small>
+
+
+							<?php endif; ?>
+						</div>						
+					</div>						
+				</div>	
+
+			</div>
+		</div>
+		<div class="shipping-faq full-width pR10 pL10 text-center"> 
+			<a href="javascript:void(0)" onclick="jQuery('#shipping-faq-popup-box').show();" class="fr apricot-text" style="line-height:50px;">Checkout FAQ ></a>
+		</div>
+		<div id="shipping-faq-popup-box" style="display:none;">
+			<div class="top-msg">Free shipping and Free returns</div>
+			<div class="go2cart" onclick="jQuery('#shipping-faq-popup-box').hide();"><span class="go2cart-txt"><< BACK</span><span class="go2cart-btn"></span></div>
+			<div class="overflow">
+			<div class="shipping-faq-popup-holder">
+				<div class="conctus-box">
+					<h1 class="" style="font-size:24px;line-height:30px;">Checkout FAQ</h1>
+					<div class="btm24" style="font-size:20px;line-height:30px;font-weight:bold;"><p class=""><span>Contact us.</span></p></div>
+					<div class="chat-row btm24"><div class=""><span>Get help via </span><strong class=""><a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link apricot-text"><span>Live chat</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+					<div class="call-row btm24"><div class=""><span>Call us at </span><strong class=""><a href="tel:1-888-926-4272" id="" class="apricot-text"><span>1-888-926-4272</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+					<div class="email-row btm24"><div class=""><span>Write to </span><strong class=""><a href="mailto:customer.service@angara.com" id="" class="apricot-text"><span>customer.service@angara.com</span></a></strong></div><span class="text-dark-gray" >We'll get back to you within 24 hours!</span></div>
+				</div>
+				<section class="expand-box">
+					<div class="se1">
+						<h2 class="px18">
+							<span class="pull-left lh50">Free Shipping and Free Returns</span>
+							<?php /* <span class="fa fa-plus pull-right lh50 px18"></span> */ ?>
+						</h2>
+					</div>
+					<div class="clearfix"></div>
+					<div class="cont-open">
+						<span>Your order will be shipped via FedEx.</span>
+						<span>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</span>
+						<span>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill out the <a href="/awrma/guest_rma/index/" target="_blank">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</span>
+						<span>For international returns, return shipping and insurance are the responsibility of the customer.</span>
+					</div>
+				</section>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+( function ( window, globalName, undefined ) {
+	  window[ globalName ] = jQuery.noConflict() ;
+} )( window, 'jQuery' ) ;
+
+$('amazon-cancel').observe("click", function() {
+  amazon.Login.logout();
+  window.top.location.href = "<?php echo $this->getUrl('amazon_payments/checkout/clear'); ?>";
+});
+
+var AmazonPaymentsMageCheckout = Class.create();
+AmazonPaymentsMageCheckout.prototype = {
+    initialize: function(opts){
+        this.opts = opts;
+        this.hasPayment = false;
+        this.hasReviewLoader = false;
+        //this.setShippingMethod();
+    },
+
+    // Dynamically load shipping method HTML
+    setShippingMethod: function() {
+        if (this.opts.shippingMethod) {
+            this.restrictPlaceOrder(true);
+
+            var request = new Ajax.Request(this.opts.shippingMethod.url, {
+                method: 'post',
+                parameters: { "amazon_order_reference_id": this.amazonOrderReferenceId },
+                onSuccess: this.renderShippingMethod.bindAsEventListener(this, this.opts.shippingMethod.id)
+            });
+        }
+        else {
+            this.setReview();
+        }
+    },
+
+    // Dynamically load review HTML
+    setReview: function() {
+        var btnSubmit = $$(".button.btn-checkout");
+
+        var shippingMethod = $$('input:checked[type=radio][name=shipping_method]')[0];
+
+        if (shippingMethod != undefined) {
+            shippingMethod = shippingMethod.value;
+        }
+        else {
+            var firstMethodRadio = $$('input[type=radio][name=shipping_method]').first();
+            if (firstMethodRadio != undefined) {
+                firstMethodRadio.checked = "checked";
+                shippingMethod = firstMethodRadio.value;
+            }
+        }
+
+        this.restrictPlaceOrder(true);
+
+        var request = new Ajax.Request(this.opts.review.url, {
+            method: 'post',
+            parameters: { "shipping_method": shippingMethod, "amazon_order_reference_id": this.amazonOrderReferenceId },
+            onSuccess: this.renderReview.bindAsEventListener(this, this.opts.review.id)
+        });
+    },
+
+    // Render shipping method, then load Review
+    renderShippingMethod: function(transport, id) {
+        $(id).update(transport.responseText);
+
+        $$('input[type="radio"][name="shipping_method"]').each(function(el){
+            Event.observe(el, 'change', this.setReview.bindAsEventListener(this));
+       }, this);
+
+       this.setReview();
+    },
+
+    renderReview: function(transport, id) {
+        $(id).update(transport.responseText);
+        $$(".button.btn-checkout").invoke('writeAttribute','onclick', 'amazonPaymentsMageCheckout.saveOrder()');
+        this.agreementsForm = $('checkout-agreements')
+        $("amz-review-loader").hide();
+        this.restrictPlaceOrder(false);
+    },
+
+    saveOrder: function() {
+      var params = {};
+
+      if (this.agreementsForm) {
+          params += '&'+Form.serialize(this.agreementsForm);
+      }
+      params.save = true;
+
+      params.amazon_order_reference_id = this.amazonOrderReferenceId;
+
+      var sandbox = $('sandbox');
+      if (sandbox) {
+          params.sandbox = sandbox.getValue();
+      }
+
+      this.restrictPlaceOrder(true);
+      this.restrictWidgets(true);
+
+      var request = new Ajax.Request(this.opts.save.url, {
+          method: 'post',
+          parameters: params,
+          onSuccess: this.onSaveOrder.bindAsEventListener(this)
+      });
+    },
+
+    onSaveOrder: function(transport) {
+        try{
+            response = eval('(' + transport.responseText + ')');
+        }
+        catch (e) {
+            response = {};
+        }
+
+        if (response.redirect) {
+            this.isSuccess = true;
+            window.top.location.href = response.redirect;
+            return;
+        }
+        if (response.success) {
+            this.isSuccess = true;
+            window.top.location.href = this.successUrl;
+        }
+        else{
+
+            this.restrictPlaceOrder(false);
+            this.restrictWidgets(false);
+
+            var msg = response.error_messages;
+            if (typeof(msg)=='object') {
+                msg = msg.join("\n");
+            }
+            if (msg) {
+                alert(msg);
+            }
+
+            // Widget reload requried
+            if (msg.indexOf("TransactionTimedOut") != -1) {
+                location.reload();
+            }
+            else if (msg.indexOf("terms and conditions") == -1) {
+                setTimeout(loadAmazonWallet, 2000); // Refresh Wallet
+            }
+
+            if (msg.indexOf("Declined") != -1) {
+                this.restrictShipping();
+            }
+
+        }
+
+    },
+
+    restrictPlaceOrder: function(isDisabled, hideLoader) {
+        var btn = document.getElementsByClassName("button btn-checkout");
+        var review = $("checkout-review-table-wrapper");
+        var loader = $("amz-review-loader");
+
+        if (isDisabled) {
+            if (review) {
+                review.setOpacity(0.5);
+                if (!hideLoader) {
+                    loader.show();
+                    this.hasReviewLoader = true;
+                }
+            }
+			for(var i=0;i<btn.length;i++){
+				btn[i].disabled = true;
+			}
+            //btn.each(function(el, i) { el.disabled = true; });
+        } else {
+            if (review) {
+                review.setOpacity(1);
+                loader.hide();
+                this.hasReviewLoader = false;
+            }
+			for(var i=0;i<btn.length;i++){
+				btn[i].disabled = false;
+			}
+            //btn.each(function(el, i) { el.disabled = false; });
+        }
+    },
+
+    restrictWidgets: function(isDisabled) {
+        var widget    = $$(".amazon-widget-wrapper .widget-container, #shipping-method-wrapper");
+        var loader    = $$(".amz-widget-loader");
+        var smdisable = $("shipping-method-disable");
+
+        if (isDisabled) {
+            widget.each(function(el, i) {
+                el.setOpacity(0.5);
+                el.setStyle({"pointer-events" : "none"});
+            });
+            loader.each(function(el, i) {
+                el.show();
+            });
+            if (smdisable) {
+                smdisable.show();
+            }
+        } else {
+            widget.each(function(el, i) {
+                el.setOpacity(1);
+                el.setStyle({"pointer-events" : "auto"});
+            });
+            loader.each(function(el, i) {
+                el.hide();
+            });
+            if (smdisable) {
+                smdisable.hide();
+            }
+        }
+    },
+
+    restrictShipping: function() {
+        clearInterval(restrictInterval);
+
+        $$("#shipping-method-wrapper, #amazon-widget-address-wrapper").each(function(el, i) {
+            el.setOpacity(0.5);
+            //el.setStyle({"pointer-events" : "none"});
+        });
+        $$("#amazon-widget-address-wrapper .amz-widget-loader").each(function(el, i) {
+            el.show();
+            el.setStyle({"background" : "none"});
+        });
+        $("shipping-method-disable").show();
+    }
+};
+
+var opts = {
+  <?php if ($this->getChild('shipping_method')->isShow()) : ?>
+  shippingMethod : {
+      id: "checkout-shipping-method-load",
+      url: "<?php echo $this->getUrl('checkout/amazon_payments/shippingMethod') ?>"
+  },
+  <?php endif; ?>
+  review : {
+      id: "checkout-review-load",
+      url: "<?php echo $this->getUrl('checkout/amazon_payments/review') ?>"
+  },
+  save : {
+      url: "<?php echo $this->getUrl('checkout/amazon_payments/saveOrder') ?>"
+  }
+}
+
+
+var amazonPaymentsMageCheckout = new AmazonPaymentsMageCheckout(opts);
+
+
+// Variables/objects for Mage Onepage
+var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
+var checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+var lastPrice;
+
+var ShippingMethod = Class.create();
+var Review = Class.create();
+
+// Poll if payment method is set ("Place Order" is loaded via ajax and can't depend on widget events)
+var restrictInterval = setInterval(function() {
+    if (!amazonPaymentsMageCheckout.hasReviewLoader) {
+        if (amazonPaymentsMageCheckout.hasPayment) {
+            amazonPaymentsMageCheckout.restrictPlaceOrder(false);
+        } else {
+            amazonPaymentsMageCheckout.restrictPlaceOrder(true, true);
+        }
+    }
+}, 100);
+</script>
+
+
+<!-- Address Book Widget JS -->
+<script>
+
+new OffAmazonPayments.Widgets.AddressBook({
+  sellerId: '<?php echo $this->getSellerId(); ?>',
+  onOrderReferenceCreate: function(orderReference) {
+      amazonPaymentsMageCheckout.amazonOrderReferenceId = orderReference.getAmazonOrderReferenceId();
+  },
+  onAddressSelect: function(orderReference) {
+      amazonPaymentsMageCheckout.setShippingMethod();
+      amazonPaymentsMageCheckout.hasPayment = false;
+  },
+  design: {
+     designMode: 'responsive'
+  },
+  onError: function(error) {
+    if (error.getErrorCode() == "BuyerSessionExpired") {
+         window.top.location.href = '<?php echo $this->getUrl('checkout/amazon_payments/clear'); ?>';
+    }
+    console.log(error.getErrorMessage());
+  }
+}).bind("amazon-widget-address");
+</script>
+
+
+<!-- Wallet Widget JS -->
+<script>
+function loadAmazonWallet() {
+    new OffAmazonPayments.Widgets.Wallet({
+      sellerId: '<?php echo $this->getSellerId(); ?>',
+        design: {
+          designMode: 'responsive',
+      },
+
+      onPaymentSelect: function(orderReference) {
+          amazonPaymentsMageCheckout.hasPayment = true;
+      },
+      onError: function(error) {
+          console.log(error.getErrorMessage());
+      }
+    }).bind("amazon-widget-wallet");
+}
+
+loadAmazonWallet();
+
+jQuery(function(){
+	var l = jQuery('.op-checkout-left-box').height();
+	var r = jQuery('.op-checkout-right-box').height();
+	if(l<r){ 
+		jQuery('.op-checkout-left-box').css('min-height',r+'px'); 
+	}
+});
+</script>

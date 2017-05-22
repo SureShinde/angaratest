@@ -1,0 +1,266 @@
+<?php 
+	$productId			= 	$this->getAjaxProductId();			//	Calling a function from Block/Index.php
+	$_product 			= 	Mage::getModel('catalog/product')->load($productId);
+	//$_product 			= 	Mage::getModel('catalog/product')->load('24368');
+	$relatedProducts 	= 	array();
+	foreach ($_product->getRelatedLinkCollection() as $link) {
+		$relatedProducts[$link->getPosition()]	=	$link->getLinkedProductId();
+	}
+	ksort($relatedProducts);			//	Sort index of an array, Sort by Key
+	$noOfRelatedProductsToShow	=	Mage::Helper('ajaxview')->noOfRelatedProducts();
+	$relatedProducts	=	array_slice($relatedProducts,0,$noOfRelatedProductsToShow, true);	//	Get first 5 values of array
+	$countRelated		=	count($relatedProducts);
+	//echo 'relatedData<pre>'; print_r($relatedProducts);
+
+	$productName		=	substr($_product->getName(),0,50);
+	$productImage		=	$this->helper('catalog/image')->init($_product, 'image')->resize(71);
+	$_coreHelper 		= 	$this->helper('core');
+	$skinUrl			=	Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+
+	if($countRelated>0){ ?>
+
+<div class="matching-bands-wrapper">
+  <div class="close-popup" id="closeLB"></div>
+  <!--Main product heading starts-->
+  <div class="matching-bands-title-block"><img src="<?php echo $productImage;?>" width="71" height="71" class="pro-img" /><span class="title">Matching Product for:</span> <?php echo $productName;?></div>
+  <!--Main product heading ends-->
+  <!--Related products strip starts-->
+  <div class="more-matching-product">
+    <?php
+		foreach($relatedProducts as $index=>$relatedPID){
+			$relatedProduct			= 	Mage::getModel('catalog/product')->load($relatedPID);
+			$relatedProductName		=	$this->htmlEscape($relatedProduct->getName());
+			$relatedProductImage	=	$this->helper('catalog/image')->init($relatedProduct, 'image')->resize(104);
+	?>
+    <!--related product images starts--> 
+    <span class="more-matching-imgbox"><a href="#rel_<?php echo $relatedPID;?>"><img src="<?php echo $relatedProductImage;?>" width="104" height="104" alt="<?php echo $relatedProductName;?>" /></a></span> 
+    <!--related product images ends-->
+    <?php } ?>
+  </div>
+  <!--Related products strip ends-->
+  <div class="matchingbands-detail-wrapper">
+  <?php 
+  		$i=1;
+  		foreach($relatedProducts as $index=>$relatedPID){
+	  		//echo '<br>index->'.$index;
+			//echo '<br>relatedPID->'.$relatedPID;
+			$relatedProduct			= 	Mage::getModel('catalog/product')->load($relatedPID);
+			$relatedProductName		=	$this->htmlEscape($relatedProduct->getName());
+			$relatedProductURL		=	$this->htmlEscape($relatedProduct->getProductUrl());
+			$relatedProductPrice	=	$_coreHelper->currency($this->htmlEscape($relatedProduct->getPrice()),true,false);
+			$relatedProductImage	=	$this->helper('catalog/image')->init($relatedProduct, 'image')->resize(350);
+			//echo '<br>countRelated->'.$countRelated;
+			//echo '<br>i->'.$i;
+		?>
+		<div class="matching-band-product-details" id="rel_<?php echo $relatedPID;?>" <?php if($i!=1){ echo 'style="display:none;"';}?>>
+    <div class="matching-product-img"><img src="<?php echo $relatedProductImage;?>" width="350" height="350" alt="<?php echo $relatedProductName;?>" /></div>
+    
+
+<script type="text/javascript">
+	var customForm = new VarienForm('related_product_<?php echo $relatedPID;?>');
+</script>
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="related_product_<?php echo $relatedPID;?>"<?php if($relatedProduct->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+    <div class="matching-product-details">
+      <div class="matching-pro-name"><?php echo $relatedProductName;?></div>
+		
+    <?php	
+		//	Check if product is having custom options
+		$j = 0;
+		foreach ($relatedProduct->getOptions() as $o) {
+			//echo '<pre>'; print_r($o); 
+			$optionArray[$j]	=	array('Id'=>$o->getId(),'Title'=>$o->getTitle(),'Type'=>$o->getType());
+			$titleArray[]		=	$o->getTitle();
+			$typeArray[]		=	$o->getType();
+			//$idArray[]			=	$o->getId();
+			$j++;
+		}
+		/*echo '<pre>'; print_r($optionArray);
+		echo '<pre>'; print_r($titleArray);
+		echo '<pre>'; print_r($typeArray);*/
+		
+		
+		if(in_array('Ring Size',$titleArray)){
+			$ringSizeIndex	=	array_search('Ring Size', $titleArray);
+			//echo '<br>ringSizeIndex->'.$ringSizeIndex;
+			//echo '<br>typeArray->'.$typeArray[$ringSizeIndex];
+			
+			//	Get option id of Ring Size
+			$ringSizeId	=	$optionArray[$ringSizeIndex]['Id'];
+			$addToCartUrlWithRingSize	=	'&options['.$ringSizeId.']=';			//	adding custom in url
+			
+			if($typeArray[$ringSizeIndex]=='field'){			
+			 ?>
+			<div class="ringsizer-wrapper">
+                <div class="ring-size-title">Ring Size:</div>
+                <div class="ring-size-box">
+                  <select title="Ring Size" id="relatedRingSize_<?php echo $relatedPID;?>" class="required-entry product-custom-option selectringsize"><option value="">SELECT RING SIZE</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option><option value="10">10</option><option value="10.5">10.5</option><option value="11">11</option><option value="11.5">11.5</option><option value="12">12</option><option value="12.5">12.5</option><option value="13">13</option></select>
+                </div>
+                  <div class="ring-sizer"><a target="_blank" href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf">Ring Size Guide</a></div> 
+                   <div class="clear"></div>               
+          </div>
+	<?php }elseif($typeArray[$ringSizeIndex]=='drop_down'){		
+				$values = $o->getValues();
+				?>
+                <div class="ringsizer-wrapper"><div class="ring-size-title">Ring Size:</div><div class="ring-size-box">
+                <select title="Ring Size" id="relatedRingSize_<?php echo $relatedPID;?>" class="required-entry product-custom-option selectringsize">
+                    <option value="">SELECT RING SIZE</option>
+                <?php
+				foreach ($values as $v) {
+					//echo '<pre>';print_r($v->getData());
+					?>
+                    <option value="<?php echo $v->getId();?>"><?php echo $v->getTitle();?></option>
+                <?php    
+				}	//	end foreach
+				?>
+                </select>
+                    </div>
+                    <div class="ring-sizer"><a target="_blank" href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf">Ring Size Guide</a></div>
+                    <div class="clear"></div></div>
+               <?php
+            
+          }	//	end elseif
+	 }	//	end if
+	?>
+    
+		<?php	//	Get data for add to cart form with custom option and super_attribute details
+		//	Code for generating product add to cart url
+		
+		$addToCartUrl	=	Mage::getBaseUrl().'checkout/cart/add/product/'.$relatedPID;
+		//	Check if product is configurable and having super_attribute
+		if($relatedProduct->isConfigurable()){
+			$_attributes = $_product->getTypeInstance(true)->getConfigurableAttributes($relatedProduct);
+			$superAttributeLabel	=	array();
+			$j=1;
+			foreach($_attributes as $_attribute){
+				//var_dump($_attribute->debug());
+				//echo '<pre>'; print_r($_attribute->debug()); 
+				$superAttributeLabel[]		=	$_attribute->getLabel();
+				$superAttributeID			=	$_attribute->getAttributeId();			//	Id of attribute (it is configurable product attribute)
+				$superAttributeValueArray	=	$_attribute->getPrices();
+				//echo '<pre>'; print_r($superAttributeValue); 
+				$superAttributeValue	=	$superAttributeValueArray[0]['value_index'];
+				if($j==1){				
+					$addToCartUrl.=	"/?super_attribute[".$superAttributeID."]=".$superAttributeValue."";	
+				}else{
+					$addToCartUrl.=	"&super_attribute[".$superAttributeID."]=".$superAttributeValue."";	
+				}
+			$j++;
+			}
+			$addToCartUrl.=	'&';	
+			//echo '<pre>'; print_r($superAttributeLabel);
+		}else{
+			$addToCartUrl.=	'?';		
+		}
+		
+		//	Add product quantity to add to cart url
+		$addToCartUrl.=	'qty=1';
+		//	Add product custom option to add to cart url
+		if($addToCartUrlWithRingSize){
+			$addToCartUrl.=	$addToCartUrlWithRingSize;
+		}
+		//http://localhost/checkout/cart/add/product/24368/?super_attribute[262]=1947&super_attribute[272]=3339&super_attribute[332]=4044&qty=1&options[40385]=4
+		//http://192.168.1.162/checkout/cart/add/product/27459/?super_attribute[262]=1869&amp;qty=1&amp;options[40742]=315330
+		//echo $addToCartUrl;
+		
+		$stoneQualityID		=	$relatedProduct->getdefaultStone1Grade();			//	Stone Quality	-	Default Stone Grade
+		if($stoneQualityID!=''){
+			$stoneQuality 	= 	$relatedProduct->getAttributeText('default_stone1_grade');					
+		}
+		$metalTypeID		=	$relatedProduct->getdefaultMetal1Type();			//	Metal Type		-	Default Metal Type
+		if($metalTypeID!=''){
+			$metalType 		= 	$relatedProduct->getAttributeText('default_metal1_type');					
+		}
+		//$caratWeight		=	number_format(round((float)$relatedProduct->getStone1Weight(), 2), 2, '.', '');		//	Carat Weight	-	Center Stone Weight
+		/*$stone1TypeValue			= 	$_product->getStone1Type();	
+		if($stone1TypeValue!=''){
+			$stone1Type 			= 	$_product->getAttributeText('stone1_type');					//	Center Stone Type
+			echo $stone1Type; die;
+		}*/
+		
+		$caratWeightTotal	=	$relatedProduct->getStone1Weight() + $relatedProduct->getStone2Weight() + $relatedProduct->getStone3Weight() + $relatedProduct->getStone4Weight() + $relatedProduct->getStone5Weight() + $relatedProduct->getStone6Weight() + $relatedProduct->getStone7Weight() + $relatedProduct->getStone8Weight() + $relatedProduct->getStone9Weight() + $relatedProduct->getStone10Weight() + $relatedProduct->getStone11Weight() + $relatedProduct->getStone12Weight() + $relatedProduct->getStone13Weight() + $relatedProduct->getStone14Weight() + $relatedProduct->getStone15Weight();//	Center Stone Weight	+	Accent Stone 1 Weight
+		$caratWeight		=	number_format(round((float)$caratWeightTotal, 2), 2, '.', '');		
+		?>
+      <div class="details-lists">
+        <dl class="item-options">
+        <?php if(in_array('Stone Quality',$superAttributeLabel)){?>
+          <dt>Stone Quality: </dt><dd><?php echo $stoneQuality;?></dd>
+        <?php } if(in_array('Metal Type',$superAttributeLabel)){?>
+          <dt>Metal Type: </dt><dd><?php echo $metalType;?></dd>
+        <?php } //if(in_array('Stone Size',$superAttributeLabel)){?>
+          <dt>Approx Carat Weight: </dt><dd><?php echo $caratWeight;?> Carat </dd>
+        <?php //} ?>
+        </dl>
+      </div>
+      <div class="full-details-link"><a href="<?php echo $relatedProductURL;?>#mbpd">see product details +</a></div>
+      <div class="matching-product-price"><?php echo $relatedProductPrice;?></div>
+      <div class="action-buttons">
+      <div class="matching-customize-btn"><a href="<?php echo $relatedProductURL;?>">CUSTOMIZE</a></div>
+      <div style="float:left;">
+      	<input type="submit" name="submit"  class="matching-addtocart-btn" value="<?php echo $this->__('ADD TO CART') ?>" /></div>
+        <?php /*?><button title="Add to Cart" type="button" onclick="productAddToCartForm.submit(this)">ADD TO CART</button><?php */?>
+      </div>
+    </div>
+    
+</form>
+    <div class="clear"></div>
+  </div>
+  
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		//	Adding product to cart starts
+		jQuery(".matching-addtocart-btn").click(function(){
+			var selectedRingSize 	= 	jQuery("#relatedRingSize_<?php echo $relatedPID;?> option:selected").val();
+			//alert(selectedRingSize);
+			if(selectedRingSize!='' && typeof selectedRingSize!='undefined'){
+				var addtoCartUrl	=	encode('<?php echo $addToCartUrl;?>'+selectedRingSize);
+				//alert(addtoCartUrl);
+				jQuery('#related_product_<?php echo $relatedPID;?>').attr("action",addtoCartUrl);
+				//jQuery('#related_product_<?php echo $relatedPID;?>').attr("action","http://www.google.com");
+			}else{
+				//alert('No ring size selected');
+				jQuery('#related_product_<?php echo $relatedPID;?>').attr("action",'<?php echo $addToCartUrl;?>');
+			}
+		});
+		//	Adding product to cart ends
+	});
+	
+	function encode(toEncode) {
+		return toEncode.replace('&amp;', '&');			
+	}
+</script>
+
+  <?php $i++;} //	end foreach?>
+  </div>
+  <div class="more-product-view-block"><a href="javascript:void(0);" id="moreMatchingRings">More matching Bands <span>+</span></a></div>
+</div>
+<?php } ?>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#closeLB, #lightboxBlackOverlay").click(function(){
+			jQuery("#lightboxBlackOverlay, #lightboxContent").fadeOut(300);
+		})
+		//	Showing more related products starts
+		jQuery("#moreMatchingRings").click(function(){
+			jQuery(".more-matching-product").slideToggle(500);
+			if (jQuery(this).children('span').text() == "+"){
+				jQuery(this).children('span').html("-")
+			}else{
+				jQuery(this).children('span').text("+")
+			}
+		})
+		//	Showing more related products ends
+		//	Showing related product details on click of images starts
+		jQuery('.more-matching-imgbox a').click(function(e){
+			e.preventDefault();
+			var whichClick = jQuery(this).attr('href');		// Get the id of clicked div
+			//alert(whichClick);
+			var myarr 		= 	whichClick.split("#");
+			whichClick 		= 	myarr[1];
+			
+			jQuery(".matching-band-product-details").hide();
+			jQuery("#"+whichClick).show();
+		})
+		//	Showing related product details on click of images ends
+	});	
+</script>

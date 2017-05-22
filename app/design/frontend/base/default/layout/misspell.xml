@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalogsearch_result_index translate="label">
+        <reference name="content">
+            <block type="misspell/suggest" name="misspell.suggest" as="misspell.suggest"  before="search.result" template="misspell/suggest.phtml" />
+        </reference>
+    </catalogsearch_result_index>
+</layout>

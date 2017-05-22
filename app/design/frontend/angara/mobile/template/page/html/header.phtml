@@ -1,0 +1,134 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ 
+ /**
+ * @var Mage_Page_Block_Html_Header $this
+*/
+
+$requrl1 = stripos($_SERVER["REQUEST_URI"], 'checkout/'); ?>
+
+<script>
+var isHome = false;
+</script>
+
+<div class="header">
+	<div class="m-header">
+		<div class="logo">
+			<a href="<?php echo $this->getUrl(); ?>">
+				<img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" />
+			</a>
+		</div>
+		
+		<div class="cart-items">			
+			<?php
+			//get total items in cart 
+			$total_cart_item = count(Mage::getBlockSingleton('checkout/cart')->getItems());
+			
+			if($total_cart_item > 0 && $total_cart_item!='')	
+				echo $this->__('<span><a href="/checkout/cart/">%s Items</a></span>',$total_cart_item);
+			else
+				echo '<span>0 Items</span>'; ?>			
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	<div class="m-topmenu">
+		<div class="m-search">
+			<div class="append-container"></div>
+			<?php
+			$page = Mage::app()->getFrontController()->getRequest()->getRouteName();		 
+			if ($page == 'cms'):
+				$ishome = Mage::getSingleton('cms/page')->getIdentifier();
+			endif;
+			
+			if ($ishome == "home"):?>
+				<script>
+				isHome = true;
+				</script>
+				
+				<div class="m-home"></div>
+			<?php	
+			else:?>
+				<a href="javascript:void(0);" onclick="history.back();">
+					<div class="m-pageback"></div>
+				</a>
+			<?php
+			endif;?>		
+			<form method="get" action="http://<?php echo $_SERVER['HTTP_HOST'] ?>/catalogsearch/result/" class="searchautocomplete" id="search_mini_form">
+				<div class="search-wrapper<?php if($ishome == "home"){ ?> search-wrapper-home<?php }?>">
+					<div class="search-input-box<?php if($ishome == "home"){?> home-search-input<?php }?>">
+						<input type="text" value="" name="q" class="search-input input-text UI-SEARCH" placeholder="Search by keyword, SKU ID & etc." id="search">
+					</div>					
+					<div class="search-icon<?php if($ishome == "home"){?> search-icon-home<?php }?>"></div>
+					<div class="clear"></div>
+				</div>
+			</form>
+		</div>		
+		<div class="m-listmenu">
+			<div class="drop-down-list" style="display:none;">
+				<ul>
+					<li><a href="javascript:void(0);"><span>RINGS</span></a></li>
+					<li><a href="javascript:void(0);"><span>NECKLACES</span></a></li>
+					<li><a href="javascript:void(0);"><span>EARRINGS</span></a></li>
+					<li><a href="javascript:void(0);"><span>ENGAGEMENT</span></a></li>
+					<li><a href="javascript:void(0);"><span>GIFTS &amp; MORE</span></a></li>
+				</ul>
+				<div class="close-tabmenu"></div>
+			</div>
+		</div>		
+		<?php
+		if($requrl1 != false):?>
+			<div class="blocksearch"></div>
+		<?php
+		endif; ?>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<?php 
+$requrl1 = stripos($_SERVER["REQUEST_URI"], 'checkout/');
+$page = Mage::app()->getFrontController()->getRequest()->getRouteName();
+		 
+if ($page == 'cms'):
+	$ishome = Mage::getSingleton('cms/page')->getIdentifier();
+endif;
+
+if($requrl1 === false):?>
+	<div id="catpagestaticbanner"<?php if($ishome == "home"){?> style="display:none;"<?php }?>>	
+		<div class="promotions">
+			<?php echo $this->getLayout()->createBlock('bannerslider/bannerslider')->setTemplate('bannerslider/bannercatalog.phtml')->toHTML();?>
+		</div>
+		<?php
+		$bannerTitleSession = Mage::getSingleton('core/session')->getBannertitleSession();
+		if($bannerTitleSession == '' || $bannerTitleSession == 'mobile_catalog'){?>
+			<div id="countdownticker2" class="countdownticker2"></div>
+			<div class="clear"></div>
+		<?php 
+		} ?>	
+	</div>
+<?php
+endif; ?>

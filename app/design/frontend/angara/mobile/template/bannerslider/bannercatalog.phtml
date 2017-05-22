@@ -1,0 +1,10 @@
+<?php
+$bannerCollection = $this->getLayout()->createBlock('bannerslider/bannerslider')->getMobileCatalogBannerCollection();
+
+if(count($bannerCollection) > 0){
+	foreach ($bannerCollection as $banner):
+		echo $banner['content'];?>
+		<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$banner['filename'];?>" id="catalog-banner-image" width="320" height="80" />
+	<?php
+	endforeach;
+}?>

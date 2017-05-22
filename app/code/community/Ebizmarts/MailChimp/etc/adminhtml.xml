@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <newsletter>
+            <children>
+                <mailchimp translate="title" module="mailchimp">
+                    <title>Mailchimp</title>
+                    <children>
+                            <mailchimperrors translate="title" module="mailchimp">
+                                <title>Mailchimp Errors</title>
+                                <sort_order>810</sort_order>
+                                <action>adminhtml/mailchimperrors/index</action>
+                        </mailchimperrors>
+                    </children>
+                </mailchimp>
+            </children>
+        </newsletter>
+        <system>
+            <depends>
+                <module>Ebizmarts_MailChimp</module>
+            </depends>
+            <children>
+                <email_template>
+                    <children>
+                        <mailchimp translate="title" module="mailchimp">
+                            <title>MailChimp</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <mailchimp_syncronization translate="title" module="mailchimp">
+                                    <title>Ecommerce Data Syncronization</title>
+                                    <sort_order>10</sort_order>
+                                    <action>adminhtml/mailchimpEcommerceSyncronization</action>
+                                </mailchimp_syncronization>
+                            </children>
+                        </mailchimp>
+                    </children>
+                </email_template>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <newsletter>
+                        <children>
+                            <mailchimp translate="title" module="mailchimp">
+                                <title>Mailchimp</title>
+                                <children>
+                                    <mailchimperrors translate="title" module="mailchimp">
+                                        <title>Mailchimp Errors</title>
+                                    </mailchimperrors>
+                                </children>
+                            </mailchimp>
+                        </children>
+                    </newsletter>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mailchimp translate="title" module="mailchimp">
+                                        <title>MailChimp Configuration</title>
+                                    </mailchimp>
+                                </children>
+                            </config>
+                            <email_template>
+                                <children>
+                                    <mailchimp translate="title" module="mailchimp">
+                                        <title>MailChimp</title>
+                                        <children>
+                                            <mailchimp_syncronization translate="title" module="mailchimp">
+                                                <title>Ecommerce Data Syncronization</title>
+                                            </mailchimp_syncronization>
+                                        </children>
+                                    </mailchimp>
+                                </children>
+                            </email_template>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

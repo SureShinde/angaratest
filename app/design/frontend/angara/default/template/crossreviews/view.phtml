@@ -1,0 +1,116 @@
+<script language="javascript">
+jQuery(function(){
+	jQuery('.reviewovertxt').hover(function(){
+		reviewoverup();		
+	})
+})
+function reviewoverup(){
+if (document.getElementById('reviewpopup').style.display=='block'){
+dispPayment='none';
+}else{
+dispPayment='block';
+}
+document.getElementById('reviewpopup').style.display=dispPayment;
+}
+</script>
+<style>
+#reviewpopup
+{
+position:absolute;
+top:20px;
+left:10px;
+width: 231px;
+border:solid 1px #999999;
+text-decoration: none !important;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-moz-box-shadow:0px 0px 5px #797979;
+-webkit-box-shadow: 0px 0px 5px #797979;
+box-shadow: 0px 0px 5px #797979;
+padding:8px;
+z-index:999;
+display:none;
+font:11px/16px Arial, Helvetica, sans-serif;
+color:#000;
+cursor:default;
+background-color:#fff;
+}
+.reviewovertxt
+{
+vertical-align:middle;
+width:15px;
+height:16px;
+display:inline-block;
+position:relative;
+}
+.productrelatedreview .date
+{
+display:none;
+}
+</style>
+
+<?php 
+$reviews = $this->getCrossReviews($product_id);
+$product = Mage::getModel('catalog/product')->load($product_id);
+?>
+<?php if($reviews): ?>
+	<?php //$stones = array();?>
+    <div class="ppreviewheading review-category-title">
+      <div class="previewtitle">
+         Other reviews for <?php echo $product->getName();?> <span class="reviewovertxt"><img src="/skin/frontend/angara/default/images/knowmorereviews.png"   width="15" height="16"/>
+         <div id="reviewpopup">These reviews are for products with the same style but different gemstone, metal type or quality.</div>
+         </span>
+         
+      </div>
+  </div>
+	
+	<?php foreach($reviews as $review): ?>
+	<?php //if(!in_array($review->getStone(), $stones)):?>
+	<?php //$stones[] = $review->getStone();?>
+	<?php //endif;?>
+    
+	<dl class="ppreviewholder"> 
+      <dt>
+      <div class="ppreview productrelatedreview">
+       		<span class="ppreviewby">    
+			<span style="padding-right:4px;"><strong>Review by: </strong></span>
+			<span><?php echo $review->getNickname(); ?> <small class="date" style="display:block"><?php  $reviewdate=Mage::getModel('review/review')->load($review->getReviewId());echo $this->__('(Posted on %s)', $this->formatDate($reviewdate->getCreatedAt()), 'long');?></small></span>
+           
+   			</span>
+ 		    <span class="pprating">
+   <table class="ratings-table">
+            <colgroup><col width="1">
+            <col>
+            </colgroup>
+            
+            <tbody>
+                <tr>
+                    <th class="review-headings">Overall Rating:</th>
+                    <td nowrap="nowrap" style="padding:4px 0 0 0"><div class="rating-box">
+                        <div style="width:<?php echo $review->getRating(); ?>%;" class="rating"></div>
+                        </div>
+                    </td><td valign="middle" style="padding:5px 0 0 5px"><?php  echo number_format((5 * floatval($review->getRating())/100),1);?></td>
+                </tr>
+            </tbody>
+        </table>
+   </span>                         
+		  <div style="clear:both"></div>
+      </div>
+   </dt>
+    <dd></dd> 
+     <dt>
+	<div style="float:left; width:152px; padding-left:10px;">
+		<div class="review-headings"> <strong>Summary</strong> </div>
+		<div><?php echo $review->getTitle();?></div>
+    </div>    
+    <div style="float:right; width:636px;">
+		<div class="review-headings"><strong>Review</strong></div>
+		<div> <?php echo $review->getDetail(); ?> </div>
+    </div>
+    <div style="clear:both"></div>
+	 </dt>
+     <dd></dd> 
+    </dl>
+	<?php endforeach; ?>
+<?php endif; ?>

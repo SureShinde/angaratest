@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_ArchiveProduct>
+            <version>0.0.1</version>
+        </Angara_ArchiveProduct>
+    </modules>
+    <global>
+		<models>
+			<archiveproduct>
+				<class>Angara_ArchiveProduct_Model</class>
+			</archiveproduct>
+			<catalog>
+				<rewrite>
+					<product>Angara_ArchiveProduct_Model_Catalog_Product</product>
+				</rewrite>
+			</catalog>
+		</models>
+		<events>
+			<adminhtml_catalog_product_grid_prepare_massaction>
+				<observers>
+					<angara_adminhtml_catalog_product_grid_prepare_massaction>
+						<type>singleton</type> 
+						<class>archiveproduct/observer</class> 
+						<method>archiveActionAdd</method> 
+					</angara_adminhtml_catalog_product_grid_prepare_massaction>
+				</observers>
+			</adminhtml_catalog_product_grid_prepare_massaction>
+		</events>
+    </global>
+	<admin>
+		<routers>
+			<adminhtml> <!-- Mage_Adminhtml route name used due to security reason as per SUPEE-6788 -->
+				<args>
+					<modules>
+						<archiveproduct after="Mage_Adminhtml">Angara_ArchiveProduct</archiveproduct>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+</config>

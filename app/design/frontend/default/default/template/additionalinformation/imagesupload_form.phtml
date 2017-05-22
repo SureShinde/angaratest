@@ -1,0 +1,107 @@
+<div class="text-center fontsize-type5 max-margin-bottom"><strong>OR</strong></div>
+<div class="block-sub-heading min-padding-bottom">Credit/Debit Card Copy & ID Proof:-</div>
+<div class="max-margin-bottom">If you do not have a business/university/government email, the next best option is to send us a clear, color <strong>copy of the credit card</strong> used (front and back), along with a clear, color <strong>copy of your state (or country) issued identification (Color photo can be clicked with your phone)</strong>. To protect your personal information, you may black out the middle eight digits of your credit card as well as the license number from your identification. Angara Security Department will only want to see your name, the name of the bank, the type of credit card, expiration date and the last four numbers of the credit card used. <strong>Please know that any information sent to us is held in the strictest confidence, never sold or shared, and destroyed once your transaction is complete</strong>.</div>
+<div class="max-margin-bottom">To upload images of your credit/debit card and identification to our secure servers, please drag and drop files or click in the box below and select the images you would like to submit. To complete, click on upload button. Please note, you may upload up to <strong>five</strong> files <strong>(a maximum size of 2 MB each).</strong> All image files must be in <strong>gif, jpg, png, pdf or doc format.</strong></div>
+<div class="showcase-bg-light max-margin-bottom">
+<form enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+<div class="dropzone-previews"></div>
+ <div class="fallback"> <!-- this is the fallback if JS isn't working -->
+        </div>
+</form>
+<div class="clearfix"></div>
+<div class="buttonuploadwrapper">
+<button type="submit" id="submit-all" class="btn btn-primary pull-right high-margin-top max-margin-bottom max-margin-right">Upload</button>
+</div>
+<div class="clearfix"></div>
+</div>
+
+
+
+<div class="overlay" id="overlay-images-uploaded" style="display:none;"></div>
+ 
+<div class="box" id="boximagesuploaded">
+ <a class="boxclose" id="boxcloseimagesuploaded"></a>
+ <h1>You have already uploaded images</h1>
+</div>
+
+<script type="text/javascript">
+/*override dropzone.js script*/
+/*For Images Drag or Upload*/
+Dropzone.options.myDropzone = {
+	autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 5,
+		maxFilesize: 2,
+        maxFiles: 5,
+		acceptedFiles: '.jpg,.jpeg,.png,.gif,.bmp,.pdf,.doc,.docx',
+		paramName: "additionalinformationimg",
+		params: {order:'<?php echo $this->getRequest()->getParam('key');?>'},
+		url:'<?php echo Mage::getUrl("additionalinformation/index/uploadimages",array('_secure'=>true)); ?>',
+		success: function(file, response){
+			if(response=='already uploaded'){
+				loadPopUpImagesUploaded();
+				//jQuery('#submit-all').fadeTo("slow",1);
+				//jQuery('#submit-all').removeAttr('disabled');
+			}
+			else if(response=='uploaded'){
+				location.href = "<?php echo Mage::getUrl("additionalinformation/index/thankyou?key=".$this->getRequest()->getParam('key'),array('_secure'=>true)); ?>";
+			}
+		},
+    init: function() {
+      this.on("addedfile", function(file) {
+        // Create the remove button
+        var removeButton = Dropzone.createElement("<a class='dz-remove' data-dz-remove='' href='javascript:undefined;'>Remove file</a>");
+		
+        // Capture the Dropzone instance as closure.
+        var _this = this;
+
+        // Listen to the click event
+        removeButton.addEventListener("click", function(e) {
+          // Make sure the button click doesn't submit the form:
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Remove the file preview.
+          _this.removeFile(file);
+          // If you want to the delete the file on the server as well,
+          // you can do the AJAX request here.
+        });
+
+        // Add the button to the file preview element.
+        file.previewElement.appendChild(removeButton);
+      });
+	  var submitButton = document.querySelector("#submit-all")
+        myDropzone = this; // closure
+
+    submitButton.addEventListener("click", function() {
+		//jQuery('#submit-all').fadeTo("slow",0.15);
+		//jQuery('#submit-all').attr('disabled', 'disabled');
+      	myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+    });
+
+    // You might want to show the submit button only when 
+    // files are dropped here:
+   /* this.on("addedfile", function() {
+      // Show submit button here and/or inform user to click it.
+    });*/
+    }
+  };
+  	
+	function loadPopUpImagesUploaded() {
+        jQuery('#overlay-images-uploaded').fadeIn('fast',function(){
+            jQuery('#boximagesuploaded').animate({'top':'210px'},500);
+        });
+		jQuery('#boxcloseimagesuploaded').click(function(){
+			jQuery('#boximagesuploaded').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-images-uploaded').fadeOut('fast');
+			});
+		});
+	}
+</script>
+
+<div class="max-margin-bottom">We are eager to get your order into full production and would like to avoid any shipment delays; so the sooner we can receive this information the better. Upon verification of the order, an email will be sent to you confirming that the order has been moved into production.</div>
+
+<div class="max-margin-bottom">If you have any questions about your order please email us at <a href="mailto:webmaster@angara.com" class="fontcolor-type1 text-underline">customer.service@angara.com</a> or call us at 1-888-926-4272 . Our customer care representatives are glad to assist you with your questions or concerns.</div>
+
+
+<div class="block-sub-heading">Angara Team</div>

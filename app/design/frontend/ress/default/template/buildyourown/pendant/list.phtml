@@ -1,0 +1,951 @@
+<!--[if IE 9]>
+<style>	
+.ui-jqgrid-hdiv th, .ui-jqgrid-bdiv td{width:auto!important}
+</style>
+<![endif]-->
+<script>
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
+<style>	
+	html[data-useragent*='MSIE 10.0'] .ui-jqgrid-hdiv th, 
+	html[data-useragent*='MSIE 10.0'] .ui-jqgrid-bdiv td {
+	  width:auto!important
+	}
+</style>
+
+<?php 
+$availableShapes = '"Round", "Pear", "Princess", "Marquise", "Oval", "Radiant", "Emerald", "Heart", "Cushion", "Asscher"';
+$colors = array('D','E','F','G','H','I','J');
+$clarities = array('IF','VVS1','VVS2','VS1','VS2','SI1','SI2');
+$cuts = array('Good','Very Good','Excellent');
+$polish = array('Good','Very Good','Excellent');
+$symmetries = array('Good','Very Good','Excellent');
+$minDiamondSize = 0.2;
+$maxDiamondSize = 15.30;
+
+$byoModel = Mage::getModel('buildyourown/jewelry_pendant');
+$userFilters = $byoModel->getUserFilters();
+
+$setting = $byoModel->getSettingSelected();
+if($setting){
+	$productId = $setting['productId'];
+	if($productId){
+		$product = Mage::getModel('catalog/product')->load($productId);
+		if($product && $product->getId()){
+			$minDiamondSize = $product->getBuildYourOwnSizeFrom();
+			$maxDiamondSize = $product->getBuildYourOwnSizeTo();
+			$userFilters['shapes'] = $availableShapes = $product->getAttributeText('stone1_shape');
+		}
+	}
+} ?>
+<div class="container design-your-own  dyo-pendant">
+	<?php echo $this->getChildHtml('buildyourown_header'); ?>
+	<div class="col-sm-12 text-center max-padding high-margin-bottom"> Select your perfect diamond from thousands of ethical, verified origin options. </div>
+	<div class="clearfix"></div>
+	<div class="col-sm-12 filters no-padding high-margin-bottom basic-filters">
+		<div class="catalog-loader col-xs-12 text-center absolute-placeholder hidden" style="top:28%; z-index:10;">
+			<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+		</div>
+		<div class="filter-holder-box">
+			<div class="col-sm-12 filter-head showcase-border-bottom-thin-1px high-padding" onclick="filterToggle('basic');">
+				<div class="pull-left">FILTER YOUR DIAMOND</div>
+				<i class="fa fa-caret-up fontsize-type2 pull-right"></i>
+			</div>
+			<script>		
+			function selectShape(shapeElement){
+				// select shape & update input
+				jQuery('.shape-icons li').removeClass('selected');
+				shapeElement.addClass('selected');															
+				applyFilters();
+			}
+			
+			function getFilters(){
+				var filters = Array();
+				var shapes = Array();
+				jQuery('.shape-icons li.selected').each(function(){
+					var shape = jQuery(this).attr('title');
+					shapes.push(shape);
+				});
+				
+				// Color
+				var colors = ['D','E','F','G','H','I','J'];
+				var colorFrom = colors[jQuery("#colorFrom").val()];
+				var colorTo = colors[jQuery("#colorTo").val()];
+				
+				// Clarity
+				var clarities = ['IF','VVS1','VVS2','VS1','VS2','SI1','SI2'];
+				var clarityFrom = clarities[jQuery("#clarityFrom").val()];
+				var clarityTo = clarities[jQuery("#clarityTo").val()];
+				
+				// Cut
+				var cuts = ['Good','Very Good','Excellent'];
+				var cutFrom = cuts[jQuery("#cutFrom").val()];
+				var cutTo = cuts[jQuery("#cutTo").val()];
+				
+				// Polish
+				var polish = ['Good','Very Good','Excellent'];
+				var polishFrom = polish[jQuery("#polishFrom").val()];
+				var polishTo = polish[jQuery("#polishTo").val()];
+				
+				// Symmetry
+				var symmetries = ['Good','Very Good','Excellent'];
+				var symmetryFrom = symmetries[jQuery("#symmetryFrom").val()];
+				var symmetryTo = symmetries[jQuery("#symmetryTo").val()];	
+				
+				// Price
+				var priceFrom = jQuery("#priceFrom").val();
+				var priceTo = jQuery("#priceTo").val();	
+				
+				// caratSize
+				var sizeFrom = jQuery("#sizeFrom").val();
+				var sizeTo = jQuery("#sizeTo").val();
+				
+				// tablePercent
+				var tablePercentFrom = jQuery("#tablePercentFrom").val();
+				var tablePercentTo = jQuery("#tablePercentTo").val();	
+				
+				// depthPercent
+				var depthPercentFrom = jQuery("#depthPercentFrom").val();
+				var depthPercentTo = jQuery("#depthPercentTo").val();	
+				
+				filters = {
+					'shapes' : '"' + shapes.join('", "') + '"',
+					'sizeFrom' : sizeFrom,
+					'sizeTo' : sizeTo,
+					'priceFrom' : priceFrom,
+					'priceTo' : priceTo,
+					'cutFrom' : cutFrom,
+					'cutTo' : cutTo,
+					'depthPercentFrom' : depthPercentFrom,
+					'depthPercentTo' : depthPercentTo,
+					'tablePercentFrom' : tablePercentFrom,
+					'tablePercentTo' : tablePercentTo,
+					'polishFrom' : polishFrom,
+					'polishTo' : polishTo,
+					'symmetryFrom' : symmetryFrom,
+					'symmetryTo' : symmetryTo,
+					'colorFrom' : colorFrom,
+					'colorTo' : colorTo,
+					'clarityFrom' : clarityFrom,
+					'clarityTo' : clarityTo,				
+					'sortBy' : 'Shape',
+					'sortDir' : 'Asc',
+					
+				};
+				return filters;
+			}
+			
+			function applyFilters(){
+				// read inputs
+				var filters = getFilters();
+				showLoader();
+				// update grid
+				filterDiamonds(filters);
+				updateDiamondResults();
+				//hideLoader();
+			}
+			
+			function filterDiamonds(filters){
+				jQuery('#diamond-list').setGridParam({url:'/buildyourown/pendant/filterDiamonds/'});
+				jQuery('#diamond-list').setGridParam({
+					'postData':{
+						'userFilters': filters
+					}
+				});
+				jQuery('#diamond-list').trigger('reloadGrid');
+			}
+			
+			function filldiamond(id){
+				jQuery('#diamond-detail .diamond-detail-holder').addClass('fadedetail');
+				jQuery('#diamond-detail .using-info').addClass('hidden');
+				jQuery('#measurements-top, #measurements-side').addClass('hidden');
+				jQuery('#diamond-detail .catalog-loader').removeClass('hidden');
+				
+				//manage image
+				jQuery("#diamnod-main-view").attr("src","");
+				//mangae more-views
+				jQuery("#main-top-view").attr("src","");
+				jQuery("#main-side-view").attr("src","");
+				jQuery("#side-view-sketch").attr("src","");
+				jQuery("#top-view-sketch").attr("src","");
+				
+				jQuery.post("/buildyourown/index/diamondDetails",{
+					diamondId: id
+				}, function(result){
+					var diamond = jQuery.parseJSON(result);
+					//manage diamond detail
+					jQuery("#diamond-number .value").html(("ANG"+diamond.diamond_id).split("").reverse().join(""));
+					jQuery('#currentDiamondId').val(diamond.diamond_id);
+					jQuery("#diamond-shape .value").html(diamond.shape);
+					jQuery("#diamond-price .value").html(diamond.current_price);
+					//jQuery("#diamond-cut .value").html(diamond.cut);
+					jQuery("#diamond-carat-weight .value").html(diamond.size);
+					jQuery("#diamond-color .value").html(diamond.color);
+					jQuery("#diamond-polish .value").html(diamond.polish);
+					jQuery("#diamond-clarity .value").html(diamond.clarity);
+					jQuery("#diamond-table .value").html(diamond.table_percent+'%');
+					jQuery("#diamond-lab .value").html(diamond.lab);
+					jQuery("#diamond-symmetry .value").html(diamond.symmetry);
+					jQuery("#diamond-depth-percent .value").html(diamond.depth_percent+'%');
+					
+					if(diamond.has_cert_file){
+						jQuery('#diamond-cert-image').removeClass('hidden');
+						jQuery('#diamond-cert-image a').attr('href',"http://www.diamondselections.com/GetCertificate.aspx?diamondid="+id);
+					}
+					else{
+						if(!jQuery('#diamond-cert-image').hasClass('hidden')){
+							jQuery('#diamond-cert-image').addClass('hidden');
+						}
+					}
+					if(diamond.cut == 'None' || diamond.cut == ''){
+						jQuery("#diamond-cut .value").html('None');
+					}else{
+						jQuery("#diamond-cut .value").html(diamond.cut);
+					}
+					if(diamond.culet_size == 'None' || diamond.culet_size == ''){
+						jQuery("#diamond-culet .value").html('None');
+					}else{
+						jQuery("#diamond-culet .value").html(diamond.culet_size);
+					}
+					if(diamond.meas_length == 'null'){
+						jQuery("#diamond-measurements .value").html('None');
+					}else{
+						jQuery("#diamond-measurements .value").html(diamond.meas_length+' X '+diamond.meas_width+' X '+diamond.meas_depth);
+					}
+					if(diamond.girdle_min != '' || diamond.girdle_max != ''){
+						if(diamond.girdle_min == diamond.girdle_max){
+							jQuery("#diamond-girdle .value").html(diamond.girdle_max);
+						}else{
+							if(diamond.girdle_min == ''){
+								jQuery("#diamond-girdle .value").html(diamond.girdle_max);
+							}
+							if(diamond.girdle_max == ''){
+								jQuery("#diamond-girdle .value").html(diamond.girdle_min);
+							}
+							if(diamond.girdle_min != '' && diamond.girdle_max != ''){
+								jQuery("#diamond-girdle .value").html(diamond.girdle_min+' - '+diamond.girdle_max);
+							}
+						}
+					}else{
+						jQuery("#diamond-girdle .value").html('None');
+					}		
+					
+					//manage sketch measurements
+					jQuery("#measurements-length strong").html(diamond.meas_length+'mm');				
+					jQuery("#measurements-width strong").html(diamond.meas_width+'mm');				
+					
+					jQuery("#measurements-table strong").html(diamond.table_percent+'%');				
+					if(diamond.girdle_min != '' || diamond.girdle_max != ''){
+						if(diamond.girdle_min == diamond.girdle_max){
+							jQuery("#measurements-girdle strong").html(diamond.girdle_max);
+						}else{
+							if(diamond.girdle_min == ''){
+								jQuery("#measurements-girdle strong").html(diamond.girdle_max);
+							}
+							if(diamond.girdle_max == ''){
+								jQuery("#measurements-girdle strong").html(diamond.girdle_min);
+							}
+							if(diamond.girdle_min != '' && diamond.girdle_max != ''){
+								jQuery("#measurements-girdle strong").html(diamond.girdle_min+' - '+diamond.girdle_max);
+							}
+						}
+					}else{
+						jQuery("#measurements-girdle strong").html('None');
+					}	
+					if(diamond.culet_size == 'None' || diamond.culet_size == ''){
+						jQuery("#measurements-culet strong").html('None');
+					}else{
+						jQuery("#measurements-culet strong").html(diamond.culet_size);
+					}
+					jQuery("#measurements-depth strong").html(diamond.depth_percent+'%');
+					
+					jQuery('#measurements-top, #measurements-side').removeAttr('class').addClass('hidden');
+					
+					//manage image
+					jQuery("#diamnod-main-view").attr("src","<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/diamond/"+diamond.shape+"_top_diamond.jpg");
+					
+					//mangae more-views
+					jQuery("#main-top-view").attr("src","<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/diamond/"+diamond.shape+"_top_diamond.jpg").removeAttr('class').addClass('img-responsive shape-'+diamond.shape);
+					jQuery("#main-side-view").attr("src","<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/diamond/"+diamond.shape+"_side_diamond.jpg").removeAttr('class').addClass('img-responsive shape-'+diamond.shape);
+					jQuery("#side-view-sketch").attr("src","<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/sketch/"+diamond.shape+"_side_sketch.jpg").removeAttr('class').addClass('img-responsive shape-'+diamond.shape);
+					jQuery("#top-view-sketch").attr("src","<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/sketch/"+diamond.shape+"_top_sketch.jpg").removeAttr('class').addClass('img-responsive shape-'+diamond.shape);
+					
+					//manage loader
+					jQuery('#diamond-detail .diamond-detail-holder').removeClass('fadedetail');
+					jQuery('#diamond-detail .catalog-loader').addClass('hidden');
+					jQuery('#diamond-detail .diamond-detail-holder').css('opacity','1');
+				});
+			}
+			function showIpadDetail(){
+				if(jQuery(window).width() <= 768 && jQuery(window).width() > 600){
+					jQuery('.byo-result-right').css('right','1px');
+					jQuery('.byo-result-right').find('.fa-caret-left').addClass('hidden');
+					jQuery('.byo-result-right').find('.fa-caret-right').removeClass('hidden');
+				}
+				if(jQuery(window).width() < 600){
+					jQuery('.byo-result-right').css({'right':'1px','width':'86%'});
+					jQuery('.byo-result-right').find('.fa-caret-left').addClass('hidden');
+					jQuery('.byo-result-right').find('.fa-caret-right').removeClass('hidden');
+				}
+			}
+			function hideLoader(){
+				jQuery('.filters .filter-holder-box, .byo-product-detail').removeClass('disabled');
+				jQuery('.filters .catalog-loader').addClass('hidden');
+			}
+			function showLoader(){
+				jQuery('.filters .filter-holder-box, .byo-product-detail').addClass('disabled');
+				jQuery('.filters .catalog-loader').removeClass('hidden');
+			}
+			function updateDiamondResults(){}
+			
+			function init(){
+				jQuery('.shape-icons li').click(function(){
+					selectShape(jQuery(this));
+					byoClicked('Shape | '+jQuery(this).attr('title'));
+				});
+				jQuery("#diamond-list").jqGrid({
+					url: "/buildyourown/pendant/diamondGrid",
+					height: 815,
+					datatype: "json",
+					mtype: "GET",
+					colNames: ["DiamondId", "Shape", "Carat", "Color", "Clarity", "Cut", "Price"],
+					colModel: [
+						{ name: "diamond_id", hidden: true, align: "center" },
+						{ name: "shape", width: 85, align: "center" },
+						{ name: "size", width: 90, align: "center" },
+						{ name: "color", width: 80, align: "center" },
+						{ name: "clarity", width: 80, align: "center" },					
+						{ name: "cut", width: 80, align: "center" },
+						{ name: "price", width: 150, align: "center" }
+					],
+					pager: "#diamond-list-pager",
+					rowNum: 50,
+					autowidth: false,
+					rownumbers: true,
+					sortname: "shape",
+					sortorder: "asc",
+					viewrecords: true,
+					scroll: true,
+					loadonce:false,
+					multiselect: false,
+					gridview: true,
+					autoencode: true,
+					caption: "",
+					onSelectRow: function(id){ 
+						filldiamond(id);
+						showIpadDetail();
+					},
+					loadComplete: function(e){
+						jQuery('#dyn_result').html('('+jQuery("#diamond-list").getGridParam("records")+')');
+						hideLoader();
+					}
+				});
+			}
+			
+			jQuery(function(){	
+				init();										
+			});
+			</script>
+			<?php //filters ?>
+			<div class="filter-holder full-width high-padding">
+				<div class="col-md-6 col-sm-12 padding-type-2">
+					<div class="col-sm-12 padding-type-10 clearfix shapes">
+						<label>SHAPE</label>
+						<?php $userFilters['shapes'] = explode(', ', str_replace('"','',$userFilters['shapes']));?>
+						<div class="filter-options">
+							<ul class="shape-icons">
+								<?php 
+								$shapes = explode(', ', str_replace('"','',$availableShapes));
+								foreach($shapes as $shape){ ?>
+									<li class="shape-<?php echo strtolower($shape); if($userFilters['shapes'] && count($userFilters['shapes']) == 0){?> selected<?php }else if(in_array($shape,$userFilters['shapes'])){?> selected<?php }?>" title="<?php echo $shape;?>"><span class="icon"></span><span class="text"><?php echo $shape;?></span></li>
+								<?php 
+								}?>
+							</ul>
+						</div>
+						<?php 
+						foreach($userFilters['shapes'] as $key=>$userFilterShape):
+							$shapeUser .= $userFilterShape.(($key < (count($userFilters['shapes']) - 1)) ? ',' : '');
+						endforeach; ?>
+						<input type="hidden" id="shapes" name="shapes" class="pull-left" value=<?php echo $shapeUser;?>>
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix carat">
+						<label>CARAT</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#carat-slider" ).slider({
+									  range: true,
+									  min: <?php echo $minDiamondSize;?>,
+									  max: <?php echo $maxDiamondSize;?>,
+									  values: [ <?php echo $userFilters['sizeFrom']; ?>, <?php echo $userFilters['sizeTo']; ?> ],
+									  step: 0.01,
+									  slide: function( event, ui ) {
+										jQuery( "#sizeFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#sizeTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										byoClicked('Carat | '+jQuery( "#sizeFrom" ).val()+'-'+jQuery( "#sizeTo" ).val());
+									  }
+									});
+								});
+							</script>
+							<div id="carat-slider" class="range-slider-scroller"></div>
+							<div class="clearfix"></div>
+							<div class="col-sm-12 high-padding-top padding-type-2">
+								<input type="text" id="sizeFrom" name="sizeFrom" readonly class="pull-left" value="<?php echo $userFilters['sizeFrom']; ?>">
+								<input type="text" id="sizeTo" name="sizeTo" readonly class="pull-right" value="<?php echo $userFilters['sizeTo']; ?>">
+							</div>			
+						</div>
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix color">
+						<label>COLOR</label>
+						<div class="filter-options relative-placeholder">
+							<script>
+								jQuery(function(){
+									jQuery( "#color-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 6,
+									  values: [ <?php echo array_search($userFilters['colorFrom'], $colors); ?> , <?php echo array_search($userFilters['colorTo'], $colors); ?> ],
+									  step: 1,
+									  slide: function( event, ui ) {
+										jQuery( "#colorFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#colorTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										var colorFrom = jQuery( ".color-options .fv span:eq("+jQuery( "#colorFrom" ).val()+")" ).html();
+										var colorTo = jQuery( ".color-options .fv span:eq("+jQuery( "#colorTo" ).val()+")" ).html();
+										byoClicked('Color | '+colorFrom+'-'+colorTo);
+									  }
+									});
+								});
+							</script>
+							<div id="color-slider" class="range-slider-scroller"></div>
+							<div class="filter-value color-options">
+								<span class="fv"><span>D</span></span>
+								<span class="fv"><span>E</span></span>
+								<span class="fv"><span>F</span></span>
+								<span class="fv"><span>G</span></span>
+								<span class="fv"><span>H</span></span>
+								<span class="fv"><span>I</span></span>
+								<span class="fv"><span>J</span></span>
+							</div>
+						</div>
+						<input type="hidden" id="colorFrom" name="colorFrom" class="pull-left" value="<?php echo array_search($userFilters['colorFrom'], $colors); ?>">
+						<input type="hidden" id="colorTo" name="colorTo" class="pull-left" value="<?php echo array_search($userFilters['colorTo'], $colors); ?>">
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 padding-type-2">
+					<div class="col-sm-12 padding-type-10 clearfix price">
+						<label>PRICE</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#price-slider" ).slider({
+									  range: true,
+									  min: 100,
+									  max: 1000000,
+									  values: [ <?php echo $userFilters['priceFrom']; ?>, <?php echo $userFilters['priceTo']; ?> ],
+									  slide: function( event, ui ) {
+										jQuery( "#priceFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#priceTo" ).val( ui.values[ 1 ] );
+										jQuery( "#priceFromShow" ).val( '$' + ui.values[ 0 ] );
+										jQuery( "#priceToShow" ).val( '$' + ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										byoClicked('Price | '+jQuery( "#priceFromShow" ).val()+'-'+jQuery( "#priceToShow" ).val());
+									  }
+									});
+								});
+							</script>
+							<div id="price-slider" class="range-slider-scroller"></div>
+							<div class="clearfix"></div>
+							<div class="col-sm-12 high-padding-top padding-type-2">
+								<input type="text" id="priceFromShow" name="priceFromShow" class="pull-left" readonly value="<?php echo Mage::helper('core')->currency($userFilters['priceFrom'],true,false); ?>">
+								<input type="text" id="priceToShow" name="priceToShow" class="pull-right text-right" readonly  value="<?php echo Mage::helper('core')->currency($userFilters['priceTo'],true,false); ?>">
+								<input type="hidden" id="priceFrom" name="priceFrom" class="pull-left" readonly value="<?php echo $userFilters['priceFrom']; ?>">
+								<input type="hidden" id="priceTo" name="priceTo" class="pull-right text-right" readonly  value="<?php echo $userFilters['priceTo']; ?>">
+
+							</div>						
+						</div>
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix cut">
+						<label>CUT</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#cut-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 2,
+									  values: [ <?php echo array_search($userFilters['cutFrom'], $cuts); ?>, <?php echo array_search($userFilters['cutTo'], $cuts); ?> ],
+									  step: 1,
+									  slide: function( event, ui ) {
+										jQuery( "#cutFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#cutTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										var cutFrom = jQuery( ".cut-options .fv span:eq("+jQuery( "#cutFrom" ).val()+")" ).html();
+										var cutTo = jQuery( ".cut-options .fv span:eq("+jQuery( "#cutTo" ).val()+")" ).html();
+										byoClicked('Cut | '+cutFrom+'-'+cutTo);
+									  }
+									});
+								});
+							</script>
+							<div id="cut-slider" class="range-slider-scroller"></div>
+							<div class="filter-value cut-options">
+								<span class="fv"><span>Good</span></span>
+								<span class="fv"><span>Very Good</span></span>
+								<span class="fv"><span>Excellent</span></span>
+							</div>
+						</div>
+						<input type="hidden" id="cutFrom" name="cutFrom" class="pull-left" value="<?php echo array_search($userFilters['cutFrom'], $cuts); ?>">
+						<input type="hidden" id="cutTo" name="cutTo" class="pull-left" value="<?php echo array_search($userFilters['cutTo'], $cuts); ?>">
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix clarity">
+						<label>CLARITY</label>
+						<div class="filter-options">						
+							<script>
+								jQuery(function(){
+									jQuery( "#clarity-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 6,
+									  values: [ <?php echo array_search($userFilters['clarityFrom'], $clarities); ?>, <?php echo array_search($userFilters['clarityTo'], $clarities); ?> ],
+									  step: 1,
+									  slide: function( event, ui ) {
+										jQuery( "#clarityFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#clarityTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										var clarityFrom = jQuery( ".clarity-options .fv span:eq("+jQuery( "#clarityFrom" ).val()+")" ).html();
+										var clarityTo = jQuery( ".clarity-options .fv span:eq("+jQuery( "#clarityTo" ).val()+")" ).html();
+										byoClicked('Clarity | '+clarityFrom+'-'+clarityTo);
+									  }
+									});
+								});
+							</script>
+							<div id="clarity-slider" class="range-slider-scroller"></div>
+							<div class="filter-value clarity-options">
+								<span class="fv"><span>IF</span></span>
+								<span class="fv"><span>VVS1</span></span>
+								<span class="fv"><span>VVS2</span></span>
+								<span class="fv"><span>VS1</span></span>
+								<span class="fv"><span>VS2</span></span>
+								<span class="fv"><span>SI1</span></span>
+								<span class="fv"><span>SI2</span></span>
+							</div>
+						</div>
+						<input type="hidden" id="clarityFrom" name="clarityFrom" class="pull-left" value="<?php echo array_search($userFilters['clarityFrom'], $clarities); ?>">
+						<input type="hidden" id="clarityTo" name="clarityTo" class="pull-left" value="<?php echo array_search($userFilters['clarityTo'], $clarities); ?>">
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12">
+					<a href="javascript:void(0)" class="advanced-filter-open pull-left text-blue text-underline padding-type-6">Advanced Filters <i class="fa fa-caret-right"></i></a>
+					<?php /*?><a href="javascript:void(0)" class="pull-right text-blue text-underline padding-type-6"><i class="fa fa-refresh fa-fw"></i> Reset Filters</a><?php */?>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<?php //advanced filter ?>
+	<div class="col-sm-12 filters advanced-filters no-padding high-margin-bottom hidden">
+		<div class="catalog-loader col-xs-12 text-center absolute-placeholder hidden" style="top:28%; z-index:10;">
+			<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+		</div>
+		<div class="filter-holder-box">
+			<div class="col-sm-12 filter-head showcase-border-bottom-thin-1px high-padding">
+				<div class="pull-left">ADVANCED FILTER</div>
+				<a href="javascript:void(0)" class="back-to-basic-filter pull-right text-blue text-underline"><i class="fa fa-caret-left"></i> Basic Filters</a>
+			</div>
+			<div class="filter-holder full-width high-padding">
+				<div class="col-md-6 col-sm-12 padding-type-2">
+					<div class="col-sm-12 padding-type-10 clearfix price">
+						<label>DEPTH</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#depth-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 100,
+									  step: 1,
+									  values: [ <?php echo $userFilters['depthPercentFrom']; ?>, <?php echo $userFilters['depthPercentTo']; ?> ],
+									  slide: function( event, ui ) {
+										jQuery( "#depthPercentFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#depthPercentTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										byoClicked('Depth | '+jQuery( "#depthPercentFrom" ).val()+'-'+jQuery( "#depthPercentTo" ).val());
+									  }
+									});
+								});
+							</script>
+							<div id="depth-slider" class="range-slider-scroller"></div>
+							<div class="clearfix"></div>
+							<div class="col-sm-12 high-padding-top padding-type-2">
+								<input type="text" id="depthPercentFrom" name="depthPercentFrom" class="pull-left" readonly value="<?php echo $userFilters['depthPercentFrom']; ?>">
+								<input type="text" id="depthPercentTo" name="depthPercentTo" class="pull-right text-right" readonly  value="<?php echo $userFilters['depthPercentTo']; ?>">
+							</div>						
+						</div>
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix color">
+						<label>POLISH</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#polish-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 2,
+									  values: [ <?php echo array_search($userFilters['polishFrom'], $polish); ?> , <?php echo array_search($userFilters['polishTo'], $polish); ?> ],
+									  step: 1,
+									  slide: function( event, ui ) {
+										jQuery( "#polishFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#polishTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										var polishFrom = jQuery( ".polish-options .fv span:eq("+jQuery( "#polishFrom" ).val()+")" ).html();
+										var polishTo = jQuery( ".polish-options .fv span:eq("+jQuery( "#polishTo" ).val()+")" ).html();
+										byoClicked('Polish | '+polishFrom+'-'+polishTo);
+									  }
+									});
+								});
+							</script>
+							<div id="polish-slider" class="range-slider-scroller"></div>
+							<div class="filter-value polish-options">
+								<span class="fv"><span>Good</span></span>
+								<span class="fv"><span>Very Good</span></span>
+								<span class="fv"><span>Excellent</span></span>
+							</div>
+						</div>
+						<input type="hidden" id="polishFrom" name="polishFrom" class="pull-left" value="<?php echo array_search($userFilters['polishFrom'], $polish); ?>">
+						<input type="hidden" id="polishTo" name="polishTo" class="pull-left" value="<?php echo array_search($userFilters['polishTo'], $polish); ?>">
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 padding-type-2">
+					<div class="col-sm-12 padding-type-10 clearfix price">
+						<label>TABLE</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#table-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 100,
+									  step: 1,
+									  values: [ <?php echo $userFilters['tablePercentFrom']; ?>, <?php echo $userFilters['tablePercentTo']; ?> ],
+									  slide: function( event, ui ) {
+										jQuery( "#tablePercentFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#tablePercentTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										byoClicked('Table | '+jQuery( "#tablePercentFrom" ).val()+'-'+jQuery( "#tablePercentTo" ).val());
+									  }
+									});
+								});
+							</script>
+							<div id="table-slider" class="range-slider-scroller"></div>
+							<div class="clearfix"></div>
+							<div class="col-sm-12 high-padding-top padding-type-2">
+								<input type="text" id="tablePercentFrom" name="tablePercentFrom" class="pull-left" readonly value="<?php echo $userFilters['tablePercentFrom']; ?>">
+								<input type="text" id="tablePercentTo" name="tablePercentTo" class="pull-right text-right" readonly  value="<?php echo $userFilters['tablePercentTo']; ?>">
+							</div>						
+						</div>
+					</div>
+					<div class="col-sm-12 padding-type-10 clearfix color">
+						<label>SYMMETRY</label>
+						<div class="filter-options">
+							<script>
+								jQuery(function(){
+									jQuery( "#symmetry-slider" ).slider({
+									  range: true,
+									  min: 0,
+									  max: 2,
+									  values: [ <?php echo array_search($userFilters['symmetryFrom'], $symmetries); ?> , <?php echo array_search($userFilters['symmetryTo'], $symmetries); ?> ],
+									  step: 1,
+									  slide: function( event, ui ) {
+										jQuery( "#symmetryFrom" ).val( ui.values[ 0 ] );
+										jQuery( "#symmetryTo" ).val( ui.values[ 1 ] );
+									  },
+									  stop: function ( event, ui ) {
+										applyFilters();
+										var symmetryFrom = jQuery( ".symmetry-options .fv span:eq("+jQuery( "#symmetryFrom" ).val()+")" ).html();
+										var symmetryTo = jQuery( ".symmetry-options .fv span:eq("+jQuery( "#symmetryTo" ).val()+")" ).html();
+										byoClicked('Symmetry | '+symmetryFrom+'-'+symmetryTo);
+									  }
+									});
+								});
+							</script>
+							<div id="symmetry-slider" class="range-slider-scroller"></div>
+							<div class="filter-value symmetry-options">
+								<span class="fv"><span>Good</span></span>
+								<span class="fv"><span>Very Good</span></span>
+								<span class="fv"><span>Excellent</span></span>
+							</div>
+						</div>
+						<input type="hidden" id="symmetryFrom" name="symmetryFrom" class="pull-left" value="<?php echo array_search($userFilters['symmetryFrom'], $symmetries); ?>">
+						<input type="hidden" id="symmetryTo" name="symmetryTo" class="pull-left" value="<?php echo array_search($userFilters['symmetryTo'], $symmetries); ?>">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-sm-12 byo-product-detail no-padding">
+		<div class="byo-tabs full-width max-margin-top">
+			<ul>
+				<li class="active"><span class="tab-1">Diamond Results <span id="dyn_result" class="block-inline-display"></span></span></li>
+				<?php /* <li><span class="tab-2">Recently Viewed</span></li>
+				<li><span class="tab-3">Comparison</span></li> */ ?>
+			</ul>
+		</div>
+		<div class="byo-tab-content full-width high-margin-bottom">
+			<div id="tab-1" class="tab-content diamond-result full-width">
+				<div class="byo-result-right pull-right col-sm-3 no-padding">
+					<div class="byo-result-heading text-center"><i class="fa fa-caret-left pull-left hidden-md"></i> DIAMOND INFORMATION <i class="fa fa-caret-right pull-right hidden-md hidden"></i></div>
+					<div id="diamond-detail" class="byo-result-content high-padding relative-placeholder">
+						<div class="catalog-loader text-center absolute-placeholder hidden">
+							<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+							
+						</div>
+						<div class="using-info absolute-placeholder text-center">
+							<br><br>
+							<i class="fa fa-question-circle fa-fw text-lighter" style="font-size:50px; opacity:0.4;"></i>
+							<br><br>
+							Click on a diamond to see further details.
+							<br><br>
+						</div>
+						<div class="diamond-detail-holder relative-placeholder" style="z-index:1; opacity:0;">
+							<div class="byo-btn full-width high-margin-bottom">
+								<form action="/buildyourown/pendant/selectDiamond" name="choose_diamond_form" method="post">
+									<input type="hidden" id="currentDiamondId" name="diamondId" value="" />
+									<input type="submit" class="byo-choose-btn full-width text-center" onclick="chooseThisDiamondClicked();" value="CHOOSE THIS DIAMOND">
+								</form>
+							</div>
+							<div class="byo-pro-detail full-width high-margin-bottom">
+								<ul class="col-two full-width">
+									<li id="diamond-number">
+										<span class="title">STOCK NUMBER</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-price">
+										<span class="title">PRICE</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-shape">
+										<span class="title">SHAPE</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-cut">
+										<span class="title">CUT</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-carat-weight">
+										<span class="title">CARAT WEIGHT</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-clarity">
+										<span class="title">CLARITY</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-color">
+										<span class="title">COLOR</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-measurements">
+										<span class="title">MEASUREMENTS:</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-lab">
+										<span class="title">REPORT</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-symmetry">
+										<span class="title">SYMMETRY:</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-polish">
+										<span class="title">POLISH</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-table">
+										<span class="title">TABLE</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-depth-percent">
+										<span class="title">DEPTH</span>
+										<span class="value"></span>
+									</li>
+									<li id="diamond-culet">
+										<span class="title">CULET</span>
+										<span class="value"></span>
+									</li>
+								</ul>
+								<ul class="col-one full-width">
+									<li id="diamond-girdle">
+										<span class="title">GIRDLE:</span>
+										<span class="value"></span>
+									</li>
+								</ul>
+							</div>
+							<div class="byo-img-box full-width high-margin-bottom">
+								<div class="diamond-image relative-placeholder">
+									<img id="diamnod-main-view" src="" alt="" class="img-responsive" />
+									<div id="measurements-top" class="absolute-placeholder hidden" style="z-index:1;">
+										<span id="measurements-length">Length:<strong></strong></span>
+										<span id="measurements-width">Width:<strong></strong></span>
+									</div>
+									<div id="measurements-side" class="absolute-placeholder hidden" style="z-index:1;">
+										<span id="measurements-table">Table:<strong></strong></span>
+										<span id="measurements-girdle">Girdle:<strong></strong></span>
+										<span id="measurements-culet">Culet:<strong></strong></span>
+										<span id="measurements-depth">Depth:<strong></strong></span>
+									</div>
+								</div>
+								<div class="diamond-image-more-views">
+								 	<ul>
+								  		<li><a href="javascript:void(0);"><img id="main-top-view" onclick="imgUpdate(this)" src="" alt="" class="img-responsive" /></a></li>
+								  		<li><a href="javascript:void(0);"><img id="main-side-view" onclick="imgUpdate(this)" src="" alt="" class="img-responsive" /></a></li>
+								  		<li><a href="javascript:void(0);"><img id="side-view-sketch" onclick="imgUpdate(this)" src="" alt="" class="img-responsive" /></a></li>
+								  		<li><a href="javascript:void(0);"><img id="top-view-sketch" onclick="imgUpdate(this)" src="" alt="" class="img-responsive" /></a></li>
+								  		<li id="diamond-cert-image" class="hidden"><a  href="javascript:void(0);" rel="nofollow" target="_blank"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/buildyourown/gia.jpg" alt="GIA Certificate" class="img-responsive" /></a></li>
+								 	</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="byo-result-left pull-left col-sm-9 no-padding">
+					<div class="byo-result-content">
+						<div class="">
+							<table id="diamond-list">
+								<tr>
+									<td></td>
+								</tr>
+							</table>
+							<div id="diamond-list-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="tab-2" class="tab-content recently-viewed  full-width hidden"> Recently Viewed </div>
+			<div id="tab-3" class="tab-content comparison  full-width hidden"> Comparison </div>
+		</div>
+		<script>
+			jQuery('.byo-tabs li span').click(function(){
+				var cls = jQuery(this).attr('class');
+				jQuery(this).parent('li').siblings().removeClass('active');
+				jQuery(this).parent('li').addClass('active');
+				jQuery('.tab-content').addClass('hidden');
+				jQuery('#'+cls).removeClass('hidden');
+			});
+		</script>
+	</div>	
+</div>
+<script type="text/javascript">
+function imgUpdate(item){
+ 	var curImg = jQuery(item).attr('src');
+ 	var id = jQuery(item).attr('id');
+ 	var cls = jQuery(item).attr('class').split(' ')[1];
+ 	jQuery("#diamnod-main-view").attr("src",curImg);
+ 
+ 	if(id == 'main-top-view' || id == 'main-side-view'){
+  		jQuery('#measurements-top, #measurements-side').removeAttr('class').addClass('hidden');
+ 	}
+ 	if(id == 'top-view-sketch'){
+  		jQuery('#measurements-side').removeAttr('class').addClass('hidden');
+  		jQuery('#measurements-top').removeClass('hidden').addClass('absolute-placeholder top-view '+cls+'-'+id);
+ 	}
+ 	if(id == 'side-view-sketch'){
+  		jQuery('#measurements-top').removeAttr('class').addClass('hidden');
+  		jQuery('#measurements-side').removeClass('hidden').addClass('absolute-placeholder side-view '+cls+'-'+id);
+ 	} 
+};
+
+jQuery('.advanced-filter-open').click(function(){
+	jQuery('.advanced-filters').removeClass('hidden');
+	jQuery('.basic-filters').addClass('hidden');
+	
+	//S: to manage advanced filter value
+	jQuery('.advanced-filters .filter-value .fv').each(function() {
+		var cutWidth = jQuery(this).children('span').width() / 2;
+		jQuery(this).children('span').css('margin-left','-'+cutWidth+'px');
+	});
+	jQuery('.advanced-filters .filter-value').each(function() {
+		var lngth = jQuery(this).find('.fv').length - 1; 
+		jQuery(this).find('.fv').css('width',100/lngth+'%');
+	});
+	//E: to manage advanced filter value
+});
+jQuery('.back-to-basic-filter').click(function(){
+	jQuery('.advanced-filters').addClass('hidden');
+	jQuery('.basic-filters').removeClass('hidden');
+});
+
+//S: to manage basic filter value
+jQuery(function(){
+	jQuery('.basic-filters .filter-value .fv').each(function() {
+		var cutWidth = jQuery(this).children('span').width() / 2;
+		jQuery(this).children('span').css('margin-left','-'+cutWidth+'px');
+	});
+	jQuery('.basic-filters .filter-value').each(function() {
+		var lngth = jQuery(this).find('.fv').length - 1; 
+		jQuery(this).find('.fv').css('width',100/lngth+'%');
+	});
+});
+
+//To manage byo detail on ipad
+jQuery('.byo-result-right .byo-result-heading').click(function(){	
+	var position = jQuery('.byo-result-right').position();
+	if(jQuery(window).width() <= 768 && jQuery(window).width() > 600){
+		if(position.left > 500){
+			jQuery(this).parent('.byo-result-right').css('right','1px');
+			jQuery(this).children('.fa-caret-left').addClass('hidden');
+			jQuery(this).children('.fa-caret-right').removeClass('hidden');
+		}else{
+			jQuery(this).parent('.byo-result-right').css('right','-320px');
+			jQuery(this).children('.fa-caret-left').removeClass('hidden');
+			jQuery(this).children('.fa-caret-right').addClass('hidden');
+		}
+	}
+	if(jQuery(window).width() <= 600){
+		if(position.left > 200){
+			jQuery(this).parent('.byo-result-right').css({'right':'1px','width':'86%'});
+			jQuery(this).children('.fa-caret-left').addClass('hidden');
+			jQuery(this).children('.fa-caret-right').removeClass('hidden');
+		}else{
+			jQuery(this).parent('.byo-result-right').css({'right':'-85%','width':'100%'});
+			jQuery(this).children('.fa-caret-left').removeClass('hidden');
+			jQuery(this).children('.fa-caret-right').addClass('hidden');
+		}
+	}
+});
+
+
+//To manage advanced-filters basic-filters toggle
+
+function filterToggle(filter){
+	if(filter == 'basic'){
+		jQuery('.basic-filters').find('.filter-holder').slideToggle(300);
+		if(jQuery('.filter-head').children('.fa').hasClass('fa-caret-up')){
+			jQuery('.filter-head').children('.fa').removeClass('fa-caret-up').addClass('fa-caret-down');
+		}else{
+			jQuery('.filter-head').children('.fa').removeClass('fa-caret-down').addClass('fa-caret-up');
+		}
+	}
+}
+
+
+
+</script>

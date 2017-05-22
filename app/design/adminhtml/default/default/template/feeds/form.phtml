@@ -1,0 +1,43 @@
+<!--
+/* Author : Saurabh Sharma*/
+--> 
+
+<div class="entry-edit">
+    <div class="box-left">
+    	<div class="entry-edit-head">
+			<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('feeds')->__('Generate Feeds') ?></h4>
+        </div>
+    	<!-- Amazone Feed For US-->
+        <form id="export_feeds" action="<?php echo $this->getUrl('*/*/export',array('id' => $this->getRequest()->getParam('id'))) ?>" method="post" enctype="multipart/form-data">
+            <?php echo $this->getBlockHtml('formkey')?>
+            <fieldset>
+            <table class="form-list" cellspacing="0">
+                <colgroup class="label"/>
+                <colgroup class="value"/>
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="value">
+                            <?php $button_label = Mage::helper('feeds')->__('Export'); ?>
+                            <?php echo $this->getButtonHtml($button_label, "this.form.submit();displayLoadingMaskUs();") ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+			
+            var amazoneFormUs = new varienForm('export_feeds');
+
+            function displayLoadingMaskUs()
+            {
+                var loaderArea = $$('#html-body .wrapper')[0];
+                Position.clone($(loaderArea), $('loading-mask'), {offsetLeft:-2});
+                toggleSelectsUnderBlock($('loading-mask'), false);
+                //Element.show('loading-mask');
+            }
+        </script>
+    </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,90 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if(count($this->getItemCollection()->getItems())): ?>
+<?php $this->resetItemsIterator() ?>
+<?php 
+$_totProd = ($this->getRowCount())*($this->getColumnCount());
+$_product = $this->getProduct();
+
+/* checking most important stone  | 3 > 2 > 1| */
+if($_product->getAttributeText('emb_stone_name3')){
+	$_stone_name = $_product->getAttributeText('emb_stone_name3');
+} else if($_product->getAttributeText('emb_stone_name2')){
+	$_stone_name = $_product->getAttributeText('emb_stone_name2');
+} else if($_product->getAttributeText('emb_stone_name')){
+	$_stone_name = $_product->getAttributeText('emb_stone_name');
+}
+				
+
+$skuGBB = $_product->getSku();
+$hLoom = false;
+if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+if(substr($skuGBB, -1)==="H")$hLoom = true;
+if($hLoom):  // for Heirloom ?>
+
+	<div>
+		<?php for($_i=0;$_i<$_totProd;$_i++):
+	if($_link=$this->getIterableItem()): 
+		$skuGBB = $_link->getSku();
+		if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+?>
+			<div class="quality-type-option">
+				<a href="<?php echo $_link->getProductUrl() ?>?sel=y"><div><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(59) ?>" height="59" width="59"/></div></a>
+				<span class="more-option-product-details">
+					<?php if(substr($skuGBB, -1)==="B"):?>Best <span class="help-icon" about="<?php echo strtolower($_stone_name.'AAA') ?>"></span>
+					<?php elseif(substr($skuGBB, -1)==="H"):?>Heirloom <span class="help-icon" about="<?php echo strtolower($_stone_name.'AAAA') ?>"></span>
+					<?php else:?>Better <span class="help-icon" about="<?php echo strtolower($_stone_name.'AA') ?>"></span>
+					<?php endif;?><br />$<?php echo round($_link->getFinalPrice(),2); ?></span>
+				</span>
+			</div>
+	<?php endif;
+endfor;?>
+	<div style="clear:both"></div>
+</div>
+<?php else:  // when there are less then 3 suggested items, done specially for the case when there is no labcreated variation ?>
+<div>
+<?php for($_i=0;$_i<$_totProd;$_i++):
+	if($_link=$this->getIterableItem()): 
+		$skuGBB = $_link->getSku();
+		if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+?>
+		<div class="quality-type-option">
+			<a href="<?php echo $_link->getProductUrl() ?>?sel=y"><div><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(59) ?>" height="59" width="59"/></div></a>
+			<span class="more-option-product-details">
+				<?php if(substr($skuGBB, -1)==="B"):?>Best <span class="help-icon" about="<?php echo strtolower($_stone_name.'AAA') ?>"></span>
+				<?php elseif(substr($skuGBB, -1)==="H"):?>Heirloom <span class="help-icon" about="<?php echo strtolower($_stone_name.'AAAA') ?>"></span>
+				<?php elseif(substr($skuGBB, -1)==="G"):?>Good <span class="help-icon" about="<?php echo strtolower($_stone_name.'A') ?>"></span>
+				<?php else:?>Better <span class="help-icon" about="<?php echo strtolower($_stone_name.'AA') ?>"></span>
+				<?php endif;?><br />$<?php echo round($_link->getFinalPrice(),2); ?></span>
+			</span>
+		</div>
+<?php endif;
+endfor;?>
+		<div style="clear:both"></div>
+	</div>
+<?php endif;?>
+<?php endif; ?>

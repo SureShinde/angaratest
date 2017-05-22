@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Mage_Digger>
+      <version>0.1.0</version>
+    </Mage_Digger>
+  </modules>
+  <global>
+    <helpers>
+      <digger>
+        <class>Mage_Digger_Helper</class>
+      </digger>
+    </helpers>
+  </global>
+</config> 

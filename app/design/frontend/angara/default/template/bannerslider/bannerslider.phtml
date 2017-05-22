@@ -1,0 +1,106 @@
+<?php
+	$bannerCollection = $this->getBannerCollection();
+	$i = 0;
+	$timeDelay = $this->getDelayTime();
+	$showdesc = $this->isShowDescription();
+	$listStyle = $this->getListStyle();
+	$imagewidth = $this->getImageWidth();
+	$imageheight = $this->getImageHeight() 
+?>
+<?php
+if(count($bannerCollection) > 1)
+{
+?>
+<style>
+/* new banner slider */
+#slideshowContainer {
+	width:960px;
+	position:relative;
+}
+.slideshow-new {
+	height: 355px;
+	overflow:hidden;
+}
+#nav-slide {
+	position: absolute;
+	right:20px;
+	bottom:20px;
+	z-index:4;
+	height:18px;
+}
+#nav-slide li {
+	float: left;
+	list-style: none outside none;
+	width:18px;
+	height:18px;
+	margin-right:10px;
+}
+#nav-slide a {
+	padding-left:18px;
+	height:18px;
+	overflow:hidden;
+	text-decoration: none;
+	background: url(/skin/frontend/angara/default/images/home-banner/inactive-slider.png) no-repeat;
+	display:block;
+ text-indent:
+}
+#nav-slide li.activeSlide a {
+	background: url(/skin/frontend/angara/default/images/home-banner/active-slider.png) no-repeat;
+	color: black;
+}
+#prev a, #next a, #next a:hover, #prev a:hover {
+	display:none;
+}
+
+/* end banner slider */
+</style>
+<!--start banner slider-->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/chili-1.7.pack.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.cycle.all.js'); ?>"></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery('.slideshow-new').cycle({
+        fx:      'fade',
+        pause: 	 1,
+		prev:    '#prev',
+        next:    '#next',
+        pager:   '#nav-slide',
+        pagerAnchorBuilder: pageSlideUpdater
+    });
+    function pageSlideUpdater(idx, slide) {
+        var s = idx > 2 ? ' style="display:none"' : '';
+        return '<li'+s+'><a href="javascript:;">'+(idx+1)+'</a></li>';
+    };
+});
+</script>
+<!--end banner slider-->
+<?php
+}
+?>
+<!-- start home slider -->
+<div id="slider-1" class="slide-container">
+  <div id="slideshowContainer">
+    <div class="slideshow-new pics">
+      <?php 
+			$i = 0; 
+			foreach ($bannerCollection as $banner): 
+			$i++; 
+			//echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+			?>
+      <span class="home-slider-block"> <img src="<?php  echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $banner['filename']?>" usemap="#main-banner-image<?php echo $i;?>" id="main-banner-image<?php echo $i;?>" width="960" height="355" /> <?php echo $banner['content']; ?> </span>
+      <?php endforeach; ?>
+    </div>
+    <?php
+        if(count($bannerCollection) > 1)
+		{
+		?>
+    <div> <span id="prev"><a href="javascript:;"></a></span> <span id="next"><a href="javascript:;"></a></span>
+      <ul id="nav-slide">
+      </ul>
+    </div>
+    <?php
+		}
+		?>
+  </div>
+</div>
+<!-- end home slider -->

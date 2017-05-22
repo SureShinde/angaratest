@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit. or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Mage
+ * @package    Mage_Core
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <global>
+		<!--<cache>
+            <backend>apc</backend>
+            <prefix>ANGARA_</prefix>
+        </cache>-->
+        <install>
+            <date><![CDATA[Thu, 24 Feb 2011 07:55:50 +0000]]></date>
+        </install>
+        <crypt>
+            <key><![CDATA[a04dd5b2f2b3c005b36825f1990d1bbe]]></key>
+        </crypt>
+        <disable_local_modules>false</disable_local_modules>
+        <resources>
+            <db>
+                <table_prefix><![CDATA[]]></table_prefix>
+            </db>
+            <default_setup>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[angara_01]]></username>
+                    <password><![CDATA[ADF3WEFUIdsf#Fg!Dg463]]></password>
+                    <dbname><![CDATA[angara_01]]></dbname>
+                    <active>1</active>
+                </connection>
+            </default_setup>
+        </resources>
+<!--redis start-->
+        <session_save>db</session_save>
+        <redis_session>                       <!-- All options seen here are the defaults -->
+            <host>angararedis-001.lyqciz.0001.usw2.cache.amazonaws.com</host>            <!-- Specify an absolute path if using a unix socket -->
+            <port>6379</port>
+            <password></password>             <!-- Specify if your Redis server requires authentication -->
+            <timeout>2.5</timeout>            <!-- This is the Redis connection timeout, not the locking timeout -->
+            <persistent></persistent>         <!-- Specify unique string to enable persistent connections. E.g.: sess-db0; bugs with phpredis and php-fpm are known: https://github.com/nicolasff/phpredis/issues/70 -->
+            <db>0</db>                        <!-- Redis database number; protection from accidental loss is improved by using a unique DB number for sessions -->
+            <compression_threshold>2048</compression_threshold>  <!-- Set to 0 to disable compression (recommended when suhosin.session.encrypt=on); known bug with strings over 64k: https://github.com/colinmollenhour/Cm_Cache_Backend_Redis/issues/18 -->
+            <compression_lib>gzip</compression_lib>              <!-- gzip, lzf, lz4 or snappy -->
+            <log_level>1</log_level>               <!-- 0 (emergency: system is unusable), 4 (warning; additional information, recommended), 5 (notice: normal but significant condition), 6 (info: informational messages), 7 (debug: the most information for development/testing) -->
+            <max_concurrency>6</max_concurrency>                 <!-- maximum number of processes that can wait for a lock on one session; for large production clusters, set this to at least 10% of the number of PHP processes -->
+            <break_after_frontend>5</break_after_frontend>       <!-- seconds to wait for a session lock in the frontend; not as critical as admin -->
+            <fail_after>10</fail_after>                          <!-- seconds after which we bail from attempting to obtain lock (in addition to break after time) -->
+            <break_after_adminhtml>30</break_after_adminhtml>
+            <first_lifetime>600</first_lifetime>                 <!-- Lifetime of session for non-bots on the first write. 0 to disable -->
+            <bot_first_lifetime>60</bot_first_lifetime>          <!-- Lifetime of session for bots on the first write. 0 to disable -->
+            <bot_lifetime>7200</bot_lifetime>                    <!-- Lifetime of session for bots on subsequent writes. 0 to disable -->
+            <disable_locking>0</disable_locking>                 <!-- Disable session locking entirely. -->
+            <min_lifetime>60</min_lifetime>                      <!-- Set the minimum session lifetime -->
+            <max_lifetime>2592000</max_lifetime>                 <!-- Set the maximum session lifetime -->
+        </redis_session>
+<!--redis end-->
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <frontName><![CDATA[admin]]></frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+	<cache>
+		<fast_backend>Memcached</fast_backend>
+		<fast_backend_options>
+			<servers>
+				<server>
+					<host><![CDATA[127.0.0.1]]></host>
+					<port>11211</port>
+					<persistent>1</persistent>
+				</server>
+			</servers>
+		</fast_backend_options>
+		  
+        <backend>Memcached</backend>
+        <memcached>
+            <servers>
+                <server>
+                    <host><![CDATA[127.0.0.1]]></host>
+                    <port><![CDATA[11211]]></port>
+                    <persistent><![CDATA[1]]></persistent>
+                </server>
+            </servers>
+            <compression><![CDATA[0]]></compression>
+            <cache_dir><![CDATA[]]></cache_dir>
+            <hashed_directory_level><![CDATA[]]></hashed_directory_level>
+            <hashed_directory_umask><![CDATA[]]></hashed_directory_umask>
+            <file_name_prefix><![CDATA[]]></file_name_prefix>
+        </memcached>
+    </cache>
+	
+	
+	
+</config>

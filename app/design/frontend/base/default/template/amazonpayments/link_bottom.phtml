@@ -1,0 +1,22 @@
+<?php
+/**
+ * @see Mage_AmazonPayments_Block_Link
+ */
+?>
+
+<!-- - Load the Checkout Url in the pop-up window itself -->
+<!-- - Load the CBA Standard Widget using functions in shortcut.php -->
+<!-- - Do not load the checkout button if there are no items in the cart -->
+<?php if (Mage::getSingleton('checkout/session')->getQuote()->hasItems()):  ?>
+<?php
+    if(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE){
+	?>
+
+<a onclick="pushOPGA();">
+<?php } else{?>
+<a href="<?php echo $this->getCheckoutUrl();?>" onclick="pushOPGA();">
+<?php } ?>
+<?php echo $this->getButtonHtml("cbaButton2");?>
+<?php /*<img id="CBAWidgets0" src="/skin/frontend/angara/default/images/amazon-checkout.png" width="126" height="24" style="cursor: pointer;"> */?>
+</a>
+<?php endif; ?>

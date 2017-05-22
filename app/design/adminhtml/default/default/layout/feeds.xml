@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <feeds_adminhtml_feeds_index>
+        <reference name="content">
+            <block type="feeds/adminhtml_feeds" name="feeds" />
+        </reference>
+    </feeds_adminhtml_feeds_index>
+</layout>

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+		<checkout>
+			<groups>
+				<internationalcheckout translate="label" module="checkout">
+					<label>International Checkout</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>13</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<ic_server translate="label">
+							<label>Live/Sandbox Testing</label>							
+							<frontend_type>select</frontend_type>
+							<source_model>Ic_InternationalCheckout_Model_Servers</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>							
+							<comment>
+								<![CDATA[
+									<span>Please select &quot;Sandbox&quot; and use &quot;test&quot; for the P Value if you need to test your add-on. If you choose &quot;Live&quot;, please be sure to use the correct P value which has been issued to you.</span>
+								]]>
+							</comment>
+						</ic_server>
+						<name_of_company translate="label">
+							<label>P Value</label>							
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+							<comment>
+								<![CDATA[
+									<span>Please contact us using the form on our website to obtain the P Value required for successful integration.<br/><a href="http://www.internationalcheckoutsolutions.com/contact-us.html" target="_newtab">http://www.internationalcheckoutsolutions.com/contact-us.html</a></span>
+								]]>
+							</comment>
+						</name_of_company>
+						<image_width translate="label">
+							<label>Item Image Width</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>validate-number</validate>
+							<comment>
+								<![CDATA[
+									<span>Example: 75</span>
+								]]>
+							</comment>
+						</image_width>
+						<image_height translate="label">
+							<label>Item Image Height</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>validate-number</validate>
+							<comment>
+								<![CDATA[
+									<span>Example: 75</span>
+								]]>
+							</comment>
+						</image_height>
+						<discount translate="label">
+							<label>Discount</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>
+								<![CDATA[
+									<span>Example: 10 or 15%</span>
+								]]>
+							</comment>
+						</discount>
+						<shipping_method translate="label">
+							<label>Shipping Method</label>
+							<frontend_type>select</frontend_type>
+							<source_model>Ic_InternationalCheckout_Model_Shippingmethods</source_model>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<validate>validate-select</validate>
+						</shipping_method>
+						<ic_button_image>
+							<label>IC Button Image</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>adminhtml/system_config_backend_image</backend_model>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<upload_dir config="system/filesystem/media" scope_info="1">Ic/images</upload_dir>
+							<base_url type="media" scope_info="1">Ic/images</base_url>
+						</ic_button_image>
+						<ic_button_width>
+							<label>IC Button Width</label>
+							<frontend_type>text</frontend_type>							
+							<sort_order>9</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</ic_button_width>
+						<ic_button_height>
+							<label>IC Button Height</label>
+							<frontend_type>text</frontend_type>							
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>							
+						</ic_button_height>
+					</fields>
+				</internationalcheckout>
+			</groups>
+		</checkout>
+	</sections>	
+</config>

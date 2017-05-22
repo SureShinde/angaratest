@@ -1,0 +1,137 @@
+<?php
+$email=$this->getRequest()->getParam('email');
+$cid=$this->getRequest()->getParam('cid');
+
+$a=$_SERVER['QUERY_STRING'];
+$a=str_replace("amp;","",$a);
+$b=explode('&',$a);
+foreach($b as $i)
+{
+    $e=explode('=',$i);
+    if($e[0]=='email')
+        $email= $e[1];
+    else if($e[0]=='cid')
+        $cid= $e[1];
+}
+?>
+<style>
+.thanx-gift input[type="text"], .thanx-gift input[type="submit"], .thanx-gift select {height:40px;border: 1px solid #ccc;margin-top:35px;border-radius: 3px;box-shadow: none;}
+.thnx-header {border-bottom:1px solid #fa505a;}
+.thnx-header .logo-box {top:0px;padding-left:15px;}
+.thanx-gift input[type="submit"] {font-size:16px;max-width:300px;margin:30px auto;display:block;}
+.thanx-gift .step-container {border: 1px solid #e6e6e6;}
+.thanx-gift .form-heading {padding:10px;font-size:18px;font-weight: 500;background: #f0f0f0;border-bottom: 1px solid #e6e6e6;}
+.state select {width:100%;}
+.px28 {font-size:28px;}
+@media (max-width:1024px) {
+.thnx-header .logo-box {margin-left:0px;}
+.thanx-gift .img-box img {max-width:220px !important;}
+}
+@media (max-width:768px) {
+.thanx-gift .img-box img {max-width:100% !important;}
+.thnx-header .logo-box {bottom:5px;top: initial;}
+}
+</style>
+<div class="full-width max-padding-bottom max-margin-top thnx-header relative-placeholder">
+	<div class="pull-left logo-box absolute-placeholder">
+		<a href="<?php echo $this->getUrl('');?>" title="Angara Jewelry" class="logo">
+			<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/logo.png" class="original-logo img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+		</a>
+	</div>
+	<div class="px28 text-center text-bold high-padding-top">A Gift of Gratitude</div>
+</div>
+<div class="clearfix"></div>
+<div class="text-center max-padding-bottom high-margin-top high-margin-bottom max-padding-top" style="width:75%;padding-left:16px;padding-right:16px;">It’s the season of giving thanks! We’d like to express our gratitude for joining our mailing list by giving you a Garnet Solitaire Pendant with sterling silver chain. Fill in your shipping details and we’ll dispatch the gift at the earliest.</div>
+<div class="clearfix"></div>
+<div class="thanx-gift container" style="display:table;">
+    <div class="col-sm-9 no-padding step-container" style="display:table-cell;vertical-align:top;float: none;">
+        <form id="thnx_gift_form" method="post" name="email_free" action="newsletter/subscriber/shippingdetailUpdate">
+            <div class="form-heading">Shipping</div>
+            <div class="col-sm-12 pull-left max-padding-bottom">
+                <div class="col-sm-6">
+                    <input type="text" id="firstname" name="firstname" value="" title="First Name" placeholder="First Name" class="input-text t1 required-entry">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" id="lastname" name="lastname" value="" title="Last Name" placeholder="Last Name" class="input-text t1 required-entry">
+                </div>
+                <input type="hidden" name="email" value="<?php echo $email;?>">
+                <input type="hidden" name="cid" value="<?php echo $cid;?>">
+                <div class="clearfix"></div>
+                <div class="col-sm-6">
+                    <input type="text" id="street" name="street" value="" title="street" placeholder="Street Address" class="input-text t1 required-entry">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" id="apartment" name="apartment" value="" title="apartment" placeholder="Apartment, Suite, Floor (optional)" class="input-text t1">
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-6">
+                    <input type="text" id="city" name="city" value="" title="city" placeholder="City" class="input-text t1 required-entry">
+                </div>
+                <div class="col-sm-6 state">
+                <?php $obj2=new IWD_OnepageCheckout_Block_Onepage_Billship();?>
+                    <label class="ielabel hidden"> <?php echo $this->__('State') ?> </label>
+                        <select id="shipping:region_id" class="shipping_state" name="billing[region_id]" title="<?php echo $this->__('State / Province') ?>" class="input-text validate-select required-entry" style="display:none;">
+                            <option value=""><?php echo $this->__('State') ?></option>
+                        </select>
+                        <input type="text" id="shipping:region" name="billing[region]"   title="<?php echo $obj2->__('State / Province') ?>" class="input-text t1 required-entry" style="display:none;" placeholder="State"/>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-6">
+                    <?php echo $obj2->getShippingCountriesSelectBox() ?>
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" id="zi" name="zi" value="" placeholder="Zip Code" class="input-text t1 required-entry">
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-6 max-margin-bottom">
+                    <input type="text" id="phone" name="phone" value="" placeholder="Phone" class="input-text t1 required-entry">
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-12 no-padding">
+                    <input type="submit" value="Submit" class="btn col-sm-12" onclick="submitThanksGivingGiftClicked();">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3 no-padding" style="display:table-cell;vertical-align: middle;float: none;">
+		<div class="pro-details">
+			<div class="full-width img-box">
+				<img class="img-responsive bdr-typ-2" style="max-width:250px;margin:0 auto;" alt="Pear Ruby Teardrop Pendant Necklace with Diamond" title="Pear Ruby Teardrop Pendant Necklace with Diamond" src="skin/frontend/ress/default/images/thanksgiving-product.jpg">
+			</div>
+			<div class="full-width img-title text-center">
+				<div class="text-bold" style="font-size:18px;">Garnet Solitaire Pendant</div>
+				<div>(With Chain)</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+ var productxyzForm = new VarienForm('thnx_gift_form');
+ $('firstname').observe('blur', function(e){
+    Validation.validate($('firstname'))
+   });
+ $('lastname').observe('blur', function(e){
+    Validation.validate($('lastname'))
+   });
+ $('zi').observe('blur', function(e){
+    Validation.validate($('zi'))
+   });
+ $('street').observe('blur', function(e){
+    Validation.validate($('street'))
+   });
+ $('city').observe('blur', function(e){
+    Validation.validate($('city'))
+   });
+ $('phone').observe('blur', function(e){
+    Validation.validate($('phone'))
+   });
+ $('shipping:region').observe('blur', function(e){
+    Validation.validate($('shipping:region'))
+   });
+ $('shipping:region_id').observe('change', function(e){
+    Validation.validate($('shipping:region_id'))
+   });
+
+ countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?>;
+ var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', countryRegions, undefined, 'shipping:postcode');
+</script>

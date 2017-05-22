@@ -1,0 +1,45 @@
+<style>
+.cat-banner-link {
+	height:75px;
+	width:960px;
+	display:block;
+}
+</style>
+<?php
+$bannerCollection = $this->getBannerCatalogCollection();
+$i = 0;
+$timeDelay = $this->getDelayTime();
+$showdesc = $this->isShowDescription();
+$listStyle = $this->getListStyle();
+$imagewidth = $this->getImageWidth();
+$imageheight = $this->getImageHeight(); 
+
+$bannerCollection 	= $this->getLayout()->createBlock('bannerslider/bannerslider')->getBannerCatalogCollection();
+
+/*$bannerTitle		=	$bannerCollection[0]['title'];
+//echo '<br>bannerTitle->'.$bannerTitle; 
+//	Modified by Vaseem for 1680 Bug
+if(count($bannerCollection) > 0 && $bannerTitle!='catalog'){  */
+
+if(count($bannerCollection) > 0){ ?>   
+    <div id="catpagestaticbanner">	
+        <div style="width:960px; display:block; position:relative; cursor:default; height:110px;" class="promotions">
+		<?php 
+		$i = 0; 
+		foreach ($bannerCollection as $banner): 
+			$i++; 
+			echo $banner['content'];?>
+            <?php /*?><a href="<?php echo $banner['weblink'];?>" class="cat-banner-link"><?php 
+			echo Mage::getBaseUrl().'media/'
+			*/?>
+                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$banner['filename']?>" id="catalog-banner-image" width="960" height="110"/>	
+            <?php /*?></a><?php */?>       
+        <?php 
+		break; 
+		endforeach; ?>                
+        </div>
+    </div>
+<?php 
+} ?>
+<div id="mbpd" ></div>
+

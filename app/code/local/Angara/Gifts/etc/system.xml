@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+ * @category   Angara
+ * @package    Angara_Gifts
+ * @copyright  Copyright (c) 2014 Angara ecommerce. (http://www.angara.com)
+ * @license    http://angara.com/LICENSE-COMMUNITY.txt
+ */
+-->
+
+<config>
+	<sections>
+		<gifts translate="label">
+			<label>Gifts</label>
+			<tab>angara</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1111</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+					<label>Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<!--<comment>        
+						<![CDATA[
+							<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+							This module was developed by <a href="http://www.angara.com" target="_blank">www.angara.com</a>.
+							<br/>
+							</div>
+						]]>
+					</comment>-->
+					<fields>
+						<enabled translate="label comment">
+							<label>Enabled</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enabled>		  
+					</fields>
+				</settings>
+			</groups>
+		</gifts>
+	</sections>
+</config>

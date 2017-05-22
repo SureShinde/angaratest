@@ -1,0 +1,3146 @@
+*, body {
+	padding:0;
+	margin:0;
+}
+.clear {
+	clear: both;
+}
+#pp-wrapper {
+	position:relative;
+	padding-top:12px;
+}
+/* S: Breadcrumb */
+.breadcrumb-wrapper {
+	position:relative;
+	width:100%;
+	padding-top:3px;
+}
+#breadcrumb {
+	width:960px;
+	margin:2px 0 2px 5px;
+}
+#breadcrumb a {
+	text-decoration:none;
+	color: #7F7E7E;
+    font: 11px droid_sansregular,Arial,Helvetica,sans-seri;
+}
+#breadcrumb a:hover {
+	text-decoration:underline;
+}
+
+#breadcrumb a span {
+	font:11px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#7f7e7e;
+}
+#breadcrumb a span:hover {
+	text-decoration:underline;
+}
+#breadcrumb span.divider-breadcrumb {
+	padding:0 3px;
+}
+#breadcrumb .last-item {
+	font:11px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#521f35;
+}
+/* E: Breadcrumb */
+#pro-title-block {
+	padding:20px 13px 60px 13px;
+	position:relative;
+}
+.product_simple #pro-title-block {
+	padding: 10px 13px 20px 13px;
+	position: relative;
+}
+.pro-name {
+	overflow:hidden;
+}
+.pro-name h1 {
+	font:18px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-transform:uppercase;
+	color:#000;
+}
+.pro-name .pro-rating {
+	padding-top:2px;
+}
+.pro-rating {
+	float:left;
+	margin-top:2px;
+	margin-bottom:3px;
+}
+.pro-description {
+	color:#6e6e6e;
+	font:13px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-top:10px;
+}
+.pp-mid-block, .pp-bottom-block {
+	padding:0 15px;
+	width:930px;
+	margin:0 auto;
+}
+/* S: Customization Tabs Block */
+.customization-tabs-block {
+	margin-top:15px;
+	position:relative;
+	padding-top:28px;
+	z-index:1;
+}
+.customization-tabs-block ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+	height:28px;
+	position:absolute;
+	top:1px;
+}
+.customization-tabs-block ul li {
+	-moz-box-shadow:4px 1px 1px -2px #cfcfcf;
+	-webkit-box-shadow:4px 1px 1px -2px #cfcfcf;
+	box-shadow:4px 1px 1px -2px #cfcfcf;
+	float:left;
+	height:28px;
+	margin-right:6px;
+	cursor:pointer;
+}
+.customization-tabs-block ul li span {
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	display:block;
+	border:1px solid #d4d4d4;
+	background:url(../images/pp-icons.png) 0px -210px repeat-x;
+	font:11px/26px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-transform:uppercase;
+	text-decoration:none;
+	padding:0 9px;
+	color:#5c5c5c;
+	height:26px;
+}
+.customization-tabs-block ul li span:hover {
+	background:none #fff;
+	border:1px solid #d4d4d4;
+	border-bottom:1px solid #fff;
+	color:#de513e;
+}
+.customization-tabs-block ul li.active span {
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	background:none #fff;
+	font:11px/26px droid_sansregular, Arial, Helvetica, sans-seri;
+	border:1px solid #d4d4d4;
+	border-bottom:1px solid #fff;
+	text-transform:uppercase;
+	height:26px;
+	display:block;
+	padding:0 10px;
+	color:#de513e;
+}
+/* E: Customization Tabs Block */
+/* S: Social Media */
+.social-icons {
+	clear:both;
+	padding-top:30px;
+	height:17px;
+}
+.social-icons ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.social-icons ul li {
+	width:18px;
+	height:17px;
+	float:left;
+	margin-left:3px;
+	cursor:pointer;
+}
+.social-icons ul li.fb {
+	background:url(../images/pp-icons.png) 0px -61px no-repeat;
+}
+.social-icons ul li.fb:hover {
+	background:url(../images/pp-icons.png) -22px -61px no-repeat;
+}
+.social-icons ul li.tw {
+	background:url(../images/pp-icons.png) 0px -79px no-repeat;
+}
+.social-icons ul li.tw:hover {
+	background:url(../images/pp-icons.png) -22px -79px no-repeat;
+}
+.social-icons ul li.pin {
+	background:url(../images/pp-icons.png) 0px -97px no-repeat;
+}
+.social-icons ul li.pin:hover {
+	background:url(../images/pp-icons.png) -22px -97px no-repeat;
+}
+.social-icons ul li.in {
+	background:url(../images/pp-icons.png) 0px -115px no-repeat;
+}
+.social-icons ul li.in:hover {
+	background:url(../images/pp-icons.png) -22px -115px no-repeat;
+}
+.social-icons ul li.gplus {
+	background:url(../images/pp-icons.png) 0px -133px no-repeat;
+}
+.social-icons ul li.gplus:hover {
+	background:url(../images/pp-icons.png) -22px -133px no-repeat;
+}
+.social-icons ul li a {
+	width:18px;
+	height:17px;
+	display:block;
+}
+/* E: Social Media */
+#pp-social-share-container {
+	background: #f6f6f6;
+	height: 42px;
+	display: none
+}
+.customization-tabs {
+}
+.pp-mid-right-block {
+	width:47.9166%;
+	float:right;
+	position:relative;
+}
+.pp-mid-left-block {
+	width:50.5208%;
+	float:left;
+	background-color:#fff;
+}
+.product-view-section {
+/*padding: 0 0 0 3.3167%;*/
+}
+.product-image {
+	float:right;
+	width:400px;
+	text-align:center;
+}
+.big-img {
+	width:350px;
+	margin:0 auto;
+}
+.customize-option-title {
+	height: 36px;
+	background-color: #f8f8f8;
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
+	font: 16px/36px dinbek_boldregular, Arial, Helvetica, sans-seri;
+	padding-left: 3.3167%;
+	color: #616161;
+	text-transform: uppercase;
+	margin: 0 0 19px -19px;
+}
+#moreviews {
+	width: 67px;
+	height: 292px;
+	overflow: hidden;
+	position: relative;
+}
+#moreviews ul {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: absolute
+}
+#moreviews li {
+	padding: 3px 0;
+}
+#moreviews li .thumbs {
+	width: 63px;
+	height: 63px;
+	border: solid 1px #fff;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	padding: 1px;
+}
+#moreviews li .thumbs img, #moreviews li.active img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+#moreviews li .thumbs:hover, #moreviews li.active .thumbs {
+	width:63px;
+	height:63px;
+	border:solid 1px #f4612e;
+	padding:1px;
+	cursor:pointer;
+	display:block;
+	text-align:center;
+}
+/* user customization block */
+.option-list-container {
+	margin:0;
+	padding:8px;
+	min-height:110px;
+}
+.option-details-text {
+	font:11px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding:0 12px 8px 12px;
+	color:#5C5C5C;
+}
+.option-list-container .option-container {
+	float: left;
+	position: relative;
+	list-style:none;
+	width:81px;
+	height:86px;
+	border:solid 1px #fff;
+	margin:12px;
+}
+.option-list-container .option-container .user-option-image {
+	width:81px;
+	height:81px;
+	display:block;
+	text-align:center;
+	line-height:81px;
+}
+.option-list-container .option-container .user-option-title {
+	width:81px;
+	font:11px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-align:center;
+	position:absolute;
+	z-index:1;
+	bottom:0px;
+	left:0;
+}
+.option-list-container .option-container.default-user-option {
+	width:81px;
+	height:86px;
+	border:solid 1px #DE513E;
+	padding:0;
+	cursor:pointer;
+	display:block;
+	color:#e88578;
+}
+.option-list-container .option-container.default-user-option .user-option-title {
+	width:81px;
+	text-align:center;
+	font:11px droid_sansregular, Arial, Helvetica, sans-seri;
+	position:absolute;
+	z-index:1;
+	left:0;
+	bottom:0px;
+	color:#DE513E;
+}
+.option-list-container .option-container:hover {
+	width:81px;
+	height:86px;
+	border:solid 1px #DE513E;
+	padding:0;
+	cursor:pointer;
+	display:block;
+	color:#e88578;
+}
+.option-list-container .option-container:hover .user-option-title {
+	color: #5C5C5C;
+}
+.option-list-container .option-container.last-user-option {
+	margin-right: 0px;
+}
+.imgsize {
+	max-width:81px;
+	max-height:81px;
+	vertical-align:middle;
+}
+.addon-option {
+	background: url(../images/pp-icons.png) 0px -455px no-repeat;
+	font:10px droid_sansregular, Arial, Helvetica, sans-serif;
+	padding-left: 15px;
+	vertical-align:top;
+	color: #939292;
+	float: left;
+	text-transform:capitalize;
+	margin:10px 0 17px 0;
+	cursor: pointer;
+}
+.addon-option:hover, .addon-option.active {
+	background-position: 0px -439px;
+}
+.option-list-container .help-info {
+	margin:10px 0 0 7px;
+	float: none;
+	display: inline-block;
+}
+/*****************************jquery image sub-menu start*************/
+.sbHolder {
+	background-color: #fff;
+	height: 21px;
+	position: relative;
+	width:140px;
+	border:solid 1px #c1c1c1;
+	font:10px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-transform:uppercase;
+	float:left;
+}
+.sbHolder option {
+	padding: 2px 0 2px 3px;
+	font-size: 10px;
+	font-weight: normal;
+}
+.sbSelector {
+	display: block;
+	height:22px;
+	left: 0;
+	line-height:22px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 120px;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover {
+	color: #885e6f;
+	outline: none;
+	text-decoration: none;
+}
+.spacing {
+	border:1px solid #d4d4d4;
+	-moz-box-shadow:4px 5px 1px -2px #cfcfcf;
+	-webkit-box-shadow:4px 5px 1px -2px #cfcfcf;
+	box-shadow:4px 5px 1px -2px #cfcfcf;
+	position:relative;
+}
+.spacing .last {
+	position:absolute;
+	bottom:-118px;
+}
+.required-entry-show-msg
+{
+	width:140px;
+	display:none;
+	color:red;
+	position:absolute;
+	bottom:-135px;
+	font-size:11px;
+	color:#EB340A;
+}
+.ring-sizer-block {
+	float:left;
+}
+/* S: Price Section */
+.price-easypay-block {
+	margin-top:23px;
+}
+.all-price-block {
+	float:left;
+}
+.angara-price-block {
+	margin-bottom:6px;
+}
+.angara-price-block .price-title {
+	color:#000;
+	float:left;
+	font:18px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-right:3px;
+	text-transform:uppercase;
+}
+.angara-price-block .price-block {
+	color:#de513e;
+	float:left;
+	font:bold 18px droid_sansregular, Arial, Helvetica, sans-seri;
+}
+.retail-price-block {
+	margin-bottom:6px;
+}
+.retail-price-block .price-title {
+	color:#626262;
+	float:left;
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-right:3px;
+}
+.retail-price-block .price-block {
+	color:#626262;
+	float:left;
+	font:13px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-decoration:line-through;
+}
+/* E: Price Section */
+.ring-size-guide {
+	float:left;
+	padding:2px 0 0 5px;
+}
+.ring-size-guide a {
+	color:#434343;
+	font:10px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-decoration:underline;
+	text-transform:uppercase;
+}
+.product-details {
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+	color: #585757;
+}
+.ringsizer {
+	float:left;
+}
+.ringsizer a {
+	color:#434343;
+	font:10px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-decoration:underline;
+	text-transform:uppercase;
+}
+/* S: Easy Pay Block */
+.easy-pay-block {
+	float:right;
+}
+.easy-pay-title-block {
+	margin-bottom:6px;
+}
+.easy-pay-title {
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#2a2a2a;
+	text-transform:uppercase;
+	float:left;
+}
+.or {
+	color:#2f2f2f;
+	font:16px droid_sansregular, Arial, Helvetica, sans-seri;
+	float:right;
+	padding:15px 65px 15px 0;
+}
+.easy-pay-installment .sbHolder {
+	background-color: #fff;
+	height: 21px;
+	position: relative;
+	width:100%;
+	border:solid 1px #c1c1c1;
+	font:10px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-transform:uppercase;
+	float:left;
+}
+.easy-pay-installment .sbSelector {
+	display: block;
+	height:22px;
+	left: 0;
+	line-height:22px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width:155px;
+}
+.easy-pay-installment .sbOptions {
+	background-color: #fff;
+	border: solid 1px #c1c1c1;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 26px;
+	width:100%;
+	z-index: 1;
+	overflow-y: auto;
+}
+/* E: Easy Pay Block */
+.ringsize-addtocart-block {
+	margin-top:18px;
+	margin-bottom:12px;
+}
+.add-to-cart {
+	height:34px;
+	font:18px/34px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-align:center;
+	color:#fff;
+	background-color:#de513e;
+	cursor:pointer;
+	padding:0 38px;
+	float:right;
+	border:none;
+	-webkit-appearance: none;
+}
+.prodetails {
+	margin: 24px 0 20px 0;
+}
+.estimated-ship-date {
+	margin-top:10px;
+}
+.estimated-title {
+	font: 12px droid_sansregular, Arial, Helvetica, sans-seri;
+	float: right;
+	color:#626262;
+}
+.estimated-ship-date .ship-date {
+	color: #DE513E;
+	font: 12px droid_sansregular, Arial, Helvetica, sans-seri;
+	display: inline-block;
+	padding-left: 3px;
+	text-transform: none;
+}
+.estimated-ship-date .help-info {
+	float:right;
+	margin-left:5px;
+}
+.prodetails .detailrow {
+	background: url(../images/pp-icons.png) 0px -360px repeat-x;
+	height: 22px;
+	color: #585757;
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+}
+.prodetails .detailrow span.detail-title {
+	float: left;
+	display: inline-block;
+	background-color: #fbfbfb;
+	padding-right: 5px;
+}
+.prodetails .detailrow span.detail-value {
+	float: right;
+	color: #de513e;
+	display: inline-block;
+	background-color: #fbfbfb;
+	padding-left: 5px;
+}
+.detailrow-addon {
+	color: #585757;
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+	margin-bottom: 40px;
+	line-height: 22px;
+}
+.selected-addon {
+	color: #de513e;
+	font-size: 12px;
+	float: left;
+}
+.addon-seperator {
+	padding: 0 5px;
+	color: #de513e;
+	font-size: 12px;
+	float: left;
+}
+/* S: Product Bottom Page*/
+#product-info-tabs {
+	margin:20px 0 25px;
+	height:28px;
+	border-bottom:2px solid #e2e2e2;
+	position:relative;
+}
+#product-info-tabs ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+	position:absolute;
+	bottom:-2px;
+	left:0;
+}
+#product-info-tabs ul li {
+	float:left;
+	color:#524c4a;
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	cursor: pointer
+}
+#product-info-tabs ul li span {
+	color:#524c4a;
+	display:inline-block;
+	text-decoration:none;
+	padding:0 16px;
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-bottom:4px;
+	border-bottom:2px solid #e2e2e2;
+}
+#product-info-tabs ul li span:hover {
+	color:#f06a34;
+	border-bottom:2px solid #f06a34;
+}
+#product-info-tabs ul li.active span {
+	color:#f06a34;
+	border-bottom:2px solid #f06a34;
+}
+.product-tab-content {
+	display: none
+}
+#details-heading-top {
+	float:left;
+	width:204px;
+}
+.detail-box-title {
+	color: #000;
+	font:13px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-bottom: 5px;
+}
+#details-heading-top .field, .stone-detail-box .field, .stone-detail-box-odd .field {
+	border-bottom:1px dotted #d3d3d3;
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	color: #828282;
+}
+#details-heading-top .fieldtitle {
+	float:left;
+	padding:3px 0;
+}
+.stones-details-box {
+	float:right;
+	width:720px;
+}
+.stone-detail-box {
+	float:right;
+	margin-bottom:20px;
+	padding-bottom:3px;
+}
+.stone-detail-box-odd {
+	float:left;
+	margin-bottom:20px;
+	padding-bottom:3px;
+	padding:0 22px 3px 22px;
+}
+.stone-detail-box .fieldtitle, .stone-detail-box-odd .fieldtitle {
+	width:233px;
+	float:left;
+	padding:3px 0;
+}
+.stone-detail-box .fieldvalue, .stone-detail-box-odd .fieldvalue, #details-heading-top .fieldvalue {
+	width:88px;
+	float:right;
+	text-align:right;
+	padding:3px 0;
+	color:#3d3d3d;
+}
+.certificate_txt_link {
+	margin-bottom:15px;
+}
+.certificate_txt_link a {
+	color:#e45b24;
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-right:27px;
+	background:url(../images/pp-icons.png) 171px -179px no-repeat;
+	text-decoration: underline;
+}
+.product-description {
+	font:16px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#000;
+	padding-bottom:14px;
+	text-transform:uppercase;
+}
+.writeareviewlink {
+	float:right;
+	color:#DE513E;
+	font:10px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-decoration:underline;
+	text-transform:uppercase;
+	cursor:pointer;
+}
+.writeareviewlink span {
+	font:17px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#DE513E;
+}
+.add-wishlist {
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	overflow:hidden;
+}
+.add-wishlist a {
+	color:#626262;
+	float:right;
+	text-decoration:none;
+}
+.add-wishlist a:hover {
+	text-decoration:underline;
+}
+.recentlyview-title {
+	font:18px droid_sansregular, Arial, Helvetica, sans-seri;
+	color:#000;
+	height:30px;
+	border-bottom:2px solid #e2e2e2;
+	margin:6px 0;
+}
+.popup-icon {
+	background:url(../images/pp-icons.png) -1px -166px no-repeat;
+	display:inline-block;
+	width:11px;
+	height:11px;
+	cursor:pointer;
+	margin-left:3px;
+	vertical-align:middle;
+}
+/* E: Product Bottom Page*/
+/*S: Quality Images*/
+.stone-Round-BlueSapphire .user-option-stone-image {
+	background: url(../images/round-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Round-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Round-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Round-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Oval-BlueSapphire .user-option-stone-image {
+	background: url(../images/oval-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Oval-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Oval-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Oval-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-BlueSapphire .user-option-stone-image {
+	background: url(../images/emerald-cut-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Trillion-BlueSapphire .user-option-stone-image {
+	background: url(../images/trillion-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Trillion-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Trillion-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Trillion-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Cushion-BlueSapphire .user-option-stone-image {
+	background: url(../images/cushion-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Cushion-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Cushion-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Cushion-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Marquise-BlueSapphire .user-option-stone-image {
+	background: url(../images/marquise-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Marquise-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Marquise-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Marquise-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Marquise-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Square-BlueSapphire .user-option-stone-image {
+	background: url(../images/square-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Square-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Square-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Square-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Heart-BlueSapphire .user-option-stone-image {
+	background: url(../images/heart-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Heart-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Heart-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Heart-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Pear-BlueSapphire .user-option-stone-image {
+	background: url(../images/pear-sapphire-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-BlueSapphire .A-stone-BlueSapphire {
+	background-position: 0px 0;
+}
+.stone-Pear-BlueSapphire .AA-stone-BlueSapphire {
+	background-position: -84px 0;
+}
+.stone-Pear-BlueSapphire .AAA-stone-BlueSapphire {
+	background-position: -166px 0;
+}
+.stone-Pear-BlueSapphire .AAAA-stone-BlueSapphire {
+	background-position: -249px 0;
+}
+.stone-Round-Ruby .user-option-stone-image {
+	background: url(../images/round-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Round-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Round-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Round-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Oval-Ruby .user-option-stone-image {
+	background: url(../images/oval-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Oval-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Oval-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Oval-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Ruby .user-option-stone-image {
+	background: url(../images/emerald-cut-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Trillion-Ruby .user-option-stone-image {
+	background: url(../images/trillion-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Trillion-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Trillion-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Trillion-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Cushion-Ruby .user-option-stone-image {
+	background: url(../images/cushion-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Cushion-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Cushion-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Cushion-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Marquise-Ruby .user-option-stone-image {
+	background: url(../images/marquise-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Marquise-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Marquise-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Marquise-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Marquise-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Square-Ruby .user-option-stone-image {
+	background: url(../images/square-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Square-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Square-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Square-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Heart-Ruby .user-option-stone-image {
+	background: url(../images/heart-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Heart-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Heart-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Heart-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Pear-Ruby .user-option-stone-image {
+	background: url(../images/pear-ruby-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Ruby .A-stone-Ruby {
+	background-position: 0px 0;
+}
+.stone-Pear-Ruby .AA-stone-Ruby {
+	background-position: -84px 0;
+}
+.stone-Pear-Ruby .AAA-stone-Ruby {
+	background-position: -166px 0;
+}
+.stone-Pear-Ruby .AAAA-stone-Ruby {
+	background-position: -249px 0;
+}
+.stone-Pear-Diamond .user-option-stone-image {
+	background: url(../images/pear-diamond-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Diamond .I2-stone-Diamond {
+	background-position: 0px 0;
+}
+.stone-Pear-Diamond .I1-stone-Diamond {
+	background-position: -84px 0;
+}
+.stone-Pear-Diamond .SI2-stone-Diamond {
+	background-position: -166px 0;
+}
+.stone-Pear-Diamond .VS-stone-Diamond {
+	background-position: -249px 0;
+}
+.stone-Round-Emerald .user-option-stone-image {
+	background: url(../images/round-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Round-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Round-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Round-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Oval-Emerald .user-option-stone-image {
+	background: url(../images/oval-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Oval-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Oval-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Oval-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Emerald .user-option-stone-image {
+	background: url(../images/emerald-cut-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Trillion-Emerald .user-option-stone-image {
+	background: url(../images/trillion-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Trillion-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Trillion-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Trillion-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Cushion-Emerald .user-option-stone-image {
+	background: url(../images/cushion-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Cushion-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Cushion-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Cushion-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Marquise-Emerald .user-option-stone-image {
+	background: url(../images/marquise-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Marquise-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Marquise-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Marquise-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Marquise-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Square-Emerald .user-option-stone-image {
+	background: url(../images/square-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Square-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Square-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Square-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Heart-Emerald .user-option-stone-image {
+	background: url(../images/heart-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Heart-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Heart-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Heart-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Pear-Emerald .user-option-stone-image {
+	background: url(../images/pear-emerald-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-Diamond .user-option-stone-image {
+	background: url(../images/heart-diamond-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-Diamond .I2-stone-Diamond {
+	background-position: 0px 0;
+}
+.stone-Heart-Diamond .I1-stone-Diamond {
+	background-position: -84px 0;
+}
+.stone-Heart-Diamond .SI2-stone-Diamond {
+	background-position: -166px 0;
+}
+.stone-Heart-Diamond .VS-stone-Diamond {
+	background-position: -249px 0;
+}
+.stone-Pear-Emerald .A-stone-Emerald {
+	background-position: 0px 0;
+}
+.stone-Pear-Emerald .AA-stone-Emerald {
+	background-position: -84px 0;
+}
+.stone-Pear-Emerald .AAA-stone-Emerald {
+	background-position: -166px 0;
+}
+.stone-Pear-Emerald .AAAA-stone-Emerald {
+	background-position: -249px 0;
+}
+.stone-Round-Tanzanite .user-option-stone-image {
+	background: url(../images/round-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Round-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Round-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Round-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Oval-Tanzanite .user-option-stone-image {
+	background: url(../images/oval-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Oval-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Oval-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Oval-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Tanzanite .user-option-stone-image {
+	background: url(../images/emerald-cut-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Aquamarine .user-option-stone-image {
+	background: url(../images/emerald-cut-aquamarine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Aquamarine .A-stone-Aquamarine {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Aquamarine .AA-stone-Aquamarine {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Aquamarine .AAA-stone-Aquamarine {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Aquamarine .AAAA-stone-Aquamarine {
+	background-position: -249px 0;
+}
+.stone-Trillion-Tanzanite .user-option-stone-image {
+	background: url(../images/trillion-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Trillion-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Trillion-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Trillion-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Cushion-Tanzanite .user-option-stone-image {
+	background: url(../images/cushion-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Cushion-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Cushion-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Cushion-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Marquise-Tanzanite .user-option-stone-image {
+	background: url(../images/marquise-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Marquise-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Marquise-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Marquise-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Marquise-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Square-Tanzanite .user-option-stone-image {
+	background: url(../images/square-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Square-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Square-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Square-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Heart-Tanzanite .user-option-stone-image {
+	background: url(../images/heart-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Heart-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Heart-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Heart-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Heart-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Pear-Tanzanite .user-option-stone-image {
+	background: url(../images/pear-tanzanite-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Tanzanite .A-stone-Tanzanite {
+	background-position: 0px 0;
+}
+.stone-Pear-Tanzanite .AA-stone-Tanzanite {
+	background-position: -84px 0;
+}
+.stone-Pear-Tanzanite .AAA-stone-Tanzanite {
+	background-position: -166px 0;
+}
+.stone-Pear-Tanzanite .AAAA-stone-Tanzanite {
+	background-position: -249px 0;
+}
+.stone-Round-Aquamarine .user-option-stone-image {
+	background: url(../images/round-aquamarine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Aquamarine .A-stone-Aquamarine {
+	background-position: 0px 0;
+}
+.stone-Round-Aquamarine .AA-stone-Aquamarine {
+	background-position: -84px 0;
+}
+.stone-Round-Aquamarine .AAA-stone-Aquamarine {
+	background-position: -166px 0;
+}
+.stone-Round-Aquamarine .AAAA-stone-Aquamarine {
+	background-position: -249px 0;
+}
+.stone-Oval-Aquamarine .user-option-stone-image {
+	background: url(../images/oval-aquamarine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Aquamarine .A-stone-Aquamarine {
+	background-position: 0px 0;
+}
+.stone-Oval-Aquamarine .AA-stone-Aquamarine {
+	background-position: -84px 0;
+}
+.stone-Oval-Aquamarine .AAA-stone-Aquamarine {
+	background-position: -166px 0;
+}
+.stone-Oval-Aquamarine .AAAA-stone-Aquamarine {
+	background-position: -249px 0;
+}
+.stone-Round-Citrine .user-option-stone-image {
+	background: url(../images/round-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Aquamarine .user-option-stone-image {
+	background: url(../images/pear-aquamarine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Aquamarine .A-stone-Aquamarine {
+	background-position: 0px 0;
+}
+.stone-Pear-Aquamarine .AA-stone-Aquamarine {
+	background-position: -84px 0;
+}
+.stone-Pear-Aquamarine .AAA-stone-Aquamarine {
+	background-position: -166px 0;
+}
+.stone-Pear-Aquamarine .AAAA-stone-Aquamarine {
+	background-position: -249px 0;
+}
+.stone-Round-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Round-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Round-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Round-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Oval-Citrine .user-option-stone-image {
+	background: url(../images/oval-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Oval-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Oval-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Oval-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Citrine .user-option-stone-image {
+	background: url(../images/emerald-cut-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Trillion-Citrine .user-option-stone-image {
+	background: url(../images/trillion-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Trillion-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Trillion-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Trillion-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Cushion-Citrine .user-option-stone-image {
+	background: url(../images/cushion-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Cushion-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Cushion-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Cushion-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Square-Citrine .user-option-stone-image {
+	background: url(../images/square-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Square-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Square-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Square-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Pear-Citrine .user-option-stone-image {
+	background: url(../images/pear-citrine-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Citrine .A-stone-Citrine {
+	background-position: 0px 0;
+}
+.stone-Pear-Citrine .AA-stone-Citrine {
+	background-position: -84px 0;
+}
+.stone-Pear-Citrine .AAA-stone-Citrine {
+	background-position: -166px 0;
+}
+.stone-Pear-Citrine .AAAA-stone-Citrine {
+	background-position: -249px 0;
+}
+.stone-Round-Amethyst .user-option-stone-image {
+	background: url(../images/round-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Round-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Round-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Round-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Oval-Amethyst .user-option-stone-image {
+	background: url(../images/oval-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Oval-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Oval-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Oval-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Amethyst .user-option-stone-image {
+	background: url(../images/emerald-cut-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Trillion-Amethyst .user-option-stone-image {
+	background: url(../images/trillion-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Trillion-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Trillion-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Trillion-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Cushion-Amethyst .user-option-stone-image {
+	background: url(../images/cushion-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Cushion-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Cushion-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Cushion-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Square-Amethyst .user-option-stone-image {
+	background: url(../images/square-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Square-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Square-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Square-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Pear-Amethyst .user-option-stone-image {
+	background: url(../images/pear-amethyst-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Amethyst .A-stone-Amethyst {
+	background-position: 0px 0;
+}
+.stone-Pear-Amethyst .AA-stone-Amethyst {
+	background-position: -84px 0;
+}
+.stone-Pear-Amethyst .AAA-stone-Amethyst {
+	background-position: -166px 0;
+}
+.stone-Pear-Amethyst .AAAA-stone-Amethyst {
+	background-position: -249px 0;
+}
+.stone-Round-Garnet .user-option-stone-image {
+	background: url(../images/round-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Round-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Round-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Round-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Oval-Garnet .user-option-stone-image {
+	background: url(../images/oval-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Oval-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Oval-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Oval-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Garnet .user-option-stone-image {
+	background: url(../images/emerald-cut-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Trillion-Garnet .user-option-stone-image {
+	background: url(../images/trillion-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Trillion-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Trillion-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Trillion-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Cushion-Garnet .user-option-stone-image {
+	background: url(../images/cushion-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Cushion-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Cushion-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Cushion-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Square-Garnet .user-option-stone-image {
+	background: url(../images/square-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Square-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Square-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Square-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Pear-Garnet .user-option-stone-image {
+	background: url(../images/pear-garnet-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Garnet .A-stone-Garnet {
+	background-position: 0px 0;
+}
+.stone-Pear-Garnet .AA-stone-Garnet {
+	background-position: -84px 0;
+}
+.stone-Pear-Garnet .AAA-stone-Garnet {
+	background-position: -166px 0;
+}
+.stone-Pear-Garnet .AAAA-stone-Garnet {
+	background-position: -249px 0;
+}
+.stone-Round-Peridot .user-option-stone-image {
+	background: url(../images/round-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Round-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Round-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Round-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Oval-Peridot .user-option-stone-image {
+	background: url(../images/oval-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Oval-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Oval-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Oval-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-EmeraldCut-Peridot .user-option-stone-image {
+	background: url(../images/emerald-cut-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-EmeraldCut-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-EmeraldCut-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-EmeraldCut-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-EmeraldCut-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Trillion-Peridot .user-option-stone-image {
+	background: url(../images/trillion-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Trillion-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Trillion-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Trillion-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Trillion-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Cushion-Peridot .user-option-stone-image {
+	background: url(../images/cushion-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Cushion-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Cushion-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Cushion-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Cushion-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Square-Peridot .user-option-stone-image {
+	background: url(../images/square-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Square-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Square-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Square-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Square-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Pear-Peridot .user-option-stone-image {
+	background: url(../images/pear-peridot-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Peridot .A-stone-Peridot {
+	background-position: 0px 0;
+}
+.stone-Pear-Peridot .AA-stone-Peridot {
+	background-position: -84px 0;
+}
+.stone-Pear-Peridot .AAA-stone-Peridot {
+	background-position: -166px 0;
+}
+.stone-Pear-Peridot .AAAA-stone-Peridot {
+	background-position: -249px 0;
+}
+.stone-Round-Opal .user-option-stone-image {
+	background: url(../images/round-opal-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Opal .A-stone-Opal {
+	background-position: 0px 0;
+}
+.stone-Round-Opal .AA-stone-Opal {
+	background-position: -84px 0;
+}
+.stone-Round-Opal .AAA-stone-Opal {
+	background-position: -166px 0;
+}
+.stone-Round-Opal .AAAA-stone-Opal {
+	background-position: -249px 0;
+}
+.stone-Oval-Opal .user-option-stone-image {
+	background: url(../images/oval-opal-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Oval-Opal .A-stone-Opal {
+	background-position: 0px 0;
+}
+.stone-Oval-Opal .AA-stone-Opal {
+	background-position: -84px 0;
+}
+.stone-Oval-Opal .AAA-stone-Opal {
+	background-position: -166px 0;
+}
+.stone-Oval-Opal .AAAA-stone-Opal {
+	background-position: -249px 0;
+}
+.stone-Pear-Opal .user-option-stone-image {
+	background: url(../images/pear-opal-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Pear-Opal .A-stone-Opal {
+	background-position: 0px 0;
+}
+.stone-Pear-Opal .AA-stone-Opal {
+	background-position: -84px 0;
+}
+.stone-Pear-Opal .AAA-stone-Opal {
+	background-position: -166px 0;
+}
+.stone-Pear-Opal .AAAA-stone-Opal {
+	background-position: -249px 0;
+}
+.stone-Princess-EnhancedBlackDiamond .user-option-stone-image {
+	background: url(../images/square-black-diamond.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Princess-EnhancedBlackDiamond .A-stone-EnhancedBlackDiamond {
+	background-position: 0px 0;
+}
+.stone-Princess-EnhancedBlackDiamond .AA-stone-EnhancedBlackDiamond {
+	background-position: -84px 0;
+}
+.stone-Round-EnhancedBlackDiamond .user-option-stone-image {
+	background: url(../images/round-black-diamond.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-EnhancedBlackDiamond .A-stone-EnhancedBlackDiamond {
+	background-position: 0px 0;
+}
+.stone-Round-EnhancedBlackDiamond .AA-stone-EnhancedBlackDiamond {
+	background-position: -84px 0;
+}
+.stone-Princess-EnhancedBlueDiamond .user-option-stone-image {
+	background: url(../images/square-blue-diamond.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Princess-EnhancedBlueDiamond .AA-stone-EnhancedBlueDiamond {
+	background-position: -84px 0;
+}
+.stone-Princess-EnhancedBlueDiamond .AAA-stone-EnhancedBlueDiamond {
+	background-position: -166px 0;
+}
+.stone-Round-EnhancedBlueDiamond .user-option-stone-image {
+	background: url(../images/round-blue-diamond.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-EnhancedBlueDiamond .AA-stone-EnhancedBlueDiamond {
+	background-position: -84px 0;
+}
+.stone-Round-EnhancedBlueDiamond .AAA-stone-EnhancedBlueDiamond {
+	background-position: -166px 0;
+}
+.stone-Round-Diamond .user-option-stone-image {
+	background: url(../images/round-diamond-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Round-Diamond .I1-stone-Diamond {
+	background-position: -84px 0;
+}
+.stone-Round-Diamond .SI2-stone-Diamond {
+	background-position: -166px 0;
+}
+.stone-Round-Diamond .VS-stone-Diamond {
+	background-position: -249px 0;
+}
+.stone-Princess-Diamond .user-option-stone-image {
+	background: url(../images/princess-diamond-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.stone-Princess-Diamond .I1-stone-Diamond {
+	background-position: 0px 0;
+}
+.stone-Princess-Diamond .SI2-stone-Diamond {
+	background-position: -84px 0;
+}
+.stone-Princess-Diamond .VS-stone-Diamond {
+	background-position: -166px 0;
+}
+/*E: Quality Images*/
+/* metal options */
+.user-option-metal-image {
+	background: url(../images/metal-type-sprite.jpg) no-repeat;
+	height: 98px;
+	width: 98px;
+	display: block;
+}
+.metaltype-SL {
+	background-position: 0 -98px;
+}
+.metaltype-WG {
+	background-position: 0 -98px;
+}
+.metaltype-YG {
+	background-position: 0 0;
+}
+.metaltype-PT {
+	background-position: 0 -98px;
+}
+.metaltype-RG {
+	background-position: 0 -196px;
+}
+.customer-review-list {
+	height: 300px;
+	overflow: auto;
+	padding-right:15px;
+	margin-bottom: 25px;
+}
+.review-block {
+	margin: 15px 0 15px 0;
+}
+.customer-review-left-block {
+	float: left;
+	width: 110px;
+}
+.customer-review-left-block .review-rating {
+	margin-bottom: 15px;
+	min-height: 20px;
+	height: auto!important;
+	height: 20px;
+	color: #585757;
+	font-size: 13px;
+}
+.customer-review-right-block {
+	float: right;
+	width: 700px;
+}
+.review-summary .summary-title, .review-summary {
+	color: #000;
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-bottom: 5px;
+}
+.summary-txt {
+	color: #585757;
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-bottom: 5px;
+}
+.customer-review-right-block .reviewer-date {
+	margin-bottom: 15px;
+	min-height: 20px;
+	height: auto!important;
+	height: 20px;
+	color: #585757;
+	font: 13px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-align: right;
+}
+.review-txt-block .review-title {
+	color: #000;
+	font: 15px droid_sansregular, Arial, Helvetica, sans-seri;
+	padding-bottom: 3px;
+}
+.review-txt-block .review-txt {
+	color: #585757;
+	font: 13px/18px droid_sansregular, Arial, Helvetica, sans-seri;
+}
+.product-tab-content {
+	font: 13px/20px droid_sansregular, Arial, Helvetica, sans-serif;
+}
+.product-tab-content h3 {
+	color: #000;
+	font-weight: normal;
+}
+.product-tab-content p {
+	padding-bottom: 10px;
+	color: #939292;
+}
+.recently-view-image {
+	width: 170px;
+	height: 170px;
+}
+#write-customer-reviews hr {
+	color: #F9F9F9;
+	margin: 20px 0 0;
+}
+/* S: Request Shipping Label */
+.ui-dialog .ui-dialog-content {
+	padding: 0px;
+	padding-top: 3px;
+}
+/* E: Request Shipping Label */
+
+/* S: Regarding Chain Text for Single Template */
+.chaintxt {
+	font: 11px Arial, Helvetica, sans-serif;
+	text-align: center;
+	padding-bottom: 10px;
+	left: 0;
+	z-index: 99;
+}
+/* E: Regarding Chain Text for Single Template */
+
+/* rather make it global */
+/* tooltip */
+.help-info-content {
+	display: none;
+	position: absolute;
+	min-width: 200px;
+	padding: 10px;
+	border: 1px solid #d3d3d3;
+	background: #fff;
+	box-shadow: 0 0 3px #e3e3e3;
+	left: 20px;
+	top: 14px;
+	font: 11px normal droid_sansregular, Arial, Helvetica, sans-serif;
+	z-index: 9999;
+}
+.help-info-content-left {
+	left: auto;
+	right: 6px;
+}
+.help-info {
+	width:13px;
+	height:13px;
+	float:right;
+	cursor:pointer;
+	background:url(../images/pp-icons.png) 0px -151px no-repeat;
+	margin:2px 0 0 3px;
+	position:relative;
+}
+.ratings-table th {
+	width: 80px;
+}
+.form-list {
+	padding-top:10px;
+}
+.data-table {
+	border: 1px solid #d3d3d3;
+	border-right: none;
+	width: 500px;
+}
+.data-table td {
+	width: 50px;
+}
+.buttons-set {
+	border: none;
+	margin: 0;
+}
+.buttons-set button.button {
+	float: left;
+}
+.data-table thead th {
+	background: none #f0f0f0;
+	border-right: 1px solid #d3d3d3;
+}
+.data-table tbody th, .data-table tbody td {
+	background: #FFFFFF;
+	border-top: 1px solid #d3d3d3;
+	border-right: 1px solid #d3d3d3;
+}
+.data-table td.last, .data-table th.last {
+	border-right: 1px solid #d3d3d3;
+}
+.form-list label {
+	color: #000;
+}
+.main-container {
+	background: none;
+}
+#instaplancombo {
+	height: 20px
+}
+#pricesection .price {
+	margin-top: 20px;
+	display: block;
+	color: #000000
+}
+#overlayText {
+	position: absolute;
+	top: 0;
+	z-index: 9999;
+	left: auto;
+	display: none;
+}
+.write-review-btn {
+	border: none;
+	outline: none;
+	width: 66px;
+	height: 18px;
+	cursor: pointer;
+	margin-left: 8px;
+}
+#mid-part-right dt, #mid-part-right dd {
+	float: left;
+	height: 21px;
+	line-height: 21px;
+	margin-right: 4px
+}
+.form-list textarea {
+	border: 1px solid #B6B6B6;
+}
+.buttons-set .submit-review-btn {
+	background: url("../images/allbuttonbgleft.jpg") no-repeat scroll left top transparent;
+	height: 31px;
+}
+.buttons-set .submit-review-btn span {
+	background: url("../images/allbuttonbgright.jpg") no-repeat scroll right top transparent;
+	border: medium none;
+	height: 26px;
+	line-height: 25px;
+}
+.rating-box {
+	float: right;
+	margin: 0 5px 0 0;
+}
+ul.easypaypoint {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+ul.easypaypoint li {
+	font-size: 11px;
+	list-style: disc outside none;
+	margin: 0 0 0 12px;
+	padding-bottom: 8px;
+	text-align: left;
+}
+#more-views-up {
+	cursor: default;
+	background: none;
+	height: 20px;
+	width: 67px;
+}
+#more-views-up.active {
+	cursor: pointer;
+	background: url("../images/pp-icons.png") no-repeat scroll 13px -401px transparent;
+	height: 30px;
+}
+#more-views-down {
+	cursor: default;
+	background: none;
+	height: 20px;
+	top: 0;
+	width: 67px;
+}
+#more-views-down.active {
+	cursor: pointer;
+	background: url("../images/pp-icons.png") no-repeat scroll 13px -382px transparent;
+}
+.more-views li img.playvideothumb {
+	height: 56px;
+	width: 56px;
+	cursor: pointer;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	z-index: 10;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+.more-views li img.playvideothumb:hover {
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+.more-views li img {
+	height: 56px;
+	width: 56px;
+	cursor: pointer;
+}
+.submitbtnreturnpolicy {
+	width: 96px;
+	float: right;
+	padding: 0px;
+	text-align: center;
+	background: #6A2D3A; /* Old browsers */
+	background: #6a2d3a;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-right: 10px;
+	height: 25px;
+ 	font:font:bold 12px/22px Arial, Helvetica, sans-serif;
+	cursor: pointer;
+	display: block;
+	margin-top: 15px;
+}
+.submitbtnreturnpolicy div {
+	bottom: 25px !important;
+}
+.ringsizepopupbox {
+	margin: 0 auto;
+	width: 625px;
+	padding: 12px;
+	min-height: 233px;
+	height: auto!important;
+	height: 233px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #D9D9D9;
+	border-radius: 5px 5px 5px 5px;
+	position: absolute;
+	z-index: 99;
+	left: 155px;
+	top: 451px;
+}
+.ringsizepopupbox p {
+	margin: 0;
+	padding: 0;
+	font: 12px Arial, Helvetica, sans-serif, Tahoma;
+	font-style: italic;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.ringsizepopupbox small {
+	font: 12px Arial, Helvetica, sans-serif, Tahoma;
+	display: block;
+	padding-top: 6px;
+	font-style: italic;
+}
+.sizepopupbox {
+	border: solid 1px #d4d4d4;
+	padding: 12px;
+	min-height: 233px;
+	height: auto!important;
+	height: 233px;
+	position: absolute;
+	z-index: 999;
+	top: 707px;
+	right: 356px;
+	background-color: #f4f4f4; /* for non-css3 browsers */
+}
+.popupboxheading {
+	font: bold 15px Arial, Helvetica, sans-serif, Tahoma;
+	width: 400px;
+	float: left;
+}
+.popupboxcross {
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../images/cross-popup.jpg) no-repeat;
+	display: block;
+	cursor: pointer;
+}
+.eraserpoint {
+	width: 97px;
+	height: 215px;
+	background: url(../images/eraserpoint.jpg) no-repeat;
+	float: left;
+}
+.stonesizebox {
+	padding-top: 45px;
+	width: 410px;
+	padding-right: 5px;
+	float: right;
+}
+.qualitypopupbox {
+	z-index: 999;	
+	padding: 10px;
+	position: absolute;
+	top: 575px;
+	left: 200px;
+	border: solid 1px #d4d4d4;	
+	background-color: #f4f4f4; /* for non-css3 browsers */
+}
+.qualityboxalignment {
+	top: 365px;
+	left:350px;
+}
+.qualitystonebox span {
+	width: 182px;
+	text-align: center;
+	font: bold 12px Arial, Helvetica, sans-serif, Tahoma;
+	display: block;
+	padding-bottom: 5px;
+}
+.qualitystonebox img {
+	border: solid 1px #d4d4d4;
+	width: 182px;
+	height: 182px;
+}
+.qualitystonerow {
+	margin: 10px 0 5px 158px;
+}
+.qualitydetailrow {
+	width: auto;
+	height: auto;
+}
+.qualitystonebox {
+	margin: 3px;
+	width: 184px;
+	float: left;
+}
+.detailheading {
+	margin-top: 3px;
+	width: 146px;
+	float: left;
+	padding-right: 12px;
+}
+.detailheading span {
+	width: 146px;
+	display: block;
+	line-height: 16px;
+	font: bold 12px Arial, Helvetica, sans-serif, Tahoma;
+	color: #000;
+	padding-bottom: 15px;
+}
+.detailsdisp {
+	margin: 3px;
+	width: 184px;
+	float: left;
+}
+.lastrow {
+	width: 190px;
+}
+.detailsdisp span {
+	display: block;
+	line-height: 16px;
+	padding-bottom: 15px;
+	font: 12px Arial, Helvetica, sans-serif, Tahoma;
+}
+.detailsdisp span p {
+	margin: 0;
+	padding: 0;
+	font: 11px Arial, Helvetica, sans-serif, Tahoma;
+	font-style: italic;
+	padding-bottom: 20px;
+}
+.detailsdisp span p small {
+	display: block;
+	padding-top: 6px;
+}
+.padnone {
+	padding-bottom: 0;
+}
+.diamondpopup {
+	z-index: 999;
+	position: absolute;
+	top: 770px;
+	left: 375px;
+	width: 513px;
+	padding: 12px;
+	border: solid 1px #d4d4d4;
+	min-height: 180px;
+	height: auto!important;
+	height: 180px;
+	background-color: #f4f4f4; /* for non-css3 browsers */
+}
+#playvedio {
+	position: absolute;
+	z-index: 980;
+	left: 440px;
+}
+#playvedio a {
+	width: 36px;
+	height: 38px;
+	display: block;
+}
+#playvedio a:hover {
+	width: 36px;
+	height: 38px;
+	display: block;
+	background-color: #e6e6e6;
+	border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-box-shadow: -1px 1px 4px #797979;
+	-webkit-box-shadow: -1px 1px 4px #797979;
+	box-shadow: -1px 1px 4px #797979;
+}
+#playvedio a img {
+	height: 27px;
+	width: 33px;
+	padding: 6px 0 0 2px;
+}
+.refundtxt {
+	font-size: 9px;
+	margin:0 0 0 5px;
+	text-align: center;
+	vertical-align: top;
+	padding: 5px 4px;
+	border: dotted 1px #666666;
+	color: #DE513E;
+	cursor: default;
+}
+#nonjewelry {
+	display:inline-block;
+	margin-top:4px;
+}
+.appraisalcertimg {
+	width: 378px;
+	height: 502px;
+	top: -273px;
+	left: -343px;
+	background: url(/skin/frontend/angara/ADVRP/images/appraisalcertificate.jpg) no-repeat;
+	font: 18px Arial, Helvetica, sans-serif;
+	color: #000;
+	padding-top: 5px;
+	z-index: 10;
+	text-align: center;
+}
+.appraisalclose {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 14px;
+	height: 14px;
+	background: url(/skin/frontend/angara/ADVRP/images/appraisalclose.jpg) no-repeat;
+	z-index: 15;
+	cursor: pointer;
+}
+.certpopup {
+	width: 13px;
+	height: 15px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+}
+.ring-size-box {
+	float: left;
+}
+.ring-size-box .validation-advice {
+	padding-top: 6px;
+	background:none;
+	color: #eb340a;
+	font-weight:normal;
+	width:130px;
+	padding-left:0;
+}
+.engtop {
+	position: absolute;
+	left:9px;
+	top:87px;
+}
+.engtopnone {
+	z-index: 1000;
+	position: absolute;
+	left: 19px;
+	top: -9999px;
+}
+.addedwl {
+	display: block;
+	text-align: center;
+	float: right;
+}
+.promotions {
+	margin: 13px 0 5px;
+}
+#mycarousel1 {
+	float: none;
+	width: 900px;
+	padding: 0 30px;
+	height: 200px;
+	position:relative;
+}
+.mycarousel1-wrapper {
+	position: relative;
+	width: 852px;
+	height: 200px;
+	overflow: hidden;
+	margin: 0 0 0 9px;
+}
+#mycarousel1 .jcarousel-prev.active {
+	position: absolute;
+	top: 80px;
+	left: 0;
+	width: 30px;
+	height: 24px;
+	background: url(../images/pp-icons.png) 0px 0px no-repeat;
+	cursor: pointer;
+}
+#mycarousel1 .jcarousel-prev {
+	position: absolute;
+	top: 80px;
+	left: 0;
+	width: 30px;
+	height: 24px;
+	cursor: default;
+}
+#mycarousel1 .jcarousel-next.active {
+	position: absolute;
+	top: 80px;
+	right: 0;
+	width: 30px;
+	height: 24px;
+	background: url(../images/pp-icons.png) 3px -27px no-repeat;
+	cursor: pointer;
+	margin-right:33px;
+}
+#mycarousel1 .jcarousel-next {
+	position: absolute;
+	top: 80px;
+	right: 0;
+	width: 30px;
+	height: 24px;
+	cursor: default;
+}
+#mycarousel1 ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	width: 3600px;
+}
+#mycarousel1 li {
+	float: left;
+	padding: 13px;
+	width: 145px;
+	height: 145px;
+}
+#mycarousel1 li img {
+	width: 154px;
+	height: 154px;
+}
+.customize-btn {
+	position:absolute;
+	right:-340px;
+	top:0;
+	width:330px;
+	cursor:default;
+}
+#engraving_popup {
+	margin: 0 auto;
+	position:fixed;
+	padding-bottom: 6px;
+	width:100%;
+	height:900px;
+	z-index:10000;
+	top:0;
+	left:0;
+}
+.layoverlayer {
+	background: #000;
+	margin: 0 auto;
+	position:absolute;
+	padding-bottom: 6px;
+	width: 100%;
+	opacity:0.8;
+	height: 100%;
+	filter: alpha(opacity = 80);
+	top:0;
+	left:0;
+}
+/* Added by Vaseem for iPad */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+ .layoverlayer {
+ background: #000;
+ margin: 0 auto;
+ position:absolute;
+ padding-bottom: 6px;
+ width: 100%;
+ opacity:0.8;
+ height: 1400px;
+ filter: alpha(opacity = 80);
+ top:0;
+ left:0;
+}
+}
+.engrave-link-image-add {
+	width:190px;
+	height:30px;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:5px;
+	background:url(/skin/frontend/angara/default/images/engraving-btn.jpg) no-repeat;
+	cursor:pointer;
+}
+.engrave-link-image-edit {
+	width:153px;
+	height:30px;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:5px;
+	background:url(/skin/frontend/angara/default/images/edit-engraving-btn.jpg) no-repeat;
+	cursor:pointer;
+}
+.engravingwrapper {
+	width:754px;
+	height:311px;
+	background-color:#fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow:0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	border:1px solid #d8d8d8;
+	position:absolute;
+	top:-9999px;
+	right:306px;
+	cursor:default;
+	z-index:9999;
+}
+/* Added by Vaseem for iPad */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+ .engravingwrapper {
+ width:258px;
+ height:311px;
+ background-color:#fff;
+ -moz-border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -khtml-border-radius: 5px;
+ border-radius: 5px;
+ -moz-box-shadow:0px 0px 5px #797979;
+ -webkit-box-shadow: 0px 0px 5px #797979;
+ box-shadow: 0px 0px 5px #797979;
+ border:1px solid #d8d8d8;
+ position:absolute;
+ top:-9999px;
+ right:306px;
+ cursor:default;
+ z-index:9999;
+}
+}
+.engravingwrapperIE {
+	position:absolute;
+	top:-9999px;
+	right:-215px;
+	width:754px;
+	height:311px;
+	background-color:#fff;
+	border:1px solid #d8d8d8;
+	z-index:999;
+}
+.engravingoption {
+	width:258px;
+	float:right;
+}
+.engravingview {
+	float:left;
+	width:495px;
+	height:311px;
+	background:url(/skin/frontend/angara/default/images/engraving-metal.jpg) no-repeat top;
+	border-right:solid 1px #bbbbbb;
+	position:relative;
+}
+.engraving-price {
+	background-color:#f6f6f6;
+	font:15px/50px Arial, Helvetica, sans-serif;
+	color:#585858;
+	padding-left:15px;
+	text-align:left;
+}
+.engravingtxtbox {
+	margin:24px 0 0 15px;
+}
+.engravinputbox {
+	width:215px;
+	height:30px;
+	border:solid 3px #e5e5e5;
+}
+.inputboxstyle {
+	border:solid 1px #c2c2c2;
+	border-right:none;
+	width:185px;
+	height:28px;
+	float:left;
+}
+.inputboxstyle input {
+	margin:0;
+	width:175px;
+	height:26px;
+	padding:0 5px;
+	font:12px/26px Arial, Helvetica, sans-serif;
+	border:none;
+}
+.btnclose {
+	border:solid 1px #c2c2c2;
+	border-left:none;
+	height:28px;
+	width:28px;
+	float:right;
+}
+.btnclose a {
+	background-color:#fff;
+	padding:9px;
+	width:10px;
+	height:10px;
+	display:block;
+}
+.btnclose a:hover {
+	background-color:#dddddd;
+}
+.fontthumbmail {
+	height:44px;
+	padding-left:15px;
+	padding-top:22px;
+}
+.fontbox {
+	margin-right:15px;
+	height:44px;
+	width:44px;
+	float:left;
+}
+.fontbox a {
+	width:36px;
+	width:36px;
+	border:solid 4px #b2b2b2;
+	display:block;
+}
+.fontbox a img {
+	display:block;
+	width:32px;
+	height:32px;
+	border:solid 2px #fff;
+}
+.fontbox a:hover {
+	border:solid 4px #990003;
+}
+.fontbox a.activefont {
+	border:solid 4px #990003;
+}
+.remainingletters {
+	padding-top:5px;
+	padding-left:15px;
+	display:inline-block;
+	font:11px Arial, Helvetica, sans-serif;
+	color:#bdbcbc;
+	text-align:left;
+	float:left;
+}
+.continueangraving {
+	margin:22px 0 0 15px;
+	height:45px;
+}
+.close-popup {
+	width:16px;
+	height:16px;
+	background:url(/skin/frontend/angara/ADVRP/images/appraisalclose.jpg) no-repeat;
+	position:absolute;
+	cursor:pointer;
+	right:5px;
+	top:5px;
+}
+.continue-engraving-btn {
+	width:164px;
+	height:45px;
+	background:url(/skin/frontend/angara/default/images/continue-engraving.jpg) no-repeat;
+}
+#showFontDiv {
+	float:right;
+	font:bold 11px Arial, Helvetica, sans-serif;
+	display:inline-block;
+	padding-top:5px;
+	padding-right:23px;
+}
+.refundable {
+	font:10px Arial, Helvetica, sans-serif;
+	margin:26px 15px 0 0;
+	text-align:right;
+}
+#editEng {
+	display:none;
+	text-decoration:underline;
+	float:left;
+	text-align:center;
+	padding-left:10px;
+	color:#939292;
+}
+#removeEng {
+	display:none;
+	text-decoration:underline;
+	float:left;
+	text-align:center;
+	padding-left:15px;
+	color:#939292;
+	padding-right:8px;
+}
+#engraveTitle {
+	color:#939292;
+}
+.more-matching-jewelry {
+	margin-top:15px;
+}
+.more-matching-jewelry a {
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	text-decoration:underline;
+	font-weight:bold;
+	color:#008906;
+}
+#engCost {
+	text-transform:none;
+}
+.popup-mid {
+	font:11px/17px droid_sansregular, Arial, Helvetica, sans-seri;
+}
+.prodiscrip {
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+	margin-bottom:10px;
+}
+.prodiscrip li {
+	display:inline;
+	background:url(../images/fullstop-icon.jpg) right no-repeat;
+	padding-right:3px;
+	margin-right:3px;
+}
+.pro-rating a {
+	font:12px droid_sansregular, Arial, Helvetica, sans-seri;
+}
+.ring-size-wrapper .validation-advice {
+	width:130px;
+}
+/*ADDED FOR BOTTOM POPUP*/
+.offer-accross-site {
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	height:20px;
+	background-color:#fff;
+	z-index:99;	
+}
+.offer-strip-bottom {
+	height:20px;
+	background-color:#000;
+	text-align:right;
+	top:-20px;
+}
+.offer-strip-bottom a {
+	height:20px;
+	line-height:20px;
+	font-weight:bold;
+	padding:0 37px 0 25px;
+	font-size:13px;
+	text-transform:uppercase;
+	color:#e8e8e8;
+	text-decoration:none;
+	background: url(../images/offer-text-arrow.png) #dc3113 no-repeat;
+	display:inline-block;
+}
+.offer-strip-bottom a.active {
+	background-position:154px 7px;
+}
+.offer-strip-bottom a.deactive {
+	background-position:154px -28px;
+}
+.highlighted-offer {
+	font-weight:bold;
+	font-size:24px;
+	color:#dc3113;
+}
+.offers-detail-box {
+	width:960px;
+	margin:0 auto;
+}
+.offer-details-left-block {
+	float:left;
+}
+.official-rules-ipad {
+ -moz-border-radius: 3px;
+ -webkit-border-radius: 3px;
+ -khtml-border-radius: 3px;
+ border-radius: 3px;
+ border:solid 1px #d6d6d6;
+ background-color:#fff;
+ -moz-box-shadow: 0px 0px 3px #797979;
+ -webkit-box-shadow: 0px 0px 3px #797979;
+ box-shadow: 0px 0px 4px #797979;
+ width:400px;
+ padding:10px;
+ position:absolute;
+ top:-176px;
+ z-index:999;
+ right:19px;
+}
+.official-rules-ipad ul {
+ list-style:none;
+ padding:0;
+ margin:0;
+}
+.official-rules-ipad li {
+ font:11px Arial, Helvetica, sans-serif;
+ line-height:13px;
+ list-style:disc outside;
+ margin-left:10px;
+ padding-bottom:5px; 
+}
+/* Text Message under Product Image */
+.text-message {
+    color: #939292;
+    font-size: 10px;
+    text-align: left;
+	padding: 0;
+}
+.vdayimgtop {
+	margin-top:2px;
+}
+#offerEng {
+    position: absolute;
+    top: -20px;
+}

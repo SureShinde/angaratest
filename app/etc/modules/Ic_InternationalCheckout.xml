@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ic_InternationalCheckout>
+            <active>true</active>
+            <codePool>community</codePool>			
+        </Ic_InternationalCheckout>
+		<depends>
+				<Mage_Checkout />
+		</depends>
+    </modules>
+</config>

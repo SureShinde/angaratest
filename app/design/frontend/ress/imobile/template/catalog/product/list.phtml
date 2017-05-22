@@ -1,0 +1,282 @@
+<style>
+.delivered-by{position:absolute; right:5px; top:3px; z-index:1; font-size:12px;}
+.box-golden{color:#daa520 !important}
+.mewe{width:50px; z-index:1; top:3px;}
+</style>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$countryParam = Mage::getModel('countrymapping/country')->getCountryParameters();
+$countryCode = strtolower($countryParam->getCountryCode());
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+if(!$_productCollection->count()): ?>
+	<p class="note-msg"><?php echo $this->__('There are no products matching the selection.');?></p>
+<?php 
+else: 
+
+if(Mage::registry('current_category')){
+	$categoryID		=	Mage::registry('current_category')->getId();
+}
+
+	//echo $this->getToolbarHtml(); 
+	$quickWishlist	=	Mage::helper('ajax')->getWishlistStatus(); ?>
+	<div class="category-products">
+        <div class="catalog-loader hidden">
+			<div class="catalog-loader-holder">
+				<div class="fa fa-spinner fa-spin fa-5x max-margin-top" style="margin-top:70%;"></div>
+			</div>  
+        </div>  
+	<?php	
+	$extraParams = array();
+	
+	if($this->getFilteredMetal()){
+		$extraParams[] = 'metal1_type='.urlencode($this->getFilteredMetal());//'?videoplay=1';
+	}
+	
+	if($this->getFilteredGrade()){
+		$extraParams[] = 'stone1_grade='.urlencode($this->getFilteredGrade());//'?videoplay=1';
+	} 
+	// List mode 
+	if($this->getMode()!='grid'):
+		$_iterator = 0; ?>
+		<ul class="showcase-bg-light-alternate" id="products-list">
+      
+		<?php 
+		foreach($_productCollection as $_product): 
+			$itemList[] = $_product->getSku();?>
+        <li class="product item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+			<div class="row">   
+			<?php // Product Image ?>
+            <div class="pro-image fl">
+            <?php if(!$_product->isSaleable()){ echo '<div class="out-of-stock">Out of Stock</div>';}?>
+				<a href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" class="product-image">
+					<?php
+					if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+						if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+							<img src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+						<?php
+						elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+							<img src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+						<?php	
+						else: ?>
+							<img src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+						<?php
+						endif;
+					else:?>
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+					<?php 
+					endif;?>
+					<?php echo $this->arrivesByDate($_product);?>
+				</a>
+                </div>
+			<?php // Product description ?>
+				<div class="pro-detail fl">
+						<?php $_productNameStripped = $this->stripTags($_product->getShortDescription(), null, true); ?>
+						<div class="product-name mB10"><a href="<?php echo $_product->getProductUrl() ?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>"><p class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription() , 'name'); ?></p></a></div>
+						
+						<div class="mB10"><?php echo $this->getPriceHtml($_product, true);?></div>
+				</div>
+                </div>
+			</li>
+		<?php 
+		endforeach; 
+		/* item list set in registry */
+		Mage::register('itemList', $itemList);?>
+	</ul>
+	<?php 
+	else: 
+		// Grid Mode 
+		$_collectionSize = $_productCollection->count();?>
+        <!--start grid mode-->
+		<div id="products-grid">
+		<?php 
+		$i=0; 
+		foreach ($_productCollection as $_product):  
+			$itemList[] = $_product->getSku();
+			$jewelryStyles = ((is_array($_product->getAttributeText('jewelry_styles')))?array_values($_product->getAttributeText('jewelry_styles')):array($_product->getAttributeText('jewelry_styles'))); 
+			$stoneNames = ((is_array($_product->getAttributeText('filterable_stone_names')))?array_values($_product->getAttributeText('filterable_stone_names')):array($_product->getAttributeText('filterable_stone_names')));
+			?>
+			<div class="product item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+				<div class="row relative">
+                
+                <?php if ($categoryID == 476){ ?>
+					<div class="mewe absolute absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/mewe-collection.png"/> </div>
+				<?php }else if ($categoryID == 560 || $categoryID == 561 || $categoryID == 562 || $categoryID == 563 || $categoryID == 564){ ?>
+					<div class="mewe absolute absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/infinity.png"/> </div>
+				<?php }else if ($categoryID == 550){ ?>
+					<div class="mewe absolute absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/knotty-heart.png"/> </div>
+				<?php }else if ($categoryID == 556 || $categoryID == 557 || $categoryID == 558 || $categoryID == 559){ ?>
+					<div class="mewe absolute absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/coffee-diamond-collection.png"/> </div>
+				<?php } ?>
+                        
+                        
+				<?php $skuArray	=	Mage::helper('function')->getSkuFromCoupon();
+						$offerSku	=	'';	
+						if(in_array($_product->getSku(), $skuArray)){							
+							$offerSku	=	1;
+							?>
+						<div class="absolute" style="left:10px; top:2px;z-index:1;"><img width="40" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/deal-of-the-day.png"/> </div>
+				<?php } ?>
+                <?php if(!$_product->isSaleable()){ echo '<div class="out-of-stock">Out of Stock</div>';}?>
+					<div class="pro-image relative">
+						<a id="gemcolor_a_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>">
+							<?php
+							if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+								if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="auto" />
+								<?php
+								elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>"alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="auto" />
+								<?php	
+								else: ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="auto" />
+								<?php
+								endif;
+							else:?>
+								<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="auto" />
+							<?php 
+							endif;?>
+						</a>
+						
+						<?php //echo $this->getChild('product_list_gemcolor')->getGemColorHtml($_product, $i);
+						$gemcolor = Mage::getBlockSingleton('catalog/product_list_gemcolor'); 
+						echo $gemcolor->getGemColorHtml($_product, $i);
+						//	S:VA	Delivered by
+						//echo $this->getLayout()->createBlock('catalog/product_deliverydate')->setProduct($_product)->setTemplate('catalog/product/deliverydate.phtml')->toHTML();
+						
+						if($quickWishlist){
+							$productInWishlist	=	Mage::helper('ajax')->getProductInWishlist($_product->getId());
+							$currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+							$position = 'top:0px;';
+							if($productInWishlist){ ?>
+								<button id="wishlist_product_<?php echo $_product->getId();?>" data-pid="<?php echo $_product->getId();?>" wishlist-id='<?php echo $productInWishlist;?>' type="button" style="position:absolute; right:0px; <?php echo $position; ?> color:#e1e1e1; background:none; font-size:18px; z-index:1; border:none; padding:7px 9px;" class="view-wishlist apricot-text remove-wishlist" ><i class="fa fa-heart"></i></button>
+							<?php } else{?>
+								<button id="wishlist_product_<?php echo $_product->getId();?>" data-pid="<?php echo $_product->getId();?>" style="position:absolute; right:0px; <?php echo $position; ?> color:#e1e1e1; background:none; font-size:18px; z-index:1; border:none; padding:7px 9px;" <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){?> data-toggle="modal" <?php } ?> data-target="#wishlistModal" class="view-wishlist add-wishlist"  ><i class="fa fa-heart"></i></button>
+							<?php } 
+						} ?>
+					</div>
+					<div class="pro-detail relative">
+						<div class="product-name mB5">
+							<a id="gemcolor_desc_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl();?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>">
+								<p id="gemcolor_desc_p_<?php echo $_product->getId(); ?>" class="product-name"><?php echo Mage::helper('function')->truncateOnWord($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), 35);?></p>
+							</a>
+						</div>
+						
+						<div class="full-width mB5">
+							<?php  
+							if(strtolower($countryCode)=='us'){						  
+							   echo '<div id="gemcolor_price_'.$_product->getId().'">';						  				  	
+							}else{
+								 echo '<div id="gemcolor_price_'.$_product->getId().'" class="reduce-price-size">';						
+							}
+							echo $this->getPriceHtml($_product, true); 
+							echo '</div>'; ?>
+						</div>	
+						<?php /* <div class="block-inline-display apricot-text fontsize-type3 col-sm-12 no-padding">
+							<?php echo $offerText	=	Mage::helper('function')->getOfferTextCatalog();?>
+						</div> 
+						
+						<div class="full-width mB5" style="font-size:12px;"><span class="color999">Get it by</span> <span class="text-bold">Thursday, Oct 20</span></div>
+						*/ ?>
+					</div>
+				</div>
+			</div>
+		<?php 
+		$i++; endforeach; 
+		/* item list set in registry */
+		Mage::register('itemList', $itemList);?>
+		</div>
+        <!--end grid mode-->
+	<?php 
+	endif; ?>
+    <div class="toolbar-bottom"><?php echo $this->getToolbarBlock()->setTemplate('catalog/product/list/toolbar_bottom.phtml')->toHtml(); ?></div>
+</div>
+<?php 
+endif; ?>
+<?php echo $this->getChildHtml('ajax_wishlist');?>
+<script type="text/javascript">
+/* Gemstone Colors */
+/* Start */
+function changegemstonecolors(gemcolorprodid,prodid) {
+	//	S:VA
+	if(gemcolorprodid == prodid){
+		jQuery('#wishlist_product_'+prodid).removeClass('hidden');	
+	}else{
+		jQuery('#wishlist_product_'+prodid).addClass('hidden');	
+	}
+	//	E:VA
+	
+	/*  Product url changes */
+	if(document.getElementById('gemcolor_a_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_a_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML;
+	
+	/*  Image changes */
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_src_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).src = document.getElementById('gem_img_src_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_alt_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).alt = document.getElementById('gem_img_alt_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Toggle image changes */
+	if(document.getElementById('gemcolor_img_toggle_'+prodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = 'none';
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = document.getElementById('gem_toggle_img_src_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_alt_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = document.getElementById('gem_toggle_img_alt_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	}
+	
+	/* Product name/description changes */
+	if(document.getElementById('gemcolor_desc_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_desc_p_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_'+prodid).innerHTML = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Product price name */
+	if(document.getElementById('gemcolor_price_'+prodid) && document.getElementById('gem_price_'+gemcolorprodid))
+		document.getElementById('gemcolor_price_'+prodid).innerHTML = document.getElementById('gem_price_'+gemcolorprodid).innerHTML;
+	
+	/* Review template changes */
+	if(document.getElementById('gemcolor_review_'+prodid) && document.getElementById('gem_review_'+gemcolorprodid))
+		document.getElementById('gemcolor_review_'+prodid).innerHTML = document.getElementById('gem_review_'+gemcolorprodid).innerHTML;	
+	
+}
+/* End */
+jQuery(function(){
+
+	jQuery("#refine").click(function() {
+				window.scrollTo(0,0); // reset in case prev not scrolled  
+				var PageH = jQuery(document).height();
+				var ViewH = window.outerHeight;
+				if (ViewH > PageH) {
+				  ViewH -= 250;
+				  jQuery('body').css('height',ViewH + 'px');
+				}
+				window.scrollTo(0,1);
+				//console.log('outerwidht =' + ViewH + 'actuial width =' + PageH);
+	});
+});
+</script>

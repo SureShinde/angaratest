@@ -1,0 +1,227 @@
+{
+	"shapes":{
+		"oval":{
+			"description":"<h6>Oval Shape</h6>Close in its brilliance to the round shape, an oval shaped stone offers the elegance of an elongated outline. The oval stone is a perfect choice for a detailed 3 stone setting in which the oval stone can be at the center flanked by smaller stones."
+		},
+		"round":{ 
+			"description":"<h6>Round Shape</h6>Round is one of the most popular shapes of gems. This shape has the maximum facets and is calibrated to achieve the maximum brilliance."
+		},
+		"pear":{
+			"description":"<h6>Pear Shape</h6>A hybrid cut, this shape combines the best of round and marquise shapes. It is shaped like a sparkling tear drop. Pear shaped diamonds are very popular for pendants and earrings."
+		},
+		"trillion":{
+			"description":"<h6>Trillion Shape</h6>Trillion cut is a fine combination between step-cut and brilliant faceting. Trillion shaped stones make perfect accent stones. A well cut large trillion makes an admirable center stone."
+		},
+		"marquise":{
+			"description":"<h6>Marquise Shape</h6>A very popular shape for bridal sets, marquise is a slim oval shape with tapered pointed ends. The marquise shape was created when The Sun King, France&acute;s Louis XIV wanted a diamond to match the smile of Marquise de Pompadour, a courtesan and his mistress."
+		},
+		"princess":{
+			"description":"<h6>Princess Shape</h6>Very popular for engagement rings, the princess shape follows the round shape in its display of brilliance. The square shaped stone has pointed corners."
+		},
+		"emerald":{
+			"description":"<h6>Emerald Shape</h6>Emerald shape is a rectangular shape with trimmed corners. This shape features few facets thus the clarity of the stone is pronounced. Emerald shaped stones exhibit a subtle brilliance."
+		},
+		"cushion":{
+			"description":"<h6>Cushion Shape</h6>With corners gently rounded like a cushion, this shape is reminiscent of vintage designs. It is relatively rare; perfect for people who wish to possess something different. Cushion shaped stones are usually set as solitaires."
+		},
+		"emeraldcut":{
+			"description":"<h6>Emerald cut Shape</h6>Emerald cut, one of the oldest cuts of gemstones, is Rectangular Step Cut with cut corners.  The cut is known to accentuate the color and clarity of the stone. Emerald cut looks great in center stones and gives the jewelry a royal look."
+		},
+		"ascher":{
+			"description":"<h6>Ascher Shape</h6>This pristine cut is a square shape with deeply trimmed edges. It is similar to emerald cut, the only distinction being in its pavilion that features rectangular facets. The facets point down to the cutlet giving the stone a remarkable depth."
+		},
+		"heart":{
+			"description":"<h6>Heart Shape</h6>A novelty, the heart shape is essentially a pear with a cleft on top. A heart shaped stone requires exceptional skills of a cutter to balance the beauty of the shape with the brilliance of the stone."
+		},
+		"baguette":{
+			"description":"<h6>Baguette Shape</h6>Baguette cut diamonds are preferred side stones among diamonds. Rectangular step cut diamond; this is an evolution from Art Deco and Art Noveau movement, echoing the geometric patterns that dominated the period."
+		}
+	},
+	"metals":{
+		"whitegold18k":{
+			"description":"<h6>18k White Gold</h6>Purity of gold is measured in Karats (k), 24k gold being the purest. 24k gold is very soft and malleable and cannot endure daily wear and tear, hence it is rarely used in jewelry. Pure gold is mixed with other metals to make a stronger gold alloy making it apt for jewelry. One of the most popular of choices, 18k white gold is the finest quality gold used in jewelry with 75% pure gold. Often chosen as a substitute for platinum, the metal offers a similar whiter luster for about half the price."
+		},
+		"yellowgold18k":{
+			"description":"<h6>18k Yellow Gold</h6>Purity of gold is measured in Karats (k), 24k gold being the purest. 24k gold is very soft and malleable and cannot endure daily wear and tear, hence it is rarely used in jewelry. Pure gold is mixed with other metals to make a stronger gold alloy making it apt for jewelry. Warm, sunny and yellow in color, 18k yellow gold is the easiest and the most practical precious metals to maintain. High in quality with 75% pure gold, 18k yellow gold is durable and does not tarnish."
+		},
+		"whitegold14k":{
+			"description":"<h6>14k White Gold</h6>Purity of gold is measured in Karats (k), 24k gold being the purest. 24k gold is very soft and malleable and cannot endure daily wear and tear, hence it is rarely used in jewelry. Pure gold is mixed with other metals to make a stronger gold alloy making it apt for jewelry. 14K white gold is very affordable and is a practical choice when choosing metal for jewelry. The fine combination of gold and alloy makes it durable for normal wear and tear."
+		},
+		"yellowgold14k":{
+			"description":"<h6>14k Yellow Gold</h6>Yellow gold in its purest form is not usable for jewelry. 14k yellow gold is an alloy of gold made with another precious metal for jewelry purposes. 14k yellow gold enjoys great popularity because of its affordability."
+		},
+		"whitegold10k":{
+			"description":"<h6>10k White Gold</h6>Karats(k) is the unit used for measuring the purity of Gold. 24K Gold is the purest. However, it is too soft for daily wear and tear, thus is rarely used in jewelry. To make Gold a stronger metal, it is mixed with other metals. 10K White Gold has 10 parts gold and 14 parts alloy, making it apt for all kinds of fine jewelry and durable for daily wear and tear."
+		},
+		"silver":{
+			"description":"<h6>Silver</h6>Silver is a precious metal that has been used for over 6000 years. Silver has brilliant white metallic luster and is the preferred metal of choice in jewelry. Mostly silver is safer to wear and medical uses of silver are also reported."
+		},
+		"sterlingsilver":{
+			"description":"<h6>Sterling Silver</h6>Sterling Silver is a precious metal that has been used for over 6000 years. Silver has brilliant white metallic luster and is the preferred metal of choice in jewelry. Mostly silver is safer to wear and medical uses of silver are also reported."
+		},
+		"sterlingsilver925":{
+			"description":"<h6>925 Sterling Silver</h6>925 Sterling Silver is a precious metal that has been used for over 6000 years. Silver has brilliant white metallic luster and is the preferred metal of choice in jewelry. Mostly silver is safer to wear and medical uses of silver are also reported."
+		},
+		"platinum":{
+			"description":"<h6>Platinum</h6>Platinum is the purest, finest and rarest of precious metals. Its lustrous white texture accentuates the brilliance of diamonds while securing them. The sophisticated metal is hypoallergenic and also resists tarnish."
+		}
+	},
+	"quality":{ 
+		"emeralda":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of emeralds in terms of quality. &nbsp;Dark green and opaque. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"emeraldaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of emeralds in terms of quality. &nbsp;Medium green and moderately included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"emeraldaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of emeralds in terms of quality. &nbsp;Rich medium green, ranges from slightly included to moderately included and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"emeraldaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of emeralds in terms of quality. &nbsp;Truly exceptional rich green, very slightly included and exhibits high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"rubya":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of rubies in terms of quality. &nbsp;Dark pinkish red and opaque. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"rubyaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of rubies in terms of quality. &nbsp;Medium pinkish red and moderately included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"rubyaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of rubies in terms of quality. &nbsp;Medium red, slightly included and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"rubyaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of rubies, in terms of quality. &nbsp;Truly exceptional deep rich red, very slightly included and exhibits high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"sapphirea":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of sapphires in terms of quality. &nbsp;Dark blue and opaque. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"sapphireaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of sapphires in terms of quality. &nbsp;Medium blue and moderately included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"sapphireaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of sapphires in terms of quality. &nbsp;Medium blue, slightly included and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"sapphireaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of sapphires in terms of quality. &nbsp;Truly exceptional deep rich blue, very slightly included and exhibits high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"tanzanitea":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of tanzanites in terms of quality. &nbsp;Light violet blue and slightly included. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"tanzaniteaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of tanzanites in terms of quality. &nbsp;Medium violet blue and slightly included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"tanzaniteaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of tanzanites in terms of quality. &nbsp;Rich violet blue, eye clean and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"tanzaniteaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of tanzanites in terms of quality. &nbsp;Truly exceptional rich violet blue, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"diamonda":{
+			"description":"<h6>Quality Grade A</h6>Top 50% of diamonds in terms of quality. &nbsp;J Color and I2 clarity. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"diamondaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 25% of diamonds in terms of quality. &nbsp;I Color and I1 Clarity. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"diamondaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of diamonds in terms of quality. &nbsp;H Color, SI2 Clarity and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"diamondaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of diamonds in terms of quality. &nbsp;Truly exceptional G Color, VS Clarity and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"amethysta":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of amethysts in terms of quality. &nbsp;Light purple and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"amethystaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of amethysts in terms of quality. &nbsp;Medium purple and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"amethystaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of amethysts in terms of quality. &nbsp;Deep purple, eye clean and exhibits high brilliance. &nbsp;This quality is comparable to that used by t e top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"amethystaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of amethysts in terms of quality. &nbsp;Truly exceptional deep rich purple, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"opala":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of opals in terms of quality. &nbsp;Dull luster and low iridedcence. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"opalaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of opals in terms of quality. &nbsp;Medium luster and medium iridescence. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"opalaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of opals in terms of quality. &nbsp;Rich luster and high iridescence. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"opalaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of opals in terms of quality. &nbsp;Truly exceptional luster and very high iridescence. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"garneta":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of garnets in terms of quality. &nbsp;Medium brownish red and opaque. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"garnetaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of garnets in terms of quality. &nbsp;Deep brownish red and moderately included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"garnetaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of garnets in terms of quality. &nbsp;Deep brownish red, slightly included and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"garnetaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of garnets in terms of quality. &nbsp;Truly exceptional deep rich brownish red, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"aquamarinea":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of aquamarines in terms of quality. &nbsp;Very light sea blue and moderately included. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"aquamarineaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of aquamarines in terms of quality. &nbsp;Light sea blue and slightly included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"aquamarineaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of aquamarines in terms of quality. &nbsp;Medium sea blue, eye clean and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"aquamarineaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of aquamarines in terms of quality. &nbsp;Truly exceptional medium sea blue, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"pearla":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of pearls in terms of quality. &nbsp;Dull luster. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"pearlaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of pearls in terms of quality. &nbsp;Medium luster. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"pearlaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of pearls in terms of quality. &nbsp;Rich luster. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"pearlaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of pearls in terms of quality. &nbsp;Truly exceptional brilliant luster. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"peridota":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of peridots in terms of quality. &nbsp;Pale yellow green and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"peridotaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of peridots in terms of quality. &nbsp;Olive green and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"peridotaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of peridots in terms of quality. &nbsp;Bottle green, eye clean and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"peridotaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of peridots in terms of quality. &nbsp;Truly exceptional vibrant apple green, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+		"citrinea":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of citrines in terms of quality. &nbsp;Light yellow orange and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"citrineaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of citrines in terms of quality. &nbsp;Medium yellow orange and range between slightly included to eye clean. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"citrineaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of citrines in terms of quality. &nbsp;Deep yellow orange, eye clean and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"citrineaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of citrines in terms of quality. &nbsp;Truly exceptional deep rich yellow orange, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		},
+	    "pinksappphirea":{
+			"description":"<h6>Quality Grade A</h6>Top 75% of pink sapphires in terms of quality. &nbsp;Dark pink and opaque. &nbsp;This quality is comparable to that used by mall jewelry and chain stores."
+		},
+		"pinksapphireaa":{
+			"description":"<h6>Quality Grade AA</h6>Top 33% of pink sapphires in terms of quality. &nbsp;Medium pink and slightly included. &nbsp;This quality is comparable to that used by leading independent/family jewelers."
+		},
+		"pinksapphireaaa":{
+			"description":"<h6>Quality Grade AAA</h6>Top 10% of pink sapphires in terms of quality. &nbsp;Medium pink, very slightly included and exhibits high brilliance. &nbsp;This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers."
+		},
+		"pinksapphireaaaa":{
+			"description":"<h6>Quality Grade AAAA</h6>Top 1% of pink sapphires in terms of quality. &nbsp;Truly exceptional deep rich pink, eye clean and exhibits very high brilliance. &nbsp;This quality can be found only at the top boutiques in the world."
+		}	
+	}
+}

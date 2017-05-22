@@ -1,0 +1,25 @@
+<?php 
+if($crumbs && is_array($crumbs)): ?>
+	<div class="breadcrumb-wrapper">
+		<div id="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">		<?php // Added by Vaseem for Google Rich Snippets?>
+		<?php 
+		foreach($crumbs as $_crumbName=>$_crumbInfo): 
+			if($_crumbInfo['link']):?>
+				<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>" typeof="v:Breadcrumb" rel="v:url" property="v:title"><?php // Added by Vaseem for Google Rich Snippets?><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+					<?php 
+					if(!$_crumbInfo['last']): ?>
+						<span class="divider-breadcrumb"> / </span>
+					<?php 
+					endif; ?>				
+			<?php 
+			elseif($_crumbInfo['last']): ?>
+				<span class="last-item" rel="v:child" property="v:title"><?php // Added by Vaseem for Google Rich Snippets?><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+			<?php 
+			else: 
+				echo $this->htmlEscape($_crumbInfo['label']); 
+			endif;			
+		endforeach; ?>
+		</div>
+	</div>	
+<?php 
+endif; ?>

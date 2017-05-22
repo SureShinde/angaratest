@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <modules>
+        <Angara_Popup>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Angara_Popup>
+    </modules>
+</config>

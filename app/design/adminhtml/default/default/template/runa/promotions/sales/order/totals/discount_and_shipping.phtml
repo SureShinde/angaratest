@@ -1,0 +1,25 @@
+<?php $_source = $this->getSource() ?>
+<?php $this->setPriceDataObject($_source) ?>
+
+  <?php if ($_source->getRunaDiscountTotal() < 0 ): ?>
+<tr>
+    <td class="label">
+        <strong style="color:green;"><big>
+            <?php echo "(Runa Special Discount)"; ?>
+            </big></strong>
+    </td>
+    <td class=""><?php echo $this->displayPriceAttribute('runa_discount_total', true) ?></td>
+</tr>
+<?php endif; ?>
+ <?php if ($_source->getRunaDiscountShipping() < 0 ): ?>
+<tr>
+    <td class="label">
+        <strong style="color:green;"><big>
+
+            <?php echo Mage::helper('sales')->__('(Runa Shipping Discount)') ?>
+
+            </big></strong>
+    </td>
+    <td class=""><?php echo $this->displayPriceAttribute('runa_discount_shipping', true) ?></td>
+</tr>
+ <?php endif; ?>

@@ -1,0 +1,190 @@
+<?php
+$keys		=	Mage::helper('function')->getGoogleRecaptchaKeys();		//	S:VA
+$pubKey 	= 	$keys['public_key'];
+$privKey 	= 	$keys['private_key'];
+$recaptcha 	= 	new Zend_Service_ReCaptcha($pubKey, $privKey);
+//	S:VA	Secure Check
+if (Mage::app()->getStore()->isCurrentlySecure()){
+	$recaptcha->setParams(array('ssl'=>true));
+}
+?>
+
+<div class='max-margin-bottom max-margin-top visible-xs'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Review Status</div></div>
+
+<div class="form-add" style="padding-top:0; overflow:auto;">
+<?php 
+if($this->getAllowWriteReviewFlag()): ?>
+	<div id="review-form-container" >
+    	<form action="<?php echo $this->getAction() ?>" method="post" id="review-form">
+        	<fieldset>
+            <?php 
+			echo $this->getChildHtml('form_fields_before');
+			if($this->getRatings() && $this->getRatings()->getSize()): ?>
+                <h4>How do you rate this product? <em class="required">*</em></h4>
+                <span id="input-message-box"></span>
+                <table class="data-table" id="product-review-table">
+                    <col />
+                    <col width="1" />
+                    <col width="1" />
+                    <col width="1" />
+                    <col width="1" />
+                    <col width="1" />
+                    <thead>
+                        <tr>
+                            <th width="20%"><div class="nobr" align="center">&nbsp;</div></th>
+                            <th width="16%"><div class="nobr" align="center"><?php echo $this->__('1 star') ?></div></th>
+                            <th width="16%"><div class="nobr" align="center"><?php echo $this->__('2 stars') ?></div></th>
+                            <th width="16%"><div class="nobr" align="center"><?php echo $this->__('3 stars') ?></div></th>
+                            <th width="16%"><div class="nobr" align="center"><?php echo $this->__('4 stars') ?></div></th>
+                            <th width="16%"><div class="nobr" align="center"><?php echo $this->__('5 stars') ?></div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+					foreach ($this->getRatings() as $_rating): ?>
+                        <tr>
+                            <th><div class="low-padding-top"><?php echo $this->escapeHtml($_rating->getRatingCode()) ?></div></th>
+                        <?php 
+						foreach ($_rating->getOptions() as $_option): ?>
+                            <td class="value" align="center"><input type="radio" name="ratings[<?php echo $_rating->getId() ?>]" id="<?php echo $this->escapeHtml($_rating->getRatingCode()) ?>_<?php echo $_option->getValue() ?>" value="<?php echo $_option->getId() ?>" class="radio" /></td>
+                        <?php 
+						endforeach; ?>
+                        </tr>
+                    <?php 
+					endforeach; ?>
+                    </tbody>
+                </table>
+                <input type="hidden" name="validate_rating" class="validate-rating" value="" />
+				<input type="hidden" name="order_id" id="order_id" value="<?php echo $this->htmlEscape($data->getOrderId()) ?>" />
+				<input type="hidden" name="item_id" id="item_id"  value="" />
+				<input type="hidden" name="sequence_number" id="sequence_number"  value="<?php echo $this->htmlEscape($data->getSequenceNumber()) ?>" />
+                <input type="hidden" name="email" id="email"   value="<?php echo $this->htmlEscape($data->getEmail()) ?>" />
+				<input type="hidden" name="sku" id="sku"  value="" />
+				<input type="hidden" name="rule" id="rule"  value="" />
+				<script type="text/javascript">decorateTable('product-review-table')</script>
+            <?php 
+			endif; ?>
+                <ul class="form-list">
+                    <li class="fields">
+                        <label for="nickname_field" class="required"><em>*</em><?php echo $this->__('Nickname') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" />
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <label for="summary_field" class="required"><em>*</em><?php echo $this->__('Summary of Your Review') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="title" id="summary_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" />
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <label for="review_field" class="required"><em>*</em><?php echo $this->__('Review') ?></label>
+                        <div class="input-box">
+                            <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
+                        </div>
+                    </li>
+                    <li class="fields">
+                        <label for="review_field" class="required"><em>*</em><?php echo $this->__('Enter Code') ?></label>
+                        <div class="input-box">
+                            <?php echo $recaptcha->getHTML(); ?>
+                        </div>
+                    </li>                                        
+                </ul>
+            </fieldset>
+            <div>
+            	<div id="customer-review-submit" class="pull-left high-margin-right high-margin-bottom">
+                <?php 	//	Added by Vaseem to get the order id from customer review url
+
+				$orderId	=	(int)Mage::app()->getRequest()->getParam('order');
+                 
+				if($orderId){?>
+                	<input type="hidden" name="real_order_id" value="<?php echo $orderId;?>" />
+                <?php } ?>
+                	<button type="button" onclick="submitform()" title="<?php echo $this->__('Submit Review') ?>" class="btn btn-primary btn-block padding-type-8"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
+            	</div>
+				<div id="loadingmask" style="display: none;">
+					<div class="loader" id="loading-mask-loader"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>adminhtml/default/default/images/ajax-loader-tr.gif" alt="<?php echo $this->__('Loading...') ?>"/></div>
+					<div id="loading-mask"></div>
+				</div>
+            </div>			
+    	</form>
+	</div>
+    <script type="text/javascript">
+    //<![CDATA[
+       var dataForm = new varienForm('review-form','<?php echo $this->getUrl('*/*/validate', array('_current'=>true)) ?>');
+		dataForm._processValidationResult = function(transport) {	
+		  var response = transport.responseText.evalJSON();Element.hide('loadingmask');Recaptcha.reload();
+			if(response.error){				
+				if($('messages')){
+					$('messages').innerHTML = '<ul class="messages"><li class="error-msg"><ul><li>' + response.message + '</li></ul></li></ul>';
+					$('messages').focus();
+					jQuery(window).scrollTop(jQuery('messages').position().top);		
+				}
+			}
+			else{
+				this._submit();
+			}		
+		};
+		
+		dataForm.submit=function(url){
+			if (typeof varienGlobalEvents != undefined) {
+			   // varienGlobalEvents.fireEvent('formSubmit', this.formId);
+			}
+			this.errorSections = $H({});
+			this.canShowError = true;
+			this.submitUrl = url;
+			if(this.validator && this.validator.validate()){
+				if(this.validationUrl){
+					this._validate();
+					Element.show('loadingmask');
+				}
+				else{
+					this._submit();
+				}
+				return true;
+			}
+			return false;
+		};
+		
+        Validation.addAllThese(
+        [
+               ['validate-rating', '<?php echo $this->__('Please select one of each of the ratings above') ?>', function(v) {
+                    var trs = $('product-review-table').select('tr');
+                    var inputs;
+                    var error = 1;
+    
+                    for( var j=0; j < trs.length; j++ ) {
+                        var tr = trs[j];
+                        if( j > 0 ) {
+                            inputs = tr.select('input');
+    
+                            for( i in inputs ) {
+                                if( inputs[i].checked == true ) {
+                                    error = 0;
+                                }
+                            }
+    
+                            if( error == 1 ) {
+                                return false;
+                            } else {
+                                error = 1;
+                            }
+                        }
+                    }
+                    return true;
+                }]
+        ]
+        );
+	function submitform() {
+		dataForm.submit("<?php echo $this->getAction() ?>");
+	}	
+    //]]>
+    </script>
+<?php 
+else: ?>
+    <p class="review-nologged" id="review-form">
+        <?php echo $this->__('Only registered users can write reviews. Please, <a href="%s">log in</a> or <a href="%s">register</a>', $this->getLoginLink(), Mage::helper('customer')->getRegisterUrl()); ?>
+    </p>
+<?php 
+endif; ?>
+</div>

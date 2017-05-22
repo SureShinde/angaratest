@@ -1,0 +1,201 @@
+<?php
+/**
+ * Template for displaying product price in different places (products grid, product view page etc)
+ *
+ * @see Mage_Catalog_Block_Product_Abstract
+ */
+?>
+<?php 
+/* @var $_coreHelper Mage_Core_Helper_Data */
+$_coreHelper = $this->helper('core');
+
+/* @var $_taxHelper Mage_Tax_Helper_Data */
+$_taxHelper = $this->helper('tax');
+
+$_product = $this->getProduct();
+$_id = $_product->getId();
+$_retailPrice = $_taxHelper->getPrice($_product, $_product->getMsrp()); 
+$_price = $_taxHelper->getPrice($_product, $_product->getPrice()); 
+$_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) 
+?>
+
+<!-- S: Price Section -->
+<div class="all-price-block">
+	<div class="angara-price-block">
+		<div class="price-title">PRICE:</div>
+		<div class="price-block" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>"><?php echo $_coreHelper->currency($_finalPrice,true,false); ?></div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="retail-price-block">
+		<div class="price-title">RETAIL VALUE:</div>
+		<div class="price-block dyn_msrp" id="retail-del-price"><?php echo $_coreHelper->currency($_retailPrice,true,false); ?></div>
+		<div class="clear"></div>
+	</div>
+</div>	
+<!-- E: Price Section -->
+
+<script>            
+function priceChanged(totPaidAmt){
+		
+	if(totPaidAmt == 0)
+		return false;
+	if((totPaidAmt) > 2500){
+		installments = 2;
+	} 
+	else {
+		installments = 3;
+	}
+	
+	if(installments == 2){
+		jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + optionsPrice.formatPrice(totPaidAmt) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + optionsPrice.formatPrice(totPaidAmt / 2) + '</option>');
+		var easyPayPrice = (optionsPrice.formatPrice(totPaidAmt / 2));
+		jQuery('#easy-pay-text').html('or 2 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+	} 
+	else{
+		jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + optionsPrice.formatPrice(totPaidAmt) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + optionsPrice.formatPrice(totPaidAmt / 2) + '</option><option value="2_' + (totPaidAmt / 3).toFixed(2) + '">3 payments of ' + optionsPrice.formatPrice(totPaidAmt / 3) + '</option>');
+		var easyPayPrice = (optionsPrice.formatPrice(totPaidAmt / 3));
+		jQuery('#easy-pay-text').html('or 3 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+	}
+	
+	if((totPaidAmt) > 2500){
+		if(jQuery('#exclusiveOfferFooter').length == 0){
+			jQuery('body').append(
+				jQuery('<div style="height: 128px; display: block;" id="exclusiveOfferFooter" class="offer-accross-site"><div class="offer-strip-bottom"><a class="active" id="offerArrow" href="javascript:void(0);">Exclusive Offer</a></div><div class="offers-detail-box" style="position:relative;"><img src="/skin/frontend/angara/default/images/special-price-offer-banner.jpg" usemap="#termsrules"><map name="termsrules" id="termsrules"><area shape="rect" coords="853,63,942,80" href="javascript:;" id="ipadrule" /></map><span id="ipadrule-popup-chance" class="official-rules-ipad" style="display:none;"><ul><li style="font-size:13px; font-weight:bold; list-style:none; margin-left:0;">Cyber Monday Exclusive Terms & Conditions</li><li>You will receive a free iPad mini 16 GB when you order merchandise above $3500. This offer cannot be combined with any other offer.</li><li>Customers eligible must be over 18 years of age and resident in the United State of America. International orders are not eligible for this offer.</li><li>The free iPad mini 16GB has no cash value and cannot be used as payment on account or for past purchases.</li><li>Merchandise cannot be returned without the free iPad mini in original unopened packaging and within Angara’s Return Policy.</li><li>If the merchandise is returned within the applicable return period along with opened packaging of the iPad mini 16GB, then Angara has the right to deduct $300 from your refund.</li><li>Angara has the sole right to alter or terminate the terms and conditions of this offer at any time.</li></ul></span></div></div>')
+				.data('offer-minimized',false)
+
+			)
+			//	Code Added by Vaseem Starts
+			jQuery('#offerArrow').click(function(){
+				if (jQuery('#offerArrow').attr('class') == 'deactive'){
+					jQuery(this).removeClass("deactive");			
+					jQuery(this).addClass("active");
+					jQuery('#exclusiveOfferFooter').animate({'height':'128px'}, 500, 'easeInOutQuint');
+					//setTimeout( "jQuery('#exclusiveOfferFooter').animate({'height':'20px'}, 500, 'easeInOutQuint');",5000 );
+				}else{
+					jQuery(this).removeClass("active");			
+					jQuery(this).addClass("deactive");
+					jQuery('#exclusiveOfferFooter').animate({'height':'20px'}, 500, 'easeInOutQuint');
+				}
+			})
+			//	Code Added by Vaseem Ends
+			jQuery(function(){
+				jQuery('#ipadrule').hover(
+					function(){jQuery('#ipadrule-popup-chance').show();},
+					function(){jQuery('#ipadrule-popup-chance').hide();}
+				)
+			})
+			
+			jQuery(document).ready(function () {
+				if ( (jQuery('#offerArrow').attr('class') == 'active') ){
+					setTimeout( "jQuery('#offerArrow').click();",10000 );
+				}
+			});
+
+			/*jQuery(document).click(function (event) { 
+				if ( (jQuery('#offerArrow').attr('class') == 'active') ){
+					setTimeout( "jQuery('#offerArrow').click();",2000 );
+				}
+				//console.log(event.target.id);
+			})*/
+
+		}
+	}
+	
+	/*Added by Saurabh For add insurance on product page*/
+	if(totPaidAmt < 200.00){
+		var insprice = 40;
+	}
+	else{
+		var insprice = totPaidAmt * .1;
+	}
+	
+	jQuery('#insprice').html(parseFloat(insprice).toFixed(2));
+	/*End Added by Saurabh For add insurance on product page*/
+	
+	
+	<!--Added by Vaseem on 10 Jan 2013 for packaging box task no 239-->
+	<?php	
+	if($_product->isConfigurable()){
+		// This will call once user click on gemstone quality or metal type
+		$sku 						= 	$_product->getSku();
+		$jewelryTypeID 				= 	$_product->getJewelryType();
+		if($jewelryTypeID!=''){
+			$jewelryType			= 	$_product->getAttributeText('jewelry_type');					//	Center Stone Type
+		}
+		
+		// Check if attribute is defined or not
+		$stone1TypeValue			= 	$_product->getStone1Type();	
+		if($stone1TypeValue!=''){
+			$stone1Type 				= 	$_product->getAttributeText('stone1_type');					//	Center Stone Type
+		}
+		
+		$productType				=	Mage::helper('function')->packagingImageST($stone1Type,$sku,$jewelryType);
+	?>
+	finalboxImage	=	showPkgImage('<?php echo $productType?>',totPaidAmt);
+	jQuery('#pckImg').html(finalboxImage);
+	<!--Added by Vaseem on 10 Jan 2013 for packaging box task no 239-->
+	<?php } ?>
+}
+</script>
+
+<?php 
+//hard coded check for diamond studs by pankaj
+$cats = $this->getProduct()->getCategoryIds();
+
+if(!in_array(279, $cats)){ ?>
+	<!-- S: Easy Pay Code -->
+	<?php $_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_finalPrice); ?>
+	<div class="easy-pay-block">
+		<div class="easy-pay-title-block">
+			<div class="easy-pay-title"> Easy Pay Installments!</div>
+			<div class="help-info" onclick="customLinkTracking('Easy Pay Popup');">
+							<div class="help-info-content help-info-content-left">
+								<div class="popup-mid" style="text-align:justify;">
+									<div>
+										<div style="width:400px; font-weight:bold; font-size:16px; padding:0 0 15px 10px; text-align:left">What is Easy Pay?</div>
+									</div>
+									<ul class="easypaypoint">
+										<li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+										<li>First payment is charged at the time of purchase.</li>
+										<li>The order is processed for shipment immediately upon checkout.</li>
+										<li>Your credit card will be charged for 2 or 3 equal installments starting 30 days from the date of purchase.
+										<li>No interest or additional fees are charged from Angara.</li>
+										<li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the right to collect the same or send a collection agency if a payment is not made.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="easy-pay-installment">
+			<div class="easy-pay-installment">
+				<select class="sbHolder" title="Easy Pay Installment" id="easyopt" name="easyopt">
+					<?php 
+					foreach($_easyPayOptions as $key => $val):
+						if($key == 0){
+							$selopt = 'selected="selected"';
+							$displayopt = ($key + 1) . ' payment of ' . $_coreHelper->currency($val, true, false);
+						} 
+						elseif($key == 1){
+							$selopt = '';
+							$displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+						}else{
+							$selopt = '';
+							$displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+						}?>
+						<option value="<?php echo $key . '_' . $_coreHelper->currency($val, false, false); ?>" <?php echo $selopt; ?>><?php echo $displayopt; ?></option>
+					<?php endforeach; ?>
+				</select>
+				
+				<div class="clear"></div>
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- E: Easy Pay Code -->	
+	<div class="or">-OR-</div>
+<?php 
+}?>

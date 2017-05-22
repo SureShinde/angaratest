@@ -1,0 +1,164 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var $this Mage_Tax_Block_Checkout_Grandtotal
+ * @see Mage_Tax_Block_Checkout_Grandtotal
+ */
+?>
+
+<?php
+
+$pageType =	Mage::helper('function')->getPageType();
+if($pageType == 'cart' && !Mage::getSingleton('checkout/session')->getData('shipment')){
+	$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();				// Base Currency
+	$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();			// Current Currency
+	if($currentCurrencyCode == $baseCurrencyCode){
+		$availableShippingMethods	=	Mage::helper('function')->getDefaultShippingMethods();
+		//print_r($availableShippingMethods);
+		$i = 0;
+		foreach($availableShippingMethods as $_method){
+			//echo $_method['price'].'---';
+			if($i == 0){
+				if($_method['price'] == '' || $_method['price'] == 0 || $_method['price'] == '0.00' || $_method['code'] == 'freeshipping_freeshipping'){
+					$priceForTotal = 0; 
+				}else{
+					$priceForTotal = $_method['price'];
+				}
+			}
+		$i++;
+		}
+	}else{
+		$subTotalWithoutEasyEmi				= 	Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();
+		$freeInternationalShippingAmount	=	Mage::getStoreConfig("carriers/angnonusflatrate/min_cart_value_for_free_shipping");
+		$price		=	Mage::getStoreConfig("carriers/angnonusflatrate/price");
+		if($subTotalWithoutEasyEmi >= $freeInternationalShippingAmount){
+			$_title 	= 	Mage::getStoreConfig("carriers/angnonusflatrate/title");
+			$priceForTotal = 0;
+		} 
+		else {
+			$priceForTotal = $price;
+		}
+	}
+
+	$priceForTotal = Mage::helper('directory')->currencyConvert($priceForTotal, $baseCurrencyCode, $currentCurrencyCode);
+	?>
+
+	<?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
+	<tr class="showcase-dotted-border-top-1px" >
+		<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?>:
+		</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+			<strong><?php echo $this->helper('checkout')->formatPrice($priceForTotal += $this->getTotalExclTax()) ?></strong>
+		</td>
+	</tr>
+	<?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
+	<tr class="showcase-dotted-border-top-1px" >
+		<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?>:
+		</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+			<strong><?php echo $this->helper('checkout')->formatPrice($priceForTotal += $this->getTotal()->getValue()) ?></strong>
+		</td>
+	</tr>
+	<?php else:?>
+		<?php if( !Mage::getBlockSingleton('checkout/cart')->hasRecurringItem() ): ?>
+		<tr class="showcase-dotted-border-top-1px">
+			<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<strong><?php echo $this->getTotal()->getTitle() ?></strong>
+			</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+				<strong style="font-size:18px"><?php echo $this->helper('checkout')->formatPrice($priceForTotal += $this->getTotal()->getValue()); ?></strong>
+			</td>
+		</tr>
+		<?php else: ?>
+			<tr class="showcase-dotted-border-top-1px">
+				<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+					<strong style="font-size:14px!important;"><?php echo $this->getTotal()->getTitle() ?></strong>
+				</td>
+				<td style="<?php echo $this->getStyle() ?>" class="a-right" style="font-size:14px!important;">
+					<strong><?php echo $this->helper('checkout')->formatPrice($priceForTotal += Mage::getBlockSingleton('checkout/cart')->getGrandtotalWithoutInstallments()) ?></strong>
+				</td>
+			</tr>
+			<tr>
+				<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+					<strong>Pay Today</strong>
+				</td>
+				<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+					<strong style="font-size:18px"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()); ?></strong>
+				</td>
+			</tr>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php }else{ ?>
+	<?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
+	<tr class="showcase-dotted-border-top-1px" >
+		<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?>:
+		</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+			<strong><?php echo $this->helper('checkout')->formatPrice($this->getTotalExclTax()) ?></strong>
+		</td>
+	</tr>
+	<?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
+	<tr class="showcase-dotted-border-top-1px" >
+		<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?>:
+		</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+			<strong><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></strong>
+		</td>
+	</tr>
+	<?php else:?>
+		<?php if( !Mage::getBlockSingleton('checkout/cart')->hasRecurringItem() ): ?>
+		<tr class="showcase-dotted-border-top-1px">
+			<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+			<strong><?php echo $this->getTotal()->getTitle() ?></strong>
+			</td>
+		<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+				<strong style="font-size:18px"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()); ?></strong>
+			</td>
+		</tr>
+		<?php else: ?>
+			<tr class="showcase-dotted-border-top-1px">
+				<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+					<strong style="font-size:14px!important;"><?php echo $this->getTotal()->getTitle() ?></strong>
+				</td>
+				<td style="<?php echo $this->getStyle() ?>" class="a-right" style="font-size:14px!important;">
+					<strong><?php echo $this->helper('checkout')->formatPrice(Mage::getBlockSingleton('checkout/cart')->getGrandtotalWithoutInstallments()) ?></strong>
+				</td>
+			</tr>
+			<tr>
+				<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+					<strong>Pay Today</strong>
+				</td>
+				<td style="<?php echo $this->getStyle() ?>" class="a-right fontcolor-type1">
+					<strong style="font-size:18px"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()); ?></strong>
+				</td>
+			</tr>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php } ?>

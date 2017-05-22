@@ -1,0 +1,163 @@
+<style>
+#shipping_active_box .active-option span:first-child{line-height:30px;}
+#shipping_dropdown_box label span:first-child{line-height:30px;}
+
+<?php /*#shipping_active_box .active-option span:last-child, #shipping_active_box .active-option br{display:none}
+#shipping_dropdown_box label span:last-child, #shipping_dropdown_box label br{display:none}*/?>
+</style>
+<div class="row no-gutters">
+	<?php 
+	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		<div class="label fl pull-left" style="line-height:35px; font-weight:bold;">Shipping</div>
+		<div class="shipping-option fr" style="width:75%; float:right" data-class="open-shipping">
+	<?php 
+	}
+	else{ ?>
+		<div class="label fl pull-left hidden">Shipping</div>
+		<div class="shipping-option fr" data-class="open-shipping">
+	<?php 
+	}	
+	$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();				// Base Currency
+	$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();			// Current Currency
+	$shipment_hp 			= 	'';
+	if(Mage::getSingleton('checkout/session')->getData('shipment')){
+		$shipment_hp 		= 	Mage::getSingleton('checkout/session')->getData('shipment');
+	}
+    if($currentCurrencyCode == $baseCurrencyCode){ 
+        $availableShippingMethods	=	Mage::helper('function')->getAvailableShippingMethods(); ?>	
+		<div id="shipping_option_box" class="hide">
+		<?php 
+		if(count($availableShippingMethods)){
+			$i = 0;
+			foreach($availableShippingMethods as $_method){ ?>
+				<input type="radio" name="estimate_method" value="<?php echo $_method['code']?>" id="<?php echo $_method['code']?>" <?php if($shipment_hp == $_method['code']){echo 'checked';}?> <?php if($shipment_hp == '' && $i == 0){echo 'checked';}?>/>
+			<?php   
+			$i++;
+			}
+		} ?>
+		</div>
+		<div id="shipping_option" <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>style="min-width:100px!important;"<?php } ?>>
+			<div id="shipping_active_box" data-visibility="hidden" <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>style="padding-right:18px!important;font-size:12px;"<?php } ?>>
+				<span class="active-option pull-left">
+				<?php 
+				if(count($availableShippingMethods)){
+					$emp = 'false';
+					foreach($availableShippingMethods as $_method){ 
+						if($shipment_hp == $_method['code']){
+							echo $_method['title'];
+							$emp = 'true';
+						}
+				    }
+					if($emp == 'false'){
+						foreach($availableShippingMethods as $_method){ 
+							echo $_method['title'];
+							break;
+						}
+					}
+				} ?>
+				</span>
+				<i class="fa fa-angle-down"></i>
+			</div>			
+			<div id="shipping_dropdown_box" class="hide">
+			<?php 
+			if(count($availableShippingMethods)){
+				$i = 0;
+				foreach($availableShippingMethods as $_method){ ?>
+					<label for="<?php echo $_method['code']?>" <?php if($shipment_hp == $_method['code']){echo 'class="active"';}?> <?php if($shipment_hp == '' && $i == 0){echo 'class="active"';}?> ><?php echo $_method['title']?></label>
+				<?php   
+				$i++;
+				}
+			} ?>
+			</div>
+		</div>
+		<?php 
+		if($emp == 'false'){ ?>
+			<script>
+				jQuery(function(){
+					jQuery('#shipping_option_box input:eq(0)').attr('checked', 'checked');
+					var id = jQuery('#shipping_option_box input:eq(0)').attr('id');
+					jQuery('label[for="'+id+'"]').addClass('active');
+				});
+			</script>
+		<?php 
+		} 
+	}
+	else{ ?>
+		<div id="shipping_option_box" class="hide">
+			<input type="radio" name="estimate_method" value="angnonusflatrate_angnonusflatrate" id="angnonusflatrate_angnonusflatrate" checked />
+		</div>
+		<div id="shipping_option" <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>style="min-width:100px!important;"<?php } ?>>
+			<div id="shipping_active_box" data-visibility="hidden" <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>style="padding-right:8px!important;padding-left:8px!important; font-size:11px;"<?php } ?> >
+				<span class="active-option pull-left">
+					<span class="title">
+					<?php 
+					$subTotalWithoutEasyEmi				= 	Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();
+					$freeInternationalShippingAmount	=	Mage::getStoreConfig("carriers/angnonusflatrate/min_cart_value_for_free_shipping");
+					if($subTotalWithoutEasyEmi >= $freeInternationalShippingAmount){ 
+						$_title 	= 	Mage::getStoreConfig("carriers/angnonusflatrate/title");
+						echo 'Free '.$_title; 
+					} 
+					else { 
+						$price		=	Mage::getStoreConfig("carriers/angnonusflatrate/price");
+						echo 'International Shipping '.Mage::helper('core')->currency($price,true,false); 
+					} ?>
+					</span>
+				</span>
+			</div>
+			<div id="shipping_dropdown_box" class="hide">
+				<label for="angnonusflatrate_angnonusflatrate" class="active">
+					<span class="title">
+					<?php 
+					$subTotalWithoutEasyEmi				= 	Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();
+					$freeInternationalShippingAmount	=	Mage::getStoreConfig("carriers/angnonusflatrate/min_cart_value_for_free_shipping");
+					if($subTotalWithoutEasyEmi >= $freeInternationalShippingAmount){ 
+						$_title 	= 	Mage::getStoreConfig("carriers/angnonusflatrate/title");
+						echo 'Free '.$_title; 
+					} 
+					else { 
+						$price		=	Mage::getStoreConfig("carriers/angnonusflatrate/price");
+						echo 'International Shipping '.Mage::helper('core')->currency($price,true,false); 
+					} ?>
+					</span>
+				</label>				
+			</div>
+		</div>			
+		<script>
+		jQuery(function(){
+			jQuery('#angnonusflatrate_angnonusflatrate').attr('checked', 'checked');
+			jQuery('label[for="angnonusflatrate_angnonusflatrate"]').addClass('active');
+		});
+		</script>			
+	<?php 
+	}?>
+		<script>
+		jQuery('#shipping_dropdown_box label').click(function(){
+			var text = jQuery(this).find('.title').text();
+			var date = jQuery(this).children('span:eq(1)').text();
+			
+			jQuery(this).parent('#shipping_dropdown_box').addClass('hide');
+			
+			jQuery(this).siblings().removeClass('active');
+			jQuery(this).addClass('active');
+			jQuery('#shipping_active_box .active-option').html('');
+			jQuery('#shipping_active_box .active-option').html('<span class="title">'+ text +'</span>');
+			jQuery('#shipping_active_box').attr('data-visibility','hidden');
+		});		
+		jQuery('#shipping_active_box').click(function(){
+			if(jQuery(this).attr('data-visibility') == 'hidden'){
+				jQuery('#shipping_dropdown_box').removeClass('hide');
+				jQuery(this).attr('data-visibility','visible');
+			}else{
+				jQuery('#shipping_dropdown_box').addClass('hide');
+				jQuery(this).attr('data-visibility','hidden');
+			}
+		});		
+		jQuery(document).on('click', function(e){
+			if (!jQuery(e.target).closest('#shipping_option').length) {
+				jQuery('#shipping_dropdown_box').addClass('hide');
+				jQuery('#shipping_active_box').attr('data-visibility','hidden');
+			}
+		});		
+		</script>
+	</div>
+</div>

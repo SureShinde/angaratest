@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mageix_ExtensionManagerLicense>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mageix_ExtensionManager/>
+            </depends>
+        </Mageix_ExtensionManagerLicense>
+    </modules>
+</config>

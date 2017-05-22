@@ -1,0 +1,63 @@
+<?php 
+//$reviews	= 	$this->getReviews()->getItems();
+$reviews	= 	$this->getCatalogReviews()->getItems();
+if(count($reviews) > 1):
+$category 	= 	Mage::registry('current_category');
+?>
+
+
+	<div class="col-xs-12 block-sub-heading low-padding-bottom showcase-border-bottom high-margin-bottom max-margin-top ">		
+			Latest Jewelry Reviews for <?php echo $category->getName(); ?>       
+	</div>
+	<div id="latest-reviews" class="col-xs-12 max-margin-top">				
+					<?php #todo don't load complete product each time. store the product image with review itself. ?>
+					<?php foreach($reviews as $review): ?>
+					<?php //$_product	= Mage::getModel('catalog/product')->load($review->getEntityPkValue()); ?>					
+					<?php $_product = Mage::getModel('catalog/product')->getCollection()
+							->addAttributeToSelect('product_url')
+							->addAttributeToSelect('name')
+							->addAttributeToSelect('image')
+							->addAttributeToFilter('entity_id', $review->getEntityPkValue())
+							->addUrlRewrite()
+							->load()
+							->getFirstItem();
+					?>
+						<div class="row showcase-bg-white showcase-box-side-shadow max-margin-bottom">
+							<div class="col-sm-3 text-center"> <a href="<?php echo $_product->getProductUrl(); ?>?icid=catalog|rr-widget" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="center-block text-center">
+								<img data-org="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(175); ?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="img-responsive center-block" alt="<?php echo $this->htmlEscape($_product->getName()); ?>" style="max-width:175px;"/>
+								</a>
+							</div>
+							<div class="col-sm-9 showcase-bg-light" style="min-height:180px;">
+								<div class="padding-type-10">                                	
+                                    <?php $_percentRating = 0;
+										if( count($review->getRatingVotes()) ) {
+											foreach($review->getRatingVotes() as $_vote){
+												$_percentRating = $_percentRating + $_vote->getPercent();
+											}
+										}
+										$_percentRating = $_percentRating / count($review->getRatingVotes());
+									?>
+								<div class="high-margin-bottom">
+                                <div class="rating-box pull-left">
+									<div style="width:<?php echo $_percentRating; ?>%;" class="rating"></div>
+								</div>  
+                                <div class="pull-left low-padding-left min-padding-top small"><strong><?php printf("%.1f",($_percentRating * .05));?></strong></div>
+                                <div class="clearfix"></div>
+                                 </div>                               
+									<div class="fontsize-type3 high-padding-bottom"><strong><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getTitle()), null, true), $length = 50, $etc = '...');?></strong></div>                                    
+									<div class="fontsize-type2"><?php echo $this->stripTags($this->htmlEscape($review->getDetail())) ?></div>
+                                    
+                                    <div class="fontsize-type1 text-light high-padding-top"><i><?php echo $this->htmlEscape($review->getNickname()); ?> <?php /*?>/ <span class="fontcolor-type1"><?php 
+      if(strtotime('1 month ago') < strtotime(Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL)))
+       echo Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL); 
+      else
+       echo 'Older than a month';?><?php //echo Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);?></span><?php */?></i></div>
+								</div>
+							</div>
+						</div>					
+					<?php endforeach; ?>
+		
+	</div>
+    
+    <div class="max-margin-top"><a href="/testimonials/index/morereviews/id/<?php echo $category->getID();?>/" class="fontcolor-type1 max-margin-bottom text-underline pull-right">Read More Reviews</a></div>
+<?php endif; ?>

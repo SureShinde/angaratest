@@ -1,0 +1,71 @@
+<div style="display: none;" class="loading-indicator hide text-center">
+<div class="modal-backdrop fade in"></div>
+	<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+</div>
+<div class="block-sub-heading text-left">Request For Return Shipping Label</div>
+<form method="post"	name="formrequestlabel" class="formrequestlabel text-left" id="formrequestlabel" onsubmit="return false;">
+	<div class="max-padding-top">
+		<input name="name" class="input-text required-entry inputentry" type="text"  placeholder="Name"/>
+	</div>
+	<div class="max-padding-top">
+		<input name="email" class="input-text required-entry validate-email inputentry" type="text"  placeholder="Email Address" />
+	</div>
+	<div class="max-padding-top">
+		<input name="orderno" class="input-text required-entry validate-number inputentry" type="text" placeholder="Order Number"  />
+	</div>
+	<div class="max-padding-top">
+		<input name="reason" class="input-text required-entry inputentry" type="text"  placeholder="Reason for Return" />
+	</div>
+
+    <script>
+	 jQuery('#refresh_captcha').click(function() {  change_captcha(); });
+	 function change_captcha() { document.getElementById('captcha').src="<?php echo Mage::getUrl('popup/index/generatecaptcha/')?>?rnd=" + Math.random(); }
+    </script>
+    <div>
+		<div style="width:165px;float:left"><img src="<?php echo Mage::getUrl('popup/index/generatecaptcha/')?>?rnd=<?php echo rand(0,6);?>" alt="Captcha" id="captcha" /></div>
+        <div style="float:left;padding-top: 17px;"><i class="fa fa-refresh clickable fontsize-type7" id="refresh_captcha"></i></div>
+		<div class="max-padding-top"><input name="code" id="code" class="input-text required-entry inputentry" type="text"  placeholder="Enter Captcha" /></div>
+	</div>
+                        
+	<div class="high-padding-top text-left">
+		<input name="check" type="checkbox" value="1" checked="checked" class="checkbox required-entry"/>
+		<label>Email me a return shipping label</label>
+	</div>
+	<div class="low-padding-top fontsize-type1 text-left">Note: Free return shipping labels are provided<br />
+		for US domestic orders only.</div>
+	<div class="submitbtnreturnpolicy max-padding-top">
+		<input type="submit" value="SUBMIT" name="submitreturnlabel" class="btn btn-primary btn-block" >
+	</div>
+	<div style="clear:both;"></div>
+</form>
+<script>
+//&lt;![CDATA[
+jQuery(function(){
+	var dataFormReturnLabel = new VarienForm('formrequestlabel', false);
+	jQuery('#formrequestlabel').on('submit', function(e) {
+		e.preventDefault();
+		if(dataFormReturnLabel.validator.validate()) {
+			var url =  '/popup/index/requestreturnshippinglabel';
+			var dataString = jQuery(this).serialize();
+			jQuery.ajax({
+				type: 'POST',
+				url: url,
+				data: dataString
+			})
+			.done(function(result,textStatus){
+				if(textStatus == 'success'){          
+					jQuery('#formrequestlabel').parent().append('<div class="padding-type-10">' + result + '</div>');
+					jQuery('#formrequestlabel').remove(); 
+				}
+			})
+			.fail(function(){         
+				// just in case posting your form failed
+				//alert( "Posting failed." );             
+			});			 
+			// to prevent refreshing the whole page page
+			return false;
+		}
+    });	
+});
+//]]&gt; 
+</script>

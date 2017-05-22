@@ -1,0 +1,156 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/layer.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+<?php if($this->canShowOptions()): 
+if($category = 	Mage::registry('current_category')){
+	$categoryId = 	$category->getId();
+	$allowedCategories	=	Mage::helper('function')->getAllowedJewelryTypeCategory($categoryId);
+}
+?>
+
+<div class="low-margin-bottom text-center">
+	<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+	<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+	<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+	<div class="showcase-bg-darkest text-on-dark">
+		<?php /* <div class="row no-margin">
+			<?php if ($state[1] AND $this->bNeedClearAll()): ?>
+			<div class="col-xs-8 col-md-10 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i>Narrow your Selection</div>
+			<div class="col-xs-4 col-md-2 pull-right text-right padding-type-8 clickable"><a class="adj-nav-clearall text-on-dark no-underline block-inline-display" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><div class="hidden-xs"><i class="fa fa-refresh fa-fw"></i>Reset Filters</div><div class="visible-xs"><i class="fa fa-refresh fa-fw"></i>Reset</div></a></div>
+			<?php else: ?>
+			<div class="col-xs-12 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i>Narrow your Selection<span id="catalog-filter-toggle"><i class="fa fa-angle-down fa-fw pull-right"></i></span></div>
+			<?php endif ?>
+		</div> */ ?>
+		<!--<div class="shine-effect"></div>-->
+	</div>
+	<div id="filter-panel" class="hide high-margin-bottom">
+		<?php $_filters = $this->getFilters() ?>
+		<div class="row max-margin-top no-gutters filter-hldr">
+			<div class="col-sm-1 filter-title" style="color:#000000; font-weight:500">
+				Shop For:
+			</div>
+			<div class="col-sm-9 main-filter-title-holder">
+					<?php foreach ($_filters as $_filter): ?>
+					<?php if($_filter->getName() != 'Category'){ ?>
+					<?php $colSize = 2; if($_filter->getName() == 'Price' || $_filter->getName() == 'Style') $colSize = 1; $s=1; ?>
+                    <?php if( ($_filter->getName()=='Jewelry Type')){	//	S:VA
+							if($allowedCategories){?>
+                    			<div class="catalog-filter clickable" <?php if($s == 7){ echo 'style="display:none"'; } ?>>
+									<div class="catalog-filter-nav-item">
+                                        <span class="block-inline-display col-sm-12 no-padding sep-holder"><span class="pull-left right-pad"><?php echo $_filter->getName();?></span><i class="fa fa-angle-down pull-right" style="margin-top:2px"></i></span>
+                                        <br>
+                                        <small></small>
+                                    </div>
+								</div>
+                            <?php } ?>
+                    <?php } else{?>
+                   		<div class="catalog-filter clickable" <?php if($s == 7){ echo 'style="display:none"'; } ?>>
+							<div class="catalog-filter-nav-item">
+							<span class="block-inline-display col-sm-12 no-padding sep-holder"><span class="pull-left right-pad"><?php 
+							/* Added to show Static Text for Pearl */
+							$pearlCategories = array('482','483','484','485','211');
+							if(in_array($categoryId, $pearlCategories)){ 
+								if($_filter->getName() == 'Gemstone'){ 
+									$filterName = 'Pearl Type';
+								} 
+								else if($_filter->getName() == 'Gemstone Shape'){ 
+									$filterName = 'Pearl Shape'; 
+								}
+								else{
+									$filterName = $_filter->getName();
+								}
+							}
+							else { 
+								$filterName = $_filter->getName();	
+							} 
+							echo $filterName; //echo $_filter->getName();?></span><i class="fa fa-angle-down pull-right" style="margin-top:2px"></i></span>
+							<br>
+							<small></small>
+						</div>
+						</div>
+                    <?php } //	E:VA?>
+                    
+					<?php $s++; } ?>
+					<?php endforeach; ?>
+			</div>
+			<div id="sort-by-option-holder" class="col-sm-2"></div>
+		</div>
+		<div class="row low-padding-top no-gutters">
+			<div class="col-xs-12">
+				<div class="showcase-bg-white min-margin-right min-padding-bottom clearfix">
+					<?php foreach ($_filters as $_filter): ?>
+					<?php if($_filter->getName() != 'Category'){ ?>
+						<?php if ($clearUrl = $_filter->getClearUrl()){ $style = 'margin-bottom:40px'; }else{ $style = ''; } ?>
+						<?php if( ($_filter->getName()=='Jewelry Type') ){	//	S:VA
+							if($allowedCategories){?>
+								<div id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="catalog-filter-content clearfix hide">
+									<div class="adj-nav-filter-scroll-box" style="<?php echo $style; ?>">
+										<?php echo $_filter->getHtml() ?>
+									</div>
+									<?php if ($clearUrl = $_filter->getClearUrl()){ ?>
+										<span class="clear-selections"><a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear"><?php echo $this->__('Clear Selections')?></a></span>
+									<?php } ?>
+								</div>
+							<?php } ?>
+						<?php } else{ ?>
+							<div id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="catalog-filter-content clearfix hide">
+								<div class="adj-nav-filter-scroll-box" style="<?php echo $style; ?>">
+									<?php echo $_filter->getHtml() ?> 
+								</div>
+								<?php if ($clearUrl = $_filter->getClearUrl()){ ?>
+									<span class="clear-selections"><a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear"><?php echo $this->__('Clear Selections')?></a></span>
+								<?php } ?>
+							</div>
+						<?php } //	E:VA?>
+					<?php } ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="applied-filter-list-container" class="row high-margin-bottom no-gutters text-left small hidden">
+		<div class="col-sm-12">
+			<div class="low-padding-top low-padding-left nowrap applied-filter-title">You've selected: </div>
+		</div>
+		<div class="col-sm-12">
+			<div id="applied-filter-list"></div>
+			<?php if ($state[1] AND $this->bNeedClearAll()){ ?>
+				<div class="pull-left padding-type-5 high-padding-right low-margin-bottom clickable" style="color:#999999; padding-right:0px;"><a class="adj-nav-clearall no-underline block-inline-display" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><div>Clear All</div></a></div>
+			<?php } ?>
+		</div>
+	</div>
+	<script type="text/javascript">adj_nav_init();</script> 
+</div>
+<?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+		if ('function' == typeof(sns_layer_add_attr)){
+			sns_layer_add_attr();
+		}
+		adj_nav_toolbar_init();
+		
+		jQuery('.catalog-filter-nav-item.active').parent('.catalog-filter').find('')
+
+//	S:VA	Close elements on click of outside
+jQuery(document).on('click touchstart', function(e){
+	if ( (!jQuery(e.target).closest('.main-filter-title-holder, .catalog-filter-content').length) ) {		//	find if we have a class
+		if(jQuery('.main-filter-title-holder').children().find('.catalog-filter-nav-item').hasClass('active')){	//check if we have child class with active class
+			jQuery('.catalog-filter-content').hide();
+			jQuery(this).find('.catalog-filter-nav-item').removeClass('active');
+		}
+	}
+	if ((!jQuery(e.target).closest('.sort-by-options-title, .sort-by-options').length)) {		//	find if we have a class
+		jQuery('#sort-by-option-holder .sort-by-options-title').removeClass('active');
+		jQuery('#sort-by-option-holder .sort-by-options').slideUp(100);
+	}
+});		
+</script> 

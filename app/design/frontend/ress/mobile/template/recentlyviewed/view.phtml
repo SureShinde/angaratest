@@ -1,0 +1,48 @@
+<style>
+#recently-viewed-jewelry-container .row:last-child{ border-bottom:0;}
+</style>
+
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items = array();
+
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+}
+
+if(count($rw_items) >= 4){?>
+	<div class="max-padding-bottom">	
+		<div class="high-margin-top showcase-bg-dark padding-type-8"><span class="fontsize-type4"><strong>Recently Viewed Jewelry</strong></span><span data-toggle="tab" data-to-toggle-class="recently-tab-content" data-to-toggle="#recently-viewed-jewelry"><i class="clickable fa fa-minus pull-right low-margin-top"></i></span></div>
+        <div id="recently-viewed-jewelry" class="recently-tab-content padding-type-8 border-block" style="max-height:348px; overflow:auto;">
+        <?php
+        $rw_count_prod = 0;
+        foreach($rw_items as $product){
+            if($rw_count_prod <= 7){
+                $prod_data = Mage::getModel('catalog/product');
+                $prod_data->load($product);
+                $_helper = $this->helper('catalog/output');
+                $image = $this->helper('catalog/image')->init($prod_data,'image')->resize(116,116);
+                $_coreHelper = $this->helper('core');?>
+                <div class="row no-gutters  <?php if($rw_count_prod < (count($rw_items) -1)){?>showcase-border-bottom-1px<?php }?>">
+                	<div class="col-xs-5">
+                        <a href="<?php echo $this->getUrl().$prod_data->getUrlPath();?>?icid=rv-widget"> 
+                            <img class="img-responsive" alt="<?php echo $prod_data->getShortDescription();?>" title="<?php echo $prod_data->getShortDescription();?> - Angara.com" src="<?php echo $image;?>">
+                        </a>
+                    </div>
+                    <div class="col-xs-7 max-margin-top">
+                        <?php 
+						$_productNameStripped = $this->stripTags($prod_data->getShortDescription(), null, true); 
+						$remainder = ''; ?>
+                        <div class="low-margin-bottom"><a href="<?php echo $prod_data->getProductUrl() ?>?icid=rv-widget" title="<?php echo $_productNameStripped; ?>"><strong><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($prod_data, $prod_data->getShortDescription(), 'short_description'), $length = 42, $etc = '...', $remainder, false);?></strong></a></div>
+                        <div class="regular-price"><?php echo $this->getPriceHtml($prod_data, true, '-recent'); ?></div>
+                    </div>
+                </div>            
+        	<?php
+            }
+        $rw_count_prod++;
+        }?>
+        </div>
+    </div>    
+<?php
+}?>

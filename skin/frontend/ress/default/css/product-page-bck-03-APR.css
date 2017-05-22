@@ -1,0 +1,4390 @@
+.customize-product-option {
+    line-height: 13px;
+    font-size: 11px
+}
+.padding-left-3px {
+    padding-left: 3px
+}
+.padding-right-3px {
+    padding-right: 3px
+}
+.fa-info-circle:hover {
+    color: #d60b0b
+}
+.last-minute-shopping-tag {
+    display: none !important
+}
+.filter-categories {
+    height: 72px;
+    background: url(/skin/frontend/angara/default/images/top-cat-divider.jpg?v=1.2) no-repeat
+}
+.filter-categories a {
+    padding: 1px;
+    display: block;
+    text-decoration: none
+}
+.filter-categories a img {
+    border: none;
+    outline: none
+}
+.filter-categories a:hover {
+    border: solid 1px #DE513E;
+    display: block;
+    padding: 0;
+    transition: none
+}
+.inactive-block {
+    opacity: 0.5;
+    filter: alpha(opacity=50)
+}
+div.siblings+div.siblings div.seperator {
+    display: block !important
+}
+.bg-subheading {
+    background-color: #ebebeb
+}
+.border-block {
+    border: solid 2px #ebebeb
+}
+.sleshed-price .price {
+    font-size: 10px;
+    text-decoration: line-through;
+    color: #000
+}
+.simpleLens-mouse-cursor {
+    background-color: #CCC;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #999;
+    box-shadow: 0 0 2px 2px #999;
+    cursor: none
+}
+.simpleLens-lens-element {
+    border: 1px solid #999;
+    background-color: #FFFFFF;
+    height: 350px;
+    left: 102%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 350px;
+    z-index: 9999;
+    text-align: center
+}
+.simpleLens-lens-element img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: auto !important;
+    max-width: none !important
+}
+#more-views-left.active {
+    cursor: pointer;
+    padding: 2px 0
+}
+#more-views-right.active {
+    cursor: pointer;
+    padding: 2px 0
+}
+.product-view .box-reviews dd {
+    padding-bottom: 0;
+    border-bottom: 1px solid #eeeeee
+}
+.product-view .box-reviews dt {
+    padding-top: 13px;
+    font-weight: normal
+}
+.product-retail-price-range-recent,
+.product-retail-price-recent {
+    font-size: 11px
+}
+.price-extra-text-upsell {
+    display: none !important
+}
+.product-retail-price-range-upsell,
+.product-retail-price-upsell {
+    font-size: 11px
+}
+.or-sep.full-or-sep {
+    width: 100%
+}
+.or-sep.full-or-sep:before {
+    width: 110px;
+    left: 0px;
+    height: 1px;
+    top: 23px
+}
+.or-sep.full-or-sep span {
+    margin-left: 50px
+}
+.product-tags li {
+    display: inline-block;
+    margin-bottom: 3px
+}
+.product-tags li a {
+    color: #777777;
+    font-size: 12px
+}
+.product-tags li a:hover {
+    color: #fa505a
+}
+.product-tags li:last-child span {
+    display: none
+}
+.option-details-text span:hover {
+    color: #fa505a
+}
+.showcase-border-1px {
+    border: 1px solid #e2e2e2
+}
+.padding-type-1 {
+    padding: 1px
+}
+.mothers-pro-container #add-cart-wait {
+    position: absolute;
+    left: 170px;
+    top: 4px;
+    color: #ffffff
+}
+.product-name h1 {
+    line-height: 20px;
+    font-size: 18px !important;
+    padding-right: 40px
+}
+.mothers-pro-container .product-essential .link-wishlist {
+    position: absolute;
+    top: 15px;
+    display: block;
+    padding: 3px 8px;
+    font-size: 19px;
+    border: 1px solid #aaaaaa;
+    color: #6a6663;
+    left: 215px;
+}
+.mothers-pro-container .product-essential .link-wishlist:hover,
+.mothers-pro-container .product-essential .link-wishlist.added-to-wishlist {
+    border: 1px solid #fa505a;
+    color: #fa505a
+}
+.normal-pro-container .product-essential .link-wishlist:hover,
+.normal-pro-container .product-essential .link-wishlist.added-to-wishlist {
+    background-position: -173px -160px
+}
+.product-tab-content h3:first-child {
+    margin-top: 0px
+}
+li.product-tab:last-child a {
+    border-right: 1px solid #dddddd !important
+}
+.link-to-tabs ul {
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    float: left
+}
+.link-to-tabs ul li {
+    display: block;
+    float: left;
+    padding: 5px 15px 5px 0px
+}
+.link-to-tabs ul li a {
+    color: #00499c
+}
+.social-share .share {
+    line-height: 20px;
+    font-size: 16px;
+    color: #00459e
+}
+.newsletter-home-upperfix {
+    width: 0px;
+    position: fixed;
+    z-index: 1030;
+    border: 1px solid #eeeeee;
+    box-shadow: 0px 0px 11px -2px #dedede;
+    background-color: #ffffff;
+    transition: 500ms width;
+    height: 100%;
+    top: 0px;
+    right: 0px
+}
+.newsletter-home-upperfix .viewed-pro {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0
+}
+.newsletter-home-upperfix .viewed-pro:last-child {
+    border: none
+}
+.newsletter-home-upperfix .heading {
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -100px;
+    top: 390px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    width: 170px;
+    height: 30px;
+    border-radius: 5px 5px 0px 0px;
+    background: #6d6b6c;
+    background: -moz-linear-gradient(top, #6d6b6c 0%, #3d3d3d 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6d6b6c), color-stop(100%, #3d3d3d));
+    background: -webkit-linear-gradient(top, #6d6b6c 0%, #3d3d3d 100%);
+    background: -o-linear-gradient(top, #6d6b6c 0%, #3d3d3d 100%);
+    background: -ms-linear-gradient(top, #6d6b6c 0%, #3d3d3d 100%);
+    background: linear-gradient(to bottom, #6d6b6c 0%, #3d3d3d 100%);
+    color: #ffffff
+}
+.newsletter-home-upperfix .heading .deactive,
+.newsletter-home-upperfix .heading .active {
+    cursor: pointer;
+    display: block;
+    padding: 5px 14px
+}
+.newsletter-home-upperfix .heading .deactive i,
+.newsletter-home-upperfix .heading .active i {
+    float: right
+}
+#add-ons-panel .hidden-sm {
+    display: inline-block !important
+}
+.product-essential .product-img-box {
+    padding: 10px !important;
+    margin-bottom: 50px
+}
+.products-grid {
+    margin-left: -8px;
+    margin-right: -8px
+}
+.products-grid:before,
+.products-grid:after {
+    content: " ";
+    display: table
+}
+.products-grid:after {
+    clear: both
+}
+.products-grid:before,
+.products-grid:after {
+    content: " ";
+    display: table
+}
+.products-grid:after {
+    clear: both
+}
+.products-grid .item {
+    position: relative;
+    float: left;
+    width: 33.33333333333333%;
+    min-height: 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-height: 390px;
+    padding-bottom: 80px
+}
+.products-grid .product-image {
+    display: block;
+    margin-bottom: 10px
+}
+.products-grid .product-image img {
+    padding: 4px;
+    line-height: 1.428571429;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+    max-width: 100%;
+    height: auto
+}
+.products-grid .product-name {
+    min-height: 60px
+}
+.products-grid .actions {
+    position: absolute;
+    bottom: 0
+}
+.products-grid .add-to-links .separator {
+    display: none
+}
+.products-list li.item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeeee
+}
+.products-list li.item:before,
+.products-list li.item:after {
+    content: " ";
+    display: table
+}
+.products-list li.item:after {
+    clear: both
+}
+.products-list li.item:before,
+.products-list li.item:after {
+    content: " ";
+    display: table
+}
+.products-list li.item:after {
+    clear: both
+}
+.products-list li.item:first-child {
+    padding-top: 0
+}
+.products-list li.item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0
+}
+.products-list .product-image {
+    float: left;
+    width: 150px;
+    display: block
+}
+.products-list .product-image img {
+    padding: 4px;
+    line-height: 1.428571429;
+    background-color: #ffffff;
+    display: inline-block;
+    max-width: 100%;
+    height: auto
+}
+.products-list .product-shop {
+    margin-left: 160px
+}
+.products-list .add-to-links li {
+    display: inline
+}
+.products-list .add-to-links .separator {
+    display: inline;
+    margin: 0 4px
+}
+.add-to-cart .paypal-logo {
+    margin: 0;
+    text-align: right
+}
+.add-to-cart .paypal-logo .paypal-or {
+    display: block;
+    margin: 5px 60px 5px 0
+}
+.add-to-cart .paypal-logo .paypal-logo {
+    margin: 0
+}
+.add-to-box:after {
+    clear: both
+}
+.add-to-box:after {
+    clear: both
+}
+.add-to-box .or {
+    float: left
+}
+.product-view:after {
+    clear: both
+}
+.product-view:before,
+.product-view:after {
+    content: " ";
+    display: table
+}
+.product-view:after {
+    clear: both
+}
+.product-essential .product-shop {
+    min-height: 1px;
+    position: relative
+}
+.product-essential .product-img-box .more-views ul:after {
+    clear: both
+}
+.product-view .product-shop>.list-group {
+    margin-bottom: 0
+}
+.product-view .product-shop>.list-group .list-group-item {
+    border-width: 1px 0
+}
+.product-view .product-shop>.list-group .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0
+}
+.product-view .product-shop>.list-group .list-group-item:last-child {
+    border-bottom: 0
+}
+.product-view .product-shop>.table,
+.product-view .product-shop>.table-responsive {
+    margin-bottom: 0
+}
+.product-view .product-shop>.panel-body+.table,
+.product-view .product-shop>.panel-body+.table-responsive {
+    border-top: 1px solid #dddddd
+}
+.product-view .product-shop>.table-bordered,
+.product-view .product-shop>.table-responsive>.table-bordered {
+    border: 0
+}
+.product-view .product-shop>.table-bordered>thead>tr>th:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr>th:first-child,
+.product-view .product-shop>.table-bordered>tbody>tr>th:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr>th:first-child,
+.product-view .product-shop>.table-bordered>tfoot>tr>th:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr>th:first-child,
+.product-view .product-shop>.table-bordered>thead>tr>td:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr>td:first-child,
+.product-view .product-shop>.table-bordered>tbody>tr>td:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr>td:first-child,
+.product-view .product-shop>.table-bordered>tfoot>tr>td:first-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr>td:first-child {
+    border-left: 0
+}
+.product-view .product-shop>.table-bordered>thead>tr>th:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr>th:last-child,
+.product-view .product-shop>.table-bordered>tbody>tr>th:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr>th:last-child,
+.product-view .product-shop>.table-bordered>tfoot>tr>th:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr>th:last-child,
+.product-view .product-shop>.table-bordered>thead>tr>td:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr>td:last-child,
+.product-view .product-shop>.table-bordered>tbody>tr>td:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr>td:last-child,
+.product-view .product-shop>.table-bordered>tfoot>tr>td:last-child,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr>td:last-child {
+    border-right: 0
+}
+.product-view .product-shop>.table-bordered>thead>tr:last-child>th,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr:last-child>th,
+.product-view .product-shop>.table-bordered>tbody>tr:last-child>th,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr:last-child>th,
+.product-view .product-shop>.table-bordered>tfoot>tr:last-child>th,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr:last-child>th,
+.product-view .product-shop>.table-bordered>thead>tr:last-child>td,
+.product-view .product-shop>.table-responsive>.table-bordered>thead>tr:last-child>td,
+.product-view .product-shop>.table-bordered>tbody>tr:last-child>td,
+.product-view .product-shop>.table-responsive>.table-bordered>tbody>tr:last-child>td,
+.product-view .product-shop>.table-bordered>tfoot>tr:last-child>td,
+.product-view .product-shop>.table-responsive>.table-bordered>tfoot>tr:last-child>td {
+    border-bottom: 0
+}
+.product-view .product-shop .product-name {
+    padding: 0 0 5px
+}
+.product-view .product-shop .product-name>.dropdown .dropdown-toggle {
+    color: inherit
+}
+.product-view .product-shop .product-name h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px
+}
+.product-view .product-shop .product-name h1>a {
+    color: inherit
+}
+.product-view .product-shop .product-options-bottom .price-box,
+.product-view .product-shop .product-options-bottom .add-to-cart {
+    padding-left: 8px 82px
+}
+.product-view .grouped-items-table .price-box {
+    margin: 0
+}
+.product-view .grouped-items-table .qty {
+    width: auto
+}
+.product-view .box-collateral:before,
+.product-view .box-collateral:after {
+    content: " ";
+    display: table
+}
+.product-view .box-collateral:after {
+    clear: both
+}
+.product-view .box-collateral:before,
+.product-view .box-collateral:after {
+    content: " ";
+    display: table
+}
+.product-view .box-collateral:after {
+    clear: both
+}
+.product-view .box-collateral>.list-group {
+    margin-bottom: 0
+}
+.product-view .box-collateral>.list-group .list-group-item {
+    border-width: 1px 0
+}
+.product-view .box-collateral>.list-group .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0
+}
+.product-view .box-collateral>.list-group .list-group-item:last-child {
+    border-bottom: 0
+}
+.product-view .box-collateral>.table,
+.product-view .box-collateral>.table-responsive {
+    margin-bottom: 0
+}
+.product-view .box-collateral>.panel-body+.table,
+.product-view .box-collateral>.panel-body+.table-responsive {
+    border-top: 1px solid #dddddd
+}
+.product-view .box-collateral>.table-bordered,
+.product-view .box-collateral>.table-responsive>.table-bordered {
+    border: 0
+}
+.product-view .box-collateral>.table-bordered>thead>tr>th:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr>th:first-child,
+.product-view .box-collateral>.table-bordered>tbody>tr>th:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr>th:first-child,
+.product-view .box-collateral>.table-bordered>tfoot>tr>th:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr>th:first-child,
+.product-view .box-collateral>.table-bordered>thead>tr>td:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr>td:first-child,
+.product-view .box-collateral>.table-bordered>tbody>tr>td:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr>td:first-child,
+.product-view .box-collateral>.table-bordered>tfoot>tr>td:first-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr>td:first-child {
+    border-left: 0
+}
+.product-view .box-collateral>.table-bordered>thead>tr>th:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr>th:last-child,
+.product-view .box-collateral>.table-bordered>tbody>tr>th:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr>th:last-child,
+.product-view .box-collateral>.table-bordered>tfoot>tr>th:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr>th:last-child,
+.product-view .box-collateral>.table-bordered>thead>tr>td:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr>td:last-child,
+.product-view .box-collateral>.table-bordered>tbody>tr>td:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr>td:last-child,
+.product-view .box-collateral>.table-bordered>tfoot>tr>td:last-child,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr>td:last-child {
+    border-right: 0
+}
+.product-view .box-collateral>.table-bordered>thead>tr:last-child>th,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr:last-child>th,
+.product-view .box-collateral>.table-bordered>tbody>tr:last-child>th,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr:last-child>th,
+.product-view .box-collateral>.table-bordered>tfoot>tr:last-child>th,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr:last-child>th,
+.product-view .box-collateral>.table-bordered>thead>tr:last-child>td,
+.product-view .box-collateral>.table-responsive>.table-bordered>thead>tr:last-child>td,
+.product-view .box-collateral>.table-bordered>tbody>tr:last-child>td,
+.product-view .box-collateral>.table-responsive>.table-bordered>tbody>tr:last-child>td,
+.product-view .box-collateral>.table-bordered>tfoot>tr:last-child>td,
+.product-view .box-collateral>.table-responsive>.table-bordered>tfoot>tr:last-child>td {
+    border-bottom: 0
+}
+.product-view .box-collateral>h2 {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin: -15px -15px 15px;
+    border-color: #dddddd;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    color: #333333
+}
+.product-view .box-collateral>h2>.dropdown .dropdown-toggle {
+    color: inherit
+}
+.product-view .box-additional {
+    padding: 0
+}
+.product-view .box-additional>h2 {
+    margin: 0
+}
+.product-view .box-additional .data-table {
+    border: 0;
+    margin-bottom: 0
+}
+.product-view .box-additional .data-table>tbody>tr>th {
+    border-left: 0
+}
+.product-view .box-additional .data-table>tbody>tr>td {
+    border-right: 0
+}
+.product-view .box-additional .data-table>tbody>tr.first>th,
+.product-view .box-additional .data-table>tbody>tr.first>td {
+    border-top: 0
+}
+.product-view .box-additional .data-table>tbody>tr.last>th,
+.product-view .box-additional .data-table>tbody>tr.last>td {
+    border-bottom: 0
+}
+.product-view .box-up-sell .table-responsive {
+    padding: 15px 0
+}
+.product-view .box-up-sell .products-grid {
+    margin: 0;
+    width: 100%
+}
+.product-view .box-up-sell .products-grid td {
+    width: 25%;
+    padding: 0 15px;
+    vertical-align: top
+}
+.product-view .box-up-sell .products-grid .product-image,
+.product-view .box-up-sell .products-grid .price-box {
+    margin-bottom: 10px
+}
+.product-view .box-up-sell .products-grid .ratings {
+    margin-bottom: 0
+}
+.product-view .box-tags {
+    margin: 0
+}
+.product-view .box-tags .product-tags li {
+    display: inline;
+    white-space: nowrap;
+    margin: 0 6px
+}
+.product-view .box-tags .note {
+    margin: 0;
+    text-align: center
+}
+.product-view .box-reviews dt {
+    padding-top: 15px;
+    font-weight: normal
+}
+.product-view .box-reviews dt a,
+.product-view .box-reviews dt span {
+    font-weight: bold
+}
+.product-view .box-reviews dd {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eeeeee
+}
+.product-view .box-reviews dd:before,
+.product-view .box-reviews dd:after {
+    content: " ";
+    display: table
+}
+.product-view .box-reviews dd:after {
+    clear: both
+}
+.product-view .box-reviews dd:before,
+.product-view .box-reviews dd:after {
+    content: " ";
+    display: table
+}
+.product-view .box-reviews dd:after {
+    clear: both
+}
+.product-view .box-reviews dd .ratings-table {
+    float: left;
+    margin-right: 10px
+}
+.product-view .box-reviews dd small {
+    font-style: italic
+}
+.product-view .box-reviews .form-add h3 {
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: normal
+}
+.product-view .box-reviews .form-add h3 span {
+    font-weight: 500
+}
+.product-view .box-reviews .form-add h4 {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold
+}
+.product-view .box-reviews .form-add h4 em {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: -8px;
+    color: #b94a48
+}
+.product-view .box-reviews .form-add td.value {
+    text-align: center
+}
+.product-view .box-reviews .form-add td.value .radio {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    height: 20px
+}
+.quick-view .more-views ul li {
+    margin: 2px;
+    width: 45px;
+    height: 45px
+}
+.quick-view .more-views ul li img {
+    max-width: 100% !important;
+    max-height: 100% !important
+}
+.quick-view #product-options-wrapper-ring-size .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 20px
+}
+.quick-view button#addtocart-btn {
+    height: 50px;
+    background: #f14c36;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    max-width: 350px
+}
+.quick-view button#addtocart-btn i {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 20px
+}
+.quick-view button#addtocart-btn:before {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background: #b52f1c;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: .3
+}
+.quick-view #add-cart-wait {
+    left: 300px;
+    right: initial;
+    top: 0px;
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    line-height: 60px;
+    text-align: center;
+    background: #ea8577
+}
+.quick-view .simpleLens-big-image-container {
+    width: 300px
+}
+.quick-view .simpleLens-lens-image {
+    max-width: 300px
+}
+@media (min-width: 999px) and (max-width: 1550px) {
+    .valentines_heart.push-right {
+        right: initial;
+        left: 5px
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mainSection {
+        width: 100% !important
+    }
+    .similarItems {
+        width: 100% !important
+    }
+    .similarItems .visible-md {
+        display: none !important
+    }
+    .similarItems .visible-sm {
+        display: block !important
+    }
+    .similarItems #similar-items {
+        border: none !important
+    }
+    .similarItems #similar-items .block-sub-heading {
+        text-align: left
+    }
+    .quick-view .col-md-10 {
+        width: 83.33333333333334%
+    }
+    .normal-pro-container #similar-items {
+        position: relative
+    }
+    .stone-holder-box .padding-type-5.low-padding-left.low-padding-right {
+        padding: 5px 1px
+    }
+    .stone-holder-box .low-padding-left.low-padding-right.showcase-border-thick.padding-type-3.border-active.no-transition {
+        padding: 3px 1px
+    }
+}
+@media screen and (min-width: 999px) {
+    #similar-items .slick-slide img {
+        width: 100%
+    }
+    #similar-items .block-sub-heading {
+        margin-top: 2px
+    }
+    .top-position-btn {
+        position: absolute;
+        top: 58px;
+        right: 8px;
+        width: 225px;
+        padding: 5px;
+        border: 1px solid #dedede
+    }
+    .top-position-btn .low-padding-top {
+        padding-top: 0px
+    }
+    .top-position-btn .col-md-4 {
+        width: 100%
+    }
+    .top-position-btn .col-md-7 {
+        width: 25%;
+        height: 0px
+    }
+    .product-view .product-shop .product-options-bottom .price-box,
+    .product-view .product-shop .product-options-bottom .add-to-cart {
+        float: none;
+        width: auto
+    }
+    .product-options-bottom .price-box,
+    .product-options-bottom .add-to-cart {
+        float: left;
+        width: 50%
+    }
+    .product-options-bottom .price-box {
+        padding-top: 0
+    }
+}
+@media screen and (max-width: 999px) {
+    .quality-chart {
+        float: right !important
+    }
+    .ring-size-guide {
+        float: right !important
+    }
+    .usp-near-add-to-cart {
+        margin: 10px 0px 20px
+    }
+    #special-offer-details {
+        width: 100% !important
+    }
+    #add-ons-panel .hidden-sm {
+        display: none !important
+    }
+    .mothers-pro-container .product-essential .link-wishlist {
+        position: absolute;
+        top: 15px;
+        display: block;
+        padding: 3px 8px;
+        font-size: 19px;
+        border: none;
+        color: #6a6663;
+        right: initial;
+        left: 0px
+    }
+    .mothers-pro-container.product-essential .link-wishlist:hover,
+    .product-essential .link-wishlist.added-to-wishlist {
+        border: none;
+        color: #fa505a
+    }
+    .product-name h1 {
+        font-size: 16px !important
+    }
+    li.product-tab a {
+        font-size: 13px !important
+    }
+    #sub-navigation nav {
+        width: 716px
+    }
+    .link-to-tabs ul li {
+        padding: 5px 10px 5px 0px
+    }
+    .link-to-tabs ul li:last-child {
+        padding-right: 0px
+    }
+    .product-essential .product-img-box .more-views ul li img {
+        max-width: 100% !important;
+        height: auto !important
+    }
+    .social-share .share {
+        font-size: 14px !important;
+        margin-right: 5px !important
+    }
+    #add-ons-panel #jewel-appraisal {
+        float: left
+    }
+    .add-to-cart-holder-box {
+        padding: 5px
+    }
+    .product-img-box .more-views {
+        width: 75%
+    }
+    .product-essential .product-img-box .more-views ul li {
+        margin: 0 2px
+    }
+    #more-views-left {
+        width: 29px
+    }
+    #more-views-right {
+        width: 29px
+    }
+    .simpleLens-lens-image {
+        width: auto
+    }
+}
+@media (min-width: 768px) and (max-width: 999px) {
+    .filter-categories a span {
+        font-size: 12px
+    }
+}
+.product-view {
+    width: 100% !important
+}
+.product-view:before,
+.product-view:after {
+    content: " ";
+    display: table
+}
+.normal-pro-container .product-view .product-essential {
+    margin-top: 2px
+}
+.product-essential,
+.product-collateral {
+    position: relative;
+    min-height: 1px
+}
+@media screen and (min-width: 1025px) {
+    .mainSection {
+        width: 88% !important
+    }
+}
+.product-name h1 {
+    line-height: 20px;
+    font-size: 18px;
+    padding-right: 40px
+}
+.product-name .rating-links span {
+    color: #1D6DD1
+}
+.product-name {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 30px
+}
+.normal-pro-container .product-name {
+    padding-bottom: 10px
+}
+.slick-prev:before,
+.slick-next:before {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e2e2
+}
+.slick-slider {
+    margin-bottom: 0px !important
+}
+.regular-price .price,
+.regular-price .price-box .price {
+    font-weight: normal;
+    font-size: 12px !important
+}
+.product-retail-price-range-related,
+.product-retail-price-related {
+    font-size: 11px
+}
+.low-padding {
+    padding: 5px
+}
+.product-tab-content .field {
+    border-bottom: 1px dotted #D3D3D3;
+    padding-bottom: 4px;
+    margin-bottom: 4px
+}
+.detail-box-title {
+    font-size: 13px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    color: #777777
+}
+.product-tab-content {
+    padding: 10px;
+    border-top: none
+}
+#product-details-tab {
+    padding: 15px 0px 15px
+}
+li.product-tab a {
+    line-height: 20px;
+    font-size: 14px !important;
+    margin: 0px !important;
+    border-top: 1px solid #dddddd !important;
+    border-left: 1px solid #dddddd !important;
+    font-weight: bold !important
+}
+.nav>li.product-tab>a {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #fff;
+    border-bottom: none
+}
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus {
+    background-color: #f3f3f3;
+    color: #fa505a;
+    border-bottom: none;
+    text-decoration: none !important
+}
+li.product-tab {
+    margin: 0px !important
+}
+.product-essential .product-img-box {
+    position: relative;
+    min-height: 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-left: 0;
+    padding-right: 0
+}
+.simpleLens-big-image-container {
+    width: 500px
+}
+.simpleLens-big-image-container {
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 60px
+}
+.product-img-box .product-image-zoom {
+    vertical-align: middle;
+    text-align: center
+}
+.simpleLens-lens-image {
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: none;
+    float: none;
+    position: relative;
+    max-width: 400px
+}
+.product-img-box .product-image-zoom img,
+.product-img-box .more-views img {
+    vertical-align: middle
+}
+.product-essential .product-img-box img {
+    line-height: 1.428571429;
+    background-color: #ffffff;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+    vertical-align: middle
+}
+.simpleLens-big-image {
+    max-width: 100%;
+    margin: 0 auto
+}
+.more-views-box {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 60px
+}
+.more-views-box #more-views-left,
+.more-views-box #more-views-right {
+    display: none
+}
+#more-views-left {
+    cursor: default;
+    background: none;
+    width: 25px;
+    padding: 2px 0;
+    font-size: 43px;
+    color: #c6c6c6
+}
+.more-views-box .more-views {
+    height: 100%;
+    width: 100%
+}
+.product-img-box .more-views {
+    height: 67px;
+    overflow: hidden;
+    position: relative;
+    width: 87%
+}
+.product-essential .product-img-box .more-views ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: absolute
+}
+.product-essential .product-img-box .more-views ul:before,
+.product-essential .product-img-box .more-views ul:after {
+    content: " ";
+    display: table
+}
+.product-essential .product-img-box .more-views ul li:hover,
+.product-essential .product-img-box .more-views ul li.active {
+    border: 2px solid #CCCCCC
+}
+.product-essential .product-img-box .more-views ul:after {
+    clear: both
+}
+.product-essential .product-img-box .more-views ul:before,
+.product-essential .product-img-box .more-views ul:after {
+    content: " ";
+    display: table
+}
+.more-views-box #more-views-left,
+.more-views-box #more-views-right {
+    display: none
+}
+#more-views-right {
+    cursor: default;
+    background: none;
+    left: 0;
+    width: 25px;
+    padding: 2px 0;
+    font-size: 43px;
+    color: #c6c6c6
+}
+.share-wishlist {
+    width: 100%;
+    float: left;
+    border: 1px solid #dedede;
+    margin-top: 15px;
+    background: #ffffff
+}
+.normal-pro-container .product-essential .link-wishlist {
+    display: block;
+    width: 90%;
+    margin: 5%;
+    height: 50px;
+    float: left;
+    border: 1px solid #dedede;
+    text-align: center;
+    line-height: 50px;
+    background: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    color: #565a5c
+}
+.normal-pro-container .product-essential .add-wishlist:hover {
+    text-decoration: none;
+    color: #565a5c !important;
+    border: 1px solid #bfbfbf
+}
+.normal-pro-container .product-essential .link-wishlist:hover {
+    text-decoration: none;
+}
+.share-wishlist .social-media {
+    width: 100%
+}
+.share-wishlist .social-media .i-holder {
+    width: 25%;
+    float: left;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 5px 5px 8px 5px;
+    border: 1px solid #dedede;
+    border-bottom: none;
+    border-left: none;
+    background: #ffffff
+}
+.share-wishlist .social-media .i-holder.last-child {
+    border-right: none
+}
+.share-wishlist .social-media i {
+    font-size: 0px !important;
+    display: block;
+    width: 38px;
+    height: 38px;
+    float: none;
+    margin: 0 auto;
+    background: url("/skin/frontend/ress/default/images/sprite.jpg?v=1.2") no-repeat
+}
+.share-wishlist .social-media .pinShare {
+    background-position: -129px -203px
+}
+.share-wishlist .social-media .pinShare:hover {
+    background-position: -129px -160px
+}
+.share-wishlist .social-media .tweetShare {
+    background-position: -43px -203px
+}
+.share-wishlist .social-media .tweetShare:hover {
+    background-position: -43px -160px
+}
+.share-wishlist .social-media .googleShare {
+    background-position: -87px -203px
+}
+.share-wishlist .social-media .googleShare:hover {
+    background-position: -87px -160px
+}
+.share-wishlist .social-media .fbShare {
+    background-position: -4px -203px
+}
+.share-wishlist .social-media .fbShare:hover {
+    background-position: -4px -160px
+}
+.product-variation-form {
+    background-color: #ffffff
+}
+div[itemprop="offers"] {
+    padding: 0px
+}
+.price-holder,
+.or-sep,
+.easy-pay {
+    height: 60px
+}
+.product-essential .price-box .product-retail-price {
+    font-size: 17px;
+    color: #000000
+}
+.product-essential .price-box .price {
+    font-size: 22px;
+    font-weight: normal;
+    color: #565a5c;
+    white-space: normal;
+    line-height: 15px
+}
+.pro-options-parent {
+    margin-bottom: 25px
+}
+.pro-options {
+    padding: 0px
+}
+.layout .container .row {
+    margin-left: 0px;
+    margin-right: 0px
+}
+.padding-type-0 {
+    padding: 0px !important
+}
+.normal-pro-container .product-options .h3 {
+    font-size: 11px !important
+}
+.product-options .form-control {
+    height: 30px;
+    border: 1px solid #e2e2e2
+}
+#customize-product-panel .customize-product-tab-content {
+    padding: 20px 0px 35px
+}
+.Stone-BlueSapphire .Round-A {
+    background-position: 0px -2200px
+}
+.Stone-BlueSapphire .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-bluesapphirestone.jpg?v=1.2")
+}
+.product-fi {
+    height: 48px;
+    width: 48px;
+    margin: 0 auto;
+    display: block
+}
+.Stone-BlueSapphire .Round-AA {
+    background-position: 0px -2250px
+}
+.Stone-BlueSapphire .Round-AAA {
+    background-position: 0px -2300px
+}
+.Stone-BlueSapphire .Round-AAAA {
+    background-position: 0px -2350px
+}
+.option-hldr {
+    padding: 0px !important
+}
+.add-to-box:before,
+.add-to-box:after {
+    content: " ";
+    display: table
+}
+.full-width {
+    width: 100%
+}
+.Stone-Amethyst .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-amethyststone.jpg?v=1.3")
+}
+.Stone-Amethyst .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Amethyst .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Amethyst .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Amethyst .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Amethyst .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Amethyst .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Amethyst .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Amethyst .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Amethyst .Heart-AAA {
+    background-position: 0px -850px
+}
+.Stone-Amethyst .Oval-A {
+    background-position: 0px -900px
+}
+.Stone-Amethyst .Oval-AA {
+    background-position: 0px -950px
+}
+.Stone-Amethyst .Oval-AAA {
+    background-position: 0px -1000px
+}
+.Stone-Amethyst .Oval-AAAA {
+    background-position: 0px -1050px
+}
+.Stone-Amethyst .Pear-A {
+    background-position: 0px -1100px
+}
+.Stone-Amethyst .Pear-AA {
+    background-position: 0px -1150px
+}
+.Stone-Amethyst .Pear-AAA {
+    background-position: 0px -1200px
+}
+.Stone-Amethyst .Pear-AAAA {
+    background-position: 0px -1250px
+}
+.Stone-Amethyst .Square-A {
+    background-position: 0px -1300px
+}
+.Stone-Amethyst .Square-AA {
+    background-position: 0px -1350px
+}
+.Stone-Amethyst .Square-AAA {
+    background-position: 0px -1400px
+}
+.Stone-Amethyst .Square-AAAA {
+    background-position: 0px -1450px
+}
+.Stone-Amethyst .Round-A {
+    background-position: 0px -1501px
+}
+.Stone-Amethyst .Round-AA {
+    background-position: 0px -1551px
+}
+.Stone-Amethyst .Round-AAA {
+    background-position: 0px -1601px
+}
+.Stone-Amethyst .Round-AAAA {
+    background-position: 0px -1651px
+}
+.Stone-Amethyst .Trillion-A {
+    background-position: 0px -1700px
+}
+.Stone-Amethyst .Trillion-AA {
+    background-position: 0px -1750px
+}
+.Stone-Amethyst .Trillion-AAA {
+    background-position: 0px -1800px
+}
+.Stone-Amethyst .Trillion-AAAA {
+    background-position: 0px -1850px
+}
+.Stone-Amethyst .Square-Emerald-Cut-A {
+    background-position: 0px -1900px
+}
+.Stone-Amethyst .Square-Emerald-Cut-AA {
+    background-position: 0px -1950px
+}
+.Stone-Amethyst .Square-Emerald-Cut-AAA {
+    background-position: 0px -2000px
+}
+.Stone-Amethyst .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2050px
+}
+.Stone-Aquamarine .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-aquamarinestone.jpg?v=1.2")
+}
+.Stone-Aquamarine .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Aquamarine .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Aquamarine .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Aquamarine .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Aquamarine .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Aquamarine .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Aquamarine .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Aquamarine .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Aquamarine .Marquise-A {
+    background-position: 0px -850px
+}
+.Stone-Aquamarine .Marquise-AA {
+    background-position: 0px -900px
+}
+.Stone-Aquamarine .Marquise-AAA {
+    background-position: 0px -950px
+}
+.Stone-Aquamarine .Marquise-AAAA {
+    background-position: 0px -1000px
+}
+.Stone-Aquamarine .Oval-A {
+    background-position: 0px -1050px
+}
+.Stone-Aquamarine .Oval-AA {
+    background-position: 0px -1100px
+}
+.Stone-Aquamarine .Oval-AAA {
+    background-position: 0px -1150px
+}
+.Stone-Aquamarine .Oval-AAAA {
+    background-position: 0px -1200px
+}
+.Stone-Aquamarine .Pear-A {
+    background-position: 0px -1250px
+}
+.Stone-Aquamarine .Pear-AA {
+    background-position: 0px -1300px
+}
+.Stone-Aquamarine .Pear-AAA {
+    background-position: 0px -1350px
+}
+.Stone-Aquamarine .Pear-AAAA {
+    background-position: 0px -1400px
+}
+.Stone-Aquamarine .Round-A {
+    background-position: 0px -1450px
+}
+.Stone-Aquamarine .Round-AA {
+    background-position: 0px -1500px
+}
+.Stone-Aquamarine .Round-AAA {
+    background-position: 0px -1550px
+}
+.Stone-Aquamarine .Round-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-Aquamarine .Heart-A {
+    background-position: 0px -1650px
+}
+.Stone-Aquamarine .Heart-AA {
+    background-position: 0px -1700px
+}
+.Stone-Aquamarine .Heart-AAA {
+    background-position: 0px -1750px
+}
+.Stone-Aquamarine .Heart-AAAA {
+    background-position: 0px -1800px
+}
+.Stone-Aquamarine .Square-A {
+    background-position: 0px -1850px
+}
+.Stone-Aquamarine .Square-AA {
+    background-position: 0px -1900px
+}
+.Stone-Aquamarine .Square-AAA {
+    background-position: 0px -1950px
+}
+.Stone-Aquamarine .Square-AAAA {
+    background-position: 0px -2000px
+}
+.Stone-Aquamarine .Square-Emerald-Cut-A {
+    background-position: 0px -2050px
+}
+.Stone-Aquamarine .Square-Emerald-Cut-AA {
+    background-position: 0px -2100px
+}
+.Stone-Aquamarine .Square-Emerald-Cut-AAA {
+    background-position: 0px -2150px
+}
+.Stone-Aquamarine .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2200px
+}
+.Stone-Aquamarine .Trillion-A {
+    background-position: 0px -2250px
+}
+.Stone-Aquamarine .Trillion-AA {
+    background-position: 0px -2300px
+}
+.Stone-Aquamarine .Trillion-AAA {
+    background-position: 0px -2350px
+}
+.Stone-Aquamarine .Trillion-AAAA {
+    background-position: 0px -2400px
+}
+.Stone-Citrine .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-citrinestone.jpg?v=1.3")
+}
+.Stone-Citrine .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Citrine .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Citrine .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Citrine .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Citrine .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Citrine .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Citrine .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Citrine .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Citrine .Oval-A {
+    background-position: 0px -850px
+}
+.Stone-Citrine .Oval-AA {
+    background-position: 0px -900px
+}
+.Stone-Citrine .Oval-AAA {
+    background-position: 0px -950px
+}
+.Stone-Citrine .Oval-AAAA {
+    background-position: 0px -1000px
+}
+.Stone-Citrine .Pear-A {
+    background-position: 0px -1050px
+}
+.Stone-Citrine .Pear-AA {
+    background-position: 0px -1100px
+}
+.Stone-Citrine .Pear-AAA {
+    background-position: 0px -1150px
+}
+.Stone-Citrine .Pear-AAAA {
+    background-position: 0px -1200px
+}
+.Stone-Citrine .Square-A {
+    background-position: 0px -1250px
+}
+.Stone-Citrine .Square-AA {
+    background-position: 0px -1300px
+}
+.Stone-Citrine .Square-AAA {
+    background-position: 0px -1350px
+}
+.Stone-Citrine .Square-AAAA {
+    background-position: 0px -1400px
+}
+.Stone-Citrine .Round-A {
+    background-position: 0px -1450px
+}
+.Stone-Citrine .Round-AA {
+    background-position: 0px -1500px
+}
+.Stone-Citrine .Round-AAA {
+    background-position: 0px -1550px
+}
+.Stone-Citrine .Round-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-Citrine .Trillion-A {
+    background-position: 0px -1650px
+}
+.Stone-Citrine .Trillion-AA {
+    background-position: 0px -1700px
+}
+.Stone-Citrine .Trillion-AAA {
+    background-position: 0px -1750px
+}
+.Stone-Citrine .Trillion-AAAA {
+    background-position: 0px -1800px
+}
+.Stone-Citrine .Square-Emerald-Cut-A {
+    background-position: 0px -1850px
+}
+.Stone-Citrine .Square-Emerald-Cut-AA {
+    background-position: 0px -1900px
+}
+.Stone-Citrine .Square-Emerald-Cut-AAA {
+    background-position: 0px -1950px
+}
+.Stone-Citrine .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2000px
+}
+.Stone-Diamond .user-option-stone-image,
+.Stone-EnhancedBlueDiamond .user-option-stone-image,
+.Stone-EnhancedBlackDiamond .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-diamondstone.jpg?v=1.4")
+}
+.Stone-Diamond .Round-G-H-VS {
+    background-position: 0px -350px
+}
+.Stone-Diamond .Round-H-SI2 {
+    background-position: 0px -400px
+}
+.Stone-Diamond .Round-I-I1 {
+    background-position: 0px -450px
+}
+.Stone-Diamond .Round-J-I2 {
+    background-position: 0px -500px
+}
+.Stone-Diamond .Princess-G-H-VS {
+    background-position: 0px -550px
+}
+.Stone-Diamond .Princess-H-SI2 {
+    background-position: 0px -600px
+}
+.Stone-Diamond .Princess-I-I1 {
+    background-position: 0px -650px
+}
+.Stone-Diamond .Princess-J-I2 {
+    background-position: 0px -700px
+}
+.Stone-EnhancedBlackDiamond .Princess-A {
+    background-position: 0px -750px
+}
+.Stone-EnhancedBlackDiamond .Princess-AA {
+    background-position: 0px -800px
+}
+.Stone-EnhancedBlueDiamond .Princess-AA {
+    background-position: 0px -850px
+}
+.Stone-EnhancedBlueDiamond .Princess-AAA {
+    background-position: 0px -900px
+}
+.Stone-EnhancedBlackDiamond .Round-A {
+    background-position: 0px -950px
+}
+.Stone-EnhancedBlackDiamond .Round-AA {
+    background-position: 0px -1000px
+}
+.Stone-EnhancedBlueDiamond .Round-AA {
+    background-position: 0px -1050px
+}
+.Stone-EnhancedBlueDiamond .Round-AAA {
+    background-position: 0px -1100px
+}
+.Stone-Diamond .Heart-H-SI2, .Stone-Diamond .Heart-H--SI2 {
+    background-position: 0px -1600px
+}
+.Stone-Diamond .Heart-G-H-VS, .Stone-Diamond .Heart-G--VS2{
+    background-position: 0px -1650px
+}
+.Stone-Diamond .Pear-H-SI2, .Stone-Diamond .Pear-H--SI2{
+    background-position: 0px -1700px
+}
+.Stone-Diamond .Pear-G-H-VS, .Stone-Diamond .Pear-G--VS2{
+    background-position: 0px -1750px
+}
+.Stone-Diamond .Pear-I-I1, .Stone-Diamond .Pear-I-J--I1-I2 {
+    background-position: 0px -1850px
+}
+.Stone-Diamond .Pear-J-I2 {
+    background-position: 0px -1800px
+}
+.Stone-Emerald .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-emeraldstone.jpg?v=1.2")
+}
+.Stone-Emerald .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Emerald .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Emerald .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Emerald .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Emerald .Cushion-l {
+    background-position: 0px -650px
+}
+.Stone-Emerald .Emerald-Cut-A {
+    background-position: 0px -700px
+}
+.Stone-Emerald .Emerald-Cut-AA {
+    background-position: 0px -750px
+}
+.Stone-Emerald .Emerald-Cut-AAA {
+    background-position: 0px -800px
+}
+.Stone-Emerald .Emerald-Cut-AAAA {
+    background-position: 0px -850px
+}
+.Stone-Emerald .Emerald-Cut-l {
+    background-position: 0px -900px
+}
+.Stone-Emerald .Heart-A {
+    background-position: 0px -950px
+}
+.Stone-Emerald .Heart-AA {
+    background-position: 0px -1000px
+}
+.Stone-Emerald .Heart-AAA {
+    background-position: 0px -1050px
+}
+.Stone-Emerald .Heart-AAAA {
+    background-position: 0px -1100px
+}
+.Stone-Emerald .Heart-l {
+    background-position: 0px -1150px
+}
+.Stone-Emerald .Marquise-A {
+    background-position: 0px -1200px
+}
+.Stone-Emerald .Marquise-AA {
+    background-position: 0px -1250px
+}
+.Stone-Emerald .Marquise-AAA {
+    background-position: 0px -1300px
+}
+.Stone-Emerald .Marquise-AAAA {
+    background-position: 0px -1350px
+}
+.Stone-Emerald .Marquise-l {
+    background-position: 0px -1400px
+}
+.Stone-Emerald .Oval-A {
+    background-position: 0px -1450px
+}
+.Stone-Emerald .Oval-AA {
+    background-position: 0px -1500px
+}
+.Stone-Emerald .Oval-AAA {
+    background-position: 0px -1550px
+}
+.Stone-Emerald .Oval-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-Emerald .Oval-l {
+    background-position: 0px -1650px
+}
+.Stone-Emerald .Pear-A {
+    background-position: 0px -1700px
+}
+.Stone-Emerald .Pear-AA {
+    background-position: 0px -1750px
+}
+.Stone-Emerald .Pear-AAA {
+    background-position: 0px -1800px
+}
+.Stone-Emerald .Pear-AAAA {
+    background-position: 0px -1850px
+}
+.Stone-Emerald .Pear-l {
+    background-position: 0px -1900px
+}
+.Stone-Emerald .Square-A {
+    background-position: 0px -1950px
+}
+.Stone-Emerald .Square-AA {
+    background-position: 0px -2000px
+}
+.Stone-Emerald .Square-AAA {
+    background-position: 0px -2050px
+}
+.Stone-Emerald .Square-AAAA {
+    background-position: 0px -2100px
+}
+.Stone-Emerald .Square-l {
+    background-position: 0px -2150px
+}
+.Stone-Emerald .Round-A {
+    background-position: 0px -2200px
+}
+.Stone-Emerald .Round-AA {
+    background-position: 0px -2250px
+}
+.Stone-Emerald .Round-AAA {
+    background-position: 0px -2300px
+}
+.Stone-Emerald .Round-AAAA {
+    background-position: 0px -2350px
+}
+.Stone-Emerald .Round-l {
+    background-position: 0px -2400px
+}
+.Stone-Emerald .Trillion-A {
+    background-position: 0px -2450px
+}
+.Stone-Emerald .Trillion-AA {
+    background-position: 0px -2500px
+}
+.Stone-Emerald .Trillion-AAA {
+    background-position: 0px -2550px
+}
+.Stone-Emerald .Trillion-AAAA {
+    background-position: 0px -2600px
+}
+.Stone-Emerald .Trillion-l {
+    background-position: 0px -2650px
+}
+.Stone-Garnet .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-garnetstone.jpg?v=1.3")
+}
+.Stone-Garnet .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Garnet .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Garnet .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Garnet .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Garnet .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Garnet .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Garnet .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Garnet .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Garnet .Heart-AAA {
+    background-position: 0px -850px
+}
+.Stone-Garnet .Oval-A {
+    background-position: 0px -900px
+}
+.Stone-Garnet .Oval-AA {
+    background-position: 0px -950px
+}
+.Stone-Garnet .Oval-AAA {
+    background-position: 0px -1000px
+}
+.Stone-Garnet .Oval-AAAA {
+    background-position: 0px -1050px
+}
+.Stone-Garnet .Pear-A {
+    background-position: 0px -1100px
+}
+.Stone-Garnet .Pear-AA {
+    background-position: 0px -1150px
+}
+.Stone-Garnet .Pear-AAA {
+    background-position: 0px -1200px
+}
+.Stone-Garnet .Pear-AAAA {
+    background-position: 0px -1250px
+}
+.Stone-Garnet .Square-A {
+    background-position: 0px -1300px
+}
+.Stone-Garnet .Square-AA {
+    background-position: 0px -1350px
+}
+.Stone-Garnet .Square-AAA {
+    background-position: 0px -1400px
+}
+.Stone-Garnet .Square-AAAA {
+    background-position: 0px -1450px
+}
+.Stone-Garnet .Round-A {
+    background-position: 0px -1500px
+}
+.Stone-Garnet .Round-AA {
+    background-position: 0px -1550px
+}
+.Stone-Garnet .Round-AAA {
+    background-position: 0px -1600px
+}
+.Stone-Garnet .Round-AAAA {
+    background-position: 0px -1650px
+}
+.Stone-Garnet .Trillion-A {
+    background-position: 0px -1700px
+}
+.Stone-Garnet .Trillion-AA {
+    background-position: 0px -1750px
+}
+.Stone-Garnet .Trillion-AAA {
+    background-position: 0px -1800px
+}
+.Stone-Garnet .Trillion-AAAA {
+    background-position: 0px -1850px
+}
+.Stone-Garnet .Square-Emerald-Cut-A {
+    background-position: 0px -1900px
+}
+.Stone-Garnet .Square-Emerald-Cut-AA {
+    background-position: 0px -1950px
+}
+.Stone-Garnet .Square-Emerald-Cut-AAA {
+    background-position: 0px -2000px
+}
+.Stone-Garnet .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2050px
+}
+.Stone-Opal .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-opalstone.jpg?v=1.2")
+}
+.Stone-Opal .Oval-A {
+    background-position: 0px -450px
+}
+.Stone-Opal .Oval-AA {
+    background-position: 0px -500px
+}
+.Stone-Opal .Oval-AAA {
+    background-position: 0px -550px
+}
+.Stone-Opal .Oval-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Opal .Round-A {
+    background-position: 0px -650px
+}
+.Stone-Opal .Round-AA {
+    background-position: 0px -700px
+}
+.Stone-Opal .Round-AAA {
+    background-position: 0px -750px
+}
+.Stone-Opal .Round-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Opal .Pear-A {
+    background-position: 0px -850px
+}
+.Stone-Opal .Pear-AA {
+    background-position: 0px -900px
+}
+.Stone-Opal .Pear-AAA {
+    background-position: 0px -950px
+}
+.Stone-Opal .Pear-AAAA {
+    background-position: 0px -1000px
+}
+.Stone-Peridot .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-peridotstone.jpg?v=1.3")
+}
+.Stone-Peridot .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Peridot .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Peridot .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Peridot .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Peridot .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Peridot .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Peridot .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Peridot .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Peridot .Heart-AAA {
+    background-position: 0px -850px
+}
+.Stone-Peridot .Oval-A {
+    background-position: 0px -900px
+}
+.Stone-Peridot .Oval-AA {
+    background-position: 0px -950px
+}
+.Stone-Peridot .Oval-AAA {
+    background-position: 0px -1000px
+}
+.Stone-Peridot .Oval-AAAA {
+    background-position: 0px -1050px
+}
+.Stone-Peridot .Pear-A {
+    background-position: 0px -1100px
+}
+.Stone-Peridot .Pear-AA {
+    background-position: 0px -1150px
+}
+.Stone-Peridot .Pear-AAA {
+    background-position: 0px -1200px
+}
+.Stone-Peridot .Pear-AAAA {
+    background-position: 0px -1250px
+}
+.Stone-Peridot .Square-A {
+    background-position: 0px -1300px
+}
+.Stone-Peridot .Square-AA {
+    background-position: 0px -1350px
+}
+.Stone-Peridot .Square-AAA {
+    background-position: 0px -1400px
+}
+.Stone-Peridot .Square-AAAA {
+    background-position: 0px -1450px
+}
+.Stone-Peridot .Round-A {
+    background-position: 0px -1500px
+}
+.Stone-Peridot .Round-AA {
+    background-position: 0px -1550px
+}
+.Stone-Peridot .Round-AAA {
+    background-position: 0px -1600px
+}
+.Stone-Peridot .Round-AAAA {
+    background-position: 0px -1650px
+}
+.Stone-Peridot .Trillion-A {
+    background-position: 0px -1700px
+}
+.Stone-Peridot .Trillion-AA {
+    background-position: 0px -1750px
+}
+.Stone-Peridot .Trillion-AAA {
+    background-position: 0px -1800px
+}
+.Stone-Peridot .Trillion-AAAA {
+    background-position: 0px -1850px
+}
+.Stone-Peridot .Square-Emerald-Cut-A {
+    background-position: 0px -1900px
+}
+.Stone-Peridot .Square-Emerald-Cut-AA {
+    background-position: 0px -1950px
+}
+.Stone-Peridot .Square-Emerald-Cut-AAA {
+    background-position: 0px -2000px
+}
+.Stone-Peridot .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2050px
+}
+.Stone-Ruby .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-rubystone.jpg?v=1.2")
+}
+.Stone-Ruby .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Ruby .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Ruby .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Ruby .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Ruby .Cushion-l {
+    background-position: 0px -650px
+}
+.Stone-Ruby .Emerald-Cut-A {
+    background-position: 0px -700px
+}
+.Stone-Ruby .Emerald-Cut-AA {
+    background-position: 0px -750px
+}
+.Stone-Ruby .Emerald-Cut-AAA {
+    background-position: 0px -800px
+}
+.Stone-Ruby .Emerald-Cut-AAAA {
+    background-position: 0px -850px
+}
+.Stone-Ruby .Emerald-Cut-l {
+    background-position: 0px -900px
+}
+.Stone-Ruby .Heart-A {
+    background-position: 0px -950px
+}
+.Stone-Ruby .Heart-AA {
+    background-position: 0px -1000px
+}
+.Stone-Ruby .Heart-AAA {
+    background-position: 0px -1050px
+}
+.Stone-Ruby .Heart-AAAA {
+    background-position: 0px -1100px
+}
+.Stone-Ruby .Marquise-A {
+    background-position: 0px -1150px
+}
+.Stone-Ruby .Marquise-AA {
+    background-position: 0px -1200px
+}
+.Stone-Ruby .Marquise-AAA {
+    background-position: 0px -1250px
+}
+.Stone-Ruby .Marquise-AAAA {
+    background-position: 0px -1300px
+}
+.Stone-Ruby .Marquise-l {
+    background-position: 0px -1350px
+}
+.Stone-Ruby .Oval-A {
+    background-position: 0px -1400px
+}
+.Stone-Ruby .Oval-AA {
+    background-position: 0px -1450px
+}
+.Stone-Ruby .Oval-AAA {
+    background-position: 0px -1500px
+}
+.Stone-Ruby .Oval-AAAA {
+    background-position: 0px -1550px
+}
+.Stone-Ruby .Oval-l {
+    background-position: 0px -1600px
+}
+.Stone-Ruby .Pear-A {
+    background-position: 0px -1650px
+}
+.Stone-Ruby .Pear-AA {
+    background-position: 0px -1700px
+}
+.Stone-Ruby .Pear-AAA {
+    background-position: 0px -1750px
+}
+.Stone-Ruby .Pear-AAAA {
+    background-position: 0px -1800px
+}
+.Stone-Ruby .Pear-l {
+    background-position: 0px -1850px
+}
+.Stone-Ruby .Square-A {
+    background-position: 0px -1900px
+}
+.Stone-Ruby .Square-AA {
+    background-position: 0px -1950px
+}
+.Stone-Ruby .Square-AAA {
+    background-position: 0px -2000px
+}
+.Stone-Ruby .Square-AAAA {
+    background-position: 0px -2050px
+}
+.Stone-Ruby .Square-l {
+    background-position: 0px -2100px
+}
+.Stone-Ruby .Round-A {
+    background-position: 0px -2150px
+}
+.Stone-Ruby .Round-AA {
+    background-position: 0px -2200px
+}
+.Stone-Ruby .Round-AAA {
+    background-position: 0px -2250px
+}
+.Stone-Ruby .Round-AAAA {
+    background-position: 0px -2300px
+}
+.Stone-Ruby .Round-l {
+    background-position: 0px -2350px
+}
+.Stone-Ruby .Trillion-A {
+    background-position: 0px -2400px
+}
+.Stone-Ruby .Trillion-AA {
+    background-position: 0px -2450px
+}
+.Stone-Ruby .Trillion-AAA {
+    background-position: 0px -2500px
+}
+.Stone-Ruby .Trillion-AAAA {
+    background-position: 0px -2550px
+}
+.Stone-Ruby .Trillion-l {
+    background-position: 0px -2600px
+}
+.Stone-PinkSapphire .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-pinksapphirestone.jpg?v=1.2")
+}
+.Stone-PinkSapphire .Round-AA {
+    background-position: 0px 0px
+}
+.Stone-PinkSapphire .Round-AAA {
+    background-position: 0px -50px
+}
+.Stone-PinkSapphire .Oval-AA {
+    background-position: 0px -100px
+}
+.Stone-PinkSapphire .Oval-AAA {
+    background-position: 0px -150px
+}
+.Stone-PinkSapphire .Emerald-Cut-AA {
+    background-position: 0px -200px
+}
+.Stone-PinkSapphire .Emerald-Cut-AAA {
+    background-position: 0px -250px
+}
+.Stone-PinkSapphire .Pear-AA {
+    background-position: 0px -300px
+}
+.Stone-PinkSapphire .Pear-AAA {
+    background-position: 0px -350px
+}
+.Stone-PinkSapphire .Heart-AA {
+    background-position: 0px -400px
+}
+.Stone-PinkSapphire .Heart-AAA {
+    background-position: 0px -450px
+}
+.Stone-PinkSapphire .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-PinkSapphire .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-PinkSapphire .Square-AA {
+    background-position: 0px -600px
+}
+.Stone-PinkSapphire .Square-AAA {
+    background-position: 0px -650px
+}
+.Stone-PinkSapphire .Round-A {
+    background-position: 0px -700px
+}
+.Stone-PinkSapphire .Round-AAAA {
+    background-position: 0px -750px
+}
+.Stone-PinkSapphire .Oval-A {
+    background-position: 0px -800px
+}
+.Stone-PinkSapphire .Oval-AAAA {
+    background-position: 0px -850px
+}
+.Stone-PinkSapphire .Emerald-Cut-A {
+    background-position: 0px -900px
+}
+.Stone-PinkSapphire .Emerald-Cut-AAAA {
+    background-position: 0px -950px
+}
+.Stone-PinkSapphire .Pear-A {
+    background-position: 0px -1000px
+}
+.Stone-PinkSapphire .Pear-AAAA {
+    background-position: 0px -1050px
+}
+.Stone-PinkSapphire .Heart-A {
+    background-position: 0px -1100px
+}
+.Stone-PinkSapphire .Heart-AAAA {
+    background-position: 0px -1150px
+}
+.Stone-PinkSapphire .Cushion-A {
+    background-position: 0px -1200px
+}
+.Stone-PinkSapphire .Cushion-AAAA {
+    background-position: 0px -1250px
+}
+.Stone-PinkSapphire .Square-A {
+    background-position: 0px -1300px
+}
+.Stone-PinkSapphire .Square-AAAA {
+    background-position: 0px -1350px
+}
+.Stone-PinkSapphire .Marquise-A {
+    background-position: 0px -1400px
+}
+.Stone-PinkSapphire .Marquise-AA {
+    background-position: 0px -1450px
+}
+.Stone-PinkSapphire .Marquise-AAA {
+    background-position: 0px -1500px
+}
+.Stone-PinkSapphire .Marquise-AAAA {
+    background-position: 0px -1550px
+}
+.Stone-PinkSapphire .Trillion-A {
+    background-position: 0px -1600px
+}
+.Stone-PinkSapphire .Trillion-AA {
+    background-position: 0px -1650px
+}
+.Stone-PinkSapphire .Trillion-AAA {
+    background-position: 0px -1700px
+}
+.Stone-PinkSapphire .Trillion-AAAA {
+    background-position: 0px -1750px
+}
+.Stone-PinkTourmaline .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-pinktourmalinestone.jpg?v=1.2")
+}
+.Stone-PinkTourmaline .Round-A {
+    background-position: 0px -800px
+}
+.Stone-PinkTourmaline .Round-AA {
+    background-position: 0px -850px
+}
+.Stone-PinkTourmaline .Round-AAA {
+    background-position: 0px -900px
+}
+.Stone-PinkTourmaline .Round-AAAA {
+    background-position: 0px -950px
+}
+.Stone-PinkTourmaline .Oval-A {
+    background-position: 0px -400px
+}
+.Stone-PinkTourmaline .Oval-AA {
+    background-position: 0px -450px
+}
+.Stone-PinkTourmaline .Oval-AAA {
+    background-position: 0px -500px
+}
+.Stone-PinkTourmaline .Oval-AAAA {
+    background-position: 0px -550px
+}
+.Stone-PinkTourmaline .Emerald-Cut-A {
+    background-position: 0px -200px
+}
+.Stone-PinkTourmaline .Emerald-Cut-AA {
+    background-position: 0px -250px
+}
+.Stone-PinkTourmaline .Emerald-Cut-AAA {
+    background-position: 0px -300px
+}
+.Stone-PinkTourmaline .Emerald-Cut-AAAA {
+    background-position: 0px -350px
+}
+.Stone-PinkTourmaline .Pear-A {
+    background-position: 0px -600px
+}
+.Stone-PinkTourmaline .Pear-AA {
+    background-position: 0px -650px
+}
+.Stone-PinkTourmaline .Pear-AAA {
+    background-position: 0px -700px
+}
+.Stone-PinkTourmaline .Pear-AAAA {
+    background-position: 0px -750px
+}
+.Stone-PinkTourmaline .Square-Emerald-Cut-A {
+    background-position: 0px -1000px
+}
+.Stone-PinkTourmaline .Square-Emerald-Cut-AA {
+    background-position: 0px -1050px
+}
+.Stone-PinkTourmaline .Square-Emerald-Cut-AAA {
+    background-position: 0px -1100px
+}
+.Stone-PinkTourmaline .Square-Emerald-Cut-AAAA {
+    background-position: 0px -1150px
+}
+.Stone-PinkTourmaline .Cushion-A {
+    background-position: 0px 0px
+}
+.Stone-PinkTourmaline .Cushion-AA {
+    background-position: 0px -50px
+}
+.Stone-PinkTourmaline .Cushion-AAA {
+    background-position: 0px -100px
+}
+.Stone-PinkTourmaline .Cushion-AAAA {
+    background-position: 0px -150px
+}
+.Stone-Moissanite .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-moissanitestone.jpg?v=1.2")
+}
+.Stone-Moissanite .Round-Classic-Moissanite {
+    background-position: 0px -50px
+}
+.Stone-Moissanite .Round-Forever-Brilliant {
+    background-position: 0px -0px
+}
+.Stone-Moissanite .Oval-Classic-Moissanite {
+    background-position: 0px -150px
+}
+.Stone-Moissanite .Oval-Forever-Brilliant {
+    background-position: 0px -100px
+}
+.Stone-Moissanite .Princess-Classic-Moissanite,
+.Stone-Moissanite .Square-Classic-Moissanite {
+    background-position: 0px -250px
+}
+.Stone-Moissanite .Princess-Forever-Brilliant,
+.Stone-Moissanite .Square-Forever-Brilliant {
+    background-position: 0px -200px
+}
+.Stone-BlueSapphire .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-BlueSapphire .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-BlueSapphire .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-BlueSapphire .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-BlueSapphire .Cushion-l {
+    background-position: 0px -650px
+}
+.Stone-BlueSapphire .Emerald-Cut-A {
+    background-position: 0px -700px
+}
+.Stone-BlueSapphire .Emerald-Cut-AA {
+    background-position: 0px -750px
+}
+.Stone-BlueSapphire .Emerald-Cut-AAA {
+    background-position: 0px -800px
+}
+.Stone-BlueSapphire .Emerald-Cut-AAAA {
+    background-position: 0px -850px
+}
+.Stone-BlueSapphire .Emerald-Cut-l {
+    background-position: 0px -900px
+}
+.Stone-BlueSapphire .Heart-A {
+    background-position: 0px -950px
+}
+.Stone-BlueSapphire .Heart-AA {
+    background-position: 0px -1000px
+}
+.Stone-BlueSapphire .Heart-AAA {
+    background-position: 0px -1050px
+}
+.Stone-BlueSapphire .Heart-AAAA {
+    background-position: 0px -1100px
+}
+.Stone-BlueSapphire .Heart-l {
+    background-position: 0px -1150px
+}
+.Stone-BlueSapphire .Marquise-A {
+    background-position: 0px -1200px
+}
+.Stone-BlueSapphire .Marquise-AA {
+    background-position: 0px -1250px
+}
+.Stone-BlueSapphire .Marquise-AAA {
+    background-position: 0px -1300px
+}
+.Stone-BlueSapphire .Marquise-AAAA {
+    background-position: 0px -1350px
+}
+.Stone-BlueSapphire .Marquise-l {
+    background-position: 0px -1400px
+}
+.Stone-BlueSapphire .Oval-A {
+    background-position: 0px -1450px
+}
+.Stone-BlueSapphire .Oval-AA {
+    background-position: 0px -1500px
+}
+.Stone-BlueSapphire .Oval-AAA {
+    background-position: 0px -1550px
+}
+.Stone-BlueSapphire .Oval-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-BlueSapphire .Oval-l {
+    background-position: 0px -1650px
+}
+.Stone-BlueSapphire .Pear-A {
+    background-position: 0px -1700px
+}
+.Stone-BlueSapphire .Pear-AA {
+    background-position: 0px -1750px
+}
+.Stone-BlueSapphire .Pear-AAA {
+    background-position: 0px -1800px
+}
+.Stone-BlueSapphire .Pear-AAAA {
+    background-position: 0px -1850px
+}
+.Stone-BlueSapphire .Pear-l {
+    background-position: 0px -1900px
+}
+.Stone-BlueSapphire .Square-A {
+    background-position: 0px -1950px
+}
+.Stone-BlueSapphire .Square-AA {
+    background-position: 0px -2000px
+}
+.Stone-BlueSapphire .Square-AAA {
+    background-position: 0px -2050px
+}
+.Stone-BlueSapphire .Square-AAAA {
+    background-position: 0px -2100px
+}
+.Stone-BlueSapphire .Square-l {
+    background-position: 0px -2150px
+}
+.Stone-BlueSapphire .Round-l {
+    background-position: 0px -2400px
+}
+.Stone-BlueSapphire .Trillion-A {
+    background-position: 0px -2450px
+}
+.Stone-BlueSapphire .Trillion-AA {
+    background-position: 0px -2500px
+}
+.Stone-BlueSapphire .Trillion-AAA {
+    background-position: 0px -2550px
+}
+.Stone-BlueSapphire .Trillion-AAAA {
+    background-position: 0px -2600px
+}
+.Stone-BlueSapphire .Trillion-l {
+    background-position: 0px -2650px
+}
+.Stone-Tanzanite .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-tanzanitestone.jpg?v=1.2")
+}
+.Stone-Tanzanite .Cushion-A {
+    background-position: 0px -450px
+}
+.Stone-Tanzanite .Cushion-AA {
+    background-position: 0px -500px
+}
+.Stone-Tanzanite .Cushion-AAA {
+    background-position: 0px -550px
+}
+.Stone-Tanzanite .Cushion-AAAA {
+    background-position: 0px -600px
+}
+.Stone-Tanzanite .Emerald-Cut-A {
+    background-position: 0px -650px
+}
+.Stone-Tanzanite .Emerald-Cut-AA {
+    background-position: 0px -700px
+}
+.Stone-Tanzanite .Emerald-Cut-AAA {
+    background-position: 0px -750px
+}
+.Stone-Tanzanite .Emerald-Cut-AAAA {
+    background-position: 0px -800px
+}
+.Stone-Tanzanite .Heart-A {
+    background-position: 0px -850px
+}
+.Stone-Tanzanite .Heart-AA {
+    background-position: 0px -900px
+}
+.Stone-Tanzanite .Heart-AAA {
+    background-position: 0px -950px
+}
+.Stone-Tanzanite .Heart-AAAA {
+    background-position: 0px -1000px
+}
+.Stone-Tanzanite .Marquise-A {
+    background-position: 0px -1050px
+}
+.Stone-Tanzanite .Marquise-AA {
+    background-position: 0px -1100px
+}
+.Stone-Tanzanite .Marquise-AAA {
+    background-position: 0px -1150px
+}
+.Stone-Tanzanite .Marquise-AAAA {
+    background-position: 0px -1200px
+}
+.Stone-Tanzanite .Oval-A {
+    background-position: 0px -1250px
+}
+.Stone-Tanzanite .Oval-AA {
+    background-position: 0px -1300px
+}
+.Stone-Tanzanite .Oval-AAA {
+    background-position: 0px -1350px
+}
+.Stone-Tanzanite .Oval-AAAA {
+    background-position: 0px -1400px
+}
+.Stone-Tanzanite .Pear-A {
+    background-position: 0px -1450px
+}
+.Stone-Tanzanite .Pear-AA {
+    background-position: 0px -1500px
+}
+.Stone-Tanzanite .Pear-AAA {
+    background-position: 0px -1550px
+}
+.Stone-Tanzanite .Pear-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-Tanzanite .Square-A {
+    background-position: 0px -1650px
+}
+.Stone-Tanzanite .Square-AA {
+    background-position: 0px -1700px
+}
+.Stone-Tanzanite .Square-AAA {
+    background-position: 0px -1750px
+}
+.Stone-Tanzanite .Square-AAAA {
+    background-position: 0px -1800px
+}
+.Stone-Tanzanite .Round-A {
+    background-position: 0px -1850px
+}
+.Stone-Tanzanite .Round-AA {
+    background-position: 0px -1900px
+}
+.Stone-Tanzanite .Round-AAA {
+    background-position: 0px -1950px
+}
+.Stone-Tanzanite .Round-AAAA {
+    background-position: 0px -2000px
+}
+.Stone-Tanzanite .Trillion-A {
+    background-position: 0px -2050px
+}
+.Stone-Tanzanite .Trillion-AA {
+    background-position: 0px -2100px
+}
+.Stone-Tanzanite .Trillion-AAA {
+    background-position: 0px -2150px
+}
+.Stone-Tanzanite .Trillion-AAAA {
+    background-position: 0px -2200px
+}
+.Stone-Tanzanite .Square-Emerald-Cut-A {
+    background-position: 0px -2250px
+}
+.Stone-Tanzanite .Square-Emerald-Cut-AA {
+    background-position: 0px -2300px
+}
+.Stone-Tanzanite .Square-Emerald-Cut-AAA {
+    background-position: 0px -2350px
+}
+.Stone-Tanzanite .Square-Emerald-Cut-AAAA {
+    background-position: 0px -2400px
+}
+.Stone-BlueTopaz .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-bluetopazstone.jpg?v=1.2")
+}
+.Stone-BlueTopaz .Round-A {
+    background-position: 0px -451px
+}
+.Stone-BlueTopaz .Round-AA {
+    background-position: 0px -501px
+}
+.Stone-BlueTopaz .Round-AAA {
+    background-position: 0px -551px
+}
+.Stone-BlueTopaz .Round-AAAA {
+    background-position: 0px -601px
+}
+.Stone-BlueTopaz .Emerald-Cut-A {
+    background-position: 0px -1050px
+}
+.Stone-BlueTopaz .Emerald-Cut-AA {
+    background-position: 0px -1100px
+}
+.Stone-BlueTopaz .Emerald-Cut-AAA {
+    background-position: 0px -1150px
+}
+.Stone-BlueTopaz .Emerald-Cut-AAAA {
+    background-position: 0px -1200px
+}
+.Stone-BlueTopaz .Oval-A {
+    background-position: 0px -850px
+}
+.Stone-BlueTopaz .Oval-AA {
+    background-position: 0px -900px
+}
+.Stone-BlueTopaz .Oval-AAA {
+    background-position: 0px -950px
+}
+.Stone-BlueTopaz .Oval-AAAA {
+    background-position: 0px -1000px
+}
+.Stone-BlueTopaz .Cushion-A {
+    background-position: 0px -1250px
+}
+.Stone-BlueTopaz .Cushion-AA {
+    background-position: 0px -1300px
+}
+.Stone-BlueTopaz .Cushion-AAA {
+    background-position: 0px -1350px
+}
+.Stone-BlueTopaz .Cushion-AAAA {
+    background-position: 0px -1400px
+}
+.Stone-BlueTopaz .Pear-A {
+    background-position: 0px -650px
+}
+.Stone-BlueTopaz .Pear-AA {
+    background-position: 0px -700px
+}
+.Stone-BlueTopaz .Pear-AAA {
+    background-position: 0px -750px
+}
+.Stone-BlueTopaz .Pear-AAAA {
+    background-position: 0px -800px
+}
+.Stone-BlueTopaz .Square-Emerald-Cut-A {
+    background-position: 0px -1450px
+}
+.Stone-BlueTopaz .Square-Emerald-Cut-AA {
+    background-position: 0px -1500px
+}
+.Stone-BlueTopaz .Square-Emerald-Cut-AAA {
+    background-position: 0px -1550px
+}
+.Stone-BlueTopaz .Square-Emerald-Cut-AAAA {
+    background-position: 0px -1600px
+}
+.Stone-BlueTopaz .Trillion-A {
+    background-position: 0px -1650px
+}
+.Stone-BlueTopaz .Trillion-AA {
+    background-position: 0px -1700px
+}
+.Stone-BlueTopaz .Trillion-AAA {
+    background-position: 0px -1750px
+}
+.Stone-BlueTopaz .Trillion-AAAA {
+    background-position: 0px -1800px
+}
+.user-option-metal-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/metal-type.jpg?v=1.3")
+}
+.metaltype-Rose-Gold {
+    background-position: 0px 0px
+}
+.metaltype-14K-White-Gold {
+    background-position: 0px -50px
+}
+.metaltype-14K-Yellow-Gold {
+    background-position: 0px -100px
+}
+.metaltype-Platinum {
+    background-position: 0px -150px
+}
+.metaltype-Silver {
+    background-position: 0px -200px
+}
+.metaltype-14K-Yellow-and-White-Gold {
+    background-position: 0px -250px
+}
+.metaltype-14K-Rose-and-White-Gold {
+    background-position: 0px -300px
+}
+.dyn_long_description {
+	text-align:justify;
+}
+.dyn_long_description li {
+    display: inline;
+    padding-right: 5px
+}
+.dyn_long_description li:after {
+    content: "."
+}
+@media screen and (min-width: 999px) {
+    #similar-items .block-sub-heading {
+        margin-top: 2px
+    }
+}
+.image-zoom {
+    vertical-align: middle;
+    text-align: center
+}
+.product-essential .product-img-box .more-views ul:after,
+.product-essential .product-img-box .more-views ul:before,
+.product-view .box-collateral:after,
+.product-view .box-collateral:before {
+    display: table;
+    content: " "
+}
+.product-essential .product-img-box .more-views ul li {
+    position: relative;
+    width: 64px;
+    padding: 0;
+    border: 2px solid #fff;
+    margin-bottom: 5px
+}
+.product-essential .product-img-box .more-views ul li {
+    margin: 2px;
+    width: 45px;
+    height: 45px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    border: 2px solid transparent
+}
+.nav>li.product-tab>a:hover,
+.nav>li.product-tab>a:focus {
+    background-color: #f3f3f3;
+    color: #363636;
+    border: 1px solid #dddddd;
+    border-bottom: none;
+    text-decoration: none !important
+}
+.engraving {
+    padding-left: 8px !important
+}
+#moreviews li {
+    width: 62px;
+    height: 62px;
+    overflow: hidden
+}
+.catalog-product-view .add-to-cart .fontsize-type5 {
+    font-size: 16px !important
+}
+.price-box .price.block-inline-display.price-extra-text-recent {
+    display: none !important
+}
+.price.block-inline-display.price-extra-text-upsell {
+    display: none !important
+}
+h1.product-name {
+    font-size: 24px !important;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    color: #565a5c
+}
+.estimated-arrival-date {
+    margin-top: 4px
+}
+#product_addtocart_form {
+    padding-right: 370px;
+    width: 100%;
+    display: block;
+    float: left;
+    position: relative
+}
+#product_addtocart_form .product-images {
+    padding-left: 60px;
+    width: 100%;
+    float: left;
+    min-height: 400px
+}
+#product_addtocart_form .add-to-cart-container {
+    position: absolute;
+    width: 320px;
+    right: 0px
+}
+#product_addtocart_form .add-to-cart-container .add-to-cart-container-box {
+    background: #f9f9f9;
+    border: 1px solid #dedede;
+    padding-bottom:240px
+}
+#product_addtocart_form .add-to-cart-container .add-to-cart-btn-holder {
+    bottom: 0px;
+    width: 300px
+}
+.price-holder,
+.or-sep,
+.easy-pay {
+    height: auto
+}
+.product-essential .price-box .product-retail-price {
+    color: #999999 !important;
+    font-size: 14px;
+    line-height: 26px
+}
+.easy-pay,
+.ring-size-box {
+    width: 200px;
+    margin: 0 auto;
+    position: relative
+}
+.ring-size-box .validation-advice {
+    position: absolute;
+    font-size: 12px;
+}
+.ring-size-guide-link {
+    position: relative
+}
+.ring-size-guide-link a.ring-size-guide {
+    font-size: 11px;
+    color: #999999;
+    position: absolute;
+    top: -62px;
+    right: 44px
+}
+.easy-pay select,
+select[title="Ring Size"] {
+    height: 35px;
+    border: 1px solid #dedede;
+    box-shadow: none
+}
+#easy-pay-info {
+    position: absolute;
+    top: 34px;
+    right: -25px
+}
+.or-sep {
+    line-height: 28px;
+    padding-bottom: 5px;
+    position: relative
+}
+.or-sep:before {
+    content: "";
+    width: 60%;
+    height: 1px;
+    background: #eeeeee;
+    display: block;
+    position: absolute;
+    left: 20%;
+    top: 15px
+}
+.or-sep span {
+    background-color: #f9f9f9;
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    color: #999999;
+    padding: 5px
+}
+.usp-near-add-to-cart {
+    margin: 10px 0px 10px;
+    line-height: 24px
+}
+#addtocart-btn {
+    font-size: 22px !important;
+    text-shadow: none !important;
+    font-weight: 500
+}
+#addtocart-btn:hover {
+    opacity: 0.7
+}
+#addtocart-btn:focus {
+    opacity: 1
+}
+#addtocart-btn .fa-shopping-cart {
+    display: none
+}
+#moreviews {
+    margin-top: 40px
+}
+#moreviews li {
+    padding: 0px !important;
+    border: 1px solid #dedede;
+    margin-bottom: 10px
+}
+#moreviews li.active {
+    border: 1px solid #fa505a
+}
+#moreviews li:hover {
+    border: 1px solid #999999
+}
+.nav-pills li.product-tab {
+    width: 25%;
+    text-align: center;
+    background: #e9e9e9;
+    border: 1px solid #dedede;
+    border-right: none;
+    height: 40px
+}
+.nav-pills li.product-tab:last-child {
+    border-right: 1px solid #dedede
+}
+.nav-pills li.product-tab a {
+    border: none !important;
+    font-size: 18px !important;
+    font-weight: normal !important;
+    line-height: 40px;
+    padding: 0px
+}
+.nav-pills li.product-tab.active {
+    background: #f5f5f5
+}
+.nav-pills li.product-tab.active a,
+.nav-pills li.product-tab:hover a {
+    color: #fa505a
+}
+.nav-pills li.product-tab:hover {
+    background: #f5f5f5
+}
+#product-details-tab,
+#customer-reviews-tab,
+#shipping-returns-tab,
+#angara-difference-tab {
+    color: #565a5c;
+    font-size: 14px
+}
+#shipping-returns-tab h3,
+#angara-difference-tab h3 {
+    font-size: 16px
+}
+.detail-box-title {
+    font-size: 16px;
+    color: #565a5c
+}
+#authenticity-cert,
+#rating-links {
+    color: #fa505a;
+    font-size: 14px
+}
+.pro-detail {
+    background: #f5f5f5;
+    border-top: 1px solid #dedede;
+    margin-top: -1px
+}
+.add-ons {
+    float: left;
+    padding-bottom: 15px !important;
+    margin-top: 10px
+}
+.add-ons .h3,
+.upsell .block-sub-heading,
+#recently-view .block-sub-heading,
+#similar-items .block-sub-heading {
+    font-size: 18px;
+    font-weight: normal
+}
+.pro-extra-item {
+    padding-right: 10px
+}
+.pro-extra-item-box {
+    border: 1px solid #eeeeee;
+    position: relative
+}
+.pro-extra-item-box .pro-extra-item-detail-box {
+    position: absolute;
+    opacity: 0;
+    bottom: -100%;
+    -webkit-transition: all .25s ease .1s;
+    -moz-transition: all .25s ease .1s;
+    transition: all .25s ease .1s;
+    background: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    box-shadow: 0px -3px 6px -6px;
+    padding: 6px
+}
+.pro-extra-item-box:hover .pro-extra-item-detail-box {
+    opacity: 1;
+    bottom: 0px
+}
+#view-offer-price span {
+    font-size: inherit !important;
+    color: #fa505a !important;
+    font-weight: bold
+}
+.sp-offer {
+    line-height: 20px;
+    padding: 15px 0px;
+    position: relative;
+    border: 1px dashed #333333;
+    margin-top: 7px
+}
+#special-offer-click {
+    display: inline-block;
+    height: 13px;
+    line-height: 15px;
+    width: 13px;
+    color: #ffffff;
+    border-radius: 12px;
+    text-align: center
+}
+#add-ons-panel {
+    margin-top: 7px;
+    margin-bottom: 10px
+}
+#add-ons-panel input[type="checkbox"] {
+    outline: none;
+    -webkit-appearance: none;
+    border: 1px solid #dedede;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 0px
+}
+#add-ons-panel input[type="checkbox"]:checked {
+    border: 1px solid #fa505a
+}
+#add-ons-panel input[type="checkbox"]:checked:after {
+    content: "";
+    width: 27px;
+    height: 25px;
+    background: url(/skin/frontend/ress/default/images/check-checked.png) left bottom;
+    position: absolute;
+    bottom: -1px;
+    left: -3px
+}
+#add-ons-panel input[type="checkbox"]:hover {
+    border: 1px solid #999999
+}
+.add-ons-item,
+#engravingContainer {
+    border: 1px solid #eeeeee;
+    width: 32%;
+    float: left;
+    margin-right: 2%;
+    line-height: 15px;
+    position: relative;
+    font-size: 14px
+}
+.add-ons-item .addons-item,
+#engravingContainer div[data-target="#engravingModal"] {
+    display: table;
+    width: 100%
+}
+.add-ons-item .od-holder label {
+    display: inline !important
+}
+#engravingContainer {
+    margin-right: 0px
+}
+.add-ons-item .addons-item .cb-holder,
+#engravingContainer .cb-holder {
+    display: table-cell;
+    width: 50px;
+    height: 80px;
+    text-align: center;
+    position: relative;
+    vertical-align: middle
+}
+.add-ons-item .addons-item .cb-holder:before,
+#engravingContainer .cb-holder:before {
+    content: "";
+    width: 1px;
+    height: 60px;
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    background: #eeeeee
+}
+.add-ons-item .addons-item .od-holder,
+#engravingContainer .od-holder {
+    display: table-cell;
+    padding: 0px 10px;
+    vertical-align: middle
+}
+#jewel-appraisal {
+    position: absolute;
+    left: 80px;
+    bottom: 5px;
+    line-height: 10px
+}
+#engraving-options {
+    line-height: 20px;
+    position: absolute;
+    left: -10px;
+    bottom: -26px;
+    z-index: 1
+}
+@media (min-width: 1025px) and (max-width: 1499px) {
+    .add-ons-item,
+    .add-ons-item,
+    #engravingContainer {
+        font-size: 12px
+    }
+    .add-ons-item .addons-item .cb-holder,
+    #engravingContainer .cb-holder {
+        width: 50px;
+        margin-right: 10px
+    }
+    #jewel-appraisal {
+        left: 55px
+    }
+}
+@media (max-width: 1280px) {
+    .add-ons-item,
+    .add-ons-item,
+    #engravingContainer {
+        font-size: 12px
+    }
+    .pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span:last-child {
+        font-size: 12px
+    }
+}
+.pro-options {
+    padding-left: 70px;
+    float: left;
+    width: 100%;
+    position: relative
+}
+.pro-options .option-list-container {
+    background: rgba(245, 245, 245, 0.9);
+    padding: 10px;
+    position: absolute;
+    bottom: 96px;
+    left: 70px;
+    right: 0px;
+    text-align: center
+}
+.pro-options #user-option-tabs {
+    width: 100%;
+    float: left;
+    text-align: center
+}
+.pro-options #user-option-tabs ul {
+    width: 100%;
+    float: left
+}
+.pro-options #user-option-tabs ul li {
+    width: 32%;
+    display: inline-block;
+    margin-right: 2%;
+    height: 86px;
+    background: #f9f9f9;
+    border: 1px solid #dedede;
+    position: relative;
+    cursor: pointer;
+    padding-left: 40px
+}
+.pro-options #user-option-tabs ul li:hover {
+    border: 1px solid #bfbfbf
+}
+.pro-options #user-option-tabs ul li.option-list-tab.active:before {
+    content: "";
+    height: 3px;
+    background: #fa505a;
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    z-index: 1
+}
+.pro-options #user-option-tabs ul li.option-list-tab.active:after {
+    content: "";
+    border-bottom: 14px solid #fa505a;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    left: 48%;
+    position: absolute;
+    top: -22px
+}
+.pro-options #user-option-tabs ul li:last-child {
+    margin-right: 0px
+}
+.pro-options #user-option-tabs ul li .customize-btn,
+.customize-ring-btn {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 86px;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 3px
+}
+.pro-options #user-option-tabs ul li .customize-btn-title {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: -30px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px
+}
+.pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container) {
+    height: 84px;
+    width: 84px;
+    background: #ffffff;
+    padding: 18px;
+    margin-left: 40px;
+    display: table-cell
+}
+.pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) {
+    height: 84px;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0px 5px 0px 10px
+}
+.pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span {
+    display: block;
+    clear: both;
+    float: left;
+    text-align: left;
+    line-height: 20px
+}
+.pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span:first-child {
+    font-size: 14px;
+    position: absolute;
+    left: 40px;
+    width: 84px;
+    text-align: center;
+    bottom: 0px;
+    max-height: 20px;
+    overflow-y: hidden
+}
+.pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span:last-child {
+    color: #333333;
+    line-height: 20px;
+    font-weight: 500
+}
+.pro-options #user-option-tabs ul li:hover div:nth-child(3):not(.option-container) span:last-child {
+    color: #fa505a;
+    text-decoration: underline
+}
+.cWeight {
+    border: 1px solid #333333;
+    border-radius: 30px;
+    line-height: 48px;
+    font-size: 14px
+}
+.option-list-tab .option-popup-close {
+    display: none
+}
+.option-popup-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 21px;
+    height: 21px;
+    background-position: center center;
+    cursor: pointer
+}
+.option-list-tab .customize-btn-default-data {
+    padding: 0px 5px 0px 34px !important
+}
+.option-list-tab .option-hldr {
+    overflow: hidden;
+    height: 86px;
+    pointer-events: none
+}
+.option-list-tab .stone-holder-box {
+    min-width: 100% !important;
+    display: none
+}
+.pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container):after,
+.pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container):before {
+    width: 40px;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold
+}
+.pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container):after {
+    background: #fa505a;
+    height: 86px;
+    left: -1px;
+    top: -1px;
+    content: "Step";
+    line-height: 65px
+}
+.pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container):before {
+    height: 20px;
+    line-height: 40px;
+    left: 0px;
+    top: 32px;
+    z-index: 1
+}
+.pro-options #user-option-tabs ul li:nth-child(1) div:nth-child(2):not(.option-container):before {
+    content: "1"
+}
+.pro-options #user-option-tabs ul li:nth-child(2) div:nth-child(2):not(.option-container):before {
+    content: "2"
+}
+.pro-options #user-option-tabs ul li:nth-child(3) div:nth-child(2):not(.option-container):before {
+    content: "3"
+}
+.pro-options .customize-product-option .padding-type-5.low-padding-left.low-padding-right,
+.pro-options .customize-product-option .low-padding-left.low-padding-right.showcase-border-thick.padding-type-3.border-active.no-transition {
+    padding: 0px !important;
+    margin: 0px
+}
+.pro-options .customize-product-option .padding-type-5.low-padding-left.low-padding-right.product-dh,
+.pro-options .customize-product-option .low-padding-left.low-padding-right.showcase-border-thick.padding-type-3.border-active.no-transition.product-dh {
+    padding: 5px !important;
+    margin: 0px 5px
+}
+.pro-options .customize-product-option .border-active {
+    border: none !important
+}
+.pro-options .customize-product-option .border-active .product-dh {
+    border: 2px solid #fa505a !important
+}
+.pro-options .customize-product-option .border-active.product-dh {
+    border: 2px solid #fa505a !important
+}
+.pro-options .customize-product-option .padding-type-3 {
+    padding: 5px !important
+}
+.pro-options .customize-product-option .user-option-clickable {
+    position: relative
+}
+.pro-options .customize-product-option .user-option-clickable .user-option-title {
+    position: absolute;
+    left: -3px;
+    right: -3px;
+    top: 65px
+}
+.pro-options .customize-product-option {
+    display: inline-block;
+    float: none !important
+}
+.pro-options .customize-product-option .low-padding-left.low-padding-right {
+    margin: 0px 5px
+}
+.pro-options .product-dh {
+    padding: 5px;
+    border: 2px solid #dedede;
+    margin: 0px 5px;
+    background-color: #fff
+}
+.pro-options #tabs-option-details,
+.pro-options #option-details {
+    display: none;
+    width: 100%;
+    float: left
+}
+.stone-holder-box .border-active {
+    float: left
+}
+.stone-holder-box .active-option-detail {
+    width: 250px;
+    display: inline-block;
+    position: relative;
+    min-height: 50px;
+    font-size: 11px
+}
+.stone-holder-box .active-option-detail .active-option-detail-holder {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: -12px;
+    text-align: left
+}
+.option-container .padding-type-5.low-padding-left.low-padding-right {
+    float: left
+}
+.pro-options .user-option-metal-image {
+    background: url(/skin/frontend/ress/default/images/sprites/metal-type.jpg?v=1.2) no-repeat
+}
+.pro-options .user-option-metal-image.metaltype-RG {
+    background-position: 0px 0px
+}
+.pro-options .user-option-metal-image.metaltype-WG {
+    background-position: 0px -50px
+}
+.pro-options .user-option-metal-image.metaltype-YG {
+    background-position: 0px -100px
+}
+.pro-options .user-option-metal-image.metaltype-PT {
+    background-position: 0px -150px
+}
+.pro-options .user-option-metal-image.metaltype-SL {
+    background-position: 0px -200px
+}
+.pro-options .user-option-metal-image.metaltype-18RG {
+    background-position: 0px -350px
+}
+.pro-options .user-option-metal-image.metaltype-18WG {
+    background-position: 0px -400px
+}
+.pro-options .user-option-metal-image.metaltype-18YG {
+    background-position: 0px -450px
+}
+.pro-options .user-option-metal-image.metaltype-TRI {
+    background-position: 0px -500px
+}
+.pro-options .user-option-metal-image.metaltype-TUNW {
+    background-position: 0px -550px
+}
+.pro-options .user-option-metal-image.metaltype-TUNY {
+    background-position: 0px -600px
+}
+.related-item .product-retail-price-range-related,
+.related-item .product-retail-price-related,
+.related-item .product-retail-price-range-recent {
+    color: #999999 !important;
+    line-height: 10px;
+    margin-top: 15px;
+    font-size: 14px;
+    display: none
+}
+.related-item .price-extra-text-related {
+    display: none
+}
+.related-item .price-extra-text-related i {
+    display: none
+}
+.related-item .price-box .price,
+.related-item .price-box .product-price-range-related .price,
+.related-item .price-box .product-price-range-recent .price {
+    font-size: 16px !important;
+    font-weight: normal !important
+}
+.related-item .price-extra-text-recent .fa-question-circle {
+    display: none
+}
+.add-to-cart-container .price-hldr {
+    display: block
+}
+.slick-next {
+    right: 6px !important
+}
+.product-page-usp .usp-near-add-to-cart span:hover {
+    color: #fa505a
+}
+#add-ons-panel input[type="checkbox"][disabled="disabled"] {
+    opacity: .4
+}
+#catalogBannerDesktop {
+    display: none
+}
+.product-retail-price-recent .price-extra-text-recent,
+.product-retail-price-recent .dyn_msrp-recent {
+    color: #999999 !important;
+    font-size: 14px;
+    line-height: 10px
+}
+#recently-view-holder .product-retail-price-recent,
+#recently-view-holder .price-extra-text-recent {
+    display: none !important
+}
+.design-your-own .pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) {
+    max-width: 50%
+}
+.design-your-own .pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span:last-child {
+    line-height: 22px
+}
+.design-your-own .stone-holder-box .Carat+.user-option-title {
+    top: 10px !important;
+    left: 0px !important;
+    right: 0px !important
+}
+@media (max-width: 1279px) {
+    .pro-options {
+        padding-left: 0px
+    }
+    #product_addtocart_form {
+        padding-right: 340px
+    }
+    .option-list-tab .customize-btn-default-data {
+        padding: 0px 5px 0px 0px !important
+    }
+    .pro-options .product-dh {
+        margin: 0px 2px
+    }
+    .add-to-cart-container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        padding-top: 0px !important
+    }
+    .pro-options #user-option-tabs ul li .customize-btn-default-data:before {
+        display: none
+    }
+}
+@media (max-width: 1440px) {
+    .pro-options .option-list-container {
+        left: 0px
+    }
+    .pro-options {
+        padding-left: 0px
+    }
+}
+@media (max-width: 768px) {
+    .ring-size-guide-link a.ring-size-guide {
+        right: 55px
+    }
+    .pro-options #user-option-tabs ul li div:nth-child(2):not(.option-container) {
+        margin-left: 0px
+    }
+    .nav-pills li.product-tab a {
+        line-height: 38px;
+        font-size: 16px !important
+    }
+    .product-name {
+        line-height: 30px
+    }
+    .mothers-pro-container .easy-pay,
+    .mothers-pro-container .ring-size-box {
+        margin: initial
+    }
+    .mothers-pro-container #easy-pay-info {
+        right: 0px
+    }
+    .mothers-pro-container .product-essential .link-wishlist {
+        right: initial;
+        left: 215px;
+        border: 1px solid #aaaaaa
+    }
+    .retail-md {
+        display: none
+    }
+    .retail-sm {
+        display: inline-block !important
+    }
+	#product_addtocart_form .product-images {
+		min-height: 470px;
+	}
+}
+.mothers-pro-container #product_addtocart_form {
+    padding-right: 0px
+}
+.mothers-pro-container .price-holder.text-center {
+    text-align: left;
+    float: left;
+    margin-top: 17px;
+}
+.mothers-pro-container .pr-box .clearfix {
+    display: none
+}
+.mothers-pro-container .or-sep:before {
+    width: 1px;
+    height: 70px;
+    left: 42px;
+    top: 0px;
+}
+.mothers-pro-container .or-sep span {
+    float: left;
+    margin-left: 30px;
+    margin-right: 30px;
+    background: #ffffff;
+    line-height: 60px;
+}
+.mothers-pro-container .sp-offer {
+    text-align: left;
+    border: none;
+    margin-top: 0px;
+}
+.mothers-pro-container .sp-offer br {
+    display: none
+}
+.mothers-pro-container .sp-offer:before,
+.sp-offer:after {
+    display: none
+}
+.mothers-pro-container .easy-pay,
+.mothers-pro-container .ring-size-box {
+    text-align: left;
+    float: left
+}
+.mothers-pro-container [itemprop="description"] {
+    text-align: justify
+}
+.mothers-pro-container .add-ons-item .addons-item .cb-holder,
+.mothers-pro-container #engravingContainer .cb-holder {
+    height: 0px;
+    line-height: 0px;
+    width: 20px
+}
+.mothers-pro-container .add-ons-item .addons-item .cb-holder:before,
+.mothers-pro-container #engravingContainer .cb-holder:before {
+    display: none
+}
+.mothers-pro-container .add-ons-item,
+.mothers-pro-container #engravingContainer {
+    width: 100%;
+    line-height: 0px;
+    border: none
+}
+.mothers-pro-container .add-ons-item,
+.mothers-pro-container #engravingContainer .fa-stack {
+    margin-left: 14px
+}
+.mothers-pro-container label[for="appraisal"],
+.mothers-pro-container label[for="insurance"] {
+    margin-left: 10px
+}
+.mothers-pro-container #jewel-appraisal {
+    left: 260px;
+    line-height: 18px
+}
+#engraving-options .btn-warning:hover,
+#engraving-options .btn-danger:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.mothers-pro-container .product-name .rating-links span {
+    color: #999999 !important;
+}
+.mothers-pro-container .pro-detail {
+    background: #f5f5f5;
+    border-top: 1px solid #dedede;
+    margin-top: -1px;
+}
+.mothers-pro-container #engraving-options a {
+    background-color: #575757 !important;
+}
+.mothers-pro-container #recently-view-holder button {
+    display: none !important;
+}
+.mothers-pro-container .add-to-cart-btn-holder .add-to-box {
+    float: left;
+}
+.mothers-pro-container .add-to-cart-btn-holder .fontsize-type1 {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+.mothers-pro-container #similar-items .price-box del {
+    display: none !important;
+}
+.mothers-pro-container .or-sep {
+    float: left;
+}
+.mothers-pro-container .or-sep span {
+    background: transparent;
+}
+.mothers-pro-container .add-ons-item,
+.add-ons-item,
+#engravingContainer {
+    font-size: 12px !important;
+}
+@media screen and (max-width: 1024px) {
+    .mothers-pro-container .product-options {
+        width: 70%;
+    }
+    #jewel-appraisal {
+        left: 0px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .mothers-pro-container .or-sep:before {
+        width: 150px;
+        height: 1px;
+        top: 70px;
+        left: -156px;
+    }
+    .mothers-pro-container .ring-size-guide {
+        float: left !important;
+    }
+    .mothers-pro-container .or-sep span {
+        top: 30px;
+        right: 120px;
+        padding: 10px;
+    }
+    .mothers-pro-container .add-to-cart-btn-holder {
+        width: 70% !important;
+    }
+    .mothers-pro-container #product-options-wrapper .col-md-5.col-sm-12.padding-type-0 {
+        width: 70%;
+        float: left;
+    }
+    .mothers-pro-container #product-options-wrapper .small {
+        width: 30%;
+        float: left;
+        bottom: 25px;
+        right: 145px;
+    }
+    .mothers-pro-container .product-options {
+        width: 100%;
+    }
+    .mothers-pro-container .stonemetalsection .col-md-5 {
+        padding-left: 0px !important;
+    }
+    .mothers-pro-container #jewel-appraisal {
+        top: 20px;
+        left: 23px;
+    }
+    .mothers-pro-container .add-to-cart-btn-holder .fontsize-type1 {
+        width: 330px;
+    }
+}
+.Stone-Morganite .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-morganitestone.jpg?v=1.2")
+}
+.Stone-Morganite .Round-A {
+    background-position: 0px 0px;
+}
+.Stone-Morganite .Round-AA {
+    background-position: 0px -50px;
+}
+.Stone-Morganite .Round-AAA {
+    background-position: 0px -100px;
+}
+.Stone-Morganite .Round-AAAA {
+    background-position: 0px -150px;
+}
+.Stone-Morganite .Pear-A {
+    background-position: 0px -600px;
+}
+.Stone-Morganite .Pear-AA {
+    background-position: 0px -650px;
+}
+.Stone-Morganite .Pear-AAA {
+    background-position: 0px -700px;
+}
+.Stone-Morganite .Pear-AAAA {
+    background-position: 0px -750px;
+}
+.Stone-Morganite .Oval-A {
+    background-position: 0px -400px;
+}
+.Stone-Morganite .Oval-AA {
+    background-position: 0px -450px;
+}
+.Stone-Morganite .Oval-AAA {
+    background-position: 0px -500px;
+}
+.Stone-Morganite .Oval-AAAA {
+    background-position: 0px -550px;
+}
+.Stone-Morganite .Cushion-A {
+    background-position: 0px -200px;
+}
+.Stone-Morganite .Cushion-AA {
+    background-position: 0px -250px;
+}
+.Stone-Morganite .Cushion-AAA {
+    background-position: 0px -300px;
+}
+.Stone-Morganite .Cushion-AAAA {
+    background-position: 0px -350px;
+}
+.Stone-Morganite .Emerald-Cut-A {
+    background-position: 0px -800px;
+}
+.Stone-Morganite .Emerald-Cut-AA {
+    background-position: 0px -850px;
+}
+.Stone-Morganite .Emerald-Cut-AAA {
+    background-position: 0px -900px;
+}
+.Stone-Morganite .Emerald-Cut-AAAA {
+    background-position: 0px -950px;
+}
+.most-popular-icon {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 82px;
+    text-align: center;
+    color: #fa505a;
+}
+.most-popular-icon span {
+    display: block;
+}
+.most-popular-icon .special-merged-icon-20 {
+    margin-left: -6px;
+}
+.most-popular-icon .special-merged-icon-20 .fa-stack-x {
+    line-height: 17px!important;
+}
+@media (max-width: 1024px) {
+    body[class*='-rings'] .img-title-holder,
+    body[class*='-ring'] .img-title-holder {
+        min-height: 610px;
+    }
+    #product_addtocart_form .add-to-cart-container .add-to-cart-container-box {
+        padding-bottom:165px;
+    }
+    .usp-near-add-to-cart {
+        display: none;
+    }
+    .estimated-arrival-date {
+        margin-bottom: 8px;
+    }
+    #engraving-options {
+        left: 40px;
+        top: 57px;
+    }
+}
+@media (max-width: 768px) {
+    .overflow-holder {
+        width: 768px;
+        overflow-x: hidden
+    }
+    .more-views-box {
+        display: none;
+    }
+    .simpleLens-big-image-container {
+        margin: initial;
+        padding-left: 0px;
+    }
+    .simpleLens-big-image {
+        margin: initial;
+    }
+    .pro-options {
+        width: 736px;
+    }
+    .pro-options .option-list-container {
+        bottom: 100px;
+        background: rgba(245, 245, 245, 0.9);
+    }
+    #customize-product-panel .customize-product-tab-content {
+        z-index: 1;
+    }
+    .pro-options #user-option-tabs ul li {
+        width: 32%;
+        padding-left: 35px;
+        z-index: 1
+    }
+    .share-wishlist .social-media {
+        display: none;
+    }
+    .share-wishlist {
+        margin-top: 9px;
+    }
+    .normal-pro-container .product-essential .link-wishlist {
+        height: 52px;
+    }
+    #product_addtocart_form .add-to-cart-container .add-to-cart-container-box {
+        padding-bottom: 165px;
+    }
+    .sp-offer.text-center {
+        margin-top:5px;
+    }
+    .display-block {
+        width: 768px;
+    }
+    .add-ons-item,
+    #engravingContainer {
+        width: 30.5%;
+    }
+    .add-ons {
+        width: 768px;
+    }
+    .min-hgt {
+        min-height: 150px;
+    }
+    .simpleLens-big-image-container {
+        width: 400px;
+    }
+    .simpleLens-lens-image {
+        margin: -50px auto;
+    }
+    .pro-options #user-option-tabs ul li div:nth-child(3):not(.option-container) span:first-child {
+        left: 38px;
+    }
+}
+.catalog-product-view .img-title-holder .slick-next:before {
+    content: '';
+    background: url(/skin/frontend/ress/default/images/right.png) no-repeat -6px 0px;
+}
+.catalog-product-view .img-title-holder .slick-prev:before {
+    content: '';
+    background: url(/skin/frontend/ress/default/images/left.png) no-repeat -6px 0px;
+}
+.catalog-product-view .img-title-holder .slick-prev:before,
+.catalog-product-view .img-title-holder .slick-next:before {
+    border: none;
+    background-color: transparent;
+}
+.Stone-SouthSeaCulturedPearl .user-option-stone-image,
+.Stone-AkoyaCulturedPearl .user-option-stone-image,
+.Stone-AkoyaPearl .user-option-stone-image,
+.Stone-GoldenJapaneseCulturedPearl .user-option-stone-image,
+.Stone-GoldenSouthSeaCulturedPearl .user-option-stone-image,
+.Stone-TahitianCulturedPearl .user-option-stone-image,
+.Stone-FreshwaterCulturedPearl .user-option-stone-image {
+    max-width: 100%;
+    background-image: url("../images/sprites/iconset-southseepearlstone.jpg?v=1.2")
+}
+.Stone-SouthSeaCulturedPearl .Round-A,
+.Stone-AkoyaCulturedPearl .Round-A,
+.Stone-AkoyaPearl .Round-A {
+    background-position: 0px -1px;
+}
+.Stone-SouthSeaCulturedPearl .Round-AA,
+.Stone-AkoyaCulturedPearl .Round-AA,
+.Stone-AkoyaPearl .Round-AA {
+    background-position: 0px -51px;
+}
+.Stone-SouthSeaCulturedPearl .Round-AAA,
+.Stone-AkoyaCulturedPearl .Round-AAA,
+.Stone-AkoyaPearl .Round-AAA {
+    background-position: 0px -101px;
+}
+.Stone-SouthSeaCulturedPearl .Round-AAAA,
+.Stone-AkoyaCulturedPearl .Round-AAAA,
+.Stone-AkoyaPearl .Round-AAAA {
+    background-position: 0px -151px;
+}
+.Stone-GoldenSouthSeaCulturedPearl .Round-A {
+    background-position: 0px -201px;
+}
+.Stone-GoldenSouthSeaCulturedPearl .Round-AA {
+    background-position: 0px -251px;
+}
+.Stone-GoldenSouthSeaCulturedPearl .Round-AAA {
+    background-position: 0px -301px;
+}
+.Stone-GoldenSouthSeaCulturedPearl .Round-AAAA {
+    background-position: 0px -351px;
+}
+.Stone-GoldenJapaneseCulturedPearl .Round-A {
+    background-position: 0px -401px;
+}
+.Stone-GoldenJapaneseCulturedPearl .Round-AA {
+    background-position: 0px -451px;
+}
+.Stone-GoldenJapaneseCulturedPearl .Round-AAA {
+    background-position: 0px -501px;
+}
+.Stone-GoldenJapaneseCulturedPearl .Round-AAAA {
+    background-position: 0px -551px;
+}
+.Stone-TahitianCulturedPearl .Round-A {
+    background-position: 0px -601px;
+}
+.Stone-TahitianCulturedPearl .Round-AA {
+    background-position: 0px -651px;
+}
+.Stone-TahitianCulturedPearl .Round-AAA {
+    background-position: 0px -701px;
+}
+.Stone-TahitianCulturedPearl .Round-AAAA {
+    background-position: 0px -751px;
+}
+.Stone-FreshwaterCulturedPearl .Round-A {
+    background-position: 0px -1px;
+}
+.Stone-FreshwaterCulturedPearl .Round-AA {
+    background-position: 0px -51px;
+}
+.Stone-Opal .Cushion-A {
+    background-position: 0px -1050px;
+}
+.Stone-Opal .Cushion-AA {
+    background-position: 0px -1100px;
+}
+.Stone-Opal .Cushion-AAA {
+    background-position: 0px -1150px;
+}
+.Stone-Opal .Cushion-AAAA {
+    background-position: 0px -1200px;
+}
+.Stone-Opal .Heart-A {
+    background-position: 0px -1250px;
+}
+.Stone-Opal .Heart-AA {
+    background-position: 0px -1300px;
+}
+.Stone-Opal .Heart-AAA {
+    background-position: 0px -1350px;
+}
+.Stone-Opal .Heart-AAAA {
+    background-position: 0px -1400px;
+}
+.Stone-BlueTopaz .Square-A {
+    background-position: 0px -1850px;
+}
+.Stone-BlueTopaz .Square-AA {
+    background-position: 0px -1900px;
+}
+.Stone-BlueTopaz .Square-AAA {
+    background-position: 0px -1950px;
+}
+.Stone-BlueTopaz .Square-AAAA {
+    background-position: 0px -2000px;
+}
+.Stone-Morganite .Trillion-A {
+    background-position: 0px -1001px;
+}
+.Stone-Morganite .Trillion-AA {
+    background-position: 0px -1051px;
+}
+.Stone-Morganite .Trillion-AAA {
+    background-position: 0px -1101px;
+}
+.Stone-Morganite .Trillion-AAAA {
+    background-position: 0px -1151px;
+}
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-timeline-container,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-fullscreen-button {
+    cursor: pointer!important
+}
+video:-moz-media-controls-play-button,
+video:-moz-media-controls-volume-slider,
+video:-moz-media-controls-mute-button,
+video:-moz-media-controls-timeline,
+video:-moz-media-controls-timeline-container,
+video:-moz-media-controls-time-remaining-display,
+video:-moz-media-controls-fullscreen-button {
+    cursor: pointer!important
+}
+/* free gift css */
+
+.gf {
+    bottom: 0px;
+    left: 10px;
+    right: 10px;
+}
+.auto-gift {
+    padding-top: 20px;
+    border-bottom: 1px solid #777;
+}
+.padding-tp5 {
+    padding-top: 5px;
+}
+.padding-bt5 {
+    padding-bottom: 5px;
+}
+.Stone-BlueTopaz .Heart-A {
+    background-position: 0px -2049px;
+}
+.Stone-BlueTopaz .Heart-AA {
+    background-position: 0px -2099px;
+}
+.Stone-BlueTopaz .Heart-AAA {
+    background-position: 0px -2149px;
+}
+.Stone-BlueTopaz .Heart-AAAA {
+    background-position: 0px -2199px;
+}
+.Stone-Opal .Hart-A {
+    background-position: 0px -1248px;
+}
+.Stone-Opal .Hart-AA {
+    background-position: 0px -1298px;
+}
+.Stone-Opal .Hart-AAA {
+    background-position: 0px -1348px;
+}
+.Stone-Opal .Hart-AAAA {
+    background-position: 0px -1398px;
+}
+.Stone-Diamond .Round-G--VS2 {
+    background-position: 0px -350px
+}
+.Stone-Diamond .Round-H--SI2 {
+    background-position: 0px -400px
+}
+.Stone-Diamond .Round-I-J--I1-I2 {
+    background-position: 0px -450px
+}
+.Stone-Diamond .Round-K--I3 {
+    background-position: 0px -500px
+}
+.Stone-Diamond .Princess-I-J--I1-I2 {
+    background-position: 0px -1898px;
+}
+.Stone-Diamond .Princess-H--SI2 {
+    background-position: 0px -1948px;
+}
+.Stone-Diamond .Princess-G--VS2 {
+    background-position: 0px -1998px;
+}
+/* Notify Me */
+
+#notify-me-btn {
+    font-size: 22px !important;
+    text-shadow: none !important;
+    font-weight: 500;
+    height: 50px;
+}
+
+.notify-me {
+    opacity: 0;
+    position: fixed;
+    bottom: -100px;
+    left: 0px;
+    right: 0px;
+    transition: bottom 500ms, opacity 500ms;
+    -webkit-transition: bottom 500ms, opacity 500ms;
+    z-index: 2;
+}
+.notify-me .notify-me-inner {
+    color: #ffffff;
+    background: #000000;
+    padding: 15px 20px;
+    font-size: 16px;
+    display: inline-block;
+    position: relative;
+    border-radius: 2px;
+}
+.notify-me .notify-me-inner .close {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+    color: #ffffff;
+}
+#product_addtocart_form .add-to-cart-container .add-to-cart-container-box.notify-me-box {
+    padding-bottom: 320px;
+}
+.normal-pro-container #product_addtocart_form .add-to-cart-container .add-to-cart-container-box.notify-me-box #add-cart-wait {
+    top: 49px;
+}
+.notify-box .sold-out {
+    font-size: 20px;
+}
+.notify-box .oos {
+    color: #878787;
+}
+.notifyme .validation-advice {
+    position: absolute;
+    bottom: 50px;
+    font-size: 12px;
+}
+@media (max-width: 1024px) {
+    #product_addtocart_form .add-to-cart-container .add-to-cart-container-box.notify-me-box {
+        padding-bottom: 235px;
+    }
+    #product_addtocart_form .add-to-cart-container .add-to-cart-container-box.notify-me-box .add-to-cart-btn-holder {
+        bottom: 10px;
+    }
+}
+/* S: TRIO */
+.trio-box {
+    display: none;
+}
+ul.trio-product {
+    transition: display 2s;
+    -webkit-transition: display 2s;
+    border: 1px solid #dedede;
+    background: #ffffff;
+    z-index: 1;
+    top: -191px;
+    left: -1px;
+    right: -1px;
+    margin-bottom: 0px;
+}
+ul.trio-product li {
+    display: block;
+    width: 100%;
+    float: left;
+    min-height: 155px;
+    padding: 10px;
+    border-bottom: 1px solid #dedede;
+    background: #f9f9f9;
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #ececec 100%);
+    background: -webkit-linear-gradient(top, #f9f9f9 0%, #ececec 100%);
+    background: linear-gradient(to bottom, #f9f9f9 0%, #ececec 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#ececec', GradientType=0);
+}
+ul.trio-product li:last-child {
+    border-bottom: none;
+}
+ul.trio-product li h2 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0px 0px 8px;
+}
+ul.trio-product li .right-box {
+    width: 100%;
+    padding-left: 100px;
+    min-height: 110px;
+}
+ul.trio-product li .left-box {
+    width: 90px;
+    left: 0px;
+}
+ul.trio-product li .left-box img {
+    border: 1px solid #f0f0f0;
+}
+ul.trio-product li .left-box a {
+    font-size: 12px;
+    color: #999999;
+}
+ul.trio-product li .price-box .regular-price {
+    color: rgb(86, 90, 92);
+    font-size: 16px;
+}
+ul.trio-product li .price-box .traditional-price {
+    font-size: 12px;
+    color: #999999;
+}
+ul.trio-product li .ring-size select {
+    width: 100%;
+}
+/* E: TRIO */
+
+
+.Stone-Diamond .Oval-J-I2 {background-position:0px -2048px;}
+.Stone-Diamond .Oval-I-I1 {background-position:0px -2098px;}
+.Stone-Diamond .Oval-H-SI2 {background-position:0px -2148px;}
+.Stone-Diamond .Oval-G-H-VS {background-position:0px -2198px;}
+
+.Stone-Citrine .Heart-A {background-position:0px -2050px;}
+.Stone-Citrine .Heart-AA {background-position:0px -2100px;}
+.Stone-Citrine .Heart-AAA {background-position:0px -2150px;}
+.Stone-Citrine .Heart-AAAA {background-position:0px -2200px;}
+
+.Stone-Amethyst .Heart-A {background-position:0px -2298px;}
+.Stone-Amethyst .Heart-AA {background-position:0px -2348px;}
+.Stone-Amethyst .Heart-AAA {background-position:0px -2398px;}
+.Stone-Amethyst .Heart-AAAA {background-position:0px -2448px;}
+
+.Stone-Garnet .Heart-A {background-position:0px -2098px;}
+.Stone-Garnet .Heart-AA {background-position:0px -2148px;}
+.Stone-Garnet .Heart-AAA {background-position:0px -2198px;}
+.Stone-Garnet .Heart-AAAA {background-position:0px -2248px;}
+
+.Stone-Peridot .Heart-A {background-position:0px -2097px;}
+.Stone-Peridot .Heart-AA {background-position:0px -2147px;}
+.Stone-Peridot .Heart-AAA {background-position:0px -2197px;}
+.Stone-Peridot .Heart-AAAA {background-position:0px -2247px;}
+
+.Stone-Amethyst .Marquise-A {background-position:0px -2100px;}
+.Stone-Amethyst .Marquise-AA {background-position:0px -2148px;}
+.Stone-Amethyst .Marquise-AAA {background-position:0px -2198px;}
+.Stone-Amethyst .Marquise-AAAA {background-position:0px -2248px;}
+
+.Stone-BlueTopaz .Marquise-A {background-position:0px -2249px;}
+.Stone-BlueTopaz .Marquise-AA {background-position:0px -2299px;}
+.Stone-BlueTopaz .Marquise-AAA {background-position:0px -2349px;}
+.Stone-BlueTopaz .Marquise-AAAA {background-position:0px -2399px;}
+
+.Stone-Diamond .Heart-I-J--I1-I2 {background-position:0px -2248px;}
+
+.Stone-Tsavorite .user-option-stone-image {
+    max-width: 100%;
+    background-image: url(../images/sprites/iconset-tsavoritestone.jpg);
+}
+.Stone-Tsavorite .Round-A {background-position:0px  -1px;}
+.Stone-Tsavorite .Round-AA {background-position:0px -51px;}
+.Stone-Tsavorite .Round-AAA {background-position:0px -101px;}
+.Stone-Tsavorite .Round-AAAA {background-position:0px -151px;}
+
+
+.pro-options .user-option-metal-image.metaltype-14WRG {
+    background-position: 0px -298px;
+}
+.pro-options .user-option-metal-image.metaltype-14YWG {
+    background-position: 0px -698px;
+}
+.pro-options .user-option-metal-image.metaltype-14WYG {
+    background-position: 0px -248px;
+}
+
+.Stone-CoffeeDiamond .user-option-stone-image {
+    max-width: 100%;
+    background-image: url(../images/sprites/iconset-coffeediamondstone.jpg);
+}
+.Stone-CoffeeDiamond .Round-A {background-position: 0px -1px;}
+.Stone-CoffeeDiamond .Round-AA {background-position: 0px  -51px;}
+.Stone-CoffeeDiamond .Round-AAA {background-position: 0px -101px;}
+.Stone-CoffeeDiamond .Round-AAAA {background-position: 0px -151px;}
+
+.Stone-Kunzite .user-option-stone-image{
+    max-width: 100%;
+    background-image: url(/skin/frontend/ress/default/images/sprites/iconset-kunzite.jpg?v=1.0);
+}
+
+.Stone-Kunzite .Round-A{background-position:0px 0px}
+.Stone-Kunzite .Round-AA{background-position:0px -50px}
+.Stone-Kunzite .Round-AAA{background-position:0px -100px}
+.Stone-Kunzite .Round-AAAA{background-position:0px -150px}
+.Stone-Kunzite .Pear-A{background-position:0px -200px}
+.Stone-Kunzite .Pear-AA{background-position:0px -250px}
+.Stone-Kunzite .Pear-AAA{background-position:0px -300px}
+.Stone-Kunzite .Pear-AAAA{background-position:0px -350px}
+
+.Stone-Diamond  .Marquise-I-J--I1-I2{background-position:0px -2298px}
+.Stone-Diamond  .Marquise-H--SI2{background-position:0px -2348px}
+.Stone-Diamond  .Marquise-G--VS2{background-position:0px -2398px}
+
+.pro-options .user-option-metal-image.metaltype-14RWG {
+	background-position: 0px -748px;
+}
+
+.Stone-Garnet .Drop-A {background-position:0px -2299px}
+.Stone-Garnet .Drop-AA {background-position:0px -2349px}
+.Stone-Garnet .Drop-AAA {background-position:0px -2399px}
+.Stone-Garnet .Drop-AAAA {background-position:0px -2449px}

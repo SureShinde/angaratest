@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ss_Additionalinformation>
+            <version>0.1.0</version>
+        </Ss_Additionalinformation>
+    </modules>
+    <global>
+        <models>
+		  <additionalinformation>
+                <class>Ss_Additionalinformation_Model</class>
+                <resourceModel>additionalinformation_mysql4</resourceModel>
+            </additionalinformation>
+            <additionalinformation_mysql4>
+                <class>Ss_Additionalinformation_Model_Mysql4</class>
+                <entities>
+                    <additionalinformation>
+                        <table>additionalinformation</table>
+                    </additionalinformation>
+                </entities>
+            </additionalinformation_mysql4>
+        </models>
+        <resources>
+            <additionalinformation_setup>
+                <setup>
+                    <module>Ss_Additionalinformation</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </additionalinformation_setup>
+            <additionalinformation_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </additionalinformation_write>
+            <additionalinformation_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </additionalinformation_read>
+        </resources>
+        <blocks>
+            <additionalinformation>
+                <class>Ss_Additionalinformation_Block</class>
+            </additionalinformation>
+        </blocks>
+        <helpers>
+            <additionalinformation>
+                <class>Ss_Additionalinformation_Helper</class>
+            </additionalinformation>
+        </helpers>
+		 <template>
+            <email>
+                <additionalinformation_request_email_template translate="label" module="additionalinformation">
+                    <label>Additionalinformation Email</label>
+                    <file>additionalinformation/requestmail.html</file>
+                    <type>html</type>
+                </additionalinformation_request_email_template>
+				<additionalinformation_otp_email_template translate="label" module="additionalinformation">
+                    <label>Additionalinformation OTP Email</label>
+                    <file>additionalinformation/otpemail.html</file>
+                    <type>html</type>
+                </additionalinformation_otp_email_template>
+				<additionalinformation_reset_request_email_template translate="label" module="additionalinformation">
+                    <label>Additionalinformation Reset Request Email</label>
+                    <file>additionalinformation/resetrequestmail.html</file>
+                    <type>html</type>
+                </additionalinformation_reset_request_email_template>
+				<additionalinformation_send_confirmation_email_template translate="label" module="additionalinformation">
+                    <label>Additionalinformation Send Confirmation Email</label>
+                    <file>additionalinformation/sendconfirmation.html</file>
+                    <type>html</type>
+                </additionalinformation_send_confirmation_email_template>
+            </email>
+        </template>
+    </global>
+	<frontend>
+		<!--<secure_url>
+			<additionalinformation>/additionalinformation/</additionalinformation>
+		</secure_url>-->
+		<routers>
+			<additionalinformation>
+				<use>standard</use>
+				<args>
+					<module>Ss_Additionalinformation</module>
+					<frontName>additionalinformation</frontName>
+				</args>
+			</additionalinformation>
+		</routers>
+        <layout>
+            <updates>
+                <additionalinformation>
+                    <file>additionalinformation.xml</file>
+                </additionalinformation>
+            </updates>
+        </layout> 
+    </frontend>
+	<admin>
+        <routers>
+			<additionalinformation>
+				<use>admin</use>
+				<args>
+					<module>Ss_Additionalinformation</module>
+					<frontName>additionalinformation</frontName>
+				</args>
+			</additionalinformation>
+        </routers>
+    </admin>
+    <adminhtml>
+		<translate>
+            <modules>
+                <Ss_Additionalinformation>
+                    <files>
+                        <default>Ss_Additionalinformation.csv</default>
+                    </files>
+                </Ss_Additionalinformation>
+            </modules>
+        </translate>
+		<menu>
+            <sales>
+                <children>
+                    <additionalinformation module="additionalinformation">
+                        <title>Additionalinformation Module</title>
+                        <sort_order>180</sort_order>
+                        <!--<children>
+                           <settings module="additionalinformation">
+                                <title>Settings</title>
+                                <sort_order>50</sort_order>
+                                <action>adminhtml/system_config/edit/section/additionalinformation</action>
+                            </settings>
+                        </children>-->
+                    </additionalinformation>
+                </children>
+            </sales>
+        </menu>
+		<layout>
+			<updates>
+				<additionalinformation>
+					<file>additionalinformation.xml</file>
+				</additionalinformation>
+			</updates>
+		</layout>
+		<acl>
+			<resources>
+				 <all>
+					<title>Allow Everything</title>
+				</all>
+				 <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <additionalinformation>
+                                    <title>Additionalinformation Module</title>
+                                    <sort_order>180</sort_order>
+								</additionalinformation>
+							</children>
+						</sales>
+						<system>
+							<children>
+								<config>
+									<children>
+										<additionalinformation>
+											<title>Additionalinformation Configuration Section</title>
+										</additionalinformation>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>	
+				</admin>
+			</resources>
+		</acl>
+    </adminhtml>   
+</config>

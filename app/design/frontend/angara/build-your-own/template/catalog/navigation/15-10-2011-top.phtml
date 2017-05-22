@@ -1,0 +1,365 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<!-- top.phtml start -->
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+<script type="text/javascript" src="/skin/frontend/angara/default/js/menu.js"></script>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('#chromemenu').mastmenu({speed:400});
+	})
+</script>
+
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
+<?php if($_menu): ?>
+
+<div id="wrapper">
+  <div class="wrapper">
+    <div class="topnavbar">
+      <div class="nav" id="chromemenu">
+        <ul>
+          <li><a href="/jewelry.html" class="mainlvl">Gemstones<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+                 <li><a href="/birthstone-jewelry/january-birthstone-garnet-jewelry.html">Garnet</a></li>
+                 
+                  <li><a href="/birthstone-jewelry/february-birthstone-amethyst-jewelry.html">Amethyst</a></li>
+                  
+                   <li><a href="/jewelry/aquamarine-jewelry.html" rel="nofollow">Aquamarine</a> <img alt="Aquamarine" title="Aquamarine" src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/aquamarine.html">Loose Aquamarine</a></li>
+                        <li><a href="/jewelry/aquamarine-jewelry.html">Aquamarine Jewelry</a></li>
+                        <li><a href="/rings/aquamarine-rings.html" rel="nofollow">Aquamarine Rings</a></li>
+                        <li><a href="/earrings/aquamarine-earrings.html" rel="nofollow">Aquamarine Earrings</a></li>
+                        <li><a href="/pendants/aquamarine-necklace-pendants.html" rel="nofollow">Aquamarine Pendants</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                   <li><a href="/jewelry/diamond-jewelry.html" rel="nofollow">Diamond</a> <img alt="Diamond" title="Diamond"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/jewelry/diamond-jewelry.html">Diamond Jewelry</a></li>
+                        <li><a href="/rings/diamond-rings.html" rel="nofollow">Diamond Rings</a></li>
+                        <li><a href="/engagement-rings/diamond-bands.html" rel="nofollow">Diamond Bands</a></li>
+                        <li><a href="/earrings/diamond-earrings.html" rel="nofollow">Diamond Earrings</a></li>
+                        <li><a href="/earrings/diamond-studs.html" rel="nofollow">Diamond Studs</a></li>
+                        <li><a href="/pendants/diamond-necklace-pendants.html" rel="nofollow">Diamond Pendants</a></li>
+                        <li><a href="/pendants/diamond-solitaire-pendants.html" rel="nofollow">Diamond Solitaire Pendants</a></li>
+                        <li><a href="/bracelets/charm-bracelets.html">Charm Bracelets</a></li>
+                        <li><a href="/bracelets/diamond-bracelets.html">Diamond Bracelets</a></li>
+                      </ul>
+                    </div>
+                  </li>   
+                  
+                     <li><a href="/jewelry/emerald-jewelry.html" rel="nofollow">Emerald</a> <img alt="Emerald" title="Emerald"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/emerald.html">Loose Emerald</a></li>
+                        <li><a href="/jewelry/emerald-jewelry.html">Emerald Jewelry</a></li>
+                        <li><a href="/rings/emerald-rings.html" rel="nofollow">Emerald Rings</a></li>
+                        <li><a href="/earrings/emerald-earrings.html" rel="nofollow">Emerald Earrings</a></li>
+                        <li><a href="/pendants/emerald-necklace-pendants.html" rel="nofollow">Emerald Pendants</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                   <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl</a></li>  
+				   
+				    <li><a href="/jewelry/colored-diamond-jewelry.html">Colored Diamonds</a> <img alt="Colored Diamonds" title="Colored Diamonds" src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/natural-color-diamonds.html">Colored Diamonds</a></li>
+                        <li><a href="/jewelry/colored-diamond-jewelry.html">Color Diamond Jewelry</a></li>
+                       
+                      </ul>
+                    </div>
+                  </li>
+                  
+                </ul>
+              </div>
+              
+              
+              <div class="navlist">
+                <ul>                  
+                       <li><a href="/jewelry/ruby-jewelry.html" rel="nofollow">Ruby</a> <img alt="Ruby" title="Ruby"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/ruby.html">Loose Ruby</a></li>
+                        <li><a href="/jewelry/ruby-jewelry.html">Ruby Jewelry</a></li>
+                        <li><a href="/rings/ruby-rings.html" rel="nofollow">Ruby Rings</a></li>
+                        <li><a href="/earrings/ruby-earrings.html" rel="nofollow">Ruby Earrings</a></li>
+                        <li><a href="/pendants/ruby-necklace-pendants.html" rel="nofollow">Ruby Pendants</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                    <li><a href="/birthstone-jewelry/august-birthstone-peridot-jewelry.html">Peridot</a></li>
+                  
+                  <li><a href="/jewelry/sapphire-jewelry.html" rel="nofollow">Sapphire</a> <img alt="Sapphire" title="Sapphire" src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/sapphire.html">Loose Sapphire</a></li>
+                        <li><a href="/jewelry/sapphire-jewelry.html">Sapphire Jewelry</a></li>
+                        <li><a href="/rings/sapphire-rings.html" rel="nofollow">Sapphire Rings</a></li>
+                        <li><a href="/earrings/sapphire-earrings.html" rel="nofollow">Sapphire Earrings</a></li>
+                        <li><a href="/pendants/sapphire-necklace-pendants.html" rel="nofollow">Sapphire Pendants</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                   <li><a href="/birthstone-jewelry/october-birthstone-opal-jewelry.html">Opal</a></li>
+                   
+                   <li><a href="/birthstone-jewelry/november-birthstone-citrine-jewelry.html" rel="nofollow">Citrine</a><img alt="Citrine" title="Citrine"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/citrine.html">Loose Citrine</a></li>
+						<li><a href="/birthstone-jewelry/november-birthstone-citrine-jewelry.html">Citrine Jewelry</a></li>
+                      </ul>
+                    </div>
+                  </li>                  
+               
+                  <li><a href="/jewelry/tanzanite-jewelry.html" rel="nofollow">Tanzanite</a> <img alt="Tanzanite" title="Tanzanite"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2">
+                      <ul>
+                        <li><a href="/loose-gemstones/tanzanite.html">Loose Tanzanite</a></li>
+                        <li><a href="/jewelry/tanzanite-jewelry.html">Tanzanite Jewelry</a></li>
+                        <li><a href="/rings/tanzanite-rings.html" rel="nofollow">Tanzanite Rings</a></li>
+                        <li><a href="/earrings/tanzanite-earrings.html" rel="nofollow">Tanzanite Earrings</a></li>
+                        <li><a href="/pendants/tanzanite-necklace-pendants.html" rel="nofollow">Tanzanite Pendants</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/rings.html" class="mainlvl">Rings<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+                  <li><a href="/rings/sapphire-rings.html">Sapphire Rings</a></li>
+                  <li><a href="/rings/ruby-rings.html">Ruby Rings</a></li>
+                  <li><a href="/rings/emerald-rings.html">Emerald Rings</a></li>
+                  <li><a href="/rings/tanzanite-rings.html">Tanzanite Rings</a></li>
+                  <li><a href="/rings/diamond-rings.html">Diamond Rings</a></li>
+                  <li><a href="/rings/aquamarine-rings.html">Aquamarine Rings</a></li>
+				  <li><a href="/rings/gemstone-rings.html">Gemstone Rings</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/engagement-rings.html" class="mainlvl">Engagement<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+                  <li><a href="/engagement-rings/sapphire-engagement-rings.html">Sapphire Engagement Rings</a></li>
+                  <li><a href="/engagement-rings/ruby-engagement-rings.html">Ruby Engagement Rings</a></li>
+                  <li><a href="/engagement-rings/emerald-engagement-rings.html">Emerald Engagement Rings</a></li>
+                  <li><a href="/engagement-rings/tanzanite-engagement-rings.html">Tanzanite Engagement Rings</a></li>
+                  <li><a href="/engagement-rings/diamond-engagement-rings.html">Diamond Engagement Rings</a></li>
+				  <li><a href="/engagement-rings/gemstone-engagement-rings.html">Gemstone Engagement Rings</a></li>
+                  <li><a href="/engagement-rings/diamond-bands.html">Diamond Bands</a></li>
+                  <li><a href="/engagement-rings/wedding-bands.html">Wedding Bands</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/pendants.html" class="mainlvl">Pendants<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+
+                  <li><a href="/pendants/sapphire-necklace-pendants.html">Sapphire Pendants</a></li>
+                  <li><a href="/pendants/ruby-necklace-pendants.html">Ruby Pendants</a></li>
+                  <li><a href="/pendants/emerald-necklace-pendants.html">Emerald Pendants</a></li>
+                  <li><a href="/pendants/tanzanite-necklace-pendants.html">Tanzanite Pendants</a></li>
+                  <li><a href="/pendants/diamond-necklace-pendants.html">Diamond Pendants</a></li>
+                  <li><a href="/pendants/diamond-solitaire-pendants.html">Diamond Solitaire Pendants</a></li>
+                  <li><a href="/pendants/aquamarine-necklace-pendants.html">Aquamarine Pendants</a></li>
+                  <li><a href="/pendants/journey-necklace-pendants.html">Journey Pendants</a></li>
+				  <li><a href="/pendants/gemstone-necklace-pendants.html">Gemstone Pendants</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="/earrings.html" class="mainlvl">Earrings<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+                  <li><a href="/earrings/sapphire-earrings.html">Sapphire Earrings</a></li>
+                  <li><a href="/earrings/ruby-earrings.html">Ruby Earrings</a></li>
+                  <li><a href="/earrings/emerald-earrings.html">Emerald Earrings</a></li>
+                  <li><a href="/earrings/tanzanite-earrings.html">Tanzanite Earrings</a></li>
+                  <li><a href="/earrings/diamond-earrings.html">Diamond Earrings</a></li>
+                  <li><a href="/earrings/aquamarine-earrings.html">Aquamarine Earrings</a></li>
+                  <li><a href="/earrings/diamond-studs.html">Diamond Studs</a></li>
+                  <li><a href="/earrings/journey-earrings.html">Journey Earrings</a></li>
+				  <li><a href="/earrings/gemstone-earrings.html">Gemstone Earrings</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+           <li><a href="/custom-jewelry.html" class="mainlvl">Custom Jewelry<span></span></a></li>
+          <li><a href="/jewelry-gifts.html" class="mainlvl">Gifts &amp; More<span></span></a>
+            <div class="dropmenudiv lvl1">
+              <div class="navlist">
+                <ul>
+                  <li><a href="/jewelry-gifts/anniversary-gifts.html">Anniversary Gifts</a></li>
+                  <li><a href="/jewelry-gifts/birthday-gifts.html">Birthday Gifts</a></li>
+                  <li><a href="/jewelry-gifts/graduation-gifts.html">Graduation Gifts</a></li>
+                  <li><a href="/jewelry-gifts/gift-cards.html">Gift Cards</a></li>
+                  <li><a href="/jewelry-gifts/gift-sets.html">Gift Sets</a></li>
+                  <li><a href="/jewelry-gifts/bridal-jewelry.html">Bridal Jewelry</a></li>
+                  <li><a href="/jewelry-gifts/christmas-gifts.html">Christmas Jewelry Gifts</a></li>
+                  <li><a href="/jewelry-gifts/valentine-gifts.html">Valentine's Day Gifts</a></li>
+                  <li><a href="/jewelry-gifts/st-patricks-gifts.html">St Patrick's Day Gifts</a></li>
+                  <li><a href="/jewelry-gifts/sweet-16-gifts.html">Sweet 16 Gifts</a></li>
+                </ul>
+              </div>
+              <div class="navlist">
+                <ul>
+					<li><a href="/mothers-jewelry.html">Mothers Jewelry</a></li>
+                  <li><a href="/jewelry-gifts/baby-jewelry.html">Baby Jewelry</a></li>
+                  <li><a href="/jewelry-gifts/prom-jewelry.html">Prom Jewelry</a></li>
+                  <li><a href="/birthstone-jewelry.html">Birthstone Jewelry</a><img alt="Birthstone Jewelry" title="Birthstone Jewelry"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2 has_navlistparts" style="width:396px">
+                      <div class="navlist2part1">
+                        <ul>
+                          <li><a href="/birthstone-jewelry/january-birthstone-garnet-jewelry.html" rel="nofollow">Garnet - January Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/february-birthstone-amethyst-jewelry.html" rel="nofollow">Amethyst - February Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/march-birthstone-aquamarine-jewelry.html">Aquamarine - March Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/april-birthstone-diamond-jewelry.html">Diamond - April Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/may-birthstone-emerald-jewelry.html">Emerald - May Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html" rel="nofollow">Pearl - June Birthstone</a></li>
+                        </ul>
+                      </div>
+                      <div class="navlist2part2">
+                        <ul>
+                          <li><a href="/birthstone-jewelry/july-birthstone-ruby-jewelry.html">Ruby - July Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/august-birthstone-peridot-jewelry.html" rel="nofollow">Peridot - August Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/september-birthstone-sapphire-jewelry.html">Sapphire - September Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/october-birthstone-opal-jewelry.html" rel="nofollow">Opal - October Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/november-birthstone-citrine-jewelry.html" rel="nofollow">Citrine - November Birthstone</a></li>
+                          <li><a href="/birthstone-jewelry/december-birthstone-tanzanite-jewelry.html" rel="nofollow">Tanzanite - December Birthstone</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li><a href="/lab-jewelry.html">Lab Created Jewelry</a><img alt="Lab Created Jewelry" title="Lab Created Jewelry"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" />
+                    <div class="navlist2 lvl2 has_navlistparts">
+                      <ul>
+                        <li><a href="/lab-jewelry/lab-created-sapphire-jewelry.html">Lab Sapphire Jewelry</a></li>
+                        <li><a href="/lab-jewelry/lab-created-emerald-jewelry.html">Lab Emerald Jewelry</a></li>
+                        <li><a href="/lab-jewelry/lab-created-ruby-jewelry.html">Lab Ruby Jewelry</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li><a href="/jewelry/semi-mounts.html">Semi Mounts</a></li>
+                  <li><a href="/jewelry-gifts/top-ten-jewelry.html">Top Ten Jewelry</a></li>
+                  <li><a href="/jewelry-gifts/gifts-for-her.html">Gifts For Her</a></li>
+                  <li><a href="/jewelry-gifts/thanksgiving-gifts.html">Thanksgiving Gifts</a></li>
+                  <!--<li><a href="/jewelry/new-arrivals.html">New Arrival</a></li>
+                  <li><a href="/jewelry/jewelry-clearance.html">Clearance</a></li>-->
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+          <a href="/jewelry-guide.html" class="mainlvl">Jewelry Guide<span></span></a>
+          <div class="dropmenudiv lvl1 lastboxiefix">
+            <div class="navlist">
+              <ul>
+                <li><a href="/jewelry-guide/gemstone-buying-guide.html">About Gemstones</a></li>
+                <li><a href="/jewelry-guide/about-sapphire.html">About Sapphires</a></li>
+                <li><a href="/jewelry-guide/diamond-buying-guide.html">About Diamonds</a></li>
+                <li><a href="/jewelry-guide/about-emerald.html">About Emeralds</a></li>
+                <li><a href="/jewelry-guide/about-ruby.html">About Rubies</a></li>
+                <li><a href="/jewelry-guide/about-tanzanite.html">About Tanzanites</a></li>                
+                <li><a href="/jewelry-guide/about-aquamarine.html">About Aquamarines</a></li>
+                <li><a href="/jewelry-guide/about-colored-diamonds.html">About Colored Diamonds</a></li>
+                <li><a href="/jewelry-guide/jewelry-care.html">Jewelry Care</a></li>
+				 
+              </ul>
+            </div>
+            <div class="navlist">
+              <ul>              
+               
+                <li><a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank">Angara Ring Sizer</a></li>                
+                <li><a href="/jewelry-guide/sapphire-jewelry.html">Sapphire Jewelry</a></li>
+                <li><a href="/jewelry-guide/diamond-jewelry.html">Diamond Jewelry</a></li>               
+                <li><a href="/jewelry-guide/gemstone-origins.html">Gemstone Origins</a></li>
+                <li><a href="/jewelry-guide/gemstone-treatment.html">Gemstone Treatment</a></li>
+                <li><a href="/jewelry-guide/jewelry-glossary.html">Jewelry Glossary</a></li>
+                <li><a href="/jewelry-guide/about-jewelry-metal.html">About Metal</a></li>
+                <li><a href="/jewelry-guide/jewelry-articles.html">Jewelry Articles</a></li>
+                <li><a href="/customer-testimonials.html">Customer Testimonials</a></li>
+              </ul>
+            </div>
+          </div>
+          </li>
+        </ul>
+      </div>
+      <div class="searchbar">
+        <form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+          <input id="search" autocomplete="off" type="text" class="searchbox" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" />
+          <button type="submit" title="<?php echo $this->__('Search') ?>"  class="searchbutton" style="cursor:pointer;"></button>
+          <!--<div id="search_autocomplete" class="search-autocomplete"></div>-->
+          <script type="text/javascript">
+	        //<![CDATA[
+	            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Keyword or Item #') ?>');
+	           // searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+	        //]]>
+	        </script>
+        </form>
+        <!-- 
+      <input name="" type="text" class="searchbox" />
+
+      <input name="" type="image" src="/skin/frontend/angara/default/images/searchbutton.jpg"  class="searchbutton"/>
+ -->
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif ?>
+<!-- top.phtml end -->

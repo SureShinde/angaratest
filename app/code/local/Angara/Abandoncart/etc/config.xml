@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <!-- declare module's version information -->
+    <Angara_Abandoncart>
+      <!-- this version number will be used for database upgrades -->
+      <version>0.1.1</version>
+    </Angara_Abandoncart>
+  </modules>
+  <global>
+    <helpers>
+      <abandoncart>
+        <class>Angara_Abandoncart_Helper</class>
+      </abandoncart>
+    </helpers>
+    <events>
+      <checkout_cart_add_product_complete>
+        <observers>
+          <angara_checkoutCartProductAddAfterAbandoncart>
+            <type>singleton</type>
+            <class>Angara_Abandoncart_Model_Cart_Observer</class>
+            <method>checkoutCartProductAddAfterAbandoncart</method>
+          </angara_checkoutCartProductAddAfterAbandoncart>
+        </observers>
+      </checkout_cart_add_product_complete>
+      <checkout_cart_remove_item_before>
+        <observers>
+          <angara_checkoutCartRemoveItemBeforeAbandoncart>
+            <type>singleton</type>
+            <class>Angara_Abandoncart_Model_Cart_Observer</class>
+            <method>checkoutCartRemoveItemBeforeAbandoncart</method>
+          </angara_checkoutCartRemoveItemBeforeAbandoncart>
+        </observers>
+      </checkout_cart_remove_item_before>
+      <sales_order_place_after>
+        <observers>
+          <angaracart_salesOrderPlaceAfterAbandoncart>
+            <type>singleton</type>
+            <class>Angara_Abandoncart_Model_Cart_Observer</class>
+            <method>salesOrderPlaceAfterAbandoncart</method>
+          </angaracart_salesOrderPlaceAfterAbandoncart>
+        </observers>
+      </sales_order_place_after>
+    </events>
+    
+    <!-- declare model group for new module -->
+    <models>
+      <!-- model group alias to be used in Mage::getModel() -->
+      <abandoncart>
+        <!-- base class name for the model group -->
+        <class>Angara_Abandoncart_Model</class>
+        <resourceModel>abandoncart_mysql4</resourceModel>
+      </abandoncart>
+      <abandoncart_mysql4>
+        <class>Angara_Abandoncart_Model_Mysql4</class>
+        <entities>
+          <abandoncart>
+            <table>abandoncart</table>
+          </abandoncart>
+        </entities>
+      </abandoncart_mysql4>
+    </models>
+    
+    <!-- declare resource setup for new module -->
+    
+    <resources>
+      <!-- resource identifier -->
+      <abandoncart_setup>
+        <!-- specify that this resource is a setup resource and used for upgrades -->
+        <setup>
+          <!-- which module to look for install/upgrade files in -->
+          <module>Angara_Abandoncart</module>
+        </setup>
+        <!-- specify database connection for this resource -->
+        <connection>
+          <!-- do not create new connection, use predefined core setup connection -->
+          <use>core_setup</use>
+        </connection>
+      </abandoncart_setup>
+      <abandoncart_write>
+        <connection>
+          <use>core_write</use>
+        </connection>
+      </abandoncart_write>
+      <abandoncart_read>
+        <connection>
+          <use>core_read</use>
+        </connection>
+      </abandoncart_read>
+    </resources>
+  </global>
+  <crontab>
+	  <jobs>
+		  <abandoncart_cron>
+			  <schedule><cron_expr>*/60 * * * *</cron_expr></schedule>
+			  <run><model>abandoncart/cart_observer::sendDataToPardot</model></run>
+		  </abandoncart_cron>
+		  
+		  <!--Started Cron Implemented for Wishlist on Pardot by Pankaj for bug id 428-->
+		  <wishlist_cron>
+			  <schedule><cron_expr>0 9 * * *</cron_expr></schedule>
+			  <run><model>abandoncart/cart_observer::sendWishlistDataToPardot</model></run>
+		  </wishlist_cron>
+		  <!--Ended Cron Implemented for Wishlist on Pardot by Pankaj for bug id 428-->
+		  <!--Started Cron Implemented for Seen Product Details on Pardot by Pankaj for bug id 428-->
+		  <!--<product_cron>
+			  <schedule><cron_expr>*/60 * * * *</cron_expr></schedule>
+			  <run><model>abandoncart/cart_observer::sendProductDataToPardot</model></run>
+		  </product_cron>-->
+		   <!--Ended Cron Implemented for Seen Product Details on Pardot by Pankaj for bug id 428-->
+	  </jobs>
+  </crontab>
+</config>

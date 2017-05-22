@@ -1,0 +1,319 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if(count($this->getItemCollection()->getItems()) && !isset($_GET["sel"])): ?>
+<script type="text/javascript">
+	jQuery(function(){
+		var IE6 = false /*@cc_on || @_jscript_version < 5.7 @*/;
+		if(!IE6){
+			jQuery('#overlayText').css({
+				left:(jQuery('body').width()/2 - 480)
+			});
+		}
+		jQuery('.grayeffect').appendTo('body').fadeTo(500,.5,function(){
+			jQuery('#overlayText').css('top','161px').appendTo('body').fadeTo(300,1);
+		}).show()
+		.css({
+				width:jQuery('body').width(),
+				height:jQuery('body').outerHeight()
+			});
+	})
+</script>
+
+<div id="greyed" class="grayeffect"></div>
+<script>
+function closeSug(){
+if(document.getElementById("greyed"))document.getElementById("greyed").style.display="none";
+if(document.getElementById("overlayText"))document.getElementById("overlayText").style.display="none";
+	if(typeof ClickTaleExec != 'undefined'){
+		ClickTaleExec('closeSug()');
+	}
+}
+</script>
+
+<?php $this->resetItemsIterator() ?>
+<?php 
+$_totProd = ($this->getRowCount())*($this->getColumnCount());
+$_product = $this->getProduct();
+$skuGBB = $_product->getSku();
+$hLoom = false;
+if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+if(substr($skuGBB, -1)==="H")$hLoom = true;
+for($_i=0;$_i<$_totProd;$_i++){
+	if($_link=$this->getIterableItem()){ 
+		$skuGBBsug = $_link->getSku();
+		if(strrpos($skuGBBsug,"-")!==false)$skuGBBsug = substr($skuGBBsug, 0, strrpos($skuGBBsug,"-"));
+		if(substr($skuGBBsug, -1)==="H")$hLoom = true;
+	}
+}
+$this->resetItemsIterator();
+if($hLoom):  // for Heirloom ?>
+<style>
+.main-over{position:relative;width:960px;height:auto;margin:0 auto;padding-top:17px;}
+.main-upper-part{position:relative;width:960px;height:11px;}
+.main-mid-part{width:960px;background-color:#ffffff;height:480px;}
+.main-mid-part a{ display:block;}
+.quality-category-better{width:304px;position:absolute;top:57px;left:8px;}
+.quality-category-best{width:304px;position:absolute;top:57px;left:328px;}
+.quality-category-heirloom{width:304px;position:absolute;top:57px;left:648px;}
+.quality-category-heading{width:304px;height:34px;}
+.quality-category-bottom{width:304px;height:10px;}
+.quality-category-mid-part{height:380px;width:302px;border-left:solid 1px #d3d3d3;border-right:solid 1px #d3d3d3;border-bottom:solid 1px #d3d3d3;text-align:center}
+.quality-details{width:272px;margin:0 auto;text-align:center;padding:10px 0 10px 0;background:url(/skin/frontend/angara/default/images/price-dot-bg.jpg) repeat-x bottom;}
+.quality-price-details{margin-top:5px;margin-bottom:2px;text-align:right;width:75px;color:#67323a;font-family:arial;font-size:14px;float:left;font-weight:bold;}
+.cross-price{color:#a07c81;height:auto;text-align:right;width:75px;}
+.cross-price1{color:#67323a;font-family:arial;font-size:14px;font-weight:bold;height:auto;text-align:right;width:75px;}
+.quality-sale-price{font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:18px;color:#da0000;text-align:left;float:left;width:85px;}
+.quality-saving{font-family:arial;font-size:12px;color:#67323a;font-weight:normal;text-align:center;clear:both;}
+
+.quality-single-price{font-family:tahoma;font-size:10px;float:left;color:#000000;font-weight:bold;text-align:left;width:auto;}
+.quality-product-name{color:#4C2625;font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:16px;width:200px;margin:0 auto;font-stretch:normal;font-weight:bold;}
+.quality-product-name a{text-decoration:none;color:#000;}
+.quality-price-center{width:184px;margin:0 auto;}
+.quality-main-product-name{color:#000;font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:18px;font-stretch:normal;font-weight:normal;padding:10px 0 0px 10px;text-decoration:none;clear:both;}
+.gbb-cross{left:920px;position:absolute;top:24px;z-index:10;cursor:pointer;}
+img{border:none;outline:none;padding:0;margin:0;}
+a{outline:none;}
+.customize-style{position:absolute;top:-20px;left:661px;width:293px;height:32px;}
+.regular-price{margin-top:6px;display:block}
+</style>
+
+<div  class="main-over">
+    <div onclick="closeSug();" class="gbb-cross"><img src="/skin/frontend/angara/default/images/gbb-cross.jpg" width=28 height=28 alt=""/></div>
+    <div class="main-mid-part">
+        <div class="quality-main-product-name"><?php echo $_product->getShortDescription() ?></div>        
+        <a href="<?php echo $_product->getProductUrl() ?>?sel=y">
+        <div class=<?php if(substr($skuGBB, -1)==="B"):?> "quality-category-best" <?php elseif(substr($skuGBB, -1)==="H"):?> "quality-category-heirloom" <?php else: ?> "quality-category-better" <?php endif;?>>
+        <?php if(substr($skuGBB, -1)==="B"):?>
+            <div class="quality-category-heading">
+                <div><img src="/skin/frontend/angara/default/images/best-heading.jpg" alt="" width="304" height="34"/></div>
+            </div>
+            <div class="quality-category-mid-part">
+            <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+            <div class="quality-details">
+                <div class="quality-product-name">Truly Exceptional!</div>
+            </div>
+        <?php elseif(substr($skuGBB, -1)==="H"):?>
+            <div class="quality-category-heading">
+                <div><img src="/skin/frontend/angara/default/images/heirloom-heading.jpg" alt="" width="304" height="34"/></div>
+            </div>
+            <div class="quality-category-mid-part">
+            <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+            <div class="quality-details">
+                <div class="quality-product-name">One in a Million!</div>
+            </div>
+        <?php else:?>
+            <div class="quality-category-heading">
+                <div><img src="/skin/frontend/angara/default/images/better-heading.jpg" alt="" width="304" height="34"/></div>
+            </div>
+            <div class="quality-category-mid-part">
+                <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+                <div class="quality-details">
+                    <div class="quality-product-name">Beauty &amp; Value!</div>
+                </div>
+        <?php endif;?>
+                <?php echo $this->getOverlayProductPriceHtml($_product) ?>
+                <div class="quality-details" style="background:none;"><img src="/skin/frontend/angara/default/images/view-details.jpg" width=104 height=35 border="0" alt="View details"/></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+         </a>
+        <?php for($_i=0;$_i<$_totProd;$_i++):
+            if($_link=$this->getIterableItem()): 
+                $skuGBB = $_link->getSku();
+                if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+        ?>
+        <a href="<?php echo $_link->getProductUrl() ?>?sel=y">
+        <div class=<?php if(substr($skuGBB, -1)==="B"):?> "quality-category-best" <?php elseif(substr($skuGBB, -1)==="H"):?> "quality-category-heirloom" <?php else: ?> "quality-category-better" <?php endif;?>>
+        <?php if(substr($skuGBB, -1)==="B"):?>
+            <div class="quality-category-heading">
+                <div><img src="/skin/frontend/angara/default/images/best-heading.jpg" alt="" width="304" height="34"/></div>
+            </div>
+            <div class="quality-category-mid-part">
+                <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+                <div class="quality-details">
+                    <div class="quality-product-name">Truly Exceptional!</div>
+                </div>        
+        <?php elseif(substr($skuGBB, -1)==="H"):?>
+                <div class="quality-category-heading">
+                    <div><img src="/skin/frontend/angara/default/images/heirloom-heading.jpg" alt="" width="304" height="34"/></div>
+                </div>
+            <div class="quality-category-mid-part">
+                <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+                <div class="quality-details">
+                        <div class="quality-product-name">One in a Million!</div>
+                    </div>
+        <?php else:?>
+                <div class="quality-category-heading">
+                        <div><img src="/skin/frontend/angara/default/images/better-heading.jpg" alt="" width="304" height="34"/></div>
+                    </div>
+            <div class="quality-category-mid-part">
+                <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+                <div class="quality-details">
+                            <div class="quality-product-name">Beauty &amp; Value!</div>
+                        </div>
+        <?php endif;?>
+            <?php echo $this->getOverlayProductPriceHtml($_link) ?>
+            <div class="quality-details" style="background:none;"><img src="/skin/frontend/angara/default/images/view-details.jpg" width=104 height=35 border="0" alt="View details"/></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        </a>
+                <?php endif;
+        endfor;?>
+        <div style="clear:both"></div>
+    </div>
+</div>
+
+<?php else:  // when there are less then 3 suggested items, done specially for the case when there is no labcreated variation ?>
+<style>
+.main-over{position:relative;width:960px;height:auto;margin:0 auto;padding-top:17px;}
+.main-upper-part{position:relative;width:960px;height:11px;}
+.main-mid-part{width:960px;background-color:#ffffff;height:480px;}
+.main-mid-part a{ display:block;}
+.quality-category-good{width:304px;position:absolute;top:57px;left:8px;}
+.quality-category-better{width:304px;position:absolute;top:57px;left:328px;}
+.quality-category-best{width:304px;position:absolute;top:57px;left:648px;}
+.quality-category-heirloom{width:304px;position:absolute;top:57px;left:648px;}
+.quality-category-heading{width:304px;height:34px;}
+.quality-category-bottom{width:304px;height:10px;}
+.quality-category-mid-part{height:380px;width:302px;border-left:solid 1px #d3d3d3;border-right:solid 1px #d3d3d3;border-bottom:solid 1px #d3d3d3;text-align:center}
+.quality-details{width:272px;margin:0 auto;text-align:center;padding:10px 0 10px 0;background:url(/skin/frontend/angara/default/images/price-dot-bg.jpg) repeat-x bottom;}
+.quality-price-details{margin-top:5px;margin-bottom:2px;text-align:right;width:75px;color:#67323a;font-family:arial;font-size:14px;float:left;font-weight:bold;}
+.cross-price{color:#a07c81;height:auto;text-align:right;width:75px;}
+.cross-price1{color:#67323a;font-family:arial;font-size:14px;font-weight:bold;height:auto;text-align:right;width:75px;}
+.quality-sale-price{font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:18px;color:#da0000;text-align:left;float:left;width:85px;}
+.quality-saving{font-family:arial;font-size:12px;color:#67323a;font-weight:normal;text-align:center;clear:both;}
+.quality-single-price{font-family:tahoma;font-size:10px;float:left;color:#000000;font-weight:bold;text-align:left;width:auto;}
+.quality-product-name{color:#4C2625;font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:16px;width:200px;margin:0 auto;font-stretch:normal;font-weight:bold;}
+.quality-product-name a{text-decoration:none;color:#4C2625;}
+.quality-price-center{width:184px;margin:0 auto;}
+.quality-main-product-name{color:#000;font-family:Georgia,Century Schoolbook L,Palatino,serif;font-size:18px;font-stretch:normal;font-weight:normal;padding:10px 0 0px 10px;text-decoration:none;clear:both;}
+.gbb-cross{left:920px;position:absolute;top:24px;z-index:10;cursor:pointer;}
+img{border:none;outline:none;padding:0;margin:0;}
+a{outline:none;}
+.customize-style{position:absolute;top:-20px;left:661px;width:293px;height:32px;}
+</style>
+
+<div  class="main-over">
+<div onclick="closeSug();" class="gbb-cross"><img src="/skin/frontend/angara/default/images/gbb-cross.jpg" width=28 height=28 alt=""/></div>
+<div class="main-mid-part">
+<div class="quality-main-product-name"><?php echo $_product->getShortDescription() ?></div>
+<a href="<?php echo $_product->getProductUrl() ?>?sel=y">
+<div class=<?php if(substr($skuGBB, -1)==="B"):?> "quality-category-best" <?php elseif(substr($skuGBB, -1)==="G"):?> "quality-category-good" <?php elseif(substr($skuGBB, -1)==="H"):?> "quality-category-heirloom" <?php else:?> "quality-category-better" <?php endif;?>>
+
+<?php if(substr($skuGBB, -1)==="B"):?>
+        <div class="quality-category-heading">
+        <div><img src="/skin/frontend/angara/default/images/best-heading.jpg" alt="" width="304" height="34"/></div>
+    </div>
+   	    <div class="quality-category-mid-part">
+        <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+        <div class="quality-details">
+            <div class="quality-product-name">Truly Exceptional!</div>
+        </div>
+<?php elseif(substr($skuGBB, -1)==="H"):?>
+        <div class="quality-category-heading">
+            <div><img src="/skin/frontend/angara/default/images/heirloom-heading.jpg" alt="" width="304" height="34"/></div>
+        </div>
+        <div class="quality-category-mid-part">
+        <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+        <div class="quality-details">
+            <div class="quality-product-name">One in a Million!</div>
+        </div>
+<?php elseif(substr($skuGBB, -1)==="G"):?>
+        <div class="quality-category-heading">
+            <div><img src="/skin/frontend/angara/default/images/good-heading.jpg" alt="" width="304" height="34"/></div>
+        </div>
+        <div class="quality-category-mid-part">
+        <div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+        <div class="quality-details">
+            <div class="quality-product-name">The Look for Less!</div>
+        </div>
+<?php else:?>
+		<div class="quality-category-heading">
+		<div><img src="/skin/frontend/angara/default/images/better-heading.jpg" alt="" width="304" height="34"/></div>
+	</div>
+		<div class="quality-category-mid-part">
+		<div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(180) ?>" height="180" width="180"/></div>
+		<div class="quality-details">
+			<div class="quality-product-name">Beauty &amp; Value!</div>
+		</div>
+<?php endif;?>
+		<?php echo $this->getOverlayProductPriceHtml($_product) ?>
+		<div class="quality-details" style="background:none;"><img src="/skin/frontend/angara/default/images/view-details.jpg" width=104 height=35 border="0" alt="View details"/></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+</a>
+<?php for($_i=0;$_i<$_totProd;$_i++):
+	if($_link=$this->getIterableItem()): 
+		$skuGBB = $_link->getSku();
+		if(strrpos($skuGBB,"-")!==false)$skuGBB = substr($skuGBB, 0, strrpos($skuGBB,"-"));
+?>
+
+<a href="<?php echo $_link->getProductUrl() ?>?sel=y">
+<div class=<?php if(substr($skuGBB, -1)==="B"):?> "quality-category-best" <?php elseif(substr($skuGBB, -1)==="G"):?> "quality-category-good" <?php else:?> "quality-category-better" <?php endif;?>>
+<?php if(substr($skuGBB, -1)==="B"):?>
+	    <div class="quality-category-heading">
+		<div><img src="/skin/frontend/angara/default/images/best-heading.jpg" alt="" width="304" height="34"/></div>
+	</div>
+	    <div class="quality-category-mid-part">
+		<div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+		<div class="quality-details">
+			<div class="quality-product-name">Truly Exceptional!</div>
+		</div>
+<?php elseif(substr($skuGBB, -1)==="G"):?>
+		<div class="quality-category-heading">
+			<div><img src="/skin/frontend/angara/default/images/good-heading.jpg" alt="" width="304" height="34"/></div>
+		</div>
+		<div class="quality-category-mid-part">
+		<div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+		<div class="quality-details">
+				<div class="quality-product-name">The Look for Less!</div>
+			</div>
+<?php else:?>
+		<div class="quality-category-heading">
+				<div><img src="/skin/frontend/angara/default/images/better-heading.jpg" alt="" width="304" height="34"/></div>
+			</div>
+		<div class="quality-category-mid-part">
+		<div class="quality-details"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(180) ?>" height="180" width="180"/></div>
+		<div class="quality-details">
+					<div class="quality-product-name">Beauty &amp; Value!</div>
+				</div>
+<?php endif;?>
+		<?php echo $this->getOverlayProductPriceHtml($_link) ?>
+		<div class="quality-details" style="background:none;"><img src="/skin/frontend/angara/default/images/view-details.jpg" width=104 height=35 border="0" alt="View details"/></div>
+</div>
+		<div style="clear:both"></div>
+</div>
+</a>
+		<?php endif;
+endfor;?>
+		<div style="clear:both"></div>
+	</div>
+</div>
+<?php endif;?>
+<?php endif; ?>

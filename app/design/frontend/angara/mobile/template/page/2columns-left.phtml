@@ -1,0 +1,42 @@
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang(); ?>" lang="<?php echo $this->getLang(); ?>">
+<head><?php echo $this->getChildHtml('head'); ?></head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':''?>>
+	<div class="mboxDefault"></div>
+	<?php echo $this->getChildHtml('after_body_start'); ?>
+	<div class="wrappermain">
+		<?php echo $this->getChildHtml('global_notices'); ?>
+		<?php /*?><div class="page"><?php */?>
+			<?php echo $this->getChildHtml('header'); ?>
+			<div class="main-container col2-left-layout">
+				<div class="main">
+					<?php echo $this->getChildHtml('breadcrumbs'); ?>
+					<?php echo $this->getChildHtml('promotions'); ?>
+					<div class="col-main">
+						<?php echo $this->getChildHtml('global_messages'); ?>
+						<?php echo $this->getChildHtml('content'); ?>
+					</div>
+					<?php /*?><div class="catleftnav">
+						<div class="leftnavcat"><?php echo $this->getChildHtml('left'); ?></div>
+					</div><?php */?>
+				</div>
+				<?php /*?><div class="angaracustomblock"><?php echo $this->getChildHtml('angaracustomblock'); ?><div style="clear:both"></div></div>
+				<div style="clear:both"></div><?php */?>
+			</div>
+			<?php 
+			echo $this->getChildHtml('middle_categories_mob');
+			echo $this->getChildHtml('footer');
+			echo $this->getChildHtml('before_body_end'); 
+			?>
+		<?php /*?></div><?php */?>
+	</div>
+	
+	<?php echo $this->getAbsoluteFooter(); ?>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?php
+$_product 			= 	$this->getProduct(); 
+$_wishlistSubmitUrl = 	$this->helper('wishlist')->getAddUrl($_product); ?>
+
+<div class="high-padding-top small">
+<?php
+$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){
+	$wishlist = Mage::getModel('wishlist/item')->getCollection();
+	$wishlist->getSelect()
+			  ->join(array('t2' => 'wishlist'),
+					 'main_table.wishlist_id = t2.wishlist_id',
+					 array('wishlist_id','customer_id'))
+					 ->where('main_table.product_id='.$_product->getId().' AND t2.customer_id='.$customerId);
+	$count = $wishlist->count();
+	
+	if($count != 0){ 
+		echo '<a href="javascript:void(0)" class="link-wishlist"><i class="fa fa-heart-o pR5"></i>Added</a>';
+	} 
+	else{?>
+		<a href="<?php echo $_wishlistSubmitUrl;?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="fa fa-heart-o pR5"></i>Want</a>
+	<?php
+	}
+}
+else{?>
+	<a href="<?php echo $_wishlistSubmitUrl;?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="fa fa-heart-o pR5"></i>Want</a>
+<?php	
+}?>
+</div>

@@ -1,0 +1,408 @@
+<style>
+#fetchcountry{}
+#fetchcountry .container{height:100%;}
+#fetchcountry .showcase-bg-white{background:#ffffff; height:100%;}
+#fetchcountry .showcase-bg-white .row{padding:0px 5px 10px;}
+#fetchcountry .showcase-bg-white .row .col-xs-12 .fontcolor-type1.fontsize-type7{padding-bottom:10px!important;}
+#fetchcountry .showcase-bg-white .points{}
+#fetchcountry .showcase-bg-white .points ul{}
+#fetchcountry .showcase-bg-white .points .list-style-disc {list-style: disc;margin-left: 10px}
+#fetchcountry .showcase-bg-white .points ul li{margin-bottom: 10px; text-align: left;}
+#fetchcountry .showcase-bg-white .btn-primary {padding: 10px 15px; display: inline-block; border-radius: 2px; margin:15px 0px 10px;}
+#fetchcountry .close{margin-right:10px; margin-top:10px;}
+</style>
+<script>
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
+<?php
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+
+$totalCartItems = Mage::helper('function')->getCartItemsCount();
+
+//	check which page you are on
+$showMenu 	=	true;
+$request 	= 	Mage::app()->getRequest();
+$module 	= 	$request->getModuleName();
+$controller = 	$request->getControllerName();
+$action 	= 	$request->getActionName();
+
+if($module == 'checkout' || $module == 'onepagecheckout' || $controller == 'cart' ) {	$showMenu =	false; } ?>
+<?php $pageType = Mage::helper('function')->getPageType(); ?>
+<header id="header" class="page-header">
+    <div class="page-header-container <?php if (Mage::getSingleton('customer/session')->isLoggedIn()){ echo 'loggedin'; }?>">
+		<div class="row">
+			<?php if($pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType!='amazon_payments' && $pageType != 'cart'){ ?>
+			<div class="fl">
+				<?php if($showMenu){?><div class="nav-icon fl icon"><a href="javascript:void(0)" onclick="navigation()"><i class="fa fa-bars fl apricot-text"></i></a></div><?php } ?>
+			</div>
+			<?php } ?>
+
+			<?php if($pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType!='amazon_payments' && $pageType != 'cart'){ ?>
+			<div class="fl">
+			<?php }else{ ?>
+			<div class="fl mL10">
+			<?php } ?>
+				<a class="logo" href="<?php echo $this->getUrl('') ?>"><img src="<?php echo $this->getLogoSrc();?>" alt="Angara The Jewelry Destination" title="Angara Jewelry"/></a>
+			</div>
+			
+			<div class="fr">
+				<?php if($pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType!='amazon_payments' && $pageType != 'cart'){ ?>
+					<div class="head-contact fl icon"><a href="javascript:void(0)" style=""><i class="fa fa-phone fl" style="font-size:25px; color:#777777; margin-top:11px; margin-left:11px;"></i></a></div>
+					<div class="head-search fl icon"><a href="javascript:void(0)"><i class="fa fa-search fl apricot-text"></i></a></div>				
+					<div class="head-cart fr icon">
+						<?php echo $this->getChildHtml('cart_opener_new'); ?>
+					</div>
+				<?php } ?>
+				<?php if($pageType == 'cart'){ ?>
+					<span style="line-height:45px; padding-right:20px; font-weight:bold; font-size:16px;">Secure Shopping Cart</span>
+				<?php }?>
+				<?php if($pageType == 'checkout'){ ?>
+					<div class="head-contact fl icon"><a href="javascript:void(0)" style=""><i class="fa fa-phone fl" style="font-size:25px; color:#777777; margin-top:11px; margin-left:11px;"></i></a></div>
+				<?php }?>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div id="header-search" style="display:none">
+				<?php echo $this->getChildHtml('topSearch') ?>
+			</div>
+		</div>
+    </div>
+</header>
+<div id="header-contact">
+    <div class="header-contact-holder">
+        <div class="full-width h3">
+            <span class="fl">Contact Us</span> <span class="close-contact fr">X</span>
+        </div>
+        <div class="full-width hc-content center-align pT10">	
+            Click below to be connected with one of our Angara advisors.
+        </div>
+        <div class="half-width hc-btn center-align pT10" style="padding:10px!important">	
+            <a href="tel:18889264272" rel="nofollow" class="full-width">
+                <span class="button"><i class="fa fa-phone"></i> 1-888-926-4272</span>
+            </a>
+        </div>
+        <div class="half-width hc-btn center-align pT10" style="padding:10px!important">	
+            <a href="mailto:customer.service@angara.com" rel="nofollow" class="full-width">
+				<span class="button"><i class="fa fa-envelope-o"></i> Email</span>
+			</a>
+        </div>
+        <?php /* <div class="full-width hc-faq center-align pT10 pB10">	
+            For any product/service related questions, please email us at <a href="mailto:customer.service@angara.com">customer.service@angara.com</a>
+        </div> */ ?>
+    </div>
+</div>
+<?php 
+// hide menu from cart, checkout pages
+if($showMenu){ ?>
+<div id="navigation">
+	<div id="main-menu">
+		<div class="nav-heading fl">
+			<span class="title fl mL10">Menu</span><span class="fr close-nav" onclick="navigationClose()"></span>
+		</div>
+		<div class="nav-holder">
+			<div class="before-main-nav full-width">
+				<ul>
+					<?php
+                	if (Mage::getSingleton('customer/session')->isLoggedIn()){
+						$accountUrl = 	Mage::helper('customer')->getAccountUrl();
+					}//else{
+						//$loginUrl 	= 	Mage::helper('customer')->getLoginUrl();
+					//} 
+					?>
+                	<li><?php if(isset($accountUrl)){?><a href="<?php echo $accountUrl;?>"><i class="fa fa-user"></i>My Account</a><?php }else{?><a href="javascript:;" id="login-popup" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user"></i>Log In</a><?php }?></li>                  
+					<li><a href="/tracking"><i class="fa fa-map-marker"></i> Track Your Order</a></li>
+				</ul>
+			</div>            
+            <?php //	S:VA	Login or Register Ajax Popup
+			$seqHttp	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');?>
+			<script type="text/javascript">
+            jQuery(document).on('click','#login-popup',function(e){
+                var ce 			= 	jQuery(this);
+				if ( ce.data('requestRunning') ) {	return;	}
+				ce.data('requestRunning', true);
+				jQuery.ajax({
+					type: 'POST',
+					url: '<?php echo Mage::getUrl("ajax/index/login/",array('_secure'=>$seqHttp))?>', 
+					beforeSend: function( xhr ) {
+						jQuery('#loginModal').html('<div class="loading-indicator text-center"><div class="modal-backdrop fade in"></div><div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div></div>');				
+					},
+					context: document.body
+				}).done(function( html, textStatus ){
+					<?php if(Mage::getSingleton('customer/session')->isLoggedIn()){?>
+					var result		= 	JSON.parse(html);
+					var wishlist_id	=	result.wishlist_id;
+					<?php } ?>
+					if(textStatus == 'success'){
+						jQuery('#loginModal').html(html);
+					}else if(textStatus == 'error'){
+						alert(textStatus);
+					}else{			
+						jQuery('#loginModal').html(html);
+					}
+					ce.data('requestRunning', false);	
+				}).fail(function(jqXHR, textStatus){
+					if(textStatus === 'timeout'){  
+						jQuery('#loginModal').html('error');
+					}
+				});
+            }); 
+			</script>
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1"></div>			
+			<div class="full-width">
+				<?php
+				if($pageType == 'category' || $pageType == 'product'){
+					$_category = Mage::registry('current_category');
+				}
+				$current_identifier = Mage::getSingleton('cms/page')->getIdentifier();
+				if(($current_identifier && stripos($current_identifier, 'pearl') !== false) || (($pageType == 'category' || $pageType == 'product') && ($_category && stripos($_category->getName(), 'pearl') !== false)) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'pearl') !== false)){?>
+					<style>
+						#main-menu ul li a.level0,
+						#main-menu ul li a.level0-dl{padding:0px 20px;}
+						#main-menu ul li a.level1, #main-menu ul li.view-all a, #home-menu ul li a.level1, #home-menu ul li.view-all a{
+							padding:0px 30px
+						}
+						#main-menu ul li.level2 a, #home-menu ul li.level2 a{
+							padding:0px 40px
+						}
+						.pearl-nav{display: block; line-height: 44px; border-bottom: 1px solid #e6e6e6; color: #444444; font-weight: bold; font-size: 13px; text-decoration: none; padding-right:10px;}
+						.pearl-nav i.fa{font-size: 12px; float: right; line-height: 44px;}
+						.after-main-nav li a.level0{
+							padding:0px 10px!important;
+						}
+					</style>
+					<div class="full-width">
+						<div class="full-width">
+							<a href="" class="high-padding-left text-bold pearl-nav" style="pointer-events:none;"> Gemstone Jewelry <i class="pull-right fa fa-chevron-right"></i> </a>
+							<?php echo $this->getChildHtml('topMenu'); ?>
+						</div>
+					</div>
+				<?php }else{ 
+				
+					echo $this->getChildHtml('topMenu');
+					
+				} ?>
+				
+			</div>
+			<div class="after-main-nav full-width">
+				<ul class="level0">
+					<li class="level0">
+						<a  class="level0" href="javascript:void(0)">Jewelry by collections <i class="fa fa-plus"></i></a>
+						<ul class="level1">
+							<li class="level1">
+								<a href="/birthstone-jewelry">Birthstone Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/jewelry/gemstone-jewelry">Gemstone Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/jewelry/diamond-jewelry">Diamond Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/jewelry/colored-diamond-jewelry">Colored Diamond Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/bridal-jewelry">Bridal Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/lab-jewelry">Lab Created Jewelry</a>
+							</li>
+							<li class="level1">
+								<a href="/jewelry">Jewelry</a>
+							</li>
+					   </ul>
+					</li>
+				
+				
+					<li class="level0">
+						<ul class="level1">
+							<li class="level1">
+							<a href="/ls-index">Affiliate Program</a>	
+							</li>
+							<li class="level1">
+							<a href="/site-map">Sitemap</a>	
+							</li>
+						</ul>
+					 </li>
+					<li class="level0">
+						<a  class="level0" href="javascript:void(0)">Get to Know Us <i class="fa fa-plus"></i></a>
+						<ul class="level1">
+							<li class="level1">
+								<a href="/about-us">About Angara</a>
+							</li>
+							<li class="level1">
+								<a href="http://blog.angara.com/">Blog</a>
+							</li>
+							<li class="level1">
+								<a href="/faq">FAQ's</a>
+							</li>
+							<li class="level1">
+								<a href="/angara-in-the-press">Angara in the News</a>
+							</li>
+							<li class="level1">
+								<a href="/customer-reviews">Customer Reviews</a>
+							</li>
+						</ul>
+					</li>
+					
+					<li class="level0">
+						<a  class="level0" href="javascript:void(0)">Policies <i class="fa fa-plus"></i></a>
+						<ul class="level1">
+							<li class="level1">
+							<a href="/return-policy">Return</a>	
+							</li>
+							<li class="level1">
+							<a href="/privacy-and-security">Privacy and Security</a>	
+							</li>
+							<li class="level1">
+								<a href="/term-of-use">Terms of Use</a>
+							</li>
+							<li class="level1">
+								<a href="/shipping">Shipping</a>
+							</li>
+							<li class="level1">
+								<a href="/international-policies">International Shipping</a>
+							</li>
+							<li class="level1">
+								<a href="/total-protection-warranty">Warranty Plan</a>
+							</li>
+							
+						</ul>
+					</li>
+					<li class="level0">
+						<a  class="level0" href="javascript:void(0)">Contact Us <i class="fa fa-plus"></i></a>
+						<ul class="level1">
+							<li class="level1">
+							<a href="javascript:;" class="live-chat-link">Live Chat</a>	
+							</li>
+							<li class="level1">
+								<a href="mailto:customer.service@angara.com" >Email</a>
+							</li>
+							<li class="level1">
+							<a href="/tracking" >Track Your Order</a>
+								
+							</li>
+							<li class="level1">
+							<a href="/contact-us" class="block-inline-display">Call Us: 1-888-926-4272 <span style="color:#008906"></span></a>	
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>			
+			<div class="extra-block full-width">
+				<div class="block connect-with-us full-width">
+					<div class="title full-width">Connect with Us:</div>
+					<div class="social-icon full-width">
+						<ul class="socialicons social-list-inline">
+							<li class="ficon social-icons-footer"><a href="https://www.facebook.com/Angaradotcom"><i class="fa px32 fa-facebook-square" style="color:#314987"></i></a></li>
+							<li class="pinticon social-icons-footer"><a href="https://www.pinterest.com/angarajewelry/"><i class="fa px32 fa-pinterest-square" style="color:#cb2026"></i></a></li>
+							<li class="twiticon social-icons-footer"><a href="https://twitter.com/angarajewelry"><i class="fa px32 fa-twitter-square" style="color:#38b7da"></i></a></li>
+							<li class="gplusicon social-icons-footer"><a href="https://plus.google.com/+Angara"><i class="fa px32 fa-google-plus-square" style="color:#c53113"></i></a></li>
+							<li class="utubeicon social-icons-footer"><a href="https://www.youtube.com/c/Angarajewelry"><i class="fa px32 fa-youtube" style="color:#c80b07"></i></a></li>
+							<li class="blogicon instaicon social-icons-footer">
+								<a href="https://www.instagram.com/angarajewelry/">
+									<img class="" src="<?php echo $this->getSkinUrl();?>images/instagram-sm.png"/>
+								</a>
+							</li>
+							<li class="blogicon social-icons-footer">
+								<a href="http://blog.angara.com/">
+									<img class="" src="<?php echo $this->getSkinUrl();?>images/blog-sm.png"/>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function(){
+		//to set height main head navigation
+		var wHeight = jQuery(window).height();
+		jQuery('#navigation #main-menu').css('height',wHeight+90);
+		jQuery('#navigation #main-menu .nav-holder').css('height',wHeight-45);
+	});
+	jQuery(window).load(function(){
+		jQuery('#main-menu ul.level0 li.level0').each(function(){
+			var posTop = jQuery(this).offset().top - jQuery('header').height();
+			jQuery(this).attr('data-pos',posTop);
+		})
+	});
+	jQuery(window).resize(function(){
+		//to set height main head navigation
+		var wHeight = jQuery(window).height();
+		jQuery('#navigation #main-menu').css('height',wHeight);
+		jQuery('#navigation #main-menu .nav-holder').css('height',wHeight-45);
+	});
+	jQuery('#main-menu a.level0 , #main-menu a.level1').unbind("click").click(function( e ){
+		e.preventDefault();
+		
+		jQuery(this).parents('#main-menu').find('li a').removeClass('active');
+		jQuery(this).parent('li').siblings().find('ul').slideUp();
+		jQuery(this).parent('li').siblings().find('a .fa').removeClass('fa-minus');
+		jQuery(this).parent('li').siblings().find('a .fa').addClass('fa-plus');
+		jQuery(this).parent('li').siblings().find('a .fa-chevron-right').removeClass('fa-plus fa-minus');
+		
+		jQuery(this).toggleClass('active').next('ul').slideToggle();
+		jQuery(this).find('.fa-minus, .fa-plus').toggleClass('fa-minus fa-plus');
+		
+		//To Manage focus
+		if(jQuery(this).hasClass('active')){
+			var sPos = jQuery(this).parents('li.level0').data('pos');
+			jQuery('.nav-holder').animate({scrollTop:sPos}, '500');
+		}
+	
+		//to manage more link in last level menu
+		jQuery('#main-menu .view-more').slideDown();
+		jQuery('#main-menu .view-more').nextAll('li.level2').hide();
+	});
+	
+	jQuery(document).ready(function(){
+		//to hide all last level menu after more link
+		jQuery('#main-menu .view-more').nextAll('li.level2').hide();
+	});
+	jQuery('#main-menu .view-more a').click(function(){
+		//to show all last level menu after more link
+		jQuery(this).parent('li').slideUp();
+		jQuery(this).parent('li').nextAll('li.level2').slideDown();
+	});
+</script>
+<?php } ?>
+<script>
+// to show contact info on header icon click
+jQuery('.head-contact').click(function(){
+	jQuery('#header-contact').show();
+});
+
+// to show contact info on header icon click
+jQuery('.close-contact').click(function(){
+	jQuery('#header-contact').hide();
+});
+</script>
+<?php echo $this->getChildHtml('topContainer'); ?>
+<script language="javascript">
+jQuery(function(){
+	jQuery('.head-search').click(function(){
+		jQuery('#header-search').slideToggle(300);
+		
+		if(jQuery('#header-search').hasClass('active')){
+			jQuery('body').css('padding-top','45px');
+		}else{
+			jQuery('body').css('padding-top','84px');
+		}
+		jQuery('#header-search').toggleClass('active');
+		
+		//jQuery("#header-search").show();
+	});
+	jQuery('#close-serarch').click(function(){
+		jQuery('#header-search').slideToggle(300);
+		jQuery('#header-search').toggleClass('active');
+		jQuery('body').css('padding-top','45px');
+	});
+});
+</script>

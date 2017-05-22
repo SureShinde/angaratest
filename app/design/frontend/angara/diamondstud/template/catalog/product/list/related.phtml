@@ -1,0 +1,77 @@
+<?php	//$totalRelatedProducts	=	$this->getItems()->getSize();
+$_product 		= 	$this->getProduct();
+$relatedSku 	= 	$_product->getDiamondRelatedProducts();
+$relatedProd 	= 	explode(',',$relatedSku);
+$currentUrl		=	$_product->getProductUrl();
+//echo '<pre>'; print_r($relatedSku);die;
+$currentItem  	= 	$this->getRequest()->getParam('item');
+
+if(count($relatedProd)>1){?>
+<link rel="stylesheet" href="<?php echo Mage::getDesign()->getSkinUrl('css/jcarousel_horizontal.css');?>"/>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+		scroll: 1,
+	<?php if($currentItem){?>
+		start:	<?php echo $currentItem;?>
+	<?php } ?>
+    });
+	
+	// Settings the styles for clicked item
+	jQuery('#mycarousel li span').click(function(){
+		// Reset all items
+		jQuery('#mycarousel').find('span').removeClass('activethumb'); 
+		// Add css/class to the clicked one only
+		jQuery(this).addClass("activethumb");
+	})
+});
+</script>
+        <div id="mostpopularitems">
+            <div class="mostpopular-title">Most popular diamond stud options</div>	            
+            <ul id="mycarousel" class="jcarousel-skin-tango">
+				<?php $j=1;
+				$_coreHelper = $this->helper('core');
+				foreach($relatedProd as $_item){
+					//echo '<pre>';print_r($_item);
+					$productCollection			=	Mage::getModel("catalog/product")->load( $_item );
+					$studWeightID				=	$productCollection->getStudWeight();
+					if($studWeightID!=''){
+						$studWeight 			= 	$productCollection->getAttributeText('stud_weight');			//	1.25 ct is “Stud Weight”				
+					}
+					$centerStoneShapeID			=	$productCollection->getStone1Shape();
+					if($centerStoneShapeID!=''){
+						$centerStoneShape		= 	$productCollection->getAttributeText('stone1_shape');			//	Round is “Center Stone Shape”			
+					}
+					$metalTypeID				=	$productCollection->getMetal1Type();
+					if($metalTypeID!=''){
+						$metalType 				= 	$productCollection->getAttributeText('metal1_type');			//	Silver is “Metal Type”				
+					}
+					$stoneQualityID				=	$productCollection->getStone1Grade();
+					if($stoneQualityID!=''){
+						$stoneQuality 			= 	$productCollection->getAttributeText('stone1_grade');			//	VS1-VS2/G-H  would be GH-VS2 is “Stone Quality”				
+					}
+					
+					$settingStyleID				=	$productCollection->getSettingStyle();
+					if($settingStyleID!=''){
+						$settingStyle 			= 	$productCollection->getAttributeText('setting_style');			//	VS1-VS2/G-H  would be GH-VS2 is “Stone Quality”				
+					}
+					$productUrl					=	$productCollection->getProductUrl();
+					$relatedProductUrl			=	$currentUrl."?stone1_shape=".$centerStoneShapeID."&setting_style=".$settingStyleID."&stud_weight=".$studWeightID."&stone1_grade=".$stoneQualityID."&metal1_type=".$metalTypeID."&item=".$j;
+				?>  
+					<li><span class="<?php if($j==$currentItem){echo 'activethumb';}?> thumbs"><a href="<?php echo $relatedProductUrl; ?>" title="<?php echo $this->htmlEscape($productCollection->getName()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($productCollection, 'thumbnail')->resize(76) ?>" alt="<?php echo $this->htmlEscape($productCollection->getName()) ?>" /></a></span>
+					<span class="mostpopularitems-price" ><?php echo $_coreHelper->currency($this->htmlEscape($productCollection->getFinalPrice()),true,false); ?></span>
+					<span class="mostpopularitems-name">
+                    	<!--pid<?php echo $productCollection->getID();?>-->
+                        <?php echo $studWeight;?> ct 
+                        <?php echo $centerStoneShape;?>
+                        <?php echo $metalType;?>
+                        <?php echo $stoneQuality;?>
+                    </span>
+					</li>
+					<?php 
+					$j++;
+				 }	//	end foreach
+				?>
+            </ul>
+        </div>
+<?php } ?>

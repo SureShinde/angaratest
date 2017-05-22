@@ -1,0 +1,78 @@
+<?php /*<style>
+#playvedio {
+	position:absolute;
+	z-index:10;
+	left:550px;
+	top:-5px;
+}
+#playvedio a {
+	width:36px;
+	height:38px;
+	display:block;
+}
+#playvedio a:hover {
+	width:36px;
+	height:38px;
+	display:block;
+	background-color:#e6e6e6;
+	border-bottom-left-radius:3px;
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-moz-box-shadow:-1px 1px 4px #797979;
+	-webkit-box-shadow:-1px 1px 4px #797979;
+	box-shadow:-1px 1px 4px #797979;
+}
+#playvedio a img {
+	height:27px;
+	width:33px;
+	padding:6px 0 0 2px;
+}
+</style>*/?>
+<?php
+/*
+ * Contus Support Pvt Ltd.
+ * created by Vasanth on nov 02 2010.
+ * vasanth@contus.in
+ * In this page we can include the jw player in frontend.
+ */
+
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$cids = $_product->getCategoryIds();
+$_videoDetails['video'] = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+$video_arr = array_filter(explode("|",$_videoDetails['video']),'trim');
+$number_of_videos = count($video_arr); 
+
+$videoPath = Mage::getBaseURL('media').'productVideos/';
+$thumbPath = Mage::getBaseURL('media').'productVideos/'; 
+
+//	Added by Vaseem to resolve video width bug in iPad
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+	$playerWidth	=	'820';	//	Width of video with jwplayer logo inside layer
+	$playerHeight	=	'440';	//	Height of video with jwplayer logo
+}else{
+	$playerWidth	=	'960';
+	if(!(in_array($_product->getSku(), $plainBandSku))){
+		$playerHeight	=	'490';
+	}
+	else{
+		$playerHeight	=	'510';
+	}
+}
+?>
+<div class="provideo-holder hidden img-3" autobuffer>
+	<div style="text-align:center"> 
+		<?php for($i=0; $i < count($video_arr); $i++) {
+		  /*Retrive uploaded videos from media*/
+			list($videoPName,$thumbPName) = explode(',',$video_arr[$i]); ?>
+		<?php }	?>
+		<video id="angvideo" width="420" preload="auto" placeholder="<?php echo $thumbPath."videoplaceholder/".$thumbPName; ?>" controls>
+			<?php for ($i=0; $i < count($video_arr); $i++) {
+			  /*Retrive uploaded videos from media*/
+				list($videoName,$thumbName) = explode(',',$video_arr[$i]); ?>
+				<source src="<?php echo $videoPath."video/".$videoName; ?>" type="video/mp4">
+			<?php }	?>
+			Your browser does not support HTML5 video.
+		</video>
+	</div> 
+</div>

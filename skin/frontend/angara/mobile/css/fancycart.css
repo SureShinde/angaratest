@@ -1,0 +1,665 @@
+.main {
+	background-color: #FFFFFF;
+	border:none;
+	margin:0;
+	padding:0;
+}
+.popup-shopping-cart {
+	font-family: open_sansregular, Arial, Helvetica, sans-seri;
+	margin:5px;
+}
+.popup-shopping-cart .newcart .col2-set .col-2 {
+	padding:10px;
+	border: solid 1px #eaeaea;
+	background-color:#f9f9f9;
+}
+.popup-shopping-cart .newcart .col2-set .col-1 {
+	width: 585px;
+}
+.popup-shopping-cart .cart-price {
+	text-align:center;
+	font-size: 13px;
+	color: #3d9900;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+}
+.popup-shopping-cart .cart-price span.price {
+	color: #000;
+}
+.popup-shopping-cart .detail-part {
+	float: left;
+	width:92%;
+}
+.popup-shopping-cart .item-options dt {
+	float: left;
+	padding-right: 3px;
+	color: #292929;
+}
+.popup-shopping-cart .item-options dd {
+	margin-bottom:1px;
+	color: #838383;
+}
+.popup-shopping-cart .img-action-btn {
+	text-align: center;
+	float:right;
+}
+.popup-shopping-cart .img-action-btn a {
+	text-decoration: none;
+	width:13px;
+	height:14px;
+	cursor:pointer;
+	background: url(/skin/frontend/angara/mobile/images/delete-cart-prodcut.png) center no-repeat;
+	display:block;
+	margin-top:4px;
+}
+.popup-shopping-cart .summary-title {
+	padding: 0 0 10px 0;
+	border-bottom: solid 1px #eaeaea;
+	font-size: 19px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	color: #3a3a3a;
+}
+.popup-shopping-cart h2.product-name {
+	font-size: 12px;
+	color: #000;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+}
+.popup-shopping-cart .proceed-checkout-btn {
+	padding:6px 0;
+	outline: none;
+	border: solid 1px #cd7708;
+	background: #DE513E; /* for non-css3 browsers */
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 13px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	cursor: pointer;
+}
+.popup-shopping-cart .continue-btn {
+	width: 160px;
+	padding:7px 0;
+	border: none;
+	outline: none;
+	background: #afafaf;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 13px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	cursor: pointer;
+}
+.popup-shopping-cart .discount-code-title {
+	display: block;
+	padding-bottom: 5px;
+	font-size:12px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+}
+.popup-shopping-cart #coupon_code {
+	float: left;
+}
+.popup-shopping-cart .apply-code {
+	width: 63px;
+	height: 26px;
+	outline: none;
+	border: solid 1px #b1b1b1;
+	background: #cdcdcd; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='#cdcdcd'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#cdcdcd)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #ebebeb, #cdcdcd); /* for firefox 3.6+ */
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	color: #000;
+	font-size: 9px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	float: right;
+	margin-right: 5px;
+	cursor: pointer;
+	position: absolute;
+	top: 34px;
+	right:38px;
+}
+.popup-shopping-cart .discount-input-text {
+	width: 133px;
+	padding: 0 4px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #bdbdbd;
+}
+.popup-shopping-cart .cancel-code {
+	width: 26px;
+	height: 26px;
+	outline: none;
+	border: solid 1px #b1b1b1;
+	background: #ebebeb;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	color: #000;
+	font-size: 9px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	float: right;
+	cursor: pointer;
+	position: absolute;
+	top: 34px;
+	right: 12px;
+}
+.popup-shopping-cart .payment-method-block {
+	margin-top:15px;
+}
+.popup-shopping-cart .proceed-checkout-btn-bottom {
+	width: 280px;
+	height: 36px;
+	outline: none;
+	border: solid 1px #cd7708;
+	background: #DE513E; /* for non-css3 browsers */
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 17px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	cursor: pointer;
+}
+.popup-shopping-cart .space {
+	margin-top: 12px;
+}
+.popup-shopping-cart .messages li li {
+	margin: 0 !important;
+}
+.popup-shopping-cart .secure-checkout-logo {
+	width:280px;
+	height:28px;
+	margin:0 auto;
+	margin-bottom: 12px;
+}
+.popup-shopping-cart .secure-checkout-logo ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.popup-shopping-cart .secure-checkout-logo li {
+	background: url("../images/secure-checkout-logo.jpg") no-repeat center;
+	display:block;
+	float:left;
+}
+.popup-shopping-cart .secure-checkout-logo li.verisign {
+	width:57px;
+	height:28px;
+	background-position:-109px 0px;
+	cursor:pointer;
+}
+.popup-shopping-cart .secure-checkout-logo li.paypal {
+	width:57px;
+	height:28px;
+	background-position:-168px 0px;
+	cursor:default;
+}
+.popup-shopping-cart .secure-checkout-logo li.mcafee {
+	width:57px;
+	height:28px;
+	background-position:-227px 0px;
+	cursor:pointer;
+}
+.popup-shopping-cart .secure-checkout-logo li.title {
+	width:109px;
+	height:28px;
+	background-position:0 0;
+}
+.popup-shopping-cart .tax-note {
+	font-size: 9px;
+	margin: 25px 0 0 12px;
+	color: #626262;
+}
+.popup-shopping-cart #shopping-cart-totals-table td.a-right strong {
+	color: #964b59;
+	font-size: 14px;
+}
+.popup-shopping-cart .block .block-content .product-name {
+	color: #000;
+}
+.popup-shopping-cart .certpopup {
+	width: 13px;
+	height: 15px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0px;
+	background: url(/skin/frontend/angara/default/images/priceknowmore.jpg) no-repeat;
+}
+.popup-shopping-cart .certpopup a.tooltip-cart {
+	width: 13px;
+	height: 15px;
+	cursor: pointer;
+	display: block;
+	position: relative;
+}
+.popup-shopping-cart a.tooltip-cart span {
+	position: absolute;
+	top: -91px;
+	left:-82px;
+	width: 243px;
+	opacity: 0;
+	text-decoration: none !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	z-index: 999;
+	display: none;
+}
+.popup-shopping-cart a.tooltip-cart:hover span {
+	margin-left: 0;
+	opacity: 1;
+	font: 11px Arial, Helvetica, sans-serif;
+	display: block;
+}
+.popup-shopping-cart .taxovertxt {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 8px;
+}
+.popup-shopping-cart .cart-product {
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: solid 1px #efefef;
+}
+.popup-shopping-cart .cart-product-image {
+	float: left;
+	width:31.25%;
+	text-align:center;
+}
+.popup-shopping-cart .cart-product-details {
+	float:right;
+	padding-left: 20px;
+	width:60.5263%;
+}
+.popup-shopping-cart .cart-product-sku {
+	margin-bottom: 10px;
+	margin-top: 3px;
+	font-size: 11px;
+	font-style: italic;
+	color: #888888;
+}
+.popup-shopping-cart .remove-item-link {
+	margin-top: 6px;
+	display: block;
+	color: #829FBF
+}
+.popup-shopping-cart input.qty {
+	text-align: center;
+	border-color: #829FBF
+}
+.popup-shopping-cart .lastcol {
+	color: #B20400;
+	font-weight: bold
+}
+.popup-shopping-cart #coupon-code {
+	padding: 12px;
+	background-color: #fafafa;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: solid 1px #f1f1f1;
+	position: relative;
+}
+.popup-shopping-cart .new-shipping {
+	margin: 0 15px 20px 15px;
+	text-align: right;
+}
+.popup-shopping-cart .small-shipping-text {
+	font-size: 11px;
+	padding: 3px 0 0 0;
+	display: block;
+}
+.popup-shopping-cart .cart-cell {
+	border-top: none;
+}
+.popup-shopping-cart #checkout-step-login .col2-set .col-2 {
+	border-left: 0px dotted #d3d3d3;
+}
+.popup-shopping-cart #shopping-cart-totals-table {
+	width: 100%;
+}
+.popup-shopping-cart .checkout-right-gray-box #shopping-cart-totals-table {
+	width: 100%;
+	margin: 0;
+}
+.popup-shopping-cart #shopping-cart-totals-table td.a-right {
+	padding: 6px 0 6px 0;
+	color: #4e4e4e;
+}
+.popup-shopping-cart #shopping-cart-totals-table td.a-left {
+	padding: 6px 0 6px 0;
+	color: #4e4e4e;
+}
+.popup-shopping-cart #shopping-cart-totals-table th {
+	padding: 5px 0;
+}
+.popup-shopping-cart .newcart .a-right {
+	text-align: right;
+}
+.popup-shopping-cart .newcart .a-left {
+	text-align: left;
+}
+.popup-shopping-cart .newcart td.a-left strong {
+	font-size: 13px;
+	color: #4e4e4e;
+	font-weight: normal;
+}
+.popup-shopping-cart .all-checkouts {
+	background: #f5f5f5;
+	border-top: 1px dotted #d3d3d3;
+	overflow: auto;
+}
+.popup-shopping-cart .upper-total-row td {
+	border: 0 none;
+	border-top: 1px dotted #cacbbf;
+	margin-top: 5px;
+}
+.popup-shopping-cart .lower-total-row td {
+	border: 0 none;
+	/*border-bottom: 1px dotted #cacbbf;*/
+	margin-bottom: 5px;
+}
+.popup-shopping-cart .data-table td.last {
+	border-right: 0 none;
+	border-left: 1px solid #D4D4D4;
+}
+.popup-shopping-cart .product-name a {
+	color: #000;
+	font:12px open_sanssemibold, Arial, Helvetica, sans-seri;
+}
+.popup-shopping-cart a {
+	color: #000;
+}
+.popup-shopping-cart .why-shop-at-angara {
+	width:100%;
+	height: 60px;
+	font-size: 12px;
+	line-height: 60px;
+	color: #585858;
+	text-transform: uppercase;
+	background: url(../images/why-shop-angara-bg.jpg) center no-repeat;
+	margin-top: 25px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	text-align:center;
+}
+.popup-shopping-cart #shopping-cart-totals-table .upper-total-row .a-right {
+	padding: 7px 0 7px 0;
+}
+.popup-shopping-cart #shopping-cart-totals-table .lower-total-row .a-right {
+	padding: 7px 0 7px 0;
+}
+.popup-shopping-cart .discountsection {
+	padding: 15px 0 20px;
+	font-size:12px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+}
+.popup-shopping-cart .select_shipping {
+	width: 205px;
+	height: 21px;
+	border: solid 1px #bdbdbd;
+	float: right;
+	color: #964b59;
+}
+.popup-shopping-cart .green-title {
+	padding: 0 0 8px 0;
+}
+.popup-shopping-cart .item-options {
+	width: auto;
+	color: #292929;
+	font-size: 11px;
+}
+.popup-shopping-cart .page-title h1 {
+	font-size: 22px;
+	color: #000000;
+}
+#cbaButton2 {
+	width:135px;
+}
+#cbaButton2 img {
+	float:right;
+}
+#shadow-box-overlay {
+	position:absolute;
+	top:0;
+	left:0;
+	background:#333;
+	display:none;
+	z-index:9998;
+	background: url(/skin/frontend/angara/default/images/lay-over-transperent-img.png);
+}
+#shadow-box-wrapper {
+	position:absolute;
+	left:0;
+	right:0;
+	top:120px;
+	z-index:9999;
+	display:none;
+}
+#shadow-box-content {
+	position:relative;
+	width:928px;
+	min-height:100px;
+	margin:0 auto;
+	min-height:100px;
+	background:#fff;
+	-moz-box-shadow: 0px 0px 4px #000;
+	-webkit-box-shadow: 0px 0px 4px #000;
+	box-shadow: 0px 0px 4px #000;
+	border-radius:2px;
+	padding:14px;
+	min-height:252px;
+	height:auto!important;
+	height:252px;
+}
+.mycartitem {
+	cursor:pointer
+}
+#shadow-box-close {
+	float:right;
+	clear:both;
+	margin: 0 0 8px;
+	cursor:pointer
+}
+.topnavbar {
+	display: block;
+}
+.popup-shopping-cart .cart {
+	float:none;
+	padding:0;
+	text-transform:none;
+}
+.popup-shopping-cart .why-shop-at-angara {
+	width:auto;
+}
+#progressing-loader {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background: url(/skin/frontend/angara/default/images/logoanimatedgif.gif) #fff center no-repeat;
+	display:none;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+	filter: alpha(opacity=85);
+	-moz-opacity: 0.85;
+	-khtml-opacity: 0.85;
+	opacity: 0.85;
+}
+#progressing-loader {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	display:none;
+	background-color:#fff;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+	filter: alpha(opacity=85);
+	-moz-opacity: 0.85;
+	-khtml-opacity: 0.85;
+	opacity: 0.85;
+}
+.continue-shopping-block {
+	width: 162px;
+	margin:0 auto;
+	margin-top:100px;
+}
+.continue-shopping-btn {
+	width: 160px;
+	height: 31px;
+	outline: none;
+	border: solid 1px #cd7708;
+	background: #fb8a25; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8a656', endColorstr='#fb8a25'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8a656), to(#fb8a25)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #f8a656, #fb8a25); /* for firefox 3.6+ */
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 11px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	cursor: pointer;
+}
+.emcartheadingtxt {
+	font-size:21px;
+	color: #3a3a3a;
+}
+.items-txt-color {
+	color:#8e8e8e;
+	text-transform:lowercase;
+}
+#shopping-cart-totals-table .lower-total-row .a-left, #shopping-cart-totals-table .lower-total-row .a-right {
+	border-top: 1px dotted #cacbbf;
+}
+#pay-today-text dd, #pay-today-text dt {
+	color:#964B59;
+}
+.freeeng {
+	color:#F00;
+	font-weight:bold;
+}
+.why-shop-at-angara b {
+	font-weight:normal;
+}
+.why-shop-at-angara a.tooltip-home {
+	cursor: default;
+	position: relative;
+	text-decoration:none;
+}
+.why-shop-at-angara a.tooltip-home span {
+	position: absolute;
+	top:25px;
+	left: -19px;
+	width: 200px;
+	opacity: 0;
+	text-decoration: none !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	z-index: 999;
+	display: none;
+}
+.why-shop-at-angara a.tooltip-home:hover span {
+	margin-left: 0;
+	opacity: 1;
+	font-size: 11px;
+	display: block;
+}
+.why-shop-at-angara .classic-home {
+	padding: 0.8em 1em;
+}
+.why-shop-at-angara .classic-home {
+	background: #fff;
+	border: 1px solid #999999;
+	color: #000000;
+	text-align: left;
+	font-size:11px;
+	line-height:14px;
+	text-transform:none;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.cart-bottom-border {
+	border-bottom: 4px solid #D4D4D4;
+	margin-bottom:15px;
+}
+.loading-msg {
+	font-size: 14px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	text-align:center;
+	padding-top:170px;
+}
+.loading-msg b {
+	color:#838383;
+	font-weight:normal;
+}
+.cart-offer-wrapper {
+	margin:0 0 30px 0;
+}
+.cart-page-offer {
+	width:450px;
+	border:dashed 1px #cbcbcb;
+	height:50px;
+	position:relative;
+	background-color:#fffbea;
+}
+.scissor-icon {
+	width:23px;
+	height:15px;
+	position:absolute;
+	top:-9px;
+	left:223px;
+	background: url(/skin/frontend/angara/default/images/scissor-icon.png) no-repeat;
+}
+.offer-btn {
+	outline: none;
+	border: solid 1px #66a100;
+	background-color: #66A100;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 12px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	cursor: pointer;
+	display:block;
+	text-align:center;
+	padding:6px 20px;
+}
+.offer-text-box {
+	float:left;
+	font-size:14px;
+	line-height:18px;
+	margin:9px 0 0 20px;
+	text-align:center;
+	color:#595959;
+}
+.offer-button-box {
+	float:right;
+	margin:8px 20px 0 0;
+}
+.offer-text-box strong {
+	font-size:16px;
+	font-weight:normal;
+}
+.trust-buildup-txt {
+	font-size: 11px;
+	color: #888888;
+	margin:15px 0 0 12px;
+}
+.trust-buildup-txt ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.trust-buildup-txt li {
+	padding-bottom:10px;
+	line-height:18px;
+}
+.trust-buildup-txt li strong {
+	font-weight:normal;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-seri;
+	color:#292929;
+	font-size: 12px;
+}

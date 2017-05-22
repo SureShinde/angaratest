@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config>
+<!-- ... -->
+  <modules>
+    <Angara_Angaracart>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Angara_Angaracart>
+  </modules>
+<!-- ... -->
+</config>

@@ -1,0 +1,618 @@
+<?php 
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>
+<?php /*?><script type="text/javascript">	
+	function executeUrl(urlvaltop){
+		if(urlvaltop != ''){	
+			window.location.href = '<?php echo Mage::getBaseUrl();?>' + urlvaltop;
+		}
+		else{
+			window.location.href = '<?php echo Mage::getBaseUrl();?>';
+		}	
+	}
+</script><?php */?>
+<?php
+$requrl1 = stripos($_SERVER["REQUEST_URI"], 'checkout/'); 
+$_menu = true;
+
+if($_menu): ?>
+
+<div class="nav-wrapper">
+  <?php
+	if($requrl1 === false): ?>
+  <div class="topnav-block" id="top-nav-block">
+    <div class="topnav-bar" id="nav-menu-bar">
+      <ul>
+        <li class="first-nav"><a href="/rings.html">Rings<span></span></a></li>
+        <li><a href="/pendants.html">Necklaces<span></span></a></li>
+        <li><a href="/earrings.html">Earrings<span></span></a></li>
+        <li><a href="/engagement-rings.html">Engagement<span></span></a></li>
+        <li><a href="/wedding-rings.html">Wedding<span></span></a></li>        
+        <li><a href="/jewelry-gifts.html">Gifts &amp; More<span></span></a></li>
+        <li><a href="/jewelry-guide.html">Jewelry Guide<span></span></a></li>      
+      </ul>
+    </div>
+    <div id="nav-menu-subcontainer">
+      <!--ring categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Stone</div>
+          <ul class="add-left" >
+            <li><a href="/rings/sapphire-rings.html">Sapphire</a>
+              <ul>
+                <li>-<a href="/rings/sapphire-rings/blue-sapphire.html">Blue Sapphire</a></li>
+                <li>-<a href="/rings/sapphire-rings/pink-sapphire.html">Pink Sapphire</a></li>
+              </ul>
+            </li>
+            <li><a href="/rings/ruby-rings.html">Ruby</a></li>
+            <li><a href="/rings/emerald-rings.html">Emerald</a></li>
+            <li><a href="/rings/tanzanite-rings.html">Tanzanite</a></li>
+            <li><a href="/rings/diamond-rings.html">Diamond</a></li>
+            <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl</a></li>
+            <li><a href="/rings/peridot-rings.html">Peridot</a></li>
+            <li><a href="/rings/citrine-rings.html">Citrine</a></li>
+            <li><a href="/rings/opal-rings.html">Opal</a></li>
+          </ul>
+          <ul>
+            <li><a href="/rings/garnet-rings.html">Garnet</a></li>
+            <li><a href="/rings/black-onyx-rings.html">Black Onyx</a></li>
+            <li><a href="/rings/amethyst-rings.html">Amethyst</a></li>
+            <li><a href="/rings/aquamarine-rings.html">Aquamarine</a> </li>
+            <li><a href="/rings/colored-diamond-rings.html">Colored Diamond</a>
+              <ul>
+                <li>-<a href="/rings/colored-diamond-rings/enhanced-black-diamond.html">Black Diamond</a></li>
+                <li>-<a href="/rings/colored-diamond-rings/enhanced-blue-diamond.html">Blue Diamond</a></li>
+              </ul>
+            </li>
+            <li><a href="/birthstone-jewelry/birthstone-rings.html">Birthstone</a></li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul>
+            <li><a href="/rings.html?dir=asc&order=price&p=1&price=1,250">Below $250</a></li>
+            <li><a href="/rings.html?dir=asc&order=price&p=1&price=251,500">$251 - $500</a></li>
+            <li><a href="/rings.html?dir=asc&order=price&p=1&price=501,1000">$501 - $1000</a></li>
+            <li><a href="/rings.html?dir=asc&order=price&p=1&price=1001,2500">$1001 - $2500</a></li>
+            <li><a href="/rings.html?dir=asc&order=price&p=1&price=2501,99999">Above $2500</a></li>           
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul>
+            <li><a href="/rings.html?order=position&dir=asc&p=clear&filterable_metal_types=4159&no_cache=true">Silver</a></li>
+            <li><a href="/rings.html?order=position&dir=asc&filterable_metal_types=4160&p=clear&no_cache=true">White Gold</a></li>
+            <li><a href="/rings.html?order=position&dir=asc&p=clear&filterable_metal_types=4161&no_cache=true">Yellow Gold</a></li>
+            <li><a href="/rings.html?order=position&dir=asc&p=clear&filterable_metal_types=4162&no_cache=true">Platinum</a></li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Shop by Style</div>
+          <ul>
+            <li><a href="/mothers-jewelry/mother-rings.html">Mother's</a></li>
+          	<li><a href="/rings/heart-rings.html">Hearts</a></li>
+            <li><a href="/rings/stackable-bands.html">Stackables</a></li>            
+            <li><a href="/engagement-rings/solitaire-rings.html">Solitaire</a></li>
+            <li><a href="/engagement-rings/three-stone-rings.html">Three Stone</a></li>
+            <li><a href="/rings/fashion-rings.html">Fashion</a></li>
+            <li><a href="/collection/vintage.html">Vintage</a></li>
+            <li><a href="/jewelry/knot-jewelry.html">Knot</a></li>
+          </ul>
+        </div>
+        <?php /*?><div class="nav-list lastnone banner-right"> <a href="/rings/sapphire-rings.html"><img src="<?php echo $this->getSkinUrl('images/home-banner/exclusive-rings.jpg'); ?>" alt="Exclusive Rings Collection" width="159" height="266"/></a> </div><?php */?>
+        <div class="clear"></div>
+      </div>
+      <!--ring categories ends-->
+      <!--necklaces categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Stone</div>
+          <ul class="add-left">
+            <li><a href="/pendants/sapphire-necklace-pendants.html">Sapphire</a>
+              <?php /*?><ul>
+									<li>-<a href="/pendants/sapphire-necklace-pendants.html?filterable_stone_names=4144&order=position&dir=asc">Blue Sapphire</a></li>
+									<li>-<a href="/pendants/sapphire-necklace-pendants.html?filterable_stone_names=4140&order=position&dir=asc">Pink Sapphire</a></li>
+								</ul><?php */?>
+            </li>
+            <li><a href="/pendants/ruby-necklace-pendants.html">Ruby</a></li>
+            <li><a href="/pendants/emerald-necklace-pendants.html">Emerald</a></li>
+            <li><a href="/pendants/tanzanite-necklace-pendants.html">Tanzanite</a></li>
+            <li><a href="/pendants/diamond-necklace-pendants.html">Diamond</a></li>
+            <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl</a></li>
+            <li><a href="/pendants/peridot-necklace-pendants.html">Peridot</a></li>
+            <li><a href="/pendants/citrine-necklace-pendants.html">Citrine</a></li>
+            <li><a href="/pendants/opal-necklace-pendants.html">Opal</a></li>
+            <li><a href="/pendants/garnet-necklace-pendants.html">Garnet</a></li>
+            <li><a href="/pendants/black-onyx-necklace-pendants.html">Black Onyx</a></li>
+          </ul>
+          <ul>
+            <li><a href="/pendants/amethyst-necklace-pendants.html">Amethyst</a></li>
+            <li><a href="/pendants/aquamarine-necklace-pendants.html">Aquamarine</a></li>
+            <li><a href="/pendants/colored-diamond-necklace-pendants.html">Colored Diamond</a>
+              <ul>
+                <li>-<a href="/pendants/colored-diamond-necklace-pendants/enhanced-black-diamond.html">Black Diamond</a></li>
+                <li>-<a href="/pendants/colored-diamond-necklace-pendants/enhanced-blue-diamond.html">Blue Diamond</a></li>
+              </ul>
+            </li>
+            <li><a href="/birthstone-jewelry/birthstone-necklace-pendants.html">Birthstone</a></li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul>
+            <li><a href="/pendants.html?dir=asc&order=price&p=1&price=1,250">Below $250</a></li>
+            <li><a href="/pendants.html?dir=asc&order=price&p=1&price=251,500">$251 - $500</a></li>
+            <li><a href="/pendants.html?dir=asc&order=price&p=1&price=501,1000">$501 - $1000</a></li>
+            <li><a href="/pendants.html?dir=asc&order=price&p=1&price=1001,2500">$1001 - $2500</a></li>
+            <li><a href="/pendants.html?dir=asc&order=price&p=1&price=2501,99999">Above $2500</a></li>
+           
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul>
+            <li><a href="/pendants.html?p=clear&filterable_metal_types=4159&order=position&dir=asc&no_cache=true">Silver</a></li>
+            <li><a href="/pendants.html?filterable_metal_types=4160&order=position&dir=asc&p=clear&no_cache=true">White Gold</a></li>
+            <li><a href="/pendants.html?filterable_metal_types=4161&order=position&dir=asc&p=clear&no_cache=true">Yellow Gold</a></li>
+            <li><a href="/pendants.html?filterable_metal_types=4162&order=position&dir=asc&p=clear&no_cache=true">Platinum</a></li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Shop by Style</div>
+          <ul>
+            <li><a href="/mothers-jewelry/mothers-necklace-pendants.html">Mother's</a></li>     
+            <li><a href="/pendants/heart-necklace-pendants.html">Hearts</a></li>
+            <li><a href="/pendants/cross-necklace-pendants.html">Crosses</a></li>
+            <li><a href="/pendants/journey-necklace-pendants.html">Journey</a></li>
+            <li><a href="/collection/hope-pendants.html">Ribbon</a></li>
+            <li><a href="/pendants/solitaire-necklace-pendants.html">Solitaire</a></li>
+            <li><a href="/pendants/fashion-necklace-pendants.html">Fashion</a></li>
+            <li><a href="/pendants/three-stone-necklace-pendants.html">Three Stone</a></li>
+            <li><a href="/jewelry/knot-jewelry.html">Knot</a></li>            
+            <?php /* ?><li><a href="/pendants/drop-necklace-pendants.html">Drops</a></li><?php */ ?>
+          </ul>
+        </div>
+        <?php /*?><div class="nav-list lastnone banner-right"> <a href="/pendants/sapphire-necklace-pendants.html"><img src="<?php echo $this->getSkinUrl('images/home-banner/exclusive-necklace.jpg'); ?>" alt="Exclusive Necklace Collection" width="159" height="266"/></a> </div><?php */?>
+        <div class="clear"></div>
+      </div>
+      <!--necklaces categories ends-->
+      <!--earrings categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Stone</div>
+          <ul class="add-left">
+            <li><a href="/earrings/sapphire-earrings.html">Sapphire</a>
+              <?php /*?><ul>
+									<li>-<a href="/earrings/sapphire-earrings.html?filterable_stone_names=4144&order=position&dir=asc">Blue Sapphire</a></li>
+									<li>-<a href="/earrings/sapphire-earrings.html?filterable_stone_names=4140&order=position&dir=asc">Pink Sapphire</a></li>
+								</ul><?php */?>
+            </li>
+            <li><a href="/earrings/ruby-earrings.html">Ruby</a></li>
+            <li><a href="/earrings/emerald-earrings.html">Emerald</a></li>
+            <li><a href="/earrings/tanzanite-earrings.html">Tanzanite</a></li>
+            <li><a href="/earrings/diamond-earrings.html">Diamond</a></li>
+            <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl</a></li>
+            <li><a href="/earrings/peridot-earrings.html">Peridot</a></li>
+            <li><a href="/earrings/citrine-earrings.html">Citrine</a></li>
+            <li><a href="/earrings/opal-earrings.html">Opal</a></li>
+            <li><a href="/earrings/garnet-earrings.html">Garnet</a></li>
+            <li><a href="/earrings/black-onyx-earrings.html">Black Onyx</a></li>
+          </ul>
+          <ul class="left-none">
+            <li><a href="/earrings/amethyst-earrings.html">Amethyst</a></li>
+            <li><a href="/earrings/aquamarine-earrings.html">Aquamarine</a></li>
+            <li><a href="/earrings/colored-diamond-earrings.html">Colored Diamond</a>
+              <ul>
+                <li>-<a href="/earrings/colored-diamond-earrings/enhanced-black-diamond.html">Black Diamond</a></li>
+                <li>-<a href="/earrings/colored-diamond-earrings/enhanced-blue-diamond.html">Blue Diamond</a></li>
+              </ul>
+            </li>
+            <li><a href="/birthstone-jewelry/birthstone-earrings.html">Birthstone</a></li>
+          </ul>
+        </div>
+       <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul class="left-none">
+            <li><a href="/earrings.html?dir=asc&order=price&p=1&price=1,250">Below $250</a></li>
+            <li><a href="/earrings.html?dir=asc&order=price&p=1&price=251,500">$251 - $500</a></li>
+            <li><a href="/earrings.html?dir=asc&order=price&p=1&price=501,1000">$501 - $1000</a></li>
+            <li><a href="/earrings.html?dir=asc&order=price&p=1&price=1001,2500">$1001 - $2500</a></li>
+            <li><a href="/earrings.html?dir=asc&order=price&p=1&price=2501,99999">Above $2500</a></li>           
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul class="left-none">
+            <li><a href="/earrings.html?p=clear&filterable_metal_types=4159&order=position&dir=asc&no_cache=true">Silver</a></li>
+            <li><a href="/earrings.html?order=position&dir=asc&p=clear&filterable_metal_types=4160&no_cache=true">White Gold</a></li>
+            <li><a href="/earrings.html?order=position&dir=asc&filterable_metal_types=4161&p=clear&no_cache=true">Yellow Gold</a></li>
+            <li><a href="/earrings.html?order=position&dir=asc&filterable_metal_types=4162&p=clear&no_cache=true">Platinum</a></li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Shop by Style</div>
+          <ul class="add-left">
+            <li><a href="/mothers-jewelry/mothers-earrings.html">Mother's</a></li>
+           <li><a href="/earrings/heart-earrings.html">Hearts</a></li>
+          	<li><a href="/earrings/stud-earrings.html">Studs</a></li>
+            <li><a href="/earrings/three-stone-earrings.html">Three Stone</a></li>
+            <li><a href="/earrings/drop-earrings.html">Drops</a></li>
+            <li><a href="/earrings/hoop-earrings.html">Hoops</a></li>            
+            <li><a href="/earrings/leverback-earrings.html">Leverback</a></li>
+            <li><a href="/earrings/fashion-earrings.html">Fashion</a></li>
+            <li><a href="/earrings/journey-earrings.html">Journey</a></li>
+            <li><a href="/jewelry/knot-jewelry.html">Knot</a></li>            
+          </ul>
+        </div>
+        <?php /*?><div class="nav-list lastnone banner-right"> <a href="/earrings/sapphire-earrings.html"><img src="<?php echo $this->getSkinUrl('images/home-banner/exclusive-earrings.jpg'); ?>" alt="Exclusive Earrings Collection" width="159" height="266"/></a> </div><?php */?>
+        <div class="clear"></div>
+      </div>
+      <!--earrings categories ends-->
+      <!--engagement categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Stone</div>
+          <ul>
+            <li><a href="/engagement-rings/sapphire-engagement-rings.html">Sapphire</a>
+              <ul>
+                <li>-<a href="/engagement-rings/blue-sapphire-engagement-rings.html">Blue Sapphire</a></li>
+                <li>-<a href="/engagement-rings/pink-sapphire-engagement-rings.html">Pink Sapphire</a></li>
+              </ul>
+            </li>
+            <li><a href="/engagement-rings/ruby-engagement-rings.html">Ruby</a></li>
+            <li><a href="/engagement-rings/emerald-engagement-rings.html">Emerald</a></li>
+            <li><a href="/engagement-rings/tanzanite-engagement-rings.html">Tanzanite</a></li>
+            <li><a href="/engagement-rings/diamond-engagement-rings.html">Diamond</a></li>
+            <li><a href="/engagement-rings/black-onyx-engagement-rings.html">Black Onyx</a></li>
+            <li><a href="/engagement-rings/colored-diamond-engagement-rings.html">Colored Diamond</a>
+              <ul>
+                <li>-<a href="/engagement-rings/colored-diamond-engagement-rings/enhanced-black-diamond-engagement.html">Black Diamond</a></li>
+                <li>-<a href="/engagement-rings/colored-diamond-engagement-rings/enhanced-blue-diamond-engagement.html">Blue Diamond</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul class="left-none">
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?dir=asc&order=price&p=1&price=1,250">Below $250</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?dir=asc&order=price&p=1&price=251,500">$251 - $500</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?dir=asc&order=price&p=1&price=501,1000">$501 - $1000</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?dir=asc&order=price&p=1&price=1001,2500">$1001 - $2500</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?dir=asc&order=price&p=1&price=2501,99999">Above $2500</a></li>           
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul class="left-none">
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?p=clear&filterable_metal_types=4159&order=position&dir=asc&no_cache=true">Silver</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?filterable_metal_types=4160&order=position&dir=asc&p=clear&no_cache=true">White Gold</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?order=position&dir=asc&p=clear&filterable_metal_types=4161&no_cache=true">Yellow Gold</a></li>
+            <li><a href="/engagement-rings/gemstone-engagement-rings.html?order=position&dir=asc&filterable_metal_types=4162&p=clear&no_cache=true">Platinum</a></li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Shop by Style</div>
+          <ul class="left-none">
+          	<li><a href="/engagement-rings/promise-rings.html">Promise</a></li>
+            <li><a href="/engagement-rings/solitaire-rings.html">Solitaire</a></li>
+            <li><a href="/engagement-rings/three-stone-rings.html">Three Stone</a></li>			
+            <li><a href="/collection/vintage.html">Vintage</a></li>
+            <li><a href="/engagement-rings/wedding-ring-set.html">Bridal Sets</a></li>
+          </ul>
+        </div>
+        <?php /*?><div class="nav-list lastnone banner-right"> <a href="/engagement-rings/promise-rings.html"><img src="<?php echo $this->getSkinUrl('images/home-banner/exclusive-engagement-rings.gif'); ?>" width="159" height="266"/></a> </div><?php */?>
+        <div class="clear"></div>
+      </div>
+      <!--engagement categories ends-->
+      <!--wedding categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">For Her</div>
+          <ul>
+            <li><a href="/wedding-rings/womens-wedding-bands.html">Women's Bands</a>
+            	<ul>
+                    <li>-<a href="/wedding-rings/womens-diamond-wedding-bands.html">Diamond</a></li>
+                    <li>-<a href="/wedding-rings/womens-plain-wedding-bands.html">Plain</a></li>
+                    <li>-<a href="/wedding-rings/womens-gemstone-wedding-bands.html">Gemstone</a></li>
+                    <li>-<a href="/wedding-rings/womens-gemstone-and-diamond-bands.html">Gemstone and Diamond</a></li>
+                    <li>-<a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4160&order=position&dir=asc">White Gold</a></li>
+                    <li>-<a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4161&order=position&dir=asc">Yellow Gold</a></li>
+                    <li>-<a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4162&order=position&dir=asc">Platinum</a></li>            
+            	</ul>
+             </li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">For Him</div>
+          <ul>
+            <li><a href="/wedding-rings/mens-wedding-bands.html">Men's Bands</a>
+            	<ul>
+                    <li>-<a href="/wedding-rings/mens-diamond-wedding-bands.html">Diamond</a></li>
+                    <li>-<a href="/wedding-rings/mens-plain-wedding-bands.html">Plain</a></li>
+                    <li>-<a href="/wedding-rings/mens-gemstone-wedding-bands.html">Gemstone</a></li>
+                    <li>-<a href="/wedding-rings/mens-gemstone-and-diamond-bands.html">Gemstone and Diamond</a></li>
+                    <li>-<a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4160&order=position&dir=asc">White Gold</a></li>
+                    <li>-<a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4161&order=position&dir=asc">Yellow Gold</a></li>
+                    <li>-<a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4162&order=position&dir=asc">Platinum</a></li>
+                </ul>
+            </li>           
+          </ul>
+        </div>        
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul class="left-none">
+            <li><a href="/wedding-rings/wedding-bands.html?dir=asc&order=price&p=1&price=1,250">Below $250</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?dir=asc&order=price&p=1&price=251,500">$251 - $500</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?dir=asc&order=price&p=1&price=501,1000">$501 - $1000</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?dir=asc&order=price&p=1&price=1001,2500">$1001 - $2500</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?dir=asc&order=price&p=1&price=2501,99999">Above $2500</a></li>           
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul class="left-none">
+            <li><a href="/wedding-rings/wedding-bands.html?filterable_metal_types=4159&order=position&dir=asc">Silver</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?filterable_metal_types=4160&order=position&dir=asc">White Gold</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?filterable_metal_types=4161&order=position&dir=asc">Yellow Gold</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?filterable_metal_types=4164&order=position&dir=asc">Two Tone Gold</a></li>
+            <li><a href="/wedding-rings/wedding-bands.html?filterable_metal_types=4162&order=position&dir=asc">Platinum</a></li>
+          </ul>
+        </div>
+        <?php /*?><div class="nav-list lastnone banner-right"> <a href="/engagement-rings/promise-rings.html"><img src="<?php echo $this->getSkinUrl('images/home-banner/exclusive-engagement-rings.gif'); ?>" width="159" height="266"/></a> </div><?php */?>
+        <div class="clear"></div>
+      </div>
+      <!--wedding categories ends-->
+      <!--gift & more categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Occasion</div>
+          <ul>
+            <li><a href="/jewelry-gifts/anniversary-gifts.html">Anniversary</a></li>
+            <li><a href="/jewelry-gifts/baby-jewelry.html">Baby</a></li>
+            <li><a href="/jewelry-gifts/birthday-gifts.html">Birthday</a></li>
+            <li><a href="/jewelry-gifts/christmas-gifts.html">Christmas</a></li>
+            <li><a href="/jewelry-gifts/graduation-gifts.html">Graduation</a></li>
+            <li><a href="/mothers-jewelry.html">Mother's Day</a></li>
+            <li><a href="/jewelry-gifts/prom-jewelry.html">Prom</a></li>
+            <li><a href="/jewelry-gifts/st-patricks-gifts.html">St. Patrick's Day</a></li>
+            <li><a href="/jewelry-gifts/sweet-16-gifts.html">Sweet 16</a></li>
+            <li><a href="/jewelry-gifts/thanksgiving-gifts.html">Thanksgiving</a></li>
+        	 <li><a href="/jewelry-gifts/valentine-gifts.html">Valentine's Day</a></li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Price</div>
+          <ul class="left-none"> 
+          <li><a href="/jewelry-gifts/gifts-below-250.html?price=1,250">Below $250</a></li>
+          <li><a href="/jewelry-gifts/gifts-between-250-500.html?price=251,500">$250 - $500</a></li>
+          <li><a href="/jewelry-gifts/gifts-above-500.html?price=501,99999">Above $500</a></li>       
+          </ul>
+        </div>
+        <!--<div class="nav-list">
+          <div class="topnav-subheading">Shop by Metal</div>
+          <ul class="left-none">
+            <li><a href="/jewelry-gifts.html?p=clear&filterable_metal_types=4159&order=position&dir=asc&no_cache=true">Silver</a></li>
+            <li><a href="/jewelry-gifts.html?filterable_metal_types=4160&order=position&dir=asc&p=clear&no_cache=true">White Gold</a></li>
+            <li><a href="/jewelry-gifts.html?order=position&dir=asc&p=clear&filterable_metal_types=4161&no_cache=true">Yellow Gold</a></li>
+            <li><a href="/jewelry-gifts.html?order=position&dir=asc&filterable_metal_types=4162&p=clear&no_cache=true">Platinum</a></li>
+          </ul>
+        </div>-->
+        <div class="nav-list">
+          <div class="topnav-subheading">Shop by Collection</div>
+          <ul> 
+        
+           <li><a href="/collection/stackables.html">Stackables</a></li> 	 
+            <li><a href="/bridal-jewelry/bridal-rings.html">Wow Bridal</a></li>
+            <li><a href="/collection/tajmahal-sugarloaf.html">Taj Mahal</a></li>
+            <li><a href="/collection/facets.html">Facets</a></li>
+            <li><a href="/collection/vintage.html">Vintage Rings</a></li>
+            <li><a href="/collection/hope-pendants.html">Hope Pendants</a></li>
+            <li><a href="/jewelry/moissanite-jewelry.html">Moissanite Jewelry</a></li>
+            <li><a href="/lab-jewelry.html">Lab Created Jewelry</a>
+              <ul>
+                <li>-<a href="/lab-jewelry/lab-created-sapphire-jewelry.html">Lab Sapphire</a></li>
+                <li>-<a href="/lab-jewelry/lab-created-ruby-jewelry.html">Lab Ruby</a></li>
+                <li>-<a href="/lab-jewelry/lab-created-emerald-jewelry.html">Lab Emerald</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">Top Ten Jewelry</div>
+          <ul style="float:none">
+            <li><a href="/jewelry-gifts/top-ten-rings.html">Rings</a></li>
+            <li><a href="/jewelry-gifts/top-ten-earrings.html">Earrings</a></li>
+            <li><a href="/jewelry-gifts/top-ten-necklace-pendants.html">Necklaces</a></li>
+          </ul>
+          <div class="topnav-subheading" style="margin-top:30px;">Others</div>
+          <ul style="float:none">
+            <li><a href="/jewelry-gifts/gift-cards.html">Gift Cards</a></li>
+            <li><a href="/bracelets.html">Bracelets</a></li>
+          </ul>
+        </div>
+        <div class="nav-list lastnone banner-right"> <a href="/engagement-rings/promise-rings.html?icid=topnav|giftsandmore|Promise_banner|01282014" title="Promise Rings"><img src="<?php echo $this->getSkinUrl('images/home-banner/promise-gifts.png'); ?>" alt="Promise Rings" width="305" height="305"/></a> </div>
+        <div class="clear"></div>
+      </div>
+      <!--gift & more categories ends-->
+      <!--jewelry guide categories starts-->
+      <div class="sub-menu-list">
+        <div class="nav-list">
+          <div class="topnav-subheading">About Gemstone</div>
+          <ul>
+            <li><a href="/jewelry-guide/about-sapphire.html">About Sapphire</a></li>
+            <li><a href="/jewelry-guide/diamond-buying-guide.html">About Diamond</a></li>
+            <li><a href="/jewelry-guide/about-ruby.html">About Ruby</a></li>
+            <li><a href="/jewelry-guide/about-tanzanite.html">About Tanzanite</a></li>
+            <li><a href="/jewelry-guide/about-aquamarine.html">About Aquamarine</a></li>
+            <li><a href="/jewelry-guide/about-colored-diamonds.html">About Colored Diamonds</a></li>
+            <li><a href="/jewelry-guide/about-birthstones.html">About Birthstones</a></li>
+            <li><a href="/jewelry-guide/gemstone-origins.html">Gemstone Origin</a></li>
+            <li><a href="/jewelry-guide/gemstone-treatment.html">Gemstone Treatment</a></li>
+          </ul>
+        </div>
+        <div class="nav-list">
+          <div class="topnav-subheading">About Jewelry</div>
+          <ul>
+            <li><a href="/jewelry-guide/sapphire-jewelry.html">Sapphire</a></li>
+            <li><a href="/jewelry-guide/diamond-jewelry.html">Diamond</a></li>
+            <li><a href="/jewelry-guide/jewelry-care.html">Jewelry Care</a></li>
+            <li><a target="_new" href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf">Angara Ring Sizer</a></li>
+            <li><a href="/jewelry-guide/tips-to-find-her-ring-size.html">Tips To Find Her Ring Size</a></li>
+            <li><a href="/jewelry-guide/jewelry-articles.html">Articles</a></li>
+            <li><a href="/jewelry-guide/jewelry-glossary.html">Glossary</a></li>
+            <li><a href="/jewelry-guide/jewelry-articles.html">Buying Guide</a></li>
+          </ul>
+        </div>
+        <div class="nav-list backnone">
+          <div class="topnav-subheading">About Metal</div>
+          <ul>
+            <li><a href="/jewelry-guide/about-jewelry-metal.html">Yellow Gold</a></li>
+            <li><a href="/jewelry-guide/about-jewelry-metal.html">White Gold</a></li>
+            <li><a href="/jewelry-guide/about-jewelry-metal.html">Rose Gold</a></li>
+            <li><a href="/jewelry-guide/about-jewelry-metal.html">Silver</a></li>
+            <li><a href="/jewelry-guide/about-jewelry-metal.html">Platinum</a></li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <!--jewelry guide categories ends-->    
+      <div class="up-menu-arrow"></div>
+    </div>    
+  </div>
+  <!--<div id="top-last-nav">
+  <a href="/jewelry-gifts/last-minute-shopping.html?icid=topnav|last-minute-shopping|11022014">Last-Minute Shopping</a>
+    <ul><li><a href="/mothers-jewelry.html?icid=home|topnav|mothers-day-special|04242014">MOTHER'S DAY SPECIAL</a></li></ul>
+  </div>-->
+  <div class="topnav-bottom-border"></div>
+  <?php
+	endif; ?>
+  <div class="customerdiscountarea">
+    <div class="customerdiscountbox">
+      <div class="customerloginsection" id="slidingMemberDiv">
+        <div class="closesection" onclick="javascript:jQuery('.customerdiscountbtn').show();jQuery('.customerdiscountarea').hide();"></div>
+        <div class="advantagepoint">
+          <div class="pointheading">ANGARA Membership Advantages:</div>
+          <ul>
+            <li>Get guaranteed discounts, free gifts and more</li>
+            <li>Personalized shopping experience</li>
+            <li>Previews of new product lines</li>
+            <li>Access to one of a kind designs prior to launch on the <span style="line-height:6px; display:block">site</span></li>
+            <li style=" margin-top:8px;">Faster check out</li>
+          </ul>
+        </div>
+        <div class="membersignsection" >
+          <div class="signupsection"> <span id="newmemberlink"> <span class="newmambertxt">New Member <span class="signuptxt">Sign Up Here.</span> </span> <span class="signupmember"> <img src="<?php echo $skinUrl; ?>frontend/angara/default/images/new_member_screen/signupbtn.png" alt="Sign up" onclick="javascript:showSelectedMemberFormOption('new');" /> </span> </span> <span id="oldmemberlink" style="display:none;"> <span class="newmambertxt">Already a Member? <span class="signuptxt"></span> </span> <span class="allreadymember"> <a href="javascript:showSelectedMemberFormOption('old');"> <img src="<?php echo $skinUrl; ?>frontend/angara/default/images/new_member_screen/locksign.png" style=" vertical-align:baseline; margin:0 3px" /> Login Here </a> </span> </span> </div>
+          <div class="loginsection" id="registerblock" style="display:none">
+            <?php 
+			$secureProt = (Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://';
+			$SignupAction .= 'go.pardot.com/l/17452/2012-11-21/2rcq';
+			$successUrl = 'www.angara.com/customer/account/createpost';	?>
+			
+            <form id="register-form-new" method="post" action="<?php echo $secureProt.$SignupAction;?>">
+              <input type="hidden" name="success_location" value="<?php echo $secureProt.$successUrl;?>" />
+              <div class="jointoday">Join Today</div>
+              <div class="inputfieldsection">
+                <div class="usernamefiend">First name
+                  <input type="text" name="firstname" id="firstname" title="First Name" value="" class="inputtxtsmall required-entry" />
+                </div>
+                <div class="usernamefiend">Last name
+                  <input type="text" name="lastname" id="lastname" title="Last Name" value="" class="inputtxtsmall required-entry" />
+                </div>
+                <div class="clearall"></div>
+              </div>
+              <div class="inputfieldsection">
+                <div class="usernamefiendlogin">Email address
+                  <input type="text" name="email" id="email_address" title="Email Address" value="" class="inputtxtbig validate-email required-entry" />
+                </div>
+                <div class="clearall"></div>
+              </div>
+              <div class="inputfieldsection">
+                <div class="usernamefiend">Password
+                  <input type="password" name="password" id="password" title="Password" value="" class="inputtxtsmall required-entry validate-password-top" />
+                </div>
+                <div class="usernamefiend">Confirm password
+                  <input type="password" name="confirmation" id="confirmation" title="Confirm Password" value="" class="inputtxtsmall required-entry validate-cpassword-top" />
+                </div>
+                <div class="clearall"></div>
+              </div>
+              <div class="promisetxt">We promise never to sell or trade your information. <a href="/privacy-and-security.html" style="font-size:11px; text-decoration:underline; color:#e3e3e3">Privacy policy</a> </div>
+              <div class="submisection"> <span class="submitbtn">
+                <button type="submit" title="Submit" name="send1" id="send1" class="newmemberloginbutton" style="cursor:pointer;"></button>
+                </span>
+                <?php 
+									if( Mage::getSingleton('facebook/config')->isEnabled()=='1'){ ?>
+                <span class="ortxt">or</span> <span class="facebookbtn"> <a rel="facebook-connect" title="Connect with Facebook"> <img src="<?php echo $skinUrl; ?>frontend/angara/default/images/new_member_screen/loginwithfacebook.png" alt="Login with facebook"/> </a> </span>
+                <?php 
+									} ?>
+              </div>
+            </form>
+            <script>
+								//<![CDATA[
+									var dataForm = new VarienForm('register-form-new', true);
+								//]]> 
+								</script>
+          </div>
+          <div class="loginsection" id="loginblock" style="display:block;">
+            <div class="jointoday">Member Sign In</div>
+            <form id="login-form-new" method="post" action="/customer/account/loginPost/">
+              <input type="hidden" name="success_url" value="/" />
+              <div class="inputfieldsection">
+                <div class="usernamefiendlogin">Email
+                  <input type="text" name="login[username]" id="email" value="" class="inputtxtbig required-entry validate-email" title="Email Address" />
+                </div>
+                <div class="clearall"></div>
+              </div>
+              <div class="inputfieldsection">
+                <div class="usernamefiendlogin">Password
+                  <input type="password" name="login[password]" id="pass" value="" class="inputtxtbig required-entry validate-password-top" title="Password" />
+                </div>
+                <div class="clearall"></div>
+              </div>
+              <div class="submisection"> <span class="submitbtn">
+                <button type="submit" title="Login" name="newloginsubmit" id="newloginsubmit" class="newmemberloginbutton" style="cursor:pointer;"></button>
+                </span>
+                <?php 
+									if( Mage::getSingleton('facebook/config')->isEnabled()=='1'){ ?>
+                <span class="ortxt">or</span> <span class="facebookbtn"> <a rel="facebook-connect" title="Connect with Facebook"> <img src="<?php echo $skinUrl; ?>frontend/angara/default/images/new_member_screen/loginwithfacebook.png" alt="Login with facebook"/> </a> </span>
+                <?php 
+									} 
+									else{?>
+                <span class="ortxt"></span>
+                <?php 
+									} ?>
+              </div>
+              <div class="forgotpassword"> <a href="/customer/account/forgotpassword/" class="f-left">Forgot Your Password?</a> </div>
+            </form>
+            <script>var dataForm = new VarienForm('login-form-new', true);
+			//	Login form issue resolved in IE8 by Vaseem
+			jQuery( "#pass" ).keypress(function( event ) {
+			  if ( event.which == 13 ) {
+				 jQuery("#newloginsubmit").click();
+			  }
+			});
+			</script>
+          </div>
+        </div>
+      </div>
+      <div class="clearall"></div>
+    </div>
+    <div class="clearall"></div>
+  </div>
+  <div class="clearall"></div>
+</div>
+<?php 
+endif;
+
+if($requrl1 === false) {
+?>
+<style>
+	.validation-advice{width:200px;}
+</style>
+<?php
+}
+else{ ?>
+<script>
+		jQuery('.customerdiscountarea').hide();
+	</script>
+<?php
+}?>

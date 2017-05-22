@@ -1,0 +1,23 @@
+<?php
+if($this->getCountryCount()>1): ?>
+
+<span class="country-dropdown-list-container desktop">
+	<span class="country-dropdown-list border-focus hidden" tabindex="-1">
+		<ul class="root">
+			<li style="pointer-events:none">
+				<span class="country-list-item text-bold" style="padding-left:4px;">
+					Select Currency
+				</span>
+			</li>
+			<?php foreach ($this->getCountries() as $_code => $_name): ?>
+			<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl($_code) ?>');">
+				<span class="country-list-item country-flag country-<?php echo strtolower($_code); ?>-smallf">
+					<?php echo $_name; ?>
+				</span>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</span>
+</span>
+<?php 
+endif; ?>

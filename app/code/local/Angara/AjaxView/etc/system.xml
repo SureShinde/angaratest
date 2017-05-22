@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <ajaxview translate="label" module="ajaxview">
+      <label>Ajax View Settings</label><!--Name of the Tab shown in left side under System->Configuration-->
+      <sort_order>150</sort_order>
+    </ajaxview>
+  </tabs>
+  <sections>
+    <ajaxview  translate="label" module="ajaxview"><!--Name of the Section shown in left side under System->Configuration-->
+      <label>Ajax View Configuration</label>
+      <tab>ajaxview</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>1</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <!--Creating new Group Starts-->
+      <groups>
+        <seo translate="label comment">
+          <label>Related Products Settings</label>
+          <sort_order>50</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <!--<comment><![CDATA[This is a <strong>global comment</strong> about my <em>configuration</em>.<br />You can specify <u>custom html</u> tags. <a href="http://www.bubblecode.net/en" target="_blank">Click here for example!</a>]]></comment>-->
+          <fields>
+            <no_of_related_products translate="label comment">
+              <label>No of Related Products</label>
+              <comment>
+                <![CDATA[No of Related Products that will show as <strong><span style="color: red;"><a href="#">Matching Bands</a></span></strong> on product page.]]>
+              </comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>11</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>0</show_in_website>
+              <show_in_store>0</show_in_store>
+            </no_of_related_products>
+          </fields>
+        </seo>
+      </groups>
+      <!--Creating new Group Ends-->
+    </ajaxview>
+  </sections>
+</config>

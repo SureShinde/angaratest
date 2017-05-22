@@ -1,0 +1,65 @@
+header[role="banner"] .container{max-width:100%!important}
+.light-gray-bg{background:rgba(245,245,245,1); background:#f5f5f5;}
+
+.hero-banner-box img{margin:0 auto; max-width:100%;}
+
+.set-go-with-page .pearl-navigation .nav-link i{color: #fa505a !important;}
+.set-go-with-page .pearl-navigation .nav-link span{color: #000000 !important;}
+
+.homepage-main-container, .homepage-main-container section, .homepage-main-container section .heading-box, .homepage-main-container section .content-box, .homepage-main-container section .button-box{width:100%; float:left}
+.homepage-main-container section{padding:20px 0px 30px;}
+.homepage-main-container section .heading-box{padding-bottom:20px; text-align:center}
+.homepage-main-container section .heading-box .heading{font-size:32px; margin:0px; color:#333333;}
+.homepage-main-container section .heading-box .sub-heading{font-size:16px; color:#666666;}
+.homepage-main-container section .content-box{font-size:16px;}
+.homepage-main-container section .button-box{padding-top:30px; text-align:center;}
+.homepage-main-container section .button-box a{background:#fa505a; color:#ffffff; display:inline-block; font-size:22px; line-height:50px; padding-left:30px; padding-right:30px; text-decoration:none; font-weight:400; border-radius:2px;}
+.homepage-main-container section .button-box a:hover{color:#ffffff!important; background:#fa505a!important; text-decoration:none; opacity:.8}
+.homepage-main-container section .button-box a:focus{opacity:1; color:#ffffff!important;}
+/* .gem-6, .gem-7 {padding-bottom:initial !important;}
+.gem-1, .gem-2 {padding-top:initial !important;} */
+.gem-1{clear:left}
+/* Css for Angara in Press Toggle */
+#ang-toggle{}
+#ang-toggle #ang-toggle-content, #ang-toggle #ang-toggle-title, #ang-toggle #ang-toggle-title ul{width:100%; float:left}
+#ang-toggle #ang-toggle-content{color:#666666; padding:0px 10%}
+#ang-toggle #ang-toggle-title{border-top:1px solid #e9e9e9; margin-top:40px;}
+#ang-toggle #ang-toggle-title ul{padding:0px; margin:0px; text-align:center}
+#ang-toggle #ang-toggle-title ul li{display:inline-block; padding:10px; cursor:pointer; max-width:20%; height:57px; position:relative}
+#ang-toggle #ang-toggle-title ul li .table-box{display:table;height: 100%;}
+#ang-toggle #ang-toggle-title ul li .table-cell{display:table-cell;vertical-align: middle;}
+#ang-toggle #ang-toggle-title ul li img{max-height:37px;}
+/* #ang-toggle #ang-toggle-title ul li.greyscale img{filter: grayscale(100%); -webkit-filter: grayscale(100%); filter: url(/skin/frontend/ress/default/images/homepage/new-skeleton/press/desaturate.svg#greyscale);} */
+#ang-toggle #ang-toggle-title ul li.active:before, #ang-toggle #ang-toggle-title ul li.active:after{content:""; position:absolute}
+#ang-toggle #ang-toggle-title ul li.active:before{height:1px; background:#000000; left:10px; right:10px; top:-1px;}
+#ang-toggle #ang-toggle-title ul li.active:after{border-style:solid; border-color:transparent transparent #000000 transparent; border-width:6px; top:-12px; left:47%;}
+
+/* Latest Reviews */
+.lr-box-rating{width:100%; float:left;}
+.lr-box{display:table;width:100%;}
+.lr-box .lr-box-cell{display:table-cell; vertical-align:middle; float:none}
+#latest-reviews .slick-dots{text-align:center!important}
+#cs-images{max-width:507px; float:right; margin-right:25px;}
+#cs-images .cs-images.box-1{max-width:90px; width:17.7865612648%; float:left}
+#cs-images .cs-images.box-2{max-width:180px; width:35.5731225296%; float:left}
+#cs-images .cs-images.box-3{max-width:90px; width:17.7865612648%; float:left}
+#cs-images .cs-images.box-4{max-width:146px; width:28.8537549407%; float:left}
+#cs-images .cs-images img{cursor:pointer; opacity:.4; -webkit-transition:all .3s ease-in-out; transition:all .3s ease-in-out;}
+#cs-images .cs-images img.active, #cs-images .cs-images img:hover{opacity:1}
+#cs-content-table{display:table;width:100%;}
+#cs-content-table #cs-content{padding-left:25px;}
+#cs-content-table .cs-content-table-cell{display:table-cell; vertical-align:middle; float:none;}
+
+html[data-useragent~="rv:11.0"] #ang-toggle #ang-toggle-title ul li .table-cell,
+html[data-useragent~="MSIE"] #ang-toggle #ang-toggle-title ul li .table-cell{display:inline-block}
+html[data-useragent~="rv:11.0"] #ang-toggle #ang-toggle-title ul li img,
+html[data-useragent~="MSIE"] #ang-toggle #ang-toggle-title ul li img{width:100%;}
+
+@media (min-width: 999px){
+	.homepage-main-container section.angara-in-press .visible-md {display:inline-block !important;}
+}
+#footer{margin-top:0px !important; padding-top:30px !important; background:#ffffff;}
+
+@media (max-width:1024px) {
+	#cs-content-table .cs-content-table-cell {    vertical-align: top;}
+}

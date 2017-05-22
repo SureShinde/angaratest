@@ -1,0 +1,30 @@
+<?php echo $this->getCssJsHtml() ?><?php echo $this->getChildHtml() ?>
+<div id="ajax-loader" class="text-center hide"></div>
+
+<?php 
+/*$http	=	'http';
+if (Mage::app()->getStore()->isCurrentlySecure()){
+	$http	=	'https';
+}
+$pageType = Mage::helper('function')->getPageType();
+if($pageType=='category'){
+	$image	=	$http.'://px.c1exchange.com/pubpixel/1234989';
+}elseif($pageType=='product'){
+	$image	=	$http.'://px.c1exchange.com/pubpixel/1234977';
+}elseif($pageType=='cart'){
+	$image	=	$http.'://px.c1exchange.com/pubpixel/1234978';
+}elseif($pageType=='checkout'){
+	$image	=	$http.'://px.c1exchange.com/pubpixel/1234979';
+}elseif($pageType=='success'){
+	//echo '<img src="'.$http.'://px.c1exchange.com/pubpixel/1234980" height="1" width="1" style="display:none;"></img>';
+	$image	=	$http.'://px.c1exchange.com/pubpixel/1234980';
+}*/
+?>
+    
+<script type="text/javascript">
+jQuery(window).load(function() {
+	jQuery("#ajax-loader").html('<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>');
+	<?php /*?>jQuery('#c1exchange').attr('src', '<?php echo $image;?>' );<?php */?>
+})
+</script>
+<?php /*?><img src="" id="c1exchange" height="1" width="1" style="display:none;"><?php */?>

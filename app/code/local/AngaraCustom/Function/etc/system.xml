@@ -1,0 +1,667 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <myconf translate="label">		<!--myconf-->
+            <label>Angara Configuration</label>
+            <sort_order>150</sort_order>
+        </myconf>
+    </tabs>
+    <sections>
+        <function translate="label" module="adminhtml">
+            <label>General Options</label>	<!--This name will be shown in left side-->
+            <tab>myconf</tab>				<!--myconf-->
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>Discount and Coupon Codes</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <!--<comment><![CDATA[This is a <strong>global comment</strong> about my <em>configuration</em>.<br />You can specify <u>custom html</u> tags. <a href="http://www.bubblecode.net/en" target="_blank">Click here for example!</a>]]></comment>-->
+                    <fields>
+                        <global_coupon_code translate="label comment">		
+                            <label>Default Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </global_coupon_code>
+						
+						<promotion_coupon_code translate="label comment">		
+                            <label>15% Promotion Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </promotion_coupon_code>
+						
+						<mobile_coupon_code translate="label comment">		
+                            <label>Mobile Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mobile_coupon_code>
+						
+						<amazon_coupon_code translate="label comment">		
+                            <label>Amazon Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </amazon_coupon_code>
+						<pricegrabber_coupon_code translate="label comment">		
+                            <label>Pricegrabber Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pricegrabber_coupon_code>
+						<shopping_coupon_code translate="label comment">		
+                            <label>Shopping Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shopping_coupon_code>
+						<become_coupon_code translate="label comment">		
+                            <label>Become Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </become_coupon_code>
+						<shopbot_coupon_code translate="label comment">		
+                            <label>ShopBot Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shopbot_coupon_code>
+						<pinterest_coupon_code translate="label comment">		
+                            <label>Pinterest Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pinterest_coupon_code>
+						<myshopping_coupon_code translate="label comment">		
+                            <label>Myshopping Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </myshopping_coupon_code>
+						<pranto_coupon_code translate="label comment">		
+                            <label>Pranto Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pranto_coupon_code>
+						<google_coupon_code translate="label comment">		
+                            <label>Google Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_coupon_code>
+						<bing_coupon_code translate="label comment">		
+                            <label>Bing Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bing_coupon_code>
+						<shopzilla_coupon_code translate="label comment">		
+                            <label>Shopzilla Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shopzilla_coupon_code>
+						<getprice_coupon_code translate="label comment">		
+                            <label>Getprice Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </getprice_coupon_code>
+						<bizrate_coupon_code translate="label comment">		
+                            <label>Bizrate Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bizrate_coupon_code>
+						<google_paid_coupon_code translate="label comment">		
+                            <label>Google Paid Traffic Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_paid_coupon_code>
+						<mobile_cse_coupon_code translate="label comment">		
+                            <label>Mobile Cse Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mobile_cse_coupon_code>
+						<!--<mobile_pla_coupon_code translate="label comment">		
+                            <label>Mobile Pla Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mobile_pla_coupon_code>-->
+						<mobile_google_coupon_code translate="label comment">		
+                            <label>Mobile Google Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mobile_google_coupon_code>
+						<mobile_bing_coupon_code translate="label comment">		
+                            <label>Mobile Bing Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mobile_bing_coupon_code>
+						<!--Code Added by Vaseem Starts-->
+						<email_coupon_code translate="label comment">		
+                            <label>Email Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_coupon_code>
+						<blue_diamond_rings_coupon_code translate="label comment">		
+                            <label>Blue Diamond Rings Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>103</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </blue_diamond_rings_coupon_code>
+						
+						<blue_diamond_studs_coupon_code translate="label comment">		
+                            <label>Blue Diamond Studs Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>104</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </blue_diamond_studs_coupon_code>
+						
+						<black_diamond_rings_coupon_code translate="label comment">		
+                            <label>Black Diamond Rings Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </black_diamond_rings_coupon_code>
+						
+						<black_diamond_studs_coupon_code translate="label comment">		
+                            <label>Black Diamond Studs Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>106</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </black_diamond_studs_coupon_code>
+						
+						<moissanite_coupon_code translate="label comment">		
+                            <label>Moissanite Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>107</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </moissanite_coupon_code>
+						
+						<onyx_coupon_code translate="label comment">		
+                            <label>Onyx Coupon</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>108</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </onyx_coupon_code>
+						<!--<returning_visitor_coupon_code translate="label comment">
+                            <label>Returning Visitor Coupon</label>
+                            <comment>Text field with store view scope.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </returning_visitor_coupon_code>-->
+						<!--Code Added by Vaseem Ends-->
+						
+                        <textarea_discount_type1 translate="label comment">
+                            <label>Discount Type 1 Text</label>
+                            <comment>Text you want to show on cart page for discount type 1.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_discount_type1>
+                        <!--<dropdown translate="label comment">
+                            <label>Dropdown</label>
+                            <comment>Dropdown with global scope.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>angaracustom_function/system_config_source_dropdown_values</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dropdown>
+                        <multiple_dropdown translate="label comment">
+                            <label>Multiselect</label>
+                            <comment>Multiselect with global scope.</comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>angaracustom_function/system_config_source_dropdown_values</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </multiple_dropdown>-->
+                        <!--<file translate="label comment">
+                            <label>File</label>
+                            <comment><![CDATA[File saved in <strong><span style="color: red;">var/uploads</span></strong> folder.]]></comment>
+                            <frontend_type>file</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_file</backend_model>
+                            <upload_dir>var/uploads</upload_dir>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </file>
+                        <time translate="label comment">
+                            <label>Time</label>
+                            <frontend_type>time</frontend_type>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </time>
+                        <active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>54</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <heading_example translate="label">
+                            <label>Heading example</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </heading_example>
+                        <boolean translate="label comment">
+                            <label>Boolean</label>
+                            <comment>Boolean with website scope and dependant fields when Yes is selected.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </boolean>
+                        <dependant_text_field translate="label comment">
+                            <label>Dependant Text Field</label>
+                            <comment>This field depends of boolean value above.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <boolean>1</boolean>
+                            </depends>
+                        </dependant_text_field>-->
+                    </fields>
+                </general>
+            </groups>
+			
+			<!--Creating new Group Starts-->
+			<groups>
+                <seo translate="label comment">
+                    <label>Generate Sitemaps and Reviews XML</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <!--<comment><![CDATA[This is a <strong>global comment</strong> about my <em>configuration</em>.<br />You can specify <u>custom html</u> tags. <a href="http://www.bubblecode.net/en" target="_blank">Click here for example!</a>]]></comment>-->
+                    <fields>
+					
+						<image_sitemap translate="label comment">
+                            <label>Image Sitemap</label>
+                            <comment><![CDATA[Click here to generate <strong><span style="color: red;"><a href="/api/image_sitemap.php" target="_blank">Image Sitemap</a></span></strong>]]></comment>
+							<frontend_type>link</frontend_type>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </image_sitemap>
+						
+						<category_sitemap translate="label comment">
+                            <label>Category Sitemap</label>
+                            <comment><![CDATA[Click here to generate <strong><span style="color: red;"><a href="/api/category_sitemap.php" target="_blank">Category Sitemap</a></span></strong>]]></comment>
+							<frontend_type>link</frontend_type>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </category_sitemap>
+						
+						<cms_pages_sitemap translate="label comment">
+                            <label>CMS Pages Sitemap</label>
+                            <comment><![CDATA[Click here to generate <strong><span style="color: red;"><a href="/api/cms_page_sitemap.php" target="_blank">CMS Pages Sitemap</a></span></strong>]]></comment>
+							<frontend_type>link</frontend_type>
+                            <sort_order>53</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cms_pages_sitemap>
+						
+						<product_url_sitemap translate="label comment">
+                            <label>Product URL Sitemap</label>
+                            <comment><![CDATA[Click here to generate <strong><span style="color: red;"><a href="/api/product_url_sitemap.php" target="_blank">Product URL Sitemap</a></span></strong>]]></comment>
+							<frontend_type>link</frontend_type>
+                            <sort_order>51</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </product_url_sitemap>
+                        
+						<reviews_xml translate="label comment">
+                            <label>Reviews XML</label>
+                            <comment><![CDATA[Click here to generate <strong><span style="color: red;"><a href="/api/review_full_feed.php" target="_blank">Reviews XML</a></span></strong> for Google Shopping]]></comment>
+							<frontend_type>link</frontend_type>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </reviews_xml>
+						
+                    </fields>
+                </seo>
+            </groups>
+			<!--Creating new Group Ends-->
+			
+			<!--Creating new Group Starts-->
+			<groups>
+                <seo_redirect translate="label comment">
+                    <label>SEO Redirects</label>
+                    <sort_order>51</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <!--<comment><![CDATA[This is a <strong>global comment</strong> about my <em>configuration</em>.<br />You can specify <u>custom html</u> tags. <a href="http://www.bubblecode.net/en" target="_blank">Click here for example!</a>]]></comment>-->
+                    <fields>
+						<textarea_410_url translate="label comment">
+                            <label>410 Page URL's</label>
+                            <comment>URL's of the pages for which we want to show 410 page.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>201</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_410_url>
+						<textarea_301_url translate="label comment">
+                            <label>301 Page URL's</label>
+                            <comment>URL's of the pages for which we want to show 301 page.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>202</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_301_url>
+						
+						<textarea_301_url_1 translate="label comment">
+                            <label>301 Page URL's 1</label>
+                            <comment>URL's of the pages for which we want to show 301 page.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>203</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_301_url_1>
+						
+						<textarea_301_url_2 translate="label comment">
+                            <label>301 Page URL's 2</label>
+                            <comment>URL's of the pages for which we want to show 301 page.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>204</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_301_url_2>
+						
+                        <textarea_not_found_url translate="label comment">
+                            <label>404 Page URL's</label>
+                            <comment>URL's of the pages for which we want to show 404 page.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </textarea_not_found_url>
+                    </fields>
+                </seo_redirect>
+            </groups>
+			<!--Creating new Group Ends-->
+			
+			<!--Creating new Group Starts-->
+			<groups>
+                <angara_promotion translate="label comment">
+                    <label>Discount and Promotion</label>
+                    <sort_order>61</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<timer_based_promotion_status translate="label comment">
+                            <label>Time Based Promotion Status</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>51</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_based_promotion_status>
+					
+						<promotion_time translate="label comment">
+                            <label>Promotion Time</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+                                <timer_based_promotion_status>1</timer_based_promotion_status>
+                            </depends>
+                        </promotion_time>
+						<no_coupon_rule_id translate="label comment">
+                            <label>No Coupon Rule Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>53</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+                                <timer_based_promotion_status>1</timer_based_promotion_status>
+                            </depends>
+                        </no_coupon_rule_id>
+						<happyhours_timer_text translate="label comment">
+                            <label>Happy Hours Timer Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+                                <timer_based_promotion_status>1</timer_based_promotion_status>
+                            </depends>
+                        </happyhours_timer_text>
+						
+						
+                    </fields>
+                </angara_promotion>
+            </groups>
+			<!--Creating new Group Ends-->
+			
+			<!--Creating new Group Starts-->
+			<groups>
+                <angara_happyhours translate="label comment">
+                    <label>Happy Hours</label>
+                    <sort_order>62</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<happyhours_status translate="label comment">
+                            <label>Status</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>51</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </happyhours_status>
+
+						<happyhours_start_time translate="label comment">
+                            <label>Start Time</label>
+                            <frontend_type>time</frontend_type>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<!--<depends>
+                                <happyhours_status>1</happyhours_status>
+                            </depends>-->
+                        </happyhours_start_time>
+						
+						<happyhours_end_time translate="label comment">
+                            <label>End Time</label>
+                            <frontend_type>time</frontend_type>
+                            <sort_order>53</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<!--<depends>
+                                <happyhours_status>1</happyhours_status>
+                            </depends>-->
+                        </happyhours_end_time>
+						
+						<happyhours_free_sku translate="label comment">
+                            <label>Free SKU</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+                                <happyhours_status>1</happyhours_status>
+                            </depends>
+                        </happyhours_free_sku>
+						
+						<happyhours_free_sku_text translate="label comment">
+                            <label>Free SKU Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+                                <happyhours_status>1</happyhours_status>
+                            </depends>
+                        </happyhours_free_sku_text>
+						
+                    </fields>
+                </angara_happyhours>
+            </groups>
+			<!--Creating new Group Ends-->
+			
+			<!--S:VA	Creating new Group-->
+			<groups>
+                <angara_sold_out translate="label comment">
+                    <label>Sold Out Settings</label>
+                    <sort_order>63</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<sold_out_skus translate="label comment">
+                            <label>Sold Out SKU's List</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sold_out_skus>
+						
+                    </fields>
+                </angara_sold_out>
+            </groups>
+			<!--E:VA	Creating new Group-->
+			
+        </function>
+    </sections>
+</config>

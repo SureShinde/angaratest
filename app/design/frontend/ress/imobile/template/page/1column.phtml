@@ -1,0 +1,60 @@
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js">
+<head><?php echo $this->getChildHtml('head') ?></head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header');
+		echo $this->getChildHtml('content_showcase'); ?>
+        <div class="main-container col1-layout">
+            <div class="main">
+                <?php //echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php //echo $this->getChildHtml('content') ?>
+                    <?php 		
+					if(Mage::getSingleton('customer/session')->isLoggedIn()){	
+						echo $this->getChildHtml('content');
+					}else{
+						$userAgent = Mage::getUserAgent();
+						try{
+							$cacheHelper 	= Mage::helper('helloworld');
+							$cachingEnabled = array('catalog');
+							$key 			= md5(Mage::helper('core/url')->getCurrentUrl().Mage::getModel('countrymapping/country')->getCountryParamCode().$userAgent['browser_name'].$userAgent['operating_system'].'mobile');
+							$currentModule 	= Mage::app()->getRequest()->getModuleName();
+							if (in_array($currentModule, $cachingEnabled) && Mage::helper('adjnav')->getParams(true, Mage::getBlockSingleton('page/html_pager')->getPageVarName()) == '') {
+								if ($content = $cacheHelper->getDataFromCache($key)) { 
+									//nothing to do as $content now has the data
+								} else {
+									$content = $this->getChildHtml('content');
+									$cacheHelper->setKey($key)->setData($content)->saveDataInCache();
+								}
+							} else {
+								$content = $this->getChildHtml('content');
+							} 
+							echo $content;
+						}
+						catch(Exception $e){
+							echo $this->getChildHtml('content');
+						}
+					}
+					?>
+                </div>
+            </div>
+        </div>
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

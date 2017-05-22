@@ -1,0 +1,91 @@
+<!--@subject {{var store.getFrontendName()}} | {{var subject}} @-->
+<!--@styles
+body{ margin:0;padding:0; width:100% !important;font-size:11px; font-family: Arial, Helvetica, sans-serif; }
+@-->
+<body>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td align="center"><table width="590" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E0E0E0; padding:5px;">
+        <tr>
+          <td><table cellpadding="0" cellspacing="0" width="600">
+              <tr>
+                <td align="left" valign="middle" width="366"><a href="http://www.angara.com/?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" target="_blank"><img src="http://cdn.angara.com/promotions/Email/Mar/email-logo.jpg" border="0" align="" alt="Angara.com - The Gemstone Destination", title="Angara.com - The Gemstone Destination"></a></td>
+                <td width="234" align="right">
+                   <p style="margin:0;font-size:14px"><a href="https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&byhref=1&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/?track=head" style="color:#d0471a;font-family:'Arial','sans-serif';" title="Live Chat" target="_blank"><b>Live Chat</b></a> | <a href="http://www.angara.com/contact-us?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#d0471a;font-family:'Arial','sans-serif';" title="1-888-926-4272" target="_blank"><b>1-888-926-4272</b></a><span style="color:#008906;"> </span><br /><br />
+                  
+                  <a href="https://www.facebook.com/Angaradotcom" style="outline:none;border:none"><img src="http://cdn.angara.com/promotions/Email/Feb/facebook.png" title="Angara on Facebook" alt="Angara on Facebook" border="0" ></a>&nbsp;
+                  <a href="https://www.pinterest.com/angarajewelry/" style="outline:none;border:none"><img src="http://cdn.angara.com/promotions/Email/Feb/pinterest.png" title="Angara on Pinterest" alt="Angara on Pinterest" border="0" ></a>&nbsp; 
+                  <a href="https://twitter.com/angarajewelry" style="outline:none;border:none"><img src="http://cdn.angara.com/promotions/Email/Feb/twitter.png" title="Angara on Twitter" alt="Angara on Twitter" border="0" ></a>&nbsp; 
+                  <a href="https://plus.google.com/+Angara" style="outline:none;border:none"><img src="http://cdn.angara.com/promotions/Email/Feb/googleplus.png" title="Angara on Google Plus" alt="Angara on Google Plus" border="0" ></a>&nbsp; 
+                  <a href="https://www.youtube.com/c/Angarajewelry" title="Follow us on Twiiter" style="outline:none;border:none"><img src="http://cdn.angara.com/promotions/Email/Feb/youtube.png" title="Angara on YouTube" alt="Angara on YouTube" border="0"></a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="background:#E8E8E8;padding:8px 0;"><table cellpadding="0" cellspacing="0" width="600" style="font-size:12px">
+                    <tr>
+                      <td align="center"><a href="http://www.angara.com/rings?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Rings" target="_blank">Rings</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/pendants?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Necklaces" target="_blank">Necklaces</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/earrings?&utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Earrings" target="_blank">Earrings</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/engagement-rings?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Engagement" target="_blank">Engagement</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/wedding-rings?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Wedding" target="_blank">Wedding</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/bracelets?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="Bracelets" target="_blank">Bracelets</a></td>
+                      <td>|</td>
+                      <td align="center"><a href="http://www.angara.com/collection/high-jewelry?utm_source=Email&utm_medium=Email&utm_campaign=RMA&utm_term={{var customer_email()}}" style="color:#555; text-decoration: none;" title="High Jewelry" target="_blank">High Jewelry</a></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td colspan="2" height="10px" style="height:10px;font-size:10px;"></td>
+              </tr>
+              <tr>
+                        <td colspan="2" valign="top">
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">
+							{{var content}}
+							</p>
+							<p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">
+							{{depend request.getNotifyHasComment()}}
+								<strong>{{var request.getCustomerName()}}</strong> has left a comment:<br />
+								{{var request.getNotifyCommentText()}}
+							{{/depend}}
+							</p>
+							<p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">
+								You can manage the request by following the link: <a href="{{var request.getAdminUrl()}}">{{var request.getAdminUrl()}}</a>
+							</p>
+                        </td>
+                    </tr>
+                  <tr>
+                <td colspan="2" style="height:15px;" align="center">
+                
+                    </td>
+       			 </tr>
+                 
+                   <tr>
+                <td colspan="2" style="border:1px solid #d3d3d3;" align="center">
+                <table align="center" style="background-color:#FFFFFF" cellpadding="0" cellspacing="0">				
+              <tr>
+                <td colspan="2" style="padding:10px 0" align="center"><table cellpadding="0" cellspacing="0" width="580" style="font-size:13px;" align="center">
+                    <tr>
+
+                      <td align="center"><a><img src="http://cdn.angara.com/promotions/Email/Feb/footer-links.jpg" border="0" alt="Why Shop At Angara"/></a></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding:10px 0;border-top:none" align="center"><table cellpadding="0" cellspacing="0" width="580" style="font-size:13px;" align="center">
+                    <tr>
+                      <td align="center"><span style="line-height:115%; font-family:'Arial','sans-serif'; font-size:8.0pt; color:#868686; ">&copy; 2016 Angara Inc. All rights reserved | Angara Inc. 550 South Hill St, Suite 1015 Los Angeles, CA 90013</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              </table>
+              </td>
+              </tr>
+      </table></td>
+  </tr>
+</table>
+</body>

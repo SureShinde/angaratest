@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+  <config>
+     <modules>
+        <Angara_Abandoncartmailchimp>
+          <version>1.1.1</version>
+        </Angara_Abandoncartmailchimp>
+     </modules>     
+	<frontend>
+        <routers>
+			  <abandoncartmailchimp>
+				  <use>standard</use>
+				  <args>
+					  <module>Angara_Abandoncartmailchimp</module>
+					  <frontName>mailchimp</frontName>
+				  </args>
+			</abandoncartmailchimp>
+		</routers>
+    </frontend>
+	<global>
+		<events>
+		 <!-- <checkout_cart_save_after>
+		  <observers>
+			  <angara_update>
+				<type>singleton</type>
+				<class>Angara_Abandoncartmailchimp_Model_Observer</class>
+				<method>update</method>
+			  </angara_update>
+			</observers>
+			</checkout_cart_save_after> -->
+		</events>
+		<models>
+			<abandoncartmailchimp>
+				<class>Angara_Abandoncartmailchimp_Model</class>
+				<resourceModel>abandoncartmailchimp_mysql4</resourceModel>
+			</abandoncartmailchimp>
+			<abandoncartmailchimp_mysql4>
+				<class>Angara_Abandoncartmailchimp_Model_Mysql4</class>
+				<entities>
+					<visitor>
+						<table>abandoncartmailchimp</table>
+					</visitor>
+					<session>
+						<table>mailchimpsession</table>
+					</session>
+					<unsubscriber>
+						<table>mailchimp_unsubscribers</table>
+					</unsubscriber>
+					<sent>
+					 <table>mailchimp_sent</table>
+					 </sent>
+				</entities>
+			</abandoncartmailchimp_mysql4>
+		</models>
+		<resources>
+		<!-- connection to write -->
+		<abandoncartmailchimp_setup>
+				<setup>
+					<module>Angara_Abandoncartmailchimp</module>
+				</setup>
+				<connection>
+				<use>core_setup</use>
+				</connection>
+		 </abandoncartmailchimp_setup>
+		<abandoncartmailchimp_write>
+			<connection>
+				<use>core_write</use>
+			</connection>
+		</abandoncartmailchimp_write>
+		<!-- connection to read -->
+		 <abandoncartmailchimp_read>
+		  <connection>
+			 <use>core_read</use>
+		  </connection>
+		 </abandoncartmailchimp_read>
+	  </resources>
+	</global>
+	
+	<crontab>
+        <jobs>
+			<abandon_cart_email>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+				<!--<schedule><cron_expr>01 05 * * *</cron_expr></schedule>-->
+                <run><model>abandoncartmailchimp/cron::processAutoEmailJobs</model></run>
+            </abandon_cart_email>
+			
+			<abandon_cart_email2>
+				<schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>abandoncartmailchimp/cron::processFollowEmailJobs</model></run>
+            </abandon_cart_email2>
+			
+			<mailchimp_unsubs>
+				<schedule><cron_expr>* * * * *</cron_expr></schedule>
+				<run><model>abandoncartmailchimp/cron::unsubsynchronization</model></run>
+		  	</mailchimp_unsubs>
+		</jobs>
+    </crontab>
+</config>

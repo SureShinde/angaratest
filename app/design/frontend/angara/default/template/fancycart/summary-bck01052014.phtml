@@ -1,0 +1,89 @@
+<div class="summary-block">
+<div class="summary-title">Cart Summary</div>
+<div class="cart-cell"> <?php echo $this->getChildHtml('totals'); ?> </div>
+<div class="cart-cell discountsection">
+	<?php $shipment_hp = '';if(Mage::getSingleton('checkout/session')->getData('shipment')){$shipment_hp = Mage::getSingleton('checkout/session')->getData('shipment');}?>
+	<?php $grandtotalwithout_easy = Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();?>
+	<?php if($currentCurrencyCode==$baseCurrencyCode) : ?>
+	Shipping:
+	<select id="custom_estimate_method" class="select_shipping" name="estimate_method" onchange="updatePostForm()" >
+		<option value="freeshipping_freeshipping"<?php if($shipment_hp=='freeshipping_freeshipping'){echo ' selected="selected" ';}?>>Free Ground Shipping</option>
+		<option value="angnonusflatrate_angnonusflatrate"<?php if($shipment_hp=='angnonusflatrate_angnonusflatrate'){echo ' selected="selected" ';}?>>
+		<?php if($grandtotalwithout_easy >= 500){ echo 'Free International Shipping'; } else { echo 'International Shipping $39.99'; }  ?>
+		</option>
+		<option value="ang2dayflatrate_ang2dayflatrate"<?php if($shipment_hp=='ang2dayflatrate_ang2dayflatrate'){echo ' selected="selected" ';}?>> 2 Day Shipping $12.95 </option>
+		<option value="angovernightflatrate_angovernightflatrate"<?php if($shipment_hp=='angovernightflatrate_angovernightflatrate'){echo ' selected="selected" ';}?>>Priority Overnight $21.95</option>
+		<option value="flatrate_flatrate"<?php if($shipment_hp=='flatrate_flatrate'){echo ' selected="selected" ';}?>>Saturday Delivery $32.95</option>
+	</select>
+	<?php else : ?>
+	<select id="custom_estimate_method" name="estimate_method">
+		<option value="angnonusflatrate_angnonusflatrate"<?php if($shipment_hp=='angnonusflatrate_angnonusflatrate'){echo ' selected="selected" ';}?>>
+		<?php if($grandtotalwithout_easy >= 500){ echo 'Free International Shipping'; } else { echo 'International Shipping $39.99'; }  ?>
+		</option>
+	</select>
+	<?php endif; ?>
+</div>
+<div class="discount-code-block">
+	<div id="coupon-code">
+		<div>
+			<span class="discount-code-title">
+				Angara Discount Code:
+			</span>
+			<input class="discount-input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getQuote()->getCouponCode()) ?>" />
+			<button type="button" title="<?php echo $this->__('Cancel Code') ?>" class="cancel-code" onclick="discountCodeCancel()" value="<?php echo $this->__('Cancel') ?>">X</button>
+			<button type="button" title="<?php echo $this->__('Apply Code') ?>" class="apply-code" onclick="discountCodeApply()" value="<?php echo $this->__('Apply Code') ?>">Apply</button>
+		<div class="clear"></div>
+		</div>
+		<span class="small-shipping-text">
+			<?php echo $this->__('Only one code is permitted for each order.') ?>
+		</span>
+	</div>
+</div>
+
+<div class="payment-method-block">
+	<ul class="checkout-types">
+		<?php 
+				$has_recurring_item = $this->hasRecurringItem();
+				$methods = $this->getMethods('methods');
+				if(isset($methods[1])){
+					$tmp = $methods[1];
+					$methods[1] = $methods[0];
+					$methods[0] = $tmp;
+				}
+				$loop = 0;
+				
+			?>
+		<?php foreach ($methods as $method): ?>
+		<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+		<li>
+			<?php					
+					echo $methodHtml;
+					if($loop == 0){					
+                        //echo '<br><img src="/skin/frontend/angara/default/images/sc-paymentcard.jpg" width="219" height="27">';
+						if($has_recurring_item){
+							break;
+						}else{
+							echo '<br><img src="/skin/frontend/angara/default/images/sc-paymentcard.png" style="margin:11px 0 0 32px; width:219px; height:27px;">';	
+						}
+					}
+					$loop++;
+				?>
+		</li>
+		<?php endif; ?>
+		<?php endforeach; ?>
+	</ul>
+	<div class="clear"></div>
+</div>
+<div class="secure-checkout-logo">
+    <ul>
+        <li class="title"></li>
+        <li class="verisign" onClick="vrsn_splash();">
+        <script type="text/javascript">// <![CDATA[
+function vrsn_splash(){sw=window.open('https://seal.verisign.com/splash?form_file=fdf/splash.fdf&dn=WWW.ANGARA.COM&lang=en','VRSN_Splash','location=yes,status=yes,resizable=yes,scrollbars=yes,width=560,height=500');sw.focus();}
+// ]]></script>
+        </li>
+        <li class="paypal"></li>
+        <li class="mcafee" style="cursor:default;"></li>
+    </ul>
+</div>
+</div>

@@ -1,0 +1,145 @@
+<style>
+	.coffee-clock .heading{font-family: cinzelregular; position: absolute; top: 0px; left: 0px; right: 0px; text-transform: uppercase; text-align: center; color: #5c362b; font-size: 40px;} 	
+	
+	.coffee-clock .clock-box{position:absolute;width:200px;height:200px; border-radius:370px; top:325px; left:325px; animation:rotate 60s infinite linear;z-index: 2;}
+	.coffee-clock .clock-hand{z-index:2; position:absolute; left:76px; width:46px; height:340px; bottom:50%; top:-205px;}
+	
+	.coffee-clock .product-box{z-index:1; position:absolute; width:680px;height:680px;border-radius: 370px; top: 85px;left: 86px;overflow: hidden;}
+	
+	.coffee-clock .pro-block{position:absolute; display:block; margin:0 auto;}
+	.coffee-clock .pro-block img, .pro-block .shop-now{opacity:0;}
+	.coffee-clock .pro-block .shop-now{color: #ffffff; font-size: 12px; position: absolute; left: 0px; right: 0px; text-align: center; top: 48%;margin:0 auto;border: 1px solid #ffffff;padding: 5px;width: 62%;}
+	.coffee-clock .pro-block:hover{ z-index:2;}
+	.coffee-clock .pro-block:hover img{opacity:0.5;}
+	.coffee-clock .pro-block:hover .shop-now{opacity:1;color: #fa505a;border: 1px solid #fa505a;}
+	
+	.coffee-clock .pro-block.active{ z-index:2; cursor:pointer;}
+	.coffee-clock .pro-block.active .shop-now {opacity:1;}
+	.coffee-clock .pro-block.active img{opacity:0.5;}
+	
+	.coffee-clock .pb-12{top:7px;left: 251px; z-index:1;}
+	.coffee-clock .pb-1{top: 37px;left: 370px;    transform:rotate(30deg);-webkit-transform:rotate(30deg);-moz-transform:rotate(30deg);-ms-transform:rotate(30deg);-o-transform:rotate(30deg);}
+	.coffee-clock .pb-2{top: 122px;left: 457px;   transform:rotate(60deg);-webkit-transform: rotate(60deg);-moz-transform:rotate(60deg);-ms-transform:rotate(60deg);-o-transform:rotate(60deg);}
+	.coffee-clock .pb-3{top: 242px;left: 490px;   transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-ms-transform:rotate(90deg);-o-transform:rotate(90deg);}
+	.coffee-clock .pb-4{top: 362px;l;left: 458px; transform:rotate(120deg);-webkit-transform:rotate(120deg);-moz-transform:rotate(120deg);-ms-transform:rotate(120deg);-o-transform:rotate(120deg);}
+	.coffee-clock .pb-5{ top: 449px;left: 371px;  transform:rotate(150deg); -webkit-transform:rotate(150deg); -moz-transform:rotate(150deg);-ms-transform:rotate(150deg);-o-transform:rotate(150deg);}
+	.coffee-clock .pb-6{top: 480px;left: 250px;   transform:rotate(180deg);-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-ms-transform:rotate(180deg);-o-transform:rotate(180deg);}
+	.coffee-clock .pb-7{top: 447px;left: 131px;   transform:rotate(210deg);-webkit-transform:rotate(210deg);-moz-transform:rotate(210deg);-ms-transform:rotate(210deg);-o-transform:rotate(210deg);}
+	.coffee-clock .pb-8{top: 360px;left: 45px;    transform:rotate(240deg);-webkit-transform:rotate(240deg);-moz-transform:rotate(240deg);-ms-transform:rotate(240deg);-o-transform:rotate(240deg);}
+	.coffee-clock .pb-9{top: 243px;left: 14px;    transform:rotate(270deg);-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-ms-transform:rotate(270deg);-o-transform:rotate(270deg);}
+	.coffee-clock .pb-10{top: 125px;left: 47px;   transform:rotate(300deg);-webkit-transform:rotate(300deg);-moz-transform:rotate(300deg);-ms-transform:rotate(300deg);-o-transform:rotate(300deg);}
+	.coffee-clock .pb-11{top: 38px;left: 133px;   transform:rotate(330deg);-webkit-transform:rotate(330deg);-moz-transform:rotate(330deg);-ms-transform:rotate(330deg);-o-transform:rotate(330deg);}
+	
+	.coffee-clock .pb-12 .shop-now{}
+	.coffee-clock .pb-1 .shop-now{transform:rotate(-30deg);-webkit-transform:rotate(-30deg);-moz-transform:rotate(-30deg);-ms-transform:rotate(-30deg);-o-transform:rotate(-30deg);}
+	.coffee-clock .pb-2 .shop-now{transform:rotate(-60deg);-webkit-transform: rotate(-60deg);-moz-transform:rotate(-60deg);-ms-transform:rotate(-60deg);-o-transform:rotate(-60deg);}
+	.coffee-clock .pb-3 .shop-now{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-o-transform:rotate(-90deg);}
+	.coffee-clock .pb-4 .shop-now{transform:rotate(-120deg);-webkit-transform:rotate(-120deg);-moz-transform:rotate(-120deg);-ms-transform:rotate(-120deg);-o-transform:rotate(-120deg);}
+	.coffee-clock .pb-5 .shop-now{transform:rotate(-150deg); -webkit-transform:rotate(-150deg); -moz-transform:rotate(-150deg);-ms-transform:rotate(-150deg);-o-transform:rotate(-150deg);}
+	.coffee-clock .pb-6 .shop-now{transform:rotate(-180deg);-webkit-transform:rotate(-180deg);-moz-transform:rotate(-180deg);-ms-transform:rotate(-180deg);-o-transform:rotate(-180deg);}
+	.coffee-clock .pb-7 .shop-now{transform:rotate(-210deg);-webkit-transform:rotate(-210deg);-moz-transform:rotate(-210deg);-ms-transform:rotate(-210deg);-o-transform:rotate(-210deg);}
+	.coffee-clock .pb-8 .shop-now{transform:rotate(-240deg);-webkit-transform:rotate(-240deg);-moz-transform:rotate(-240deg);-ms-transform:rotate(-240deg);-o-transform:rotate(-240deg);}
+	.coffee-clock .pb-9 .shop-now{transform:rotate(-270deg);-webkit-transform:rotate(-270deg);-moz-transform:rotate(-270deg);-ms-transform:rotate(-270deg);-o-transform:rotate(-270deg);}
+	.coffee-clock .pb-10 .shop-now{transform:rotate(-300deg);-webkit-transform:rotate(-300deg);-moz-transform:rotate(-300deg);-ms-transform:rotate(-300deg);-o-transform:rotate(-300deg);}
+	.coffee-clock .pb-11 .shop-now{transform:rotate(-330deg);-webkit-transform:rotate(-330deg);-moz-transform:rotate(-330deg);-ms-transform:rotate(-330deg);-o-transform:rotate(-330deg);}
+	
+	.coffee-clock .exbtn{position: absolute; bottom: 0px; border: 1px solid #000000; padding: 8px 30px; font-size: 16px; left: 50%; width: 200px; text-align: center; margin-left: -100px;}
+	.coffee-clock .exbtn:hover, .coffee-clock .exbtn:focus, .coffee-clock .exbtn.active{border-color:#fa505a;text-decoration:none;}
+	.ExText {bottom:6%;left:0;right:0;text-align:center;}
+	
+</style>
+<div style="width:700px; margin:0 auto 50px;">
+	<div class="coffee-clock" style="background:url(/skin/frontend/ress/default/images/coffee-clock.jpg) no-repeat center center; width:850px; height:850px; border-radius:400px; margin-left:-75px; position:relative; overfloat:hidden">
+		<div class="heading">Coffee Diamond is Forever</div>
+		<div class="clock-box">
+			<div class="clock-hand"><img src="/skin/frontend/ress/default/images/clock-hand.png" style="max-width:46px;"/></div>
+		</div>
+		<div class="product-box">
+			<a class="pro-block pb-12 active" href="/pendants/coffee-diamond-pendant-necklaces?icid=coffee-d-page|coffee-p|sp1162brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Pendants</span>
+			</a>
+			<a class="pro-block pb-1" href="/pendants/coffee-diamond-pendant-necklaces?icid=coffee-d-page|coffee-p|sp0730mgbrd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Pendants</span>
+			</a>
+			<a class="pro-block pb-2" href="/pendants/coffee-diamond-pendant-necklaces?icid=coffee-d-page|coffee-p|sp0701brd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Pendants</span>
+			</a>
+			<a class="pro-block pb-3" href="/rings/coffee-diamond-rings?icid=coffee-d-page|coffee-r|sd_sr1806brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Rings</span>
+			</a>
+			<a class="pro-block pb-4" href="/rings/coffee-diamond-rings?icid=coffee-d-page|coffee-r|sd_wrd_sr1819brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Rings</span>
+			</a>
+			<a class="pro-block pb-5" href="/rings/coffee-diamond-rings?icid=coffee-d-page|coffee-r|sr1262mgbrd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Rings</span>
+			</a>
+			<a class="pro-block pb-6" href="/rings/coffee-diamond-rings?icid=coffee-d-page|coffee-r|sr0808brd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Rings</span>
+			</a>
+			<a class="pro-block pb-7" href="/earrings/coffee-diamond-earrings?icid=coffee-d-page|coffee-e|sd_se1476brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Earrings</span>
+			</a>
+			<a class="pro-block pb-8" href="/earrings/coffee-diamond-earrings?icid=coffee-d-page|coffee-e|se1410brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Earrings</span>
+			</a>
+			<a class="pro-block pb-9" href="/earrings/coffee-diamond-earrings?icid=coffee-d-page|coffee-e|se0974brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Earrings</span>
+			</a>
+			<a class="pro-block pb-10" href="/earrings/coffee-diamond-earrings?icid=coffee-d-page|coffee-e|se1043aqbrd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Earrings</span>
+			</a>
+			<a class="pro-block pb-11" href="/pendants/coffee-diamond-pendant-necklaces?icid=coffee-d-page|coffee-p|sd_sp1191brdd|02252017">
+				<img src="/skin/frontend/ress/default/images/coffee-clock.png">
+				<span class="shop-now">Explore Pendants</span>
+			</a>
+		</div>
+		<div class="absolute-placeholder ExText">Delightful yet stunning treasures adorned with coffee diamonds that glow with matchless beauty.</div>
+		<a href="/jewelry/coffee-diamond-jewelry" class="exbtn">Explore Collection</a>
+	</div>
+</div>
+<script>
+	jQuery(function(){
+		var i = 1;
+		setInterval(function(){
+			jQuery('.pro-block').removeClass('active');
+			jQuery('.pro-block:eq('+i+')').addClass('active');
+			if(i == 11){
+				i = 0;
+			}else{
+				i++;
+			}
+		},5000);
+	});
+</script>
+<script>
+	jQuery(function(){
+		setTimeout(function(){
+			var deg = 6;
+			setInterval(function(){
+				jQuery('.coffee-clock .clock-box').css({
+					'transform':'rotate('+deg+'deg)',
+					'-webkit-transform':'rotate('+deg+'deg)',
+					'-moz-transform':'rotate('+deg+'deg)',
+					'-ms-transform':'rotate('+deg+'deg)',
+					'-o-transform':'rotate('+deg+'deg)'
+				});
+				if(deg == 360){
+					deg = 6;
+				}else{
+					deg += 6;
+				}
+			},1000)			
+		},2000)			
+	});
+</script>

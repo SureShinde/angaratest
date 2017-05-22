@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_Testimonials>
+			<version>0.1.0</version><!--Modified by Vaseem to run sql to create new Category Attribute starts-->
+		</Angara_Testimonials>
+	</modules>
+	<frontend>
+		<routers>
+			<testimonials>
+				<use>standard</use>
+				<args>
+					<module>Angara_Testimonials</module>
+					<frontName>testimonials</frontName>
+				</args>
+			</testimonials>
+		</routers>
+	
+		<layout>
+			<updates>
+				<testimonials>
+					<file>testimonials.xml</file>
+				</testimonials>
+			</updates>
+		</layout>
+	</frontend>
+	<global>
+		<!--<helpers>
+			<testimonials>
+				<class>Angara_Testimonials_Helper</class>
+			</testimonials>
+		</helpers>-->
+		<blocks>
+			<testimonials>
+				<class>Angara_Testimonials_Block</class>
+			</testimonials>
+		</blocks>
+		<models>
+        	<testimonials>
+            	<class>Angara_Testimonials_Model</class>
+            	<resourceModel>testimonials_resource</resourceModel>
+        	</testimonials>
+			<testimonials_resource>
+            	<class>Angara_Testimonials_Model_Resource</class>
+				<entities>
+                	<reviewdetail>
+                    	<table>review_detail</table>
+                	</reviewdetail>
+            	</entities>
+        	</testimonials_resource>
+    	</models>
+		
+	<!--Added by Vaseem to run sql to create new Category Attribute starts-->
+		<resources>
+			<testimonials_setup>
+				<setup>
+					<module>Angara_Testimonials</module>
+					<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</testimonials_setup>
+			<testimonials_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</testimonials_write>
+			<testimonials_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</testimonials_read>
+		</resources>
+	<!--Added by Vaseem to run sql to create new Category Attribute ends-->	
+	</global>
+</config>

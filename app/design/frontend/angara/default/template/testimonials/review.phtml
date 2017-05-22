@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<?php 
+//$b_hp = Mage::getBlockSingleton('hprcv/hprcv');
+$review= $this->getReviews()->getItems();//Mage::getBlockSingleton('review/product_view');//$this->getLayout()->createBlock('review/view');
+$pro=Mage::getModel('catalog/product');//->getItems();
+$reviewnum=Mage::getModel('testimonials/reviewdetail')->getCollection();
+//var_dump(Mage::helper('catalog/image'));
+//var_dump($review);//->getReviewsCollection());
+//echo var_dump($this->getTestimonials());
+/*foreach($this->getTestimonials() as $each){
+var_dump($each->getData());
+}*/
+$page=$this->getRequest()->getParams();
+?>
+  <div class="pageheading">Angara Customers Share Their Jewelry Stories</div>
+
+<div class="reviewwrapper">
+  <div class="displayoption">
+    <div class="pages">
+      <ol>
+        <li class="pre"><a style="cursor:pointer" class="button previous" >Previous</a></li>
+        <?php /*?><li class="pageno">Page <?php echo $page['page']?> of <?php echo (int)(count($reviewnum)/count($review));?></li><?php */?>
+        <li class="next"><a style="cursor:pointer" class="button next" >Next</a></li>
+      </ol>
+    </div>
+    <!--<div class="sortby">
+      <div class="relevance">
+        <select  class="relevanceselect">
+          <option value="" selected="selected">per page</option>
+        </select>
+      </div>
+    </div>-->
+  </div>
+<?php
+$testi=$this->getTestimonials();
+$i=0;
+foreach($review as $testimonial){ 
+
+$_product=$pro->load($testimonial->getEntityPkValue());
+//if($_product->getImage()!='no_selection')var_dump($_product);
+//var_dump($_product);
+//$product=$testimonial->->getEntityPkValue()
+$_votes = $testimonial->getRatingVotes();
+?>
+
+  <div class="anim reviewholder" id="span<?php echo $i ?>" style="display:none"><span class="reviewproholder"> <span class="reviewproimg"><img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')// $_product->getImage()//Mage::helper('catalog/image')->init($_product, 'image')?>" width="172" height="172">
+<?php
+        /*$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).' "width="172" height="172" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');*/
+    ?>
+</span> <span class="reviewproname"><?php echo $_product->getName()?></span> </span> <span  class="reviewnoteholder"> <span class="reviewtitleholder"> <span class="reviewnoteheading"><?php echo $this->htmlEscape($testimonial->getTitle()) ?></span> <span class="reviewprorating">
+  
+  <table class="ratings-table">
+          <col width="1" />
+          <col />
+          <tbody>
+            <?php foreach ($_votes as $_vote): ?>
+            <tr>
+              <!--<th  class="review-headings"><?php //echo $this->escapeHtml($_vote->getRatingCode()) ?></th>-->
+              <td nowrap="nowrap" style="padding:4px 0 0 0"><div class="rating-box">
+                  <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                </div>
+              <td valign="middle" style="padding:5px 0 0 5px"><?php printf("%.1f",($_vote->getPercent()* .05))?></td>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+  
+  <!--<img src="/skin/frontend/angara/default/images/ratingreview.png" width="73" height="15"/>--></span> </span> <span class="reviewcontentbox readingnote"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())) ?><!--Just wanted to thank you for helping make this ring "the" ring. What I wanted was the perfect ring for her and you helped me match up reality with what was rattling around in my head. She absolutely loves it! I love it, and it looks good on her too! Just wanted to thank you for helping make this ring "the" ring. What I wanted was the perfect ring for her and you helped me match up reality with what was rattling around in my head. She absolutely loves it! I love it, and it looks good on her too! --><img src="/skin/frontend/angara/default/images/speakicon.png" width="28" height="15"  class="speakicon"/> </span> <span class="reviewerdetails">- <?php echo $this->htmlEscape($testimonial->getNickname()) ?><br>
+    <small class="reviewdate"><?php echo $this->__('%s', $this->formatDate($testimonial->getCreatedAt()), 'long') ?><!--15 Sep, 2012--></small> </span> </span>
+    </div>
+	<?php 
+	$i++;
+	} 
+	?> 
+  </div>   
+</div>
+
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+var listItem = $('.anim');
+$('div').html( 'Index: ' + $('li').index(listItem) );
+jQuery(".button").click(function() {  
+    jQuery(".glow").removeClass("glow");
+	jQuery(this).addClass("glow");
+  });
+
+jQuery(".button").click(function(){
+		var number=(jQuery('.anim').index(this));
+		jQuery("#span0").text("That was anim index #" + index);
+		jQuery('.anim').hide();
+		jQuery('.anim:eq('+number+')').show();
+		});
+</script>
+

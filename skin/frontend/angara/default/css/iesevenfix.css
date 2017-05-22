@@ -1,0 +1,205 @@
+/****************************home page css starts*******************/
+
+.mail-capture-official-rules {
+padding-top:0!important;
+margin-top:16px;
+}
+
+.mail-capture-input {
+	background: none #fff;
+	border: solid 1px #595959;
+	width:180px;
+	padding: 0 5px;
+	height:27px;
+	font-size: 12px;
+	line-height:16px;
+	font-family:'open_sansregular', Arial, Helvetica, sans-serif;
+	margin-left:68px;
+}
+.mail-capture-input-block form#newsletter-validate-detail-chance .validation-advice
+{
+left:68px!important;
+}
+
+#whyshop, #whyshop .wshop
+{
+vertical-align:bottom!important;
+}
+
+.social-icons-footer
+{
+padding:0!important;
+}
+.navigations h3
+{
+width:auto!important;
+}
+
+.subtext
+{
+margin-top:3px!important;
+display:inline-block!important;
+margin-right:10px !important;
+}
+
+.countrydroplist
+{
+right:201px!important;
+}
+
+.navigations
+{
+margin-right:20px!important;
+}
+
+#footer .last
+{
+margin:0!important;
+padding:12px 0 0 0!important;
+float:right!important;
+}
+
+#footer .secondlast
+{
+width:230px!important;
+}
+
+#whyshop .seprator
+{
+display:inline-block;
+}
+
+.topnav-bottom-border
+{
+height:0!important;
+}
+.global-offer-strip
+{
+z-index:0!important;
+}
+
+.offers-title, .offer-descrrip
+{
+float:left!important;
+}
+
+
+.global-offer-strip .offer-code
+{
+
+display:inline-block!important;
+float:right!important;
+text-align:right!important;
+}
+
+
+/****************************home page css ends*******************/
+
+/****************************product page css starts*******************/
+
+.customization-tabs-block
+{
+padding-top:0!important;
+height:28px!important;
+}
+.pro-rating
+{
+text-align:left!important;
+float:left!important;
+width:167px!important;
+}
+
+.easy-pay-block
+{
+width:170px!important;
+}
+
+.add-to-cart
+{
+padding:0 18px!important;
+}
+
+.ring-sizer-block
+{
+width:140px!important;
+}
+
+.ring-size-guide
+{
+width:83px!important;
+}
+.stone-detail-box-container
+{
+width:335px!important;
+}
+
+.ringSizeHtml
+{
+	position:absolute;
+	bottom:-130px;
+	left:0;
+}
+
+
+
+/****************************product page css ends*******************/
+
+/****************************checkout page css ends*******************/
+.popup-shopping-cart .continue-btn
+{
+margin-right:5px!important;
+}
+.popup-shopping-cart .discount-code-title
+{
+width:250px!important;
+}
+
+.popup-shopping-cart .select_shipping
+{
+float:none!important;
+}
+#custom_estimate_method
+{
+margin-left:20px!important;
+}
+
+.popup-shopping-cart .why-shop-at-angara
+{
+width:928px!important;
+}
+
+.field-small-description
+{
+display:none;!important;
+}
+#billing-new-address-form .checkout-block, shipping-new-address-form .checkout-block
+{
+height:42px!important;
+width:385px!important;
+}
+.view-active-option
+{
+width:105px!important;
+margin-top:0px!important;
+padding-top:6px!important;
+}
+.White-diamond .setting-style-sprite-small
+{
+vertical-align:top!important;
+display:inline-block!important;
+}
+.recently-view-block
+{
+position:relative!important;
+z-index:0!important;
+}
+a.tooltip-home
+{
+position:relative!important;
+z-index:99!important;
+}
+.active-option-summary{
+float:right!important;
+}
+
+/****************************checkout page css ends*******************/

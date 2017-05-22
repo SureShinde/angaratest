@@ -1,0 +1,64 @@
+<script type="text/javascript">// <![CDATA[
+jQuery(function() {
+    jQuery('#mycarousel').jcarousel({wrap: 'circular'});
+	jQuery('#mycarousel2').jcarousel({wrap: 'circular'});
+});
+// ]]></script>
+
+<div class="mainwrapper">
+  <div class="topbanner">
+    <div class="landingbanner"><img src="/skin/frontend/angara/default/images/landingimages/banner-product.png" width="498" height="242" /></div>
+    <div class=" bannercontent catcontent"> <span class="sectiontitle">You Have My Heart! <img src="/skin/frontend/angara/default/images/landingimages/read-heart.png" width="46" height="32"  style="vertical-align:middle" /></span>     
+    <span class="descripition">A wedding ring is special. It represents your emotions, the state of your happy mind. As an enduring symbol of your commitment to each other, we proudly offer one of the widest selections of wedding rings - all crafted with meticulous attention to details. Do please take a look. We offer a special ring, just for you.<br />
+ <span class="bannertextlink" style="text-align:center; display:block;"> <a href="#" style="background:none;">Select Your "True Love" Wedding Ring Here</a> </span> 
+ <span style="text-align:center; display:block;"><img src="/skin/frontend/angara/default/images/landingimages/trustpseal.png" width="319" height="105"  style="vertical-align:middle" /></span>
+ 
+ </span> </div>
+  </div>
+  <div id="promotion-banner"><img src="/skin/frontend/angara/default/images/landingimages/catalog-flash.jpg" width="958" height="50"   /></div>
+  
+  <div class="slider">
+    <div class="sliderbox">
+      <div class="sliderheading">Our Best Sellers</div>
+      <ul id="mycarousel" class="jcarousel-skin-tango" style="width:882px; margin:0 auto; height:268px; overflow:hidden;padding-top:10px;">
+        <?php
+$_coreHelper = $this->helper('core');
+$top10jewelrySkus = array('SR0112SB', 'SR0263SB', 'SR0101RD', 'SR0115RWS', 'SR0153E', 'SR0160EB', 'SR0228T', 'SR0153T', 'SR0102AQ', 'SR0149AQ', 'SR0260SD', 'SR0342EH');	
+$_imageHelper = Mage::helper('catalog/image');
+ foreach($top10jewelrySkus as $sku){
+			$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);			
+			if ($product){
+		?>
+        <li style="float:left; padding-left:6px; padding-right:5px; padding-bottom:20px;"> <a href="<?php echo $product->getProductUrl() ?>"> <img src="<?php echo $_imageHelper->init($product, 'small_image')->resize(207); ?>" alt="<?php echo $_coreHelper->stripTags($product->getName(), null, true); ?>" width="207" /> <span class="proname"><?php echo $_coreHelper->stripTags($product->getName(), null, true); ?></span> <span  class="proprice"><?php echo $_coreHelper->currency($product->getFinalPrice() ,true,true); ?></span> </a> </li>
+        <?php }
+} ?>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="textwrapper" id="txtslider">  
+    <div class="sliderheading">Customer Review</div>
+   <ul id="mycarousel2" class="jcarousel-skin-tango textcontentholder" style="width:882px; background-color:#f5f5f5; margin:0 auto; height:125px; overflow:hidden; margin-top:10px; margin-bottom:10px;-moz-border-radius:8px;border-radius:8px;" >  
+   
+    <li>After looking for months to find the perfect ring and stressing over costs and getting something to match my fiance's tastes, I found Angara.com. The selection of gemstone engagement rings they have is out of this world, and the website is both intuitive and visually stunning. Another important thing to mention here is the fact that they make it absurdly easy to find and talk with a customer service expert while browsing.<br /><br />
+   <span><em>George B.</em></span>
+   </li> 
+   <li>I have used Angara to purchase a really nice Tanzanite ring this past year, and I couldn't be happier with my purchase. I looked around at local jewelry shops, and they just didn't have the selection or prices that Angara had. I would have to say that the best part was being able to pay the ring off in payments, and having it sent to me right away. Thanks a lot Barbara, and Angara, for helping me along the way.<br /><br />
+   <span><em>Aaron S.</em></span>
+   </li>  
+   
+   <li>I believe Angara.com is one of the great gemstone jewelry and diamond jewelry sites. I thought of writing a review here after getting beautiful pair of sapphire earrings from Angara. The pear square sapphire and diamond dangle earrings in 14k white gold that I got are simply superb. It's the real value for money and style. All the gemstone jewelry segments are easily navigable from the top menu bar. <br /><br />
+   <span><em>Amy B.</em></span>
+   </li>
+   
+   <li>Very quick to answer the phone, return phone calls, and emails. They went above and beyond to ship the diamond ring out quickly and I couldn't be any happier with them. I had it independently inspected and appraised and it came back for far more then I paid meaning insurance won't be an issue. Very smooth transaction and I wouldn't hesitate to come back.<br /><br />
+   <span><em>Todd M.</em></span>
+   </li>   
+   
+   </ul>
+   <div class="viewmorereview"><a href="javascript:void(0);" onclick="window.open('http://www.trustlink.org/Reviews/AngaraCom-205983643#ctl00_ctl00_Main_FullSection_upTabSection','popup','width=960,height=500,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=150,top=200'); return false">Read more customer reviews at TrustLink.org</a></div>
+    <div class="clear"></div>
+  </div>
+  
+  
+</div>

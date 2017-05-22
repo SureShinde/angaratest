@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>    
+    <modules>
+        <Angara_Newproducts>
+            <version>0.1.0</version>
+        </Angara_Newproducts>
+    </modules>
+    <frontend>
+        <routers>
+            <newproducts>
+                <use>standard</use>
+                <args>
+                    <module>Angara_Newproducts</module>
+                    <frontName>newproducts</frontName>
+                </args>
+            </newproducts>
+        </routers>  
+    </frontend>
+	<global>
+		<helpers>
+            <newproducts>
+                <class>Angara_Newproducts_Helper</class>
+            </newproducts>
+        </helpers>
+		<events>
+			<catalog_product_save_after>
+				<observers>
+					<angara_newproducts_model_observer>
+						<type>singleton</type>							
+						<class>Angara_Newproducts_Model_Observer</class>
+						<method>catalogProductSaveAfter</method>
+					</angara_newproducts_model_observer>
+				</observers>
+			</catalog_product_save_after>
+		</events>
+	</global>    
+</config>

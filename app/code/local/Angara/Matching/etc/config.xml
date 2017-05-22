@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Moneybookers
+ * @copyright   Copyright (c) 2012 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+  <config>
+     <modules>
+        <Angara_Matching>
+          <version>1.1.0</version>
+        </Angara_Matching>
+     </modules>     
+	
+	
+	<frontend>
+        <routers>
+          <angaramatching>
+              <use>standard</use>
+              <args>
+                  <module>Angara_Matching</module>
+                  <frontName>matching</frontName>
+              </args>
+        </angaramatching>
+    </routers>
+    </frontend>
+	 
+	
+ 
+   
+	<global>		
+		<models>
+			<matching>
+    			<class>Angara_Matching_Model</class>
+     			<resourceModel>matching_mysql4</resourceModel>
+ 			</matching>
+			
+			
+		<matching_mysql4>
+     		<class>Angara_Matching_Model_Mysql4</class>
+     		<entities>
+         		<right>
+           			<table>matching_emails</table>
+         		</right>
+				<wrong>
+					<table>matching_emailcount</table>
+				</wrong>
+				<matchingdata>
+           			<table>matching</table>
+         		</matchingdata>				
+      		</entities>
+		</matching_mysql4>
+		</models>
+			
+		<resources>
+        <!-- connection to write -->
+			<matching_setup>
+                <setup>
+                    <module>Angara_Matching</module>
+                </setup>
+				<connection>
+				<use>core_setup</use>
+				</connection>
+       	 </matching_setup>
+         <matching_write>
+            	<connection>
+                	<use>core_write</use>
+            	</connection>
+         </matching_write>
+        <!-- connection to read -->
+         <matching_read>
+          <connection>
+             <use>core_read</use>
+          </connection>
+         </matching_read>
+      </resources>
+	</global>
+        
+	
+	
+	 
+	
+	
+</config>

@@ -1,0 +1,36 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/filter_attribute.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<?php 
+$items        = $this->getItemsArray();
+$displayStyle = $this->getColumnsNum(); 
+?>
+<ol>
+<?php if ($displayStyle <=1): // one column ?>
+    <?php foreach ($items as $_item): ?>
+        <li><?php echo $_item?></li>
+    <?php endforeach ?>
+<?php elseif (3 == $displayStyle): // only images ?>
+<li>
+    <div class="adj-icons-filter-one-column">
+    <?php foreach ($items as $_item) echo $_item ?>
+    </div>
+</li>
+<?php else: $n = count($items); $middle = ceil($n/2); //two columns ?>
+<li>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i=0; $i<$middle; ++$i) echo "<div>{$items[$i]}</div>" ?>
+    </div>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i=$middle; $i<$n; ++$i) echo "<div>{$items[$i]}</div>" ?>
+    </div>
+</li>
+<?php endif ?>
+</ol>

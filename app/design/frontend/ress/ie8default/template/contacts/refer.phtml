@@ -1,0 +1,225 @@
+<style>
+.input-text {
+    border: 1px solid #b0b0b0 !important;
+    color: #a3a3a3 !important;
+}
+
+.refer-to-win-form{ color:#f8f8f8 no-repeat;}
+.signup-sub-heading{ font-size:30px; color:#7e0014; padding-top:20px;}
+.signup-main-mid{height:auto; background: url(/skin/frontend/ress/default/images/refer-to-win-background.jpg) no-repeat;}
+.signup-discriptive{ font-size:17px; line-height:18px; color:#7e0014; padding:20px 0;}
+.signup-form-wrapper{}
+.input-text::-moz-placeholder{ color:#000!important;}
+.calender-icon{ position:absolute; bottom:10px; right:10px; curser:pointer;}
+#subscribeForm .input-text{ padding:6px 3px!important;font-size:11px;}
+.c-box{position:relative;}
+.c-box input.error{margin-bottom:20px;}
+.c-box label.error{position:absolute;left:32px;top:20px;}
+
+.thankyou-popup{position:fixed;top:0px;right:0px;bottom:0px;left:0px;background:rgba(0,0,0,.40);z-index:1050;width:100%}
+.thankyou-popup .holder{width:450px;margin:0 auto}
+.thankyou-popup .holder .tp-content{width:100%;background:#ffffff;padding:25px 10px}
+.thankyou-popup .holder .tp-content p{text-align:center}
+.thankyou-popup .holder .tp-content p span{font-size:20px; text-transform:uppercase; line-height:45px;}
+.thankyou-popup .holder .tp-content p a.btn{background:#; color:#ffffff; padding:8px 16px;display:inline-block;margin-top:15px;line-height: 17px;}
+@media (max-width:999px){
+	.desk-img, .win-image{display:none}
+	.ipad-img{display:block!important}
+}
+.ipad-img{display:none}
+</style>
+<!--<link href="style.css" rel="stylesheet" type="text/css" />-->
+<div class="container showcase-bg-white min-padding-top relative-placeholder">
+<div class="refer-to-win-form">
+<div class="signup-sub-heading">
+	<img class="img-responsive desk-img" src="/skin/frontend/ress/default/images/ref-your-friend-banner.jpg" />
+	<img class="img-responsive ipad-img" src="/skin/frontend/ress/default/images/refer-to-win-mob.jpg" />
+</div>
+
+<div class="signup-main-mid">
+	<div class="row">
+    	<div class="col-md-6 col-sm-12 win-image"><img class="img-responsive" src="/skin/frontend/ress/default/images/refer-to-win.png" /></div>
+        <div class="col-md-6 col-sm-12 max-padding-right">
+			<div class="signup-form-wrapper">
+			<form action="<?php echo $this->getFormAction();?>" id="refForm" method="post" novalidate="novalidate">
+				<div class="signup-discriptive">Your Information</div>
+				<div class="row customer-name">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname" class="input-text t1 " title="First Name" value="<?php if($email=$this->getRequest()->getParam('fname')){echo $email;}?>" placeholder="Your Name" name="reffname">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="email" id="refemail" class="input-text required-entry validate-email friendsemail" title="Email Address" value="<?php if($email  = $this->getRequest()->getParam('email')){echo $email;}?>" placeholder="Email Address" name="refemail" >
+						</div>
+					</div>
+				</div>
+				<div class="signup-discriptive">Friends Information</div>
+				<div class="row customer-name high-margin-top high-margin-bottom">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname1" class="input-text t1" title="First Name" value="" placeholder="Friend 1 Name" name="reffname1">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="email" id="refemail1" class="input-text required-entry validate-email friendsemail" title="Email Address" value="" placeholder="Email Address" name="refemail1" >
+						</div>
+					</div>
+				</div>
+				<div class="row customer-name high-margin-top high-margin-bottom">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname2" class="input-text t1" title="First Name" value="" placeholder="Friend 2 Name" name="reffname2">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="text" id="refemail2" class="input-text friendsemail" title="Email Address" value="" placeholder="Email Address" name="refemail2" >
+						</div>
+					</div>
+				</div>
+				<div class="row customer-name high-margin-top high-margin-bottom">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname3" class="input-text t1" title="First Name" value="" placeholder="Friend 3 Name" name="reffname3">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="text" id="refemail3" class="input-text friendsemail" title="Email Address" value="" placeholder="Email Address" name="refemail3" >
+						</div>
+					</div>
+				</div>
+				<div class="row customer-name high-margin-top high-margin-bottom">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname4" class="input-text t1" title="First Name" value="" placeholder="Friend 4 Name" name="reffname4">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="text" id="refemail4" class="input-text friendsemail" title="Email Address" value="" placeholder="Email Address" name="refemail4" >
+						</div>
+					</div>
+				</div>
+				<div class="row customer-name high-margin-top">
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area">  
+							<input type="text" id="reffname5" class="input-text t1" title="First Name" value="" placeholder="Friend 5 Name" name="reffname5">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6 col-xs-12 high-margin-bottom">
+						<div class="data_area"> 
+							<input type="text" id="refemail5" class="input-text friendsemail" title="Email Address" value="" placeholder="Email Address" name="refemail5" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<div class="row"><div class="col-sm-12 small max-padding-left c-box"><input name="policy" type="checkbox" value="" checked="checked" class="required-newsletter" />I agree to receive newsletters and promotional emails from Angara.com</div></div>
+				<div class="row"><div class="col-sm-12 small max-padding-left c-box"><input name="rule" type="checkbox" value="" class="required-rules" /><a href="/official-rules.html" class="text-underline" target="_blank">I agree to the official rules</a></div></div>
+				<div class="col-sm-6 high-margin-top">
+				<!--<a href="#"><button class="btn btn-primary btn-block btn-place-order fontsize-type2" title="Complete form" type="submit">Enter To Win</button></a>-->
+				<input type="button" id="enter_to_win" onclick="refSubmit()" title="Complete Form" class="btn btn-primary btn-block btn-place-order fontsize-type2" value="Enter To Win"/>
+				</div>
+                <div class="col-sm-2 col-md-1 high-margin-top text-light hide" id="wait-spinner">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+				</div>    
+			</form>
+<script type="text/javascript">
+	//var subscribeForm = new VarienForm('referForm',true);
+	//script for thankyou popup
+	jQuery(function(){
+		var wH = jQuery(window).height();
+		var tPc = jQuery('.thankyou-popup .tp-content').height();
+		var mT = wH-tPc;
+		jQuery('.thankyou-popup .holder').css('margin-top',mT/2.5);
+	});
+	function getUrlParameter(sParam)
+	{
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('?');
+		for (var i = 0; i < sURLVariables.length; i++)
+		{
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam)
+			{
+				return sParameterName[1];
+			}
+		}
+	} 
+	jQuery(function(){
+		var res = getUrlParameter('submit');
+		if(res == 1){
+			jQuery('.thankyou-popup').css('display','block');
+			setTimeout(function(){
+				location.href='<?php echo $this->getUrl('');?>'; return false;
+			},4000)
+		}
+	});
+//	S:VA	Validation Added
+//<![CDATA[
+Validation.add('required-newsletter', 'In order to participate, you must agree to recieve angara newsletters.', function (v,elm) {
+	var inputs = $$('input[name="' + elm.name.replace(/([\\"])/g, '\\$1') + '"]');
+	var error = 1;
+	for(var i=0;i<inputs.length;i++) {
+		if((inputs[i].type == 'checkbox' || inputs[i].type == 'radio') && inputs[i].checked == true) {
+			error = 0;
+		}
+		if(Validation.isOnChange && (inputs[i].type == 'checkbox' || inputs[i].type == 'radio')) {
+			Validation.reset(inputs[i]);
+		}
+	}
+	if( error == 0 ) { return true; } else { return false; }
+});
+
+Validation.add('required-rules', 'In order to participate, you must agree to official rules.', function (v,elm) {
+	var inputs = $$('input[name="' + elm.name.replace(/([\\"])/g, '\\$1') + '"]');
+	var error = 1;
+	for(var i=0;i<inputs.length;i++) {
+		if((inputs[i].type == 'checkbox' || inputs[i].type == 'radio') && inputs[i].checked == true) {
+			error = 0;
+		}
+		if(Validation.isOnChange && (inputs[i].type == 'checkbox' || inputs[i].type == 'radio')) {
+			Validation.reset(inputs[i]);
+		}
+	}
+	if( error == 0 ) { return true; } else { return false; }
+});			
+//]]>
+//	E:VA	Validation Added
+
+//<![CDATA[
+	var referform = new VarienForm('refForm');
+	function refSubmit() {
+		if (referform.validator.validate()) {
+			//	S:VA	Adding wait spinner and disabling the submit button
+			jQuery('#wait-spinner').removeClass('hide');
+			jQuery('#enter_to_win').attr('disabled','disabled');
+			//	E:VA	
+			var form = referform.form;
+			form.submit(referform.form.action);
+		}else{
+			return false;
+		}
+	}
+//]]>
+</script>
+
+
+
+</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="thankyou-popup" style="display:none;">
+<div class="holder">
+	<div class="tp-content">
+		<p style="text-align:center"><span><strong>Thank You</strong></span><br> for your participation in <strong>Angara's</strong> Refer 2 Win Contest.<br>Results will be declared by 10th of next month.<br><a href="<?php echo $this->getUrl('');?>" class="btn">Start Shopping</a></p>
+	</div>
+</div>
+</div>

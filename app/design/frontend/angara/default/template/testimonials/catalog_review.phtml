@@ -1,0 +1,80 @@
+<?php 
+//$review	= $this->getCatalogReviews()->getItems();
+$categoryId = Mage::getSingleton('catalog/session')->getLastVisitedCategoryId();
+if($categoryId){
+	$reviews = $this->getCatalogReviews($categoryId)->getItems();
+}
+
+if(count($review) > 0) {
+	//$category = Mage::registry('current_category'); 
+	if($categoryId){
+		$categoryName = Mage::getModel('catalog/category')->load($categoryId)->getName();
+	}?>
+	<div class="reviews-wrapper">
+  		<div class="review-block-title">Latest Reviews for <?php echo $categoryName; ?></div>
+      	<?php 
+		foreach($review as $testimonial){
+			$pro		=	Mage::getModel('catalog/product');
+			$_product	=	$pro->load($testimonial->getEntityPkValue());
+			$status		=	$_product->getStatus();
+			$skuProduct	=	$_product->getSku();
+			$productID	=	$_product->getID(); ?>
+            <div class="review-block">
+                <div class="reviewed-pro-img">
+                    <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=rr-widget"><img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>"></a>					
+                    <div class="rating-on-catalog">
+					<?php
+					$averageRating = 0;
+					$ratings = array();					
+					foreach($testimonial->getRatingVotes() as $vote) {
+						$ratings[] = $vote->getPercent();
+					}					
+					$averageRating = array_sum($ratings)/count($ratings);
+					if($averageRating): ?>
+						<div class="rating-box">
+							<div class="rating" style="width: <?php echo ceil($averageRating) ; ?>%;"></div>
+						</div>
+					<?php 
+					endif; ?>
+				  	</div>					
+                  	<span class="reviewer-details">
+				  		<?php echo $this->htmlEscape($testimonial->getNickname()) ?>
+                 	</span>					
+				  	<?php /*<span class="testimonial-date">
+				 	<?php 
+					if(strtotime('1 month ago') < strtotime($testimonial->getCreatedAt())) {
+						list($fromDate,$fromTime) = explode(' ',$testimonial->getCreatedAt());
+						$toDateFormat = 'D, F j, Y';
+						$formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($fromDate));
+						echo $formattedDate;
+					}
+					else {
+						echo 'Older than a month';
+					} ?>
+                  	</span>*/?>
+                </div>				
+                <div class="review-txt-block">
+                	<div class="catalog-testimonial-arrow"></div>                	
+					<div>                
+                  		<div class="review-title">
+					  	<?php 
+					  	$testi_title = $this->htmlEscape($testimonial->getTitle());					  	
+						if (strlen($testi_title) > 50) {
+							$testi_title = substr($testi_title, 0, 50);
+							$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+							$testi_title .= '...';
+					  	}
+					  	echo $testi_title;
+					  	$_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL; ?>
+                   		</div>                  
+                 		<div class="clear"></div>
+                  	</div>                  	
+					<p class="review-descreption"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></p>
+                </div>                
+				<div style="clear:both"></div>
+            </div>
+      	<?php 
+		} ?>      
+	</div>
+<?php
+} ?>

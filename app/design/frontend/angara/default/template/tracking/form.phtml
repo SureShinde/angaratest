@@ -1,0 +1,121 @@
+<style>
+.col-main
+{
+	
+	min-height:200px;
+	height:auto!important;
+	height:200px;
+}
+</style>
+<?php
+/**
+ * Customy
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Customy EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.customy.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@customy.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.customy.com/ for more information
+ * or send an email to sales@customy.com
+ *
+ * @copyright  Copyright (c) 2011 Triple Dev Studio (http://www.customy.com/)
+ * @license    http://www.customy.com/LICENSE-1.0.html
+ */
+
+$buttonTitle = $this->__('View Tracking Status');
+
+?>
+<div class="order-tracking-wrapper">
+    <div class="page-title">
+        <h1><?php echo $this->__('Order Tracking'); ?></h1>
+    </div>
+    <div class="content">
+    
+        <div class="order-tracking-top">
+		<p class="sbdescrip"><?php echo $this->__('Enter your email address and order number into the form below to obtain the shipment tracking info for your order.'); ?></p>
+            <div class="order-tracking-top-left">
+                Track Your Order
+            </div>
+            <div class="order-tracking-top-right">
+             <form action="<?php echo $this->getFormUrl() ?>" method="post" id="tracking_form" <?php if ($this->isAjax()) : ?>onsubmit="return false;" <?php endif; ?>>
+                <div class="fieldset tracking-orders-block">                   
+                    <ul class="form-list">
+                        <li>
+                            <label for="tracking_email" class="required"><em>*</em><?php echo $this->__('Email Address:'); ?></label>
+                            <div class="input-box">
+                                <input name="email" id="tracking_email"  title="<?php echo $this->__('Email Address:'); ?>" value="" class="input-text required-entry validate-email track-order-detail" type="text" />
+                            </div>
+                        </li>
+                        <li>
+                            <label for="tracking_email" class="required"><em>*</em><?php echo $this->__('Order Number:'); ?></label>
+                            <div class="input-box">
+                                <input name="order" id="tracking_order"  title="<?php echo $this->__('Order Number:'); ?>" value="" class="input-text required-entry validate-number track-order-detail" type="text" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p id="invalid-order-details" style="color:#EB340A;display:none">Invalid E-mail or Order Number!</p>
+                <div class="buttons-set track-ur-order-btn-block">
+                    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                    <button type="submit" title="<?php echo $buttonTitle ?>" class="button trackorderbtn " onclick="return trackingForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button><div id="loadingmask" style="display: none;">
+            <div class="loader" id="loading-mask-loader">
+                <img src="/skin/frontend/angara/default/images/opc-ajax-loader.gif" alt="<?php echo $this->__('Loading...') ?>" style="vertical-align:middle; margin-right:5px;"/>
+                <?php echo $this->__('Loading...') ?>
+            </div>
+            <div id="loading-mask"></div>
+        </div>
+                </div>
+            </form>
+            </div>
+            <div class="clear"></div>
+       </div>
+        
+        <?php if($this->isAjax()) : ?>
+        <div id="tracking_result"></div> 
+         
+        <?php endif; ?>
+        
+        <script type="text/javascript">
+        //<![CDATA[
+            var trackingForm = new VarienForm('tracking_form');
+            trackingForm.submit = function(button, url) {
+                if (this.validator.validate()) {
+                <?php if ($this->isAjax()) : ?>
+                    var email = $('tracking_email').value;
+                    var orderId = $('tracking_order').value;
+                    $('loadingmask').show();
+                    $('tracking_result').hide();
+                    new Ajax.Updater('tracking_result', '<?php echo $this->getFormUrl() ?>', {
+                        parameters: { 'email': email, 'order': orderId },
+                        onComplete : function(response) {
+							if(response.responseText == 'invalid'){
+								$('loadingmask').hide(); jQuery('#invalid-order-details').show();
+							}
+							else{
+								jQuery('#invalid-order-details').hide();
+								$('loadingmask').hide();
+								$('tracking_result').show();
+								jQuery('.order-tracking-top, .page-title').hide();
+							}
+						}
+                    });
+                <?php else : ?>
+                    this.form.submit();
+                <?php endif; ?>
+                }
+            }.bind(trackingForm);
+        //]]>
+        </script>
+    </div>
+</div>

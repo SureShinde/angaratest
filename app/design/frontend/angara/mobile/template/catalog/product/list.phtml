@@ -1,0 +1,98 @@
+<div class="viewoption"> 
+	<span class="gridview gridviewselected">
+		<span class="viewoptiong">Grid</span>
+	</span> 
+	<span class="listview">
+		<span class="viewoptionl">List</span>
+	</span>
+</div>
+
+<?php
+$_productCollection = $this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output'); 
+
+if(!$_productCollection->count()): ?>
+	<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php 
+else: ?>
+	<div class="category-products"> 
+		<?php echo $this->getToolbarHtml() ; ?>	
+		
+		<div id="catalog-view" class="productgridview">
+			<ul id="list_results">
+			<?php 
+			// Grid Mode 
+			$_collectionSize = $_productCollection->count(); 
+			$_columnCount = 4;
+			$i=0; 
+			
+			foreach ($_productCollection as $_product): 
+				if ($i++%$_columnCount==0 && $i!=1): ?>
+					<li class="partition" style="list-style:none"><a href="#"></a></li>
+				<?php 
+				endif; ?>
+				
+				<li class="proddetails<?php if($i%$_columnCount==0 && $i!=1): ?> last<?php endif; ?>"> 
+					<a href="<?php echo $_product->getProductUrl(); ?>" title="<?php echo $this->stripTags($_product->getName(), null, true); ?>" <?php if($i%2 == 0){?>style="border-right:none;"<?php }?>> 
+						<span class="catproductlist" style="position:relative;">
+							<img class="catalog-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150); ?>" style="display:block" title="<?php echo $_product->getShortDescription(); ?>" alt="<?php echo $_product->getShortDescription() ?>"/>
+							<?php 
+							$currDate = getDate();
+							$currYear = $currDate['year'];
+							
+							$vendorLeadTime = ($_product->getVendorLeadTime() + 4);
+							$arriveByDate = Mage::helper('function')->skipUsaHolidays($vendorLeadTime).' '.$currYear;
+							
+							if($_product->getVendorLeadTime() <= 5){?>
+								<div class="arrive-text-grid">
+									<?php /*?><img class="christmas-gift" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png"><?php */?>
+									<span class="arrive-date-text">Arrives By <?php echo date('n/j', strtotime($arriveByDate)); ?></span>
+								</div>
+							<?php 
+							}
+							
+							if($_product->getIsNewProduct()=='1'): ?>
+							   <span class="new-tag-img"></span>
+							<?php 
+							endif; ?>
+						</span> 
+						
+						<span class="productpricedetails">
+							<h4>
+								<?php 
+								$name = $this->stripTags($_product->getName(), null, true);
+								if(strlen($name) > 35){
+									if(substr($name, 35, 36)!=' '){
+										echo substr($name, 0, 35).'...';
+									} 
+									else{
+										echo substr($name, 0, 34).'...';
+									}
+								}
+								else{
+									echo $name;
+								} ?>
+							</h4>
+							<?php 
+							echo $this->getPriceHtml($_product, true); 
+							
+							if($this->getReviewsSummaryHtml($_product, 'short')): ?>
+								<div class="customerrating-grid"><?php echo $this->getReviewsSummaryHtml($_product, 'short'); ?></div>
+							<?php 
+							endif; ?>						
+						</span>
+					</a> 
+				</li>
+			<?php 
+			endforeach; ?>					
+			</ul>	
+						
+			<div class="clear"></div>
+							
+			<?php /*?><div id="ae_extra_proddetails"></div><?php */?>
+		</div>
+				
+		<?php /*?><div class="toolbar-bottom"><?php echo $this->getToolbarHtml(); ?></div><?php */?>	
+	</div>
+<?php 
+endif; ?>

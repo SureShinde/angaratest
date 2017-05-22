@@ -1,0 +1,196 @@
+<style>
+.mainwrapper {
+	width:958px;
+	margin:0 auto;
+	border: 1px solid #D3D3D3;
+	margin-top:9px;
+	padding-bottom:15px;
+}
+.column-heading {
+	height:30px;
+	font-size:16px;
+	line-height:30px;
+	padding-left:15px;
+	border:none;
+	background-color:#adadad!important;
+	color:#fff!important;
+}
+.pageheading h1 {
+	font-size:22px;
+	font-weight:bold;
+	margin-left:15px;
+	margin-top:15px;
+}
+.feed-block {
+	width:928px;
+	margin:0 15px;
+	border:none
+}
+.cat-label
+{
+font-size:12px;
+font-weight:bold;
+display:block;
+padding:5px 10px;
+cursor:pointer;
+}
+
+.odd .cat-label
+{
+cursor:default;
+}
+
+td, th
+{
+border:none!important;
+}
+
+.cat-descrip
+{
+font-size:12px;
+padding:5px 10px;
+display:block;
+margin-bottom:10px;
+line-height:17px;
+}
+#rss-table-category .even
+{
+background-color:#eeeeee;
+border:none;
+}
+
+.moreLink
+{
+position:relative;
+}
+.cat-feed-lists
+{
+padding:0 10px 7px 10px;
+margin-left:10px;
+background:url("/skin/frontend/angara/default/images/bullot-point.png") no-repeat;
+}
+.getfeed
+{
+padding-top:10px!important;
+background-color:#e9e9e9;
+}
+.odd .getfeed
+{
+background-color:#f1f1f1;
+}
+
+</style>
+<div class="mainwrapper">
+  <div class="pageheading">
+    <h1><?php echo $this->__('RSS Feeds') ?></h1>
+  </div>
+<?php
+    $_categories = $this->getRssCatalogFeeds();
+    $_misc = $this->getRssMiscFeeds();
+?>
+<?php if ($_categories || $_misc): ?>
+<?php if($_misc): ?>
+<table class="data-table rss-table" id="rss-table-misc">
+    <col />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th colspan="2"><?php echo $this->__('Miscellaneous Feeds') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_misc as $_feed): ?>
+        <tr>
+            <td><?php echo $_feed->getLabel() ?></td>
+            <td><a href="<?php echo $_feed->getUrl() ?>" class="link-rss"><?php echo $this->__('Get Feed'); ?></a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif; ?>
+<?php if ($_categories && $_misc): ?>
+<br />
+<?php endif ?>
+<?php if($_categories): 
+//echo '<pre>'; print_r($_categories); die;?>
+<table class="data-table rss-table feed-block" id="rss-table-category">   
+    <thead>
+        <tr>
+            <th colspan="2"  class="column-heading"><?php echo $this->__('Category Feeds') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($_categories as $_category): 
+		$categoryData				=	Mage::getModel('catalog/category')->load($_category->getCid());
+		$categoryMetaDescription	=	$categoryData->getMetaDescription();
+		
+		//	Load sub category data
+		$CatArray2			= 		$categoryData->getChildrenCategories()->toArray();// checking for sub categories(level2)
+		$CatArray2			= 		$categoryData->getChildrenCategories();	//	Angara breadcrumb issue resolved
+		?>
+		<tr>
+			<?php if(count($CatArray2) > 0) { // checking sub category data(level2)
+				//echo '<pre>';print_r($CatArray2); die;?>
+			<td>
+            <div id="moreCategory_<?php echo $_category->getCid();?>" class="moreLink cat-label"><span>+ </span><?php echo $_category->getLabel()?> </div>
+           <div  class="cat-descrip"><?php echo $categoryMetaDescription;?></div>
+			  <?php foreach($CatArray2 as $key2) {
+					//echo '<pre>';print_r($key2); die;
+					$categoryCollection2 				= 		Mage::getModel('catalog/category')->load($key2['entity_id']);	// getting level2 cat data
+					//$CatArray3							= 		$categoryCollection2->getChildrenCategories()->toArray();		// checking for sub categories(level3)
+				   ?>
+				  <?php // Second Level Sub Category ?>
+                  <div class="moreCategory_<?php echo $_category->getCid();?> cat-feed-lists" style="display:none;">
+                      <div style="width:400px"><?php echo $categoryCollection2->getName(); // showing parent category data(level1) ?><a href="<?php echo Mage::getUrl().'rss/catalog/category/cid/'.$categoryCollection2->getID().'/store_id/1/';?>" class="link-rss" style="float:right;"><?php echo $this->__('Get Feed'); ?></a></div>
+                      
+                      <!--<td><?php echo $categoryCollection2->getName()?> <br /><?php echo $categoryCollection2->getMetaDescription();?></td>-->
+                     
+                  </div>
+				  
+				  <?php 
+					}	// end foreach CatArray2	?></td>
+			<?php }else{ ?>
+                <td>
+				<div class="cat-label"><?php echo $_category->getLabel()?></div>
+				<div  class="cat-descrip"><?php echo $categoryMetaDescription;?></div>
+                </td>
+			<?php } ?>
+				<td  class="getfeed"><a href="<?php echo $_category->getUrl() ?>" class="link-rss"><?php echo $this->__('Get Feed'); ?></a></td>
+                
+             
+        
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif; ?>
+<script type="text/javascript">
+//<![CDATA[
+    decorateTable('rss-table-misc');
+    decorateTable('rss-table-category');
+//]]>
+</script>
+<?php else: ?>
+    <p><?php echo $this->__('There are no Rss Feeds'); ?></p>
+<?php endif; ?>
+</div>
+
+<!--Added by Vaseem for plus minus functionality-->
+<script type="text/javascript">
+jQuery.noConflict()
+jQuery(document).ready(function(){
+	jQuery(".moreLink").click(function(){
+		var clickedId	=	jQuery(this).attr('id');
+		//alert(clickedId);
+		jQuery("."+clickedId).slideToggle(500);
+		if (jQuery(this).children('span').text() == "+ "){
+			jQuery(this).children('span').html("- ")
+		}else{
+			jQuery(this).children('span').text("+ ")
+		}
+	})
+})
+</script>
+
+
+

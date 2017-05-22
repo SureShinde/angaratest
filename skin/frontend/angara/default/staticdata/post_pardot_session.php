@@ -1,0 +1,9 @@
+<?php 
+session_start();
+if(isset($_REQUEST['email'])){
+	$_SESSION['newsletteremail']=$_REQUEST['email'];
+}
+else{
+	$_SESSION['newsletteremail']='';
+}
+?>

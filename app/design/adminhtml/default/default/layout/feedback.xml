@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <feedback_adminhtml_feedback_index>
+	<reference name="content">
+	  <block type="feedback/adminhtml_feedback" name="feedback" />
+	</reference>
+  </feedback_adminhtml_feedback_index>
+  
+  <feedback_adminhtml_category_index>
+	<reference name="content">
+	  <block type="feedback/adminhtml_category" name="category" />
+	</reference>
+  </feedback_adminhtml_category_index>
+  
+</layout>

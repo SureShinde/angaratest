@@ -1,0 +1,82 @@
+<div class="text-center fontsize-type5 max-margin-bottom"><strong>OR</strong></div>
+<div class="block-sub-heading min-padding-bottom">Name of the Bank & Authorization Code:</div>
+<div class="max-margin-bottom">If you do not have a copy of the credit card used and copy of your state (or country) issued identification, the next best option is to send us the <strong>Name of the Bank</strong> associated with the Credit Card used and <strong>Authorization Code</strong>.<br>
+  (Authorization Code or Transaction ID is the code provided by the bank when you call your bank linked to your credit card used for this transaction)</div>
+<div class="padding-type-16 showcase-bg-light max-margin-bottom">
+  <div class="row">
+    <form name="bank-detail-new-form" id="bank-detail-new-form">
+      <div class="col-sm-3">
+        <input type="text" name="bankname" id="bankname" class="input-text required-entry low-margin-bottom" placeholder="Bank Name"  />
+      </div>
+      <div class="col-sm-3">
+        <input type="text" name="transactionid" id="transactionid" class="input-text required-entry low-margin-bottom" placeholder="Transaction ID" />
+        <input type="hidden" name="ord" value="<?php echo $this->getRequest()->getParam('key');?>" />
+      </div>
+      <div class="col-sm-2 fc-module">
+        <button type="submit" title="<?php echo $this->__('Submit Request') ?>" class="btn btn-block btn-primary" id="btn-bank-detail-upload"><?php echo $this->__('Submit') ?></button>
+      </div>
+      <!--<span id="formLoader" style="display:none;">&nbsp;</span>-->
+    </form>
+  </div>
+</div>
+<div class="overlay" id="overlay-bank-detail" style="display:none;"></div>
+<div class="box" id="boxbankdetail"> <a class="boxclose" id="boxclosebankdetail"></a>
+  <h1>You cannot upload more than one data</h1>
+  <!-- <p>
+  Here comes a very important message for your user.
+  Turn this window off by clicking the cross.
+ </p>--> 
+</div>
+<br />
+<?php
+$baseUrl		=	Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+?>
+<script type="text/javascript">
+//<![CDATA[
+var formId = 'bank-detail-new-form';
+    var myForm = new VarienForm(formId, true);
+	var postUrl = '<?php echo $baseUrl."additionalinformation/index/savebankdetail"; ?>';
+    function doAjax() {
+        if (myForm.validator.validate()) {
+            new Ajax.Updater(
+                { success:'formSuccess' }, postUrl, {
+                    method:'post',
+                    asynchronous:true,
+                    evalScripts:false,
+                    onComplete:function(request, json) {
+                        //Element.hide(formId);
+						//Element.show('formSuccess');
+						if(request.responseText=='bank detail saved'){
+							location.href="<?php echo $baseUrl."additionalinformation/index/thankyou?key=".$this->getRequest()->getParam('key');?>";
+						}
+						else if(request.responseText=='You cannot upload more than one data'){
+							loadPopUpBankDetail();  
+						}
+                    },
+                    onLoading:function(request, json){
+                        Element.show('formLoader');
+                    },
+                    parameters: $(formId).serialize(true),
+                }
+            );
+        }
+    }
+    
+    new Event.observe(formId, 'submit', function(e){
+		jQuery('#btn-bank-detail-upload').fadeTo("slow",0.15);
+		jQuery('#btn-bank-detail-upload').attr('disabled', 'disabled');
+        e.stop();
+        doAjax();
+    });
+//]]>
+	function loadPopUpBankDetail() {
+        jQuery('#overlay-bank-detail').fadeIn('fast',function(){
+            jQuery('#boxbankdetail').animate({'top':'210px'},500);
+        });
+		jQuery('#boxclosebankdetail').click(function(){
+			jQuery('#boxbankdetail').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-bank-detail').fadeOut('fast');
+			});
+		});
+	}
+</script>

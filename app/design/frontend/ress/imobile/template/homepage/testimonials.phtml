@@ -1,0 +1,55 @@
+<?php 
+$reviews	= $this->getReviews()->getItems();
+if( count($reviews) > 4){ ?>
+	<div class="full-width review-slider rs">
+	<div class="slides-homepage mT10">	
+	<?php 
+    #todo don't load complete product each time. store the product image with review itself.
+    foreach($reviews as $review){
+        $_product	= Mage::getModel('catalog/product')->load($review->getEntityPkValue()); ?>
+        <div>
+            <span class="image half-width">
+                <a href="<?php echo $_product->getProductUrl();?>?icid=valentinepage|cr-widget|01282017" title="<?php echo $this->htmlEscape($_product->getName()); ?>"><img src="<?php echo str_replace('www.','cdn.',Mage::helper('catalog/image')->init($_product, 'image')->resize(175)->setQuality(80)); ?>" title="<?php echo $this->htmlEscape($_product->getName()); ?>" alt="<?php echo $this->htmlEscape($_product->getName()); ?>"/></a>
+            </span>
+            
+            <span class="half-width">
+                <?php //echo Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);?>
+                <span class="review-title center-align mB10"><strong><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getTitle()), null, true), $length = 50, $etc = '...');?></strong></span>
+                <span class="pro-rating center-align mB10">
+                    <span class="rating-box">
+					<?php 
+                    $_percentRating = 0;
+                    foreach($review->getRatingVotes() as $_vote){
+                        $_percentRating = $_percentRating + $_vote->getPercent();
+                    }
+                    $_percentRating = $_percentRating / count($review->getRatingVotes()); ?>		
+                        <span style="width:<?php echo $_percentRating; ?>%;" class="rating"></span>
+                    </span> 
+                    <span class="rating-num"><strong><?php printf("%.1f",($_vote->getPercent() * .05));?></strong></span>
+                </span>
+                <span class="customer-name center-align mB10">
+                    <i>- <?php echo $this->htmlEscape($review->getNickname()); ?> -</i>
+                </span>                
+            </span>
+            <span class="full-width review center-align">
+                <?php echo nl2br(Mage::helper('function')->truncateOnWord($this->stripTags($this->htmlEscape($review->getDetail()), null, true),150)); ?>
+                <?php //echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getDetail()), null, true), $length = 380, $etc = '...');?>
+            </span>
+        </div>
+    <?php 
+	} ?>
+</div>
+</div>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('.slides-homepage').slick({
+			dots	: 	false,
+			arrows	: 	true,
+			autoplay: 	true,
+			autoplayspeed: 2000,
+			adaptiveHeight: true
+		});
+	});
+</script>
+<?php 
+} ?>

@@ -1,0 +1,122 @@
+<?php
+/**
+ * Customy
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Customy EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.customy.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@customy.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.customy.com/ for more information
+ * or send an email to sales@customy.com
+ *
+ * @copyright  Copyright (c) 2011 Triple Dev Studio (http://www.customy.com/)
+ * @license    http://www.customy.com/LICENSE-1.0.html
+ */
+
+$buttonTitle = $this->__('View Order Status');?>
+<div class="container showcase-bg-white max-padding-top">
+    <div id="tracking_form" class="row high-margin-top max-margin-bottom">
+    	<div class="col-xs-12 visible-xs max-margin-bottom">
+            <div class="text-center low-margin-bottom" style="font-size:30px;"><strong>Track Your Order</strong></div>
+        </div>       
+		<div class="col-sm-6 hidden-xs max-margin-top max-padding-top">
+            <div class="text-center"><i class="fa fa-truck" style="font-size:100px;"></i></div>
+            <div class="text-center" style="font-size:40px;"><strong>Track Your Order</strong></div>
+            <div class="text-center">
+            	<p><?php echo $this->__('Enter your email address and order number into the form below to obtain the shipment tracking info for your order.'); ?></p>
+        	</div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <form action="<?php echo $this->getFormUrl() ?>" method="post" id="tracking_form" <?php if ($this->isAjax()) : ?>onsubmit="return false;" <?php endif; ?>>
+                <div class="showcase-bg-light padding-type-16">
+                    <div class="content">                   
+                        <ul class="form-list">
+                            <li>
+                                <label for="tracking_email" class="required"><?php echo $this->__('Email Address'); ?><em style="font-style:normal">*</em></label>
+                                <div class="input-box">
+                                    <input name="email" id="tracking_email"  title="<?php echo $this->__('Email Address:'); ?>" value="<?php echo $this->htmlEscape($this->helper('tracking')->getUserEmail()) ?>" class="input-text required-entry validate-email track-order-detail" type="text" />
+                                </div>
+                            </li>
+                            <li>
+                                <label for="tracking_email" class="required"><?php echo $this->__('Order Number'); ?><em style="font-style:normal">*</em></label>
+                                <div class="input-box">
+                                    <input name="order" id="tracking_order"  title="<?php echo $this->__('Order Number:'); ?>" value="<?php echo Mage::app()->getRequest()->getParam('order_id'); ?>" class="input-text required-entry validate-number track-order-detail" type="text" />
+                                </div>
+                            </li>
+                        </ul>							
+                    </div>
+                    <p id="invalid-order-details" style="color:#EB340A;display:none">Invalid E-mail or Order Number!</p>
+                    <div class="buttons-set">
+                        <span style="color:#b94a48; line-height:35px;">* Required Fields</span>
+						<button type="submit" title="<?php echo $buttonTitle ?>" class="button trackorderbtn " onclick="return trackingForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+                        <div id="loadingmask" style="display: none;">
+                            <div class="loader" id="loading-mask-loader">
+                                <img src="/skin/frontend/angara/default/images/opc-ajax-loader.gif" alt="<?php echo $this->__('Loading...') ?>" style="vertical-align:middle; margin-right:5px;"/>
+                                <?php echo $this->__('Loading...') ?>
+                            </div>
+                            <div id="loading-mask"></div>
+                        </div>
+                    </div>
+                </div>	
+            </form>
+        </div>		
+    </div>
+    <?php 
+	if($this->isAjax()) : ?>
+		<div id="tracking_result" class="low-margin-top max-margin-bottom hide"></div> 
+	<?php 
+	endif; ?>
+	<script type="text/javascript">
+	//<![CDATA[
+	var trackingForm = new VarienForm('tracking_form');
+	trackingForm.submit = function(button, url) {
+		if (this.validator.validate()) {
+		<?php if ($this->isAjax()) : ?>
+			var email = $('tracking_email').value;
+			var orderId = $('tracking_order').value;
+			$('loadingmask').show();
+			new Ajax.Updater('tracking_result', '<?php echo $this->getFormUrl() ?>', {
+				parameters: { 'email': email, 'order': orderId },
+				onComplete : function(response) {
+					if(response.responseText == 'invalid'){
+						$('loadingmask').hide(); jQuery('#invalid-order-details').show();
+					}
+					else{
+						jQuery('#invalid-order-details').hide();
+						$('loadingmask').hide();
+						jQuery('#tracking_form').hide();
+						jQuery('#tracking_result').removeClass('hide');
+						jQuery('.order-tracking-top, .page-title').hide();
+						jQuery('.o-status ul li.sts .sts-title').click(function(){
+							jQuery(this).parents("li").siblings("li").find(".status-detail").css("display","none");
+							jQuery(this).parents("li").siblings("li").find(".arrow").css("display","none");
+							jQuery(this).parents("li").find(".status-detail").css("display","block");
+							jQuery(this).parents("li").find(".arrow").css("display","block");
+						});
+						jQuery(function(){
+							var ht = jQuery("li.active .status-detail").height();
+							var sdh = 80+ht+"px";
+							jQuery("ul.high-min-hight").css("min-height",sdh);
+						});
+					}
+				}
+			});
+		<?php else : ?>
+			this.form.submit();
+		<?php endif; ?>
+		}
+	}.bind(trackingForm);
+	//]]>
+	</script>
+</div>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Atwix_Recentlyviewed>
+            <version>0.1.0</version>
+        </Atwix_Recentlyviewed>
+    </modules>
+    <global>
+        <blocks>
+            <recentlyviewed>
+                <class>Atwix_Recentlyviewed_Block</class>
+            </recentlyviewed>
+        </blocks>
+        <helpers>
+			<recentlyviewed>
+				<class>Atwix_Recentlyviewed_Helper</class>
+			</recentlyviewed>
+		</helpers>
+    </global>
+
+    <frontend>
+        <layout>
+			<updates>
+				<recentlyviewed>
+					<file>recentlyviewed.xml</file>
+				</recentlyviewed>
+			</updates>
+		</layout>
+        <routers>
+          <recentlyviewed>
+              <use>standard</use>
+              <args>
+                  <module>Atwix_Recentlyviewed</module>
+                  <frontName>rvi_panelstate</frontName>
+              </args>
+        </recentlyviewed>
+    </routers>
+	<translate>
+		<modules>
+			<recentlyviewed>
+				<files>
+					<default>Atwix_recentlyviewed.csv</default>
+				</files>
+			</recentlyviewed>
+		</modules>
+	</translate>
+    </frontend>
+
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<general>
+											<title>Atwix - Recently Viewed Items Section</title>
+										</general>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+
+	<default>
+		<recentlyviewed>
+			<general>
+				<enablemodule>1</enablemodule>
+				<itemscount>3</itemscount>
+                <enableextraspace>1</enableextraspace>
+			</general>
+		</recentlyviewed>
+	</default>
+
+</config>

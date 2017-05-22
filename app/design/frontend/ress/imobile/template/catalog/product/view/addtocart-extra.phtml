@@ -1,0 +1,76 @@
+<?php
+/**
+ * Magento
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$_product = $this->getProduct();
+$buttonTitle = $this->__('Add to Cart');
+
+if($_product->isSaleable()): ?>
+	<div class="row">
+		<div class="col-xs-6">
+            <div class="add-to-cart-extra">
+            <?php 
+			if(!$_product->isGrouped()): ?>
+                <input type="hidden" name="qty" id="qty" maxlength="12" value="<?php echo ($qty = $this->getProductDefaultQty()*1)?$qty:1; ?>" />
+                <button type="button" id="addtocart-btn-extra" title="<?php echo $buttonTitle; ?>"  class="btn btn-cart add-to-cart-extra btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this); addCartClicked();"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle; ?></button>
+                <?php 
+				echo $this->getChildHtml('', true, true);
+			else: ?>
+                <button type="button" id="addtocart-btn-extra" title="<?php echo $buttonTitle; ?>"  class="btn-cart add-to-cart-extra btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this); addCartClicked();"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle; ?></button>
+                <?php 
+				echo $this->getChildHtml('', true, true);
+			endif; ?>
+            </div>
+        </div>
+        <?php
+        /*if($_product->isConfigurable()){?>
+            <div class="col-xs-6" id="customize-product">
+                <button type="button" title="Customize" class="btn btn-dark-brown btn-block fontsize-type5 no-shadow">CUSTOMIZE</button>
+            </div>
+        <?php
+        }*/?>
+    </div>
+<?php 
+endif; ?>
+<?php /* Code for Notify me Out of Stock */ ?>
+<?php /* Asheesh:Start */ ?>
+<?php $_storeId = Mage::app()->getStore()->getId(); ?>
+<?php $_isActive = Mage::getStoreConfig('outofstocksubscription/mail/active', $_storeId); ?>
+<?php if(!$_product->isSaleable() && $_isActive): ?>	
+	<style>.add-to-box{border-top:15px solid #f5f5f1}</style>
+	<?php /*<div class="row full-width notify-box pB5">
+		<div class="sold-out-text full-width text-green pL10 pR10 pT10 pB10">
+			<?php echo 'We can customize this item for you. For further assistance, give us a call on 1-888-926-4272';?>
+		</div>
+		<div class="full-width pull-left pL10 pR10 pB10">
+			<span class="text-bold sold-out">Sold Out</span><br>
+			<span class="oos">This item is currently out of stock</span>
+		</div>
+	</div>
+	<div class="row notifyme">
+        <div class="col-xs-6">
+			<div class="add-to-cart">
+				<input type="text" placeholder="Enter email to get notified" class="t1 input-text validate-email required-entry" id="subscription_email-extra" title="Enter email to get notified" name="subscription_email">
+				<button class="btn btn-cart btn-primary btn-block fontsize-type5 no-shadow" type="submit"><?php echo $this->__('Notify Me') ?></button>
+			</div>
+		</div>
+	</div>*/?>
+	<div class="row soldoutbox-extra">
+        <div class="col-xs-6">
+			<div class="add-to-cart-extra">
+				<button style="display: inline-block; border: none; opacity: 1; color: #ffffff; width: 100%; line-height: 43px; border-top: 1px solid #fa505a; font-size: 20px; background:#fd7880;" type="button"><?php echo $this->__('Sold Out') ?></button>
+			</div>
+		</div>
+	</div>
+	<style>
+		.messages {
+			display: block !important;			
+		}
+	</style>
+<?php endif; ?>
+<?php /* Asheesh:End */ ?>

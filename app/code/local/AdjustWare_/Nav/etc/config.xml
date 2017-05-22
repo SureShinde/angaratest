@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AdjustWare_Nav>
+            <version>2.1.1</version>
+        </AdjustWare_Nav>
+    </modules>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <AdjustWare_Nav>
+                    <files>
+                        <default>AdjustWare_Nav.csv</default>
+                    </files>
+                </AdjustWare_Nav>
+            </modules>
+        </translate>
+    </adminhtml> 
+    <frontend>
+        <routers>
+            <adjnav>
+                <use>standard</use>
+                <args>
+                    <module>AdjustWare_Nav</module>
+                    <frontName>adjnav</frontName>
+                </args>
+            </adjnav>
+        </routers>  
+            
+        <translate>
+            <modules>
+                <AdjustWare_Nav>
+                    <files>
+                        <default>AdjustWare_Nav.csv</default>
+                    </files>
+                </AdjustWare_Nav>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <adjnav>
+                    <file>adjnav.xml</file>
+                </adjnav>
+            </updates>
+        </layout>
+    </frontend> 
+   
+    <global>
+        <models>
+            <adjnav>
+                <class>AdjustWare_Nav_Model</class>
+            </adjnav>
+        </models>     
+    
+        <blocks>
+            <adjnav>
+                <class>AdjustWare_Nav_Block</class>
+            </adjnav>
+            <catalog>
+                <rewrite>
+        			<category_view>AdjustWare_Nav_Block_Rewrite_FrontCatalogCategoryView</category_view>
+        		</rewrite> 
+            </catalog>  
+            <catalog>
+                <rewrite>
+                        <layer_view>AdjustWare_Nav_Block_Rewrite_FrontCatalogLayerView</layer_view>
+                </rewrite>
+            </catalog>
+            <catalogsearch>
+                <rewrite>
+        			<result>AdjustWare_Nav_Block_Rewrite_FrontCatalogsearchResult</result>
+        		</rewrite> 
+            </catalogsearch>            
+        </blocks>
+        <helpers>
+            <adjnav>
+                <class>AdjustWare_Nav_Helper</class>
+            </adjnav>
+        </helpers>
+        <resources>
+            <adjnav_setup>
+                <setup>
+                    <module>AdjustWare_Nav</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </adjnav_setup>
+            <adjnav_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </adjnav_write>
+            <adjnav_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </adjnav_read>
+        </resources>
+    </global> 
+
+    <default>
+        <design>
+            <adjnav>
+                <cat_style>breadcrumbs</cat_style>
+                <price_style>default</price_style>
+                <remove_links>0</remove_links>
+                <reset_filters>1</reset_filters>
+            </adjnav>  
+        </design>
+    </default> 
+</config>
+<!--
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/code/local/AdjustWare/Nav/etc/config.data.xml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+-->

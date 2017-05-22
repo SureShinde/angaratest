@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Offers>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Angara_Offers>
+  </modules>
+</config>

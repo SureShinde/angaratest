@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_EstimateShipping>
+            <version>0.1.0</version>
+        </Angara_EstimateShipping>
+    </modules>
+    <global>
+        <blocks>
+            <estimateShipping>
+                <class>Angara_EstimateShipping_Block</class>
+            </estimateShipping>
+        </blocks>
+        <helpers>
+			<estimateShipping>
+				<class>Angara_EstimateShipping_Helper</class>
+			</estimateShipping>
+		</helpers>
+		<models>
+            <estimateShipping>
+                <class>Angara_EstimateShipping_Model</class>
+            </estimateShipping>
+        </models>
+    </global>
+
+    <frontend>
+        <layout>
+			<updates>
+				<estimateShipping>
+					<file>estimateShipping.xml</file>
+				</estimateShipping>
+			</updates>
+		</layout>
+        <routers>
+          <estimateShipping>
+              <use>standard</use>
+              <args>
+                  <module>Angara_EstimateShipping</module>
+                  <frontName>estimateShipping</frontName>
+              </args>
+        </estimateShipping>
+    </routers>
+    </frontend>
+</config>

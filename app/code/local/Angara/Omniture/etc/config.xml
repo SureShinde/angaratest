@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_Omniture>
+			<version>0.0.4</version>
+		</Angara_Omniture>
+	</modules>
+	
+	<frontend>
+        <routers>
+            <omniture>
+                <use>standard</use>
+                <args>
+                    <module>Angara_Omniture</module>
+                    <frontName>omniture</frontName>
+                </args>
+            </omniture>
+        </routers>
+        <layout>
+            <updates>
+                <omniture>
+                    <file>omniture.xml</file>
+                </omniture>
+            </updates>
+        </layout>
+    </frontend>
+	
+	<global>
+		
+		<events>
+			<wishlist_add_product>
+				<observers>
+					<omniture_wishlistAddProduct>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>wishlistAddProduct</method>
+					</omniture_wishlistAddProduct>
+				</observers>
+			</wishlist_add_product>
+		
+			<checkout_cart_product_add_after>
+				<observers>
+					<omniture_checkoutCartProductAddAfter>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>checkoutCartProductAddAfter</method>
+					</omniture_checkoutCartProductAddAfter>
+				</observers>
+			</checkout_cart_product_add_after>
+				
+			<checkout_cart_remove_item_before>
+				<observers>
+					<omniture_checkoutCartRemoveItemBefore>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>checkoutCartRemoveItemBefore</method>
+					</omniture_checkoutCartRemoveItemBefore>
+				</observers>
+			</checkout_cart_remove_item_before>
+			
+			<checkout_cart_remove_item_after>
+				<observers>
+					<omniture_checkoutCartRemoveItemAfter>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>checkoutCartRemoveItemAfter</method>
+					</omniture_checkoutCartRemoveItemAfter>
+				</observers>
+			</checkout_cart_remove_item_after>
+			
+			<checkout_cart_update_items_after>
+				<observers>
+					<omniture_checkoutCartUpdateItemsAfter>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>checkoutCartUpdateItemsAfter</method>
+					</omniture_checkoutCartUpdateItemsAfter>
+				</observers>
+			</checkout_cart_update_items_after>
+			
+			<checkout_cart_add_product_complete>
+				<observers>
+				</observers>
+			</checkout_cart_add_product_complete>
+			
+			<sales_quote_add_item>
+				<observers>
+				</observers>
+			</sales_quote_add_item>-->
+			
+			<customer_login>
+				<observers>
+					<angara_customerLogin>
+						<type>singleton</type>
+						<class>Angara_Omniture_Model_Sitecatalyst_Observer</class>
+						<method>customerLogin</method>
+					</angara_customerLogin>
+				</observers>
+			</customer_login>
+			
+		</events>
+		
+		<blocks>
+			<omniture>
+				<class>Angara_Omniture_Block</class>
+			</omniture>
+		</blocks>
+		<models>
+            <omniture>
+                <class>Angara_Omniture_Model</class>
+                <resourceModel>omniture_mysql4</resourceModel>
+            </omniture>
+            <!--<omniture_mysql4>
+                <class>Angara_Omniture_Model_Mysql4</class>
+                <entities>
+                </entities>
+            </omniture_mysql4>-->
+        </models>
+		
+		<!--<resources>
+			<omniture_setup>
+				<setup>
+					<module>Angara_Omniture</module>
+					<class>Angara_Omniture_Model_Resource_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</omniture_setup>
+		</resources>-->
+	</global>
+</config>

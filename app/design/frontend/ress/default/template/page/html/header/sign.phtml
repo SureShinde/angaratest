@@ -1,0 +1,9 @@
+<?php 
+	if (Mage::getSingleton('customer/session')->isLoggedIn()){
+		$accountUrl = Mage::helper('customer')->getAccountUrl();
+	}
+	else{
+		$loginUrl = Mage::helper('customer')->getLoginUrl();
+	}
+?>
+<li><?php if(isset($accountUrl)):?><a rel="nofollow" href="<?php echo $accountUrl;?>" class="fontsize-type4 color555"><i class="fa fa-user fa-fw color888"></i>My Account</a><?php else:?><a rel="nofollow" href="<?php echo $loginUrl;?>" class="fontsize-type4 color555"><i class="fa fa-user fa-fw color888"></i>Log In</a><?php endif;?></li>

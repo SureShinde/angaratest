@@ -1,0 +1,95 @@
+<!--@subject  {{var store.getFrontendName()}}: Invoice for Order # {{var order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$billing.getName()":"Guest Customer Name",
+"var store.getFrontendName()":"Store Name",
+"var invoice.increment_id":"Invoice Id",
+"var order.increment_id":"Order Id",
+"var order.billing_address.format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.shipping_address.format('html')":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"layout handle=\"sales_email_order_invoice_items\" invoice=$invoice order=$order":"Invoice Items Grid",
+"var comment":"Invoice Comment"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body>
+<center>
+  <table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td valign="top" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td valign="top"  colspan="2" style="line-height:20px; padding-bottom:15px; "><strong style="font-size:20px; line-height:30px;"> Dear {{htmlescape var=$billing.getName()}},</strong><br>
+              Thank you for shopping with {{var store.getFrontendName()}}.
+              We hope you love your Angara jewelry as much as we do!
+              If you need anything else, or have any questions, give us a call on {{config path='general/store_information/phone'}} or write an e-mail to <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>. </td>
+          </tr>
+          <tr>
+            <td valign="top"  style="font-size:25px; padding-bottom:10px;	font-weight:bold;text-align:right;" colspan="2">Invoice</td>
+          </tr>
+          <tr>
+            <td valign="top" align="left">Angara Inc.<br />
+              550 S. Hill St.<br />
+              Suite 1015<br />
+              Los Angeles, CA 90013</td>
+            <td valign="top" align="right"><table width="198" cellspacing="0" cellpadding="0"  style="border:1px solid #333; border-right:none;">
+                <tr>
+                  <th scope="col" width="80" style="padding:8px 0 8px 15px; text-align:center;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Date</th>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:center;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;border-right:1px solid #333; ">Order #</th>
+                </tr>
+                <tr>
+                  <td  align="center" style="border-right:1px solid #333; font:13px Arial, Helvetica, sans-serif; padding:8px; color:#000;">{{var orderDate}}</td>
+                  <td class="default-space" align="center" style=" font:13px Arial, Helvetica, sans-serif; padding:8px; color:#000;border-right:1px solid #333;">{{var order.increment_id}}</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" style="padding-top:20px;"><table width="350" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #333;">
+                <tr>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;">Bill To</th>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" style="padding:5px 0 0 15px; text-align:left; height:120px;font:13px/20px Arial, Helvetica, sans-serif;
+	width:200px;" class="editarea">{{var order.billing_address.format('html')}}</td>
+                </tr>
+              </table></td>           
+            {{depend order.getIsNotVirtual()}}
+            <td valign="top" align="right"  style="padding-top:20px;"><table width="348" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #333;border-right:0px solid #333;">
+                <tr>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;border-right:1px solid #333;">Ship To</th>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" style="padding:5px 0  0 15px; text-align:left; height:120px;font:13px/20px Arial, Helvetica, sans-serif;
+	width:200px;border-right:1px solid #333;" class="editarea">{{var order.shipping_address.format('html')}}</td>
+                </tr>
+              </table></td>        
+            {{/depend}} </tr>
+          <tr>
+            <td valign="top" colspan="2" align="right"  style="padding-top:20px;"><table width="253"  border="0" cellspacing="0" cellpadding="0" class="section" style="border:1px solid #333; border-bottom:none;border-right:0px solid #333;" >
+                <tr>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:center;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;border-right:1px solid #333;">Ship By</th>
+                </tr>
+                <tr>
+                  <td valign="middle" align="center" style="padding:10px;border-right:1px solid #333;" class="edit">{{var order.shipping_description}}&nbsp;</td>
+                </tr>
+              </table></td>
+          </tr>
+          <!--items.phtml file code starts--> 
+          {{layout area="frontend" handle="sales_email_order_invoice_items" invoice=$invoice order=$order}} 
+          <!--items.phtml file code ends-->
+          <p style="font-size:12px; margin:0 10px 10px 0;">{{var comment}}</p>
+          <tr>
+            <td align="right" width="150" colspan="2" style="padding:15px 0 15px; font:13px/20px Arial, Helvetica, sans-serif;">Best Regards,<br>
+              The Angara Service Team <br>
+              {{config path='general/store_information/phone'}}<br></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+</center>
+</body>

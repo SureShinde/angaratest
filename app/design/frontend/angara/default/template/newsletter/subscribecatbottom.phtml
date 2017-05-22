@@ -1,0 +1,27 @@
+<?php $newslettertext = "Enter Your Email Address"; ?>
+<div class="block block-layered-nav adj-nav">
+  <dl>
+    <div id="mailcapturecat" class="popupboxnew"></div>
+    <dd class="even" style="padding-left:10px; width:181px;">
+      <ol>
+        <div class="offertxt" style="font-weight:normal;">Get an <strong>Instant Discount Coupon</strong> for <strong><?php echo Mage::registry('current_category')->getName(); ?></strong> directly in your inbox!</div>
+        <div style="clear:both"></div>
+        <div class="block block-subscribe">
+          <form action="http://www2.angara.com/l/17452/2012-11-19/26qd<?php //echo $this->getFormActionUrl() ?>" method="post" id="frm-newsletter-validate-cat">
+            <div style="clear:both"></div>
+            <div class="catemailcaptureinput">              
+              <input type="text" name="email" id="newsletter0233" value="<?php echo $newslettertext; ?>" class="input-text required-entry validate-email catcaptureinput" onfocus="if(this.value=='<?php echo $newslettertext; ?>') this.value = ''" onblur="if(this.value=='') this.value = '<?php echo $newslettertext; ?>'"  />
+              <input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+              <input type="hidden" name="newslettertype" value="02-Catalog-Ruby-Pendant-Contest" />
+            </div>
+            <div class="catcapturebtn">
+              <button type="submit">Save More</button>
+            </div>
+            <div class="catrespect" style="width:130px;"><a href="/privacy-and-security.html" target="_blank" style="padding:0; float:none;">We respect your privacy.</a></div>
+            <div style="clear:both"></div>
+          </form>          	
+        </div>
+      </ol>
+    </dd>
+  </dl>
+</div>

@@ -1,0 +1,118 @@
+<?php $productCollection = $this->getLoadedProductCollection();?>
+<section class="container valentine-top20">
+	<div class="valentine-top20-head">
+		<div class="banner-text col-md-3 col-md-offset-1">
+		<h1> TOP TWENTY GIFTS</h1> <p>Presenting our top 20 best-selling and unique designs. The choice in stone quality, metal type and total carat weight makes it easy for you to select a piece that suits your requirements.</p>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<?php 
+	if($productCollection){
+		$i=0;
+		$_product = Mage::getModel('catalog/product');
+		foreach($productCollection as $_product){
+			$i++;
+			$_product->load($_product->getId());?>
+			<div class="row item">
+				<div class="col-md-2 col-sm-2 fore1"><div class="num hidden-xs"> <?php echo $i;?> </div> </div>
+				<div class="col-md-4 col-sm-4 fore2">
+					<a id="gemcolor_a_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl();?>?icid=vday16|top20|<?php echo $_product->getSku();?>|02042016">
+						<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" data-org="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" width="200" height="200" alt="<?php echo $_product->getShortDescription(); ?>" title="<?php echo $_product->getShortDescription(); ?>"/>
+					</a>
+					<div><?php echo Mage::getBlockSingleton('Mage_Catalog_Block_Product_List_Gemcolor')->getGemColorHtml($_product, 0);?></div>
+				</div>
+				<div class="col-md-6 col-sm-6 fore3">
+					<h2><a href="<?php echo $_product->getProductUrl();?>?icid=vday16|top20|<?php echo $_product->getSku();?>|02042016" class="text-uppercase" id="gemcolor_desc_<?php echo $_product->getId(); ?>"><p id="gemcolor_desc_p_<?php echo $_product->getId(); ?>"><?php echo $_product->getShortDescription(); ?></p></a></h2>
+					<p id="gemcolor_desc_p_d_<?php echo $_product->getId(); ?>"><?php echo $_product->getDescription(); ?></p>
+					<style type="text/css">
+					.catalog-page-price-box{
+						display: block !important;
+					}
+					</style>
+					<?php 
+					if(strtolower($countryCode)=='us'){						  
+					   echo '<div id="gemcolor_price_'.$_product->getId().'">';						  				  	
+					}else{
+						 echo '<div id="gemcolor_price_'.$_product->getId().'" class="reduce-price-size">';							
+					}?>
+					<?php echo $this->getPriceHtml($_product, true, '-toptwenty'); ?>
+					<?php echo '</div>';?>
+					<div class="vw-collection high-margin-top"><a id="gemcolor_desc_shop<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl();?>?icid=vday16|top20|<?php echo $_product->getSku();?>|02042016">SHOP NOW</a></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+	<?php
+		}
+	}?>
+</section>
+<script type="text/javascript">
+/* Gemstone Colors */
+/* Start */
+function changegemstonecolors(gemcolorprodid,prodid,sku) {
+	//	S:VA
+	if(gemcolorprodid == prodid){
+		jQuery('#wishlist_product_'+prodid).removeClass('hidden');	
+	}else{
+		jQuery('#wishlist_product_'+prodid).addClass('hidden');	
+	}
+	//	E:VA
+	
+	/*  Product url changes */
+	if(document.getElementById('gemcolor_a_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_a_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	if(document.getElementById('gemcolor_desc_shop'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_shop'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	
+	/*  Image changes */
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_src_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).src = document.getElementById('gem_img_src_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_alt_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).alt = document.getElementById('gem_img_alt_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Toggle image changes */
+	if(document.getElementById('gemcolor_img_toggle_'+prodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = 'none';
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = document.getElementById('gem_toggle_img_src_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_alt_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = document.getElementById('gem_toggle_img_alt_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	}
+	
+	/* Product name/description changes */
+	if(document.getElementById('gemcolor_desc_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML+'?icid=vday16|top20|'+sku+'|02042016';
+	if(document.getElementById('gemcolor_desc_p_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_'+prodid).innerHTML = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	if(document.getElementById('gemcolor_desc_p_d_'+prodid) && document.getElementById('gem_desc_p_d_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_d_'+prodid).innerHTML = document.getElementById('gem_desc_p_d_'+gemcolorprodid).innerHTML;
+	
+	/* Product price name */
+	if(document.getElementById('gemcolor_price_'+prodid) && document.getElementById('gem_price_'+gemcolorprodid))
+		document.getElementById('gemcolor_price_'+prodid).innerHTML = document.getElementById('gem_price_'+gemcolorprodid).innerHTML;
+	
+	/* Review template changes */
+	if(document.getElementById('gemcolor_review_'+prodid) && document.getElementById('gem_review_'+gemcolorprodid))
+		document.getElementById('gemcolor_review_'+prodid).innerHTML = document.getElementById('gem_review_'+gemcolorprodid).innerHTML;	
+	
+}
+/* End */
+</script>

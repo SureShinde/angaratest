@@ -1,0 +1,74 @@
+<?php
+//$banner = $this->getBanner();?>
+<style>
+.mini-hero-newletter{display:none !important; visibility:hidden}
+/*#content-showcase{display:none;}*/
+#mini-hero-showcase-md {
+    background: none repeat scroll 0 0 #e6f5f5;
+}
+/*.countdownticker2 { background-color: #000; height: 27px; width: 152px; position: absolute; bottom:27px; left:78px; text-align: center; font: bold 14px/27px "Arial", Helvetica, serif; color: #fff;  border-radius: 5px; display:none; }*/
+.countdownticker2 { height: 30px; width: 150px; position: absolute; bottom: 5px; right: 173px; text-align: center; font: bold 14px/30px "Arial", Helvetica, serif; color: #000000; border-radius: 2px; border: dashed 1px;}
+.actionbtn{ position: absolute; bottom: 45px; left:124px;}
+.timeleftxt2 { display: inline-block; }
+.hourdigits2 { display: inline-block; min-width: 12px; padding-left: 5px; }
+.minutedegites2 { display: inline-block; min-width: 12px; }
+.secondigits2 { display: inline-block; min-width: 12px; }
+.colondigit2 { display: inline-block; font-size: 14px; }
+.global-offer-wrapper { height: 27px; }
+
+.tickr-width{width:100%; max-width:1500px; margin: 0 auto; position:relative;}
+.tickr-style{border:2px dashed #000000; font-weight:bold; padding:3px 10px; font-size:15px;float:left; position:absolute; right:5px; margin-top:4px; color:#ffffff; background:#000000;}
+
+.cat-offer-banner img{max-width:100%!important}
+
+ @media (min-width: 768px ) and (max-width: 999px) {
+	 .countdownticker2{ bottom:6px; right:170px; display:block;}
+	 .actionbtn{ position: absolute; bottom: 45px; left:4px;}
+ }
+ @media (max-width: 768px ){
+	.tickr-width{width:100%; margin: 0 auto; position:relative;}
+	.tickr-style{border:2px dashed #000000;font-weight:bold;padding: 4px 15px;font-size: 15px;float:left; position:absolute; right:20px; top:50px; z-index: 1; color:#ffffff; background:#000000}
+ }
+ 
+</style>
+<?php $minitickerState = false; ?>
+<?php if($minitickerState == true){ ?>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+<?php } ?>
+
+<div id="content-showcase" class="cat-offer-banner container-fluid">
+    <?php $channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+	if($channel):?> 
+        <div class="container-fluid" id="catalogBannerDesktop">
+        <?php
+        if($channel->getCatalogBannerDesktop()):
+            $bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerDesktop());	 
+            if($bannerDesktop){?>
+                <div class="visible-md relative-placeholder">
+					
+					<?php if($minitickerState == true){ ?>
+						<?php echo Mage::helper('function')->getHomePageTickerHtml();?>
+					<?php } ?>
+					
+                    <?php echo $bannerDesktop->getHtml();?>
+                </div>
+            <?php
+            }
+        endif;?>	
+        <?php 
+        if($channel->getCatalogBannerTablet()):
+            $bannerTablet = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerTablet());
+            if($bannerTablet){ ?>    
+                <div class="visible-sm"  style="height:40px;">
+					<?php if($minitickerState == true){ ?>
+						<?php echo Mage::helper('function')->getHomePageTickerHtml();?>
+					<?php } ?>
+					
+                    <?php echo $bannerTablet->getHtml(); ?>
+                </div>
+            <?php
+            }
+        endif;?>
+        </div>
+	<?php endif;?>
+</div>

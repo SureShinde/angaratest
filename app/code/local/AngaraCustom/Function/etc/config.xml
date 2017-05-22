@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AngaraCustom_Function>
+            <version>1.0.2</version>
+        </AngaraCustom_Function>
+    </modules>
+	<adminhtml>
+	<!--Below code is used to enable this module to appear in ACL permission under Role Resources Tab-->
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <function translate="title" module="function">
+                                            <title>Angara Custom Module</title>
+                                        </function>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+	<!--<admin>
+        <routers>
+            <function>
+                <use>admin</use>
+                <args>
+                    <module>AngaraCustom_Function</module>
+                    <frontName>function</frontName>
+                </args>
+            </function>
+        </routers>
+    </admin>-->
+	<!--Below code is used to enable this module to appear in ACL permission under Role Resources Tab-->
+    <global>
+		<fieldsets>
+            <sales_convert_quote_item>
+                <vendor_lead_time>		
+                    <to_order_item>*</to_order_item>
+                </vendor_lead_time>
+            </sales_convert_quote_item>
+
+            <sales_convert_order_item>
+                <vendor_lead_time>		
+                    <to_quote_item>*</to_quote_item>
+                </vendor_lead_time>
+            </sales_convert_order_item>
+        </fieldsets>
+        <events>
+            <sales_quote_item_set_product>	
+                <observers>
+                    <save_vendor_lead_time_to_order>
+                        <class>AngaraCustom_Function_Model_Observer</class>
+                        <method>salesQuoteItemSetVendorLeadTime</method>
+                    </save_vendor_lead_time_to_order>
+                </observers>
+            </sales_quote_item_set_product>
+        </events>
+		
+        <helpers>
+            <function>
+                <class>AngaraCustom_Function_Helper</class>
+            </function>
+        </helpers> 
+		<!--Creating new tab in System->Configuration by Vaseem-->
+		<models>
+            <angaracustom_function>
+                <class>AngaraCustom_Function_Model</class>
+            </angaracustom_function>
+			<!--<checkout>
+                <rewrite>
+                    <cart>AngaraCustom_Function_Model_Checkout_Cart</cart>
+                </rewrite>
+            </checkout>-->
+        </models>
+		<!--Creating new tab in System->Configuration by Vaseem-->
+		
+		<resources>
+            <function_setup>
+                <setup>
+                    <module>AngaraCustom_Function</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </function_setup>
+            <function_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </function_write>
+            <function_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </function_read>
+        </resources>
+    </global>
+	
+	<frontend>
+		<!--<secure_url>
+			<angaracustom_function>/custom/</angaracustom_function>
+		</secure_url>-->
+       <routers>
+          <function>
+              <use>standard</use>
+              <args>
+                 <module>AngaraCustom_Function</module>
+                 <frontName>custom</frontName>
+              </args>
+           </function>
+       </routers>
+	   <!--<layout>
+            <updates>
+                <angaracustom_function>
+                    <file>angaracustom_function.xml</file>
+                </angaracustom_function>
+            </updates>
+        </layout> -->
+    </frontend>
+	
+	
+	
+	<!--Creating new tab in System->Configuration by Vaseem-->
+	<default>
+        <tab1>
+            <general>
+                <text_field>Default value</text_field>
+                <textarea></textarea>
+                <dropdown>key2</dropdown>
+                <multiple_dropdown>key1,key2</multiple_dropdown>
+                <time>11,30,45</time>
+                <active>0</active>
+                <boolean>1</boolean>
+                <dependant_text_field>Default value</dependant_text_field>
+            </general>
+        </tab1>
+    </default>
+	<!--Creating new tab in System->Configuration by Vaseem-->
+	
+	<crontab>
+		<jobs>
+			<angaracustom_function_function>		<!--modulename_model_file_name  cronjob_name-->
+				<schedule><cron_expr>20 5 * * 2,5</cron_expr></schedule>
+				<!--<schedule><cron_expr>* * * * *</cron_expr></schedule>-->
+				<run><model>angaracustom_function/function::cron</model></run>
+			</angaracustom_function_function>
+		</jobs>
+	</crontab>
+	
+</config>

@@ -1,0 +1,28 @@
+<?php foreach ($this->getTotals() as $_code => $_total){ ?>
+	<?php if ($_total->getBlockName()){ //echo $_total->getBlockName();?>
+    	<?php echo $this->getChildHtml($_total->getBlockName(), false); ?>
+    <?php }else{
+		if($_total->getLabel()!='Shipping & Handling' && $_total->getLabel()!='Installment Pending Amount'){?>
+    	<tr class="<?php //echo $_code?>">
+          <td width="240" align="right" height="30" valign="middle" style="padding-right:15px; font:bold 13px Arial, Helvetica, sans-serif; border-top:1px solid #333; border-right:1px solid #333;" <?php //echo $this->getLabelProperties()?>>
+		  <?php if($_total->getLabel()=='Total Paid'){
+			  		echo 'Total Credit';
+		  		}elseif($_total->getLabel()=='Shipping Charges / Rest Installment Amount'){
+					echo 'Shipping & Rest Installment Amount';
+				}else{
+			  		echo $_total->getLabel();
+			  	}
+			?>
+          </td>
+          <td width="95" height="30" align="right" valign="middle"  style=" padding-right:15px;font:bold 13px Arial, Helvetica, sans-serif; border-top:1px solid #333;" <?php //echo $this->getValueProperties()?>>
+		  	<?php 	if( ($_total->getLabel()=='Subtotal') || ($_total->getLabel()=='Total Paid') ){
+						echo '-'.$this->formatValue($_total);
+					}else{
+						echo $this->formatValue($_total);
+					}
+			?>
+            </td>
+    	</tr>
+        <?php }	//	end if Shipping & Handling  ?>
+	<?php }	?>
+<?php }		 //	endforeach?>

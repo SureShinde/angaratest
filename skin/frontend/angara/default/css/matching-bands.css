@@ -1,0 +1,311 @@
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.eot');
+    src: url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.woff') format('woff'),
+         url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.ttf') format('truetype'),
+         url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.eot');
+    src: url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.woff') format('woff'),
+         url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.ttf') format('truetype'),
+         url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.clear {
+	clear: both;
+}
+.matching-bands-wrapper {
+	width: 807px;
+	min-height: 400px;
+	height: auto!important;
+	height: 400px;
+	background-color: #fff;
+	-moz-box-shadow: 0px 0px 3px 0px #797979;
+	-webkit-box-shadow: 0px 0px 3px 0px #797979;
+	box-shadow: 0px 0px 3px 0px #797979;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-family: open_sansregular, Arial, Helvetica, sans-serif;
+	position: relative;	
+}
+.close-popup {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 15px;
+	right: 15px;
+	display: block;
+	cursor: pointer;
+	background: url(../images/close-popup-btn.jpg) 5px 5px no-repeat;
+	border: solid 1px #fff;
+}
+.close-popup:hover {
+	border: solid 1px #DFDFDF;
+}
+.more-product-view-block {
+	height: 44px;
+	line-height: 44px;
+	background-color: #fafafa;
+	border-top: solid 1px #ebebeb;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	padding-left: 25px;
+	font-size: 16px;
+}
+.more-product-view-block a {
+	color: #ca5d37;
+	text-decoration: none;
+}
+.more-product-view-block a:hover {
+	text-decoration: underline;
+}
+.matching-bands-title-block {
+	height: 71px;	
+	font-family: open_sansregular, Arial, Helvetica, sans-serif;
+	color: #545454;
+	font-size: 18px;
+	padding: 0 40px 0 20px;
+}
+.matching-bands-title-block img.pro-img {
+	width: 71px;
+	height: 71px;
+	vertical-align: top;
+}
+.matching-band-product-details {
+	padding: 0 25px;
+	border-top: solid 1px #dfdfdf;	
+}
+.matching-product-img{
+	width: 350px;
+	height: 350px;
+	float: left;
+}
+.matching-product-details {
+	float: right;
+	padding: 20px 0;
+	width: 375px;
+	
+}
+.matching-pro-name {
+	color: #000000;
+	font-size: 16px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	margin-bottom:8px;
+}
+.ringsizer-wrapper{
+	margin-top: 15px;
+	position:relative;
+}
+.ring-size-box, .ring-size-title {
+	float: left;
+}
+.matching-product-details .ring-sizer {
+	position:absolute;
+	top:1px;
+	left:219px;
+}
+
+.selectringsize {
+	background-color: #fff;
+	height: 21px;
+	position: relative;
+	width: 140px;
+	border: solid 1px #c1c1c1;
+	font-size: 10px;
+	padding:2px;
+	text-transform: uppercase;
+	float: left;
+}
+.ring-sizer a {
+	color: #434343;
+	font-size: 10px;
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+.ring-size-title {
+	color: #000000;
+	font-size: 13px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	margin-right: 7px;
+}
+.details-lists {
+	font-size: 10px;
+	line-height: 18px;
+	margin-top: 15px;
+}
+.details-lists dt {
+	float: left;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0 5px 0 0;
+}
+
+.details-lists dd {
+	color: #6e364d;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+}
+.full-details-link {
+	margin-top: 45px;
+	clear:both;
+}
+.full-details-link a {
+	color: #DE513E;
+	font-size: 13px;
+	text-decoration: underline;
+}
+.matching-product-price {
+	font-size: 26px;
+	color: #804d62;
+	margin-top: 15px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+}
+.matching-bands-title-block .title {
+	color: #000;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	float:left;
+	width:193px;
+}
+.matching-bands-title-block .img-pro-name
+{
+float:left;
+ width:475px;
+ line-height:20px;
+}
+.action-buttons {
+	margin-top: 15px;
+}
+.matching-customize-btn {
+	width: 140px;
+	height: 31px;	
+	float:left;	
+	text-align:center;
+	margin-right:20px;
+}
+
+.matching-customize-btn a
+{
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 15px;	
+	text-decoration:none;
+	width: 140px;
+	height: 31px;
+	line-height:31px;
+	background: #555657; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c6e71', endColorstr='#555657'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#6c6e71), to(#555657)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #6c6e71, #555657); /* for firefox 3.6+ */	
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	display:block;
+}
+
+.matching-addtocart-btn {
+	width: 140px;
+	height: 31px;
+	outline: none;
+	border: solid 1px #cd7708;
+	background: #DE513E; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DE513E', endColorstr='#DE513E'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#DE513E), to(#DE513E)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #DE513E, #DE513E); /* for firefox 3.6+ */
+/*	-moz-border-radius: 3px;
+	border-radius: 3px;*/
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 15px;
+	font-family: open_sanssemibold, Arial, Helvetica, sans-serif;
+	cursor: pointer;
+	float: left;
+}
+.more-matching-product {
+	background-color: #fff;
+	border-top: solid 1px #DFDFDF;
+	height: 104px;
+	padding: 0 25px;
+	text-align: center;
+	display:none;
+}
+.more-matching-imgbox {
+	width: 104px;
+	height: 104px;
+	margin: 0 15px;
+	display: inline-block;
+}
+.more-matching-imgbox img {
+	width: 104px;
+	height: 104px;
+}
+.matching-img
+{
+float:left; 
+width:71px;
+}
+.img-details
+{
+float:right;
+width:670px;
+padding-top:22px;
+line-height:20px;
+}
+.ring-size-guide
+{
+	position:relative;
+}
+#lightboxBlackOverlay {
+	display:none;	
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;	
+	z-index: 1001;
+	background:url("/skin/frontend/angara/default/images/lay-over-transperent-img.png") repeat;
+	min-height:1250px;
+	height:auto !important;
+	height:1250px;
+}
+#lightboxContent {
+	display:none;
+	position:fixed;
+	top:10px;
+	left:50%;
+	width:807px;
+	margin-left:-400px;
+	background:#FFFFFF;
+	min-height: 400px;
+	height: auto!important;
+	height: 400px;	
+	z-index:9999;
+}
+
+.matching-band-thumb{
+	float:left;
+	margin:0 18px;
+}
+.matching-band-thumb.selected{
+	background:#757575;
+}
+#matching-band-thumbs{
+	border-top:1px solid #DFDFDF;
+}
+.signicon
+{
+font-size:22px;
+vertical-align:middle;
+display:inline-block;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	#lightboxContent {
+	top:30px;	
+}
+}

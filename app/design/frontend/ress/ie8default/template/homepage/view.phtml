@@ -1,0 +1,292 @@
+<!--[if IE 8]>
+<style>
+.cat-tabs ul li.tanzanite{width:190px;}
+.cat-tabs ul li.ruby{width:160px;}
+.cat-tabs ul li.sapphire{width:185px;}
+.cat-tabs ul li.emerald{width:190px;}
+.cat-tabs ul li.diamond{width:190px;}
+.cat-tabs ul li.opal{width:160px;}
+.cat-tabs ul li.aquamarine{width:210px;}
+.cat-tabs ul li.garnet{width:180px;}
+.cat-tabs ul li a span{display:inline-block}
+
+.cat-tabs ul li.garnet, .cat-tabs ul li.aquamarine, .cat-tabs ul li.opal{display:none!important}
+</style>
+<![endif]-->
+<?php $userAgent = Mage::getUserAgent(); ?>
+<div class="clearfix"></div>
+<div class="top-usp-bar text-center padding-type-5 max-margin-top showcase-bg-dark">
+	<span class="usp"><span class="text-blue">FREE</span> SHIPPING WORLDWIDE</span>
+	<span class="usp"><span class="text-green"><?php echo Mage::helper('function')->freeReturnDays();?>-DAY</span> RETURNS</span>
+	<span class="usp"><span class="text-red">110%</span> REFUND POLICY</span>
+	<span class="usp"><span class="text-sky">0%</span> INTEREST FINANCING</span>
+	<span class="usp"><span class="text-purpal">TRUSTED</span> GEMSTONE SOURCE</span>
+</div>
+<div class="clearfix"></div>
+<div class="container showcase-bg-white">
+	<?php /* S: pro category tabs and slider */ ?>
+    <div class="row max-margin-top">
+        <div class="col-xs-12 col-sm-12 max-margin-top">
+            <div class="light-border full-width">
+                <div class="col-md-12 col-sm-12 padding-0 cat-tabs" style="border-bottom:1px solid #e9e9e9">
+                    <ul>
+						<li class="emerald active"><a class="tab-link" id="tab-3" href="javascript:void(0)" data-category='emerald'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Emerald-Round.png" alt="Emerald Jewelry" title="Emerald Jewelry" /> Emerald <span class="jewelry">Jewelry</span> </a></li>
+						<li class="sapphire"><a class="tab-link" id="tab-1" href="javascript:void(0)" data-category='sapphire'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Sapphire-Round.png" alt="Sapphire Jewelry" title="Sapphire Jewelry" /> Sapphire <span class="jewelry">Jewelry</span> </a></li>
+						<li class="ruby"><a class="tab-link" id="tab-2" href="javascript:void(0)" data-category='ruby'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Ruby-Round.png" alt="Ruby Jewelry" title="Ruby Jewelry" /> Ruby <span class="jewelry">Jewelry</span> </a></li>
+                        <li class="tanzanite"><a class="tab-link" id="tab-4" href="javascript:void(0)" data-category='tanzanite'> <img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Tanzanite-Round.png" alt="Tanzanite Jewelry" title="Tanzanite Jewelry" /> Tanzanite <span class="jewelry">Jewelry</span> </a> </li>
+                        <li class="diamond"><a class="tab-link" id="tab-5" href="javascript:void(0)" data-category='diamond'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Diamond-Round.png" alt="Diamond Jewelry" title="Diamond Jewelry" /> Diamond <span class="jewelry">Jewelry</span> </a></li>
+						<li class="aquamarine"><a class="tab-link" id="tab-7" href="javascript:void(0)" data-category='aquamarine'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Aquamarine-Round.png" alt="Aquamarine Jewelry" title="Aquamarine Jewelry" /> Aquamarine <span class="jewelry">Jewelry</span> </a></li>
+						<li class="opal"><a class="tab-link" id="tab-6" href="javascript:void(0)" data-category='opal'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Opal-Round.png" alt="Opal Jewelry" title="Opal Jewelry" /> Opal <span class="jewelry">Jewelry</span> </a></li>
+						<li class="garnet"><a class="tab-link" id="tab-8" href="javascript:void(0)" data-category='garnet'><img class="img-responsive" style="display:inline-block" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/skeleton/Garnet-Round.png" alt="Garnet Jewelry" title="Garnet Jewelry" /> Garnet <span class="jewelry">Jewelry</span> </a></li>
+                    </ul>
+                </div>
+				<?php 
+				if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+					<script type="text/javascript">
+						function slSlider(){
+							jQuery('#content-tab').slick({
+								arrows			: 	true,
+								slidesToShow	: 	4,
+								slidesToScroll	: 	1
+							});
+						};
+					</script>
+				<?php 
+				} else { ?>
+					<script type="text/javascript">
+					function slSlider(){
+						jQuery('#content-tab').slick({
+							arrows			: 	true,
+							slidesToShow	: 	7,
+							slidesToScroll	: 	1
+						});
+					};
+					</script>
+				<?php 
+				} ?>
+
+                <script type="text/javascript">
+					jQuery(document).ready(function(){
+						var dataLoaded	=	'';							//	Creating a varible to prevent multiple ajax request
+						jQuery('.tab-link').click(function() {
+							var categoryName	=	jQuery(this).data('category');
+							var catContent = jQuery('#'+categoryName+'Box').html();	
+								
+							if(catContent == ''){	
+								jQuery.ajax({
+									type: 'POST',
+									data: { category :  categoryName },
+									url: '<?php echo Mage::getUrl("hometabs/ajax/index/")?>',
+									beforeSend: function( xhr ) {
+										jQuery("#ajaxData").html('<div class="catalog-loader text-center" style="margin-top:50px"><div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div></div>');		
+										jQuery(".cat-tabs").addClass("disabled");
+									},
+								}).done(function( html ){
+									
+									jQuery('#'+categoryName+'Box').html(html);
+									jQuery("#ajaxData").html();
+									jQuery("#ajaxData").html('<div id="content-tab" class="content full-width">'+html+'</div>');
+									slSlider();
+									jQuery(".cat-tabs").removeClass("disabled");
+									
+								}).fail(function(jqXHR, textStatus){
+									//jQuery("#lightboxContentGift").html('Error occurred.');
+								});
+							}else{
+								jQuery("#ajaxData").html();
+								jQuery("#ajaxData").html('<div id="content-tab" class="content full-width">'+catContent+'</div>');
+								slSlider();
+								jQuery(".cat-tabs").removeClass("disabled");
+							}	
+							//}
+						});
+					});
+				</script>
+				<div id="tanzaniteBox" class="hidden"></div>
+                <div id="rubyBox" class="hidden"></div>
+                <div id="sapphireBox" class="hidden"></div>
+                <div id="emeraldBox" class="hidden"></div>
+                <div id="diamondBox" class="hidden"></div>
+                <div id="opalBox" class="hidden"></div>
+                <div id="aquamarineBox" class="hidden"></div>
+                <div id="garnetBox" class="hidden"></div>
+                <div class="col-md-12 col-sm-12 padding-0 cat-content" id="ajaxData">
+                    <div id="content-tab" class="content full-width">
+                        <div class="col-md-3 col-sm-4 cat">
+							<a href="/rings/emerald-rings.html?icid=home|slider|ej|r|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/sr0112e.jpg" alt="Emerald Rings" title="Emerald Rings"/>
+								</div>
+								<div class="cat-title">Rings<br /> <small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/earrings/emerald-earrings.html?icid=home|slider|ej|e|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/se0118e.jpg" alt="Emerald Earrings" title="Emerald Earrings"/>
+								</div>
+								<div class="cat-title">Earrings<br /><small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/pendants/emerald-necklace-pendants.html?icid=home|slider|ej|pn|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/sp0102e.jpg" alt="Emerald Pendants" title="Emerald Pendants"/>
+								</div>
+								<div class="cat-title">Necklaces<br /> <small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/engagement-rings/emerald-engagement-rings.html?icid=home|slider|ej|r|er|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/sr0217e.jpg" alt="Emerald Engagement Rings" title="Emerald Engagement Rings"/>
+								</div>
+								<div class="cat-title">Engagement<br /> <small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/wedding-rings/wedding-bands.html?filterable_stone_names=4131&amp;order=position&amp;dir=asc&amp;no_cache=true&amp;icid=home|slider|ej|r|wr|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/wrgd_sr0702ed.jpg" alt="Emerald Wedding Bands" title="Emerald Wedding Bands"/>
+								</div>
+								<div class="cat-title">Wedding<br /> <small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/bracelets/gemstone-bracelets.html?filterable_stone_names=4131&amp;icid=home|slider|ej|br|09142015">
+								<div class="cat-image">
+									<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/sb0164ed.jpg" alt="Emerald Bracelets" title="Emerald Bracelets"/>
+								</div>
+								<div class="cat-title">Bracelets<br /><small class="text-underline" style="color:#d60b0b;"> Shop Now </small></div>
+							</a>
+						</div>
+						<div class="col-md-3 col-sm-4 cat">
+							<a href="/jewelry/emerald-jewelry.html" class="view-all">
+								<span class="text-underline" style="padding-top:115px; display:block;">View All <br /> Emerald Jewelry</span>
+							</a>
+						</div>
+                    </div>
+                </div>
+				<script>
+					jQuery(function(){
+						slSlider();
+					});
+				</script>
+            </div>
+        </div>
+    </div>
+    <script>
+        jQuery('.tab-link').click(function(){
+            jQuery(this).parent('li').siblings().removeClass('active');
+            jQuery(this).parent('li').addClass('active');
+            var id = jQuery(this).attr('id');
+            var conid = '#content-'+id;
+            jQuery(conid).siblings().addClass('hidden');
+            jQuery(conid).removeClass('hidden');
+        });
+    </script>
+	<?php /* E: pro category tabs and slider */ ?>
+</div>
+<div class="clearfix max-margin-top"></div>
+<?php /* S: Featured in */ ?>
+<div class="col-sm-12 showcase-bg-dark max-margin-top max-margin-bottom featured-in">
+	<div class="container">
+		<div class="col-sm-12 full-width text-center" style="padding:8px 5px 1px">
+			<div style="display:inline-block">
+				<div class="col-md-3 col-sm-12">
+					<div class="text-uppercase px32 heading">Featured in</div>
+				</div>
+				<div class="col-md-9 col-sm-12"><a href="http://www.angara.com/angara-in-the-press.html?icid=home|angara-in-news|11012015" target="_blank" ><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/tem-img/featured-in.jpg" alt="featured in" class="img-responsive"/></a></div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php /* E: Featured in */ ?>
+
+<script>
+function callMyFunction(){
+	jQuery("#customer-stories").slick({
+		arrows			: 	true,
+		slidesToShow	: 	4,
+		slidesToScroll	: 	1
+	});	
+}
+
+//	S:VA	loading content on user scroll
+var lastScrollTop = 0;
+jQuery(window).scroll(function(event){
+   	var st = jQuery(this).scrollTop();
+   	if (st > lastScrollTop){
+       //console.log('downscroll code');
+		loadShopbyJewelry('shop_by_gemstone');
+		loadShopbyJewelry('customer_stories', '1');
+   } 
+   lastScrollTop = st;
+});
+
+function loadShopbyJewelry( IdToShowDataIn, checkCallForFunction ){
+	var request = jQuery(this);
+	if ( request.data('status'+IdToShowDataIn) ) {
+		return;
+	}
+	request.data('status'+IdToShowDataIn, true);		//	set data that ajax request is running
+		
+	jQuery.ajax({
+		type: 'POST',
+		data: { category :  IdToShowDataIn },
+		url: '<?php echo Mage::getUrl("hometabs/ajax/index/")?>',
+		beforeSend: function( xhr ) {
+			jQuery("#"+IdToShowDataIn).html('<div class="catalog-loader text-center" style="margin-top:50px"><div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div></div>');		
+		},
+	}).done(function( html ){
+		jQuery("#"+IdToShowDataIn).html(html);
+		if(checkCallForFunction == 1){callMyFunction();}
+		//request.data('status', false);		//	set data to false so that ajax request can be fired again
+	}).fail(function(jqXHR, textStatus){
+		//jQuery("#"+IdToShowDataIn).html('Error occurred.');
+	});
+}
+
+</script>
+
+<?php /* S: Shop by gemstone */ ?>
+<div class="col-sm-12 max-margin-top max-margin-bottom shop-by-gemstone" id="shop_by_gemstone"></div>
+<?php /* E: Shop by gemstone */ ?>
+
+<div class="clearfix"></div>
+<div class="container showcase-bg-white">
+    <?php echo $recentlyViewedHtml = $this->getLayout()->createBlock('recentlyviewed/view')->setTemplate('homepage/recently_viewed_products.phtml')->toHTML();  ?>
+</div>
+<div class="clearfix"></div>
+<div class="container showcase-bg-white">
+	<div class="row max-margin-bottom padding-type-8">
+		<div class="full-width light-border-top light-border-bottom">
+			<div class="customer-stories-box col-md-6 col-sm-12">
+				<div class="cs-hldr" id="customer_stories"></div>
+			</div>
+            
+            <div class="testimonials-box col-md-6 col-sm-12">
+				<div class="testimonials-hldr">
+				<?php
+				try{
+					$cacheHelper = Mage::helper('helloworld');
+					$key = md5('home-testimonials'.date('ymd').ceil((date('G') + 1)/4));
+					
+					if ($content = $cacheHelper->getDataFromCache($key)) { 
+						//nothing to do as $content now has the data
+					} 
+					else {
+						$content = $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/testimonials.phtml')->toHTML();
+						$cacheHelper->setKey($key)->setData($content)->saveDataInCache();
+					}
+					echo $content;
+				}
+				catch(Exception $e){
+					echo $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/testimonials.phtml')->toHTML();
+				} ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.ias_loader {
+	text-align:center;
+	margin: 5px 0;
+	clear:both;
+	padding: 5px 0;
+}
+.loadertop {
+	margin-top:5px;
+}
+.loadtext {
+	font:12px 'open_sansregular',Arial,Helvetica,sans-serif;
+	margin-left: 5px;
+}

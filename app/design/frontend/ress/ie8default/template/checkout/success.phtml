@@ -1,0 +1,391 @@
+<style>
+.valentines_heart {
+	display:none !important;
+}
+</style>
+<?php $orderId = $this->getOrderId(); ?>
+<div class="container showcase-bg-white max-padding-top max-padding-bottom">
+	<div class="page-title">
+		<h1 class="h1_opc">Express Checkout</h1>
+		<div class="text-left showcase-bg-gradient-one showcase-border-thin">
+			<div class="onepagecheckout_loginarea no-margin pull-left padding-type-10 showcase-bg-black text-lighter hidden-xs">Your order has been received.</div>
+			<div class="pull-left hidden-xs">
+				<div class="pull-left special-tip-right"></div>
+				<div class="pull-left padding-type-10">
+					<span class="img-circle icon-16 text-on-dark subform-index-indicator pull-left low-margin-right showcase-bg-darker">
+						1
+					</span>
+					<span class="visible-md pull-left">
+						Billing Information
+					</span>
+					<span class="visible-sm pull-left">
+						Billing
+					</span>
+				</div>
+				<div class="pull-left padding-type-10 max-margin-left max-padding-left">
+					<span class="img-circle icon-16 text-on-dark subform-index-indicator pull-left low-margin-right showcase-bg-darker">
+						2
+					</span>
+					<span class="visible-md pull-left">
+						Payment Information
+					</span>
+					<span class="visible-sm pull-left">
+						Payment
+					</span>
+				</div>
+				<div class="pull-left padding-type-10 max-margin-left max-padding-left">
+					<span class="img-circle icon-16 showcase-bg-darker text-on-dark subform-index-indicator pull-left low-margin-right">
+						3
+					</span>
+					<span class="visible-md pull-left">
+						Place Order
+					</span>
+					<span class="visible-sm pull-left">
+						Order
+					</span>
+				</div>
+				<div class="pull-left padding-type-10 max-margin-left max-padding-left">
+					<span class="img-circle icon-16 text-on-dark subform-index-indicator pull-left low-margin-right showcase-bg-green">
+						4
+					</span>
+					<span class="visible-md pull-left">
+						Order Receipt
+					</span>
+					<span class="visible-sm pull-left">
+						Receipt
+					</span>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<?php echo $this->getMessagesBlock()->getGroupedHtml();?>
+	<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!');?></h2>
+    <?php
+    $lastId = Mage::getSingleton('checkout/session')->getLastOrderId();
+    $order  = Mage::getSingleton('sales/order')->load($lastId); ?>
+	<img src="https://www.momsaffiliate.com/track/4017.png?amount=<?php echo $order->getData('grand_total')?>&amp;order=<?php echo $order->getData('increment_id')?>" />
+	<?php 
+	if($orderId):
+		if($this->getCanViewOrder()):?>
+			<p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($orderId)));?></p>
+		<?php
+		else :?>
+			<p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($orderId));?></p>
+		<?php 
+		endif;?>
+		<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.');?></p>
+		<?php 
+		if($this->getCanViewOrder() && $this->getCanPrintOrder()):?>
+			<p><?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl());?> <?php echo $this->getChildHtml();?></p>
+		<?php 
+		endif;
+	endif;
+	
+	if($this->getAgreementRefId()): ?>
+		<p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())));?></p>
+	<?php 
+	endif;
+	
+	if($profiles = $this->getRecurringProfiles()):?>
+	<p><?php echo $this->__('Your recurring payment profiles:');?></p>
+	<ul class="disc">
+	<?php 
+	foreach($profiles as $profile):
+		$profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+		<li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')));?></li>
+	<?php 
+	endforeach;?>
+	</ul>
+	<?php 
+	endif;?>
+	
+	<div class="buttons-set">
+		<button type="button" class="button" title="<?php echo $this->__('Continue Shopping');?>" onclick="window.location='<?php echo $this->getUrl();?>'">
+		<span>
+			<span>
+				<?php echo $this->__('Continue Shopping');?>
+			</span>
+		</span>
+		</button>
+	</div>
+</div>
+<?php
+$skus = array();
+$names = array();
+$qtys = array();
+$amountsExcludingZero = array();
+foreach($this->getTrackingItems() as $item){
+	$skus[] = $item['sku'];
+	$names[] = rawurlencode($item['name']);
+	$qtys[] = $item['qty'] * 1;
+	$amountsExcludingZero[] = round($item['amount'], 2) * 100;
+}
+$skusPipe = implode("|", $skus);
+$namesPipe = implode("|", $names);
+$qtysPipe = implode("|", $qtys);
+$amountsPipe = implode("|", $amountsExcludingZero);
+
+// start pay mode updation in sales_flat_order table
+try{
+	if(isset($_SESSION['pay_mode'])){
+		if(trim($_SESSION['pay_mode'])!=''){
+			$payMode = trim($_SESSION['pay_mode']);
+		}
+		else{
+			$payMode = '';
+		}
+		
+		$payModeUpdate = Mage::getBlockSingleton('checkout/cart')->updateOrderPayMode($orderId, $payMode);
+		if($_SESSION['pay_mode'] != 'FULL'){
+			if(isset($_SESSION['emi_profile_id_info'])){
+				if($_SESSION['emi_profile_id_info']!=''){
+					$comment = $_SESSION['pay_mode'].' '.$_SESSION['emi_profile_id_info'];
+					if($order && $orderId){
+						$order->addStatusHistoryComment($comment);
+						$order->save();
+					}
+					//$emiInfoHistoryUpdate = Mage::getBlockSingleton('checkout/cart')->addEasyPayHistoryWithOrder($orderId, $comment);
+				}
+				unset($_SESSION['emi_profile_id_info']);
+			}
+		}
+		unset($_SESSION['pay_mode']);
+	}
+}
+catch(Exception $e){
+	Mage::log('Easy Pay Status Update: '.$acturl, null, 'easy_pay.log');
+}
+// end pay mode updation in sales_flat_order table
+
+/* Start linkshare */
+if (isset($_COOKIE['siteID'])){
+	$siteIdCookie = $_COOKIE['siteID'];	 
+	/*linkshare vars*/
+	$discountAmount = round(abs($this->getBaseDiscountAmount()),2);
+	if($discountAmount > 0){
+		$skusPipe .= '|Discount';
+		$namesPipe .= '|Discount';
+		$qtysPipe .= '|0';
+		$amountsPipe .= '|-'.($discountAmount  * 100);
+	}?>
+	<img src="https://track.linksynergy.com/ep?mid=35520&ord=<?php echo $orderId; ?>&skulist=<?php echo $skusPipe ?>&qlist=<?php echo $qtysPipe ?>&amtlist=<?php echo $amountsPipe ?>&cur=USD&namelist=<?php echo $namesPipe ?>" border="0" width="1" height="1">
+<?php
+	setcookie('siteID','',time()-3600);
+}
+/* End linkshare */
+
+/* Start ShareASale tracking code */ ?>
+<?php if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shareasale'): ?>
+	<img src="https://shareasale.com/sale.cfm?tracking=<?php echo $orderId ?>&amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>&transtype=sale&merchantID=34037" width="1" height="1" />
+<?php endif; ?>
+<?php /* End ShareASale tracking code */
+
+//Start New Tracking scripts start - 10-11-2011. Shopping.com: Start ROI Script?>
+<script type="text/javascript">
+var _roi = _roi || [];
+
+<?php // Step 1: add base order details?>
+_roi.push(['_setMerchantId', '477936']); // required
+_roi.push(['_setOrderId', '<?php echo $orderId ?>']); // unique customer order ID
+_roi.push(['_setOrderAmount', '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>']); // order total without tax and shipping
+_roi.push(['_setOrderNotes', '']); // notes on order, up to 50 characters
+
+<?php // Step 2: add every item in the order
+// where your e-commerce engine loops through each item in the cart and prints out _addItem for each
+// please note that the order of the values must be followed to ensure reporting accuracy
+foreach ($this->getTrackingItems() as $item) { ?>
+	_roi.push(['_addItem',
+		'<?php echo $item['sku']; ?>', // Merchant sku
+		'<?php echo $item['name']; ?>', // Product name
+		'', // Category id
+		'', // Category name
+		'<?php echo $item['amount']; ?>', // Unit price
+		'<?php echo $item['qty']; ?>' // Item quantity
+	]);
+<?php
+}
+
+// Step 3: submit transaction to ECN ROI tracker?>
+_roi.push(['_trackTrans']);
+</script>
+<script type="text/javascript" src="https://stat.dealtime.com/ROI/ROI2.js"></script>
+<?php //Shopping.com: End ROI Script
+
+//S Pronto.com:?>
+<script language="Javascript">
+var merchant_account_id='68799';
+var m_order_id = '<?php echo $orderId ?>';
+var m_order_value = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>';
+var m_category_name = '';
+var m_product_id = '';
+var m_product_name = '';
+var m_price = '';
+var m_quantity = '';
+</script>
+<script language="Javascript" src="https://merchant.pronto.com/js/roi.js"></script>
+<?php
+//E Pronto.com
+ 
+//S Become.com:?>
+<script type="text/javascript" language="javascript" src="https://partner.become.com/roi-tracker2/conversion.js"></script> 
+<noscript>
+	<img src="https://partner.become.com/roi-tracker2/t.gif?merchantid=FB03A5511A8ABA22&order_id=<?php echo $orderId; ?>&order_value=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>" style="display:none;border:0;"/>
+</noscript>
+</script>
+<?php //E Become.com:
+
+//MyShopping.com.au Code for Purchase Conversion Page ?>
+<img height=0 width=0  src="https://www.myshopping.com.au/sale.asp?mid=22806767&amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>&order=<?php echo $orderId ?>">
+
+
+<?php //S ShopZilla.com:?>
+<script language="javascript">
+<?php /* Performance Tracking Data */?>
+	var mid            = '150815';
+	var cust_type      = '';
+	var order_value    = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+	var order_id       = '<?php echo $orderId ?>';
+	var units_ordered  = '';
+</script>
+<script language="javascript" src="https://www.shopzilla.com/css/roi_tracker.js"></script>
+
+<?php //NexTag.com:?>
+<script type="text/javascript">
+<?php /* NexTag ROI Optimizer Data */?>
+    var id = '4196092';
+    var rev = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+    var order = '<?php echo $orderId ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<?php //End New Tracking scripts start - 10-11-2011?>
+
+<?php //Start New Tracking scripts start - 01-02-2012?>
+<script type="text/javascript">
+<?php /* NexTag ROI Optimizer Data */?>
+    var id = '5079551';
+    var rev = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+    var order = '<?php echo $orderId ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<?php //End New Tracking scripts start - 01-02-2012?>
+
+<?php //Start New Tracking scripts for Google Adwords - 12-04-2016. 
+//Google Code for Purchase|SA Conversion Page ?> 
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_conversion_language = "en";
+	var google_conversion_format = "2";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "bS06COOaiQQQ-ZLp-wM";
+	var google_conversion_value = <?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>;
+	var google_conversion_currency = "USD";
+	var google_remarketing_only = false;
+	/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1064978809/?value=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>&amp;currency_code=USD&amp;label=bS06COOaiQQQ-ZLp-wM&amp;guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+<?php //End New Tracking scripts for Google Adwords - 12-04-2016. ?>
+
+<?php //Start New Tracking scripts for Bing start - 11-06-2012 Replace on 28042015?>
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4021092"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+<?php //Start New Tracking scripts for Bing End - 11-06-2012 Replace on 28042015
+
+//Start New Survey Popup scripts - 03-08-2012
+if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shopping'): ?>
+	<script type="text/javascript" language="JavaScript" src="https://www.shopping.com/xMSJ?pt=js&mid=477936&lid=1"></script>
+<?php 
+elseif(Mage::getModel('core/cookie')->get('ShareReferal') == 'nextag'): ?>
+	<link rel="stylesheet" href="https://merchants.nextag.com/serv/main/buyer/dhtmlpopup/dhtmlwindow.css" type="text/css" />
+	<script type="text/javascript">
+		var seller_id = 4196092;
+		var order = '<?php echo $orderId ?>';
+		var prods = '<?php echo $skusPipe ?>';
+		document.write('<'+ 'script type="text/javascript" src="https://merchants.nextag.com/seller/review/popup_include.js"><\/script>'); 
+	</script>
+<?php 
+else: // default popup ?>	
+	<?php //Start Bizrate POS Code ?> 
+	<script language="JavaScript"> 
+		<?php // var passin_x =''; //comment out to default center or adjust horizontal position by pixel 
+		// var passin_y =''; //comment out to default center or adjust vertical position by pixel ?>
+		var orderId='<?php echo $orderId; ?>'; 
+		<?php // var z_index =''; //default 1,000,000 ?>
+		var cartTotal='<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>'; 
+		<?php // var billingZipCode=''; 
+		// Pass up to 5 products from customer shopping cart ?>
+		var productsPurchased= '';		
+		<?php //'URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE='; ?>
+	</script> 
+	<script type="text/javascript" src="//eval.bizrate.com/js/pos_150815.js"></script> 
+	<?php //End Bizrate POS Code 
+endif; ?>
+<?php Mage::getModel('core/cookie')->delete('ShareReferal');
+//End New Survey Popup scripts - 03-08-2012
+
+// Annex code start ?>
+<script src="https://c.socialannex.com/c-sale-track/?site_id=1343431&order_id=<?php echo $orderId ?>&sale_amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>"></script>
+<script type="text/javascript"> var sa_page='3';(function() {function sa_async_load() { var sa = document.createElement('script');sa.type = 'text/javascript';sa.async = true;sa.src = '//cdn.socialannex.com/partner/1343431/universal.js';var sax = document.getElementsByTagName('script')[0];sax.parentNode.insertBefore(sa, sax); }if (window.attachEvent) {window.attachEvent('onload', sa_async_load);}else {window.addEventListener('load', sa_async_load,false);}})();</script>
+<?php //Annex code end 
+
+// BEGIN COMMISSION JUNCTION TRACKING CODE ?>
+<?php	
+$iCounter = 1;
+$cjItems = '';
+foreach ($this->getTrackingItems() as $item){
+	$cjItems .= '&ITEM'.$iCounter.'='.$item['sku'].'&AMT'.$iCounter.'='.$item['amount'].'&QTY'.$iCounter.'='.round($item['qty']);
+	$iCounter++;
+} ?>
+<iframe height="1" width="1" frameborder="0" scrolling="no" src="https://www.emjcd.com/tags/c?containerTagId=2057<?php echo $cjItems; ?>&CID=1525432&OID=<?php echo $orderId; ?>&TYPE=356648&CURRENCY=USD&DISCOUNT=<?php echo abs($this->getBaseDiscountAmount()); ?>" name="cj_conversion" ></iframe>
+<?php //END COMMISSION JUNCTION TRACKING CODE 
+
+// Start mediaforge Script ?>
+<script type="text/javascript" src="https://tags.mediaforge.com/js/1009/?orderNumber=<?php echo $orderId; ?>&price=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>"></script>
+<?php //End mediaforge Script  
+
+//Facebook Conversion Code for Facebook-paid-order ?>
+<?php /*?><script>
+(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId','583174048479877']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6043198835080', {'value':'<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>','currency':'USD'}]);
+//	Purchase event for FB Remarketing
+window._fbq.push(["track","Purchase",{
+    content_ids:['<?php echo $purchasedSku;?>'],
+    content_type:'product'
+}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6026842290280&cd[value]=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>&cd[currency]=USD&noscript=1" /></noscript><?php */?>
+
+<?php //S: Yahoo Gemini Conversion Tracking ?>
+<?php /*<script type="application/javascript" src="https://s.yimg.com/wi/ytc.js"></script><script type="application/javascript">YAHOO.ywa.I13N.fireBeacon([{"projectId" : "10001233591078","coloId" : "SP","properties" : {/*"documentName" : "",*//*"pixelId" : "37535","qstrings" : {}}}]);</script>*/?>
+<?php /* <script type="application/javascript">(function(w,d,t,r,u){w[u]=w[u]||[];w[u].push({'projectId':'10000','properties':{'pixelId':'37535'}});var s=d.createElement(t);s.src=r;s.async=true;s.onload=s.onreadystatechange=function(){var y,rs=this.readyState,c=w[u];if(rs&&rs!="complete"&&rs!="loaded"){return}try{y=YAHOO.ywa.I13N.fireBeacon;w[u]=[];w[u].push=function(p){y([p])};y(c)}catch(e){}};var scr=d.getElementsByTagName(t)[0],par=scr.parentNode;par.insertBefore(s,scr)})(window,document,"script","https://s.yimg.com/wi/ytc.js","dotq");</script> */ ?>
+<?php /*<script type="application/javascript">(function(w,d,t,r,u){w[u]=w[u]||[];w[u].push({'projectId':'10000','properties':{'pixelId':'37535'}});var s=d.createElement(t);s.src=r;s.async=true;s.onload=s.onreadystatechange=function(){var y,rs=this.readyState,c=w[u];if(rs&&rs!="complete"&&rs!="loaded"){return}try{y=YAHOO.ywa.I13N.fireBeacon;w[u]=[];w[u].push=function(p){y([p])};y(c)}catch(e){}};var scr=d.getElementsByTagName(t)[0],par=scr.parentNode;par.insertBefore(s,scr)})(window,document,"script","https://s.yimg.com/wi/ytc.js","dotq");</script> */?>
+<?php //E: Yahoo Gemini Conversion Tracking 
+
+//S PinInterest Conversion Tracking Code
+if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){?>
+	<img height="1" width="1" alt="" src="https://ct.pinterest.com/?tid=M494VRgD8iE"/>
+<?php 
+} //E PinInterest Conversion Tracking Code?>

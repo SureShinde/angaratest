@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_ArchiveProduct>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Adminhtml />
+				<Mage_Catalog />
+            </depends>
+		</Angara_ArchiveProduct>
+	</modules>
+</config>

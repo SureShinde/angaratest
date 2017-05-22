@@ -1,0 +1,264 @@
+<style>
+.video-popup, .audio-popup {
+	position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,0.6);
+	z-index: 1042;
+	text-align:center;
+}
+.video-popup div, .audio-popup .ap{
+    width: 280px;
+    margin: 0 auto;
+}
+#audio{
+	width:280px;
+}
+.audio-popup .ap-holder{
+	height:150px;
+    padding: 20px;
+	padding: 10px !important;
+    background: url(/skin/frontend/ress/default/images/landingpage/audio/mob-audio-bg.jpg) no-repeat center top;
+    width: 100%;
+	background-size:100%;
+}
+.audio-popup .ap-holder #audio{
+	width:100%;
+	bottom:0px;
+	left:0;
+}
+
+.popup-close {
+	position:absolute; 
+	margin-top:-20px; 
+	right:-10px; 
+	cursor:pointer; 
+	background:url(/skin/frontend/ress/default/images/sprite.jpg) -229px -151px no-repeat; 
+	border-radius: 11px; 
+	height: 18px; 
+	width: 18px;
+}
+
+
+
+
+
+
+</style>
+<h1 class="block-heading max-padding-bottom">Angara in the Press</h1>  
+
+<!--<div class="row no-gutters max-margin-bottom max-padding-bottom">
+<div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" href="http://www.philly.com/philly/living/celebrations/weddings/CTW_bridal_20090812_Diamonds_are_forever__but_so_are___.html" target="_blank"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/ls/Philadelphia-Inquirer-press.jpg" border="0" alt="The Philadelphia Inquirer" /></a></div>
+<div class="col-sm-9 col-xs-12">At Los Angeles-based Angara.com, an online jewelry retailer, emerald engagement rings are the No. 1 colored gemstone choice in the category, according to Zameer Kassam, Angara.com's vice president. <br />
+<a class="pull-right fontcolor-type1 text-underline" rel="nofollow" href="http://www.philly.com/philly/living/celebrations/weddings/CTW_bridal_20090812_Diamonds_are_forever__but_so_are___.html" target="_blank">Read More</a>
+</div>
+</div>-->
+<div class="video-popup hidden">
+	<div class="relative-placeholder">
+		<img class="pull-right" style="cursor: pointer;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/btn_trash.gif" />
+		<iframe id="video" width="280" height="158"  src="https://www.youtube.com/embed/cjxAabv8lVg?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+	</div>
+</div>
+
+<div class="audio-popup hidden">
+	<div class="ap relative">
+		<div class="ap-holder relative" id="ap-holder">
+			<div class="popup-close"></div>
+			<audio controls id="audio" class="absolute">
+			  <source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/audio/Jewelry-Industry.MP3" type="audio/mp3">
+			  Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom audio"><div class="col-sm-3 col-xs-12"><a href="javascript:void(0)" style="cursor: pointer;"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/c-suiteradio.png" alt="Cheddar" border="0" style="max-width:150px;" /></a></div>
+<div class="col-sm-9 col-xs-12">"As long as there is love, there will be a demand for jewelry."<br /> <a href="javascript:void(0)" style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom businessnewsdaily"><div class="col-sm-3 col-xs-12"><a href="http://www.businessnewsdaily.com/9666-leadership-lessons-ankur-daga.html" target="_blank" style="cursor: pointer;"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/press/bdnlogo.png" alt="businessnewsdaily" border="0" style="max-width:150px;" /></a></div>
+<div class="col-sm-9 col-xs-12">"Pick something you can be the absolute best at, and then make that pursuit your single minded focus."<br /> <a href="http://www.businessnewsdaily.com/9666-leadership-lessons-ankur-daga.html" target="_blank" style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom cheddar"><div class="col-sm-3 col-xs-12"><a href="javascript:void(0)" style="cursor: pointer;"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/press/cheddar.png" alt="Cheddar" border="0" style="max-width:150px;" /></a></div>
+<div class="col-sm-9 col-xs-12">"Online jewelry market is expected to grow 15% YOY by 2017."<br /> <a href="javascript:void(0)" style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.forbes.com/collecting/2006/11/27/jewelry-luxury-gifts-forbeslife-style-cx_hp_1128gems.html', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/press/forbes-press.jpg" alt="Forbes" border="0" style="width:150px;" /></a></div>
+<div class="col-sm-9 col-xs-12">Ankur Daga, chief executive of Angara, created the online jeweler after seeing fellow Harvard Business School classmates struggle to purchase engagement rings. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.forbes.com/collecting/2006/11/27/jewelry-luxury-gifts-forbeslife-style-cx_hp_1128gems.html', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom">
+<div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.crainsnewyork.com/article/20070401/SUB/70331017/online-jewelers-aim-at-high-end', 
+'antm','scrollbars=yes,width=500,height=500')"><img style="outline: none;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/press/crains-press.png" border="0" alt="Crain's" /></a></div>
+<div class="col-sm-9 col-xs-12">Angara Inc. was created for people like Mr. Bilimer- those willing to spend big bucks for baubles online. The company is one of a number that for the first time are taking e-commerce to the upper reaches of the jewelry market. They are challenging the long-running dominance of such titans<br />
+<a class="pull-right fontcolor-type1 text-underline" target="_blank" href="/crains.html">Learn more</a>
+</div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom">
+<div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" onClick="window.open('/skin/frontend/angara/default/images/html/pop_antm.html', 'antm','scrollbars=yes,width=400,height=340')"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/ls/topmodels-press.jpg" border="0" alt="Topmodels" /></a></div>
+<div class="col-sm-9 col-xs-12">See Angara's $40,000 diamond bracelet in America's Next Top Model<br />
+<a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline clickble" onClick="window.open('/skin/frontend/angara/default/images/html/pop_antm.html', 'antm','scrollbars=yes,width=400,height=340')">View Video</a>
+</div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom">
+<div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" target="_blank" href="/daily-candy.html"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/ls/dailycandy-press.jpg" border="0" alt="Dailycandy" /></a></div>
+<div class="col-sm-9 col-xs-12">Angara&rsquo;s three-piece jewelry line for babies is designed for your tot&rsquo;s safety and made from nickel- and allergy-free metals. Earrings include clear, rubberized backs so your little one can wear diamonds to sleep without discomfort.
+<a class="pull-right fontcolor-type1 text-underline" target="_blank" href="/daily-candy.html">Learn more</a>
+</div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom">
+<div class="col-sm-3 col-xs-12"><a style="cursor: pointer; outline: none;" target="_blank" href="/wwd"><img style="outline: none;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/ls/wwd-press.jpg" border="0" alt="WWD" /></a></div>
+<div class="col-sm-9 col-xs-12">Ankur Daga, a Harvard Business School graduate and founder of  Angara.com, an e-commerce business specializing in diamond and gemstone  jewelry, said the site's main business was engagement rings. Angara  offers custom engagement rings and other jewelry categories at prices  generally 35 to 50 percent cheaper than at traditional retailers. <br />
+<a class="pull-right fontcolor-type1 text-underline" target="_blank" href="/wwd">Learn more</a>
+</div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('https://www.cryptocoinsnews.com/angara-jewelry-offering-free-sapphire-pendant/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/cryptocoinsnews.jpg" alt="Cryptocoinsnews" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">It’s no surprise that we love great quality and great value. Finding a deal, which has both, becomes a “bargain of a lifetime.” With the power of the Internet, family and friends, finding the bargain of a lifetime has become more realistic, and provides near instant gratification. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('https://www.cryptocoinsnews.com/angara-jewelry-offering-free-sapphire-pendant/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://noobpreneur.com/2014/01/29/run-proper-online-jewelry-store-learn-angara-com/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/noobpreneur.jpg" alt="Noobpreneur" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Are you looking to buy jewelry online or simply to find inspiration for starting your own e-commerce store? I recommend you to head over to Angara.com. Here’s why.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://noobpreneur.com/2014/01/29/run-proper-online-jewelry-store-learn-angara-com/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.afewgoodygumdrops.com/2014/02/luscious-ruby-rings-at-angara-the-gemstone-destination.html', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/afewgoodygumdrops.jpg" alt="Afewgoodygumdrops" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Here’s what’s fun about Angara’s process. You can choose your carat size, stone quality, metal type and add-ons to personalize the piece and find the right goodie at your price point.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.afewgoodygumdrops.com/2014/02/luscious-ruby-rings-at-angara-the-gemstone-destination.html', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.beautyiswithin.net/2014/02/blue-sapphire-rings-that-are-hard-to.html', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/beautyiswithin.jpg" alt="Beautyiswithin" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Wow! That was my first thought when I saw this image of the ring pictured above. Isn’t it magnificent and quite royal? This ring is actually part of the ‘Wow Bridal’ collection at Angara.com<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.beautyiswithin.net/2014/02/blue-sapphire-rings-that-are-hard-to.html', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://weddinglovely.com/blog/wedding-bands-angara/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/weddinglovely.jpg" alt="Weddinglovely" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">As I’m sure you’re more than aware, there are a lot of details that go into planning a wedding, not the least of which is where to buy your wedding bands. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://weddinglovely.com/blog/wedding-bands-angara/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.lifeinabreakdown.com/thinking-of-spoiling-my-mum/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="skin/frontend/ress/default/images/education/lifeinabreakdown.jpg" alt="Lifeinabreakdown" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Of late I have been wondering if there is something special I could treat my Mum to – as the lady who raised me, put up with my awful temper in my teens and still (sometimes I wonder how) managed to love me unconditionally, I would love to treat her to something she could look back at over the years and cherish.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.lifeinabreakdown.com/thinking-of-spoiling-my-mum/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.justinasgems.com/2014/04/shopping-angara-mothers-day/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/justinasgems.jpg" alt="Justinasgems" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Mother’s Day is quickly becoming one of my favorite holidays. Other than my birthday, it’s the only day of the year my family celebrates me and all that I do for them. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.justinasgems.com/2014/04/shopping-angara-mothers-day/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.bubbyandbean.com/2014/10/giveaway-win-garnet-diamond-necklace.html', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/bubbyandbean.jpg" alt="Bubbyandbean" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">I'll admit I'm a little biased, because it happens to be my birthstone, but I think that the garnet is one of the most stunning of all gemstones. The color is so rich and deep, and it looks lovely paired with just about anything. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.bubbyandbean.com/2014/10/giveaway-win-garnet-diamond-necklace.html', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.24-7pressrelease.com/search_press_releases.php?keywords=www.angara.com', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/24-7pressrelease.jpg" alt="24-7pressrelease" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">You have a sparkling reason to celebrate now as Angara announces early special Holiday sale on stunning diamond and gemstone blings. Together with incredible discounts, Angara offers free surprise gifts with every purchase.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.24-7pressrelease.com/search_press_releases.php?keywords=www.angara.com', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://pressroom.prlog.org/angara/', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/prlog.jpg" alt="Prlog" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12"> 'Tis the season for giving and sharing gifts. If you haven’t picked out your favorite gifts this year, look no further than Angara. Your cherished year-end festivities will be most charitable!<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://pressroom.prlog.org/angara/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.newswire.com/news-center/search?terms=angara.com', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/i-newswire.jpg" alt="I-newswire" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">The unconventional jewelry collection is adorable and affordable for the upcoming bridal season and holiday fashion.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.newswire.com/news-center/search?terms=angara.com', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://enewschannels.com/2013/11/25/enc19806_160039.php/online-jewelry-store-angara-inc-announces-early-cyber-monday-deals-kickstart-2013-holidays/', 
+'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/enewschannels.jpg" alt="Enewschannels" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">The store is offering incredible online savings that include a huge discount up to 15 percent on the entire range of jewelry at the store with free garnet studs of $199 on all orders today.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://enewschannels.com/2013/11/25/enc19806_160039.php/online-jewelry-store-angara-inc-announces-early-cyber-monday-deals-kickstart-2013-holidays/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.pr.com/company-profile/press-releases/32709', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/PR.jpg" alt="PR" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Just in time for the holiday season, jewelry shopping is coming to your computers. Now you can purchase the perfect gift for your wife, girlfriend, mother or little daughter right when you think of it. Angara.com<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.pr.com/company-profile/press-releases/32709', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://californianewswire.com/?s=angara.com', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/californianewswire.jpg" alt="Californianewswire" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">There is a site-wide discount of 15 percent on all orders. Besides the discount there are some unprecedented gift offers. The store is offering a great Blue Topaz pendant and a pair of Blue Topaz studs absolutely free on all orders.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://californianewswire.com/?s=angara.com', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.1888pressrelease.com/angara-inc-11533-company-pr.html', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/1888pressrelease.jpg" alt="1888pressrelease" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Using the convenience of the Internet, Angara.com plans to become your all-in-one source for assorted stones and dazzling jewelry. The Angara expertise is repeatedly shown in our attention to fine detail, eye-catching designs and affordable prices. <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.1888pressrelease.com/angara-inc-11533-company-pr.html', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://www.viglink.com/blog/2013/10/17/angara-for-all-jewelry-lovers-this-holiday-season/', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/viglink.jpg" alt="Viglink" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Angara.com is an online only fine gemstone jewelry retailer.  They are specialists in gemstone jewelry including sapphire, ruby, emerald and tanzanite jewelry.  What’s more, this beautiful retailers has just doubled(!) it’s commission rates, to a exclusive 6% across all items! <br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://www.viglink.com/blog/2013/10/17/angara-for-all-jewelry-lovers-this-holiday-season/', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+
+<div class="row no-gutters max-margin-bottom max-padding-bottom"><div class="col-sm-3 col-xs-12"><a style="cursor: pointer;" rel="nofollow" onclick="window.open('http://bit.ly/send2press', 'antm','scrollbars=yes,width=500,height=500')"><img 
+src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/education/send2pressnewswire.jpg" alt="Send2pressnewswire" border="0" /></a></div>
+<div class="col-sm-9 col-xs-12">Angara Inc. (Angara.com) brings its Black Friday Final Offer to ensure that customers get the best of season’s deal. With a discount of 15 percent on all orders, customers can also get a pair of garnet studs and a garnet pendant worth $299 absolutely free.<br /> <a style="cursor: pointer;" class="pull-right fontcolor-type1 text-underline" rel="nofollow" onclick="window.open('http://bit.ly/send2press', 'antm','scrollbars=yes,width=500,height=500')">Learn more</a></div>
+</div>
+<script>
+	jQuery(function(){
+		jQuery('.cheddar a').click(function(){
+			var winheight = jQuery(window).height();
+			var videoheight = jQuery('.video-popup div').height();
+			var toppadding = (winheight-videoheight)/3;
+			jQuery(".video-popup").removeClass('hidden').find('div').css({'padding-top': toppadding+'px'});
+			jQuery('body, html').css({'overflow-y':'hidden'});
+		});
+		 jQuery('.video-popup').on('click', function(ev) {
+			jQuery(this).addClass('hidden').find('div').css({'padding-top': '0px'});
+			jQuery('body, html').css({'overflow-y':'auto'});
+			jQuery("#video")[0].src += "&autoplay=false";
+			ev.preventDefault();
+		  });
+		 jQuery('.audio a').click(function(){
+			var winheight = jQuery(window).height();
+			var videoheight = jQuery('.audio-popup .ap-holder').height();
+			var toppadding = (winheight-videoheight)/2;
+			jQuery(".audio-popup").removeClass('hidden').find('.ap').css({'margin-top': toppadding+'px'});
+			jQuery('body, html').css({'overflow-y':'hidden'});
+
+			var player = document.getElementById('audio');
+				player.play();
+				
+		});
+		 jQuery('.audio-popup').on('click', function(ev) {
+			if(ev.target.id != 'ap-holder'){
+				jQuery(this).addClass('hidden').find('.ap').css({'margin-top': '0px'});
+				jQuery('body, html').css({'overflow-y':'auto'}); 
+				var player = document.getElementById('audio');
+					player.pause();
+            }
+		  });
+	});
+</script>

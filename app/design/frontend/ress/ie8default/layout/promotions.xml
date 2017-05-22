@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<promotions_index_index translate="label">					
+		<block type="promotions/offer" name="root" output="toHtml" template="promotions/offer.phtml">
+			<block type="promotions/offer_coupon" name="promotion_coupon" template="promotions/offer/coupon.phtml" /> 
+		</block>        
+	</promotions_index_index>
+	
+	<promotions_index_ajax translate="label">					
+		<block type="promotions/offer" name="root" output="toHtml" template="promotions/offer_ajax.phtml">
+			<block type="promotions/offer_coupon" name="promotion_coupon" template="promotions/offer/ajax.phtml" /> 
+		</block>        
+	</promotions_index_ajax>
+	
+	<promotions_ajax_index translate="label">					
+		<block type="promotions/offer" name="root" output="toHtml" template="promotions/offer_cart.phtml">
+			<block type="promotions/offer_coupon" name="promotion_coupon" template="promotions/offer/cart_coupon.phtml" /> 
+		</block>        
+	</promotions_ajax_index>
+</layout>

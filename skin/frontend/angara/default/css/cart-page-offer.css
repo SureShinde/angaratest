@@ -1,0 +1,93 @@
+
+.offer-accross-site {
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	height:40px;
+	background-color:#fff;
+	z-index:99;
+}
+.offer-strip-bottom {
+	height:40px;
+	background-color:#000;
+	text-align:right;
+	top:-40px;
+}
+.offer-strip-bottom a {
+	height:40px;
+	line-height:40px;
+	font-weight:bold;
+	padding:0 37px 0 25px;
+	font-size:15px;
+	text-transform:uppercase;
+	color:#e8e8e8;
+	text-decoration:none;
+	background: url(../images/offer-text-arrow.png) #dc3113 no-repeat;
+	display:inline-block;
+}
+.offer-strip-bottom a.active {
+	background-position:170px 17px;
+}
+.offer-strip-bottom a.deactive {
+	background-position:170px -18px;
+}
+.offer-title {
+	text-align:center;
+	font-weight:bold;
+	font-size:18px;
+	color:#000;
+	margin-top:40px;
+}
+.offer-sub-title {
+	text-align:center;
+	font-size:16px;
+	color:#000;
+	margin-top:5px;
+}
+.highlighted-offer {
+	font-weight:bold;
+	font-size:24px;
+	color:#dc3113;
+}
+.ticker-box {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	color:#fff;
+	width:170px;
+	margin:0 auto;
+	background-color:#000;
+	font-size:19px;
+	font-weight:bold;
+	font-style:italic;
+	-webkit-border-radius:4x;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	margin-top:30px;
+}
+.use-code-txt {
+	font-size:18px;
+	color:#6c6c6c;
+	font-weight:bold;
+	text-align:center;
+	margin-top:30px;
+}
+.offers-detail-box {
+	width:960px;
+	margin:0 auto;
+}
+.offer-details-left-block {
+	float:left;
+}
+.close-accross-site-popup {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top:8px;
+	right:8px;
+	display: block;
+	cursor: pointer;
+	background: url(../images/close-popup-btn.jpg) 5px 5px no-repeat;
+	border: solid 1px #fff;
+}

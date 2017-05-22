@@ -1,0 +1,148 @@
+<style>
+.col-main {
+	min-height:500px;
+	height:auto !important;
+	height:500px;
+}
+</style>
+<?php 
+	$countryParam = $this->getCountryParams();
+	$countryName = $countryParam->getCountryName();
+	$countryCode = strtolower($countryParam->getCountryCode());	
+	$countryCurrency =  $countryParam->getCountryCurrency();
+?>
+<script type="text/javascript">
+var countryCodeShipPopup = "<?php echo $countryCode; ?>";
+</script>
+
+<div id="div_shippinginfo_popup" style="display:none;  margin: 0 auto;position:fixed;
+padding-bottom: 6px;
+width: 100%;
+height: 900px;
+z-index:10000;
+top:0;
+layer-background-color:#000;
+left:0;"  
+>
+  <div style="background: #000; margin: 0 auto;position:absolute;
+	padding-bottom: 6px;
+	width: 100%;
+	opacity:0.5;
+	border: 1px solid #CD0000;
+	height: 100%;
+	filter: alpha(opacity = 50);
+	top:0;
+	left:0;" 
+	> </div>
+  <?php
+	// get shipping informnation
+		if($countryCode=='au'){	
+
+	$line_5th ='<li>US Originating Goods: (90% of Angara Products are manufactured in the US)
+            	<ul>
+                    <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">No Duty on orders of any value</li>
+                     <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">We will email you the &lsquo;Certificate of US origin&rsquo; after product purchase</li>
+                </ul>            
+            </li>';			
+    $line_6th ='<li>Non US Originating Goods: (10% of Angara products are manufactured outside the US)
+            	<ul>
+                    <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">There is no duty on orders of amount below $1000 AUD</li>
+                     <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">For orders of value more than $1000 AUD:
+                         <ul>
+                         	<li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">Custom Duty 5% calculated on value of goods</li>
+                            <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">GST is 10% and is calculated on the Value of the goods + the Duty + the shipping and insurance cost</li>
+                            <li style="margin-top:4px; font:12px/14px Arial, Helvetica, sans-serif;">$48 customs processing fee if the goods arrive by either air cargo, sea cargo or through the Post</li>
+                         </ul>
+                     
+                     </li>
+                </ul>            
+            </li>';
+      $line_7th ='<li>Please contact customer care to know the origin of goods or for any other queries.</li>';	
+	
+	}elseif($countryCode=='ca'){	
+	$line_3rd ='<li>There is no duty on most of Angara.com orders of any amount as they are classified as US origin goods.
+</li>';
+	
+	}elseif($countryCode=='gu'){	
+	$line_3rd ='<li>Orders under $1,000 are not subject to duty or taxes!  There is no duty on Angara.com orders of any amount as they are classified as US origin goods.</li>';
+	$line_4th ='<li>If your purchase is over US $1,000, FedEx or your Customs Office will contact you regarding assessing Taxes of up to 4% when your shipment reaches Guam.</li>';	
+	
+	}elseif($countryCode=='hk'){	
+	$line_3rd ='<li>There is no duty on Angara.com orders of any amount as they are classified as US origin goods.</li>';
+	
+	}elseif($countryCode=='jp'){
+	$line_4th ='<li>FedEx or your Customs Office will contact you regarding assessing Tax and Duty of up to 10.5% when your shipment reaches Japan.</li>';
+	
+	}elseif($countryCode=='mx'){	
+	$line_3rd ='<li>There is no duty on most of Angara.com orders of any amount as they are classified as US origin goods.</li>';
+	$line_4th ='<li>FedEx or your Customs Office will contact you regarding assessing Taxes of 15% when your shipment reaches Mexico.</li>';
+	
+	}elseif($countryCode=='nz'){
+	$line_3rd ='<li>Orders under NZ$ 1,000 are not subject to duty or taxes!  There is no duty on Angara.com orders of any amount as they are classified as US origin goods.</li>';
+	$line_4th ='<li>If your purchase is over NZ$ 1,000, FedEx or your Customs Office will contact you regarding assessing Taxes of up to 20% when your shipment reaches New Zealand (for orders over NZ$ 1,000 an import fee of NZ$24.75 and NZ$12.50 Biosecurity Systems Entry Levy fee may apply).</li>';
+	
+	}elseif($countryCode=='no'){
+	$line_3rd ='<li>There is no duty on Angara.com orders of any amount.</li>';	
+	$line_4th ='<li>FedEx or your Customs Office will contact you regarding assessing Taxes of up to 25% when your shipment reaches Norway.</li>';
+	
+	}elseif($countryCode=='pr'){
+	$line_3rd ='<li>There is no duty on Angara.com orders of any amount.</li>';	
+	
+	}elseif($countryCode=='ch'){	
+	$line_4th ='<li>FedEx or your Customs Office will contact you regarding assessing Tax and Duty of up to 10% when your shipment reaches Switzerland.</li>';
+	
+	}elseif($countryCode=='vi'){
+	$line_3rd = '<li>There is no duty on Angara.com orders of any amount as they are classified as US origin goods.</li>';	
+	
+	}elseif($countryCode=='gb'){
+	$line_3rd = '<li>FedEx or your Customs Office will contact you regarding assessing Tax and Duty of up to 22.5% when your shipment reaches United Kingdom.</li>';
+		
+	}elseif($countryCode=='sg'){
+	$line_3rd ='<li>For Orders of total Value below SGD400 there is NO GST levied.</li>';	
+	$line_4th ='<li>For orders of total value above SGD400 GST levied is 7% and is calculated on the Value of goods + the shipping cost + the insurance cost.</li>';
+	
+	
+	}
+	?>
+  <div class="countrywrapper">
+    <div class="popuplogo"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/angara/default/images/popup/angara-logo.jpg"  alt="Angara" /></div>
+    <div class="closebtn" onclick="javascript:closeshippingpopup();"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/angara/default/images/popup/close-popup.jpg" alt="close" /></div>
+    <div class="clear"></div>
+    <div class="countrybox">
+      <div class="flagbox">
+        <div class="countryflag country-<?php echo $countryCode; ?>-big"></div>
+        <div class="countryname">Now Shipping to
+          <?php
+				if(strtolower($countryCode)=='gs'){
+					echo 'SGSSI';
+				}else{
+					echo $countryName;
+				}
+				?>
+        </div>
+        <div class="shippingarrow"></div>
+      </div>
+    </div>
+    <div class="heading">We make it easy to shop from <?php echo $countryName; ?> with:</div>
+    <div class="points">
+      <ul>
+        <li>Free FedEx shipping to <?php echo $countryName; ?> on all orders above $500!</li>
+        <li>Prices Displayed are in <?php echo $countryCurrency ?>.</li>
+        <li>Product(s) will be delivered in 3-6 days from the date of shipment.</li>
+        <?php echo $line_3rd; ?> <?php echo $line_4th; ?> <?php echo $line_5th; ?> <?php echo $line_6th; ?> <?php echo $line_7th; ?>
+        <?php			
+			$line_cookie_msg = '';
+			if($countryCode == 'ar' || $countryCode == 'be' || $countryCode == 'bg' || $countryCode == 'cz' || $countryCode == 'dk' || $countryCode == 'ee' || $countryCode == 'fi' || $countryCode == 'fr' || $countryCode == 'de' || $countryCode == 'gr' || $countryCode == 'hu' || $countryCode == 'ie' || $countryCode == 'it' || $countryCode == 'lv' || $countryCode == 'lt' || $countryCode == 'lu' || $countryCode == 'mt' || $countryCode == 'nl' || $countryCode == 'no' || $countryCode == 'pl' || $countryCode == 'pt' || $countryCode == 'ro' || $countryCode == 'sk' || $countryCode == 'sl' || $countryCode == 'es' || $countryCode == 'se' || $countryCode == 'ch' || $countryCode == 'gb')
+			{
+				$line_cookie_msg = '<li>Angara places cookies on your computer to help us make your shopping experience better. To find out more about cookies, see our <a href="/privacy-policy-cookie-restriction-mode" target="_blank" style="color:#ba0000;">privacy notice</a>.</li>';
+				echo $line_cookie_msg;
+			}
+			?>
+        <li>Duties/taxes may be assessed by your home country on this purchase.</li>
+      </ul>
+    </div>
+    <div class="moreinfo">More information about shipping internationally is available on our website.</div>
+    <div class="continuebtn" onclick="javascript:closeshippingpopup();"><a href="<?php echo Mage::helper('directory/url')->getSwitchCountryUrl(array('country' => strtoupper($countryCode))); ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/angara/default/images/popup/continue-shopping.jpg" alt="Continue Shopping" title="Continue Shopping" /></a></div>
+    <div class="bottomstrip">Not shipping to <?php echo $countryName; ?>? <span><a href="#popuparrow" onclick='closeshippingpopup(); showcountrypopup(1);' style="color:#ba0000;">Click here</a></span></div>
+  </div>
+</div>

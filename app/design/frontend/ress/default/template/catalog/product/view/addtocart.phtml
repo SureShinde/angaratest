@@ -1,0 +1,100 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$_product = $this->getProduct();
+$buttonTitle = $this->__('Add to Cart');
+
+if($_product->isSaleable()): ?>
+	<div class="row">
+        <div class="col-sm-12 relative-placeholder">
+            <div class="add-to-cart">
+			<?php 
+			if($_product->getIsBuildYourOwn() && !$_product->getByoModel()->hasSettingSelected()): ?>
+				<button id="select-byo-setting" type="button" title="Select this Setting" class="btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow">Select this Setting</button>
+			<?php 
+			else: 
+				if(!$_product->isGrouped()): ?>
+					<input type="hidden" name="qty" id="qty" maxlength="12" value="<?php echo ($qty = $this->getProductDefaultQty()*1)?$qty:1;?>" />
+					<button type="button" id="addtocart-btn" title="<?php echo $buttonTitle;?>" class="btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this); addCartClicked();"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle;?></button>
+					<?php 
+					echo $this->getChildHtml('', true, true);
+				else: ?>
+					<button type="button" id="addtocart-btn" title="<?php echo $buttonTitle;?>" class="btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this); addCartClicked();"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle ?></button>
+					<?php echo $this->getChildHtml('', true, true); ?>
+				<?php 
+				endif; 
+			endif;?>
+            </div>
+			<div id="add-cart-wait" class="text-light hide absolute-placeholder" style="">
+				<i class="fa fa-spinner fa-spin fa-2x"></i>
+			</div>
+        </div>
+    </div>    
+<?php 
+endif; ?>
+<?php /* Code for Notify me Out of Stock */ ?>
+<?php /* Asheesh:Start */ ?>
+<?php $_storeId = Mage::app()->getStore()->getId(); ?>
+<?php $_isActive = Mage::getStoreConfig('outofstocksubscription/mail/active', $_storeId); ?>
+<?php if(!$_product->isSaleable() && $_isActive): ?>
+	<div class="notify-box row">
+		<div class="col-sm-12 fontsize-type0 text-bold text-green low-padding-top high-padding-left high-padding-right">
+			<span>We can customize this item for you. For further assistance, give us a call on 1-888-926-4272 or <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="text-green text-underline live-chat-link">click here</a> to chat.</span>
+		</div>
+		<div class="col-sm-12 high-padding-left high-padding-right high-margin-top">
+			<span class="text-bold sold-out">Sold Out</span><br>
+			<span class="oos">This item is currently out of stock</span>
+		</div>
+	</div>
+	<div class="row notifyme">
+		<div class="col-sm-12 relative-placeholder">
+			<div class="add-to-cart">
+				<input type="text" placeholder="Enter email to get notified" class="t1 input-text validate-email required-entry max-margin-bottom high-margin-top" id="subscription_email" title="Enter email to get notified" value="" name="subscription_email" style="margin-bottom:0px; height:40px;">
+				<button type="submit" id="notify-me-btn" title="<?php echo $this->__('Notify Me'); ?>" class="disabled btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" style="font-size:22px; line-height:50px; height:50px; border-radius:2px; margin-top:10px;"><?php echo $this->__('Notify Me'); ?></button>
+			</div>
+			<div id="add-cart-wait" class="text-light hide absolute-placeholder" style="">
+				<i class="fa fa-spinner fa-spin fa-2x"></i>
+			</div>
+		</div>
+	</div>	
+<?php endif; ?>
+<?php /* Asheesh:End */ ?>
+<script>
+jQuery(function() {
+	<?php 
+	if($_product->getIsBuildYourOwn()):
+		if($_product->getByoModel()->hasSettingSelected()):
+			$settingDetails = $_product->getByoModel()->getSettingSelected();
+				foreach($settingDetails['super_attribute'] as $attributeId => $value): ?>
+					jQuery('#attribute<?php echo $attributeId; ?> option[value="<?php echo $value?>"]').prop('selected', true);
+				<?php 
+				endforeach; ?>
+			spConfig.reloadPrice();
+		<?php 
+		endif; ?>
+		jQuery('#select-byo-setting').click(function(){
+			var superAttributes = jQuery('#product_addtocart_form [name^="super_attribute"]').serializeArray();
+			var centerDiamondSize = jQuery('#product-options-wrapper').find('dt label:contains("Center Diamond Size")').parent().next('dd').find('select option:selected').text();
+			var byoForm = jQuery('<form id="select-byo-setting-form" action="/buildyourown/index/selectSetting/" method="post">');
+			byoForm.append('<input type="hidden" name="productId" value="<?php echo $_product->getId(); ?>" />');
+			byoForm.append('<input type="hidden" name="centerDiamondSize" value="' +centerDiamondSize+ '" />');
+			byoForm.append(
+				jQuery('<input type="hidden" name="simpleProductId">').val(spConfig.getMatchingSimpleProduct())
+			);
+			byoForm.append('<input type="hidden" name="byoJewelryType" value="<?php echo $_product->getAttributeText('build_your_own_jewelry_type'); ?>" />');
+			jQuery.each(superAttributes, function(iCounter, superAttribute){
+				byoForm.append('<input type="hidden" name="' + superAttribute.name + '" value="' + superAttribute.value + '">');
+			})
+			byoForm.appendTo('body').submit();
+		})
+	<?php 
+	endif; ?>
+});
+jQuery(window).load(function(){
+	jQuery('#notify-me-btn').removeClass('disabled');
+});
+</script>

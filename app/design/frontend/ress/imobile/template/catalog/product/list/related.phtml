@@ -1,0 +1,52 @@
+<?php if($this->getItems()->getSize()){ ?>
+<div class="similar-item-title relative mB10 pL10">
+	<span>Similar Items</span>
+	<span class="close absolute" onclick="closeSimilaritem('similaritemsback','similarItems')" style="right:0px; top:-11px; width:38px; height:38px; line-height:38px; text-align:center; background: url(/skin/frontend/ress/default/images/optionpopupclose.png) no-repeat center center; background-size: 15px; font-size: 0px;">X</span>
+	<?php /* $current_cat=Mage::getModel('catalog/layer')->getCurrentCategory();
+	if($current_cat && $current_cat->getId()){?>
+		<a href='<?php echo $current_cat->getUrl(); ?>' class="fr apricot-text" style="font-size:16px; line-height:18px;">View all <?php echo $current_cat->getName(); ?></a>
+	<?php } */ ?>
+</div>
+<div class="similar-item-holder" style="overflow-x:auto; padding-bottom:10px;">
+	<ul style="padding:0px 5px; float:left">
+		<?php 
+		$i = 0;
+		foreach($this->getItems() as $_item){ 
+			if($i <= 4){?>                
+				<li class="product" style="background: #ffffff; border-radius: 2px; border: 1px solid #e1e3df; border-bottom: 1px solid #cbccc9; margin:0px 5px;">
+					<div class="pro-image" style="border-bottom:1px solid #e1e3df; width:100%; min-height:100px">
+						<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" title="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(165); ?>" width="165" height="165" alt="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" class="img-responsive" /></a>
+					</div>
+					<div class="pro-detail">
+						<div class="product-name">
+							<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014"><?php echo Mage::helper('core/string')->truncate($this->helper('catalog/output')->productAttribute($_item, $this->htmlEscape($_item->getShortDescription()) , 'name'), $length = 30, $etc = '...');?></a>
+						</div>
+						<div class="mT5"><?php echo $this->getPriceHtml($_item, true, '-related'); ?></div>
+					</div>
+				</li>				
+			<?php
+			}
+		$i++;
+		} ?>
+	</ul>           
+</div>
+<script>
+	jQuery(function(){
+		var itemCount = jQuery('.similar-item-holder ul li').length;
+		var itemWidth = jQuery('.similar-item-holder ul li').outerWidth() + 10;
+		jQuery('.similar-item-holder ul').css('width',(itemCount*itemWidth)+'px');		
+	});
+	
+	jQuery(window).resize(function(){
+		var itemCount = jQuery('.similar-item-holder ul li').length;
+		var itemWidth = jQuery('.similar-item-holder ul li').outerWidth() + 10;
+		jQuery('.similar-item-holder ul').css('width',(itemCount*itemWidth)+'px');		
+	});
+</script>
+<?php }else{ ?>
+<script>
+jQuery(function(){
+	jQuery('.similar-items-icon, .similarItems, .similaritemsback').remove();
+});
+</script>
+<?php }?>

@@ -1,0 +1,82 @@
+<style>
+.last-minute-shopping-tag{position:fixed;top:552px;right:-1px;}
+.nav > li > a{padding:10px 15px;}
+.p0{padding:0px;}
+.sm{display:none}
+@media (min-width: 768px ) and (max-width: 999px) {
+	.nav > li > a{padding:10px 9px;}	
+	.sm{display:block}
+	.md{display:none}
+}
+</style>
+<!--[if IE 8]> 
+<style>
+.ie8-remove{display:none!important}
+</style>
+<![endif]-->
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */ 
+?>
+<div id="main-menu-min">
+  	<div class="hidden-xs">
+    	<div class="showcase-bg-white showcase-box-shadow container-fluid zi2">
+			<?php /*?><div class="last-minute-shopping-tag"><a href="/jewelry-gifts/last-minute-shopping.html?icid=same-day-shipping-tag|12232014"><img src="/skin/frontend/ress/default/images/promotion/default/last-minute-shopping-tag.jpg" width="137" height="73" /></a></div><?php */?>
+      		<div class="container">
+        		<div class="row">
+          			<div class="col-sm-12 text-center">
+            			<nav id="navbar-main-min" class="navbar navbar-default navbar-main text-uppercase" role="navigation">
+              				<div class="primary-navbar">
+                				<ul class="nav navbar-nav">
+                  					<li><a href="/rings.html" class="no-transition" onclick="categoryNavSelect('Rings|topnav')"><span class="nav-link-text no-transition">Rings</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+                  					<li><a href="/pendants.html" class="no-transition" onclick="categoryNavSelect('Necklaces|topnav')"><span class="nav-link-text no-transition">Necklaces</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+                  					<li><a href="/earrings.html" class="no-transition" onclick="categoryNavSelect('Earrings|topnav')"><span class="nav-link-text no-transition">Earrings</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+                  					<li><a  href="/engagement-rings.html" class="no-transition" onclick="categoryNavSelect('Engagement|topnav')"><span class="nav-link-text no-transition">Engagement</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+                  					<li><a href="/wedding-rings.html" class="no-transition" onclick="categoryNavSelect('Wedding|topnav')"><span class="nav-link-text no-transition">Wedding</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+				  					<li><a href="/bracelets.html" class="no-transition" onclick="categoryNavSelect('Bracelets|topnav')"><span class="nav-link-text no-transition">Bracelets</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+				  					<li><a href="/collection/high-jewelry.html" class="no-transition" onclick="categoryNavSelect('High Jewelry|topnav')"><span class="nav-link-text no-transition">High Jewelry</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a></li>
+                  					<li>
+										<a href="/jewelry-gifts.html" class="no-transition" onclick="categoryNavSelect('Gifts|topnav')">
+											<span class="nav-link-text no-transition" style="color:#D83D29;">
+												<i class="fa fa-gift" style="font-size:16px;"></i> Gifts
+											</span>
+											<i class="fa low-padding-left fa-angle-down no-transition" style="color:#D83D29;"></i>
+										</a>
+									</li>
+                				</ul>
+              				</div>
+            			</nav>
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+    </div>
+</div>

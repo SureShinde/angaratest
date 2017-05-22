@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<layout>
+
+	<!--S:VA	Login or Register Ajax Popup-->
+	<ajax_index_login>   
+		<block type="ajax/index" name="root" output="toHtml" template="angara_wishlist/product.phtml"/>
+	</ajax_index_login>
+	
+    <catalog_category_layered>		
+		<reference name="product_list">	
+			<block type="ajax/product" name="ajax.wishlist" as="ajax_wishlist" template="angara_wishlist/list.phtml"/>
+		</reference>
+    </catalog_category_layered>	
+	
+	<!--Apply Filters on Catalog Page -->
+	<adjnav_ajax_category> 
+		<reference name="product_list">	
+			<block type="ajax/product" name="ajax.wishlist" as="ajax_wishlist" template="angara_wishlist/list.phtml"/>
+		</reference>
+	</adjnav_ajax_category> 
+	
+	<!--Apply Filters on Search Page -->
+	<adjnav_ajax_search> 
+		<reference name="product_list">	
+			<block type="ajax/product" name="ajax.wishlist" as="ajax_wishlist" template="angara_wishlist/list.phtml"/>
+		</reference>
+	</adjnav_ajax_search> 
+	
+	<catalog_product_view>
+        <reference name="product.info.addto">	
+			<block type="ajax/product" name="ajax.wishlist" as="ajax_wishlist" template="angara_wishlist/list.phtml"/>
+        </reference>		
+    </catalog_product_view>	
+	
+	<catalogsearch_result_index>
+		<reference name="search_result_list">	
+			<block type="ajax/product" name="ajax.wishlist" as="ajax_wishlist" template="angara_wishlist/list.phtml"/>
+		</reference>
+    </catalogsearch_result_index>		
+</layout>

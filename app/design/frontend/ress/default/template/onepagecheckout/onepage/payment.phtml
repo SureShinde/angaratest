@@ -1,0 +1,37 @@
+<script type="text/javascript">
+//<![CDATA[
+    var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
+    var checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+    var lastPrice;
+//]]>
+</script>
+<div id="payment-method" class="onepagecheckout_block">
+    <?php /* <div class="block-sub-heading high-padding-bottom" style="font-size:22px;">Payment <img src="/skin/frontend/ress/default/images/verisign-logo.jpg" class="pull-right"  style="margin-top:-5px;"/></div> */ ?>
+    <div class="tool-tip" id="payment-tool-tip" style="display:none;">
+        <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
+        <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+        function toggleToolTip(event){
+            if($('payment-tool-tip')){
+                $('payment-tool-tip').toggle();
+            }
+            Event.stop(event);
+        }
+        if($('payment-tool-tip-close')){
+            Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
+        }
+        var payment = new Payment('payment-method');
+    //]]>
+    </script>
+    <div id="checkout-payment-method-load">
+    <?php echo $this->getChildHtml('methods') ?>
+    </div>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+        payment.currentMethod = "<?php echo $this->getChild('methods')->getSelectedMethodCode() ?>";
+    //]]>
+    </script>
+</div>

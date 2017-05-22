@@ -1,0 +1,170 @@
+<?php $_code=$this->getMethodCode() ?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+
+    <li class="hidden">
+        <div class="input-box">
+        	Select Card Type
+            <select id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" <?php /*?>class="required-entry validate-cc-type-select"<?php */?>>
+                <option value=""><?php echo $this->__('Amex / Visa / Master / Discover')?></option>
+            <?php $_ccType = $this->getInfoData('cc_type') ?>
+            <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+                <option value="<?php echo $_typeCode ?>"<?php if($_typeCode==$_ccType): ?> selected="selected"<?php endif ?>><?php echo $_typeName ?></option>
+            <?php endforeach ?> 
+            </select>
+        </div>
+		<input type="hidden" title="<?php echo $this->__('Name on Card') ?>" placeholder="<?php echo $this->__('Name on Card') ?>" class="input-text" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner]" value="<?php echo $this->htmlEscape($this->getInfoData('cc_owner')) ?>" />
+    </li>
+       
+    <li class="max-margin-top full-width pull-left">
+        <div class="input-box">
+			<label class="ielabel hidden" for="<?php echo $_code ?>_cc_number"><?php echo $this->__('Credit Card Number') ?></label>
+            <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-number validate-cc-type" value="" placeholder="Card Number"/>
+        </div>
+        <script>
+		jQuery(function() {
+			jQuery('#<?php echo $_code ?>_cc_number').validateCreditCard(function(result) {
+				jQuery('select[name^="payment[cc_type]"] option:selected').attr("selected",null);		//	reset card type
+				jQuery('.cc-company-logos span').each(function(){
+					jQuery(this).removeClass('grey-logo');
+					if(result.card_type!= null){
+						//	Select card type
+						if(result.card_type.name=='visa'){
+							jQuery("#<?php echo $_code ?>_cc_type").val("VI").attr('selected','selected');
+							//jQuery('select[name^="payment[cc_type]"] option[value="VI"]').attr("selected","selected");
+						}
+						if(result.card_type.name=='amex'){
+							jQuery("#<?php echo $_code ?>_cc_type").val("AE").attr('selected','selected');
+							//jQuery('select[name^="payment[cc_type]"] option[value="AE"]').attr("selected","selected");
+						}
+						if(result.card_type.name=='mastercard'){
+							jQuery("#<?php echo $_code ?>_cc_type").val("MC").attr('selected','selected');
+							//jQuery('select[name^="payment[cc_type]"] option[value="MC"]').attr("selected","selected");
+						}
+						if(result.card_type.name=='discover'){
+							jQuery("#<?php echo $_code ?>_cc_type").val("DI").attr('selected','selected');
+							//jQuery('select[name^="payment[cc_type]"] option[value="DI"]').attr("selected","selected");
+						}
+						
+						if(jQuery(this).attr('id') != (result.card_type.name)){
+							jQuery(this).addClass('grey-logo');
+						}
+					}
+				})
+			});
+		});
+		</script>
+		<div class="cc-company-logos">
+			<span id="amex" class="amex"></span>
+			<span id="visa" class="visa"></span>
+			<span id="mastercard" class="mastercard"></span>
+			<span id="discover" class="discover"></span>
+		</div>
+    </li>
+    <li id="<?php echo $_code ?>_cc_type_exp_div" class="max-margin-top full-width pull-left" style="border:1px solid #999999; height:50px; border-radius:3px; width:92%!important; float:left;">
+		<div class="input-box" style="width:50%;float:left;">           
+			<input type="text" id="mmyy_exp"  title="<?php echo $this->__('Expiration Date') ?>" class="input-text validate-mmyy required-entry" value="" placeholder="MM/YY" maxlength="5" style="border:none;height:47px !important;" />
+			<input type="hidden" id="<?php echo $_code ?>_start_month" name="payment[cc_exp_month]" data-id="mm" name="" title="" class="input-text" value=""  />
+			<input type="hidden" id="<?php echo $_code ?>_start_year" name="payment[cc_exp_year]" data-id="yy" name="" title="" class="input-text" value=""  />
+			
+		</div>
+		<?php echo $this->getChildHtml() ?>
+		<?php if($this->hasVerification()): ?>
+		<div class="input-box" style="width:50%;float:left">
+            <div class="v-fix" style="float:left;;">
+				<label class="ielabel hidden" for="<?php echo $_code ?>_cc_cid"><?php echo $this->__('Security Code') ?></label>
+                <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" placeholder="CVC" style="border:none; height:47px!important;"/>
+            </div>
+        </div>
+		<?php endif; ?>
+    </li>
+	<li id="<?php echo $_code ?>_cc_type_exp_div" class="max-margin-top full-width pull-left" style="width:7% !important;float:left;">
+	<a href="#" class="cvv-what-is-this"><i class="fa fa-question-circle apricot-text" aria-hidden="true"></i><?php //echo $this->__('What is this?') ?></a>
+	</li>
+    <?php if ($this->hasSsCardType()): ?>
+    <li id="<?php echo $_code ?>_cc_type_ss_div" class="max-margin-top full-width pull-left">
+        <ul class="inner-form">
+            <li class="form-alt"><label for="<?php echo $_code ?>_cc_issue" class="required"><em>*</em><?php echo $this->__('Switch/Solo/Maestro Only') ?></label></li>
+            <li>
+                <label for="<?php echo $_code ?>_cc_issue"><?php echo $this->__('Issue Number') ?>:</label>
+                <span class="input-box">
+                    <input type="text" title="<?php echo $this->__('Issue Number') ?>" class="input-text validate-cc-ukss cvv" id="<?php echo $_code ?>_cc_issue" name="payment[cc_ss_issue]" value="" />
+                </span>
+            </li>
+            <li>
+                <label for="<?php echo $_code ?>_start_month"><?php echo $this->__('Start Date') ?>:</label>
+                <div class="input-box">
+                    <div class="v-fix">
+                        <select id="<?php echo $_code ?>_start_month" name="payment[cc_ss_start_month]" class="validate-cc-ukss month">
+                        <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"<?php if($k==$this->getInfoData('cc_ss_start_month')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="v-fix">
+                        <select id="<?php echo $_code ?>_start_year" name="payment[cc_ss_start_year]" class="validate-cc-ukss year">
+                        <?php foreach ($this->getSsStartYears() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"<?php if($k==$this->getInfoData('cc_ss_start_year')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="adv-container">&nbsp;</li>
+        </ul>
+        <script type="text/javascript">
+        //<![CDATA[
+        var SSChecked<?php echo $_code ?> = function() {
+            var elm = $('<?php echo $_code ?>_cc_type');
+            if (['SS','SM','SO'].indexOf(elm.value) != -1) {
+                $('<?php echo $_code ?>_cc_type_ss_div').show();
+            } else {
+                $('<?php echo $_code ?>_cc_type_ss_div').hide();
+            }
+        };
+
+        Event.observe($('<?php echo $_code ?>_cc_type'), 'change', SSChecked<?php echo $_code ?>);
+        SSChecked<?php echo $_code ?>();
+        //]]>
+        </script>
+    </li>
+    <?php endif; ?>
+</ul>
+<script>
+Validation.add('validate-mmyy', 'Please enter a valid expiration date.', function(v) {     
+   var ok = false;
+
+start_mmyy = document.getElementById('mmyy_exp').value;   
+start_month = document.getElementById('<?php echo $_code ?>_start_month').value;
+start_year = document.getElementById('<?php echo $_code ?>_start_year').value;
+ /* error */ 
+ if(start_month.length && start_year.length && start_mmyy.length == 5) {
+	ok = true;
+	/* success */
+	var currYear = '<?php echo date('Y'); ?>';
+	if(parseInt(start_year) < parseInt(currYear)) {
+		//Validation.get('validate-mmyy').error = "Expiry year can't be less than current year.";
+		ok = false;
+	} else if (parseInt(start_year) == parseInt(currYear)) {		
+		ok = true;
+		var currMonth = '<?php echo date('m'); ?>';
+		if(parseInt(start_month) < parseInt(currMonth)) {
+			//Validation.get('validate-mmyy').error = "Expiry month can't be less than current month.";
+			ok = false;
+		}
+	}
+	if(parseInt(start_month) > 12 || parseInt(start_month) <= 0) {
+		//Validation.get('validate-mmyy').error = "Expiry month must be between 01 to 12";
+		ok = false;
+	}
+ } else {
+	 ok = false; 
+ }
+ //Validation.get('validate-mmyy').error = validateTrueEmailMsg;
+ if(ok == false){
+	 jQuery('#mmyy_exp').parents('li').addClass('marginBottom');
+ }else{
+	 jQuery('#mmyy_exp').parents('li').removeClass('marginBottom');
+ }
+ return ok;
+});
+</script>

@@ -1,0 +1,124 @@
+<style>
+.block-subscribe
+{
+width:181px;
+margin:0 auto;
+position:relative;
+}
+
+.usermsg
+{
+position:absolute;
+top:-17px;
+left:-5px;
+font:10px/10px Arial, Helvetica, sans-serif;
+color:#FF0000;
+}
+
+.usermsg1
+{
+position:absolute;
+top:-24px;
+left:-5px;
+font:10px/10px Arial, Helvetica, sans-serif;
+color:#FF0000;
+}
+.catcaptureinput
+{
+height:22px;
+font:12px/22px Arial, Helvetica, sans-serif;
+}
+
+</style>
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $newslettertext = "Enter Your Email Address"; ?>
+ <div class="block block-layered-nav adj-nav">
+<dl>
+ <div id="mailcapturecat" class="popupboxnew"></div>
+<dd class="even" style="padding-left:10px; width:181px;">
+	<ol>
+<div class="offertxt" style="font-weight:normal;">Get an <strong>Instant Discount Coupon</strong> for <strong><?php echo Mage::registry('current_category')->getName(); ?></strong> directly in your inbox!</div>
+ <div style="clear:both"></div>                
+<div class="block block-subscribe">  
+    <form action="http://www2.angara.com/l/17452/2012-11-19/26qd<?php //echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail-cat">
+            <div style="clear:both"></div>
+			<div class="catemailcaptureinput">
+				<div id="spnerror02" class="usermsg" style="display:none ;color:red; padding-left:5px;">Invalid Email Address</div>  
+				<div id='02-Catalog-Ruby-Pendant-Contest-err' class="usermsg1" style="display:none; padding-left:5px;"></div> 
+				<div id='02-Catalog-Ruby-Pendant-Contest-suc' class="usermsg" style="display:none; padding-left:5px;"></div> 
+				<input type="text" name="email" id="newsletter02" value="<?php echo $newslettertext; ?>" class="input-text required-entry validate-email catcaptureinput" onfocus="if(this.value=='<?php echo $newslettertext; ?>') this.value = ''" onblur="if(this.value=='') this.value = '<?php echo $newslettertext; ?>'"  />
+				<input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+				<input type="hidden" name="newslettertype" value="02-Catalog-Ruby-Pendant-Contest" />
+            </div>			           	
+			<div class="catcapturebtn">
+                <button type="submit" onclick="return emailvalidate02();">Save More</button>
+            </div>  
+  <div class="catrespect" style="width:130px;"><a href="/privacy-and-security.html" target="_blank" style="padding:0; float:none;">We respect your privacy.</a></div>
+
+ <div style="clear:both"></div> 
+    </form>
+    <script type="text/javascript">	
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail-cat');
+		
+		jQuery(function(){
+			jQuery('#newsletter02').focusin(function(){
+				if(jQuery(this).val()=='<?php echo $newslettertext; ?>'){
+					jQuery(this).val('');
+				}
+			})
+			jQuery('#newsletter02').focusout(function(){
+				if(jQuery(this).val()==''){
+					jQuery(this).val('<?php echo $newslettertext; ?>');
+				}
+			})
+		})
+		
+    //]]>
+		function emailvalidate02() 
+		{				 
+			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			var address = document.getElementById("newsletter02").value;
+			if(reg.test(address) == false)
+			{
+				document.getElementById("newsletter02").value = "Enter Your Email Address";
+				document.getElementById("spnerror02").style.display="block";
+				return false;
+			}
+			document.getElementById("spnerror02").style.display="none";
+		}
+    </script>
+</div>
+</ol>
+</dd>
+</dl>
+</div>
+
+

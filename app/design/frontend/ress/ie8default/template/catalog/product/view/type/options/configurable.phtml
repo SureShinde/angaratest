@@ -1,0 +1,101 @@
+<?php
+$_product = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+// S:VA	Commented to show out of stock products with all variations
+if(count($_attributes)):?>
+    <dl class="hidden">
+    <?php 
+	foreach($_attributes as $_attribute): 
+		if($_attribute->getLabel()=='Ring Size'){
+			if(!($_product->getIsBuildYourOwn() && !$_product->getByoModel()->hasSettingSelected())):?>
+				<dd>
+					<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select product-custom-option form-control">           
+						<option><?php echo $this->__('Select Ring Size') ?></option>               
+					</select>				
+				</dd>
+				<dt class="required hidden" id="required-entry-show-msg">This is a required field.</dt>
+				<script type="text/javascript">
+				jQuery(function(){
+					jQuery('#product-options-wrapper')	//	S:VA	Ring Size shown at last
+						.prepend(
+							jQuery('<div id="super-ring-size" class="row">')
+							.prepend(
+								jQuery('<div class="col-md-2 col-sm-12 padding-type-0">')
+								.append(
+									jQuery('<div>Ring Size</div>').addClass('low-padding-bottom h3')
+								)
+							)
+							.append(
+								jQuery('<div class="col-md-5 col-sm-12 padding-type-0">')
+								.append(jQuery('#attribute<?php echo $_attribute->getAttributeId() ?>')
+							)
+						)
+						.append('<div class="col-md-3 col-sm-12 low-margin-top small"><a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank" class="ring-size-guide pull-left"><i class="fa fa-fw fa-external-link"></i>Ring Size Guide</a></div>')
+					);
+					
+					jQuery('#product_addtocart_form').submit(function(){
+						if(strtolower(jQuery('#super-ring-size select').val()) == 'select ring size'){
+							return false;
+						}
+					});
+				});
+				</script>
+			<?php
+			endif;
+		}
+		else{
+			if($_attribute->getProductAttribute()->getAttributeCode() == 'center_diamond_size'){
+				$centerDiamondSizeAttributeId = $_attribute->getAttributeId();
+			}
+			?>
+			<dt><label class="required"><em>*</em><?php echo $_attribute->getLabel();?></label></dt>
+			<dd<?php if($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+				<select name="super_attribute[<?php echo $_attribute->getAttributeId();?>]" id="attribute<?php echo $_attribute->getAttributeId();?>" class="required-entry super-attribute-select product-custom-option form-control">
+					<option><?php echo $this->__('Choose an Option...');?></option>
+				</select>
+			</dd>
+    	<?php
+		}
+	endforeach; ?>
+    </dl>
+	<?php if(!$_product->getIsBuildYourOwn()): ?>
+		<div id="variations-container"></div>
+	<?php elseif(!$_product->getByoModel()->hasSettingSelected()): ?>
+		<div id="variations-container"></div>
+		<?php if($diamond = $_product->getByoModel()->getDiamondSelected()): ?>
+			<style>
+				#option-list-container<?php echo $centerDiamondSizeAttributeId; ?>{
+					display:none;
+				}
+			</style>
+			<script type="text/javascript">
+				jQuery(function(){	<?php //	S:VA	Select Center Diamond Size based on the carat weight selection	?>
+					<?php if($diamond['diamond']['size'] <= 1){?>
+						jQuery('#product-options-wrapper').find('dt label:contains("Center Diamond Size")').parent().next('dd').find(jQuery('#attribute<?php echo $centerDiamondSizeAttributeId; ?> option')).each(function(){    
+							if(jQuery(this).text() === 'Up to 1 Carat'){
+								jQuery('#attribute<?php echo $centerDiamondSizeAttributeId; ?> option:eq(1)').prop('selected', true);
+							}
+						});
+					<?php }else{ ?>
+						jQuery('#product-options-wrapper').find('dt label:contains("Center Diamond Size")').parent().next('dd').find(jQuery('#attribute<?php echo $centerDiamondSizeAttributeId; ?> option')).each(function(){    
+							if(jQuery(this).text() === 'Greater Than 1 Carat'){
+								jQuery('#attribute<?php echo $centerDiamondSizeAttributeId; ?> option:eq(0)').prop('selected', true);
+							}
+						});
+					<?php } ?>
+					spConfig.reloadPrice();
+				});
+			</script>
+		<?php endif; ?>
+	<?php else: ?>
+		<?php echo $this->getLayout()->createBlock('buildyourown/selection')->setTemplate('buildyourown/selection.phtml')->toHTML(); ?>
+	<?php endif; ?>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig();?>);
+		var variations = jQuery('#variations-container').Variations(spConfig.config);
+		jQuery(function(){
+			spConfig.reloadPrice();
+		});
+    </script>
+<?php 
+endif;?>

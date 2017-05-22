@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<Ayasoftware_SimpleProductPricing>
+			<version>0.8.5</version>
+		</Ayasoftware_SimpleProductPricing>
+	</modules>
+	<global>
+		<models>
+			<catalog>
+				<rewrite>
+					<product_type_configurable_price>Ayasoftware_SimpleProductPricing_Catalog_Model_Product_Type_Configurable_Price</product_type_configurable_price>
+				</rewrite>
+			</catalog>
+		</models>
+		<blocks>
+			<catalog>
+				<rewrite>
+					<product_view_type_configurable>Ayasoftware_SimpleProductPricing_Catalog_Block_Product_View_Type_Configurable</product_view_type_configurable>
+				</rewrite>
+			</catalog>
+			
+			<checkout>
+                <rewrite>
+                    <cart_item_renderer>Ayasoftware_SimpleProductPricing_Checkout_Block_Cart_Item_Renderer</cart_item_renderer>
+               </rewrite>
+           </checkout>
+           
+		</blocks>
+		<blocks>
+			<spp>
+				<class>Ayasoftware_SimpleProductPricing_Catalog_Block</class>
+			</spp>
+		</blocks>
+		<helpers>
+			<spp>
+				<class>Ayasoftware_SimpleProductPricing_Catalog_Helper</class>
+			</spp>
+		</helpers>
+		
+		<rewrite>
+            <!-- This is an identifier for your rewrite that should be unique -->
+            <!-- THIS IS THE CLASSNAME IN YOUR OWN CONTROLLER -->
+        </rewrite>
+		 
+	</global>
+	<frontend>
+	<layout>
+		<updates>
+			<spp>
+				<file>spp.xml</file>
+			</spp>
+		</updates>
+	</layout>
+	</frontend>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<spp>
+											<title>Ayasoftware Configuration Area</title>
+										</spp>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		
+	</adminhtml>
+	<default>
+		<spp>
+			<setting>
+				<show>0</show>
+				<absprice>0</absprice>
+				<productname>1</productname>
+				<description>1</description>
+				<shortdescription>1</shortdescription>
+			</setting>
+		</spp>
+	</default>
+	
+	 <frontend>
+        <routers>
+            <ayasoftware_simpleproductpricing>
+                <!-- should be set to "admin" when overloading admin stuff (?) -->
+                <use>standard</use>
+                <args>
+                    <module>Ayasoftware_SimpleProductPricing</module>
+                    <!-- This is used when "catching" the rewrite above -->
+                    <frontName>spp</frontName>
+                </args>
+            </ayasoftware_simpleproductpricing>
+        </routers>
+    </frontend>
+</config>

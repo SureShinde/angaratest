@@ -1,0 +1,7 @@
+<?php $_order = $this->_getOrder($this->getRequest()->getParam('key')); ?>
+<div class="container showcase-bg-white max-padding-top max-padding-bottom">
+  <div class="block-heading max-margin-bottom">Thank You <?php echo $_order->getCustomerFirstname().' '.$_order->getCustomerLastname() ?>, </div>
+  <div class="max-margin-bottom">We are eager to get your Angara <strong>order# <?php echo $_order->getIncrementId(); ?></strong> into full production; this additional information will help us in verifying the order. Upon verification of the order, you will receive a confirmation email that the order has been moved into production.</div>
+  <div class="max-margin-bottom">If you have any questions about your order please email us at <a href="mailto:webmaster@angara.com" class="fontcolor-type1 text-underline">customer.service@angara.com</a> or call us at 1-888-926-4272 . Our customer care representatives are glad to assist you with your questions or concerns.</div>
+  <div class="block-sub-heading">Angara Team</div>
+</div>

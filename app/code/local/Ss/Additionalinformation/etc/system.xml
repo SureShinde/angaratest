@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<additionalinformation_configuration translate="label">
+			<label>Additionalinformation Configuration</label>
+			<sort_order>151</sort_order>
+		</additionalinformation_configuration>
+	</tabs>
+	<sections>
+		<additionalinformation translate="label" module="additionalinformation">
+			<label>Additionalinformation Configuration</label>
+			<tab>additionalinformation_configuration</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>555</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+				<label>Additionalinformation Email Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+						<blacklist_emails translate="label">
+                            <label>Please enter rejected emails list</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+							<comment>* Comma Seprated Values</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </blacklist_emails>
+					</fields>
+				</settings>
+			</groups>
+		</additionalinformation>
+	</sections>
+</config>

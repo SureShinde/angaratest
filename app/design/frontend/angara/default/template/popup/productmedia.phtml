@@ -1,0 +1,143 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$productId  = (int) $this->getRequest()->getParam('id');
+$model = Mage::getModel('catalog/product'); //getting product model 
+$_product = $model->load($productId); //getting product
+$cids = $_product->getCategoryIds();
+$pinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).$_product->getUrlPath();
+$productTinyURLPinit = rawurlencode($pinUrl.'?utm_source=Pinit&utm_medium=Website&utm_campaign=SOCIAL'); 
+//var_dump($_product);
+//echo $_product->getCustomj();
+if($_product->getCustomj()=='1'){
+	$image_arr = Mage::getBlockSingleton('hprcv/hprcv')->fetchAllCustomJImageCombinations($_product);
+}else{
+	//print_r($cids);exit;	
+	if(in_array(277,$cids)){
+		$image_arr[] = $this->helper('catalog/image')->init($_product, 'image'); // build-your-own
+	}elseif(in_array(99,$cids) || in_array(271,$cids) || in_array(272,$cids) || in_array(273,$cids) || in_array(274,$cids) || in_array(275,$cids) || in_array(276,$cids)){
+		if(in_array(229,$cids)){
+			$image_arr = array();		 // ADVRP
+			if($_product->getWhiteGoodImage()!= 'no_selection' && $_product->getWhiteGoodImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteGoodImage();
+			}
+			if($_product->getWhiteBetterImage()!= 'no_selection' && $_product->getWhiteBetterImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteBetterImage();
+			}
+			if($_product->getWhiteBestImage()!= 'no_selection' && $_product->getWhiteBestImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteBestImage();
+			}
+			if($_product->getWhiteHeirloomImage()!= 'no_selection' && $_product->getWhiteHeirloomImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteHeirloomImage();
+			}
+			if($_product->getYellowGoodImage()!= 'no_selection' && $_product->getYellowGoodImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowGoodImage();
+			}
+			if($_product->getYellowBetterImage()!= 'no_selection' && $_product->getYellowBetterImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowBetterImage();
+			}
+			if($_product->getYellowBestImage()!= 'no_selection' && $_product->getYellowBestImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowBestImage();
+			}
+			if($_product->getYellowHeirloomImage()!= 'no_selection' && $_product->getYellowHeirloomImage()){
+				$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowHeirloomImage();
+			}
+			if(count($image_arr)==0){
+				$image_arr[] = $this->helper('catalog/image')->init($_product, 'image');
+			}
+		}else{
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/images/mothers/'.$_product->getSku().'.png'; // mothers			
+		}
+	}elseif(in_array(279,$cids) || in_array(94,$cids)){
+		$image_arr[] = $this->helper('catalog/image')->init($_product, 'image'); // default	
+	}else{
+		$image_arr = array();		 // ADVRP
+		if($_product->getWhiteGoodImage()!= 'no_selection' && $_product->getWhiteGoodImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteGoodImage();
+		}
+		if($_product->getWhiteBetterImage()!= 'no_selection' && $_product->getWhiteBetterImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteBetterImage();
+		}
+		if($_product->getWhiteBestImage()!= 'no_selection' && $_product->getWhiteBestImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteBestImage();
+		}
+		if($_product->getWhiteHeirloomImage()!= 'no_selection' && $_product->getWhiteHeirloomImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getWhiteHeirloomImage();
+		}
+		if($_product->getYellowGoodImage()!= 'no_selection' && $_product->getYellowGoodImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowGoodImage();
+		}
+		if($_product->getYellowBetterImage()!= 'no_selection' && $_product->getYellowBetterImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowBetterImage();
+		}
+		if($_product->getYellowBestImage()!= 'no_selection' && $_product->getYellowBestImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowBestImage();
+		}
+		if($_product->getYellowHeirloomImage()!= 'no_selection' && $_product->getYellowHeirloomImage()){
+			$image_arr[] = 'http://'.$_SERVER['HTTP_HOST'].'/media/catalog/product/'.$_product->getYellowHeirloomImage();
+		}
+		if(count($image_arr)==0){
+			$image_arr[] = $this->helper('catalog/image')->init($_product, 'image');
+		}
+	}	
+}
+//var_dump($image_arr);exit;
+?>
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('Product Gallery') ?></h1>    
+</div>
+<div>
+	<ul style="list-style: none;">
+	<?php 
+	foreach($image_arr as $imgurl)
+	{
+		if($_product->getCustomj()=='1'){	
+			if (stripos($imgurl, '-SL-') !== false || stripos($imgurl, '-PT-') !== false || stripos($imgurl, '-A-') !== false) {
+				continue;
+			}
+		}	
+	?>
+		<li style="float: left; padding: 5px; list-style: none;display: inline-block;">			
+			<span><img src="<?php echo $imgurl; ?>" width="150"></span>
+			<span class="communiteebtnpin">
+				<a title="Pin this piece" alt="Pin this piece"  href="http://pinterest.com/pin/create/button/?url=<?php echo $productTinyURLPinit; ?>&media=<?php echo $imgurl; ?>&description=<?php echo trim($_product->getShortDescription()).': Angara'; ?>" class="pin-it-button" count-layout="none" ><img border="0" src="http://assets.pinterest.com/images/PinExt.png" /></a>		
+			</span>
+		</li> 
+	<?php
+	}
+	?>
+	</ul>
+	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+</div>
+<style>
+.rw-wrapper{
+	display:none !important;
+}
+.rw-wrapper-hidden{
+	display:none !important;
+}
+</style>

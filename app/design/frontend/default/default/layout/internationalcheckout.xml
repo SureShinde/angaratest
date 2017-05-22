@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.0.1">
+
+   <checkout_cart_index> 
+       <reference name="content">
+            <reference name="checkout.cart">
+            	<reference name="checkout.cart.methods">  
+			    
+					
+					<block type="internationalcheckout/international" name="internationalcheckout.international" template="internationalcheckout/international.phtml"/>
+					
+				</reference>	
+            </reference>
+        </reference>
+	</checkout_cart_index>   
+   
+</layout>

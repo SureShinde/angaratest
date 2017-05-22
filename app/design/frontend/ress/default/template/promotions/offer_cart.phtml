@@ -1,0 +1,61 @@
+<?php 
+// get applicable platform
+$platform = Mage::helper('promotions')->getPlatform();
+
+$coupons = $this->getApplicableCoupons($platform);
+if(count($coupons) > 0):?>
+    <div class="coupon-code">
+		<div class="dismiss-popup" style="position: absolute; top: -8px; right: -10px; cursor: pointer; height:18px; width:18px; background: url(/skin/frontend/ress/default/images/sprite.jpg) no-repeat; background-position: -229px -151px; border-radius: 11px;" data-dismiss="modal"></div>
+        <div class="holder">
+            <div class="apply-code">
+                <div class="apply-title tAc">APPLY COUPON</div>
+                <div class="clearfix"></div>
+                 <form id="couponform" class="coupon-form" action="/checkout/cart/couponPost/" onsubmit="return checkFormApplyCoupon(this);" method="post">
+                    <input class="required-coupon" type="text" id="user_coupon_code" name="coupon_code" placeholder="ENTER COUPON CODE" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>">
+                    <input class="btn pull-right no-shedow-btn-sm min-margin-left btn-primary" onClick="applyCouponClicked('<?php echo $this->getCode();?>');" type="submit" title="<?php echo $this->__('Apply') ?>" value="<?php echo $this->__('Apply') ?>">
+                </form>
+                <script type="text/javascript">
+				//&lt;![CDATA[
+				var dataFormApplyCoupon = new VarienForm('couponform', false);
+				function checkFormApplyCoupon(frm) {
+					if(frm.user_coupon_code.value != '') {
+						return true;												
+					}
+					return false;
+				}
+				Validation.add('required-coupon', 'Please enter a valid coupon code.', function (v) {
+					return !Validation.get('IsEmpty').test(v);
+				});
+				//]]&gt;
+				</script>	
+                <div class="clearfix"></div>
+                <div class="sep tAc"><span>OR</span></div>
+            </div>
+            <div class="apply-title tAc">SELECT COUPON</div>
+            <div class="coupon-holder">
+			<?php 
+            foreach ($coupons as $coupon):
+                echo $this->getCouponHtml($coupon);
+            endforeach;?>            	
+			</div>
+		</div>
+	</div>
+	<?php 
+endif; ?>
+<script>
+jQuery(function(){
+	jQuery('.coupon-block .toggle-icon').click(function(){
+		jQuery(this).parent().parent().find('.detail').slideToggle();
+		if(jQuery(this).find('.plus').hasClass('hidden')){
+			jQuery(this).find('.plus').removeClass('hidden');
+		}else{
+			jQuery(this).find('.plus').addClass('hidden');
+		}
+		if(jQuery(this).find('.minus').hasClass('hidden')){
+			jQuery(this).find('.minus').removeClass('hidden');
+		}else{
+			jQuery(this).find('.minus').addClass('hidden');
+		}
+	});
+});
+</script>

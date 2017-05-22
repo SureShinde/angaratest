@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<angaraall translate="label" module="wishlist">
+            <label>Angara Extensions</label>
+            <sort_order>0</sort_order>
+        </angaraall>
+	  </tabs>
+	  <sections>
+		<!--S:VA	Add a new tab in left nav of System Config-->
+		<ajax_wishlist translate="label" module="wishlist">    <!--section name-->                
+			<label>Quick Wishlist</label>
+			<tab>angaraall</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>            
+				<groups>
+				  <settings translate="label"> 		<!--group name-->
+					  <label>Wishlist Settings</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>0</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+					   <fields>
+						  <status translate="label">				<!--field name-->
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Enabled</comment>
+						  </status>
+					   </fields>
+				   </settings>
+				</groups>
+		</ajax_wishlist>
+	  </sections>
+</config>

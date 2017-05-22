@@ -1,0 +1,47 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items= array();
+
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+}
+
+$rw_items = Mage::getModel('catalog/product')
+    ->getCollection()
+	->addAttributeToFilter( 'entity_id', array('in' => array($rw_items)) )
+	->addAttributeToFilter('status',1) 	//	only enabled product
+	->addAttributeToFilter('visibility', 4)
+	//	Get values to show
+	->addAttributeToFilter('name',array('neq'=>''))
+	->addAttributeToFilter('price',array('neq'=>0))
+	->addAttributeToFilter('url_path',array('neq'=>''))
+	->addAttributeToFilter('small_image',array('notnull'=>'','neq'=>'no_selection'))
+	->setPageSize(8)			//	Limit results in query
+	;
+ 
+if(count($rw_items) >= 4){?>
+	<div class="recentlyview-title">RECENTLY VIEWED JEWELRY</div>
+	
+	<div id="mycarousel1">
+    	<div class="mycarousel1-wrapper">
+			<ul class="jcarousel-skin-tango">
+			<?php 
+			foreach ($rw_items as $product){
+				$image	=  Mage::helper('function')->getResizedUrl('catalog/product/'.$product['small_image'],170,170); // Fixed by Vaseem?>			
+				<li>
+					<a href="<?php echo Mage::getBaseUrl().$product['url_path']; ?>?icid=rv-widget"> 
+						<span> 
+							<img class="recently-view-image" alt="<?php echo $product['name'];?>" src="<?php echo $image;?>"> 
+						</span> 
+					</a>
+				</li>						
+			<?php
+			}?>	
+			</ul>
+        </div>
+	</div>
+
+	<div class="clear"></div>
+<?php
+}?>

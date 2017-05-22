@@ -1,0 +1,141 @@
+
+h1 {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+	line-height: 1.35;
+    margin: 0 0 5px;
+}
+h2 {
+	font-size:22px;
+	text-align:center;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin: 2px;
+	/*color:#CC2127;*/
+}
+h3{
+	font-size:15px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin: 10px;
+	color:#CC2127;
+}
+#above-float p, #below-float p, #pin_wrapper p{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    margin:15px;
+    text-align: center;
+	line-height:22px;
+	color: #6D4421;
+}
+
+#above-float-rules {
+	margin: 10px;
+	width:880px;
+	background: url("/skin/frontend/angara/default/images/pinterest/iseparator.png") repeat-x scroll left bottom transparent;
+	height:auto;
+	}
+
+#above-float-rules p{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 14px;
+    margin:15px;
+	line-height:22px;
+	color: #6D4421;
+	text-align:justify;
+}
+	
+a{
+	color: #CC2127;
+}
+#pin_wrapper{
+	width:900px;
+	padding:0 29px;
+	border: 1px solid #D3D3D3;
+}
+
+
+#header-wapper{
+	width:900px;
+	overflow:hidden;
+}
+#header1 {
+    background: url("/skin/frontend/angara/default/images/pinterest/iseparator.png") repeat-x scroll left bottom transparent;
+    overflow: hidden;
+    padding-bottom: 2px;
+    text-align: center;
+	width:900px;
+	float:left;
+}
+#header-image{
+	float:right;
+	width:200px;
+	text-align:center;
+}
+#above-float {
+	margin: 10px;
+	width:880px;
+	background: url("/skin/frontend/angara/default/images/pinterest/iseparator.png") repeat-x scroll left bottom transparent;
+	height:420px;
+}
+#banner{
+	float:right;
+	width:550px;
+}
+#above-float-text{
+	float:left;
+	width:330px;
+	margin-top:30px;
+}
+#above-float-text p {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    margin:15px;
+    text-align: center;
+	line-height:22px;
+	color: #6D4421;
+}	
+.pinbutton {
+    background-color: #CC2127;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    float: none;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    margin: 30px 0 0;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    z-index: 1000;
+}
+#below-float{
+	width:780px;
+    overflow: hidden;
+    padding: 0 60px;
+	background: url("/skin/frontend/angara/default/images/pinterest/iseparator.png") repeat-x scroll left bottom transparent;
+	padding-bottom:8px;
+}
+#below-float-text{
+	background: url("/skin/frontend/angara/default/images/pinterest/column_divider.gif") repeat-y scroll center top transparent;
+	overflow: hidden;
+}
+#below-float-left{
+	float:left;
+	width: 330px;
+	margin:25px;
+}
+#below-float-right{
+	float:right;
+	width: 330px;
+	margin:25px;
+}
+#below-float-text p{
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 16px;
+    margin:15px;
+	line-height:22px;
+	color: #6D4421;
+	text-align:left;
+}

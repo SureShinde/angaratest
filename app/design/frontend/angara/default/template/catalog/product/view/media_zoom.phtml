@@ -1,0 +1,97 @@
+<!--Code Added by Vaseem for Zoom-->
+<style type="text/css">
+.magnifyarea { /* CSS to add shadow to magnified image. Optional */
+	box-shadow: 5px 5px 7px #D3D3D3;	background: white;
+}
+.targetarea { /* CSS for container div(s) of the zoomable image */
+	width: 350px; /* wide or wider than the widest zoomable image */
+	height: 350px; /* high or higher than the tallest zoomable image */
+}
+#two { /* Added CSS for second target div of zoomable images */
+	height: 350px; /* high or higher than the tallest zoomable image */
+}
+.targetarea img { /* zoomable image */
+	margin: auto; /* for horizontal centering */
+	display: block; /* also for horizontal centering */
+	position: relative; /* along with on the fly calculations in script, for vertical centering */
+	border-width: 0;
+}
+.zoomtracker{z-index:800!important;}
+</style>
+<!--Code Added by Vaseem for Zoom-->
+<script language="javascript" src="<?php echo $this->helper('core/js')->getJsUrl('zoom/multizoom.js'); ?>" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery('#image').multizoomhide();
+jQuery(document).ready(function($){ //Load multizoom on document ready:
+	$('#image').addimagezoom({ // options same as for previous Featured Image Zoomer's addimagezoom unless noted as '- new'
+		magnifiersize:[350, 350],
+		cursorshade: true
+		//zoomrange: [3, 10],
+		//disablewheel: true // even without variable zoom, mousewheel will not shift image position while mouse is over image (optional) - new
+	});
+	jQuery('div.metaltype').click(function(){
+		var curAngle	=	jQuery('#angleType').html();
+		actualHeight	=	jQuery('#image').height();
+		actualWidth	=	jQuery('#image').width();
+		//alert(actualHeight); alert(actualWidth);
+		jQuery('#image').css({'width':'350px','height':'350px'});
+		jQuery('#angle_10').click();
+		changeImage(curAngle,actualHeight,actualWidth);
+	});
+});
+</script>
+<!--Code Added by Vaseem for Zoom-->
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+
+<div class="product-image product-image-zoom">
+  <?php
+        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" width="350" height="350" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+</div>
+<?php else: ?>
+<div class="product-image">
+  <?php
+        $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+</div>
+<?php endif; ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div id="moreviews" class="more-views">
+  <ul>
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+    	<li> <img onclick="$('image').src = '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>'; return false;" title='<?php echo $this->htmlEscape($_image->getLabel()); ?>' src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt='<?php echo $this->htmlEscape($_image->getLabel()) ?>' /> </li>
+    <?php endforeach; ?>
+  </ul>
+</div>
+<?php endif; ?>
+
+<?php
+# @todo handle product video here
+$video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+if($video != ''){?>
+	<div class="view-video">
+  <ul>
+    <?php
+	$video_arr = explode("|",$video);
+	$number_of_videos = count($video_arr);
+	$thumbPath = Mage::getBaseURL('media').'productVideos/';
+	for ($i=0; $i < count($video_arr); $i++)
+	{
+		list($videoName,$thumbName) = explode(',',$video_arr[$i]);
+		?>
+<li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"> <img title='' src="<?php echo $thumbPath."thumb/".$thumbName; ?>" width="56" height="56" /> <img src="/skin/frontend/angara/default/images/play-video-thumb.png" width="56" height="56"  class="playvideothumb" alt="Play Video" title="Play Video" /></a></li>
+<?php
+	}?>
+     </ul>
+</div>
+    <?php
+}
+?>
+<div class="view-video" id="pckImg" style="display:none;"></div>

@@ -1,0 +1,435 @@
+<style>
+.thnx-header {border-bottom:1px solid #fa505a;}
+.thnx-header .logo-box {padding-left:15px;}
+.thanx-gift input[type="text"], .thanx-gift a[type="submit"], .thanx-gift select {height:40px;border: 1px solid #ccc;margin-top:35px;border-radius: 3px;box-shadow: none;}
+.thanx-gift a[type="submit"] {font-size:18px;width:250px;margin:30px auto;display:block;border:none;background: #fa505a;color: #ffffff;line-height: 40px;}
+.thanx-gift .btn:hover, .thanx-gift .btn:focus, .thanx-gift .btn.active{color: #ffffff !important;text-decoration:none !important;}
+.thanx-gift .step-container {border: 1px solid #e6e6e6;}
+.thanx-gift .form-heading {padding:10px;font-size:18px;font-weight: 500;background: #f0f0f0;border-bottom: 1px solid #e6e6e6;}
+.thanks-gift img {max-width:580px;margin:0 auto;}
+.px16 {font-size:16px;}
+
+
+.hover-bdr {top:0px;left:0;right:0;text-align:center;color:#868686;}
+.hover-bdr span {display:block;}
+.hover-bdr .title {font-size: 26px;padding-top: 15px; color:#000000;line-height:30px;}
+.hover-bdr .btn {width:110px;margin:0 auto;background:transparent;padding:10px;border:1px solid #868686;line-height:10px;font-size:16px;margin-top: 15px; border-radius:2px;}
+.white-bg{background:#ffffff}
+#gemstone-section .hover-bdr {top:30px;left:0;right:0;text-align:center;color:#868686;}
+#gemstone-section .hover-bdr .title {padding-top:5px;}
+
+
+#best-sellers a:hover .hover-bdr .btn, #gemstone-section a:hover .hover-bdr .btn {border:1px solid #fa505a;color:#fa505a;}
+.top20 {top:69%;}
+.top20 .btn {width:140px;}
+#ang-toggle ul li{display:inline-block; margin:0px 20px; position:relative; cursor:pointer;}
+#ang-toggle ul li:first-child{cursor:default;}
+#ang-toggle ul li:first-child{line-height:28px!important;}
+#ang-toggle ul li img{max-height:28px;}
+#ang-toggle ul li.active:before,
+#ang-toggle ul li.active:after{content:""; position:absolute;}
+#ang-toggle ul li.active:before{border-bottom: 7px solid #000000; border-top: 7px solid transparent; border-left: 7px solid transparent; border-right: 7px solid transparent; top: -24px; left: 50%; margin-left: -4px;} 
+#ang-toggle ul li.active:after{background: #000000; height: 1px; left: 0px; right: 0px; top: -11px;}
+#ang-toggle .gray{display:block}
+#ang-toggle .colored{display:none}
+#ang-toggle .hover .gray{display:none}
+#ang-toggle .hover .colored{display:block}
+
+#homepage-latest-reviews .detail-box-bs{bottom:-100%; transition:bottom 500ms; -webkit-transition:bottom 500ms; background: rgba(255,255,255,0.8); padding:10px 30px; text-align: center;}
+#homepage-latest-reviews .slick-slide:hover .detail-box-bs{bottom:0px;}
+#homepage-latest-reviews .detail-box-bs .color999{font-size:14px;}
+.mewe-hover-img {display:none;}
+.mewe a:hover .mewe-default-img {display:none;}
+.mewe a:hover .mewe-hover-img {display:block;}
+.px28 {font-size:28px;}
+@media (max-width:1024px) {
+	.hover-bdr .btn {
+		font-size:16px;
+		width:100px;
+		margin-top:5px;
+	}
+	#gemstone-section .hover-bdr {
+		top:10px;
+	}
+	#best-sellers .hover-bdr .title,
+	#gemstone-section .hover-bdr .title {
+		font-size:20px;
+		padding-top: 5px;
+	}
+	#ang-toggle ul li{
+		margin:0px 10px;
+	}
+	.mewe a:hover .mewe-default-img {display:block;}
+	.mewe a:hover .mewe-hover-img {display:none;}
+	
+	.thnx-header .logo-box {margin-left:0px;}
+	.thanx-gift .img-box img {max-width:220px !important;}
+}
+@media (max-width:768px) {
+	#gemstone-section .hover-bdr {top:20px;}
+	.hover-bdr .title {
+		line-height:initial;
+	}
+	#best-sellers .hover-bdr .title{
+		padding-top:15px;
+	}
+	.thanks-gift img {max-width:450px;}
+	.pro-details .bdr-typ-2 {max-width: 200px !important;}
+	
+	.thanx-gift .img-box img {max-width:100% !important;}
+	.thnx-header .logo-box {bottom:5px;top: initial;}
+}
+<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+@media (max-width:1024px) {
+	#best-sellers .col-md-4,
+	#gemstone-section .col-md-4{
+		width:33.33333333333333%!important;
+	}
+	#best-sellers .col-md-8,
+	#gemstone-section .col-md-8{
+		width:66.66666666666666%!important;
+	}
+}
+<?php } ?>
+</style>
+<div class="full-width max-padding-bottom max-margin-top thnx-header relative-placeholder">
+	<div class="pull-left logo-box absolute-placeholder">
+		<a href="<?php echo $this->getUrl('');?>" title="Angara Jewelry" class="logo">
+			<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/logo.png" class="original-logo img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+		</a>
+	</div>
+	<div class="px28 text-center text-bold high-padding-top">A Gift of Gratitude</div>
+</div>
+<div class="clearfix"></div>
+<div class="thanx-gift container max-margin-top max-margin-bottom" style="display:table;">
+    <div class="col-sm-9 no-padding step-container" style="display:table-cell;vertical-align:top;float: none;">
+		<div class="text-center max-padding-top max-padding-bottom">
+			<p class="text-bold px32">Thank You!</p>
+			<p class="px16">We’ll notify you via email as soon as the gift is dispatched.</p></div>
+		<div class="text-center px16">
+			<p>Shop this exclusive offer and get a pair of matching Garnet Fish Hook Earrings</p>
+			<div class="thanks-gift"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/Thanksgiving-gift.jpg" class="img-responsive"/></div>
+		</div>
+		<div class="text-center">
+			<a href="http://www.angara.com?cid=tg|home|browse|11252016" type="submit" class="btn">Browse Collection</a>
+		</div>
+	</div>
+    <div class="col-sm-3 no-padding" style="display:table-cell;vertical-align: middle;float:none;">
+		<div class="pro-details">
+			<div class="full-width img-box">
+				<img class="img-responsive bdr-typ-2" style="max-width:240px;margin:0 auto;" alt="Pear Ruby Teardrop Pendant Necklace with Diamond" title="Pear Ruby Teardrop Pendant Necklace with Diamond" src="skin/frontend/ress/default/images/thanksgiving-product.jpg">
+			</div>
+			<div class="full-width img-title text-center">
+				<div class="text-bold" style="font-size:18px;">Garnet Solitaire Pendant</div>
+				<div>(With Chain)</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="homepage-main-container">
+<section class="white-bg" style="padding-bottom:0px;border-top:1px solid #e6e6e6;">
+	<div class="container">
+		<div class="heading-box">
+			<h2 class="heading">Best Sellers</h2>
+		</div>
+		<div class="content-box">
+			<div id="latest-reviews" class="col-xs-12 has-slider">
+				<div class="showcase-bg-white padding-type-10 HP1">
+					<div class="HP2">
+						<div id="homepage-latest-reviews">
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/oval-sapphire-and-round-diamond-border-ring-sr0169s?icid=bestseller-widget-10262016" title="Princess Diana Inspired Blue Sapphire Ring with Diamond Halo" class="center-block text-center">
+									<img class="img-responsive bdr-typ-1" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/1.jpg" alt="Princess Diana Inspired Blue Sapphire Ring with Diamond Halo" title="Princess Diana Inspired Blue Sapphire Ring with Diamond Halo"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/oval-sapphire-and-round-diamond-border-ring-sr0169s?icid=bestseller-widget-10262016">
+										<p class="product-name">Princess Diana Inspired Blue Sapphire Ring with Diamond Halo</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$719 - $5,929</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="/p/oval-sapphire-and-diamond-pendant-sp0141s-n?icid=bestseller-widget-10262016" title="Shell Style Diamond and Oval Sapphire Pendant" class="center-block text-center">
+									<img class="img-responsive bdr-typ-1" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/2.jpg" alt="Shell Style Diamond and Oval Sapphire Pendant" title="Shell Style Diamond and Oval Sapphire Pendant"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="/p/oval-sapphire-and-diamond-pendant-sp0141s-n?icid=bestseller-widget-10262016">
+										<p class="product-name">Shell Style Diamond and Oval Sapphire Pendant</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$129 - $1,059</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/pear-ruby-and-diamond-v-bale-pendant-sp0169r?icid=bestseller-widget-10262016" title="Pear Ruby Teardrop Pendant Necklace with Diamond" class="center-block text-center">
+									<img class="img-responsive bdr-typ-2" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/3.jpg" alt="Pear Ruby Teardrop Pendant Necklace with Diamond" title="Pear Ruby Teardrop Pendant Necklace with Diamond"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/pear-ruby-and-diamond-v-bale-pendant-sp0169r?icid=bestseller-widget-10262016">
+										<p class="product-name">Pear Ruby Teardrop Pendant Necklace with Diamond</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$229 - $17,779</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-sapphire-and-diamond-v-bale-pendant-sp0155s?icid=bestseller-widget-10262016" title="V-Bale Round Blue Sapphire Solitaire Pendant with Diamond" class="center-block text-center">
+									<img class="img-responsive bdr-typ-3" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/4.jpg" alt="V-Bale Round Blue Sapphire Solitaire Pendant with Diamond" title="V-Bale Round Blue Sapphire Solitaire Pendant with Diamond"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-sapphire-and-diamond-v-bale-pendant-sp0155s?icid=bestseller-widget-10262016">
+										<p class="product-name">V-Bale Round Blue Sapphire Solitaire Pendant with Diamond</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$159 - $7,429</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/tulip-bud-inspired-dancing-ruby-solitaire-pendant-sd-sp0761r?icid=bestseller-widget-10262016" title="Solitaire Dancing Open Drop Floating Ruby Pendant" class="center-block text-center">
+									<img class="img-responsive bdr-typ-4" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/5.gif" alt="Solitaire Dancing Open Drop Floating Ruby Pendant" title="Solitaire Dancing Open Drop Floating Ruby Pendant"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/tulip-bud-inspired-dancing-ruby-solitaire-pendant-sd-sp0761r?icid=bestseller-widget-10262016">
+										<p class="product-name">Solitaire Dancing Open Drop Floating Ruby Pendant</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$489 - $729</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/standard-comfort-fit-sleek-wedding-band-wr-sr0917?icid=bestseller-widget-10262016" title="Standard Comfort Fit Sleek Wedding Band" class="center-block text-center">
+									<img class="img-responsive bdr-typ-5" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/6.jpg" alt="Standard Comfort Fit Sleek Wedding Band" title="Standard Comfort Fit Sleek Wedding Band"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/standard-comfort-fit-sleek-wedding-band-wr-sr0917?icid=bestseller-widget-10262016">
+										<p class="product-name">Standard Comfort Fit Sleek Wedding Band</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$189 - $619</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/pear-blue-sapphire-and-diamond-v-bale-pendant-sp0169s?icid=bestseller-widget-10262016" title="Pear Blue Sapphire Teardrop Pendant Necklace with Diamond" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/7.jpg" alt="Pear Blue Sapphire Teardrop Pendant Necklace with Diamond" title="Pear Blue Sapphire Teardrop Pendant Necklace with Diamond"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/pear-blue-sapphire-and-diamond-v-bale-pendant-sp0169s?icid=bestseller-widget-10262016">
+										<p class="product-name">Pear Blue Sapphire Teardrop Pendant Necklace with Diamond</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$169 - $6,369</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-sapphire-and-diamond-five-stone-ring-sr0101sd?icid=bestseller-widget-10262016" title="Half Eternity Five Stone Sapphire and Diamond Wedding Ring" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/8.jpg" alt="Half Eternity Five Stone Sapphire and Diamond Wedding Ring" title="Half Eternity Five Stone Sapphire and Diamond Wedding Ring"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-sapphire-and-diamond-five-stone-ring-sr0101sd?icid=bestseller-widget-10262016">
+										<p class="product-name">Half Eternity Five Stone Sapphire and Diamond Wedding Ring</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$359 - $2,989</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-ruby-solitaire-pendant-sp0108r?icid=bestseller-widget-10262016" title="Prong Set Round Ruby Solitaire Pendant" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/9.jpg" alt="Prong Set Round Ruby Solitaire Pendant" title="Prong Set Round Ruby Solitaire Pendant"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-ruby-solitaire-pendant-sp0108r?icid=bestseller-widget-10262016">
+										<p class="product-name">Prong Set Round Ruby Solitaire Pendant</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$169 - $4,029</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-sapphire-bezel-set-pendant-sp0159s?icid=bestseller-widget-10262016" title="Bezel Set Round Blue Sapphire Solitaire Pendant" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/10.jpg" alt="Bezel Set Round Blue Sapphire Solitaire Pendant" title="Bezel Set Round Blue Sapphire Solitaire Pendant"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-sapphire-bezel-set-pendant-sp0159s?icid=bestseller-widget-10262016">
+										<p class="product-name">Bezel Set Round Blue Sapphire Solitaire Pendant</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$349 - $12,019</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-sapphire-solitaire-studs-se0229s-n?icid=bestseller-widget-10262016" title="4 Prong Set Basket Round Blue Sapphire Stud Earrings" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/11.jpg" alt="4 Prong Set Basket Round Blue Sapphire Stud Earrings" title="4 Prong Set Basket Round Blue Sapphire Stud Earrings"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-sapphire-solitaire-studs-se0229s-n?icid=bestseller-widget-10262016">
+										<p class="product-name">4 Prong Set Basket Round Blue Sapphire Stud Earrings</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$249 - $1,209</span>
+								</div>
+							</div>
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="http://www.angara.com/p/round-sapphire-twist-ring-sr0427s?icid=bestseller-widget-10262016" title="Half Bezel Solitaire Round Blue Sapphire Bypass Ring" class="center-block text-center">
+									<img class="img-responsive bdr-typ-6" style="margin:0 auto; max-width:175px; max-height:175px" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/category/best-sellers/12.jpg" alt="Half Bezel Solitaire Round Blue Sapphire Bypass Ring" title="Half Bezel Solitaire Round Blue Sapphire Bypass Ring"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="http://www.angara.com/p/round-sapphire-twist-ring-sr0427s?icid=bestseller-widget-10262016">
+										<p class="product-name">Half Bezel Solitaire Round Blue Sapphire Bypass Ring</p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display">$249 - $6,799</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+					jQuery(function(){
+						var s2s = 0;
+						if(jQuery(window).width() <= 768){
+							s2s = 3;
+						}else if(jQuery(window).width() <= 1024 && jQuery(window).width() > 768){
+							s2s = 4;
+						}else{
+							s2s = 5;
+						}
+						jQuery('#homepage-latest-reviews').slick({
+							arrows			: 	true,
+							dots			: 	false,
+							slidesToShow	: 	s2s,
+							slidesToScroll	: 	1,
+							autoplay		: 	false,
+							autoplaySpeed	: 	5000
+						});
+					});
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="light-gray-bg">
+	<div class="container">
+		<div class="heading-box">
+			<h2 class="heading">Customer Stories</h2>
+			<div class="sub-heading">We love our customers and they love us, too! Hear what they're saying (yes, we're blushing).</div>
+		</div>
+		<div class="content-box">
+			<div id="cs-content-table">
+				<div class="cs-content-table-cell col-sm-6">
+					<div id="cs-images">
+						<div class="cs-images box-1">
+							<img class="img-responsive" data-index="0" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-01.jpg" alt=""/>
+							<img class="img-responsive" data-index="1" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-014.jpg" alt=""/>
+							<img class="img-responsive" data-index="2" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-003.jpg" alt=""/>
+							<img class="img-responsive" data-index="3" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-09.jpg" alt=""/>
+						</div>
+						<div class="cs-images box-2">
+							<img class="img-responsive active" data-index="4" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-04.jpg" alt=""/>
+							<img class="img-responsive" data-index="5" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-012.jpg" alt=""/>
+							<div style="max-width:180px;">
+								<img class="img-responsive" style="display:inline-block;max-width:50%;" data-index="6" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-016.jpg" alt=""/>
+								<img class="img-responsive" style="float:right;max-width:50%;" data-index="7" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-015.jpeg" alt=""/>
+							</div>
+						</div>
+						<div class="cs-images box-3">
+							<img class="img-responsive" data-index="8" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-010.jpg" alt=""/>
+							<img class="img-responsive" data-index="9" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-013.jpg" alt=""/>
+							<img class="img-responsive" data-index="10" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-02.jpg" alt=""/>
+							<img class="img-responsive" data-index="11" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-06.jpg" alt=""/>
+						</div>
+						<div class="cs-images box-4">
+							<img class="img-responsive" data-index="12" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-05.jpg" alt=""/>
+							<img class="img-responsive" data-index="13" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-011.jpeg" alt=""/>
+							<img class="img-responsive" data-index="14" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-07.jpg" alt=""/>
+							<img class="img-responsive" data-index="15" data-org="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/customer-stories/cs-08.jpg" alt=""/>
+						</div>
+					</div>
+				</div>
+				<div id="cs-content" class="cs-content-table-cell col-sm-6">
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"My beautiful ring from Angara! It's GORGEOUS!"</p>
+						<p style="color:#333333; margin-bottom:0px">‎-Krista</p>
+						<p style="color:#999999; font-size:14px;">CA</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"Love the garnet stone.  It’s a deep, rich gemstone and it gives any outfit a little extra richness to it.  Handcrafted in shining silver with a designer V-bale, the pear-shaped garnet is one of my go-to classic necklaces.  The sparkle is spectacular!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Karen Morse</p>
+						<p style="color:#999999; font-size:14px;">OH</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"My experience with Angara was great. I got to work with a great jeweler, Barbara Stein and got the color stone and size I wanted. I also got the ring size I wanted that fits me perfectly. I love my ring so much! The customer service was great also and I also love how the rings are not already made they are handmade. It came really fast also when you select overnight shipping for $20. I will definitely use Angara again."</p>
+						<p style="color:#333333; margin-bottom:0px">-Elizabeth Abramson</p>
+						<p style="color:#999999; font-size:14px;">CT</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"The whole experience was great. Consider me a repeat customer!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Jamal</p>
+						<p style="color:#999999; font-size:14px;">NC</p>
+					</div>
+					<div class="cs-content text-center">
+						<p style="color:#666666">"Actually I wanted to share my nice moments after proposal. There is good news and very good news. Which one you want to hear first?:) Ok, good is that ring size I selected is perfect on her finger (it is her first ring overall!). And very good news-she said YES with happy tears in her face .(unforgettable moment)."</p>
+						<p style="color:#333333; margin-bottom:0px">-Donatas</p>
+						<p style="color:#999999; font-size:14px;">LT</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"If you prefer to forgo birth stones, I would suggest something in a deep holiday, wintry hue like this garnet necklace. I’m a huge fan of dainty jewelry as it can pair with almost anything and adds an air of elegance to any outfit."</p>
+						<p style="color:#333333; margin-bottom:0px">-Julie Hiller (Joules)</p>
+						<p style="color:#999999; font-size:14px;">IL</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"I chose to have my pendant’s metal set in 14k yellow gold, but you can also choose from  silver or 14k white gold. Also, you can select up to 5 gemstones. An 18″ chain is shipped for free with the pendant."</p>
+						<p style="color:#333333; margin-bottom:0px">-Andrea Perullo (Andi)</p>
+						<p style="color:#999999; font-size:14px;">NC</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"Just wanted to thank you for helping make this ring "the" ring. What I wanted was the perfect ring for her and you helped me match up reality with what was rattling around in my head. She absolutely loves it! I love it, and it looks good on her too!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Chris</p>
+						<p style="color:#999999; font-size:14px;">LT</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"I paired this oval garnet diamond necklace from Angara with the dress since the colors complemented one another nicely. It is a lovely delicate piece set in sterling silver that shines with a garnet pendant surrounded by tiny diamonds that give off a subtle sparkle. This would be a fabulous birthstone gift for any January babies or anyone who loves quality jewelry that you could wear everyday. I love the garnet stone for this time of the year. The deep red reminds me of berries!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Amanda Brezovsky</p>
+						<p style="color:#999999; font-size:14px;">PA</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"I must say, when the beautiful package arrived to my door, I was immediately in love with my Garnet gemstone pendant. I can’t wait to wear my birthstone in such a chic style. It is the perfect size, style, and you can definitely see the quality in the cut of the piece."</p>
+						<p style="color:#333333; margin-bottom:0px">-Rachel Trampel</p>
+						<p style="color:#999999; font-size:14px;">MN</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"This pair of 14k white gold fashion earrings are perfect to wear whether you are a mother or not and make a lovely gift option for any special occasion. I cannot tell you how many compliments I have received on them since I started wearing them!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Andi</p>
+						<p style="color:#999999; font-size:14px;">CA</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"I just want to say 'thank you' for going above and beyond with helping me finally get the right ring for my daughter and future husband.. I appreciate your fantastic customer service."</p>
+						<p style="color:#333333; margin-bottom:0px">-Angel</p>
+						<p style="color:#999999; font-size:14px;">TN</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"She loves her ruby engagement ring that I got from you guys!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Bryan</p>
+						<p style="color:#999999; font-size:14px;">WI</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"I just wanted to say thanks; you guys did a phenomenal job on the blue sapphire engagement ring."</p>
+						<p style="color:#333333; margin-bottom:0px">‎-Matt</p>
+						<p style="color:#999999; font-size:14px;">AK</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"It came! I love it!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Katherine</p>
+						<p style="color:#999999; font-size:14px;">TX</p>
+					</div>
+					<div class="cs-content text-center hide">
+						<p style="color:#666666">"OMG! I JUST GOT ENGAGED – black diamonds are my favorite!! I love you Chris Ferrand I can't wait to spend the rest of my life with you!!"</p>
+						<p style="color:#333333; margin-bottom:0px">-Christopher</p>
+						<p style="color:#999999; font-size:14px;">FL</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				jQuery(function(){
+					jQuery('#cs-images img').hover(function(){
+						var elem = jQuery(this);
+						var index = elem.attr('data-index');
+						elem.parents('#cs-images').find('img').removeClass('active');
+						elem.addClass('active');
+						jQuery('#cs-content .cs-content').addClass('hide')
+						jQuery('#cs-content .cs-content:eq('+index+')').removeClass('hide');
+					});
+				});
+			</script>
+		</div>
+	</div>
+</section>
+</div>

@@ -1,0 +1,212 @@
+<?php $bandsCount = count($this->getItemCollection()->getItems());?>
+<?php $mainProduct = $this->getMainProduct();?>
+<div class="matching-bands-wrapper">
+	<div class="close-popup"></div>
+	<div class="matching-bands-title-block">
+		<div class="matching-img"><img src="<?php echo $this->helper('catalog/image')->init($mainProduct, 'small_image')->resize(71) ?>" width="71" height="71" class="pro-img" /></div>
+        <div class="img-details">
+        	<div class="title">Matching Product for:</div>
+            <div class="img-pro-name"><?php echo $this->htmlEscape($mainProduct->getName()) ?></div>
+        </div>
+		
+		
+	</div>
+	<?php if($bandsCount): ?>
+	<?php $links = array();?>
+	<div id="matching-band-thumbs">
+		<?php $this->resetItemsIterator() ?>
+		<?php while($_link = $this->getIterableItem()): ?>
+		<?php $_link->load($_link->getId());?>
+		<div class="matching-band-thumb">
+			<img src="<?php echo $this->helper('catalog/image')->init($_link, 'image')->resize(125) ?>" width="125" height="125" alt="img" />
+		</div>
+		<?php $links[] = $_link;?>
+		<?php endwhile; ?>
+		<div style="clear:both"></div>
+	</div>
+	<div id="matching-bands">
+		<?php $this->resetItemsIterator() ?>
+		<?php foreach($links as $_link): ?>
+		<?php $_link->load($_link->getId()); ?>
+		<div class="matching-band-product-details" style="display:none">
+		<div class="matching-product-img">
+			<img src="<?php echo $this->helper('catalog/image')->init($_link, 'image')->resize(350) ?>" width="350" height="350" alt="img" />
+		</div>
+		<div class="matching-product-details">
+			<div class="matching-pro-name"><?php echo $this->htmlEscape($_link->getName()) ?></div>
+			<form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_link); ?>" method="post" id="matchingband_product_<?php echo $_link->getId();?>" enctype="multipart/form-data">
+			<input type="hidden" name="product" value="<?php echo $_link->getId(); ?>" />
+			<?php foreach ($_link->getOptions() as $option): ?>
+				<?php if($option->getTitle() == 'Ring Size'):?>
+					<?php if($option->getType() == 'field'):?>
+						<div class="ring-size-wrapper">
+							<div class="ring-size-title">Ring Size:</div>
+							<div class="ring-size-box">
+								<select title="Ring Size" class="required-entry product-custom-option" name="options[<?php echo $option->getId(); ?>]"><option value="">-- Please Select --</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option><option value="10">10</option><option value="10.5">10.5</option><option value="11">11</option><option value="11.5">11.5</option><option value="12">12</option><option value="12.5">12.5</option><option value="13">13</option></select>
+							</div>
+							<div class="ring-size-guide">
+								<div class="ringsizer"><a target="_blank" href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" onclick="">Ring Size Guide</a></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					<?php elseif($option->getType() == 'drop_down'): ?>
+						<div class="ring-size-wrapper">
+							<div class="ring-size-title">Ring Size:</div>
+							<div class="ring-size-box">
+								<select title="Ring Size" class="required-entry product-custom-option" name="options[<?php echo $option->getId(); ?>]">
+									<option value="">-- Please Select --</option>
+									<?php foreach ($option->getValues() as $value): ?>
+										<option value="<?php echo $value->getId();?>"><?php echo $value->getTitle();?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="ring-size-guide">
+								<div class="ringsizer"><a target="_blank" href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" onclick="">Ring Size Guide</a></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					<?php endif; ?>
+					<?php break; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			<div class="details-lists">
+				<dl class="item-options">
+					<?php $weight = 0; ?>
+					<?php for($i = $_link->getStoneVariationCount(); $i > 0; $i--):?>
+						<?php $weight += (float)($_link->getData('stone'.$i.'_weight')); ?>
+					<?php endfor; ?>
+					<?php if($weight > 0) : ?>
+						<?php if($weight == 1): ?>
+							<?php $weight = number_format(round($weight, 2), 2, '.', '') . ' carat'; ?>
+						<?php else: ?>
+							<?php $weight = number_format(round($weight, 2), 2, '.', '') . ' carats'; ?>
+						<?php endif; ?>
+							<dt>Total Carat Weight:</dt>
+							<dd><?php echo $weight; ?></dd>
+					<?php endif; ?>
+					<?php if ($_link->isConfigurable()): ?>
+						<?php $attributes = $_link->getTypeInstance(true)->getConfigurableAttributes($_link);?>
+						<?php foreach($attributes as $attribute): ?>
+							<?php if($attribute->getProductAttribute()->getAttributeCode() != 'stone1_size'): // don't show stone size details?>
+							<dt><?php echo $attribute->getLabel()?>:</dt>
+							<dd><?php echo $_link->getAttributeText('default_'.$attribute->getProductAttribute()->getAttributeCode()); ?></dd>
+							<?php endif; ?>
+							<?php foreach($attribute->getProductAttribute()->getSource()->getAllOptions(true) as $option): ?>
+								<?php if($option['label'] == $_link->getAttributeText('default_'.$attribute->getProductAttribute()->getAttributeCode())): ?>
+									<input type="hidden" name="super_attribute[<?php echo $attribute->getProductAttribute()->getId(); ?>]" value="<?php echo $option['value'];?>" />
+									<?php break; ?>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<?php if($_link->getStone1Grade()): ?>
+							<dt>Stone Quality:</dt>
+							<dd><?php echo $_link->getAttributeText('stone1_grade'); ?></dd>
+						<?php endif; ?>
+						<?php if($_link->getMetal1Type()): ?>
+							<dt>Metal Type:</dt>
+							<dd><?php echo $_link->getAttributeText('metal1_type'); ?></dd>
+						<?php endif; ?>
+					<?php endif; ?>
+				</dl>
+			</div>
+			<div class="full-details-link"><a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>">see product details +</a></div>
+			<div class="matching-product-price"><?php echo Mage::helper('core')->currency($_link->getPrice(), true, false); ?></div>
+			<div class="action-buttons">
+				<?php if ($_link->isConfigurable()): ?>
+				<div class="matching-customize-btn" title="Customize"><a href="<?php echo $_link->getProductUrl() ?>#pp-wrapper">CUSTOMIZE</a></div>
+				<?php endif; ?>
+				<input class="matching-addtocart-btn" title="Add to Cart" type="submit" value="ADD TO CART" />
+			</div>
+			</form>
+			<script type="text/javascript">
+				var productAddToCartForm<?php echo $_link->getId();?> = new VarienForm('matchingband_product_<?php echo $_link->getId();?>');
+				jQuery(function(){
+					jQuery('#matchingband_product_<?php echo $_link->getId();?>').submit(function(){
+						if (productAddToCartForm<?php echo $_link->getId();?>.validator.validate()) {
+							var postData = jQuery(this).serialize();
+							//var url = jQuery(this).attr('action');
+							var url = '/fancycart/ajax/add';
+							shadowBoxOverlay.height(jQuery(document).height()).fadeIn();
+							jQuery('#shadow-box-wrapper').fadeIn();
+							showProgressBar();
+							jQuery("#lightboxBlackOverlay, #lightboxContent").fadeOut(300);
+							jQuery.post(url, postData, function(data){
+								jQuery.get('/fancycart/ajax/index', function(cartHtml){
+									hideProgressBar();
+									updateCartPopup(cartHtml);
+								})
+								updateCartSummary();
+							});
+							return false;
+						}
+					})
+				})
+			
+				
+				/*productAddToCartForm<?php //echo $_link->getId();?>.submit = function(button, url) {
+					if (this.validator.validate()) {
+						var form = this.form;
+						var oldUrl = form.action;
+						if (url) {
+							form.action = url;
+						}
+						var e = null;
+						try {
+							this.form.submit();
+						} catch (e) {}
+						this.form.action = oldUrl;
+						if (e) {
+							throw e;
+						}
+						if (button && button != 'undefined') {
+							button.disabled = true;
+						}
+						
+						var postData = jQuery(this).serialize();
+						//var url = jQuery(this).attr('action');
+						var url = '/fancycart/ajax/add';
+						shadowBoxOverlay.height(jQuery(document).height()).fadeIn();
+						jQuery('#shadow-box-wrapper').fadeIn();
+						showProgressBar();
+						jQuery.post(url, postData, function(data){
+							jQuery.get('/fancycart/ajax/index', function(cartHtml){
+								hideProgressBar();
+								updateCartPopup(cartHtml);
+							})
+							updateCartSummary();
+						});
+						return false;
+						
+					}
+				}.bind(productAddToCartForm<?php //echo $_link->getId();?>);
+				*/
+			</script>
+		</div>
+		<div class="clear"></div>
+	</div>
+		<?php endforeach; ?>
+	</div>
+	<?php /*?><?php if($bandsCount > 1):?>
+	<div class="more-product-view-block"><a id="more-matching-bands" href="javascript:void(0);">More matching rings <span class="signicon">+</span></a></div><?php */?>
+	<script>
+		jQuery(function(){
+			/*jQuery('#more-matching-bands').click(function(){
+				jQuery('#matching-band-thumbs').toggle();
+				if(jQuery('#matching-band-thumbs').css('display')!='none'){
+					jQuery('#more-matching-bands').html('More matching rings <span class="signicon">-</span>');
+				}
+				else{
+					jQuery('#more-matching-bands').html('More matching rings <span class="signicon">+</span>');
+				}
+			})*/
+			jQuery('.close-popup, #lightboxBlackOverlay').click(function(){
+				jQuery("#lightboxBlackOverlay, #lightboxContent").fadeOut(300);
+			})
+		})
+	</script>
+	<?php //endif; ?>
+	<?php else:?>
+		There are no more matching bands available to show.
+	<?php endif; ?>
+</div>

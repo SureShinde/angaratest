@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+    		<action method="addCss"><stylesheet>css/fancycart.css</stylesheet></action>
+            <block type="core/text" name="PaymentWidgets.js"><action method="setText"><text><![CDATA[<script type="text/javascript" src="https://payments.amazon.com/cba/js/PaymentWidgets.js"></script>]]></text></action></block>
+		</reference>
+	</default>
+	<checkout_cart_index>
+		<remove name="PaymentWidgets.js"/>
+	</checkout_cart_index>
+	<checkout_onepage_index>
+		<remove name="PaymentWidgets.js"/>
+	</checkout_onepage_index>
+	<fancycart_ajax_index>
+    	<block type="fancycart/view" name="root" template="fancycart/cart.phtml">
+				<action method="setCartTemplate"><value>fancycart/cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>fancycart/noItems.phtml</value></action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/item/default.phtml</template></action>
+				
+				<block type="offers/chooseYourGift" name="choose_your_gift" template="offers/choose_your_gift.phtml"/>
+				
+				<block type="fancycart/view" name="cartsummary" template="fancycart/summary.phtml">
+					
+					<block type="core/text_list" name="checkout.cart.top_methods" as="top_methods" translate="label">
+						<label>Payment Methods Before Checkout Button</label>
+						<block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="checkout/onepage/link.phtml"/>
+					</block>
+					
+					<block type="page/html_wrapper" name="checkout.cart.form.before" as="form_before" translate="label">
+						<label>Shopping Cart Form Before</label>
+					</block>
+					
+					<block type="core/text_list" name="checkout.cart.methods" as="methods" translate="label">
+						<label>Payment Methods After Checkout Button</label>
+						<block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="checkout/onepage/link.phtml"/>
+						<block type="checkout/multishipping_link" name="checkout.cart.methods.multishipping" template="checkout/multishipping/link.phtml"/>
+						<block type="amazonpayments/link_shortcut" name="checkout.cart.methods.amazon_cba" template="amazonpayments/link_bottom.phtml"/>
+						<block type="googlecheckout/link" name="checkout.cart.methods.googlecheckout.bottom" template="googlecheckout/link.phtml"/>
+						<block type="paypal/express_shortcut" name="checkout.cart.methods.paypal_express.bottom" before="-" template="paypal/express/shortcut.phtml">
+							<action method="setIsQuoteAllowed"><value>1</value></action>
+						</block>
+					</block>
+					<block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="checkout/cart/coupon.phtml"/>
+					<block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="checkout/cart/shipping.phtml"/>
+					<block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="checkout/cart/crosssell.phtml"/>
+	
+					<block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"/>
+					
+				</block>
+		</block>
+		<reference name="before_body_end">
+            <!--<block type="googleoptimizer/code_conversion" after="-" name="googleoptimizer.conversion.script">
+                <action method="setScriptType"><scriptType>conversion_script</scriptType></action>
+                <action method="setPageType"><pageType>checkout_cart</pageType></action>
+            </block>-->
+        </reference>
+	</fancycart_ajax_index>
+</layout>

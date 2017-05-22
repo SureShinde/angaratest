@@ -1,0 +1,189 @@
+<style>
+    #pricesection .final-price {
+        color: #B32D2C;
+    }
+	.refundtxt
+{
+font:10px Arial, Helvetica, sans-serif;
+margin:2px;
+text-align:left;
+}
+</style>
+
+
+
+<?php
+/**
+ * Template for displaying product price in different places (products grid, product view page etc)
+ *
+ * @see Mage_Catalog_Block_Product_Abstract
+ */
+?>
+<?php
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+/* @var $_coreHelper Mage_Core_Helper_Data */
+/* @var $_taxHelper Mage_Tax_Helper_Data */
+
+$_product = $this->getProduct();
+$_id = $_product->getId();
+?>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('#jewelryappraisal').click(function(){
+		if(jQuery('#jewelryappraisal').is(":checked")){
+			jQuery('#expected-shipping-date-original').html('<?php echo $day1;?>');
+			jQuery('#nonjewelry').show();
+		}else{
+			jQuery('#expected-shipping-date-original').html('<?php echo $day0;?>');
+			jQuery('#nonjewelry').hide();
+		}
+	});
+});
+</script>
+
+
+
+<?php $_retailPrice = $_taxHelper->getPrice($_product, $_product->getRetailPrice()) ?>
+<?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
+<?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+    <script>
+            var memberLoginState = 'no';
+            var memberDiscountVal = 0;
+
+            function getMemberPrice(mprice) {
+                memberPriceShow = (100 - memberDiscountVal) * mprice / 100;
+                return memberPriceShow;
+            }
+
+            function priceChanged(price) {
+                normalFinalPrice = optionsPrice.productPrice + price;
+                if (memberLoginState == 'yes') {
+                    memberFinalPrice = getMemberPrice(normalFinalPrice);
+                    memberFinalPrice = memberFinalPrice.toFixed(2);
+                    jQuery('#mpVal').html(currencySign + memberFinalPrice);
+                    totPaidAmt = parseFloat(memberFinalPrice);
+                } else {
+                    totPaidAmt = parseFloat(normalFinalPrice);
+                }
+                //effect
+                jQuery('.final-price, #instant-saving').hide().stop(false, true).fadeIn(500);
+                //var installments = jQuery('#easyopt-installments').val();
+                if ((totPaidAmt) > 2500) {
+                    installments = 2;
+                } else {
+                    installments = 3;
+                }
+                
+                if (installments == 2) {
+                    jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + currencySign + (totPaidAmt).toFixed(2) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + currencySign + (totPaidAmt / 2).toFixed(2) + '</option>');
+					var easyPayPrice = (currencySign + (totPaidAmt / 2).toFixed(2));
+					jQuery('#easy-pay-text').html('or 2 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+                } else {
+                    jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + currencySign + (totPaidAmt).toFixed(2) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + currencySign + (totPaidAmt / 2).toFixed(2) + '</option><option value="2_' + (totPaidAmt / 3).toFixed(2) + '">3 payments of ' + currencySign + (totPaidAmt / 3).toFixed(2) + '</option>');
+					var easyPayPrice = (currencySign + (totPaidAmt / 3).toFixed(2));
+					jQuery('#easy-pay-text').html('or 3 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+                }
+
+                if (jQuery('#angara-old-price').length > 0) {
+                    jQuery('#angara-old-price').text(currencySign + totPaidAmt.toFixed(2)).hide().stop(false, true).fadeIn(500);
+                }
+
+                if (jQuery('#retail-del-price').length > 0) {
+					retail_p = <?php echo $_retailPrice?>;
+                    jQuery('#retail-del-price').text(currencySign + (totPaidAmt/0.6).toFixed(2)).hide().stop(false, true).fadeIn(500);
+                }
+				
+				/*Added by Saurabh For add insurance on product page*/
+					if(normalFinalPrice<200.00){
+						var insprice=40;
+					}
+					else{
+						var insprice=normalFinalPrice*.1;
+					}
+						jQuery('#insprice').html(Math.ceil(insprice));
+				/*End Added by Saurabh For add insurance on product page*/
+
+
+            }
+
+            jQuery(function () {
+                jQuery('.mptooltip').hover(
+                        function (e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            jQuery(this).append(jQuery('#memberpricetooltip').show());
+                        },
+                        function () {
+                            jQuery('#memberpricetooltip').hide();
+                        }
+                )
+            })
+        </script>
+        
+        <div class="producr-price-block">        	
+            <span class="retailpriceblock">	
+					<span class="retailfinalprice" id="retail-del-price">
+						<?php echo $_coreHelper->currency($_retailPrice, true, false); ?>
+					</span>
+            </span>
+            <span class="angarapriceblock" style="padding:0;">
+				<span class="angarafinalprice" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+					<?php echo $_coreHelper->currency($_finalPrice, true, false); ?>
+				</span>
+            </span>
+            <div class="clear"></div>
+        </div>
+        	
+        <!--Start Easy Pay Code-->
+		<div id="easy-pay-block">
+			<?php $_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_finalPrice); ?>	
+            <div id="easy-pay-text-block">
+				<span id="easy-pay-text" class="easy-pay-text">
+					or <?php echo count($_easyPayOptions); ?> payments of <span class="easy-pay-text-price"><?php echo  $_coreHelper->currency(end($_easyPayOptions), true, false); ?></span>
+				</span>
+			</div>	
+
+			<div id="easy-pay-option-block" class="easypayoption" >
+                <span>Or <strong>Easy Pay: </strong></span>
+				<span>               
+					<select name="easyopt" id="easyopt">
+						<?php foreach ($_easyPayOptions as $key => $val): ?>
+						<?php
+						if ($key == 0) {
+							$selopt = 'selected="selected"';
+							$displayopt = ($key + 1) . ' payment of ' . $_coreHelper->currency($val, true, false);
+						} elseif ($key == 1) {
+							$selopt = '';
+							$displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+						} else {
+							$selopt = '';
+							$displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+						}
+						?>
+						<option value="<?php echo $key . '_' . $_coreHelper->currency($val, false, false); ?>" <?php echo $selopt; ?>><?php echo $displayopt; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</span>
+			</div>
+			
+			<span class="know-more-icon" id="know-more-easypay">
+              	  <div class="popupbox-block" id="knowmoreeasypay">
+                    <span class="popup-heading">What is Easy Pay?</span>                              
+                       <ul class="easypaypoint">
+                        <li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+                        <li>First payment is charged at the time of purchase.</li>
+                        <li>The order is processed for shipment immediately upon checkout.</li>
+                        <li>Your credit card will be charged for 2 or 3 equal installments starting 30 days from the date of
+                            purchase.</li>
+                        <li>No interest or additional fees are charged from Angara.</li>
+                        <li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the
+                            right to collect the same or send a collection agency if a payment is not made.
+                        </li>
+                    </ul>                   
+                  </div>
+				</span>
+			
+			</div>
+		
+		<!--End Easy Pay Code-->

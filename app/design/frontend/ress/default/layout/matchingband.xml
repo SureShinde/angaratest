@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<matchingband_index_index>
+    	<block type="matchingband/catalog_product_list_matchingband" name="root" template="catalog/product/list/matchingband.phtml" />
+	</matchingband_index_index>
+</layout>

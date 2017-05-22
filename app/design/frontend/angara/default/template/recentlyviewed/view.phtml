@@ -1,0 +1,36 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items = array();
+
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+}
+
+if(count($rw_items) >= 4){?>
+	<div class="recentlyview-title">RECENTLY VIEWED JEWELRY</div>
+	
+	<div id="mycarousel1">
+    	<div class="mycarousel1-wrapper">
+			<ul class="jcarousel-skin-tango">
+			<?php
+			foreach($rw_items as $product){
+				$prod_data = Mage::getModel('catalog/product');
+				$prod_data->load($product);
+				$image = $this->helper('catalog/image')->init($prod_data,'image')->resize(170,170);?>
+				<li>
+					<a href="<?php echo $prod_data->getProductUrl();?>?icid=rv-widget"> 
+						<span>
+							<img class="recently-view-image" alt="<?php echo $prod_data->getName();?>" src="<?php echo $image;?>">
+						</span>
+					</a>
+				</li>
+			<?php
+			}?>
+			</ul>
+        </div>
+	</div>
+
+	<div class="clear"></div>
+<?php
+}?>

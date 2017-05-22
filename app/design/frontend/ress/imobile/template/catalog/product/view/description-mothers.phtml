@@ -1,0 +1,98 @@
+<?php 
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output'); ?>
+
+<div class="col-md-12 col-sm-12" style="padding:initial;">
+	<div class="col-md-12 col-sm-12">
+		<div class="max-margin-bottom">
+		<span id="producttitle2_hp" class="h5"><?php echo $_product->getName(); ?></span>
+		<?php 
+		if($_product->getDescription()){		
+			if($_product->getTypeId() == 'configurable'):
+				echo '<div class="dyn_long_description" itemprop="description">'.strip_tags($_product->getDescription()).'</div>';
+			else:
+				echo '<div itemprop="description">'.strip_tags($_product->getDescription()).'</div>';
+			endif; 
+		}?>
+			<meta itemprop="url" content="<?php echo $_product->getUrlModel()->getUrl($_product, array('_ignore_category'=>true)); ?>" />
+			<meta itemprop="sku" content="<?php echo $_product->getSku() ?>" />
+			<?php /*<meta itemprop="brand manufacturer" content="Angara" />*/?>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row hidden-xs max-margin-bottom fontsize-type-1">
+			<div class="col-sm-8"  style="padding-left:0px;"><!--<a id="authenticity-cert" href="javascript:void(0)" onclick="getCertificate()">
+				<span class="fa-stack special-merged-icon-20">
+					<i class="fa fa-certificate fa-stack-x"></i> <i class="fa fa-bookmark fa-stack-x low-margin-top min-padding-top px7"></i>
+				</span>
+				View Certificate Of Authenticity</a>--></div>
+				
+			 <div id="rating-links" class="col-sm-4 pull-right text-right" style="padding:0px;"><span class="clickable hover-underline hover-link fontsize-type-1"><i class="fa fa-pencil-square-o fa-fw text-orange"></i>Write a Review</span></div>
+		</div>
+		<form id="cert_form" action="<?php echo Mage::getBaseUrl();?>hprcv/Index/pdf" method="post" target="_blank">
+			<input id="cert_id" type="hidden" name="certificate_id" value="<?php echo $_product->getId();?>"/>
+		</form>
+	</div> 
+</div>
+<div class="col-md-6 col-sm-6">
+	<div id="details-heading-top">
+		<div class="detail-box-title"><h5 class="no-margin">Product Details:</h5></div>
+		<?php echo $this->getAttributeHtml('Angara Item #', $_helper->productAttribute($_product, $_product->getSku(), 'sku')); ?> <?php echo $this->getMetalsHtml(); ?>
+		<?php if($_product->getMetal1Type()): ?>
+		  <div class="field">
+			<div class="fieldtitle">Metal:</div>
+			<div class="fieldvalue" id='metalfield'><?php echo $_product->getAttributeText('metal1_type') ?></div>
+			<div style="clear:both"></div>
+		  </div>
+		<?php endif?>
+		<div class="field">
+			<div class="fieldtitle">Quality Grade:</div>
+			<div class="fieldvalue" id='qgattribute'>AAA</div>
+			<div style="clear:both"></div>
+		  </div>
+		<?php
+		if($_product->getChain1Length()){ 
+			echo $this->getAttributeHtml('Chain Length', $_helper->productAttribute($_product, $_product->getChain1Length().' inches', 'chain1_length')); 
+		}			
+		if($_product->getDefaultBandWidth()!=''){  
+			echo $this->getBandWidthHtml();
+		}			
+		if($_product->getBandHeight()!=''){  
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('band_height')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getBandHeight()),'dyn_band_height','<span class="hidden-xs pull-right popup-icon gmprd-popup low-padding-left"><i id="bandheight_aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="The height or thickness of a band is the vertically measurement from the inside against the finger to the top of the band. All measurements are approximate and may vary slightly."></i></span>');
+		}			
+		if($_product->getApproximateMetalWeight()!=''){
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('approximate_metal_weight')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getApproximateMetalWeight()),'dyn_approximate_metal_weight');
+		}			
+		if($_product->getFit()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('fit')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('fit')),'fit');
+		}
+		if($_product->getLength()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('length')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getLength()),'length');
+		}
+		if($_product->getWidth()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('width')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('width')),'width');
+		}
+		if($_product->getClaspType()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('clasp_type')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('clasp_type')),'clasp_type');
+		} ?>
+	</div>
+</div> 
+<div class="col-md-6 col-sm-6">
+	<div class="stones-details-box">
+		<?php echo $_product->getCustomProductDetails(); ?>
+		<?php echo $this->getStonesHtml(); ?>
+	</div>
+</div>	
+<div class="clearfix"></div>
+
+<script type="text/javascript">
+function getCertificate(){
+	if(typeof(variations)!='undefined'){
+		jQuery('#cert_id').val(variations.getCurrentProduct());
+	}
+	jQuery('#cert_form').submit();
+}
+</script>
+<style>
+.fieldtitle {float:left; color: #777777; }
+.fieldvalue {text-align: right;}
+</style>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_Hometabs>
+			<version>0.1.0</version>
+		</Angara_Hometabs>
+	</modules>
+	
+	<frontend>
+		<routers>
+		  <hometabs>
+			<use>standard</use>
+			  <args>
+				<module>Angara_Hometabs</module>
+				<frontName>hometabs</frontName>
+			  </args>
+		  </hometabs>
+		</routers>
+		
+		<!--Once we define the layout handle here then the only the call will read the file 'app\design\frontend\ress\default\layout\flashsale.xml'-->
+		<layout>
+		  <updates>
+			<hometabs>
+			  <file>hometabs.xml</file>
+			</hometabs>
+		  </updates>
+		</layout>
+	</frontend>
+
+	<global>
+		<blocks>
+            <hometabs>
+                <class>Angara_Hometabs_Block</class>
+            </hometabs>
+        </blocks>
+		<helpers>
+			<hometabs>
+				<class>Angara_Hometabs_Helper</class>
+			</hometabs>
+		</helpers>
+	</global>
+</config> 

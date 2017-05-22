@@ -1,0 +1,4 @@
+<?php if ($this->isOnepageCheckoutAllowed()):?>
+<button type="button" id="cart-bottom-checkout-button" title="<?php echo $this->__('Checkout') ?>" class="btn-primary btn-proceed-checkout fontsize-type5 btn-block btn-checkout<?php if (!$this->checkEnable()){ echo 'no-checkout'; }?>"<?php if (!$this->checkEnable()){ echo ' disabled="disabled" ';} ?> onclick="pushOPGA(); window.location='/onepagecheckout/index/index/shipment/'+jQuery('#custom_estimate_method').val();"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+<?php endif?>
+

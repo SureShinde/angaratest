@@ -1,0 +1,272 @@
+<?php
+/**
+ * Customy
+ */
+
+$_tracks = $this->getTrackingData();
+$_details = $this->getOrderDetails();
+$_coreHelper = Mage::helper('core');
+
+$orderCreatedTimestamp = strtotime($_details['created_at']);
+
+if(empty($_details)){ echo 'invalid'; }
+else{?>	
+	<style>
+		.p0{padding:0px}
+		.fl{float:left}
+		.half-width{width:50%;}
+		.p10{padding:10px}
+		.pR10{padding-right:10px}
+		.pL10{padding-left:10px}
+		.pT10{padding-top:10px}
+		.pB10{padding-bottom:10px}
+		.mT20{margin-top:20px}
+		.mT10{margin-top:10px}
+		.mR5{margin-right:5px;}
+		.mB5{margin-bottom:5px;}
+		.mB20{margin-bottom:20px}
+		.tAc{text-align:center}
+		.color{color: #73c53d; font-size: 16px; letter-spacing: 1px; margin-bottom: 6px;}
+		.full-width{width:100%;float:left}
+		.order-detail{}
+		.order-detail .od-holder{width:100%;float:left;border:1px solid #e3e3e3}
+		.order-detail .headings{background:#f2f2f2;}
+		.order-detail .headings .title{font-size:19px; font-weight:bold; line-height:38px;}
+		.order-detail ul{display:block;margin-bottom:0px;}
+		.order-detail ul li{display:inline-block; width:160px; line-height:20px;}
+		.order-detail .headings .tags ul li{}
+		.order-detail .o-detail .o-status ul.order-status{min-height:150px;}
+		.order-detail .o-detail .o-status ul.order-status li{position:relative; border-radius:1px;}
+		.order-detail .o-detail .o-status ul.order-status li:last-child{}
+		.order-detail .o-detail .o-status ul.order-status li:before{content: ""; border-left:27px solid #dedede; border-right:27px solid transparent; border-bottom:27px solid transparent; border-top:27px solid transparent; position:absolute; z-index:2; right:-53px;}
+		.order-detail .o-detail .o-status ul.order-status li .sts-title{left:0px; right:0px; z-index:3; padding:7px 0px; position:absolute;}
+		.order-detail .o-detail .o-status ul.order-status li .arrow{width:100%; height:8px; background:url(/skin/frontend/ress/default/images/arrow.jpg) no-repeat center center; position: absolute; left: 10px; top: 63px; z-index: 2; display:none;}
+		.order-detail .o-detail .o-status ul.order-status li:last-child:before{width:100%}
+		.order-detail .o-detail .o-status ul.order-status li .sp{position:relative; background:#dedede; border-radius:0px; display:inline-block; height:54px; width:100%;}
+		.order-detail .o-detail .o-status ul.order-status li .sp1 .sp2{margin:0px; border-left:27px solid #ffffff; border-right:27px solid transparent; border-bottom:27px solid transparent; border-top:27px solid transparent; position:absolute; right:-62px; z-index:1;}
+		
+		.order-detail .o-detail .o-status ul.order-status li.completed .sts-title,
+		.order-detail .o-detail .o-status ul.order-status li.active .sts-title{color:#ffffff;}
+		
+		.order-detail .o-detail .o-status ul.order-status li.completed:before,
+		.order-detail .o-detail .o-status ul.order-status li.active:before{border-left:27px solid #fa505a}
+		
+		.order-detail .o-detail .o-status ul.order-status li.completed .sp,
+		.order-detail .o-detail .o-status ul.order-status li.active .sp{background:#fa505a}
+		
+		
+		.order-detail .o-detail .about-order{padding-bottom:10px; margin-bottom:10px; border-bottom:1px dashed #e4e4e4}
+		.order-detail .o-detail .about-order table tr td{padding:5px;}
+		.order-detail .o-detail .about-order img{border:1px solid #e3e3e3}
+		.order-detail .sm-font{font-size:10px;}
+		.order-detail .o-status ul.order-status li:nth-child(1) .status-detail{left:0px;}
+		.order-detail .o-status ul.order-status li:nth-child(2) .status-detail{left:-105%;}
+		.order-detail .o-status ul.order-status li:nth-child(3) .status-detail{left:initial; right:0px}
+		.order-detail .status-detail{display:none; border: 1px solid #c5c5c5;width: 310%; position: absolute; border-radius:5px; top:70px;  padding:10px;}
+		.order-detail .status-detail-arrow{}
+		.order-detail .active .status-detail, .order-detail .o-detail .o-status ul li.active .arrow{display:block;}
+		.order-detail .status-detail span{line-height:20px}
+		.order-detail .o-detail .o-status ul.order-status li.cc .sp{border-color:#f7e70b;}
+		.order-detail .o-detail .o-status ul.order-status li.cc .sp .sp2{background:#f7e70b}
+		.order-detail .o-detail .o-status ul.order-status li.fcf .sp{border-color:red;}
+		.order-detail .o-detail .o-status ul.order-status li.fcf .sp .sp2{background:red}
+		
+		
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(1){margin-right:5px;}
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(1) .sp1{border-radius:3px 0px 0px 3px;}
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(2){margin-right:5px;}
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(2) .sts-title,
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(3) .sts-title{left:20px;}
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(3) .sp1{border-radius:0px 3px 3px 0px}
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(3) .sp2,
+		.order-detail .o-detail .o-status ul.order-status li:nth-child(3):before{display:none;}
+		
+		.color{color: #999999; font-size: 14px; letter-spacing: 0.5px; margin-bottom: 6px;}
+		.active.fcf .color{color:red}
+		.medium-font{font-size:16px;}
+		
+		.tracking-no, .shipped-via{position:relative; margin-top:10px; padding-top:15px;}
+		.tracking-no:after, .tracking-no:before, .shipped-via:before{content:""; height: 1px; background: #dedede; width: 50%; position: absolute; top: 0px;}
+		.tracking-no:before{right:0px;}
+		.shipped-via:before{left:0px;}
+		.tracking-no:after{height:180%; width:1px; right:0px;}
+		
+		
+		@media(min-width:768px) and (max-width:999px){
+			
+		}
+		@media(max-width:767px){
+			.order-detail ul li{width:110px;}
+			.order-detail ul li .sts-title{font-size:13px;}
+			.order-detail .o-detail .o-status ul.order-status li:nth-child(1),
+			.order-detail .o-detail .o-status ul.order-status li:nth-child(2){margin-right:0px;}
+			.order-detail .o-detail .o-status ul.order-status li .sp1 .sp2{right:-57px;}
+			.headings .title{padding:0px 10px;}
+			.about-customer{padding:0px 10px;}
+		}
+		@media(max-width:325px){
+			.order-detail ul li{width:95px;}
+			.order-detail .o-detail .o-status ul.order-status li:nth-child(2) .sts-title, .order-detail .o-detail .o-status ul.order-status li:nth-child(3) .sts-title{left:0px;}
+			.order-detail ul li:before, .order-detail ul li .sp2{display:none;}
+			.order-detail ul li .sp1{border-radius:3px!important;}
+		}
+	</style>
+	<div class="full-width pull-left p10 row">    
+		<div class="col-sm-12">
+            <div class="text-center" style="font-size:30px;"><strong>Track Your Order</strong><i class="fa fa-truck low-padding-left"></i></div>
+		</div>
+		<div class="col-sm-12 order-detail mT20">
+			<a href="/tracking" style="float:right;color:#d83d29">Track Another Order</a>
+		</div>
+		<?php 
+		$orderState = $_details['state'];
+		
+		$processStatus = array('pending','pending_payment','pending_paypal','holded','payment_review','fraud'); ?>
+		<div class="col-sm-12 order-detail">
+			<div class="od-holder">
+				<div class="full-width headings mB20">
+					<div class="col-md-5 col-sm-12 title">
+						Order Detail
+					</div>
+				</div>
+				<div class="full-width o-detail mB20">
+					<div class="col-md-5 col-sm-12 o-info">
+						<div class="full-width about-order"> 
+						<?php
+                        if(count($_details['product_image_path']) < 2){?>                       
+                            <div class="col-sm-3 col-xs-3 p0">								
+                                <img class="img-responsive" width="80" height="80" src="<?php echo $_details['product_image_path'][0];?>" alt=""/>								
+                            </div>
+                            <div class="col-sm-9 col-xs-9">
+                         <?php 
+                        }
+                        else{?>
+                            <div class="col-sm-12 col-xs-12">
+                        <?php 
+                        }?>
+								<table width="100%">
+									<tr>
+										<td width="45%" class="text-light">Order Number:</td>
+										<td width="55%"><strong><?php echo $_details['id'];?></strong></td>
+									</tr>
+									<tr>
+										<td class="text-light">Order Date:</td>
+										<td class="text-light"><?php echo date('l\, F j, Y', $orderCreatedTimestamp);?></td>
+									</tr>
+									<tr>
+										<td class="text-light">Expected Delivery Date:</td>
+										<td class="text-light"><?php echo $_details['estimated_arrivaldate'];?></td>
+									</tr>
+									<tr>
+										<td class="text-light">Amount Paid:</td>
+										<td><strong><?php echo $_coreHelper->currency($_details['total_paid'],true,true);?></strong></td>
+									</tr>
+								</table>
+							</div>
+						<?php
+                        if(count($_details['product_image_path']) > 1){?>	
+                            <div class="col-sm-12 col-xs-12" style="padding-top:10px; border-top:1px dashed #e4e4e4;padding-left:5px;">
+                                <?php										
+                                foreach($_details['product_image_path'] as $image): ?>
+                                    <img class="img-responsive fl mR5 mB5" width="80" height="80" src="<?php echo $image;?>" alt=""/>
+                                <?php 
+                                endforeach;?>
+                            </div>
+                        <?php 
+                        }?>						
+						</div>
+						<div class="full-width about-customer">
+							<div class="full-width">
+								<p style="font-size:14px;"><strong><?php echo ucfirst($_details['customer_firstname']).' '.ucfirst($_details['customer_lastname']);?></strong></p>
+							</div>
+							<div class="half-width pull-left pR10">
+								<p style="font-size:12px;"><strong>Shipping Address</strong></p>
+								<p style="font-size: 12px;line-height: 18px;" class="text-light"><?php echo $_details['customer_shippingaddress'];?></p>
+							</div>
+							<div class="half-width pull-left pL10">
+								<p style="font-size:12px;"><strong>Billing Address</strong></p>
+								<p style="font-size: 12px;line-height: 18px;" class="text-light"><?php echo $_details['customer_billingaddress'];?></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-12 o-status">
+						<ul class="full-width tAc order-status high-min-hight">
+							<li class="sts relative-placeholder <?php if($_details['ok_to_ship'] == '0'){echo 'active';}else{echo 'completed';}?>">
+								<span class="sts-title"><?php if($orderState == 'canceled' || $orderState == 'closed'){echo 'Order<br>Cancelled';}else{echo 'Order<br>Confirmation';}?></span>
+								<span class="sp sp1"><span class="sp2"></span></span>
+								<span class="arrow"></span>
+								<div class="status-detail">
+									<span class="full-width tAc color"><?php if($orderState == 'canceled' || $orderState == 'closed'){echo 'Your Order has been Cancelled';}else{echo 'Congratulations on your recent purchase! You have great taste. Your order is getting ready to go into production.';}?></span>
+								</div>
+							</li>
+							<li class="relative-placeholder <?php 
+							if($_details['ok_to_ship'] == '1'){
+								if($orderState == 'complete'){
+									echo 'sts completed';
+								} 
+								else if(in_array($orderState, $processStatus) || $orderState == 'canceled' || $orderState == 'closed' || $orderState == 'processing' || $orderState == 'new'){
+									echo 'sts active';
+								}
+							}
+							else if($_details['ok_to_ship'] == '0' || $_details['ok_to_ship'] == '2'){								
+								echo 'no-status';
+							}?>">
+								<span class="sts-title">In Production/<br>Quality Control</span>
+								<span class="sp sp1"><span class="sp2"></span></span>
+								<span class="arrow"></span>
+								<div class="status-detail">
+									<span class="full-width tAc color"><?php echo 'A master jeweler is busy making your custom jewelry order perfect. It will only be passed with the highest quality standards.';?></span>
+								</div>
+							</li>
+							<li class="relative-placeholder <?php if($_details['ok_to_ship'] == '1'){if($orderState == 'processing' || $orderState == 'new' || $orderState == 'canceled' || $orderState == 'closed' || in_array($orderState, $processStatus)){echo 'no-status';} if(!in_array($orderState, $processStatus) && $orderState != 'canceled' && $orderState != 'processing' && $orderState != 'new' && $orderState != 'closed'){echo 'sts active';} if($orderState == 'complete'){echo ' completed';}} if($_details['ok_to_ship'] == '0'){echo 'no-status';}?>">
+								<span class="sts-title">Shipped/<br>In Transit</span>
+								<span class="sp sp1"><span class="sp2"></span></span>
+                                <span class="arrow"></span>
+								<div class="status-detail">
+									<span class="full-width tAc color"><?php echo 'Yay! It\'s on its way! Please use the tracking information to see when your order will arrive.';?></span>
+									<div class="full-width text-center mT10">
+									<?php 
+                                    if($orderState == 'complete' && !empty($_tracks)){?>
+                                        <div class="full-width ship-detail">
+											<div class="full-width tAc medium-font"><strong>Tracking Information:</strong></div>
+											<div class="full-width tAc">
+												<div class="half-width pull-left tracking-no">
+													<strong><?php echo $this->__('Tracking No.') ?></strong>
+												</div>
+												<div class="half-width pull-left shipped-via">
+													<strong><?php echo $this->__('Shipped Via') ?></strong>
+												</div>
+												<div class="full-width low-margin-top">
+													<?php 
+													foreach($_tracks as $track) :
+														$popup = 'onclick="popWin(\'' . $this->getCarrierUrl($track['carrier_code'],$track['title']) . $track['number'] . '\',\'trackorder\',\'width=800,height=600,resizable=yes,scrollbars=yes\'); return false"'; ?>
+														<div class="half-width pull-left">
+															<a class="text-underline" href="<?php echo $this->getCarrierUrl($track['carrier_code'],$track['title']).$track['number'] ?>" <?php echo $popup ?> ><?php echo $track['number'] ?></a>
+														</div>
+														<div class="half-width pull-left">
+														<?php 
+														if($track['carrier_code'] == 'fedex' && stripos($track['title'],'FedEx') === false){
+															echo 'FedEx '.$track['title'];
+														}
+														else{
+															echo $track['title'];
+														} ?>
+														</div>
+													<?php 
+													endforeach; ?>
+												</div>
+											</div>
+                                        </div>
+                                    <?php 
+                                    }?>
+									</div>
+								</div>     
+							</li>
+						</ul>                        
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+}?>

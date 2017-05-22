@@ -1,0 +1,198 @@
+<?php
+/**
+ * Template for displaying product price in different places (products grid, product view page etc)
+ *
+ * @see Mage_Catalog_Block_Product_Abstract
+ */
+?>
+
+<style>
+#pricesection .final-price {
+	color: #B32D2C;
+}
+</style>
+
+<?php
+/* @var $_coreHelper Mage_Core_Helper_Data */
+$_coreHelper = $this->helper('core');
+
+/* @var $_taxHelper Mage_Tax_Helper_Data */
+$_taxHelper = $this->helper('tax');
+
+$_product = $this->getProduct();
+$_id = $_product->getId();
+$_retailPrice = $_taxHelper->getPrice($_product, $_product->getMsrp()); 
+$_price = $_taxHelper->getPrice($_product, $_product->getPrice()); 
+$_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()); 
+?>
+<div>
+	<div class="apricesection" style="padding:0;"> 
+		<span class="apricetxt">
+			<strong>Angara Price:</strong>
+		</span>
+		<br />
+		<span class="final-price angarapriceblogin" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>"><?php echo $_coreHelper->currency($_finalPrice,true,false); ?></span> 
+	</div>
+	<?php /*?><br />
+	<div class="apricesection" style="padding-bottom:0"> <span class="apricetxt">Retail Value:</span><br />
+		<del><span class="apricevalue dyn_msrp" id="retail-del-price"><?php echo $_coreHelper->currency($_retailPrice,true,false); ?></span></del></div>
+	<div class="clear"></div><?php */?>
+</div>
+
+<script>           
+function priceChanged(totPaidAmt) {
+	if(totPaidAmt == 0)
+		return false;
+		
+	if ((totPaidAmt) > 2500) {
+		installments = 2;
+	} 
+	else {
+		installments = 3;
+	}
+	
+	if (installments == 2) {
+		jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + optionsPrice.formatPrice(totPaidAmt) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + optionsPrice.formatPrice(totPaidAmt / 2) + '</option>');
+		var easyPayPrice = (optionsPrice.formatPrice(totPaidAmt / 2));
+		jQuery('#easy-pay-text').html('or 2 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+	} 
+	else {
+		jQuery('#easyopt').html('<option value="0_' + (totPaidAmt).toFixed(2) + '" selected="selected">1 payment of ' + optionsPrice.formatPrice(totPaidAmt) + '</option><option value="1_' + (totPaidAmt / 2).toFixed(2) + '">2 payments of ' + optionsPrice.formatPrice(totPaidAmt / 2) + '</option><option value="2_' + (totPaidAmt / 3).toFixed(2) + '">3 payments of ' + optionsPrice.formatPrice(totPaidAmt / 3) + '</option>');
+		var easyPayPrice = (optionsPrice.formatPrice(totPaidAmt / 3));
+		jQuery('#easy-pay-text').html('or 3 payments of <span class="easy-pay-text-price">' + easyPayPrice + '</span>');
+	}
+	
+	/*Added by Saurabh For add insurance on product page*/
+		if(totPaidAmt < 200.00){
+			var insprice = 40;
+		}
+		else{
+			var insprice = totPaidAmt * .1;
+		}
+		
+		jQuery('#insprice').html(Math.ceil(insprice));
+	/*End Added by Saurabh For add insurance on product page*/	
+	
+	<!--	Added by Vaseem on 10 Jan 2013 for packaging box task no 239	-->
+		<?php	// This will call once user click on gemstone quality or metal type
+			$sku 						= 	$_product->getSku();
+			$jewelryTypeID 				= 	$_product->getJewelryType();
+			if($jewelryTypeID!=''){
+				$jewelryType			= 	$_product->getAttributeText('jewelry_type');					//	Center Stone Type
+			}
+			
+			// Check if attribute is defined or not
+			$stone1TypeValue			= 	$_product->getStone1Type();	
+			if($stone1TypeValue!=''){
+				$stone1Type 				= 	$_product->getAttributeText('stone1_type');					//	Center Stone Type
+			}
+			
+			$productType				=	Mage::helper('function')->packagingImageST($stone1Type,$sku,$jewelryType);
+		?>
+		finalboxImage	=	showPkgImage('<?php echo $productType?>',totPaidAmt);
+		
+		jQuery('#pckImg').html(finalboxImage);
+	<!--	Added by Vaseem on 10 Jan 2013 for packaging box task no 239	-->
+}
+</script>
+
+<?php 
+// hard coded check for diamond studs by pankaj
+$cats = $this->getProduct()->getCategoryIds();
+
+if(!in_array(279, $cats)){?>
+<!--Start Easy Pay Code-->
+<?php $_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_finalPrice); ?>
+<div class="saleprice11" align="center"> 
+	<span class="pricered">-or-</span><br>
+</div>
+<div class="saleprice11">
+                <span class="easypaylabel">Easy Pay Installments!</span><span class="know-more-icon whatiseasypay"><div id="paymentpop">
+    <div class="popup-mid">
+    <div>
+    <div style="width: 400px; font: bold 18px Arial, Helvetica, sans-serif; padding:0 0 15px 10px; text-align:left">What is Easy Pay?</div>
+    </div>
+    <ul class="easypaypoint">
+    <li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+    <li>First payment is charged at the time of purchase.</li>
+    <li>The order is processed for shipment immediately upon checkout.</li>
+    <li>Your credit card will be charged for 2 or 3 equal installments starting 30 days from the date of purchase.
+    <li>No interest or additional fees are charged from Angara.</li>
+    <li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the right to collect the same or send a collection agency if a payment is not made.</li>
+    </ul>
+    </div>
+    </div></span>
+    
+    </div>
+<div class="saleprice11"> <span>
+	<select name="easyopt" id="easyopt">
+		<?php foreach ($_easyPayOptions as $key => $val): ?>
+		<?php
+            if ($key == 0) {
+                $selopt = 'selected="selected"';
+                $displayopt = ($key + 1) . ' payment of ' . $_coreHelper->currency($val, true, false);
+            } elseif ($key == 1) {
+                $selopt = '';
+                $displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+            } else {
+                $selopt = '';
+                $displayopt = ($key + 1) . ' payments of ' . $_coreHelper->currency($val, true, false);
+            }
+            ?>
+		<option value="<?php echo $key . '_' . $_coreHelper->currency($val, false, false); ?>" <?php echo $selopt; ?>><?php echo $displayopt; ?></option>
+		<?php endforeach; ?>
+	</select>
+	</span> </div>
+<!--End Easy Pay Code-->
+<?php }
+// hard coded check for diamond studs by pankaj
+?>
+
+<?php if(!isset($cids))
+	$cids = $this->getProduct()->getCategoryIds();?>
+<?php 
+// ignoring gift cards (id:96)
+if(!in_array(96, $cids)): ?>
+<?php 
+	$appraisal_price = $this->helper('core')->currency(65,true,false);
+	$appraisal_price = ($appraisal_price=='$65.00')?'$65':$appraisal_price;
+	$pmain_sku = $_product->getSku();
+	$presku = strtolower(substr($pmain_sku, 0, 3)); // SD_
+?>
+<?php if($presku != 'sd_' && $presku != 'SD_'): ?>
+<div class="appraisalcert"> <span class="certspanbox">
+	<label onclick="">
+		<input name="appraisal" type="checkbox" id="jewelryappraisal" autocomplete="off"/>
+		<?php // Code Added by Vaseem for BT 346?>
+		<span class="appraisaltxt">Add Jewelry Appraisal for <?php echo ($appraisal_price=='$65')?$appraisal_price:'<br />'.$appraisal_price; ?></span> </label>
+	</span>
+	<span class="certpopup"><img src="/skin/frontend/angara/default/images/priceknowmore.jpg" width="13" height="13"></span>
+	<div class="appraisalcertimg" style="display:none;">Add Jewelry Appraisal for <?php echo $appraisal_price ?>
+			<div class="appraisalclose"></div>
+		</div>
+	<div class="refundtxt" id="nonjewelry" style="display:none;">*Jewelry Appraisal cost is non refundable</div>
+</div>
+<?php endif; ?>
+<?php /*Added by Saurabh for insurance module for issue 0000248*/ ?>
+<?php 
+$currencyPrice=Mage::helper('core')->currency($_product->getPrice(),false,false); 
+if($currencyPrice<200){
+	$insPrice=40;
+}
+else{
+	$insPrice=$currencyPrice*.1;
+}
+?>
+<div class="getinsurance"> <span class="certspanbox">
+	<label onclick="">
+		<input name="insurance" type="checkbox" autocomplete="off"/>
+		<span class="appraisaltxt">Add Warranty For <?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?><span id="insprice"><?php echo round($insPrice); ?></span></span> </label>
+	</span> <?php /*?><span class="insruanceicon" onclick="toggleDiv('insurancepopupbox');"><?php */?>
+	<span class="insruanceicon">
+	<div id="insurancepopupbox">
+		<div class="popup-mid" style="text-align:left; font:12px/17px Arial, Helvetica, sans-serif;">
+		The Total Protection Warranty Plan protects your jewelry for the next 5 years against any accidental damage and/or wear and tear in order to ensure that your jewelry looks like new whenever you wear it.  If the warranty is unused over the next 5 years, you can use the full amount paid for the warranty towards any future Angara purchase. <a href="/total-protection-warranty.html" target="_blank"; style="color:#000; text-decoration:underline;">Click here</a> for more information. </div>
+	</div> 
+	</span> </div>
+<?php /*End Added by Saurabh for insurance module for issue 0000248*/ ?>
+<?php endif; ?>

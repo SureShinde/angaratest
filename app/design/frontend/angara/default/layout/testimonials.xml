@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>          
+		<reference name="head">
+            <action method="addCss"><stylesheet>css/customerreview.css</stylesheet></action>
+			<!--<action method="addCss"><stylesheet>css/testimonials.css</stylesheet></action>-->
+        </reference>
+    </default>
+	
+	<testimonials_index_index translate="label">
+    	<label>Testimonials Customers</label>
+        <reference name="content">			
+            <block type="testimonials/items" name="testi" as="testi" template="testimonials/view.phtml" /><!--core/template-->
+        </reference>
+    </testimonials_index_index>
+	
+	<!--Added by Vaseem to show product reviews based on category starts-->
+	<testimonials_index_category translate="label">
+    	<label>Testimonials Customers</label>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/testimonials.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="testimonials/items" name="test_category_reviews" as="test_category_reviews" template="testimonials/category_reviews.phtml" />
+        </reference>
+    </testimonials_index_category>
+	
+	<testimonials_index_morereviews translate="label">
+    	<label>Testimonials Customers</label>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/testimonials.css</stylesheet></action>
+        </reference>
+        <reference name="content">		
+            <block type="testimonials/items" name="test_category_more_reviews" as="test_category_more_reviews" template="testimonials/category_more_reviews.phtml" />
+        </reference>
+    </testimonials_index_morereviews>
+	<!--Added by Vaseem to show product reviews based on category ends-->
+</layout>

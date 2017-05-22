@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+     <tabs>
+        <facebookapp translate="label" module="facebookapp">
+            <label>Facebook App Store</label>
+            <sort_order>200</sort_order>
+        </facebookapp>
+    </tabs>
+    <sections>
+        <facebookapp translate="label">
+              <label>Facebook App Store</label>
+              <tab>facebookapp</tab>
+              <frontend_type>text</frontend_type>
+              <sort_order>1000</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+        <groups>
+        <general translate="label" >
+                <label>General</label>
+                <frontend_type>text</frontend_type>
+              <sort_order>0</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            <fields>
+              <Apply_apptha_licensekey translate="label">
+                          <label>Apply License Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </Apply_apptha_licensekey>                                              
+                      </fields>
+                  </general>
+                  <facebook_app_general translate="label">
+                    <label>Popular Products Option </label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <app_general_slider translate="label comment">
+                            <label>Enable Popular Products </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable option for mostpopular and new products.</comment>
+                        </app_general_slider>
+                    </fields>
+                </facebook_app_general>
+            <faceconnect translate="label" >
+                <label>Facebook connect options</label>
+                <frontend_type>text</frontend_type>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            <fields>
+                          <facebook_app_id translate="label">
+                            <label>Facebook App ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </facebook_app_id>
+                       <facebook_app_secret translate="label">
+                            <label>Facebook App Secret</label>
+                            <frontend_type>text</frontend_type>
+                             <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </facebook_app_secret>
+                        <facebook_app_path translate="label">
+                            <label>Facebook Canvas Page</label>
+                            <frontend_type>text</frontend_type>
+                             <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </facebook_app_path>
+                      </fields>
+                  </faceconnect>
+               <banner_type translate="label">
+                    <label>Banner Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                        <app_banner_option translate="label comment">
+                            <label>Enable Banner</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable banner option.</comment>
+                        </app_banner_option>
+                        <banner_imagefield>
+                            <label>Upload Images For Banner</label>
+                            <frontend_type>imagefile</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner_images</upload_dir>
+                            <base_url type="media" scope_info="1">banner_images</base_url>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Upload images or select from the list below. [size = width:738px;height:310px;]
+                            </comment>
+                        </banner_imagefield>
+                        <file translate="label" module="adminhtml">
+                            <label>File</label>
+                            <render>adminhtml/catalog_product_edit_tab_options_type_file</render>
+                            <types>
+                                <file translate="label" module="adminhtml">
+                                    <label>File Upload</label>
+                                </file>
+                            </types>
+                        </file>
+                        <image_list translate="label">
+                            <sort_order>3</sort_order>
+                            <label>Banner Images</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_imagelist</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Selected image will be show as banner.
+                            </comment>
+                        </image_list>
+                    </fields>
+                </banner_type>
+                 </groups>
+        </facebookapp>
+    </sections>
+</config>

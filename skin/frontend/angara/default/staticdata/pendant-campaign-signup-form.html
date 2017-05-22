@@ -1,0 +1,605 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Angara.com</title>
+<script>window.location.href = 'http://www.angara.com/skin/frontend/angara/default/images/promotion-ended.jpg';</script>
+<style type="text/css">
+	form.form p label { color: #000000; }
+</style>
+
+<!--Started Modification regarding bug id :493 by Pankaj-->
+
+<!--<link rel="stylesheet" type="text/css" href="../css/dtp_jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../css/dtp_style.css" />-->
+<link rel="stylesheet" type="text/css" href="../css/pardotemail.css" />
+
+<style type="text/css">
+@font-face {
+ font-family: 'ProximaNova';
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.eot');
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.woff') format('woff'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-regular-webfont.svg#ProximaNova') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'ProximaNova_Bold';
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.eot');
+ src: url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.woff') format('woff'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/ultimate/fonts/proximanova-bold-webfont.svg#ProximaNova_Bold') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-family:ProximaNova, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#1f1f1f;
+}
+#main {
+	width:856px;
+	margin:0 auto;
+}
+.blackoverlay
+{
+position:absolute;
+width:100%;
+height:850px;
+background-color:#000;
+opacity:0.7;
+	filter:alpha(opacity=7);
+	z-index:100;
+	
+}
+.offerended
+{
+position:absolute;
+width:100%;
+text-align:center;
+padding-top:300px; 
+font-family: 'ProximaNova_Bold';
+	font-size:48px;
+	text-transform:uppercase;
+	z-index:1001;
+	color:#fff;
+}
+
+</style>
+
+<script type="text/javascript" src="../js/dtp_jquery-1.9.1.js"></script>
+<!--<script type="text/javascript" src="../js/dtp_jquery-ui.js"></script> -->
+<!--<script type="text/javascript" src="../js/piUtils.js"></script>-->
+
+<script type="text/javascript">
+	function getUrlVars() { 
+		var vars = {};
+		/*var referrer = document.referrer;
+		var parts = referrer.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});	*/	
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+	}
+	
+	var first = getUrlVars()["email"];
+	
+	jQuery(function(){
+	 	jQuery('#email').val(first);
+	});
+</script>
+
+<script type="text/javascript">
+var currYr = new Date();
+
+function addOption(selectbox, text, value) {  
+	var optn = document.createElement("option");  
+	optn.text = text;  
+	optn.value = value;  
+	selectbox.options.add(optn);  
+	//optn.selected = currYr;
+} 
+ 
+function addOption_list() {  
+	for (var i = currYr.getFullYear()-100; i <= currYr.getFullYear();++i) {  
+		addOption(document.register_form.birthday_year,i,i);
+		addOption(document.register_form.special_birthday_year,i,i);
+		addOption(document.register_form.mother_birthday_year,i,i); 
+		addOption(document.register_form.anniversary_year,i,i);
+	}  
+}
+</script>
+
+<script type="text/javascript" src="http://www.angara.com/js/adobe/s_code.js"></script>
+<script type="text/javascript">
+	s.pageName="NewsletterFormSubmit";
+	s.t();
+</script>
+
+</head>
+<body onload="addOption_list()">
+<div class="offerended">Offer has ended</div>
+<div class="blackoverlay"></div>
+<div id="main">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="f6f6f6" style="font-family:ProximaNova, Arial, Helvetica, sans-serif;">
+    <tr>
+      <td bgcolor="#FFFFFF" style="text-align:left;"><a href="http://www.angara.com/" target="_blank"><img src="/skin/frontend/angara/default/images/popup/logo.jpg" border="none" /></a></td>
+    </tr>
+    <tr>
+      <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="39%" valign="top" style="border-right:5px solid #c0c0c0;"><img src="/skin/frontend/angara/default/images/popup/model-photo.jpg" border="none" usemap="#Map" /></td>           
+            <td width="61%" style="padding:10px;" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="font-size:18px; font-family:ProximaNova_Bold, Arial, Helvetica, sans-serif; color:#6a2d3a;">Thank you for subscribing to the Angara email list.<br />
+                    <br /></td>
+                </tr>
+                <tr>
+                  <td><div style="padding-bottom:10px;"> We will keep you updated with special offers, private sales and the latest jewelry trends.</div>
+                    
+                    <div style="padding-bottom:10px;"> To be eligible for receiving the $50 gemstone pendant, you are required to complete all fields in the special dates section on the following page.</div>
+                    
+                   <div style="padding-bottom:10px;"> This promotion is only applicable for residents of the United States of America and only participants that give a valid US shipping address can participate.<br /><br />
+                   </div>
+                   <div style="padding-bottom:10px;">*Note: Limited quantities available.  While supplies last.</div>
+                   
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  	<!--<iframe src="http://go.pardot.com/l/17452/2013-01-15/29rgq" width="100%" height="335" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>-->
+                    <!--<iframe src="http://go.pardot.com/l/17452/2013-01-21/2ckl2" width="100%" height="335" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>-->
+                    <!--<iframe src="http://go.pardot.com/l/17452/2013-02-22/71g6q" width="100%" height="335" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>-->
+                    <!--<iframe src="dtpemail.php" width="100%" height="335" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>-->
+                    <!--<iframe src="/skin/frontend/angara/default/staticdata/dtpemail.php" width="100%" height="335" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>-->
+                    <form class="form" name="register_form" id="pardot-form" accept-charset="UTF-8" method="post" action="/skin/frontend/angara/default/staticdata/post_pardot.php" onSubmit="return validate(this);" >	
+                   <!--<form class="form" id="pardot-form" accept-charset="UTF-8" method="post" action="http://go.pardot.com/l/17452/2013-02-22/71g6q" onsubmit="return validate(this);" >-->
+                   <!--<form class="form" id="pardot-form" accept-charset="UTF-8" method="post" action="http://go.pardot.com/l/17452/2013-01-15/29rgq" onsubmit="return validate(this);" >-->
+                    <!--<input type="hidden" name="submit_x" value="submit">-->
+                    <p>
+                        <span style="font-size: 24px;">
+                            <span style="font-size: 18px;"></span>
+                            <strong><br /></strong>
+                        </span>
+                    </p>
+                    
+                    <p class="form-field email pd-text required">
+                        <label class="field-label" for="email">Email</label>
+                            <!--<input type="text" name="email" id="email" value="" class="text" size="30" maxlength="255" readonly="readonly" />-->
+                            <input type="text" name="email" id="email" value="" class="text" size="30" maxlength="255" />
+                    </p>
+                                        
+                    <p class="form-field first_name pd-text required">
+                        <label class="field-label" for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" value="" class="text" size="30" maxlength="32" />
+                    </p>
+                                        
+                    <p class="form-field Gender pd-select required form-field-master">
+                        <label class="field-label" for="gender">Gender</label>
+                            <select name="gender" id="gender" class="select" onChange="getgender();">
+                            <!--<select name="gender" id="gender" class="select">-->	
+                                <option value="" selected="selected">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                    </p>
+                    
+                    <p class="form-field birthday pd-date form-field-slave dependentFieldSlave" id="female-field">
+                        <label class="field-label" for="your_birthday">Your Birthday</label>
+                            <!--<input type="text" name="birthday" id="birthday" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />-->
+                            <select name="birthday_month">
+                            	<option value="">Month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select name="birthday_day">
+                            	<option value="">Day</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="birthday_year" id="birthday_year"><option value="">Year</option></select>
+                    </p>
+                    
+                    <p class="form-field special_someone_birthday pd-date form-field-slave dependentFieldSlave" id="male-field">
+                        <label class="field-label" for="special_birthday">Special Someone's Birthday</label>
+                            <!--<input type="text" name="special_someone_birthday" id="special_someone_birthday" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />-->
+                            <select name="special_birthday_month">
+                            	<option value="">Month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select name="special_birthday_day">
+                               	<option value="">Day</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="special_birthday_year" id="special_birthday_year"><option value="">Year</option></select>
+                    </p>
+                    
+                    <!--<p class="form-field mother_birthday pd-date form-field-slave">
+                        <label class="field-label" for="mother_birthday">Mother's Birthday</label>
+                            <input type="text" name="mother_birthday" id="mother_birthday" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />
+                    </p>
+                               
+                    <p class="form-field anniversary_date pd-date form-field-slave">
+                        <label class="field-label" for="anniversary">Anniversary</label>
+                            <input type="text" name="anniversary_date" id="anniversary_date" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />
+                            <span class="description">If applicable. Marriage or first date etc.</span>
+                    </p>-->
+                    
+                    <p class="form-field mother_birthday pd-date form-field-slave dependentFieldSlave" id="common_field1">
+                        <label class="field-label" for="mother_birthday">Mother's Birthday</label>
+                            <!--<input type="text" name="mother_birthday" id="mother_birthday" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />-->
+                        <select name="mother_birthday_month">
+                        		<option value="">Month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select name="mother_birthday_day">
+                                <option value="">Day</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="mother_birthday_year" id="mother_birthday_year"><option value="">Year</option></select>
+                    </p>
+                               
+                    <p class="form-field anniversary_date pd-date form-field-slave dependentFieldSlave" id="common_field2">
+                        <label class="field-label" for="anniversary">Anniversary</label>
+                            <!--<input type="text" name="anniversary_date" id="anniversary_date" value="" class="date" size="12" maxlength="10" placeholder="yyyy-mm-dd" />-->
+                        <select name="anniversary_month">
+                        		<option value="">Month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select name="anniversary_day">
+                                <option value="">Day</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="anniversary_year" id="anniversary_year"><option value="">Year</option></select>
+                            <span class="description">If applicable. Marriage or first date etc.</span>
+                    </p>
+                    
+                    <!-- forces IE5-8 to correctly submit UTF8 content  -->
+					<input name="_utf8" type="hidden" value="&#9731;" />
+                    
+                    <p class="submit">
+                        <input name="submit" type="image" src="/skin/frontend/angara/default/images/popup/submit-btn.jpg" border="none" align="left"/>
+                    </p>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:18px; font-weight:bold; color:#6a2d3a; padding-top:10px; padding-bottom:10px;">CONNECT WITH US</td>
+                </tr>
+                <tr>
+                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="9%" style="padding:5px;"><a href="https://www.facebook.com/Angaradotcom" target="_blank"><img src="/skin/frontend/angara/default/images/popup/fb-icon.jpg" border="none"/></a></td>
+                        <td width="91%" style="font-size:12px; color:#6a2d3a; padding:5px"><a href="https://www.facebook.com/Angaradotcom" style="text-decoration:none; color:#6a2d3a;" target="_blank">"Like" Angara on Facebook</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:5px;"><a href="https://twitter.com/angara" target="_blank"><img src="/skin/frontend/angara/default/images/popup/twt-icon.jpg" border="none" alt="" /></a></td>
+                        <td style="font-size:12px; color:#6a2d3a; padding:5px"><a href="https://twitter.com/angara" style="text-decoration:none; color:#6a2d3a;" target="_blank">Follow Angara on Twitter</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:5px;"><a href="http://pinterest.com/angarajewelry/" target="_blank"><img src="/skin/frontend/angara/default/images/popup/pin-icon.jpg" border="none" alt="" /></a></td>
+                        <td style="font-size:12px; color:#6a2d3a; padding:5px"><a href="http://pinterest.com/angarajewelry/" style="text-decoration:none; color:#6a2d3a;" target="_blank">Follow Angara on Pinterest</a></td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+    <tr>
+      <td style="font-size:16px; font-weight:bold; text-align:center; color:#737272; padding:10px;" bgcolor="FFFFFF" >Call Us: 1-888-926-4272</td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+/*function getgender(){
+	var gender = document.getElementById('gender').value;
+	
+	if(gender=="Female"){
+		document.getElementById('male-field').style.display = "none";
+		document.getElementById('female-field').style.display = "block";
+	}
+	if(gender=="Male"){
+		 document.getElementById('male-field').style.display = "block";
+		 document.getElementById('female-field').style.display = "none";
+	} 
+	if(gender==""){
+		document.getElementById('male-field').style.display = "none";
+		document.getElementById('female-field').style.display = "none";	
+	}	
+}*/
+
+function getgender(){
+	var gender = document.getElementById('gender').value;
+	
+	if(gender=="Female"){
+		document.getElementById('male-field').style.display = "none";
+		document.getElementById('female-field').style.display = "block";	
+		document.getElementById('common_field1').style.display = "block";
+		document.getElementById('common_field2').style.display = "block";	
+	}
+	if(gender=="Male"){
+		 document.getElementById('male-field').style.display = "block";
+		 document.getElementById('female-field').style.display = "none";
+		 document.getElementById('common_field1').style.display = "block";	
+		 document.getElementById('common_field2').style.display = "block";	
+	} 
+	if(gender==""){
+		document.getElementById('male-field').style.display = "none";
+		document.getElementById('female-field').style.display = "none";	
+		document.getElementById('common_field1').style.display = "none";
+		document.getElementById('common_field2').style.display = "none";	
+	}	
+}
+
+function validate(frm){ 
+	if(frm.email.value==""){
+		alert("Please enter your email address.");
+		frm.email.focus();
+		return false;
+	}
+	
+	if(frm.first_name.value==""){
+		alert("Please enter your first name.");
+		frm.first_name.focus();
+		return false;
+	}
+	
+	if(frm.gender.value==""){
+		alert("Please select your gender.");
+		frm.gender.focus();
+		return false;
+	}
+	
+	if(frm.birthday_month.value!="" && frm.birthday_day.value==""){
+		alert("Please select day of your birthday.");
+		frm.birthday_day.focus();
+		return false;
+	}
+	
+	if(frm.birthday_day.value!="" && frm.birthday_month.value==""){
+		alert("Please select month of your birthday.");
+		frm.birthday_month.focus();
+		return false;
+	}
+	
+	if(frm.special_birthday_month.value!="" && frm.special_birthday_day.value==""){
+		alert("Please select day of special someone's birthday.");
+		frm.special_birthday_day.focus();
+		return false;
+	}
+	
+	if(frm.special_birthday_day.value!="" && frm.special_birthday_month.value==""){
+		alert("Please select month of special someone's birthday.");
+		frm.special_birthday_month.focus();
+		return false;
+	}
+	
+	if(frm.mother_birthday_month.value!="" && frm.mother_birthday_day.value==""){
+		alert("Please select day of mother birthday.");
+		frm.mother_birthday_day.focus();
+		return false;
+	}
+	
+	if(frm.mother_birthday_day.value!="" && frm.mother_birthday_month.value==""){
+		alert("Please select month of mother birthday.");
+		frm.mother_birthday_month.focus();
+		return false;
+	}
+	
+	if(frm.anniversary_month.value!="" && frm.anniversary_day.value==""){
+		alert("Please select day of anniversary date.");
+		frm.anniversary_day.focus();
+		return false;
+	}
+	
+	if(frm.anniversary_day.value!="" && frm.anniversary_month.value==""){
+		alert("Please select month of anniversary date.");
+		frm.anniversary_month.focus();
+		return false;
+	}
+return true;
+}
+</script>
+</body>
+<!--<script>
+$(function() {
+	$("#birthday").datepicker({
+		changeMonth: true,
+		yearRange: '-100:+0',
+		dateFormat: 'yy-mm-dd', 
+		changeYear: true
+	});
+	$("#special_someone_birthday").datepicker({
+		changeMonth: true,
+		yearRange: '-100:+0',
+		dateFormat: 'yy-mm-dd', 
+		changeYear: true
+	});
+	$("#mother_birthday").datepicker({
+		changeMonth: true,
+		yearRange: '-100:+0',
+		dateFormat: 'yy-mm-dd', 
+		changeYear: true
+	});
+	$("#anniversary_date").datepicker({
+		changeMonth: true,
+	 	yearRange: '-100:+0',
+		dateFormat: 'yy-mm-dd', 	
+		changeYear: true
+	});
+});
+</script>-->
+
+<!--Ended Modification regarding bug id :493 by Pankaj-->
+
+<map name="Map" id="Map"><area shape="rect" coords="140,671,199,690" href="http://www.angara.com/p/silver-chain.html" target="_blank" />
+</map>
+</body>
+</html>

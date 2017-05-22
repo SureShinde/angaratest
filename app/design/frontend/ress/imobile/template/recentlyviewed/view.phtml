@@ -1,0 +1,45 @@
+<?php
+$urlrcv 	= 	Mage::getUrl('*/*');
+$indx 		= 	strpos($urlrcv, "/checkout");
+$rw_items 	= 	array();
+
+// check how many recently items we have
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+}	
+
+if(count($rw_items) >= 4){	//	show only when there are more than 4 items	?>
+    <div class="mT10 mB10" style="height:245px; overflow-y:hidden;">
+        <div class="recent-item-title mB10 text-center">Recently Viewed Jewelry</div>
+        <div class="recent-item-holder"  style="overflow-y: auto; height:232px;">
+        	<ul>
+			<?php
+            $j = 0;
+            foreach($rw_items as $product){
+                if($j < 8){		//	show not more than 8 items
+                    $_product 	= 	Mage::getModel('catalog/product')->load($product);
+                    $_helper 	= 	$this->helper('catalog/output');
+                    $image 		= 	$this->helper('catalog/image')->init($_product,'image')->resize(116,116); ?>
+                    <li class="product" style="padding:0px 5px;">
+						<div class="full-width" style="background: #ffffff; border-radius: 2px; border: 1px solid #e1e3df; border-bottom: 1px solid #cbccc9;">
+							<div class="pro-image text-center" style="border-bottom:1px solid #e1e3df; width:100%; min-height:100px">
+								<a href="<?php echo $_product->getProductUrl();?>?icid=rv-widget"><img class="img-responsive" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?> - Angara.com" src="<?php echo $image;?>"></a>
+							</div>
+							<div class="pro-detail">
+								<div class="product-name mB5">
+									 <?php $_productNameStripped = $this->stripTags($_product->getShortDescription(), null, true);	$remainder = ''; ?>
+									<a href="<?php echo $_product->getProductUrl() ?>?icid=rv-widget" title="<?php echo $_productNameStripped; ?>"><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description'), $length = 42, $etc = '...', $remainder, false);?></a>
+								</div>
+								<div class="mB5"><?php echo $this->getPriceHtml($_product, true, '-recent'); ?></div>
+							</div>
+						</div>
+                    </li>
+                <?php
+                }
+            $j++;
+            } ?>
+            </ul> 
+    	</div>
+    </div>	
+<?php 
+} ?>

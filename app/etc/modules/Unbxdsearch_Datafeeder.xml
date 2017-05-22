@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+
+	<Unbxdsearch_Datafeeder>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Unbxdsearch_Datafeeder>
+
+    </modules>
+</config>	

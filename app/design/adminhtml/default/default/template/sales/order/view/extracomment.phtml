@@ -1,0 +1,25 @@
+<?php
+// Developed by HPRAHI from Auriga IT
+//$admin = Mage::getSingleton('admin/session')->getUser();
+$_order = $this->getOrder();
+$info = $this->getEtraCommentInfo($_order->getId());
+$comment = '';
+if(isset($info['comment']))
+{
+	$comment = $info['comment'];
+}
+?>
+<form method="post" action="/admin/sales_order_extracomment/ad/key/a/">
+	<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" name="orderid" value="<?php echo $_order->getId();?>"  />
+	<div style="text-align:left;padding:10px">
+        <div style="margin-top:10px">
+        	<textarea name="extracommenttext" style="width:300px"><?php echo $comment;?></textarea>
+        </div>   
+        <div style="margin-top:10px">
+        	
+            <button class="scalable save" type="submit"><span>Save</span></button>
+            
+        </div>
+    </div>
+</form>

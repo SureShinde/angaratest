@@ -1,0 +1,251 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items= array();
+if($indx == "") {
+	$rw_items = $this->CollectRecentlyViewed();
+}
+
+if(count($rw_items) > 0) {
+	if(stristr($_SERVER['HTTP_USER_AGENT'], "msie 7")){
+		// Code added by Vaseem for IE 7 starts ?>
+		<style>
+		/* new banner slider */
+		#slideshowContainer {
+			width:260px;	
+			position:relative;
+		}
+		.slideshow-new-rv {
+			height: 355px;
+			overflow:hidden;
+		}
+		#nav-slide-rv {
+			display:none;
+		}
+		#slider-1-rv #prev {
+			position: absolute;
+			left:13px;
+			top:72px;
+			background: url(/skin/frontend/angara/default/images/home-banner/recently-view-slider-arrow.png) no-repeat;
+			background-position:0 0;
+			width:12px;
+			height: 24px;
+			cursor: pointer;
+			z-index:10;
+		}
+		#slider-1-rv #next {
+			position: absolute;
+			right:13px;
+			top:72px;
+			background: url(/skin/frontend/angara/default/images/home-banner/recently-view-slider-arrow.png) no-repeat;
+			background-position:-12px 0;
+			width:12px;
+			height:24px;
+			cursor: pointer;
+			z-index:10;
+		}
+		.recently-view-block {
+			position:relative;
+		}
+		.angara-item {
+			height:215px;
+			overflow:hidden;
+		}
+		/* end banner slider */
+		</style>
+		<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.cycle.all.js'); ?>"></script>
+		<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('.slideshow-new-rv').cycle({
+				fx:      'fade',
+				pause: 	 1,
+				prev:    '#prev',
+				next:    '#next',
+				pager:   '#nav-slide',
+				pagerAnchorBuilder: pageSlideUpdater
+			});
+			function pageSlideUpdater(idx, slide) {
+				var s = idx > 2 ? ' style="display:none"' : '';
+				return '<li'+s+'><a href="javascript:;">'+(idx+1)+'</a></li>';
+			};
+		});
+		</script>
+		<div id="slider-1-rv" class="slide-container">
+			<h2 class="titlebg"><a href="javascript:void(0);" class="tooltip-home">Recently Viewed Jewelry<span class="classic-home">To help you out, we stored these exquisite pieces of jewelry for you to easily view it!</span></a></h2>
+			<div id="slideshowContainer" class="angara-items-wrapper">
+				<div class="slideshow-new-rv angara-items">     
+					<?php 
+					foreach ($rw_items as $product)	{			
+						$prodmodel = Mage::getModel('catalog/product'); 
+						$prodmodel->load($product);
+						//if($prodmodel->getImage()) { ?>
+					  		<div class="angara-item"> 
+								<span class="itemimgholder"> 
+									<a href="<?php echo  $prodmodel->getProductUrl(); ?>?icid=home|rv-widget" style="display:block;">
+										<img  width="120" height="120" alt="<?php echo $prodmodel->getAttribute('name');?>" src="<?php echo $this->helper('catalog/image')->init($prodmodel,'image')->resize(120,120);?>">
+									</a>  
+								</span> 
+								<a href="<?php echo $prodmodel->getProductUrl(); ?>?icid=home|rv-widget" rel="nofollow">
+									<span class="itemdetailholder">
+										<span class="itemproname"><?php //echo $prodmodel->getName();?>
+										<?php 
+										$name = $this->stripTags($prodmodel->getName(), null, true);
+										if(strlen($name) > 35){
+											if(substr($name, 35, 36)!=' '){
+												echo substr($name, 0, 35).'...';
+											} 
+											else{
+												echo substr($name, 0, 34).'...';
+											}
+										}
+										else{
+											echo $name;
+										} ?>
+										</span>
+										<span class="itemproprice"><?php echo $this->helper('core')->currency($prodmodel->getPrice(),true,false) ?></span>
+									</span>
+								</a>
+					  		</div>
+					  	<?php 
+						//}
+					} ?>
+				</div>
+				<?php
+				if(count($rw_items) > 1) { ?>
+					<div>
+						<span id="prev"><a href="javascript:;"></a></span> 
+						<span id="next"><a href="javascript:;"></a></span>
+						<ul id="nav-slide-rv"></ul>
+					</div>
+				<?php
+				} ?>
+			</div>
+		</div> 
+<?php	//	Code added by Vaseem for IE 7 ends 
+	}
+	else {?>
+		<div class="itemholder">
+  			<h2 class="titlebg">
+				<a href="javascript:void(0);" class="tooltip-home">Recently Viewed Jewelry<span class="classic-home">To help you out, we stored these exquisite pieces of jewelry for you to easily view it!</span></a>
+			</h2>
+  			<span id="recentviewed-items-left" class="itemsliderprearrow"></span> 
+			<span id="recentviewed-items-right" class="itemslidernextarrow"></span>
+		 	<div class="angara-items-wrapper">
+				<div id="recentviewed-items" class="angara-items" style="width:<?php echo count($rw_items) * 260 ?>px">
+			 	<?php 
+				foreach ($rw_items as $product) {			
+					$prodmodel = Mage::getModel('catalog/product'); 
+					$prodmodel->load($product);
+					//if($prodmodel->getImage()) { ?>
+			  			<div class="angara-item"> 
+							<a href="<?php echo $prodmodel->getProductUrl(); ?>?icid=home|rv-widget"> 
+								<span class="itemimgholder"> 
+									<img  width="120" height="120" alt="<?php echo $prodmodel->getAttribute('name');?>" src="<?php echo $this->helper('catalog/image')->init($prodmodel,'image')->resize(120,120);?>"> 
+								</span> 
+							</a> 
+							
+							<a href="<?php echo $prodmodel->getProductUrl(); ?>?icid=home|rv-widget" rel="nofollow"> 
+								<span class="itemdetailholder"> 
+									<span class="itemproname"><?php //echo $prodmodel->getName();?>
+									<?php 
+									$name = $this->stripTags($prodmodel->getName(), null, true);
+									if(strlen($name) > 35){
+										if(substr($name, 35, 36)!=' '){
+											echo substr($name, 0, 35).'...';
+										} 
+										else{
+											echo substr($name, 0, 34).'...';
+										}
+									}
+									else{
+										echo $name;
+									} ?>
+									</span> 
+									<span class="itemproprice"><?php echo $this->helper('core')->currency($prodmodel->getPrice(),true,false) ?></span> 
+								</span> 
+							</a> 
+						</div>
+			  		<?php 
+					//}
+				} ?>
+				</div>
+		  	</div>
+		  	<div class="clear"></div>
+		</div>
+	<?php 
+	} ?>
+<?php 
+} 
+else{ ?>
+	<div class="itemholder">
+  		<div class="mail-capture-block">
+    		<div class="mail-capture-input-block">
+      		<?php $newslettertext = "Enter Your Email Address"; ?>
+      		<form action="http://www2.angara.com/l/17452/2012-11-19/26qd" method="post" id="newsletter-validate-detail-chance" name="newsletter-validate-detail-chance">
+        		<input type="text" name="email" value="<?php echo $newslettertext; ?>" class="required-entry validate-email mail-capture-input" id="subscribeWinner"  />
+        		<input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+        		<input type="hidden" name="newslettertype" value="01-Home-Top-Winner-Every-Week-Contest" />
+        		<div class="mail-capture-submit-btn">
+          			<input type="submit" name="submit" value="SUBSCRIBE" class="winnersubsbtn" />
+        		</div>
+      		</form>
+    		</div>
+    		<script>
+			// Form validation by Vaseem
+			var customForm = new VarienForm('newsletter-validate-detail-chance');
+			// On blur effect on text box
+			jQuery(function(){
+				jQuery('#subscribeWinner').click(function(){
+					value 		= 	jQuery.trim(jQuery("#subscribeWinner").val());
+					if(value == '<?php echo $newslettertext; ?>'){
+						jQuery("#subscribeWinner").val('');
+					}
+				});
+			
+				jQuery('#subscribeWinner').focusout(function(){
+					value 		= 	jQuery.trim(jQuery("#subscribeWinner").val());
+					if(value == ''){
+						jQuery("#subscribeWinner").val('<?php echo $newslettertext; ?>');
+					}
+				})
+			});
+		
+			jQuery(function(){
+				jQuery('#offrule').hover(
+					function(){
+						jQuery('#official-rules-popup-chance').show();
+					},
+					function(){
+						jQuery('#official-rules-popup-chance').hide();
+					}
+				)
+			})
+			</script>
+    		<div class="mail-capture-official-rules">
+				<a href="javascript:void(0);" id="offrule">Official Rules
+					<span id="official-rules-popup-chance" class="official-rules" style="display:none;">
+      					<ul>
+							<li>No purchase is required to win the Gemstone Pendant.</li>
+							<li>Angara.com will bear all shipping expenses.</li>
+							<li>A purchase won't improve chances of winning.</li>
+							<li>Retail worth of the Gemstone Pendant is $100.</li>
+							<li>A lucky winner will be identified once every week until the contest is valid and notified via email that is used to participate.</li>
+							<li> The winner will send the proof of age and address in reply to the winning notification email from Angara  within three days of the sent date of the winning notification email or else the prize would be void.</li>
+							<li>After receiving verification details from the winner, we will publish it on Angara.com, Angara Blog, Angara Facebook page and our other sites.</li>
+							<li>It will be delivered in 2-4 weeks after verifying the details of the identified winner.</li>
+							<li>Participants must be legal resident(s) of the United States of America and at least 18 years of age.</li>
+							<li>Online entries must be made by an individual from a stand-alone computer device and must not be made by proxy or any electronic / automated means such as script, bot, macro or any other similar software or program.</li>
+							<li>All federal, state and local laws, regulations and ordinances apply. This contest is void where such contests are prohibited, licensed, restricted or taxed.</li>
+							<li>A prize will be awarded only if it is claimed properly according to these Official Rules.</li>
+							<li>All discovered entries made in violation of these Official Rules will be eliminated from the contest.</li>
+							<li>By participating in this contest, you agree to be bound by these Official Rules and the decisions of Angara.com.</li>
+							<li>The displayed Gemstone pendant is a symbolic representation. The type, color, shape, style might vary of the actual pendant.</li>
+							<li>By enrolling for this contest, you also confirm to receive promotional offers from Angara.com which you may opt out any time.</li>
+				  		</ul>
+      				</span> 
+				</a>
+			</div>
+  		</div>
+	</div>
+<?php 
+} ?>

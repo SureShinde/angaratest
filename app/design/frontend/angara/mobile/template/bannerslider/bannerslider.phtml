@@ -1,0 +1,10 @@
+<?php
+$bannerCollection = $this->getMobileHomeBannerCollection();
+$homeBannerTitle = $bannerCollection[0]['title'];
+
+if(count($bannerCollection) > 0 && $homeBannerTitle != 'home') {	 
+	foreach ($bannerCollection as $bannerHome): ?>			
+		<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$bannerHome['filename']?>" alt="banner" />
+	<?php 
+	endforeach; 
+} ?>

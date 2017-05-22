@@ -1,0 +1,211 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+
+<?php	//	Code added by Vaseem to apply coupon code?>
+
+<form id="updatepost_form" action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" onsubmit="updatePostForm()">
+	<div class="cart popup-shopping-cart">
+		<div class="page-title title-buttons green-title">
+	<h1><?php echo $this->__('Your Cart') ?> - <?php echo count($this->getItems())?> <span class="items-txt-color">Item(s)</span></h1>
+			<div style="float:right;">
+				<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="continue-btn" onClick="closeShadowBox();">Continue Shopping</button>
+				<button type="button" id="cart-top-checkout-button" title="<?php echo $this->__('Checkout') ?>" class="proceed-checkout-btn btn-proceed-checkout" onclick="pushOPGA; window.location='<?php echo $this->getCheckoutUrl() ?>'+'index/shipment/'+jQuery('#custom_estimate_method').val();">Checkout</button>
+			</div>
+		</div>
+        <?php //$cartTotalWithoutEmi	=	Mage::Helper('ajaxview')->getCartTotal();
+		//if($cartTotalWithoutEmi>750){
+		?>
+       <!-- Offer code by vishnu-->
+	  <?php /*?> <?php 
+		$totals = Mage::getSingleton('checkout/cart')->getQuote()->getTotals();
+		$subtotal = $totals["subtotal"]->getValue();
+		?>
+		<?php if($subtotal >= 800):?>
+        <div class="cart-offer-wrapper"<?php if(Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode() == 'ANGCP15'):?> style="opacity:.3;"<?php endif;?>>
+			<div class="cart-page-offer" style="float:left;<?php if(Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode() == 'GIFT10'):?>opacity:.3;<?php endif;?>">
+				<div class="scissor-icon"></div>
+				<div class="offer-text-box">Get a surprise gift and <strong>10%</strong> discount <br />on orders below $1000</div> <div class="offer-button-box"><button class="offer-btn" coupon="GIFT10">Click Here</button></div>
+			</div>
+			<div class="cart-page-offer" style="float:right;">
+				<div class="scissor-icon"></div>
+				 <div class="offer-text-box">Get a surprise gift and <strong>15%</strong> discount <br />on orders $1000 and above</div>  <div class="offer-button-box"><button class="offer-btn" coupon="ANGCP15">Click Here</button></div>
+			</div>
+        <div class="clear"></div>
+        </div>
+		<?php endif;?><?php */?>
+         <!-- Offer code by vishnu-->
+         <?php //} ?>
+		<div class="newcart">
+			<div class="col2-set">
+				<div class="col-1"> <?php echo $this->getMessagesBlock()->getGroupedHtml() ?> <?php echo $this->getChildHtml('form_before') ?>
+					<fieldset>
+						<?php  $forEachCount=0;$scriptToDump=''; $itemCount = count($this->getItems()); ?>
+						<?php foreach($this->getItems() as $key => $_item): ?>
+						<?php
+					$tracCategory = addslashes($_item->getBuyRequest()->getData('category'));
+					$itemSku = $_item->getSku();
+					if($forEachCount==0) {
+						$scriptToDump =	"<script type='text/javascript'> function pushOPGA(){";
+					}
+					$scriptToDump= $scriptToDump . "_gaq.push(['_trackEvent', '$tracCategory', 'opcheckout', '$itemSku', undefined, true]);";
+					if($forEachCount==$itemCount-1) {
+						$scriptToDump =	$scriptToDump . "}</script>";
+					}
+					//var_dump($_item->getData());
+					?>
+						<?php echo $this->getItemHtml($_item) ?>
+						<?php $forEachCount = $forEachCount+1; ?>
+						<?php endforeach ?>
+						<?php echo $scriptToDump; ?>
+					</fieldset>
+					
+                     <div class="trust-buildup-txt">
+    <ul>
+       <li><strong>75-Day Money Back Guarantee:</strong> If you don't love it,  simply send it back in its original condition for a 100% refund. We will even send you a FREE return shipping label if you don't love your purchase (applies only to domestic orders).</li>
+        <li><strong>Exceptional Value and Quality, Guaranteed by a  110% Refund Policy:</strong> If any certified appraiser appraises our jewelry for less than 125% of your  purchase price, we will issue you a 110% refund  upon return.</li> 
+    </ul>
+    </div>
+					<div class="tax-note">Note: Sales tax applies only to orders shipped to NY, NJ & CA.</div>
+				</div>
+				<div class="col-2"> <?php echo $this->getChildHtml('cartsummary')?> </div>
+			</div>
+		</div>
+		<div class="why-shop-at-angara"><span style=" padding-right:11px;">Why Shop at Angara:</span>  
+     <a  href="javascript:;" class="tooltip-home"><b style=" color:#2179e7;">Free</b> Shipping Worldwide
+  <span class="classic-home">We ship free within the USA on all orders. We also ship FREE to 75 countries for all International orders above $500. International orders below $500 are charged $39.99.</span></a> | 
+  <a  href="javascript:;" class="tooltip-home"><b style=" color:#548e08;">75 day</b> free return policy
+  <span class="classic-home">If you don't like the product, simply send it back to us within 75 days and get a 100% refund. We will even email you a FREE return shipping label (for domestic orders). </span></a> | 
+  <a  href="javascript:;" class="tooltip-home"><b style=" color:#d60b0b;">110%</b> Refund Policy
+  <span class="classic-home"> We will refund up to 110% of the purchase price, if any accredited jewelry appraiser values your piece for less than 125% of the purchase price.</span></a> | 
+  <a  href="javascript:;" class="tooltip-home"><b style=" color:#00bde6;">Trusted</b> Gemstone Source 
+  <span class="classic-home">We are a family owned gemstone business spanning 3 generations. We will work with you to find or create the perfect jewelry piece of your dreams.</span></a>
+    
+    
+     </div>
+	</div>
+</form>
+<style>
+	.staticlinks{display:none}
+</style>
+<!-- Google Code for Item in Cart Remarketing List --> 
+<?php
+$cartHelper = Mage::helper('checkout/cart');
+$items = $cartHelper->getCart()->getItems();
+$skulist = '';
+$pricelist = '';
+foreach ($items as $item) {
+    if ($item->getProduct()->getPrice() > 0 && $item->getProduct()->getVisibility()!=1) {
+        $pro_sku = $item->getProduct()->getSku();
+        $pro_price = $item->getProduct()->getPrice();
+        
+        if($skulist == ''){
+            $skulist="'".$pro_sku."'";
+        }else{
+            $skulist.=",'".$pro_sku."'";
+        }
+        if($pricelist == ''){
+            $pricelist=$pro_price;
+        }else{
+            $pricelist.=",".$pro_price;
+        }			
+    }
+}
+?>
+<script type="text/javascript">
+    var google_tag_params = {
+    ecomm_prodid: [<?php echo $skulist; ?>],
+    ecomm_pagetype: 'cart',
+    ecomm_totalvalue: [<?php echo $pricelist; ?>]
+    };
+</script>
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+</script>
+
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_conversion_language = "en";
+	var google_conversion_format = "3";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "BQ2aCOvjmgQQ-ZLp-wM"; var google_conversion_value = 0;
+	/* ]]> */
+</script> 
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+<div style="display:inline-block; position:absolute;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1064978809/?value=0&a
+		mp;label=BQ2aCOvjmgQQ-ZLp-wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<script>
+	jQuery(function(){
+		jQuery('.remove-item, #addchain, #removechain').click(function(){
+			showProgressBar();
+			jQuery.get(jQuery(this).attr('href').replace('checkout/cart','fancycart/ajax'),function(){
+				jQuery.get('/fancycart/ajax/index', function(cartHtml){
+					hideProgressBar();
+					updateCartPopup(cartHtml);
+					updateCartSummary()
+				})
+			})
+			return false;
+		})
+		
+		jQuery('#coupon_code').keydown(function(e){
+			if(e.keyCode == 13){
+				e.preventDefault();
+				discountCodeApply();
+			}
+		})
+		
+		//	Code added by Vaseem to apply coupon code
+		jQuery('.offer-btn').click(function(e){
+			var couponCode	=	jQuery(this).attr('coupon');
+			//alert(couponCode);
+			jQuery('#coupon_code').val(couponCode);
+			e.preventDefault();
+			discountCodeApply();
+		})
+		
+	})
+	var oldPageName = s.pageName;
+	clearSVars();
+	<?php echo $this->getSVars(); ?>
+	<?php echo $this->getCartScript();?>
+</script> 

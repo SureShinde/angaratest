@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 224 254" style="enable-background:new 0 0 224 254;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#010101;}
+	.st1{font-family:'Roboto-Regular';}
+	.st2{font-size:42.105px;}
+	.st3{fill:none;stroke:#010101;stroke-width:6.6644;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#010101;stroke-width:5.3315;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<text transform="matrix(1 0 0 1 61.6174 118.3941)" class="st0 st1 st2">110%</text>
+<text transform="matrix(1 0 0 1 44.3366 158.4747)" class="st0 st1 st2">Refund</text>
+<g>
+	<g>
+		<path class="st3" d="M95.6,23.2c-50.4,8.1-89,51.9-89,104.6s38.5,96.5,89,104.6"/>
+		<path class="st3" d="M129.6,232.4c50.4-8.1,89-51.9,89-104.6s-38.5-96.5-89-104.6"/>
+	</g>
+	<g>
+		<line class="st3" x1="79.1" y1="7.7" x2="99.8" y2="23.1"/>
+		<line class="st3" x1="87.9" y1="45.9" x2="100.9" y2="23.7"/>
+	</g>
+	<g>
+		<line class="st4" x1="147.5" y1="247.2" x2="124.8" y2="235.1"/>
+		<line class="st4" x1="133.1" y1="210.7" x2="123.6" y2="234.6"/>
+	</g>
+</g>
+</svg>

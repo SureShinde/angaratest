@@ -1,0 +1,80 @@
+<!--@subject {{var store.getFrontendName()}}: Credit Memo # {{var creditmemo.increment_id}} for Order # {{var order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$billing.getName()":"Guest Customer Name (Billing)",
+"var store.getFrontendName()":"Store Name",
+"var creditmemo.increment_id":"Credit Memo Id",
+"var order.increment_id":"Order Id",
+"var order.billing_address.format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.shipping_address.format('html')":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"layout handle=\"sales_email_order_creditmemo_items\" creditmemo=$creditmemo order=$order":"Credit Memo Items Grid",
+"var comment":"Credit Memo Comment"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body>
+<center>
+  <table width="720" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td valign="top" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="padding-bottom:20px;"><img src="http://www.angara.com/skin/frontend/angara/default/images/logo.png" width="230" height="51" alt="Angara" ></td>
+            <td valign="top"  style="font-size:25px; padding-bottom:10px;	font-weight:bold;text-align:right;">Credit Memo</td>
+          </tr>
+          <tr>
+            <td valign="top" align="left">Angara Inc.<br />
+              550 S. Hill St.<br />
+              Suite 1015<br />
+              Los Angeles, CA 90013</td>
+            <td valign="top" align="right"><table width="198" cellspacing="0" cellpadding="0"  style="border:1px solid #333; border-right:none;">
+                <tr>
+                  <th scope="col" width="80" style="padding:8px 0 8px 15px; text-align:center;font:15px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Date</th>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:center;font:15px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;border-right:1px solid #333; ">Credit No.</th>
+                </tr>
+                <tr>
+                  <td  align="center" style="border-right:1px solid #333; font:13px Arial, Helvetica, sans-serif; padding:8px; color:#000;">{{var orderDate}}</td>
+                  <td class="default-space" align="center" style=" font:13px Arial, Helvetica, sans-serif; padding:8px; color:#000;border-right:1px solid #333;">CR{{var order.increment_id}}</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" style="padding-top:20px;"><table width="350" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #333;">
+                <tr>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:left;font:15px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;">Customer Details</th>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" style="padding:5px 0 0 15px; text-align:left; height:120px;font:13px/20px Arial, Helvetica, sans-serif;
+	width:200px;">{{var order.billing_address.format('html')}}</td>
+                </tr>
+              </table></td>           
+            </tr>
+          <tr>
+            <td valign="top" colspan="2" align="right"  style="padding-top:20px;"><table width="110"  border="0" cellspacing="0" cellpadding="0" class="section" style="border:1px solid #333; border-bottom:none;border-right:0px solid #333;" >
+                <tr>
+                  <th scope="col" style="padding:8px 0 8px 15px; text-align:center;font:15px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;border-right:1px solid #333;">P.O. No.</th>
+                </tr>
+                <tr>
+                  <td valign="middle" align="center" style="padding:10px;border-right:1px solid #333;">{{var order.increment_id}}</td>
+                </tr>
+              </table></td>
+          </tr>
+          <!--items.phtml file code starts--> 
+          {{layout handle="sales_email_order_creditmemo_items" creditmemo=$creditmemo order=$order}}
+          <!--items.phtml file code ends-->
+          <p style="font-size:12px; margin:0 10px 10px 0;">{{var comment}}</p>
+          <tr>
+            <td align="right" width="150" colspan="2" style="padding:15px 0 15px; font:13px/20px Arial, Helvetica, sans-serif;">Best Regards,<br>
+              The Angara Service Team <br>
+              {{config path='general/store_information/phone'}}<br></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+</center>
+</body>

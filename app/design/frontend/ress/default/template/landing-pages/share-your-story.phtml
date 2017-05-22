@@ -1,0 +1,358 @@
+<style>
+.cms-share-your-story{background: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/shareurstory.jpg) center no-repeat;background-size: 100%;}
+.shareurstory .story-holder {max-width:668px;background:#ffffff;border:2px dotted #cccccc;margin:2% auto;}
+.shareurstory .title {color:#565656;font-size:36px;font-weight: 500;}
+.shareurstory textarea {width:100%;min-height:200px;background:#fbfbfb;padding:10px;resize: none;border: 1px solid #ccc;}
+.shareurstory input[type="submit"] {text-align:center;}
+.shareurstory span {display: block;margin: 0 auto;max-width: 250px;}
+.shareurstory .btn {background: #fa505a;border-radius: 2px;color: #ffffff;width: 180px;line-height: 40px;height: 40px;font-size: 18px;}
+.btn:hover, .btn.active, .btn:focus {color: #ffffff !important;text-decoration: none;}
+.shareurstory .btn-center {width:180px;}
+@media (max-width:768px) {
+	.cms-share-your-story {background-size:initial;}
+	.story-holder {max-width:568px !important;}	
+}
+@media (max-width:767px) {
+	.cms-share-your-story {background:initial;}
+	.shareurstory {padding-top: 15px;}
+	.shareurstory .title {font-size:22px;font-weight:600;}	
+	.shareurstory .btn {font-size: 16px;text-shadow: none;}
+	.shareurstory .uploadFile {margin-bottom: 10px;}
+}
+.uploadBtn{
+    vertical-align:top;
+    background:rgba(0,0,0,0.5);
+    font-size:14px;
+    padding:0 10px;
+    height:25px;
+    line-height:22px;
+    color:#fff;
+}
+
+/* new css*/
+.img-holder {max-height:120px;}
+.img-box{height:120px;overflow-y: hidden;}
+.add-img .img-box{max-height:100%;background:#d5d5d5; cursor:pointer;}
+.add-img .img-box img{max-height:100%;}
+.image-choosed .img-box {height:100px !important;background:#fff;border:1px solid #d5d5d5;}
+.image-choosed .img-box img {max-height:initial !important;}
+.add-remove-btn {border:1px solid #d5d5d5;height:20px;padding-left:5px;padding-right:5px;border-top:initial;}
+.add-remove-btn a {font-size:12px; line-height:20px; cursor:pointer; display:block;}
+.add-remove-btn a:hover, .add-remove-btn a.active, .add-remove-btn a:focus {text-decoration:none;}
+#storyLoader {width: 180px;left: 0;right: 20px;text-align: right;top:2px;}
+#storyLoader i{color:#ffffff;height:30px;font-size:32px;}
+@media (max-width:767px) {
+	.img-container {width:100%;}
+	.img-holder {width:50%;float:left;margin-bottom:15px;}
+	.max-img-msg {margin-top:0px;margin-bottom:15px;padding:0px;}
+	.max-img-msg .text-light {font-size:12px;}
+	.shareurstory .btn-center input{border:none;}
+	.xs-padding {padding-bottom:0px;}
+	.btn-center input {background: #fa505a !important;border-radius: 2px !important;color: #ffffff !important;width: 180px !important;line-height: 40px !important;height: 40px !important;font-size: 18px !important;-webkit-appearance: none;}
+	#storyLoader {top:5px;}
+}
+
+</style>
+<div class="clearfix"></div>
+<section class="container shareurstory">
+	<div class="story-holder">
+		<div class="col-sm-12">
+			<div class="col-sm-12 title text-center max-padding-top max-padding-bottom">Share Your Story</div>
+			<div id="result-text" class="col-sm-12 text-center max-padding-bottom high-margin-bottom hide"></div>
+			<form method="post" enctype="multipart/form-data" id="share-your-story-form" onsubmit="return checkshareYourStoryForm(this); return false;">
+				<input type="hidden" name="orderId" value="<?php echo $this->getRequest()->getParam('orderId');?>"/>
+				<input class="submit-story" type="hidden" name="form_submit-story" value="0"/>
+				<div class="col-sm-12 max-padding-bottom">
+					<textarea name="comments" id="commentText" placeholder="Enter your text" class="required-entry"></textarea>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12 pull-left no-padding img-container">
+					<div class="col-sm-3 img-holder add-img">
+						<div class="full-width img-box relative-placeholder text-center">
+							<img class="img-responsive add-image" style="margin:0 auto;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/add-img.jpg" alt="img-upload" />
+						</div>
+						<div class="full-width relative-placeholder add-remove-btn hidden">
+							<?php /*<a class="pull-left edit-image" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> Edit</a>*/?>
+							<a class="remove-image text-center" href="javascript:void(0)"><i class="fa fa-trash-o"></i> Remove</a>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12 max-padding-bottom max-margin-top hidden" id="moreInputImage">
+					<div class="image-input"><input type="file" name="imagesToUpload[]" class="uploadFile" accept="image/*"></div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-sm-12 max-padding-bottom max-margin-top high-padding-top max-img-msg">
+					<div class="text-light text-center">( Maximum number of images you can upload: 4 )</div>
+					<div class="text-light text-center">( Maximum image size allowed: upto 5MB )</div>
+					<div class="text-light text-center">( Image format allowed: {JPEG, JPG, PNG, GIF} )</div>
+				</div>	
+				<div class="clearfix"></div>
+				<div class="col-sm-12 title max-padding-bottom max-margin-bottom xs-padding">
+					<span class="btn-center relative-placeholder">
+						<input id="submit" type="submit" value="Submit" class="submit btn" />
+					</span>
+					<span id="storyLoader" class="absolute-placeholder"><i class="fa fa-spinner fa-spin fa-1x hidden"></i></span>
+				</div>
+			</form>
+			<script type="text/javascript">
+			jQuery(function(){		
+				var imagesDataLength = 4;
+				var imageCount = 0;	
+				var userAgent = navigator.userAgent;	
+				jQuery(document).on("change", ".uploadFile", function(e) {
+					//var uploadImageData = this.files[0];
+					var uploadImageData = ((userAgent.match(/MSIE 9.0/i) != null) ? e.target : this.files[0]);
+					
+					if(typeof(uploadImageData) != 'undefined' && uploadImageData != null){
+						var inputIndex = jQuery(this).parent().index();		
+						var imageInputResult = validateImageInput(uploadImageData);
+						if(imageInputResult){							
+							if(!jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').hasClass('image-added')){
+								imageCount++;
+							}
+							
+							var imageUrl = ((userAgent.match(/MSIE 9.0/i) != null) ? e.target.value : URL.createObjectURL(uploadImageData))
+							
+							if(imageCount < imagesDataLength) {
+								if(jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').hasClass('image-added')){
+									jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').attr('src', imageUrl);								
+								}
+								else{
+									addImageContainer();
+								}	
+							}
+							
+							jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').attr('src', imageUrl);
+							
+							if(jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').hasClass('add-image')){
+								jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').removeClass('add-image');
+							}
+							
+							if(!jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').hasClass('image-added')){
+								jQuery(".img-container .img-holder:eq("+inputIndex+")").children().find('.img-responsive').addClass('image-added');
+							}
+							
+							if(!jQuery(".img-container .img-holder:eq("+inputIndex+")").hasClass('image-choosed')){
+								jQuery(".img-container .img-holder:eq("+inputIndex+")").addClass('image-choosed');
+							}
+									
+							if(jQuery(".img-container .img-holder:eq("+inputIndex+") .add-remove-btn").hasClass('hidden')){
+								jQuery(".img-container .img-holder:eq("+inputIndex+") .add-remove-btn").removeClass('hidden');
+							}
+						}	
+						else{
+							jQuery('#moreInputImage div:eq('+inputIndex+') .uploadFile').val('');
+						}
+					}	
+				});
+				
+				jQuery(document).on("click", '.img-container div.img-box', function(){
+					var addFileLength = jQuery(".img-container .img-holder").length;
+					var inputFileLength = jQuery('#moreInputImage .image-input').length;
+					
+					if(imageCount > 0 && imageCount < imagesDataLength && inputFileLength < addFileLength) {
+						jQuery('#moreInputImage').append(
+							jQuery('<div>').addClass('image-input')
+							.append(							
+								jQuery('<input type="file" name="imagesToUpload[]" accept="image/*">').addClass('uploadFile')
+							)
+						);							
+					}	
+					
+					var addFileIndex = jQuery(this).parent('.add-img').index();
+					if(jQuery('#moreInputImage div:eq('+addFileIndex+') .uploadFile')){
+						jQuery('#moreInputImage div:eq('+addFileIndex+') .uploadFile').click();	
+					}
+				});
+				
+				/*jQuery(document).on('click','.edit-image', function(e){
+					var editIndex = jQuery(this).parent().parent().index();
+					jQuery('#moreInputImage div:eq('+editIndex+') .uploadFile').click();
+				});*/
+				
+				jQuery(document).on('click','.remove-image', function(e){	
+					var removeIndex = jQuery(this).parent().parent().index();
+					imageCount--;				
+					
+					if(imageCount > 0){	
+						jQuery(this).parent().parent().remove();
+						jQuery('#moreInputImage div:eq('+removeIndex+')').remove();
+					}
+					else{
+						jQuery('#moreInputImage div:eq('+removeIndex+') .uploadFile').val('');						
+						jQuery(this).parent().parent().children().find('.img-responsive').attr('src', '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/add-img.jpg');	
+						jQuery(".img-container .img-holder:eq("+(removeIndex + 1)+")").remove();
+						if(jQuery('#moreInputImage div:eq('+(removeIndex + 1)+')').children('.uploadFile')){
+							jQuery('#moreInputImage div:eq('+(removeIndex + 1)+')').remove();
+						}
+						if(jQuery(this).parent().hasClass('add-remove-btn')){
+							jQuery(this).parent().addClass('hidden');
+						}	
+						jQuery(this).parent().parent().children().find('.img-responsive').removeClass('image-added');
+						jQuery(this).parent().parent().children().find('.img-responsive').addClass('add-image');
+						
+						if(jQuery(this).parent().parent().hasClass('image-choosed')){
+							jQuery(this).parent().parent().removeClass('image-choosed');
+						}
+					}
+					
+					var hasAddImage = false;
+					jQuery(".img-container .img-holder").each(function(){
+						if(jQuery(this).children().find('.img-responsive').hasClass('add-image')){
+							hasAddImage = true;
+						}
+					});
+					
+					if(imageCount > 0 && hasAddImage == false){
+						addImageContainer();
+					}
+				});	
+			});			
+			
+			function validateImageInput(uploadImageData){
+				var userAgent = navigator.userAgent;
+				var allowedFileTypes = ['jpeg','jpg','png','gif'];
+				if(userAgent.indexOf('MSIE 9.0') > -1){
+					var imageName = uploadImageData.value;
+					var imageExtension = uploadImageData.value.split(".").pop().toLowerCase();
+				}
+				else{
+					var imageName = uploadImageData.name;	
+					var imageExtension = imageName.split(".").pop().toLowerCase();
+					var imageSize = ((uploadImageData.size)/1048576).toFixed(2);
+				}
+				
+				if(userAgent.indexOf('MSIE 9.0') > -1){
+					if (imageExtension && allowedFileTypes.indexOf(imageExtension) < 0) {
+						alert('Please upload only "jpeg|jpg|png|gif" images.');
+						return false;
+					}
+				}
+				else{
+					if (imageExtension && allowedFileTypes.indexOf(imageExtension) < 0) {
+						alert('Please upload only "jpeg|jpg|png|gif" images.');
+						return false;
+					}											
+					else if(imageSize && imageSize > 5) {
+						alert('Image "'+imageName+'" Size Exceeded. Supported Image Size Upto 5 MB.');	
+						return false;
+					}
+				}
+				return true;
+			}
+			
+			function addImageContainer(){
+				jQuery('.img-container')
+				.append(
+					jQuery(
+						jQuery('<div>')
+						.append(
+							jQuery('<div>').addClass('full-width img-box relative-placeholder text-center')
+							.append(
+								jQuery('<img style="margin:0 auto;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/add-img.jpg" alt="img-upload" />')
+								.addClass('img-responsive add-image')
+							)
+						)										
+						.append(
+							jQuery('<div>').addClass('full-width relative-placeholder add-remove-btn hidden')
+							/*.append(
+								jQuery('<a href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i> Edit</a>').addClass('pull-left edit-image')
+							)*/
+							.append(
+								jQuery('<a href="javascript:void(0);"><i class="fa fa-trash-o"></i> Remove</a>').addClass('text-center remove-image')
+							)
+						)
+					).addClass('col-sm-3 img-holder add-img')
+				);
+			}
+			
+			var shareYourStoryForm = new VarienForm('share-your-story-form', false);
+			$('commentText').observe('blur', function(e){
+				Validation.validate($('commentText'));
+			});
+			
+			var isSuccess = 0;
+			function checkshareYourStoryForm(frm) {
+				if(frm.commentText.value == '' || frm.commentText.value == 'Enter your text'){
+					isSuccess = 0;
+				}
+				
+				var elements = frm.getElementsByClassName('uploadFile');
+				for (var i=0, iLen=elements.length; i<iLen; i++) {
+					var el = elements[i];
+					if (el.className.indexOf('uploadFile') > -1 && el.value != '') {
+						isSuccess = 1;
+					}
+					else {
+						if(isSuccess == 1 && i == 0 && el.value == ''){
+							isSuccess = 0;
+						}
+						if(i == 0 && el.value == ''){
+							alert('Please choose the image(s).');
+						}
+					}
+				}
+				
+				if(isSuccess == 1 && frm.commentText.value == '' || frm.commentText.value == 'Enter your text'){
+					isSuccess = 0;
+				}
+				
+				if(isSuccess){
+					jQuery('.submit-story').val('1');
+					var imagePostUrl = '/customerstory/ajax/uploadStoryImage';					
+					var formData = new FormData(frm);
+					jQuery.ajax({
+						url : imagePostUrl,
+						type : 'POST',
+						data : formData,
+						async : true,
+						cache : false,
+						contentType : false,										
+						processData : false,
+						enctype : 'multipart/form-data',
+						dataType : 'json',
+						beforeSend : function(xhr, opts){
+							if(jQuery('#storyLoader i').hasClass('hidden'))
+								jQuery('#storyLoader i').removeClass('hidden');
+							
+							if(!jQuery('#result-text').hasClass('hide'))
+								jQuery('#result-text').addClass('hide');
+							
+							if(!jQuery('#submit').hasClass('disabled'))
+								jQuery('#submit').addClass('disabled');
+						},
+						success : function(response, statusText, xhr, wrapper){
+							if(!jQuery('#storyLoader i').hasClass('hidden'))
+								jQuery('#storyLoader i').addClass('hidden');
+							
+							if(jQuery('#result-text').hasClass('hide'))
+								jQuery('#result-text').removeClass('hide');
+							
+							jQuery('#result-text').html(response.html);
+							
+							if(jQuery('#submit').hasClass('disabled'))
+								jQuery('#submit').removeClass('disabled');
+							
+							if(response.status){
+								jQuery('#share-your-story-form').addClass('hidden');
+							}
+							else{
+								if(jQuery('#share-your-story-form').hasClass('hidden'))
+									jQuery('#share-your-story-form').removeClass('hidden');
+							}	
+						},
+						error : function(e){}	
+					});
+					return false;
+				}
+				else{
+					if(jQuery('.submit-story').val() == '1')
+						jQuery('.submit-story').val('0');
+				}
+				return false;
+			}
+			</script>
+		</div>
+	</div>
+</section>

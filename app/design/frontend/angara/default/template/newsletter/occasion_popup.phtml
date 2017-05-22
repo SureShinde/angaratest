@@ -1,0 +1,161 @@
+<?php 
+$showOccasionPopup	=	0;
+$occasion_cookie 	= 	$_COOKIE["occasionpopup"];
+if ( !isset( $occasion_cookie ) ){		//	Check if occasionpopup cookie is not set then we can show popup
+	$showOccasionPopup	=	1;	
+}
+
+$livechat_cookie 	= 	$_COOKIE["visited"];
+if($this->getRequest()->getControllerName()=='product'){
+	if(!isset($livechat_cookie)){		//	Check if live_chat cookie is not set then we can not show popup, As two pop up can no come together
+		$showOccasionPopup	=	0;	
+	}	
+}
+if($showOccasionPopup==1){
+?>
+
+<script>
+jQuery.noConflict();
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+
+function launchWindow(id) {
+	//Get the screen height and width
+	var maskHeight 	= jQuery(document).height();
+	var maskWidth 	= jQuery(window).width();
+
+	//Set heigth and width to mask to fill up the whole screen
+	jQuery('#mask').css({'width':maskWidth,'height':maskHeight});
+	
+	//transition effect		
+	jQuery('#mask').fadeIn(1000);	
+	jQuery('#mask').fadeTo("slow",0.8);	
+
+	//Get the window height and width
+	var winH = jQuery(window).height();
+	var winW = jQuery(window).width();
+		  
+	//Set the popup window to center
+	jQuery('#'+id).css('top',  winH/2-jQuery('#'+id).height()/2);
+	jQuery('#'+id).css('left', winW/2-jQuery('#'+id).width()/2);
+
+	//transition effect
+	jQuery('#'+id).fadeIn(2000); 
+}
+
+// Check cookie, set cookie and show occasion popup
+jQuery(document).ready(function() {  
+    //if the cookie occasionpopup is not set, then show the modal window
+    if (!readCookie('occasionpopup')) {
+        //launch it
+		setTimeout(function() {
+			launchWindow('dialog_occasion');   
+		}, 5000);// Do something after 5 seconds
+         
+        //then set the cookie, so next time the modal won't be displaying again.
+        createCookie('occasionpopup', 1, 30);		// Create a cookie for 30 days
+    }
+	//launchWindow('dialog_occasion'); 
+	//if close button is clicked then close the popup
+	jQuery('.window .closelastminutepopup').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		jQuery('#mask').hide();
+		jQuery('.window').hide();
+	});		
+	
+	//if mask is clicked then close the popup
+	jQuery('#mask').click(function () {
+		jQuery(this).hide();
+		jQuery('.window').hide();
+	});			
+
+	// This will work on window resize and spread black overlay to full page
+	jQuery(window).resize(function () {
+ 		var box = jQuery('#occasion_content .window');
+        
+		//Get the screen height and width
+        var maskHeight = jQuery(document).height();
+        var maskWidth = jQuery(window).width();
+        
+		//Set height and width to mask to fill up the whole screen
+        jQuery('#mask').css({'width':maskWidth,'height':maskHeight});
+        
+		//Get the window height and width
+        var winH = jQuery(window).height();
+        var winW = jQuery(window).width();
+
+        //Set the popup window to center
+        box.css('top',  winH/2 - box.height()/2);
+        box.css('left', winW/2 - box.width()/2);
+	});
+	
+});
+</script>
+<style>
+#mask {
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:9000;
+	background-color:#000;
+	display:none;
+}
+#occasion_content .window {
+	position:fixed;
+	left:0;
+	top:0;
+	width:440px;
+	height:200px;
+	display:none;
+	z-index:9999;	
+}
+#occasion_content #dialog_occasion {
+	background-color: #FFFFFF;
+    border: 5px solid #D0D0D0;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 5px #BEBEBE;   
+    text-align: center;   
+    width: 255px;
+	height:223px;	
+	
+}
+
+.closelastminutepopup {
+    height: 33px;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 33px;
+    z-index: 10001;
+}
+</style>
+
+<div id="occasion_content">
+  <div id="dialog_occasion" class="window"><img width="189" height="223" border="0" usemap="#Map" alt="Last Minute Shopping For Mother's Day" src="/skin/frontend/angara/default/images/home-banner/last-minute-shopping-popup.jpg">
+  <a href="#" class="closelastminutepopup"/><img alt="close" src="/skin/frontend/angara/default/images/home-banner/closechatpopup.png"></a> 
+ <map id="Map" name="Map">
+	 <area shape="rect" coords="4,164,184,203"  href="/jewelry-deals.html?icid=last-minute-shoping-popup|08052013"  />
+ </map>
+  </div>
+</div>
+<?php } ?>

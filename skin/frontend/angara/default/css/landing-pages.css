@@ -1,0 +1,565 @@
+/*-------------------- landing css start----------------------------*/
+
+a, img, img a
+{
+	border:none;
+	text-decoration:none;
+	outline:none;
+}
+.col-main {
+    padding:0;
+	border:0;
+}
+
+#land-main
+{
+	width:960px;
+	float:left;
+	background:url(../images/engagement-landing/banner-top-shadow.jpg) top left no-repeat;
+	border-bottom:1px solid #D4D4D4;
+}
+
+.promotions
+{
+	margin-bottom:13px;
+}
+#land-main .main-banner
+{
+	float:left;
+	width:960px;
+	padding-top:22px;
+}
+#land-main .main-banner-txt
+{
+	width:385px;
+	float:right;
+	padding: 10px 75px 0 10px;
+	text-align:center;
+}
+#land-main .main-banner-txt h1
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	font-size:24px;
+	color:#4c4c4c;
+	padding-bottom:10px;
+}
+#land-main .main-banner-txt p
+{
+	font-size:14px;
+	color:#898888;
+	line-height:18px;
+	padding-bottom:10px;	
+}
+#land-main .main-banner-txt p a
+{
+	color:#e77725;
+	text-decoration:none;
+}
+#land-main .main-banner-txt .topimg
+{
+	height:150px;
+	width:150px;
+	text-align:center;
+}
+#land-main-midpart
+{
+	width:960px;
+	float:left;
+	background:url(../images/engagement-landing/mid-product-saprator.jpg) top center no-repeat;
+	padding:5px 0 20px 0;
+	margin-bottom:15px;
+}
+/*------------------- change --------------------*/
+#land-main-midpart .category-products
+{
+	width:245px;
+	float:left;
+	text-align:center;
+	background:url(../images/engagement-landing/product-cat-saprator.jpg) right center no-repeat;
+	padding:0 36px;
+}
+#land-main-midpart .category-products p
+{
+	font-size:12px;
+	color:#7c7c7c;
+	line-height:18px;
+	text-align:left;
+	margin-bottom:15px;
+}
+#land-main-midpart .category-products-engage
+{
+	width:198px;
+	float:left;
+	text-align:center;
+	background:url(../images/engagement-landing/product-cat-saprator-birthstone.jpg) right center no-repeat;
+	padding:0 20px;
+}
+/*------------------- change --------------------*/
+#land-main-midpart .category-products-none
+{
+	background:none;
+	float:right;
+}
+#land-main-midpart .category-products-engage p
+{
+	font-size:12px;
+	color:#7c7c7c;
+	line-height:18px;
+	text-align:left;
+	margin-bottom:15px;
+}
+.pmain-heading
+{
+	font-size:14px;
+	color:#4b4b4b;
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	
+}
+.pmain-heading a
+{
+	color:#4B4B4B;
+}
+.pmain-price
+{
+	font-size:18px;
+	color:#7c7c7c;
+	
+}
+.pmain-pricenum
+{
+	font-size:24px;
+	padding-left:15px;
+	color:#404040;
+	
+}
+.pmain-button
+{
+	font-size:15px;
+	width:173px;
+	height:29px;
+	line-height:29px;
+	background:#4b4b4b;
+	color:#fff;
+	margin:0 auto;
+	cursor:pointer;
+	
+}
+.pmain-button a
+{
+	color:#fff;
+	text-decoration:none;
+	
+}
+#mid-review-part
+{
+	width:960px;
+	float:left;
+	background:#f7f7f7;
+	border-top:1px solid #e5e5e5;
+	border-bottom:1px solid #e5e5e5;	
+}
+.mid-review-part-white
+{
+	border-top:1px solid #fff;
+	border-bottom:1px solid #fff;
+	padding:20px;
+}
+.review-heading
+{
+	font-size:17px;
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color:#494949;
+	width:100%;
+	padding-bottom:10px;
+}
+.reviewpart
+{
+	width:100%;
+	float:left;
+}
+.reviewpart .left-arrow
+{
+	width:19px;
+	height:170px;
+	float:left;
+	background:url(../images/engagement-landing/left-arrow.jpg) left center no-repeat;
+	cursor:pointer;	
+}
+.reviewpart .right-arrow
+{
+	width:19px;
+	height:170px;
+	float:right;
+	background:url(../images/engagement-landing/right-arrow.jpg) right center no-repeat;
+	cursor:pointer;
+}
+.reviewpart .reviewimg
+{
+	height:170px;
+	width:170px;
+	float:left;
+}
+.reviewpart .reviewtxtinfo
+{
+	width:658px;
+	padding-left:15px;
+	float:left;
+}
+.reviewtxtinfo h3
+{
+	font-size:15px;
+	padding-left:30px;
+	font-weight:normal;
+	color:#161616;
+	background:url(../images/engagement-landing/review-big-cotts.jpg) top left no-repeat;
+}
+.reviewtxtinfo p
+{
+	font-size:13px;
+	color:#8b8b8b;
+}
+.reviewdt
+{
+	font-size:15px;
+	color:#202020;
+}
+.reviewdate
+{
+	font-size:12px;
+	color:#d66927;
+}
+
+.sep {height:18px;}
+/*-------------------- landing css end----------------------------*/
+/*-------------------------------------  birthstone ring --------------------------*/
+#birthstone-products
+{
+	width:948px;
+	float:left;
+	padding:5px;
+	background:#fafafa;
+}
+.left p a
+{
+text-decoration:none;
+}
+#birthstone-products .birth-product-img
+{
+	width:150px;
+	height:135px;
+	float:left;
+}
+#birthstone-products .birth-product-contant
+{
+	width:750px;
+	float:right;
+	padding:15px;
+}
+#birthstone-products .birth-product-contant .contmain-heading
+{
+	font-size:15px;
+	text-transform:uppercase;
+	padding:5px 0;
+	margin:0;
+}
+#birthstone-products .birth-product-contant .january
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#7e1a24;
+}
+#birthstone-products .birth-product-contant .january a
+{
+	text-decoration:none;
+	color:#7e1a24;
+}
+#birthstone-products .birth-product-contant .februry
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#5b0d94;
+}
+#birthstone-products .birth-product-contant .februry a
+{
+	text-decoration:none;
+	color:#5b0d94;
+}
+#birthstone-products .birth-product-contant .march
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#539dd9;
+}
+#birthstone-products .birth-product-contant .march a
+{
+	text-decoration:none;
+	color:#539dd9;
+}
+#birthstone-products .birth-product-contant .april
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#9a9999;
+}
+#birthstone-products .birth-product-contant .april a
+{
+	text-decoration:none;
+	color:#9a9999;
+}
+#birthstone-products .birth-product-contant .may
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#006d33;
+}
+#birthstone-products .birth-product-contant .may a
+{
+	text-decoration:none;
+	color:#006d33;
+}
+#birthstone-products .birth-product-contant .jun
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#cab5b2;
+}
+#birthstone-products .birth-product-contant .jun a
+{
+	text-decoration:none;
+	color:#cab5b2;
+}
+#birthstone-products .birth-product-contant .july
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#dd001d;
+}
+#birthstone-products .birth-product-contant .july a
+{
+	text-decoration:none;
+	color:#dd001d;
+}
+#birthstone-products .birth-product-contant .august
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#93c508;
+}
+#birthstone-products .birth-product-contant .august a
+{
+	text-decoration:none;
+	color:#93c508;
+}
+#birthstone-products .birth-product-contant .septmber
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#203b80;
+}
+#birthstone-products .birth-product-contant .septmber a
+{
+	text-decoration:none;
+	color:#203b80;
+}
+#birthstone-products .birth-product-contant .october
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#98b6ce;
+}
+#birthstone-products .birth-product-contant .october a
+{
+	text-decoration:none;
+	color:#98b6ce;
+}
+#birthstone-products .birth-product-contant .november
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#f97914;
+}
+#birthstone-products .birth-product-contant .november a
+{
+	text-decoration:none;
+	color:#f97914;
+}
+#birthstone-products .birth-product-contant .december
+{
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	color:#495fab;
+}
+#birthstone-products .birth-product-contant .december a
+{
+	text-decoration:none;
+	color:#495fab;
+}
+#birthstone-products .birth-product-contant p
+{
+	font-size:13px;
+	color:#898888;
+	padding:0;
+	margin:0;
+}
+#birthstone-products .birth-product-contant .buttons
+{
+	font-size:11px;
+	text-transform:uppercase;
+	line-height:35px;	
+	cursor:pointer;
+}
+.left
+{
+	float:left!important;
+}
+.right
+{
+	float:right!important;
+}
+.backnone
+{
+	background:none!important;
+}
+/*-------------------------------------  birthstone ring --------------------------*/
+/*------------------------------------- diamond studs --------------------------*/
+#land-main-midpart .category-products-studs
+{
+	width:454px;
+	float:left;
+	background:#f9f9f9;
+	border:solid 1px #f0f0f0;
+	padding:20px 10px;
+}
+.stud-right
+{
+	float:right!important;
+}
+#land-main-midpart .category-products-studs .studs-img
+{
+	width:180px;
+	height:180px;
+	float:left;
+}
+#land-main-midpart .category-products-studs .studs-dec
+{
+	width:255px;
+	float:left;
+	padding-left:15px;
+}
+#land-main-midpart .category-products-studs .studs-dec h2
+{
+	font-size:20px;
+	color:#4b4b4b;
+	font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	margin-top: 5px;
+	
+}
+#land-main-midpart .category-products-studs .studs-dec p
+{
+	font-size:12px;
+	color:#7c7c7c;
+	line-height:18px;
+	text-align:left;
+	padding: 10px 0;
+}
+.studs-button
+{
+	font-size:15px;
+	width:173px;
+	height:29px;
+	line-height:29px;
+	background:#4b4b4b;
+	color:#fff;
+	text-align:center;
+	cursor:pointer;
+	
+}
+.studs-button a
+{
+	color:#fff;
+	text-decoration:none;
+	
+}
+.phight
+{
+	height:200px;
+}
+.studsphight {
+    height: 135px;
+}
+
+.ttjphight {
+    height: 135px;
+}
+.bjphight {
+    height: 190px;
+}
+.gjphight
+{
+    height: 155px;	
+}
+.mnphight
+{
+	height:125px;
+}
+
+/*------------------------------------- diamond studs --------------------------*/
+#land-wrapperjg {
+    font-family: open_sansregular,Arial,Helvetica,sans-serif;
+    margin: 0 auto;
+    width: 100%;
+}
+#land-mainjg {
+    background: url("../images/engagement-landing/banner-top-shadow.jpg") no-repeat scroll left top transparent;
+    border-bottom: 1px solid #D4D4D4;
+    float: left;
+    width: 100%;
+}
+#land-mainjg .main-bannerjg {
+    float: left;
+    padding-top: 22px;
+	background:url(/skin/frontend/angara/default/images/engagement-landing/valentine-gifts-banner.jpg) top left no-repeat;
+    width:100%;
+	height:344px;
+}
+
+#land-main-midpartjg {
+    background: url("../images/engagement-landing/mid-product-saprator.jpg") no-repeat scroll center top transparent;    
+    padding: 5px 0 0;
+    width: 100%;	
+}
+#land-main-midpartjg .category-products-engagejg {
+    float: left;
+    margin: 0 1.041666666666667%;  
+	min-width:218px;  
+	width:22.70833333333333%;		
+	margin-top:15px;
+	border:1px solid #D4D4D4; 
+	text-align:center; 
+	min-height:330px; 
+	background-color:#fff;
+	-moz-box-shadow: 0 0 5px 1px #D4D4D4;
+-webkit-box-shadow: 0 0 5px 1px#D4D4D4;
+box-shadow: 0 0 5px 1px #D4D4D4;
+}
+
+
+.pmain-heading a
+{
+	color:#4B4B4B;
+}
+#land-main-midpartjg .category-products-engagejg .phight
+{
+	height:115px !important;
+	margin-left:35px;
+	text-align:left;
+	
+}
+#land-main-midpartjg .category-products-engagejg .phight ul
+{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+#land-main-midpartjg .category-products-engagejg .phight ul li
+{
+	font-size:12px;
+}
+#land-main-midpartjg .category-products-engagejg .phight ul li a
+{
+	color:#7C7C7C;
+	text-decoration:none;
+	line-height:25px;
+	
+}

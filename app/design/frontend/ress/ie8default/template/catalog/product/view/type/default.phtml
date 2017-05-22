@@ -1,0 +1,161 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+ /* @var $this Mage_Catalog_Block_Product_View_Abstract */
+ 
+$_product = $this->getProduct();
+$_taxHelper = $this->helper('tax');
+$_coreHelper = Mage::helper('core');
+
+echo $this->getChildHtml('product_type_data_extra');?>
+<div class="row low-margin-top relative-placeholder" <?php if(in_array(96, $_product->getCategoryIds())): ?> style="height:80px;"<?php endif;?>> 
+	<div class="col-xs-12" itemscope itemtype="http://schema.org/Offer">
+		<meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>" />
+		<link itemprop="availability" href="http://schema.org/InStock" />
+		<div class="col-sm-12" style="padding:10px 0px 0px">
+		<div class="pull-left max-margin-right high-padding-right price-holder">
+			<span class="pull-right"><?php echo $this->getPriceHtml($_product);?></span>
+        </div>
+
+		<?php 
+		$categories = $this->getProduct()->getCategoryIds();
+		/* excluding specific categories from easy pay */ 
+		if(!in_array(96, $categories) && !$_product->getIsBuildYourOwn()): 
+			$_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_taxHelper->getPrice($_product, $_product->getFinalPrice())); ?>
+				<div class="pull-left or-sep"><span>or</span></div>
+				<div class="pull-left easy-pay">		
+					<label for="#easy-pay-box">Easy Pay Installments <i id="easy-pay-info" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="
+						<div class='block-sub-heading high-margin-bottom'>What is Easy Pay?</div>
+						<ul class='list-style-disc'>
+							<li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+							<li class='low-padding-bottom'>First payment is charged at the time of purchase.</li>
+							<li class='low-padding-bottom'>The order is processed for shipment immediately upon checkout.</li>
+							<li class='low-padding-bottom'>Your credit card will be charged for 2 or 3 equal installments starting <?php echo Mage::helper('function')->freeReturnDays();?> days from the date of purchase.
+							<li class='low-padding-bottom'>No interest or additional fees are charged by Angara.</li>
+							<li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the right to collect the same or send a collection agency if a payment is not made.</li>
+						</ul>"></i>
+					</label>
+					<select id="easy-pay-box" class="form-control high-margin-bottom" name="easyopt">
+					<?php 
+					foreach($_easyPayOptions as $key => $val): ?>
+						<option value="<?php echo $key; ?>" <?php if($key == 0): ?> selected="selected" <?php endif; ?>><?php echo ($key + 1) . ' payment(s) of ' . $_coreHelper->currency($val, true, false) ?></option>
+					<?php 
+					endforeach; ?>
+					</select>
+				</div>  
+		<?php 
+		else:?>
+			<style>
+			.product-retail-price-range, .product-retail-price { visibility: hidden; }
+			</style>
+		<?php	
+		endif; ?>
+		</div>
+		<div class="clearfix"></div>
+		<?php if(!in_array(96, $_product->getCategoryIds())): ?>			
+			<div id="view-sp-offers" class="col-sm-12" style="padding:0px">
+				<div id="special-offer-click" class="pull-left fontsize-type1 clickable block-inline-display" style="border:solid 1px #126300; background-color:#e8f3e3; margin-top:3px; margin-bottom:3px; margin-right:3px; padding:5px 10px; color:#126300">
+					<div class="pull-left" style="white-space:nowrap;"><span class="visible-md">VIEW SPECIAL OFFER</span><span class="visible-sm">TAP FOR OFFER</span></div> <div class="pull-right low-margin-left"><i class="fa fa-caret-right fontsize-type2"></i></div>
+				</div>
+			<div id="special-offer-details-holder"></div>
+		</div>
+        <?php endif;?>
+<?php /*?>Code added by Vaseem Starts<?php */?>
+<style>.ticker-border{text-align:center; border-radius:3px;}</style>
+<?php if( Mage::helper('function')->getHappyHours()  && Mage::helper('function')->showTimerPP()>0 ){
+?>
+
+<script type="text/javascript">
+	jQuery(function(){
+		var client_time 	= 	new Date();
+		var client_end_time = 	(new Date(client_time.getTime() + <?php echo Mage::helper('function')->showTimerPP();?>));
+		
+		ticker 			= 	jQuery('#offer-ticker');
+		ticker.hours 	= 	jQuery('<span class="hourdigits"></span>');
+		ticker.minutes 	= 	jQuery('<span class="minutedegites"></span>');
+		ticker.seconds 	= 	jQuery('<span class="secondigits"></span>');
+		ticker.append(ticker.hours);
+		ticker.append(jQuery('<span class="colondigit">:</span>'));
+		ticker.append(ticker.minutes);
+		ticker.append(jQuery('<span class="colondigit">:</span>'));
+		ticker.append(ticker.seconds);
+
+		//	Clear the previous variable after ajax request in popup
+		if(typeof myFunc != 'undefined'){
+			window.clearInterval(myFunc);	
+		}
+		
+		myFunc	=	setInterval(function(){
+			var client_time = new Date();	//	Tue Aug 13 2013 10:30:23 GMT+0530 (India Standard Time)
+			//console.log(client_time);console.log(client_end_time);
+			var difference 	= client_end_time - client_time;
+			//	This is the time you want to show the timer	ie 5 seconds = 5000 ms
+			//var difference = 20*60*1000;			//	mili seconds
+			if(difference > 0){
+				ticker.hours.text( zeroPad(parseInt(difference/(1000*60*60))) );
+				ticker.minutes.text( zeroPad(parseInt(difference/(1000*60))%60) );
+				ticker.seconds.text( zeroPad(parseInt(difference/(1000))%60) );
+			}
+			else{
+				ticker.hide();
+				//	Clear the previous variable after ajax request in popup
+				if(typeof myFunc != 'undefined'){
+					window.clearInterval(myFunc);	
+				}
+			}
+			
+		},1000);
+	})
+	
+	function zeroPad (number) {
+		// Pad a number with a zero, to make it 2 digits
+		return ((number < 10) ? "0" : "") + String(number);
+	}
+</script>
+<div class="low-margin-left pull-left" style="margin-top:18px;"><span class="block-inline-display fontsize-type0 hidden-xs">Ends In:</span> <span id="offer-ticker" class="ticker-border valign-middle block-inline-display min-padding-left min-padding-right text-bold  fontsize-type3 text-on-dark showcase-bg-green text-on-dark"></span></div>
+
+<?php } ?>
+<?php /*?>Code added by Vaseem Ends<?php */?>
+        <div class="clearfix"></div>     
+		<?php if($_product->getIsBuildYourOwn()){ 
+			if($_product->getByoModel()->hasSettingSelected()){ ?>
+				<div class="absolute-placeholder" style="width:130%; z-index:10; top:35px; display:none;" id="special-offer-details">
+			<?php }else{ ?>
+				<div class="absolute-placeholder" style="width:100%; z-index:10; top:105px; display:none;" id="special-offer-details">
+			<?php } ?>
+		<?php }else{ ?>
+		<div class="absolute-placeholder" style="width:96%; z-index:10; top:95px; display:none;" id="special-offer-details">
+		<?php } ?>
+			<div class="col-xs-12" style="padding:0px;">
+				<div class="showcase-bg-white" style="border:1px solid #d3d3d3; box-shadow:-2px 3px 6px -3px #999999">
+					<div id="spinner-offer" class="high-padding-top high-padding-bottom" style="display:none; width:100%; text-align:center;"><i class="fa fa-spinner fa-2x fa-spin"></i></div>      	
+					<div class="clearfix"><i id="close-special-offer" class="fa fa-times close fontsize-type5" style="position: absolute; right: -10px; top: -10px; display: block; width: 18px; height: 18px; font-size: 0px; background: url('/skin/frontend/ress/default/images/sprite.jpg') no-repeat; opacity: 1; background-position: -229px -151px; border-radius: 11px;"></i></div>
+					<div id="special-offer-text" class="" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

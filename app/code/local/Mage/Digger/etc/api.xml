@@ -1,0 +1,57 @@
+<config>
+    <api>
+        <resources>
+			<digger translate="title" module="digger">
+				<model>digger/api</model>
+                <title>Search Resource</title>
+				<acl>digger</acl>
+                <methods>
+                    <list translate="title" module="digger">
+                        <title>Searchable data listing</title>
+						<method>items</method>
+						<acl>digger/list</acl>
+                    </list>
+					<update translate="title" module="digger">
+                        <title>Update Table</title>
+						<method>update</method>
+						<acl>digger/update</acl>
+                    </update>
+					<truncate translate="title" module="digger">
+						<title>Delete Table</title>
+						<method>truncate</method>
+						<acl>digger/truncate</acl>
+					</truncate>
+                </methods>
+                <faults module="digger"> <!-- module="customer" specifies the module which will be used for translation. -->
+                    <data_invalid> <!-- if we get invalid input data for customers -->
+                        <code>100</code>
+                        <!-- we cannot know all the errors that can appear, their details can be found in error message for call -->
+                        <message>Cannot update 'product_keyword_relevancy', invalid data. Details in error message.</message>
+                    </data_invalid>
+                    <filters_invalid>
+                        <code>101</code>
+                        <message>Invalid filters specified. Details in error message.</message>
+                    </filters_invalid>
+                    <not_exists>
+                        <code>102</code>
+                        <message>Customer doesn't exist.</message>
+                    </not_exists>
+                    <not_deleted>
+                        <code>103</code>
+                        <message>Customer was not deleted. Details in error message.</message>
+                    </not_deleted>
+                </faults>
+            </digger>
+        </resources>
+        <acl>
+            <resources>
+					<digger translate="title" module="digger">
+                         <title>Search</title>
+                         <list translate="title" module="digger">
+                            <title>View All</title>
+                         </list>
+                    </digger>
+            </resources>
+        </acl>
+    </api>
+</config>

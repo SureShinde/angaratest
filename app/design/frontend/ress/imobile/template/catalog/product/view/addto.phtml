@@ -1,0 +1,30 @@
+<?php
+$quickWishlist		=	Mage::helper('ajax')->getWishlistStatus();
+$_product 			= 	$this->getProduct(); 
+$_wishlistSubmitUrl = 	$this->helper('wishlist')->getAddUrl($_product); ?>
+
+<div class="wishlist fr center-align">
+<?php
+$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){
+	$wishlist = Mage::getModel('wishlist/item')->getCollection();
+	$productInWishlist	=	Mage::helper('ajax')->getProductInWishlist($_product->getId());
+	if($productInWishlist){	?>					
+		<span id="wishlist_product_<?php echo $_product->getId();?>" data-pid="<?php echo $_product->getId();?>" wishlist-id='<?php echo $productInWishlist;?>' class='link-wishlist apricot-text added-to-wishlist clickable remove-wishlist'><i class='fa fa-heart'></i></span>
+ <?php }else{
+		//	if Quick Wishlist module is on fron admin
+		if($quickWishlist){ ?>
+			<a data-ptype='product'  data-pid="<?php echo $_product->getId();?>" id="wishlist_product_<?php echo $_product->getId();?>" <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){?> data-toggle="modal" <?php } ?> data-target="#wishlistModal" class="link-wishlist add-wishlist clickable"><i class="fa fa-heart"></i></a>
+		<?php } else{?>			
+		<a href="<?php echo $_wishlistSubmitUrl;?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="fa fa-heart"></i></a>
+	<?php }
+		}
+}else{
+	if($quickWishlist){ ?>
+		<a data-ptype='product' data-pid="<?php echo $_product->getId();?>" id="wishlist_product_<?php echo $_product->getId();?>" <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){?> data-toggle="modal" <?php } ?> data-target="#wishlistModal" class="link-wishlist add-wishlist clickable"><i class="fa fa-heart"></i></a>
+	<?php } else{?>
+		<a href="<?php echo $_wishlistSubmitUrl;?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="fa fa-heart"></i></a>
+	<?php }
+}?>
+</div>
+<?php echo $this->getChildHtml('ajax_wishlist');?>

@@ -1,0 +1,605 @@
+<style>
+@font-face {
+	font-family:'droid_sansregular';
+	src: url('/skin/frontend/angara/goldmine/fonts/s60snr-webfont.eot');
+	src: url('/skin/frontend/angara/goldmine/fonts/s60snr-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/goldmine/fonts/s60snr-webfont.woff') format('woff'),  url('/skin/frontend/angara/goldmine/fonts/s60snr-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/goldmine/fonts/s60snr-webfont.svg#droid_sansregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+</style>
+
+<?php 
+$cumbs = $this->getLayout()->getBlock('breadcrumbs'); 
+$cumbs = $cumbs->_crumbs; 
+$count_cumbs =  count($cumbs);
+
+if($cumbs && is_array($cumbs)){
+	$i = 1;
+	$tracCategory;
+	
+   	foreach($cumbs as $_crumbName=>$_crumbInfo){
+		if($_crumbInfo['link']){
+			if($i != $count_cumbs-1){
+				$i = $i+1; 
+			} 
+			else {
+				$tracCategory = $_crumbInfo['label'] ; 
+				$i = $i+1;
+			}
+	  	}
+   	}
+} 
+
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+
+$_helper = $this->helper('catalog/output'); 
+$_product = $this->getProduct(); ?>
+
+<!-- S: Jewel Product Script -->
+<script>
+	var ie = (function(){
+		var undef, v = 3, div = document.createElement('div');
+	
+		while (
+			div.innerHTML = '<!--[if gt IE '+(++v)+']><i></i><![endif]-->',
+			div.getElementsByTagName('i')[0]
+		);
+	
+		return v> 4 ? v : undef;
+	}());
+	
+	if(ie){
+		if(ie < 9){
+			jQuery(function(){
+				jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+			});
+		}
+		else{
+			jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+		}
+	}
+	else{
+		jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+	}
+</script>
+<!-- E: Jewel Product Script -->
+
+<!-- S: Custom Options Pricing -->
+<script type="text/javascript">
+	var curid = <?php echo $_product->getId(); ?>;
+	var cursku = "<?php echo $_product->getSku(); ?>";
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<!-- E: Custom Options Pricing -->
+
+<!-- S: Popup for Customer Say Best -->	
+<script type="text/javascript">	
+jQuery(function(){
+	jQuery('#internetjeweler').click(function(){
+		jQuery('.popupboxnew').hide().html('');			
+		jQuery('#internetjewelerpopup').show();
+		jQuery.ajax({
+			url:'/skin/frontend/angara/default/staticdata/internetjeweler.html',			//	Fixed by Vaseem
+			success: function(matter){
+				jQuery('#internetjewelerpopup').html(matter);
+				jQuery('#internetjewelerpopup').data('loaded','yes');
+				jQuery('.popupboxcross').click(function(){
+					jQuery('.popupboxnew').hide().html('');
+				});				
+			}
+		});
+	});
+});
+</script>
+<!-- E: Popup for Customer Say Best -->
+
+<!-- S: Message Block-->
+<?php 
+if($this->getMessagesBlock()->getGroupedHtml()){?>
+	<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml();?></div>
+<?php
+}?>	
+<!-- E: Message Block-->
+
+<!-- S: Main Product Page -->
+<div id="pp-wrapper" <?php if(!($_product->isConfigurable())){?>class="product_simple"<?php }?> itemscope itemtype="http://schema.org/Product"><?php // Added by Vaseem for Google Rich Snippets?>
+	<!-- S: Product Page Mid Part -->
+	<div class="pp-mid-block">
+		<form action="<?php echo $this->getSubmitUrl($_product); ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+			<div class="no-display">
+				<input type="hidden" name="product" value="<?php echo $_product->getId(); ?>" />
+				<input type="hidden" name="related_product" id="related-products-field" value="" />
+				<input type="hidden" name="category" value = "<?php echo $tracCategory; ?>"/>
+			</div>
+			
+			<!-- S: Product Page Left Block -->
+			<div class="pp-mid-left-block">
+				<div class="product-view-section">
+					<?php
+						# @todo handle product video here
+						$video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+						if($video != ''){
+							echo $this->getChildHtml('videoupload');
+						}
+						echo $this->getChildHtml('media');
+						echo $this->getChildHtml('packaging'); ?>
+						
+					<div class="clear"></div>
+			
+					<!-- S: Social Media Icons -->
+					<div id="share-icons" class="social-icons" style="display:none;">
+						<ul>
+							<li class="fb"></li>
+							<li class="tw"></li>
+							<li class="pin"></li>
+							<?php /*?><li class="in"></li>
+							<li class="gplus"></li><?php */?>
+						</ul>
+					</div>
+					<!-- E: Social Media Icons -->
+				</div>
+                <?php  
+					// Added by Vaseem for matching bands
+					//echo $this->getLayout()->createBlock('catalog/product/view')->setProduct($_product)->setTemplate('catalog/product/view/matchingbandshort.phtml')->toHtml();?>
+			</div>
+			<!-- E: Product Page Left Block -->
+		
+			<!-- S: Product Page Right Block -->
+			<div class="pp-mid-right-block">
+				<!-- S: Product Name With Reviews Rating -->
+				<div class="pro-name" itemscope itemtype="http://schema.org/Product">
+					<h1 itemprop="alternateName" class="dyn_name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h1>
+				</div>
+				
+				<div class="pro-rating">
+					<?php //echo $this->getReviewsSummaryHtml($_product, false, true); ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, 'aggregate', true); ?><?php // Added by Vaseem for Google Rich Snippets?>
+				</div>
+				<!-- E: Product Name With Reviews Rating -->
+				
+				<div class="clear"></div>
+				
+				<!-- S: Product Description -->
+				<?php /*?><div class="pro-description">
+					<?php echo $_product->getShortDescription(); ?>
+				</div><?php */?>
+				<!-- E: Product Description -->
+				
+				<?php 
+				if(!isset($cids))
+					$cids = $this->getProduct()->getCategoryIds();
+							
+				if(!in_array(96, $cids)):
+					$productOptions = $_product->getOptions();					
+					if(!empty($productOptions)){	
+						foreach($productOptions as $prodOpt){
+							if($prodOpt->getSku() == 'engraving' && $prodOpt->getPrice() == "0.00"){?>
+								<script type="text/javascript">
+								jQuery(function(){
+									jQuery("#option-list-tabOptions span")
+									.after('<div id="offerEng"><img src="/skin/frontend/angara/goldmine/images/special-offers-header.png" /></div>');
+								});
+								</script>
+							<?php
+								if(Mage::getSingleton('core/session')->getData('engraving_free_user') == 0){
+									Mage::getSingleton('core/session')->setData('engraving_free_user','1'); 
+								}
+							}
+						}
+					}?>				
+					<!-- S: Product Main Tabs -->
+					<div id="user-option-tabs" class="customization-tabs-block">
+						<?php
+						if($_product->getTypeId() == 'simple'){?>
+							<ul>
+								<li id="option-list-tabOptions" class="option-list-tab active">
+									<span>Add-ons</span>
+								</li>
+							</ul>
+						<?php 
+						}?>	
+					</div>
+					<!-- E: Product Main Tabs -->
+				
+					<!-- S: User Options -->
+					<div class="spacing">
+						<div id="option-list-containerOptions" class="option-list-container">
+						<?php
+							$appraisal_price = $this->helper('core')->currency(65,true,false);
+							$appraisal_price = ($appraisal_price=='$65.00')?'$65':$appraisal_price;
+							$pmain_sku = $_product->getSku();
+							$presku = strtolower(substr($pmain_sku, 0, 3)); // SD_
+							
+							if($presku != 'sd_' && $presku != 'SD_'): ?>
+								<div class="addon-option toggle-jewelry-appraisal">
+									<input name="appraisal" type="checkbox" id="jewelryappraisal" autocomplete="off" style="display:none"/>
+										ADD JEWELRY APPRAISAL FOR <b style="color:#854c64"><?php echo $appraisal_price; ?></b> 
+								</div>
+								
+								<span class="help-info certpopup">
+									<div class="help-info-content help-info-content-close">
+										<div class="appraisalcertimg">
+											<div class="appraisalcertimg">Add Jewelry Appraisal for <?php echo $appraisal_price; ?></div>
+																						
+											<div class="appraisalclose"></div>
+										</div>
+									</div>
+								</span>																	
+								
+								<span class="refundtxt" id="nonjewelry" style="display:none;">*Jewelry Appraisal cost is non refundable</span>
+							<?php 
+							endif; 
+						?>
+						<div class="clear"></div>
+						
+						<div class="addon-option toggle-jewelry-insurance">
+						<?php 
+							$currencyPrice = Mage::helper('core')->currency($_product->getPrice(),false,false); 
+							
+							if($currencyPrice<200){
+								$insPrice = 40;
+							}
+							else{
+								$insPrice = $currencyPrice*.1;
+							}?>
+							<input name="insurance" type="checkbox" autocomplete="off" id="insurance" style="display:none"/>
+								ADD WARRANTY FOR 
+								<b style="color:#854c64">
+									<?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); echo '<span id="insprice" style="color:#854c64">'.number_format($insPrice,2).'</span>'; ?>
+								</b>							
+						</div>
+						
+						<span class="help-info" onclick="customLinkTracking('Insurance Popup');">
+							<div class="help-info-content">
+								<div class="popup-mid">
+								The Total Protection Warranty Plan protects your jewelry for the next 5 years against any accidental damage and/or wear and tear in order to ensure that your jewelry looks like new whenever you wear it. If the warranty is unused over the next 5 years, you can use the full amount paid for the warranty towards any future Angara purchase. <a href="/total-protection-warranty.html" target="_blank"; style="color:#000; text-decoration:underline;">Click here</a> for more information. 
+								</div>
+							</div> 
+						</span>	   
+							
+						<?php 
+						if( $_product->getTypeId() == 'simple' ){
+							echo $this->getLayout()->createBlock('catalog/product/view')
+											->setProduct($_product)
+											->setTemplate('catalog/product/view/engraving_popup.phtml')
+											->toHtml();
+						}?>
+						
+						<div class="clear"></div>
+					</div>
+						
+					<?php 
+					if($_product->isSaleable() && $this->hasOptions()):?>
+						<?php echo $this->getChildChildHtml('container2', '', true, true); ?>
+					<?php 
+					endif;
+				
+					if($_product->isConfigurable()){
+						echo $this->getLayout()->createBlock('catalog/product/view')
+													->setProduct($_product)
+													->setTemplate('catalog/product/view/engraving_popup.phtml')
+													->toHtml();
+					}?>
+					</div>								
+					<!-- E: User Options -->
+				<?php
+				endif;?>
+					
+				<!-- S: Product Price with Easy Pay Option --> 
+				<div class="price-easypay-block">
+					<?php echo $this->getChildHtml('product_type_data');?>
+								
+					<div class="clear"></div>
+				</div>
+				<!-- E: Product Price with Easy Pay Option -->
+							
+				<div class="ringsize-addtocart-block">
+                	<!-- S: Ring Size with Its Guide Pdf Link -->
+					<?php 
+					if($_product->getAttributeText('jewelry_type')=='Ring'){?>
+						<div class="ring-sizer-block">
+							<div class="clear"></div>
+						</div>
+						<div class="ring-size-guide"></div>
+					<?php 
+					}?>
+					<!-- E: Ring Size with Its Guide Pdf Link -->
+					
+					<!-- S: Add to Cart -->
+					<?php echo $this->getChildHtml('addtocart'); ?>
+					<!-- E: Add to Cart -->
+					
+					<div class="clear"></div>
+				</div>
+				
+				<!-- S: Add to Wishlist Button Starts -->
+				<?php
+				if($_product->isSaleable()):
+					$_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+					
+					<div class="add-wishlist">
+					<?php 
+					if($this->helper('wishlist')->isAllow()){
+						$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+						
+						if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){ 	
+							
+							$wishlist = Mage::getModel('wishlist/item')->getCollection();
+							$wishlist->getSelect()
+									  ->join(array('t2' => 'wishlist'),
+											 'main_table.wishlist_id = t2.wishlist_id',
+											 array('wishlist_id','customer_id'))
+											 ->where('main_table.product_id='.$_product->getId().' AND t2.customer_id='.$customerId);
+							$count = $wishlist->count();
+							
+							if($count != 0){ 
+								echo "<span class='addedwl'>Added in your Wish List.</span>";
+							}
+							else{
+								echo "<a id='wishlist-link' href='".$_wishlistSubmitUrl ."' style='text-decoration:underline;'>Add to Wish List +</a>";
+							}
+						}
+						else{?>
+							<a id="wishlist-link" href="javascript:void(0);" onclick="setWishlistUrlSession('<?php echo $_wishlistSubmitUrl; ?>');" class="customerdiscountlink" style="text-decoration:underline;">Add to Wish List +</a>
+						<?php
+						}
+					}?>
+					</div>
+				<?php 
+				endif;?>	
+				<!-- E: Add to Wishlist Button Starts -->							
+						
+				<!-- S: Estimated Ship Date Details -->			
+				<div class="estimated-ship-date">				
+					<div class="help-info">
+						<div class="help-info-content help-info-content-left">
+							<div class="popup-mid" style="text-align:left;">Our products are all made to order. Based on the selection of stone size, stone quality, metal etc. we manufacture each piece of custom made jewelry from scratch. The date mentioned here is the date we estimate that your unique piece of jewelry will be ready for shipment. Shipping costs are typically free, but if you need the item to ship soon, you can choose faster shipping options on the next page. 
+							</div>
+						</div>
+					</div>
+					
+					<div class="estimated-title">ESTIMATED SHIP DATE: 
+						<span class="ship-date dyn_vendor_lead_time">
+							<?php echo Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime());?>
+						</span>
+					</div>
+					
+					<div class="clear"></div>
+					<?php
+					$vendorLeadTime = ($_product->getVendorLeadTime() + 4);
+					$arriveByDate = Mage::helper('function')->skipUsaHolidays($vendorLeadTime); ?>
+					<div id="valentineDate" class="ship-date" style="float:right; <?php if($_product->getVendorLeadTime() <= 5){?>display:block;<?php }else{?>display:none;<?php }?>">
+						<img height="16" width="16" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png" class="vdayimgtop">Arrives By <span id="dyn_arrive-date"><?php echo $arriveByDate;?></span>
+					</div>					
+				</div>
+				<!-- E: Estimated Ship Date Details -->			
+				
+				<div class="clear"></div>
+			</div>
+			<!-- S: Product Page Right Block -->
+		
+			<div class="clear"></div>  		
+		</form>
+	</div>
+	<!-- E: Product Page Mid Part -->
+	
+	<!-- S: Product Page Bottom Part -->
+  	<div class="pp-bottom-block">
+		<!-- S: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference -->
+		<div id="product-info-tabs-holder">
+			<div id="product-info-tabs">
+				<ul>
+					<li class="product-tab active"><span title="Product Details" style="padding-left:0;" id="mbpd">PRODUCT DETAILS</span></li>
+					<li class="product-tab"><span title="Product Review">CUSTOMER REVIEWS</span></li>
+					<li class="product-tab"><span title="Shipping Returns">SHIPPING AND RETURNS</span></li>
+					<li class="product-tab"><span title="Angara Difference" style="margin-right:0;">THE ANGARA DIFFERENCE</span></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			
+			<div style="display:block" class="product-tab-content"> 
+				<!-- S: Product Summary -->
+				<?php echo $this->getChildHtml('description') ?>
+				<!-- E: Product Summary -->
+				<div style="clear:both"></div>
+			</div>
+			
+			<div class="product-tab-content">
+				<div class="writeareviewlink">		
+					Write a Review <span>+</span>
+				</div>
+				
+				<div class="clear"></div>
+				
+				<div class="customer-review-list custom-scroll" onScroll="javascript:void(0);">
+					<?php echo $this->getChildHtml('reviews'); ?>
+				</div>
+				
+				<div class="clear"></div>
+			</div> 
+			
+			<div class="product-tab-content">
+				<h3>Return Policy:</h3>
+				<div id="requestlabel-dialog" title="Request For Return Shipping Label"></div>
+				<p>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within 30 days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</p>
+				
+				<p>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply submit a form by <a id="returnshipping-dialog-opener" href="#" style="text-decoration:underline;"> clicking here</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</p> 
+				
+				<p>For international returns, return shipping and insurance are the responsibility of the customer.</p> 
+				
+				<h3>Shipping Policy:</h3>
+				<p>We ship FREE to 67 countries - We offer FREE FedEx Ground shipping within the USA and FedEx International Shipping worldwide at no cost. Upgraded shipping options are available at Checkout for nominal fees. If you need the item to be shipped faster than the shipping date indicated above, please call 888 926 4272 to speak to one of our Angara Advisors or click <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" style="text-decoration: underline;"> Live Chat</a>. A tracking number will be sent to your email upon shipment.</p> 
+			</div> 
+			
+			<div class="product-tab-content">
+				<h3>The Internet's Family Jeweler:</h3>
+				
+				<!-- S: Popup DIV for Customer Say Best -->
+				<div id="internetjewelerpopup" class="popupboxnew"></div>
+				<!-- E: Popup DIV for Customer Say Best -->
+				
+				<p>We live and breathe gemstones and fine jewelry. We are family owned and have been in the gemstone business for 3 generations. As with a traditional family jeweler experience, we will work with you to find or create the jewelry piece of your dreams. If you cannot find the gemstone or fine jewelry piece that you are looking for on the website, simply call us at 888 926 4272 and our team will find or create your piece. If we can't source it, it probably doesn't exist. <span id="internetjeweler" style="cursor:pointer; text-decoration:underline; color:#000000;">Our Customers Say It Best</span> </p>
+				
+				<h3>Direct From The Source:</h3>
+				<p>With manufacturing and sourcing offices in Jaipur, India (commonly known as the World's Gemstone Capital), Thailand (where the majority of the world's rubies and sapphires are cut and polished), and the USA, we are able to source the best quality gemstones directly from the mines and manufacturers. Further, we manufacture the large majority of our gemstone jewelry - thus, we cut out all middlemen and are able to offer unparalleled prices. Independent appraisal tests have verified that our jewelry routinely appraises at 125-200% of purchase price. </p>
+				
+				<h3>Exceptional Value And Quality, Guaranteed By A 110% Refund Policy:</h3>
+				<p>We guarantee exceptional value and quality. We will refund up to 110% of the purchase price if an accredited, GIA trained jewelry appraiser, values your jewelry for less than 125% of the purchase price up to a dollar amount of $250.</p>
+				
+				<h3>30-Day Money Back Guarantee:</h3>
+				<p>If you don't love it, simply send it back in its original condition for a full refund. </p>
+				
+				<h3>Higher Quality:</h3>
+				<p>Our jewelry is meant to last for generations. The focus is on maximizing beauty rather than on saving gold or gemstone weight by reducing quality. While our competitors have reduced weight to 2-3 grams for most products as gold costs have gone up, our average product weight remains at 3-5 grams. Even if this philosophy and commitment to fine jewelry costs us more, we believe that the customer will be much happier as a result. </p>
+			</div>
+		</div>
+		<!-- E: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference -->
+	    			
+		<!-- S: Recently Viewed Slider -->
+		<?php echo $this->getLayout()->createBlock('recentlyviewed/view')->setTemplate('recentlyviewed/view.phtml')->toHTML();?>
+		<!-- E: Recently Viewed Slider -->
+		
+    	<div class="clear"></div>
+  	</div>
+	<!-- E: Product Page Bottom Part -->
+	
+  	<div class="clear"></div>
+</div>
+<!-- E: Main Product Page -->
+
+
+<!-- S: Shopping Cart Tracking -->
+<script type="text/javascript">
+	//<![CDATA[
+	function trackShoppingCart(res, form){
+		if(res){
+			_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart', "<?php echo $_product->getSku() ?>", undefined,true]);
+		}
+	}
+	//]]>
+</script>
+<!-- E: Shopping Cart Tracking -->	
+
+<!-- S: Product Addtocart Tracking-->	
+<script type="text/javascript">
+	//<![CDATA[		
+	var productAddToCartForm = new VarienForm('product_addtocart_form');
+	_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview', "<?php echo $_product->getSku() ?>", undefined, true]);
+	var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+	
+	productAddToCartForm.submit = function(button, url) {
+		
+		if (this.validator.validate()) {
+			var form = this.form;
+			var oldUrl = form.action;
+
+			if (url) {
+			   form.action = url;
+			}
+			var e = null;
+			try {
+				this.form.submit();
+			} catch (e) {
+			}
+			this.form.action = oldUrl;
+			if (e) {
+				throw e;
+			}
+
+			if (button && button != 'undefined') {
+				button.disabled = true;
+			}
+		}
+	}.bind(productAddToCartForm);
+
+	productAddToCartForm.submitLight = function(button, url){
+		if(this.validator) {
+			var nv = Validation.methods;
+			delete Validation.methods['required-entry'];
+			delete Validation.methods['validate-one-required'];
+			delete Validation.methods['validate-one-required-by-name'];
+			if (this.validator.validate()) {
+				if (url) {
+					this.form.action = url;
+				}
+				this.form.submit();
+			}
+			Object.extend(Validation.methods, nv);
+		}
+	}.bind(productAddToCartForm);
+	//]]>
+</script>
+<!-- S: Product Addtocart Tracking-->
+
+<!-- S: Omniture Tracking-->
+<script language="javascript">
+	jQuery(function(){
+		if(typeof(s)!='undefined')
+			s.t();
+	});
+</script>
+<!-- E: Omniture Tracking-->
+<!--start tracking for number of clicks by user-->
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('.add-to-cart').click(function(event){
+		 <!-- Added by Saurabh -->
+		jQuery(".attribValue option:selected").each(function() {
+			if(jQuery(this).text()=='SELECT RING SIZE' || jQuery(this).text()=='select ring size' || jQuery(this).text()=='Select Ring Size'){
+				event.preventDefault();
+				jQuery('.attribValue').addClass('validation-failed');
+				jQuery('#required-entry-show-msg').show();
+				return false;	
+			}
+			else{
+				jQuery('.attribValue').removeClass('validation-failed');
+				jQuery('#required-entry-show-msg').hide();
+			}
+		});
+		 <!-- Added by Saurabh -->
+		track('<?php echo Mage::getBaseUrl().'rnd/cartclick/tracker.php?uid='.Mage::getSingleton("core/session")->getEncryptedSessionId(); ?>' , function(){});
+		
+	});
+});
+function track(url, callback) {  
+        var xhr;  
+          
+        if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();  
+        else {  
+            var versions = ["MSXML2.XmlHttp.5.0",   
+                            "MSXML2.XmlHttp.4.0",  
+                            "MSXML2.XmlHttp.3.0",   
+                            "MSXML2.XmlHttp.2.0",  
+                            "Microsoft.XmlHttp"]  
+  
+             for(var i = 0, len = versions.length; i < len; i++) {  
+                try {  
+                    xhr = new ActiveXObject(versions[i]);  
+                    break;  
+                }  
+                catch(e){}  
+             } // end for  
+        }  
+          
+        xhr.onreadystatechange = ensureReadiness;  
+          
+        function ensureReadiness() {  
+            if(xhr.readyState < 4) {  
+                return;  
+            }  
+              
+            if(xhr.status !== 200) {  
+                return;  
+            }  
+  
+            // all is well    
+            if(xhr.readyState === 4) {  
+                callback(xhr);  
+            }             
+        }  
+          
+        xhr.open('GET', url, false);  
+        xhr.send('');  
+    } 
+</script>
+<!--End tracking for number of clicks by user-->

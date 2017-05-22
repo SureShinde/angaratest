@@ -1,0 +1,104 @@
+<style>
+.stepheading span.tagline
+{
+display:inline-block ;
+}
+
+.stepheading span.tagline, .stepheading span.metaltype
+{
+display:inline-block ;
+padding-left:3px;
+}
+.stepheading
+{
+padding:12px 10px 0 10px;
+}
+
+</style>
+<div class="wrapperstuds">
+  <h1 class="appheading">Your Own Diamond Studs in 3 Easy Steps
+    </h1>
+  <div class="clr"></div>
+  <div class="studsstep1">
+    <div class="stepheading">Step 1:<span class="tagline"> Select Your Diamond Shape</span></div>
+    <div class="diamondtype">
+      <div class="heading2">Round<span>
+        <input name="ddl_dshape" id="ddl_dshaper" type="radio" value="r" checked="checked" onclick="ds_metalchange('1051');" />
+        </span></div>
+      <div class="diamond-img-type"><img src="/skin/frontend/angara/default/images/diamondstuds/roundcutdiamond.jpg" /></div>
+    </div>
+    <div class="diamondtype bgnone">
+      <div class="heading2">Princess<span>
+        <input name="ddl_dshape" id="ddl_dshapep" type="radio" value="p"   onclick="ds_metalchange('1051');" />
+        </span></div>
+      <div class="diamond-img-type"><img src="/skin/frontend/angara/default/images/diamondstuds/princcutdiamond.jpg" /></div>
+    </div>
+  </div>
+  <div class="studsstep2">
+    <div class="stepheading topgap">Step2:<span class="tagline">Select Setting Style & Metal Type (Learn more about these setting styles) </span> <span class="metaltype">
+      <select name="ds_ddl_metal" id="ds_ddl_metal" onchange="ds_metalchange('1051');"> 
+        <?php
+
+			$attribute_model        = Mage::getModel('eav/entity_attribute');
+            $attribute_options_model= Mage::getModel('eav/entity_attribute_source_table') ;
+            $attribute_code         = $attribute_model->getIdByCode('catalog_product', 'metal');
+            $attribute              = $attribute_model->load($attribute_code);
+            $attribute_table        = $attribute_options_model->setAttribute($attribute);
+            $options                = $attribute_options_model->getAllOptions(false);
+            $iiii=0;
+			
+            foreach($options as $option)
+             {
+				 $value = $option['value'];
+				  $label= $option['label'];
+				if($value=="131" || $value=="130" || $value=="229" )
+				{ 
+				  
+                  echo "<option value='$value'>$label</option>";
+				}
+             }
+			 ?> 
+           
+		</select>
+		
+		
+        
+        
+      </span> </div>
+    <div class="selectstyle">
+      <div class="studstype1" id="dv_ss1">          <a href="JavaScript:void(0);"  onclick="ds_metalchange('1051')"></a></div>
+      <div class="studstype2" id="dv_ss2">          <a href="JavaScript:void(0);"  onclick="ds_metalchange('1052')"></a></div>
+      <div class="studstype3 setwidth" id="dv_ss3" ><a href="JavaScript:void(0);"  onclick="ds_metalchange('1053')"></a></div>
+      <div class="studstype4" id="dv_ss4" ><a href="JavaScript:void(0);"  onclick="ds_metalchange('1130')"></a></div>
+  
+    </div>
+  </div>
+  <div class="clr"></div>
+  
+  <div class="studsstep3" style="position:relative">
+ 
+  <div style="display:none" class="adj-nav-progress" id="dvwaiting">
+    <img src="/skin/frontend/angara/ADVRP/images/adj-nav-progress.gif">
+  </div>
+  
+    <div class="stepheading">Step3:<span class="tagline">Click on the Price below To View Details of Your Selected Studs</span>        </div>
+    <div class="pricevariation" id="dvajaresult">
+    
+    </div>
+    
+    </div>
+  <div class="clr"></div>
+</div>
+<link rel="stylesheet" href="/skin/frontend/angara/default/css/colorbox.css"/>
+<script src="/skin/frontend/angara/default/js/jquery.colorbox.js"></script>
+<script>
+	jQuery(document).ready(function($){		
+		jQuery(".iframe").colorbox({iframe:true, width:"725px", height:"500px"});
+		//Example of preserving a JavaScript event for inline calls.
+		jQuery("#click").click(function(){ 
+			jQuery('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+			return false;
+		});
+	});
+</script>
+

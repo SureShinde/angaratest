@@ -1,0 +1,271 @@
+.wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+.staticleftnav {
+	background-color: #fff;
+	width: 212px;
+	border: solid 1px #D4D4D4;
+	float: left;
+	min-height: 1327px;
+	height: auto !important;
+	height: 1327px;
+}
+.edulanding {
+	min-height: 1855px;
+	height: auto !important;
+	height: 1855px;
+}
+.staticrightpart {
+	background-color: #fff;
+	width: 714px;
+	border: solid 1px #D4D4D4;
+	float: right;
+	min-height: 700px;
+	height: auto !important;
+	height: 700px;
+	padding: 10px;
+}
+.pageheading {
+	font-size: 22px;
+	color: #000;
+}
+.subheading {
+	background-color: #eee3d1;
+	height: 21px;
+	padding: 5px 0 0 10px;
+	font-size: 12px;
+	color: #000;
+	margin-top: 12px;
+}
+.leftnavcat {
+	padding: 5px;
+}
+.leftnavheading {
+	font-size: 15px;
+	font-weight: bold;
+	color: #000;
+	line-height: 18px;
+	padding: 4px 0 4px 4px;
+	background-color: #F3F3F3;
+	margin-bottom: 5px;
+}
+.leftnavlist {
+	font-size: 12px;
+	color: #000;
+	padding-left: 4px;
+	padding-bottom: 18px;
+}
+.leftnavlist ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.leftnavlist li {
+	clear: both;
+	padding-left: 10px;
+}
+.leftnavlist li a {
+	font-size: 12px;
+	color: #000;
+	text-decoration: none;
+	line-height: 25px;
+}
+.leftnavlist li li {
+	clear: both;
+	padding-left: 10px;
+}
+.leftnavlist li li a {
+	font-size: 12px;
+	color: #000;
+	text-decoration: none;
+	line-height: 17px;
+}
+.pointlist ul {
+	list-style: circle;
+}
+.pointlist li {
+	padding-bottom: 5px;
+	margin-left: 15px;
+	line-height: 18px;
+}
+.pointlist ul ul {
+	margin-left: 15px;
+}
+.sectionhead {
+	height: 20px;
+	background-color: #fbf1e0;
+	margin: 0 0 20px 0;
+	font-size: 12px;
+	color: #000;
+	padding-left: 10px;
+	padding-top: 6px;
+}
+p {
+	margin: 0px;
+	padding: 0px;
+}
+.headingmiddle {
+	font-size: 19px;
+	color: #000;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+pre {
+	margin: 0;
+	padding: 0;
+}
+.staticlspromo {
+	background-color: #f7f1e5;
+	border: solid 1px #dfd1bb;
+	float: right;
+	min-height: 700px;
+	height: auto !important;
+	height: 700px;
+}
+.imagesection {
+	margin-top: 5px;
+	width: 714px;
+}
+.imagesection ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.imagesection ul li {
+	padding: 8px;
+	width: 222px;
+	height: 144px;
+	float: left;
+}
+.imagesection ul li a {
+	width: 220px;
+	height: 142px;
+	display: block;
+	background-color: #F9F9F9;
+	border: solid 1px #D4D4D4;
+	position: relative;
+	cursor: pointer;
+	color: #000;
+	text-decoration: none;
+}
+.edusecheading {
+	width: 220px;
+	height: 24px;
+	background-color: #EEEEEE;
+	padding-top: 6px;
+	border-bottom: solid 1px #D4D4D4;
+	color: #000;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+.edusecheading a {
+	color: #000;
+	text-decoration: none;
+}
+.eduimg {
+	width: 208px;
+	height: 98px;
+	position: absolute;
+	top: 30px;
+	left: 6px;
+	padding-top: 8px;
+}
+.landing-categories-section-box {
+	margin: 0;
+	border-bottom: solid 1px #D4D4D4;
+	width: 698px;
+	margin: 0 auto;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+}
+.landing-categories-section-details {
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	padding-bottom: 15px;
+}
+.landing-categories-section-details a {
+	text-decoration: none;
+	color: #000;
+}
+.landing-categories-section-details a:hover {
+	text-decoration: underline;
+	color: #000;
+}
+.landing-categories-section-heading {
+	color: #000;
+	font-size: 18px;
+	font-weight: normal;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+.landing-categories-section-heading a {
+	color: #000;
+	text-decoration: none;
+}
+.gemstone_bodytxt-link {
+	color: #000;
+	float: left;
+	font-family: Arial;
+	font-size: 12px;
+	height: auto;
+	padding: 5px 0 0;
+	width: 230px;
+	background: url(../images/arrow_.jpg) 0px 8px no-repeat;
+}
+.gemstone_bodytxt-link a {
+	color: #000;
+	text-decoration: none;
+	padding-left: 13px;
+}
+.gemstone_bodytxt-link a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+.gemstone_bodytxt-link img, landing-categories-section-heading img, img {
+	vertical-align: middle;
+}
+.jewelry-education {
+	width: 698px;
+	height: 144px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+.article-category {
+	padding-top: 30px;
+	width: 750px;
+	height: 200px;
+	margin: 0 auto;
+}
+.article-product {
+	width: 150px;
+	height: 150px;
+}
+.article-product img {
+	border: solid 1px #D4D4D4;
+}
+.article-product-space {
+	width: 50px;
+	height: 150px;
+	float: left;
+	background: url(../images/education/article-spacer.jpg) no-repeat center;
+}
+.article-box {
+	float: left;
+	height: 180px;
+}
+.article-product-name {
+	font-size: 11px;
+	color: #000;
+	width: 150px;
+	text-align: center;
+	line-height: 16px;
+	padding-top: 7px;
+}

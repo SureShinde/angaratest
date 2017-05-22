@@ -1,0 +1,73 @@
+<?php
+//$_coreHelper = $this->helper('core');
+//$totalPro = $this->getItems()->getSize();
+if($this->getItems()->getSize()): ?>
+	<div id="similar-items" class="full-width pull-left">
+		<div class="block-sub-heading high-padding-bottom">Similar Items</div>
+        <div id="similar-item-holder-ipad" class="item-holder full-width pull-left text-center">	
+		<?php 
+        $rw_count_prod = 0;
+        $imgObj = $this->helper('catalog/image');
+        $_helper = $this->helper('catalog/output');
+        $helperString = Mage::helper('core/string');
+        foreach($this->getItems() as $_item):  ?>                
+            <div class="related-item pro-extra-item pull-left">
+                <div class="pro-extra-item-box"> 
+                    <a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" title="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" style="display:inline-block; max-width:100%"><img src="<?php echo $imgObj->init($_item, 'thumbnail')->resize(210); ?>" alt="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" width="210" class="img-responsive" /></a>
+                    <div class="pro-extra-item-detail-box">
+                        <a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" class="fontsize-type3">
+                            <?php echo $helperString->truncate($_helper->productAttribute($_item, $this->htmlEscape($_item->getShortDescription()) , 'name'));?>
+                        </a>
+                        <style type="text/css">
+                        #similar-items .ratings .rating-box{
+                            margin :10px auto 0px; 
+                        }
+                        </style>
+                        <?php //echo $this->getReviewsSummaryHtml($_item, 'short', false)?>	
+                        <div class="regular-price">
+                            <?php echo $this->getPriceHtml($_item, true, '-related'); ?>
+                        </div>
+                    </div>
+                </div>							
+            </div>							
+			<?php
+			if($rw_count_prod == 5){ break; }
+        	$rw_count_prod++; 
+        endforeach; ?>           
+        </div>
+        <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+        <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#similar-item-holder-ipad').slick({
+                arrows			: 	true,
+                slidesToShow	: 	6,
+                slidesToScroll	: 	1,
+				responsive: [
+					{
+					  breakpoint: 1281,
+					  settings: {
+						slidesToShow: 5,
+						slidesToScroll: 1,
+					  }
+					},
+					{
+					  breakpoint: 1025,
+					  settings: {
+						slidesToShow: 4,
+						slidesToScroll: 1,
+					  }
+					},
+					{
+					  breakpoint:769,
+					  settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1
+					  }
+					}
+				]
+            });
+        });
+        </script>	
+	</div> 
+<?php 
+endif; ?>

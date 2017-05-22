@@ -1,0 +1,130 @@
+<?php
+$_order = $this->getOrder();
+$okinfo = $this->getOkToShipInfo($_order->getId());
+$ok_ok = "0";
+$ok_comment = "";
+$shipping_date_info = $this->getShipDateInfo($_order->getId());
+$shipping_date = "";
+if($shipping_date_info == 'NA'){
+	$shipping_date = '';
+}
+else{
+	$shipping_date = date('n/j/Y',strtotime($shipping_date_info['shippingdate']));
+}
+
+if($okinfo!='NA'){
+	$ok_comment = $okinfo['comment'];
+	$ok_ok = $okinfo['oktoship'];	
+}
+
+$roleId = implode('', Mage::getSingleton('admin/session')->getUser()->getRoles());
+$roleName = Mage::getModel('admin/roles')->load($roleId)->getRoleName();
+if($roleName == 'Administrators'){?>
+	<form method="post" action="/admin/sales_order_oktoship/ad/key/a/">
+		<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+		<input type="hidden" name="orderid" value="<?php echo $_order->getId();?>"  />
+		<div style="text-align:left;padding:10px">
+			<div> <b>Ok To Ship:</b>
+				<input type="radio" name="oktoshipradio" value='1' <?php if($ok_ok==1){?>checked="checked"<?php }?> />
+				Yes
+				<input type="radio" name="oktoshipradio" value='0' <?php if($ok_ok==0){?>checked="checked"<?php }?> />
+				No
+				<input type="radio" name="oktoshipradio" value='2' <?php if($ok_ok==2){?>checked="checked"<?php }?> />
+				Cancel </div>
+			<div style="margin-top:10px">
+				<textarea name="oktoshiptext" style="width:300px"><?php echo $ok_comment;?></textarea>
+			</div>
+			<div style="margin-top:10px">
+				<button class="scalable save" type="submit">
+				<span>
+					Save
+				</span>
+				</button>
+			</div>
+		</div>
+	</form>
+	
+	<form method="post" action="/admin/sales_order_oktoship/updateShippingDate/key/a/">
+		<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+		<input type="hidden" name="orderid" value="<?php echo $_order->getId();?>"  />
+		<div style="text-align:left;padding:10px">
+			<div style="margin-top:10px">
+				<div class="range-line date">
+					<span class="label">
+						Estimated Shipping Date:
+					</span>
+					<input id="estimated_shippingdate" type="text" name="shippingdate" value="<?php echo $shipping_date;?>" class="input-text no-changes"/>
+					<img id="estimated_shippingdate_trig" src="<?php echo $this->getSkinUrl('images/grid-cal.gif');?>" alt="" class="v-middle" title="Date selector"/>
+					<script type="text/javascript">
+					Calendar.setup({
+						inputField : "estimated_shippingdate",
+						ifFormat : "%m/%e/%Y",
+						button : "estimated_shippingdate_trig",
+						showsTime: false,
+						align : "Bl",
+						singleClick : true
+					});
+					</script>
+				</div>
+			</div>
+			<div style="margin-top:10px">
+				<button class="scalable save" type="submit">
+				<span>
+					Save
+				</span>
+				</button>
+			</div>
+		</div>
+	</form>
+<?php
+}
+else {?>
+	<div style="text-align:left;padding:10px">
+		<div>
+			<?php if($ok_ok==1){?>
+            OK TO SHIP
+            <?php }
+            else if($ok_ok==2){?>
+            CANCELLED
+            <?php
+            }else{?>
+            UNDER REVIEW
+            <?php }?>
+            <br />
+            Comment: <?php echo $ok_comment;?> 
+            <br />
+            Shipping Date: <?php echo $shipping_date;?> 
+		</div>
+	</div>
+<?php
+} ?>
+
+<!-- Fraud Check Module Added by Saurabh Sharma-->
+<?php 
+$sendConfirmation = $this->getUrl(
+	'additionalinformation/adminhtml_additionalinformation/sendconfirmation', array('order' => $this->getRequest()->getParam('order_id'))
+);
+//	Code added by Vaseem to show Fraud Check to admin only
+$user 		= 	Mage::getSingleton('admin/session');
+$userId 	= 	$user->getUser()->getUserId();
+$isAdmin	=	Mage::helper('function')->checkAdmin($userId);
+if( $isAdmin ){
+?>
+<form id="sendconfirmation-form" method="post" action="<?php echo $sendConfirmation; ?>">
+	<?php echo $this->getBlockHtml('formkey')?>
+        <fieldset>
+        <table cellspacing="0" class="form-list">
+        <tbody>
+            <tr>                      
+                <td>
+                 <input type="checkbox" class="input-text validate-email required-entry" value="fraudcheckconfirmation" name="fraudcheckconfirmation" id="fraudcheckconfirmation">
+                    <button style="margin:10px 0;" class="scalable" type="submit" title="Send Confirmation Mail" id="sendconfirmation" onclick="if(confirm('Email will not be sent if checkbox is not checked.')){}else{return false;}">
+                        <span>Send Confirmation For Fraud Check</span>
+                    </button>
+                </td>
+             </tr>
+        </tbody>
+        </table>
+        </fieldset> 
+</form>
+<?php } ?>

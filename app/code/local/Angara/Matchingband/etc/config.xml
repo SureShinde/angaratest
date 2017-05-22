@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Matchingband>
+            <version>0.1.0</version>
+        </Angara_Matchingband>
+    </modules>
+    <global>
+        <blocks>
+            <matchingband>
+                <class>Angara_Matchingband_Block</class>
+            </matchingband>
+        </blocks>
+        <helpers>
+			<matchingband>
+				<class>Angara_Matchingband_Helper</class>
+			</matchingband>
+		</helpers>
+    </global>
+
+    <frontend>
+        <layout>
+			<updates>
+				<matchingband>
+					<file>matchingband.xml</file>
+				</matchingband>
+			</updates>
+		</layout>
+        <routers>
+          <matchingband>
+              <use>standard</use>
+              <args>
+                  <module>Angara_Matchingband</module>
+                  <frontName>matchingband</frontName>
+              </args>
+        </matchingband>
+    </routers>
+    </frontend>
+</config>

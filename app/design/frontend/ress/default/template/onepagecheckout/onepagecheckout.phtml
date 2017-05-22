@@ -1,0 +1,848 @@
+<script>
+	function setMobileFocus(id){
+		var pos = jQuery('#'+id).offset().top;
+		if(id == 'opc-step2'){
+			var h = jQuery('#'+id).prev('.step-heading.payment').outerHeight();
+			pos = pos - h;
+		}
+		if(jQuery(window).width() <= 767){
+			jQuery('html, body').animate({
+				scrollTop: pos}, 500);
+		}
+	};
+	function manageTitle(id){
+		var shipping = jQuery('#onepage-header-step-shipping');
+		var payment = jQuery('#onepage-header-step-payment');
+		var rns = jQuery('#onepage-header-step-rns');
+		if(id == 'opc-step1'){
+			//add active color in shipping
+			shipping.find('.img-circle').removeClass('showcase-bg-darker').addClass('apricot-bg');
+			shipping.find('.pro-bar-title').addClass('apricot-text');
+			//remove active color from other option
+			payment.add(rns).find('.img-circle').removeClass('apricot-bg').addClass('showcase-bg-darker');
+			payment.add(rns).find('.pro-bar-title').removeClass('apricot-text');
+			payment.add(shipping).removeClass('hover-effect');
+			payment.add(shipping).removeAttr('data-id style');
+		}else{
+			payment.find('.img-circle').removeClass('showcase-bg-darker').addClass('apricot-bg');
+			payment.find('.pro-bar-title').addClass('apricot-text');
+			payment.removeClass('hover-effect');
+			payment.removeAttr('data-id style');
+			//remove active color from other option
+			shipping.add(rns).find('.img-circle').removeClass('apricot-bg').addClass('showcase-bg-darker');
+			shipping.add(rns).find('.pro-bar-title').removeClass('apricot-text');
+		}
+		setOpcHeight();
+	}
+	function editButton(id, clickedItem){
+		jQuery('.opc-steps, .edit-btn').addClass('hidden');
+		jQuery('#'+id).removeClass('hidden');
+		if(id != 'opc-step1'){
+			jQuery('.edit-btn').removeClass('hidden');
+			jQuery('.edit-btn[data-id='+id+']').addClass('hidden');
+		}
+		if(clickedItem){
+			clickedItem.addClass('hidden');
+		}
+		manageTitle(id);
+	}
+	function editButton1(id){
+		jQuery('.edit-btn').parent('.step-heading').removeClass('hidden');
+		jQuery('.review-nd-submit, #checkout-preview-load').addClass('hidden');
+		if(id != 'opc-step1'){
+			jQuery('.edit-btn[data-id='+id+']').addClass('hidden');
+		}else{
+			jQuery('.edit-btn').addClass('hidden');
+		}
+		jQuery('#opc-complete-button').addClass('hidden');
+		jQuery('.review-nd-submit').parent('.step-container').removeAttr('style');
+		jQuery('#checkout-preview-table-wrapper').html('');
+		jQuery('#'+id+', .review-nd-submit').removeClass('hidden');
+		manageTitle(id);
+	}
+	
+	//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+</script>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ 
+	$textRight = 'text-right';
+} ?>
+<h1 class='h1_opc' style="margin-bottom:0px;">
+	<div class="container relative-placeholder <?php echo $textRight; ?>">
+		<a href="<?php echo $this->getUrl('');?>" title="Angara Jewelry" class="logo absolute-placeholder pull-left">
+			<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+		</a>
+		<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			<i class="fa fa-lock"></i> 100% Secure Checkout
+		<?php }else{
+			echo Mage::getStoreConfig('onepagecheckout/general/title') ;
+		} ?>
+	</div>
+</h1>
+<div class="page-title max-margin-bottom">
+	<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+	<div class="hidden-xs text-left max-margin-bottom" style="background:#f5f5f5; padding:5px;">
+		<div class="container">
+			<?php /* <div class="onepagecheckout_loginarea no-margin pull-left padding-type-10">
+				<a href="javascript:void(0)" class="onepagecheckout_loginlink apricot-text " onclick='open_login();'>Already registered? Click here to login</a>
+			</div>    */ ?>             
+			<div class="hidden-xs progress-bar-titles">
+				<div id="onepage-header-shopping-step" class="pull-left padding-type-10 high-margin-right">
+					<span class="img-circle icon-16 showcase-bg-darker text-on-dark subform-index-indicator pull-left low-margin-right">1</span>
+					<span id="onepage-header-step-shopping" class="pro-bar-title visible-md visible-sm pull-left">Shopping Cart</span>
+				</div>
+				<div id="onepage-header-step-shipping" class="pull-left padding-type-10 max-margin-left high-margin-right max-padding-left">
+					<span class="img-circle icon-16 apricot-bg text-on-dark subform-index-indicator pull-left low-margin-right">2</span>
+					<span class="pro-bar-title visible-md visible-sm pull-left apricot-text">Shipping</span>
+				</div>
+				<div id="onepage-header-step-payment" class="pull-left padding-type-10 max-margin-left high-margin-right max-padding-left">
+					<span class="img-circle icon-16 showcase-bg-darker text-on-dark subform-index-indicator pull-left low-margin-right">3</span>
+					<span class="pro-bar-title visible-md visible-sm pull-left">Payment</span>
+				</div>
+				<div id="onepage-header-step-rns" class="pull-left padding-type-10 max-margin-left max-padding-left">
+					<span class="img-circle icon-16 showcase-bg-darker text-on-dark subform-index-indicator pull-left low-margin-right">4</span>
+					<span class="pro-bar-title visible-md visible-sm pull-left">Review & Submit</span>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<script>
+		jQuery(function(){
+			if(jQuery('#onepage-header-step-shipping .img-circle').hasClass('apricot-bg')){
+				jQuery('#onepage-header-shopping-step').html('<a style="text-decoration:none" href="<?php echo $this->getUrl('checkout/cart/'); ?>"><span class="img-circle icon-16 showcase-bg-darker text-on-dark subform-index-indicator pull-left low-margin-right">1</span> Shopping Cart</a>');
+			}
+			var shipping = jQuery('#onepage-header-step-shipping');
+			var payment = jQuery('#onepage-header-step-payment');
+			shipping.add(payment).on('click',function(){
+				var id = jQuery(this).attr('data-id');
+				if($(this).hasAttribute('data-id')){
+					editButton1(id);
+					editButton(id);
+				}
+			});
+		});
+	</script>
+	<?php endif; ?>
+</div>
+
+
+<div class="container showcase-bg-white">
+	<div class="fontsize-type2">
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<?php
+		$seq_http	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');
+		$browser  = $_SERVER ['HTTP_USER_AGENT'];
+		$is_persistent = Mage::helper('onepagecheckout')->isPersistentMember();
+		?>
+		<script type="text/javascript">
+			var http_type	= '<?php if($seq_http){echo 'https';}else{echo 'http';}?>';
+		</script>
+		<?php //$cssVersionNumber = Mage::helper('flashsale')->getCssVersion(); ?>
+		<?php /*?><script type="text/javascript" src="<?php echo $this->getSkinUrl('js/onepagecheckout.js') ?>?v=<?php echo  $cssVersionNumber; ?>"></script><?php */?> 
+		<script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+		<!--<form action="javascript:void(0)" method="POST" id="onepagecheckout_orderform" autocomplete="on">-->
+		
+			<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+					<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+					<div id="onepagecheckout_login-container" class="hidden">
+						<div class="row no-guters">
+							<div class="col-cs-12"><i id="onepagecheckout_login-close" class="fa fa-times padding-type-10 low-padding-bottom clickable fontsize-type7 pull-right low-margin-right"></i></div>
+						</div>
+						<div class="row max-padding-bottom">
+							<div class="col-sm-4 max-margin-bottom">
+								<div class="max-margin-left mmr-login">
+									<?php
+									echo $this->getChildHtml('customer.login');
+									echo $this->getChildHtml('customer.forgot');
+									?>
+								</div>
+							</div>
+							<div class="col-sm-1 text-center max-margin-bottom relative-placeholder">
+								<div class="visible-xs" >
+									<div class="high-padding-top"></div>
+									<div style="position: absolute; border-top: 1px solid rgb(219, 219, 219); width: 1px; left: 0px; right: 0px; top:13px; bottom:0; margin: auto; width:90%; ">
+										<div style="border:1px solid #dbdbdb; display:inline-block; padding:10px; background-color:#fff;-moz-border-radius:30px; -webkit-border-radius: 30px; border-radius: 30px; font-weight:bold; position:absolute; width:39px; height:39px; margin:auto; left:0; right:0; top:-21px; ">OR</div>
+									</div>
+									<div class="high-padding-bottom"></div>
+								</div>
+								<div class="hidden-xs" >
+									<div style="position: absolute; border-right: 1px solid rgb(219, 219, 219); width: 1px; left: 0px; right: 0px; margin: auto; height: 230px;">
+										<div style="border:1px solid #dbdbdb; display:inline-block; padding:10px; background-color:#fff;-moz-border-radius:30px; -webkit-border-radius: 30px; border-radius: 30px; font-weight:bold; position:absolute; width:39px; height:39px; margin:auto; top:0; bottom:0; right:-21px; ">OR</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-3 max-margin-bottom">
+								<div class="mmr-fb">
+									<div class="block-sub-heading high-margin-bottom ">
+										<span style="font-size:18px; font-weight:500">Facebook Users</span>
+									</div>                   
+									<p><?php echo $this->__('Use your Facebook account to login within our store. You\'re just one click away.') ?></p>
+									<div class="max-padding-top">
+										<button rel="facebook-connect" type="button" title="<?php echo $this->__('Connect with Facebook') ?>" class="button login_with_facebook_btn"></button>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="key-font-size mpr-keys">
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Faster Checkout</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Personalized Shopping Experience</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Manage & Track Your Orders</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Manage Wish List</div>
+								</div>				
+							</div>	
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<?php endif; ?>
+					<?php } ?>
+		
+		
+			<div class="relative-placeholder full-width pull-left op-checkout-left-box">
+				<div class="absolute-placeholder op-checkout-right-box">
+					<div class="op-checkout-right-box-holder">
+						<?php /*?> S:VA	Shopping Cart Tab<?php */?>
+                        <div class="cart-item-block-parent">
+							<div class="step-head">
+                                <div class="pull-left">Shopping Cart</div>
+                                <a class="pull-right" href="<?php echo $this->getUrl('checkout/cart/'); ?>">Edit</a>
+                            </div>
+							<div class="clearfix"></div>
+							<?php	//	S:VA	Order Summary Tab
+							$quote = Mage::helper('checkout')->getQuote();
+							foreach ($quote->getAllVisibleItems() as $_item) {
+								echo $this->getItemHtml($_item);
+							}
+							?> 
+                            <?php /*?><div class="cart-summary-loader-new col-sm-12 text-center max-margin-bottom">
+							</div>
+                            <div id="cart-summary" class="relative-placeholder"></div><?php */?>
+						</div>
+                        <?php /*?> S:VA	Shopping Cart Tab<?php */?>
+                        <div id="cart-review" data-subform-index="2" style="position:relative"><?php echo $this->getChildHtml('review') ?></div>
+					</div>
+				</div>
+                <div class="col-sm-12">
+					<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+					<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+					<div id="onepagecheckout_login-container" class="hidden">
+						<div class="row no-guters">
+							<div class="col-cs-12"><i id="onepagecheckout_login-close" class="fa fa-times padding-type-10 low-padding-bottom clickable fontsize-type7 pull-right low-margin-right"></i></div>
+						</div>
+						<div class="row max-padding-bottom">
+							<div class="col-sm-4 max-margin-bottom">
+								<div class="max-margin-left mmr-login">
+									<?php
+									echo $this->getChildHtml('customer.login');
+									echo $this->getChildHtml('customer.forgot');
+									?>
+								</div>
+							</div>
+							<div class="col-sm-1 text-center max-margin-bottom relative-placeholder">
+								<div class="visible-xs" >
+									<div class="high-padding-top"></div>
+									<div style="position: absolute; border-top: 1px solid rgb(219, 219, 219); width: 1px; left: 0px; right: 0px; top:13px; bottom:0; margin: auto; width:90%; ">
+										<div style="border:1px solid #dbdbdb; display:inline-block; padding:10px; background-color:#fff;-moz-border-radius:30px; -webkit-border-radius: 30px; border-radius: 30px; font-weight:bold; position:absolute; width:39px; height:39px; margin:auto; left:0; right:0; top:-21px; ">OR</div>
+									</div>
+									<div class="high-padding-bottom"></div>
+								</div>
+								<div class="hidden-xs" >
+									<div style="position: absolute; border-right: 1px solid rgb(219, 219, 219); width: 1px; left: 0px; right: 0px; margin: auto; height: 230px;">
+										<div style="border:1px solid #dbdbdb; display:inline-block; padding:10px; background-color:#fff;-moz-border-radius:30px; -webkit-border-radius: 30px; border-radius: 30px; font-weight:bold; position:absolute; width:39px; height:39px; margin:auto; top:0; bottom:0; right:-21px; ">OR</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-3 max-margin-bottom">
+								<div class="mmr-fb">
+									<div class="block-sub-heading high-margin-bottom ">
+										<span style="font-size:18px; font-weight:500">Facebook Users</span>
+									</div>                   
+									<p><?php echo $this->__('Use your Facebook account to login within our store. You\'re just one click away.') ?></p>
+									<div class="max-padding-top">
+										<button rel="facebook-connect" type="button" title="<?php echo $this->__('Connect with Facebook') ?>" class="button login_with_facebook_btn"></button>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="key-font-size mpr-keys">
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Faster Checkout</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Personalized Shopping Experience</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Manage & Track Your Orders</div>
+									<div class="high-padding-bottom"><i class="fa fa-check fa-fw text-green"></i> Manage Wish List</div>
+								</div>				
+							</div>	
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<?php endif; ?>
+					<?php } ?>
+					
+					<div class="col-sm-12 no-padding pull-left full-width step-container">
+						<div class="step-heading shipping">
+							<div class="pull-left">Shipping</div>
+							<a class="pull-right edit-btn hidden" href="javascript:void(0)" data-id="opc-step1">Edit</a>
+						</div>
+						<div id="opc-step1" class="opc-steps pull-left col-sm-12">
+							<div class="padding-type-10 padding-type-8" data-subform-index="0">
+								<form action="javascript:void(0)" method="POST" id="onepagecheckout_orderform" autocomplete="on">
+									<?php echo $this->getChildHtml('billing.address') ?> 
+									<?php //echo $this->getChildHtml('shipping.address') ?>
+									<div id="onepage-checkout-shipping-method-additional-load" class="col-sm-12 col-md-6" style="padding-left:0px!important;">
+										<?php echo $this->getChildHtml('additional') ?> 
+									</div>
+									<div class="clearfix"></div>
+									<div class="full-width pull-left relative-placeholder">
+										<button onclick="checkout.newupdate()" type="submit" class="button pull-right absolute-placeholder button50px shipping-continue" title="<?php echo $this->__('Continue') ?>"><span><?php echo $this->__('Continue') ?></span></button>
+									</div>
+                                    <input type='submit' id='opc_submit_form' style='visibility:hidden;' />
+								</form>
+								<script type="text/javascript">
+									var opcForm1 = new VarienForm('onepagecheckout_orderform', true);  
+									jQuery('#onepagecheckout_orderform').on('submit', function(e) {
+										if(opcForm1.validator.validate()) {
+											var opc1 = jQuery('#opc-step1');
+											var opc2 = jQuery('#opc-step2');
+											opc1.addClass('hidden');
+											opc1.prev('.step-heading').find('a').removeClass('hidden');
+											opc2.removeClass('hidden');
+											var shipping = jQuery('#onepage-header-step-shipping');
+											var payment = jQuery('#onepage-header-step-payment');
+											shipping.find('.img-circle').removeClass('apricot-bg').addClass('showcase-bg-darker');
+											shipping.find('.pro-bar-title').removeClass('apricot-text');
+											shipping.attr('data-id','opc-step1').addClass('hover-effect').css('cursor','pointer');
+											payment.find('.img-circle').removeClass('showcase-bg-darker').addClass('apricot-bg');
+											payment.find('.pro-bar-title').addClass('apricot-text');
+											setOpcHeight();
+											setMobileFocus('opc-step2');
+										}
+										//	customer password
+										if($('shipping:customer_password') != undefined) {
+											if($('shipping:customer_password').value){
+												$('shipping:register_account').checked = true;
+											}else{
+												$('shipping:register_account').checked = false;
+											}
+										}
+									});	
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 no-padding pull-left full-width step-container">
+						<div class="step-heading high-margin-top payment">
+							<div class="pull-left">Payment</div>
+							<a class="pull-right hidden edit-btn" href="javascript:void(0)" data-id="opc-step2">Edit</a>
+						</div>
+						<div class="hidden opc-steps pull-left no-padding col-sm-12" id="opc-step2">
+								<div class="has-subform" style="float:left; width:100%; padding:0px 6px" data-subform-index="1">
+									<form action="javascript:void(0)" method="POST" id="opc_frm2" autocomplete="on">
+										<div class="col-sm-12 max-margin-top">
+											<?php echo $this->getChildHtml('shipping.address') ?>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col-sm-12 col-md-6">
+											<?php echo $this->getChildHtml('shipping.method') ?> 
+											<?php echo $this->getChildHtml('payment.method') ?>
+											<div id="checkout-coupon-discount-load"> <?php echo $this->getChildHtml('coupon') ?> </div>
+											<?php if (Mage::getStoreConfig('onepagecheckout/general/comment')) : ?>
+												<div class="op_block_title"> <?php echo $this->helper('sales')->__('Comment') ?> </div>
+												<div class="form_fields">
+													<div class="full">
+														<div class="data_area" id='comment-block'>
+															<textarea name="order-comment" id="order-comment"><?php echo trim(Mage::getSingleton('customer/session')->getOrderCustomerComment()) ?></textarea>
+														</div>
+													</div>
+												</div>
+											<?php endif; ?>
+											<?php if (Mage::helper('onepagecheckout')->isSubscribeNewAllowed()) : ?>
+												<p class="newsletter">
+													<input type="checkbox" id="newsletter-signup" name="newsletter" value="1" title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="checkbox" />
+													<label for="newsletter-signup"> <?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?> </label>
+												</p>
+											<?php endif; ?>		
+											<div id="checkout-review-submit">    
+												<?php echo $this->getChildHtml('agreements') ?>
+											</div>	
+										</div>
+										<div class="col-sm-12 col-md-6" data-style="pad85">
+											<div class="col-sm-12 NH-4">
+												<span><i class="fa fa-check-circle"></i> Free Return Shipping</span>
+												<span><i class="fa fa-check-circle"></i> Don't love it? Send it back within <?php echo Mage::helper('function')->freeReturnDays();?> days for a full refund. <a href="javascript:void(0)" id="returnPopup">See Details</a></span>
+												<script>
+													jQuery(document).on('click', function(e){
+														var wHeight = jQuery(window).height();
+														if (jQuery(e.target).closest('#returnPopup').length) {		//	find if we have a class
+															jQuery('.returnPopup').removeClass('hide');
+															jQuery('.rp-container').css( 'margin-top',(wHeight - 250)/2 );
+														}
+														if (jQuery(e.target).closest('.returnPopup').length || jQuery(e.target).closest('.close').length) {		//	find if we have a class
+															if (!jQuery(e.target).closest('.rp-text').length){
+																jQuery('.returnPopup').addClass('hide');
+																jQuery('.rp-container').removeAttr('style');
+															}
+														}
+													});	
+												</script>
+											</div>
+											<div class="clearfix"></div>
+											
+											<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+											<?php //S:Need Help Section - RV ?>
+											<div class="max-margin-top di-need-help-box hidden">
+												<div class="padding-type-5 showcase-bg-white">
+												<h1 class="min-margin-top low-margin-bottom" style="font-size:14px; color:#363636; font-weight:700; padding-left:5px">Need Help?</h1>
+												<div class="row no-gutters text-center">
+													<div class="col-xs-4 col-sm-6 col-md-4">
+														<div class="padding-type-2">
+															<div class="padding-type-5 showcase-bg-dark">
+																<i class="fa fa-2x fa-phone text-on-light"></i>
+																<span class="center-block px10">1-888-926-4272</span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-4 hidden-sm col-md-4">
+														<div class="padding-type-2">
+															<a href="mailto:customer.service@angara.com"  class="no-underline" >
+																<div class="padding-type-5 showcase-bg-dark">
+																	<i class="fa fa-2x fa-envelope text-on-light"></i>
+																	<span class="center-block px10">Email</span>
+																</div>
+															</a>
+														</div>
+													</div>
+													<div class="col-xs-4 col-sm-6 col-md-4">
+														<div class="padding-type-2">
+															<a class="top-nav-live-chat no-underline live-chat-link" href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;">
+																<div class="padding-type-5 showcase-bg-dark">
+																	<i class="fa fa-2x fa-comments text-on-light"></i>
+																	<span class="center-block px10">Live Chat</span>
+																</div>
+															</a>
+														</div>
+													</div>
+												</div>
+												</div>
+											</div>
+											<?php } ?> 
+											<div class="need-help full-width mobile-need-help-box hidden">
+												<h1 class="nh-title" style="font-size:14px;">Need Help?</h1>
+												<div class="nh-holder">
+													<div class="nh-block center-align">
+														<i class="fa fa-2x fa-phone text-on-light"></i>
+														<span class="center-block px10">1-888-926-4272</span>
+													</div>
+													<div class="nh-block center-align">
+														<a href="mailto:customer.service@angara.com"  class="no-underline" >
+															<i class="fa fa-2x fa-envelope text-on-light"></i>
+															<span class="center-block px10">EMAIL</span>
+														</a>
+													</div>
+													<div class="nh-block center-align">
+														<a class="top-nav-live-chat no-underline live-chat-link" href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;">
+															<i class="fa fa-2x fa-comments text-on-light"></i>
+															<span class="center-block px10">LIVE CHAT</span>
+														</a>
+													</div>
+												</div>
+											</div>
+											<script>
+												jQuery(function(){
+													if(jQuery(window).width() <= 767){
+														jQuery('.mobile-need-help-box').removeClass('hidden');
+													}else{
+														jQuery('.di-need-help-box').removeClass('hidden');
+													}
+												});
+											</script>
+											<?php //E:Need Help Section - RV ?>
+											
+											<div class="clearfix"></div>
+											
+											<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+											
+											<div class="center-block high-margin-bottom max-margin-top col-md-6 col-sm-12">
+												<table width="120" border="0" style="margin:0 auto" cellpadding="0" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+													<tr>
+														<td width="120" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=www.angara.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+														<a href="http://www.symantec.com/verisign/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0 auto; padding:0px; display:inline-block;">ABOUT SSL CERTIFICATES</a></td>
+													</tr>
+												</table>
+											</div>
+											<div class="max-margin-top text-center col-md-6 col-sm-12" style="padding-top:7px;">
+												<div class="center-block high-margin-bottom">
+													<?php /* https://www.bbb.org/losangelessiliconvalley/business-reviews/jewelers-retail/angaracom-in-los-angeles-ca-100082531#bbbseal */?>
+													<a id="bbblink" class="rbhzbus" href="javascript:void(0)" title="Angara.com, Jewelers Retail, Los Angeles, CA" style="display:block; position:relative; overflow:hidden; width:100px; height:48px; margin:0px; padding:0px; cursor: default;">
+														<img style="padding: 0px; border: none;" id="bbblinkimg" src="/skin/frontend/ress/default/images/seal-for-100082531.png" width="200" height="48" alt="Angara.com, Jewelers Retail, Los Angeles, CA" />
+													</a>
+												</div>
+											</div>
+											<?php } ?>
+										</div>
+										<div class="clearfix"></div>
+										<div class="full-width pull-left relative-placeholder">
+											<button id="payment-submit-button" onclick="if(shippingMethod.validate()){checkout2.real_update('payment-submit-button');}" type="submit" class="button pull-right absolute-placeholder button50px" title="<?php echo $this->__('Continue') ?>"><span><?php echo $this->__('Continue') ?></span></button>
+										</div>
+									</form>
+								
+									<script type="text/javascript">
+										var opcForm2 = new VarienForm('opc_frm2', true);
+										
+										var checkout2 = new OPC('opc_frm2', {
+										save    : '<?php echo $this->getUrl('onepagecheckout/index/saveOrder', array('_secure'=>$seq_http)) ?>',
+										update  : '<?php echo $this->getUrl('onepagecheckout/index/updateCheckout', array('_secure'=>$seq_http)) ?>',
+										success : '<?php echo $this->getUrl('onepagecheckout/index/success', array('_secure'=>$seq_http)) ?>',
+										failure : '<?php echo $this->getUrl('checkout/cart') ?>',
+										persistent : '<?php echo $is_persistent?$this->getUrl('persistent/index/saveMethod', array('_secure'=>$seq_http)):'';?>'
+										}, "<?php echo $this->__('Please agree to all the terms and conditions.') ?>");
+									</script>
+								</div>
+							<div class="payment-loader hide text-center absolute-placeholder">
+								<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 no-padding pull-left full-width step-container">
+						<div class="step-heading high-margin-top review-nd-submit">
+							<div class="pull-left">Review & Submit</div>
+						</div>
+						<div class="hidden opc-steps pull-left col-sm-12 full-width no-padding" id="checkout-preview-load">
+						
+						</div>
+						<script>
+							jQuery(document.body).on('click', '.edit-btn1', function(event) {
+								var id = jQuery(this).attr('data-id');
+								editButton1(id);
+							});
+						</script>
+					</div>
+					<div class="col-sm-12 no-padding pull-left full-width step-container">
+						<div class="hidden opc-complete-button" id="opc-complete-button">
+							<?php //S:complete order button - RV ?>
+							<div class="buttons-set" id="review-buttons-container" style="border:none; padding-top:0px; line-height:initial">
+								<button type="submit" title="<?php echo $this->__('Complete Order') ?>" class="btn btn-primary btn-block btn-place-order fontsize-type5" style="height:50px" onclick="checkout.save(); return false;"><?php echo $this->__('Complete Order') ?></button>
+								<span id="review-please-wait" style="display:none; float:right; text-align:center; width:100%; margin-bottom:10px; margin-top: 8px;">
+									<span style="width:100%; display:block;"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /> </span>
+									<span style="width:100%; display:block;"><?php echo $this->__('Submitting order information...') ?></span>
+								</span>
+							</div>
+							<?php //E:complete order button - RV ?>
+						</div>
+					</div>
+                </div>
+				
+                <?php /*?><?php $checkHttp	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');?>
+                <script>                 
+					url = '<?php echo Mage::getUrl("ajaxview/index/cartsummary/",array('_secure'=>$checkHttp))?>'  ;
+					var updaterDivId= 'cart-summary';				
+					if(document.getElementById(updaterDivId) !='undefined' && document.getElementById(updaterDivId) != null ) {	
+						var myAjax = new Ajax.Updater(
+											updaterDivId,
+											url, {
+												method: 'get',
+												asynchronous: false,
+												insertion: Insertion.Bottom,
+												onComplete: function() {	
+													jQuery('.cart-summary-loader-new').hide();
+												}
+											}	
+										);								
+					}
+					
+					urlReview = '<?php echo Mage::getUrl("ajaxview/index/cartreview/",array('_secure'=>$checkHttp))?>'  ;
+					var updaterDivId= 'cart-review';				
+					if(document.getElementById(updaterDivId) !='undefined' && document.getElementById(updaterDivId) != null ) {	
+						var myAjax = new Ajax.Updater(
+											updaterDivId,
+											urlReview, {
+												method: 'get',
+												asynchronous: false,
+												insertion: Insertion.Bottom,
+												onComplete: function() {		
+													//jQuery('.loading_'+idToshow).hide();	// hide loading image
+													//jQuery('html,body').animate({scrollTop: jQuery('#scroll_here_'+idToshow).offset().top},'fast');
+												}
+											}	
+										);								
+					}
+				</script><?php */?>
+				
+			</div>
+		<!--</form>-->
+		
+		<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+								<div class="shipping-faq text-center"> <a href="javascript:void(0)" onclick="jQuery('#shipping-faq-popup-box').show();" class="apricot-text">Checkout FAQ </a> </div>
+									<div id="shipping-faq-popup-box" style="display:none;">
+										<div class="top-msg">Free shipping and Free returns</div>
+										<div class="shipping-faq-popup-holder">
+											<div class="go2cart" onclick="jQuery('#shipping-faq-popup-box').hide();"><span class="go2cart-txt"><< BACK</span> <span class="go2cart-btn"></span></div>
+												<div class="conctus-box">
+													<h1 class="" style="font-size:24px;line-height:30px;">Checkout FAQ</h1>
+													<div class="btm24" style="font-size:20px;line-height:30px;font-weight:bold;"><p class=""><span>Contact us.</span></p></div>
+													<div class="chat-row btm24"><div class=""><span>Get help via </span>
+													<strong class=""><a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link apricot-text"><span>Live chat</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+													<div class="call-row btm24"><div class=""><span>Call us at </span><strong class=""><a href="/contact-us" id="" class="apricot-text" target="_blank"><span>1-888-926-4272</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+													<div class="email-row btm24"><div class=""><span>Write to </span><strong class=""><a href="mailto:customer.service@angara.com" id="" class="apricot-text"><span>customer.service@angara.com</span></a></strong></div><span class="text-dark-gray" >We'll get back to you within 24 hours!</span></div>
+												</div>
+												<section class="expand-box">
+													<div class="se1"><h2 class="px22">
+														<span class="pull-left lh50">Free Shipping and Free Returns</span>
+														<?php /* <span class="fa fa-plus pull-right lh50"></span> */ ?>
+													</h2></div>
+													<div class="clearfix"></div>
+													<div class="cont-open">
+														<span>Your order will be shipped via FedEx. </span>
+														<span>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</span>
+														<span>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill out the <a href="/awrma/guest_rma/index/" target="_blank">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</span>
+														<span>For international returns, return shipping and insurance are the responsibility of the customer.</span>
+													</div>
+												</section>
+												<?php /* 
+													<script>
+														jQuery('.se1').click(function(){
+															jQuery('.cont-open').slideToggle();
+															jQuery(this).find('.fa-plus, .fa-minus').toggleClass('fa-plus fa-minus');
+														});
+													</script>
+												*/ ?>
+										</div>
+									</div>
+							<?php } ?>
+		
+	</div>
+	<script>
+		jQuery('.edit-btn').on('click',function(){
+			var id = jQuery(this).attr('data-id');
+			var thisItem = jQuery(this);
+			editButton(id, thisItem);
+		});
+		jQuery(function(){
+			setOpcHeight();
+		});
+		jQuery(window).resize(function(){
+			setOpcHeight();
+		});
+	</script>
+	<!--[if lte IE 9]>
+		<script>
+			jQuery('#checkout-payment-method-load, #ship_form, #bill_form').find('.ielabel').removeClass('hidden');
+			jQuery('.cvv-what-is-this').css('padding-top','20px');
+			jQuery('#checkout-payment-method-load, #ship_form, #bill_form').find('input[type=text], input[type=password]').removeAttr('placeholder');
+		</script>
+	<![endif]-->
+	<script type="text/javascript">
+	//<![CDATA[
+	var checkout = new OPC('onepagecheckout_orderform', {
+	save    : '<?php echo $this->getUrl('onepagecheckout/index/saveOrder', array('_secure'=>$seq_http)) ?>',
+	update  : '<?php echo $this->getUrl('onepagecheckout/index/updateCheckout', array('_secure'=>$seq_http)) ?>',
+	success : '<?php echo $this->getUrl('onepagecheckout/index/success', array('_secure'=>$seq_http)) ?>',
+	failure : '<?php echo $this->getUrl('checkout/cart') ?>',
+	persistent : '<?php echo $is_persistent?$this->getUrl('persistent/index/saveMethod', array('_secure'=>$seq_http)):'';?>'
+	}, "<?php echo $this->__('Please agree to all the terms and conditions.') ?>");
+
+	<?php $isIPad	=	Mage::helper('function')->isIPad();
+	if(!$isIPad){
+	?>
+	//	S:VA	update checkout for every field
+	var  oldValue =	"";
+	jQuery(".required-entry").focus(function(){
+		oldValue = jQuery(this).val();	
+	});
+	jQuery(".required-entry").blur(function(){
+		var elementId	=	jQuery(this).attr('id');
+		var elementName = jQuery(this).attr('name');
+		
+		if(elementId !='verisign_expiration' && elementId !='verisign_expiration_yr' && elementId !='verisign_cc_cid' && elementId !='paypal_direct_expiration' && elementId !='paypal_direct_expiration_yr' && elementId !='paypal_direct_cc_cid'){
+			var newValue = jQuery(this).val();
+			if( (oldValue != newValue) ){
+				if(elementName.match(/billing/gi) == 'billing'){
+					checkout.update({
+						'shipping-method': 1,
+						'review': 1
+					});
+				}
+				if(elementName.match(/shipping/gi) == 'shipping'){
+					checkout2.real_update();
+				}				
+			}
+		}
+	});
+	//	E:VA
+	<?php } ?>
+	<?php if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):?>
+	function show_verifications_error(){
+
+	var w = $('address-verification-results').getWidth();
+	var hh = document.body.getHeight();
+
+	var view = document.viewport.getDimensions();
+
+	var ww = view.width;
+	var d	= (ww - w)/2;
+
+	<?php if (!preg_match('/MSIE 8/i', $browser) && !preg_match('/MSIE 7/i', $browser)):?>
+	var y = window.pageYOffset+70;
+	$('address-verification-results').setStyle({
+	left: d+'px',
+	top: y+'px'
+	});
+	<?php else:?>
+	$('address-verification-results').setStyle({
+	left: d+'px'
+	});
+	<?php endif;?>
+
+	$('address-verification-results').show();
+
+	<?php $is_mobile	= Mage::helper('onepagecheckout')->isMobile();
+	if(!$is_mobile):?>
+	var el = $('iwdavPopupOverlay');
+	el.setStyle({
+	width: ww+'px',
+	height: hh+'px'
+	});
+
+	el.show();
+	<?php else:?>
+	$('onepagecheckout_orderform').hide(); // hide form for mobile devices 
+	<?php endif;?>
+	}
+	function close_verification()
+	{
+	<?php $is_mobile	= Mage::helper('onepagecheckout')->isMobile();
+	if(!$is_mobile):?>        
+	$("iwdavPopupOverlay").hide();
+	<?php else:?>
+	$('onepagecheckout_orderform').show(); // show form for mobile devices
+	<?php endif;?>
+	$('address-verification-results').hide();
+	}
+	<?php endif; ?>
+
+	document.observe("dom:loaded", function() {
+	var win_triggers	= Array();
+	$$('.checkout-agreements .agree a').each(function(item){
+	var obj	= {
+	el: $$('.' + item.className),
+	event: 'click',
+	window: $(item.className + '-window')
+	};
+	win_triggers.push(obj);
+	});
+	opc_window	= new OPC.Window({triggers: win_triggers});
+	});
+	//]]>
+	</script>
+	<?php if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):
+		$is_mobile	= Mage::helper('onepagecheckout')->isMobile();?>
+		<div style='display:none;left:0;' class="iwdav_modal <?php if($is_mobile){echo ' iwdav_modal_mobile';}?>" id="address-verification-results">
+			<div id="checkout-address-candidates-load"></div>
+		</div>
+		<?php if(!$is_mobile):?>
+			<div id='iwdavPopupOverlay' class='iwdavPopupOverlay' style='display:none;'>&nbsp;</div>
+		<?php endif;?>
+	<?php endif; ?>
+</div>
+<script type="text/javascript">
+if(Prototype.Browser.IE){}else{
+	$('shipping:firstname').observe('blur', function(e){
+    Validation.validate($('shipping:firstname'))
+   });
+   $('shipping:lastname').observe('blur', function(e){
+    Validation.validate($('shipping:lastname'))
+   });
+   	var billEmail = $('billing:email');
+	if (billEmail) {
+		billEmail.observe('blur', function(e){
+			Validation.validate($('billing:email'));
+		});
+	}
+   $('shipping:street1').observe('blur', function(e){
+    Validation.validate($('shipping:street1'))
+   });
+   $('shipping:region_id').observe('blur', function(e){
+    Validation.validate($('shipping:region_id'))
+   });
+   $('shipping:city').observe('blur', function(e){
+    Validation.validate($('shipping:city'))
+   });
+    $('shipping:postcode').observe('blur', function(e){
+    Validation.validate($('shipping:postcode'))
+   });
+   $('shipping:telephone').observe('blur', function(e){
+    Validation.validate($('shipping:telephone'))
+   });
+   if($('verisign_cc_number')) {
+	   $('verisign_cc_number').observe('blur', function(e){
+		Validation.validate($('verisign_cc_number'))
+	   });
+   }
+   if($('paypal_direct_cc_number')) {
+	   $('paypal_direct_cc_number').observe('blur', function(e){
+		Validation.validate($('paypal_direct_cc_number'))
+	   });
+   }
+   if($('verisign_expiration')) {
+	   $('verisign_expiration').observe('blur', function(e){
+		Validation.validate($('verisign_expiration'))
+	   });
+   }
+   if($('paypal_direct_expiration')) {
+	   $('paypal_direct_expiration').observe('blur', function(e){
+		Validation.validate($('paypal_direct_expiration'))
+	   });
+   }
+   if($('verisign_expiration_yr')) {
+	   $('verisign_expiration_yr').observe('blur', function(e){
+		Validation.validate($('verisign_expiration_yr'))
+	   });
+   }
+   if($('paypal_direct_expiration_yr')) {
+	   $('paypal_direct_expiration_yr').observe('blur', function(e){
+		Validation.validate($('paypal_direct_expiration_yr'))
+	   });
+   }
+   if($('verisign_cc_cid')) {
+	   $('verisign_cc_cid').observe('blur', function(e){
+		Validation.validate($('verisign_cc_cid'))
+	   });
+   }
+   if($('paypal_direct_cc_cid')) {
+	   $('paypal_direct_cc_cid').observe('blur', function(e){
+		Validation.validate($('paypal_direct_cc_cid'))
+	   });
+   }
+   $('billing:firstname').observe('blur', function(e){
+    Validation.validate($('billing:firstname'))
+   });
+   $('billing:lastname').observe('blur', function(e){
+    Validation.validate($('billing:lastname'))
+   });
+   $('billing:street1').observe('blur', function(e){
+    Validation.validate($('billing:street1'))
+   });
+   $('billing:region_id').observe('blur', function(e){
+    Validation.validate($('billing:region_id'))
+   });
+   $('billing:postcode').observe('blur', function(e){
+    Validation.validate($('billing:postcode'))
+   });
+   $('billing:city').observe('blur', function(e){
+    Validation.validate($('billing:city'))
+   });
+   $('billing:telephone').observe('blur', function(e){
+    Validation.validate($('billing:telephone'))
+   });
+}
+</script>
+<div class="returnPopup hide">
+	<div class="rp-container">
+		<div class="close"></div>
+		<div class="rp-text">
+			<p>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</p>
+			<p>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill the <a id="returnshipping-dialog-opener" target="_blank" href="/awrma/guest_rma/index/" class="clickable fontcolor-type1 text-underline" onclick="s_objectID=&quot;http://www.angara.com/awrma/guest_rma/index/_1&quot;;return this.s_oc?this.s_oc(e):true">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</p>
+		</div>
+	</div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzuRGKkHcxNohNBAPVgjXGvl-pIgAjnY&libraries=places&callback=initAutocomplete"
+        async="async" defer="defer"></script>

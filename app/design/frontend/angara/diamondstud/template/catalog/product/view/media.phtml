@@ -1,0 +1,74 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+	// Code Added by Vaseem for Zoom
+	$zoomEnable	=	Mage::helper('function')->imageZoomSku($_product->getSku());
+	//if($zoomEnable==1){
+		$dimension='width="350" height="350"';
+	//}
+	// Code Added by Vaseem for Zoom
+?>
+	<div id="media-block">
+	<?php
+		if (count($this->getGalleryImages()) > 0){ 
+		?>
+		<script type="text/javascript" src="<?php echo $this->helper('core/js')->getJsUrl('jquery.jcarousel.min.js'); ?>"></script>
+        <link rel="stylesheet" href="<?php echo Mage::getDesign()->getSkinUrl('css/vertical_jcarousel.css');?>"/>
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+            /*jQuery('#vertical-carousel').jcarousel({
+                vertical: true
+            });*/
+        });
+        </script>
+      <div id="ulternateviewthumb">
+		<ul id="vertical-carousel" class="jcarousel-skin-tango">
+		<?php $i=1;
+		foreach ($_product->getMediaGalleryImages() as $_image){
+		 ?>
+			<li><span class="<?php echo ($i==1?" activethumb":"thumbs");?>">
+				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(70); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()); ?>" onclick="$('image').src = '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>'; return false;"/>
+			</span></li>
+		<?php $i++;}	//	end foreach ?>
+		</ul>
+	<?php } ?>
+      </div>
+      <div id="mainimage-block">
+      	<?php 
+			if ($_product->getImage() != 'no_selection' && $_product->getImage()){ 
+				$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" "'.$dimension.'"/>';
+				echo $_helper->productAttribute($_product, $_img, 'image');
+			} else{ 
+				$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(350).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" "'.$dimension.'"/>';
+				echo $_helper->productAttribute($_product, $_img, 'image');
+			}
+	 	?>
+      </div>
+      <div class="clear"></div>
+      <!--Most Popular related products starts-->
+    <?php echo $this->getLayout()->createBlock('catalog/product_list_related')->setTemplate('catalog/product/list/related.phtml')->toHtml();?>
+      <!--Most Popular related products ends-->
+    </div>
+<?php
+# @todo handle product video here
+$video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+if($video != ''){?>
+	<?php /*?><div class="view-video" style="display:none;">
+      <ul>
+        <?php
+        $video_arr = explode("|",$video);
+        $number_of_videos = count($video_arr);
+        $thumbPath = Mage::getBaseURL('media').'productVideos/';
+        for ($i=0; $i < count($video_arr); $i++)
+        {
+            list($videoName,$thumbName) = explode(',',$video_arr[$i]);
+            ?>
+    <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"> <img title='' src="/image_thumb.php?width=56&height=56&image=<?php echo $thumbPath."thumb/".$thumbName; ?>" width="56" height="56" /> <img src="/skin/frontend/angara/default/images/play-video-thumb.png" width="56" height="56"  class="playvideothumb" alt="Play Video" title="Play Video" /></a></li>
+    <?php
+        }?>
+         </ul>
+	</div><?php */?>
+    <?php
+}
+?>
+<?php /*?><div class="view-video" id="pckImg" style="display:none;"></div><?php */?>

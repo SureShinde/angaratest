@@ -1,0 +1,52 @@
+<?php 
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output'); ?>
+
+<!-- S: Product Name with Review -->
+<div class="product-description">
+	<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+	<span class="writeareviewlink">
+		Write a Review <span>+</span>
+	</span>
+</div>
+<!-- E: Product Name with Review -->
+
+<!-- S: Product Certificate View -->		
+<div class="certificate_txt_link">
+	<a href="javascript:void(0);" id="authenticity-cert" onclick="getCertificate();">View Certificate Of Authenticity</a>
+	<form id="cert_form" action="<?php echo Mage::getBaseUrl();?>hprcv/Index/pdf" method="post" target="_blank">
+		<input id="cert_id" type="hidden" name="certificate_id" value="<?php echo $_product->getId()?>"/>
+	</form>
+</div>
+<!-- E: Product Certificate View -->
+
+<!-- S: Product Details -->
+<div class="item-details-box-wrapper">
+	<!-- S: Item & Free Gifts Details-->
+	<div id="details-heading-top">
+		<div class="detail-box-title">Product Details:</div>
+		<?php 
+			echo $this->getAttributeHtml('Angara Item #', $_helper->productAttribute($_product, $_product->getSku(), 'sku'));
+			echo $this->getMetalsHtml(); 
+			if($_product->getChain1Length()){ 
+				echo $this->getAttributeHtml('Chain Length', $_helper->productAttribute($_product, $_product->getChain1Length().' inches', 'chain1_length')); 
+			}?>
+	</div>
+	<!-- E: Item & Free Gifts Details-->
+	
+	<!-- S: Gemstone & Diamond Information -->
+	<div class="stones-details-box">
+		<?php echo $this->getStonesHtml(); ?>
+	</div>
+	<!-- E: Gemstone & Diamond Information -->	
+</div>
+<!-- E: Product Details -->
+
+<script type="text/javascript">
+function getCertificate(){
+	if(typeof(variations)!='undefined'){
+		jQuery('#cert_id').val(variations.getCurrentProduct());
+	}
+	jQuery('#cert_form').submit();
+}
+</script>

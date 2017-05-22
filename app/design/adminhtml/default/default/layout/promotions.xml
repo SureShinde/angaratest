@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout version="0.1.1">
+  <promotions_adminhtml_promotionsbackend_index>
+	<reference name="content">
+	  <block type="promotions/adminhtml_promotionsbackend" name="promotionsbackend" template="promotions/promotionsbackend.phtml"/>
+	</reference>
+  </promotions_adminhtml_promotionsbackend_index>
+  <promotions_adminhtml_channel_index>
+	<reference name="content">
+	  <block type="promotions/adminhtml_channel" name="channel" />
+	</reference>
+  </promotions_adminhtml_channel_index>
+  <promotions_adminhtml_coupon_index>
+	<reference name="content">
+	  <block type="promotions/adminhtml_coupon" name="coupon" />
+	</reference>
+  </promotions_adminhtml_coupon_index>
+  <promotions_adminhtml_banner_index>
+	<reference name="content">
+	  <block type="promotions/adminhtml_banner" name="banner" />
+	</reference>
+  </promotions_adminhtml_banner_index>
+</layout>

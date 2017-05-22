@@ -1,0 +1,115 @@
+<?php	//	Check form submission
+	$submit	=	Mage::getSingleton('core/session')->getData('frm_submit');	//	get the session
+	//Mage::getSingleton('core/session')->setData('frm_submit',false);		//	expire the session
+?>
+<style>
+.messages{display:none!important}
+
+.black-cyber .signup-box{width:100%; float:left; border:1px solid #cfcfcf; border-top:none;}
+.black-cyber .signup-box .text{font-size:16px; padding:55px;}
+.black-cyber .signup-box .signup-holder{width:96%; float:left; border:1px solid #cfcfcf; min-height:126px; margin:5% 2%;}
+.black-cyber .thankyou-msg .col-sm-8{background:#e6f3e1; border:1px solid #deedd0;}
+.black-cyber .thankyou-msg .col-sm-8 .heading{color:#c50009; font-size:16px;}
+.black-cyber .thankyou-msg .col-sm-8 .msg{}
+.black-cyber .su-head{font-size:16px; padding: 19px 19px 0px;}
+
+.hlder{border:1px solid #dedede; min-height:321px;}
+.hp-block-title{height: 50px; padding: 0px 10px;background-color:#6a2d3a; color:#ffffff; margin: 0px; line-height: 50px; font-size: 18px;}
+.flash-sale{height:316px;}
+.flash-sale .hp-block-title{text-transform: uppercase;}
+.flash-sale .product .pro-image{min-height: 233px;}
+.flash-sale .product .pro-image a{display: inline-block;}
+.flash-sale .product .pro-detail{background: #f9f9f9; float: left; width: 100%; padding: 10px 10px; position: relative;  height: 86px;}
+.flash-sale .product .pro-detail .discount{ position: absolute; height: 150px; text-align: center; line-height: 14px; color: #000000; top: -195px;    right: 5px;  padding: 0px;  box-sizing: content-box;   font-size: 12px; text-shadow: 1px 1px #f0f0f0;}
+.flash-sale .product .pro-detail .discount .left, .flash-sale .product .pro-detail .discount .right{border: 1px dashed #D83D29; padding: 3px 10px;  background-color: #fef6f5;}
+.flash-sale .product .pro-detail .discount .left span, .flash-sale .product .pro-detail .discount .right span{color:#D83D29; font-weight:bold}
+.flash-sale .product .pro-detail .pro-name{padding:0px;}
+.flash-sale .product .pro-detail .price{padding-left:0px;}
+.flash-sale .product .pro-detail .btn{background:#D83D29;}
+.flash-sale .product .pro-detail .btn:hover{box-shadow:0 6px 48px 6px rgba(180, 39, 18, .5) inset; -webkit-box-shadow:0 6px 48px 6px rgba(180, 39, 18, .5) inset}
+.flash-sale .product .pro-detail .btn a{color:#ffffff; text-transform:uppercase}
+#footer-email-signup{display:none!important}
+
+@media (max-width:999px){
+	#newsletter-validate-detail .col-sm-4{padding:0px;}
+	.subscribe-button{font-size:12px;}
+	.hp-block-title{font-size:14px;}
+	.hlder{min-height:234px;}
+	.flash-sale .product .pro-image{min-height:10px; height:146px;}
+	.flash-sale .product .pro-image img{max-width: 81%;}
+	.flash-sale .product .pro-detail .discount{top:-146px;}
+	.black-cyber .signup-box .text{padding:42px;}
+}
+
+@media (max-width:500px){
+	.thankyou-msg{clear:both}
+	#newsletter-validate-detail .padding-type-10{padding:0px; padding-bottom:10px!important;}
+	#newsletter-validate-detail .padding-type-10 .row .col-xs-8,
+	#newsletter-validate-detail .padding-type-10 .row .col-xs-4{padding-top:10px; padding-bottom:10px}
+	.black-cyber .signup-box .text{padding:16px;}
+	.hp-block-title{font-size:18px;}
+	.footer-newsletter{display:none!important}
+	.footer-links{border-top:1px solid #efefef}
+	.footer-links ul.links{margin-bottom:0px}
+}
+</style>
+<div class="container showcase-bg-white min-padding-top relative-placeholder">
+	<div class="black-friday black-cyber">
+		<div class="col-sm-12">
+			<div class="head-banner high-margin-top">
+				<img class="img-responsive" src="/skin/frontend/ress/default/images/black-friday-banner-2015.jpg" alt="Black Friday"/>
+			</div>
+			<div class="clearfix"></div>
+			<div class="signup-box">
+				<div class="col-sm-12">
+					<div class="col-sm-6 col-xs-12 text">
+						<p class="no-margin">Holiday gifts make for great surprises, and the Biggest Sale is just around the corner. Subscribe with us and don’t miss a single deal.</p>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="signup-holder">
+							<div class="col-sm-12 su-head">
+								Sign up For Black Friday Deal Alerts!
+							</div>
+							<div class="col-sm-12">
+								<?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml();?>
+							</div>
+						</div>
+					</div>
+				</div>
+                <?php if($submit==1){?>
+				<div class="col-sm-12 thankyou-msg">
+					<div class="col-sm-8 no-padding text-center high-margin-bottom">
+						<div class="col-sm-12 high-margin-top low-margin-bottom heading">Thank You For Subscribing.</div>
+						<div class="col-sm-12 high-margin-bottom msg">You’ve now joined our special email list. We’ll be delighted to keep you up to date about upcoming special offers, exclusive email deals, huge discounts and much more.</div>
+					</div>
+					<div class="col-sm-4 high-margin-bottom high-margin-top">
+						<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('landing-pages/sharing.phtml')->toHtml();?>
+					</div>
+				</div>
+                <?php } ?>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<?php 
+	$currentUrl		=	Mage::helper('core/url')->getCurrentUrl();
+	//$description	=	'Don\'t miss out the best deal of the year. Sign up now to get the Early Bird advantage on Black Friday.';
+	$description	=	'Holiday gifts make for great surprises, and the Biggest Sale is just around the corner. Subscribe with us and don’t miss a single deal.';
+?>
+<script type="text/javascript">					
+	function myPinFunction(){
+		var url = '<?php echo Mage::getBaseUrl();?>skin/frontend/ress/default/images/black-friday-banner-2015.jpg';
+		window.open( 'https://pinterest.com/pin/create/bookmarklet/?media='+url+'&url=<?php echo $currentUrl;?>&description=<?php echo urlencode($description);?>','pin','height=600,width=650').focus();	
+	}
+	function myGoogleFunction(){							
+		window.open('https://plus.google.com/share?url=<?php echo $currentUrl;?>','gplus','height=600,width=650,scrollbars=yes').focus();	
+	}										
+	function myFbFunction(){							
+		window.open('https://www.facebook.com/share.php?u=<?php echo $currentUrl;?>','face','height=600,width=650,scrollbars=yes').focus();	
+	}
+	function myTweetFunction(){							
+		window.open('https://twitter.com/intent/tweet?url=<?php echo $currentUrl;?>&text=<?php echo urlencode($description);?>&via=Angara','tweet','height=600,width=650').focus();	
+	}							
+</script>

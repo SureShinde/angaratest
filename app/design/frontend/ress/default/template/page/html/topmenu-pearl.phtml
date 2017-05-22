@@ -1,0 +1,139 @@
+<style>
+.last-minute-shopping-tag{position:fixed;top:552px;right:-1px;}
+.nav > li > a{padding:10px 15px;}
+.p0{padding:0px;}
+.sm{display:none}
+.main-menu-box{position:absolute;top:18px;left:300px;right:110px;}
+@media (max-width:1400px ){
+.nav > li > a{padding:10px 10px;}	
+}
+
+@media (max-width:1100px ){
+	.navbar-nav>li>a{font-size:13px!important;}
+}
+@media (max-width:1024px ){
+	<?php $pageType = Mage::helper('function')->getPageType();  
+		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		<?php if($pageType == 'category'){
+			$channel = Mage::getSingleton('core/session')->getVisitorChannel();  
+			if(!$channel->getCatalogBannerTablet()){
+				echo '.snow-f{height:182px!important;}';
+			}else{
+				echo '.snow-f{height:162px!important;}';
+			}
+		}else{
+			echo '.snow-f{height:182px!important; height:0px;}';
+		} ?>
+		.main-menu-box{top:78px; left:0px; right:0px;}
+		#main-head-inner{padding-bottom:45px!important}
+	<?php } ?>
+}
+
+@media (min-width: 768px ) and (max-width: 999px) {
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	.nav > li > a{padding:10px 9px;}	
+	<?php } ?>
+	.sm{display:block}
+	.md{display:none}
+}
+
+.navbar-nav{overflow:visible;}
+.sub-nav{display:none; position:absolute; top:40px; left: 0px; min-width:100%}
+.sub-nav ul{background: #ffffff; border: 1px solid #eaeaea; border-radius: 2px; overflow-y: hidden;}
+.navbar-nav li .sub-nav li{width: 100%; float: left; display: block!important;}
+.navbar-nav li .sub-nav li a{color: #363636; padding: 10px; display: block; text-align: left; border-bottom:1px solid #eaeaea; white-space:nowrap;}
+.navbar-nav li .sub-nav li:last-child a{border-bottom:none;}
+.navbar-nav li .sub-nav li a:hover{text-decoration:none; background:#fff6f7;}
+.navbar-nav li:hover .sub-nav{display:block;}
+
+@media (max-width:768px){
+	.navbar-nav{
+		width:100%;
+		text-align:center;
+	}
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	.navbar-nav li{
+		float:none!important;
+		display: inline-block;
+		padding:0px 10px;
+	}
+	<?php } ?>
+	.navbar-nav li .sub-nav li{
+		padding:0px;
+	}
+	
+}
+</style>
+<!--[if IE 8]> 
+<style>
+.ie8-remove{display:none!important}
+</style>
+<![endif]-->
+<div id="main-menu" class="main-menu-box">
+  	<div class="hidden-xs">
+    	<div class="container-fluid">
+      		<div class="container">
+        		<div class="row">
+          			<div class="text-center">
+            			<nav id="navbar-main" class="navbar navbar-default navbar-main text-uppercase" role="navigation">
+              				<div class="primary-navbar">
+                				<ul class="nav navbar-nav">
+                  					<li data-item="jewelry-type">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Jewelry Type</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/rings/pearl-rings?icid=pearhome|nav|jeweltype|rings|09072016" onclick="categoryNavSelect('Rings Jewelry Type|topnav pearl')">Rings</a></li>
+												<li><a href="/earrings/pearl-earrings?icid=pearhome|nav|jeweltype|earrings|09072016" onclick="categoryNavSelect('Earrings Jewelry Type|topnav pearl')">Earrings</a></li>
+												<li><a href="/pendants/pearl-necklace-pendants?icid=pearhome|nav|jeweltype|pendantss|09072016" onclick="categoryNavSelect('Pendants Jewelry Type|topnav pearl')">Pendants</a></li>
+												<li><a href="/earrings/pearl-earrings?order=position&dir=asc&no_cache=true&jewelry_styles=4194&icid=pearhome|nav|jeweltype|studs|09072016" onclick="categoryNavSelect('Studs Jewelry Type|topnav pearl')">Studs</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="pearl-type">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Pearl Type</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/jewelry/akoya-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|akoya|09072016" onclick="categoryNavSelect('Akoya Pearl Type|topnav pearl')">Akoya</a></li>
+												<li><a href="/jewelry/freshwater-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|freshwater|09072016" onclick="categoryNavSelect('Freshwater Pearl Type|topnav pearl')">Freshwater</a></li>
+												<li><a href="/jewelry/tahitian-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|tahitian|09072016" onclick="categoryNavSelect('Tahitian Pearl Type|topnav pearl')">Tahitian</a></li>
+												<li><a href="/jewelry/south-sea-cultured-pearl-jewelry/white-south-sea-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|whitesouthsea|09142016" onclick="categoryNavSelect('White South Sea Pearl Type|topnav pearl')">White South Sea</a></li>
+												<li><a href="/jewelry/golden-japanese-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|goldenjapanese|09072016" onclick="categoryNavSelect('Golden Japanese Pearl Type|topnav pearl')">Golden Japanese</a></li>
+												<li><a href="/jewelry/south-sea-cultured-pearl-jewelry/golden-south-sea-cultured-pearl-jewelry?icid=pearhome|nav|pearltype|goldensouthsea|09142016" onclick="categoryNavSelect('Golden South Sea Pearl Type|topnav pearl')">Golden South Sea</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="pearl-color">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Pearl Color</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6416&icid=pearhome|nav|color|white|09072016" onclick="categoryNavSelect('White Pearl Color|topnav pearl')">White</a></li>
+												<li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6419&icid=pearhome|nav|color|black|09072016" onclick="categoryNavSelect('Black Pearl Color|topnav pearl')">Black</a></li>
+												<li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6417&icid=pearhome|nav|color|golden|09072016" onclick="categoryNavSelect('Golden Pearl Color|topnav pearl')">Golden</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="price">
+										<a href="javascript:void(0)" class="no-transition"><span class="nav-link-text no-transition">Price</span><i class="fa low-padding-left fa-angle-down no-transition"></i></a>
+										<div class="sub-nav">
+											<ul>
+												<li><a href="/catalogsearch/result/?q=Pearl+jewelry&dir=asc&order=price&p=1&price=1,250&icid=pearhome|nav|price|<250|09072016" onclick="categoryNavSelect('$250 & Under Price|topnav pearl')">$250 & Under</a></li>
+												<li><a href="/catalogsearch/result/?q=Pearl+jewelry&dir=asc&order=price&p=1&price=251,500&icid=pearhome|nav|price|251-500|09072016" onclick="categoryNavSelect('$251 - $500 Price|topnav pearl')">$251 - $500</a></li>
+												<li><a href="/catalogsearch/result/?q=Pearl+jewelry&dir=asc&order=price&p=1&price=501,1000&icid=pearhome|nav|price|501-1000|09072016" onclick="categoryNavSelect('$501 - $1000 Price|topnav pearl')">$501 - $1000</a></li>
+												<li><a href="/catalogsearch/result/?q=Pearl+jewelry&dir=asc&order=price&p=1&price=1001,1500&icid=pearhome|nav|price|1001-1500|09072016" onclick="categoryNavSelect('$1001 - $1500 Price|topnav pearl')">$1001 - $1500</a></li>
+												<li><a href="/catalogsearch/result/?q=Pearl+jewelry&dir=asc&order=price&p=1&price=1501,50000&icid=pearhome|nav|price|>1500|09072016" onclick="categoryNavSelect('Over $1500 Price|topnav pearl')">Over $1500</a></li>
+											</ul>
+										</div>
+									</li>
+                  					<li data-item="education">
+										<a href="/cultured-pearls" class="no-transition" style="pointer-events:auto;" onclick="categoryNavSelect('Education|topnav pearl')"><span class="nav-link-text no-transition">Education</span></a>
+									</li>
+                				</ul>
+              				</div>
+            			</nav>
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</div>
+

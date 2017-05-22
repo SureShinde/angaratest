@@ -1,0 +1,167 @@
+<style type="text/css">
+.country-dropdown-list-container { white-space: normal;}
+.social-list-inline li{display:inline-block;padding-left:0px;padding-right:2px;float:left} 
+.social-list-inline .ficon{padding-left:0px;}
+.contact-box li {display:inline-block;margin-right:15px;text-align:center;}
+.timing {font-size:14px; line-height:23px;}
+footer p strong{font-size:16px;}
+.ruhzbum {display: block;position: relative;overflow: hidden; width: 150px; height: 72px; margin: 0px; padding: 0px;}
+.social-list-inline .ficon {padding-left:5px;}
+.full-width{width:100%;}
+.social-icons-holder {width:110%;}
+@media(min-width:769px){
+	#footerEmail, #advice-required-entry-footerEmail, #advice-validate-email-footerEmail{max-width:300px; float:right}
+	#advice-required-entry-footerEmail, #advice-validate-email-footerEmail{width:282px;} 
+}
+@media(min-width:1025px){
+	.social-icons-holder {width:110%; float:left!important}
+}
+</style>
+<div class="showcase-bg-dark max-padding-top max-padding-bottom" style="border-top:1px solid #cccccc; border-bottom:1px solid #cccccc;">
+	<div class="container">
+    	<div class="row no-gutters">
+			<div class="foo-box-1 col-md-4 col-sm-12 col-xs-12 rlink pull-right max-margin-bottom high-padding-bottom">
+				<div class="navigations last max-margin-left-md max-padding-left-md max-padding-left-sm ress-accordion-xs nowrap">
+					<form id="subscription-form-footer" method="post" style="max-width:530px;margin:0 auto;" action="<?php echo ((Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://').Mage::app()->getRequest()->getHttpHost().'/newsletter/subscriber/confirmed/';?>" onsubmit="return checkFormFooter(this);">
+							<div class="pull-right">
+								<div class="pull-right" style="width:350px;">
+									<div class="full-width pull-left">
+										<div class="col-md-10 col-xs-10 no-padding-left col-sm-10">
+											<input id="footerEmail" type="text" name="email" style="border-radius: 2px" class="input-text required-entry validate-email showcase-border-thick" placeholder="Enter your email for special offers" title="<?php echo $this->__('Email Address');?>">
+											<input type="hidden" value="<?php echo $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>" name="return_url">
+											<input type="hidden" value="03-footer" name="newslettertype">
+											<div class="visible-md"></div>
+											<div class="max-padding-top max-margin-top social-icons-holder pull-left">
+												<ul class="socialicons hidden-xs social-list-inline">
+													<li class="social-icons-footer low-margin-right text-bold" style="font-size:16px">Connect with us</li>
+													<li class="ficon social-icons-footer low-margin-right"><a href="https://www.facebook.com/Angaradotcom" target="_blank"><i class="fa px22 fa-facebook" ></i><span class="hidden">Facebook</span></a></li>
+													<li class="pinticon social-icons-footer low-margin-right"><a href="https://www.pinterest.com/angarajewelry/" target="_blank"><i class="fa px22 fa-pinterest"></i><span class="hidden">Pinterest</span></a></li>
+													<li class="twiticon social-icons-footer low-margin-right"><a href="https://twitter.com/angarajewelry" target="_blank"><i class="fa px22 fa-twitter" ></i><span class="hidden">Twitter</span></a></li>
+													<li class="gplusicon social-icons-footer"><a href="https://plus.google.com/+Angara"><i class="fa px22 fa-google-plus"></i><span class="hidden">Google+</span></a></li>
+													<li class="utubeicon social-icons-footer low-margin-right"><a href="https://www.youtube.com/c/Angarajewelry" target="_blank"><i class="fa px22 fa-youtube"></i><span class="hidden">Youtube</span></a></li>
+													<li class="instaicon social-icons-footer low-margin-right"><a href="https://www.instagram.com/angarajewelry/" target="_blank"><i class="fa px22 fa-instagram"></i><span class="hidden">Instagram</span></a></li>
+													<li class="blogicon social-icons-footer"><a href="http://blog.angara.com/">
+														<img class="" src="<?php echo $this->getSkinUrl();?>images/blog-sm-black.png" style="margin-top:-4px;"/><span class="hidden">Blog</span>
+													</a></li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-md-2 col-xs-2 col-sm-2 no-padding">
+											<input type="submit" value="JOIN" class="btn btn-block btn-primary visible-xs subscribe-button">
+											<input type="submit" value="Join" class="btn btn-block btn-primary hidden-xs subscribe-button">
+										</div>
+									</div>
+									<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+										<div class="full-width pull-left">
+											<div class="full-width pull-left text-bold high-padding-bottom high-padding-top high-margin-top" style="font-size:16px">
+												Review us at
+											</div>
+											<div class="pull-left max-margin-right">
+												<a id="bbblink" class="ruhzbum" href="http://www.bbb.org/losangelessiliconvalley/business-reviews/jewelers-retail/angaracom-in-los-angeles-ca-100082531" title="Angara.com, Jewelers Retail, Los Angeles, CA" target="_blank"><img style="padding: 0px; border: none;max-width:300px;" id="bbblinkimg" src="/skin/frontend/ress/default/images/seal-for-100082531.png" width="300" height="72" alt="Angara.com, Jewelers Retail, Los Angeles, CA" /></a>
+											</div>
+											<div class="pull-left">
+												<!-- BEGIN: Bizrate Medal (125x73 pixels) -->
+												<script src="//medals.bizrate.com/medals/js/150815_medal.js" type="text/javascript"></script>
+												<div style="position:relative;z-index:1;width:125px;height:73px;">
+													<a style="bottom:0;right:0;display:block;position:absolute;width:55px;height:23px;z-index:2;text-decoration:none;background:#fff;filter:alpha(opacity=0);opacity: 0;" href="//www.bizrate.com/?rf=sur" title="Bizrate" target="_blank"></a>
+													<a class="br-button" href="//www.bizrate.com/ratings_guide/merchant_detail__mid--150815?rf=sur" title="See Angara.com Reviews at Bizrate.com" target="_blank">
+														<img src="/skin/frontend/ress/default/images/bizrate.png" border="0" style="max-height:55px; margin-left:10%;" alt="See Angara.com Reviews at Bizrate.com" />
+													</a>
+												</div>
+												<!-- END: Bizrate Medal (125x73 pixels) -->
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+					</form>
+					 <script type="text/javascript">
+						//&lt;![CDATA[
+						var dataFormFooter = new VarienForm('subscription-form-footer', false);
+						function checkFormFooter(frm) {
+							var regFooter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+							if(frm.footerEmail.value != '' && regFooter.test(frm.footerEmail.value) !== false) {
+								return true;												
+							}
+							return false;
+						}
+						//]]&gt;
+					</script>
+				</div>
+			</div>
+			
+			<div class="foo-box-2 col-md-3 col-sm-5 col-xs-12">
+            	<div class="low-padding-left-md ress-accordion-xs">
+					<p class="low-margin-top max-margin-bottom hidden-xs"><strong>Need Help Buying Jewelry Online?<br>We are available 24x7 to help.</strong></p>
+					<div class="clearfix"></div>
+					<ul class="hidden-xs footer-links contact-box high-margin-top">
+                        <li>
+							<a href="/contact-us" class="block-inline-display">
+								<i class="fa fa-phone px22" style="padding-bottom:23px;"></i>
+								<span class="clearfix"></span>
+								<span>1-888-926-4272</span>
+							</a>
+						</li>
+						<li>
+							<a href="mailto:customer.service@angara.com">
+								<i class="fa fa-envelope-o px22" style="padding-bottom:23px;"></i>
+								<span class="clearfix"></span>
+								<span>Email</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link">
+								<i class="fa fa-comments-o px22" style="padding-bottom:23px;"></i>
+								<span class="clearfix"></span>
+								<span>Live Chat</span>
+							</a>
+						</li>
+					</ul>
+                </div>
+			</div>
+
+			<div class="foo-box-3 col-md-5 col-sm-7 col-xs-12 rlink">
+				<div class="col-md-6 col-sm-6 col-xs-12 rlink">
+					<div class="navigations low-padding-left-md ress-accordion-xs max-margin-left-xs">
+						<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Help</strong></p>
+						<ul class="hidden-xs footer-links">
+							<li><a href="/return-policy">Returns</a></li>
+							<li><a href="/shipping">Shipping</a></li>
+							<li><a href="/international-policies">International Shipping</a></li>
+							<li><a href="/total-protection-warranty">Warranty Plan</a></li>
+							<li><a href="/awrma/guest_rma/index/">Online Returns</a></li>
+							<li><a href="/tracking">Track Your Order</a></li>
+							<li><a href="/privacy-and-security">Privacy & Security</a></li>
+							<li><a href="/term-of-use">Terms of Use</a></li>
+						</ul>
+					</div>		
+				</div>
+			
+				<div class="col-md-6 col-sm-6 col-xs-12 rlink">
+					<div class="navigations last max-margin-left-md max-padding-left-md max-padding-left-sm ress-accordion-xs nowrap">
+						<p class="low-margin-top low-margin-bottom hidden-xs"><strong>Get to Know Us</strong></p>
+						<ul class="hidden-xs footer-links">
+							<li><a href="/about-us">About Angara</a></li>
+							<li><a href="/customer-reviews">Customer Reviews</a></li>
+							<li><a href="http://blog.angara.com/">Blog</a></li>
+							<li><a href="/faq">FAQ's</a></li>
+							<a href="/angara-in-the-press">Angara in the News</a>
+							<li><a href="/ls-index">Affiliate Program</a></li>
+							<li><a href="/site-map">Sitemap</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+    	</div>
+ 	</div>
+</div>
+<script>
+		jQuery(window).load(function() {
+			var showcaseheight = jQuery('.showcase-bg-hero').height();
+			var headerheight = jQuery('#main-head-inner').height();
+			var scrollheight = showcaseheight - headerheight;
+			if(jQuery('body').find('.messages').length) {
+				jQuery('html, body').animate({scrollTop: scrollheight}, 'fast');
+			} 
+		});
+</script>

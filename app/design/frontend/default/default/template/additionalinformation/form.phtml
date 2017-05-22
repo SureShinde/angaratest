@@ -1,0 +1,23 @@
+<?php 
+if($this->_getOrderId($this->getRequest()->getParam('key'))==0):
+	Mage::app()->getFrontController()->getResponse()->setHeader('HTTP/1.1','404 Not Found',true);
+	Mage::app()->getFrontController()->getResponse()->setHeader('Status','404 File not found',true);
+
+	$pageId = Mage::getStoreConfig('web/default/cms_no_route');
+	$url = rtrim(Mage::getUrl($pageId),'/');
+
+	Mage::app()->getFrontController()->getResponse()->setRedirect($url);
+else:
+$_order = $this->_getOrder($this->getRequest()->getParam('key'));
+
+?>
+
+<div class="container showcase-bg-white max-padding-top max-padding-bottom">
+
+<div class="block-heading max-margin-bottom">Hello <?php echo $_order->getCustomerFirstname().' '.$_order->getCustomerLastname() ?>, </div>
+
+<div class="max-margin-bottom">Thank you for your Angara.com <strong>order# <?php echo $_order->getIncrementId(); ?></strong>. We appreciate you choosing Angara.com for this important purchase. We care very much about the security of our customers and take precautions to ensure that all orders placed in our system are valid and originated from the cardholder whose information was used to make payment for the order.</div>
+
+<div class="max-margin-bottom">We are contacting you today to let you know your <strong>order# <?php echo $_order->getIncrementId(); ?> is flagged for review</strong> based on criteria of every 50th order, value of the order, items being purchased, IP addresses, shipping address, country of origin, credit card response codes, etc. We need a little more information from you before we can get the order into full production. This request for additional information is not meant to be intrusive or to imply that this order is questionable. This is a standard policy for Angara.com to protect both you the customer as well as Angara.com. </div>
+
+<?php endif; ?>

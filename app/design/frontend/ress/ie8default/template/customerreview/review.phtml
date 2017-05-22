@@ -1,0 +1,169 @@
+<div id='one'></div>
+<?php 
+$orders = $this->getCustomerOrders();
+$reviews = $this->getCustomerReviews(); ?>
+<div id='engagementbodyhome' class='container showcase-bg-white max-padding-top'>
+<?php 
+$orderLoopCount = 0;
+$forEachOuterCount = 0;
+foreach($orders as $order) {
+	$orderLoopCount = $orderLoopCount+1;
+	$items = $order->getAllVisibleItems();
+	$orderId = $order->getIncrementId();
+	$cumstomerFname = $order->getCustomerFirstname();
+	if($orderLoopCount == 1) {?>	
+    	<h1 class='block-heading max-padding-bottom'>Welcome <span style='color:#a50041'><?php echo $order->getCustomerFirstname();?></span></h1>
+		<div id="messages"></div>
+	   	<div class='row max-margin-bottom'> 
+		   	<div class='col-sm-2 low-margin-bottom'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Item</div></div> 
+		   	<div class='col-sm-3 low-margin-bottom hidden-xs'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Details</div></div> 
+		   	<div class='col-sm-7 low-margin-bottom hidden-xs'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Review Status</div></div> 
+	   	</div>    
+    <?php 
+    }	
+	$forEachInnerCount = 0;
+	foreach($items as $item) {
+		$temp = $reviews->getItemByColumnValue('item_id', $item->getId()); 
+		$sku = $item->getSku();
+		if(strtolower(substr($sku, 0,2)) == 'fr' || count($temp) > 0) {
+			continue;
+		}
+		$dashIndex = strpos($sku, "-") > 0 ?  strpos($sku, "-") : strlen($sku); 
+		$skuPre = substr($sku, 0, $dashIndex);
+		$sku = '"' . $skuPre . '"';
+		$product = Mage::getModel('catalog/product')->load($item->getProductId()); ?>
+        <div class='row max-margin-bottom'> 
+		<?php 
+		if(count($temp)>0) { ?>
+			<div class='col-sm-2'><img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(100); ?>" class="img-responsive" alt="<?php echo $item->getName() ?>"/></div> 
+		<?php 
+		} 
+		else {?>
+        	<div class='col-sm-2'><img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(100); ?>" class="img-responsive" alt="<?php echo $item->getName() ?>"/></div> 
+		<?php 
+		} ?>
+            <div class='col-sm-3'> 
+            	<div class='max-margin-bottom max-margin-top visible-xs'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Details</div></div> 
+                <span class='productname'><a target="_blank" href= "/<?php echo $product->getUrlPath() ?>" class="fontcolor-typr1 text-underline"><?php echo $item->getName() ?></a></span>
+                    <dl class='details small'>
+                      	<dt class="pull-left low-padding-right">SKU:</dt>
+                      	<dd> <?php echo $skuPre ?></dd>
+                      	<dt class="pull-left low-padding-right">Order No:</dt>
+                      	<dd> <?php echo $orderId ?></dd>
+                      	<dt class="pull-left low-padding-right">Purchase Date:</dt>
+                      	<dd> <?php echo date('d-M-y', strtotime($order->getCreatedAt()));?></dd>
+                    </dl>
+            </div> 
+          	<div class='col-sm-7'>          
+			<?php 				
+				if(count($temp)>0) {
+					$add= "<div class='reviewstatustxt'> Product Reviewed </div>";
+				} 
+				else{
+					$forEachCount = $forEachCount +1;
+					$add="<div class='clickhere' id='clickhere-$forEachCount-$forEachOuterCount' onclick='javascript:showReviewForm(this," . $order->getId() . ",". $item->getId()."," . $sku . ");'><img id='clickimg' src='/skin/adminhtml/base/default/images/reviewemail/clickview.jpg' alt='Click Here' style='cursor:pointer;' /></div><div style='display:none' class='cancel pull-left high-margin-right' onclick='javascript:hideReviewForm(this);'><button type='button' title='cancel' class='button cancelbtn showcase-bg-gray text-on-dark'><span><span>Cancel</span></span></button></div>";
+				} 
+				echo $add;	
+				if($forEachCount==1) {
+					$forEachOuterCount=$forEachOuterCount+1;
+					$scriptToDump= "<script type='text/javascript'> jQuery(document).ready(function(){jQuery('#clickhere-1-0').click();});</script>";
+				} ?>            
+        	</div>
+            <div class='clearfix'></div>
+		</div>	
+	<?php					
+	}
+}
+echo $scriptToDump; ?>
+
+<!-- Show reviewed products -->
+<?php 
+$orderLoopCount=0;
+$forEachOuterCount=0;
+foreach($orders as $order) {
+	$orderLoopCount=$orderLoopCount+1;
+	$items = $order->getAllVisibleItems();
+	$orderId = $order->getIncrementId();
+	$cumstomerFname =  $order->getCustomerFirstname();
+	if($orderLoopCount==1) {}
+	$forEachInnerCount=0;
+	foreach($items as $item) {
+		$temp = $reviews->getItemByColumnValue('item_id', $item->getId()); 
+		$sku = $item->getSku();
+		if(strtolower(substr($sku, 0,2))=='fr' OR count($temp)==0) {
+			continue;
+		}
+		$dashIndex = strpos($sku, "-")>0 ?  strpos($sku, "-") : strlen($sku); 
+		$skuPre = substr($sku,0,  $dashIndex);
+		$sku = '"' . $skuPre . '"';
+		$product = Mage::getModel('catalog/product')->load($item->getProductId()); ?>
+        <div class='productdetails'> 
+		<?php 
+		if(count($temp)>0) { ?>
+			<div class='col-sm-2'><img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(100); ?>" class="img-responsive" alt=""/></div> 
+		<?php 
+		} 
+		else {?>
+        	<div class='col-sm-2'><img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(100); ?>" class="img-responsive" alt="" onclick='javascript:showReviewForm(this, <?php echo $order->getId();?> , <?php echo $item->getId();?>, <?php echo $sku; ?> );'/></div> 
+		<?php 
+		} ?>
+            <div class='col-sm-3'> 
+            	<div class='max-margin-bottom max-margin-top visible-xs'><div class="block-sub-heading padding-type-5 showcase-bg-light">Order Details</div></div> 
+                <span class='productname'><a target="_blank" href= "/<?php echo $product->getUrlPath() ?>"><?php echo $item->getName() ?></a></span>
+                <dl class='details small'>
+                    <dt class="pull-left low-padding-right">SKU:</dt>
+                    <dd><?php echo $skuPre ?></dd>
+                    <dt class="pull-left low-padding-right">Order No:</dt>
+                    <dd><?php echo $orderId ?></dd>
+                    <dt class="pull-left low-padding-right">Purchase Date:</dt>
+                    <dd><?php echo date('d-M-y', strtotime($order->getCreatedAt()));?></dd>
+                </dl>
+            </div> 
+            <div class='col-sm-7'>           
+			<?php 				
+            if(count($temp)>0) {
+				$add= "<div class='reviewstatustxt'> Product Reviewed </div>";
+			}		
+            echo $add;?>
+        	</div>
+			<div class='clearfix'></div>
+ 		</div>	
+	<?php					
+	}
+} ?>
+	<div class='clearfix'></div>
+</div> 
+<div id='custom-review-form' style="display:none"> <?php echo $this->getLayout()->getBlock('reviewform')->toHtml();?> </div>
+<script type="text/javascript" >
+function showReviewForm(node, orderId, itemId, sku) {
+	//hide all cancel buttons and show all write review buttons
+	jQuery('.cancel').each(function(i){jQuery(this).hide()});
+	jQuery('.clickhere').each(function(i){jQuery(this).show()});
+	var item = jQuery(node);
+	if(!item.attr("class")) {
+		item = jQuery(node).parent().next().next().children().eq(0); 
+	}
+	item.after(jQuery('#custom-review-form').after());
+	jQuery('#custom-review-form').show();
+	
+	var cancelReviewBtn = item.next().next();
+	cancelReviewBtn.show();
+	//jQuery(cancelReviewBtn).insertAfter('#customer-review-submit').show();	
+	item.hide();	
+	jQuery(window).scrollTop(item.parent().position().top);		
+	jQuery('#order_id').val(orderId);
+	jQuery('#item_id').val(itemId);
+	jQuery('#sku').val(sku);
+	jQuery('#rule').val("<?php echo $this->getRequest()->getParam('order'); ?>");		
+}
+
+function hideReviewForm(node) {
+	var item = jQuery(node);
+	var writeReviewBtn = item.prev().prev();
+	writeReviewBtn.show();
+	item.hide();
+	jQuery('#custom-review-form').hide();
+	jQuery('.clickhere').show()
+	jQuery(window).scrollTop(writeReviewBtn.position().top);
+}
+</script>

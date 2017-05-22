@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+<!-- ... -->
+  <modules>
+<!-- ... -->
+<!-- declare YourCompany_NewModule module -->
+    <Angara_Ang2dayflatrate>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Angara_Ang2dayflatrate>
+<!-- ... -->
+  </modules>
+<!-- ... -->
+</config>

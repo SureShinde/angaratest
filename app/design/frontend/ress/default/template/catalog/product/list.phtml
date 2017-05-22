@@ -1,0 +1,712 @@
+<style>
+.out-of-stock{position: absolute; padding: 3px 5px; border-radius: 2px; color: #ffffff;	background: #fa505a; z-index:1;}
+.category-products .category-product-list a.product-image img{-webkit-transition:all 0.2s ease-in-out; transition:all 0.2s ease-in-out;}
+.category-products .category-product-list a.product-image img:nth-child(2){top:0px; position:absolute; left:0px; right:0px; -webkit-transition:all 0.5s ease-in-out; transition:all 0.5s ease-in-out; opacity:0}
+@media(min-width:1025px){
+	.category-products .category-product-list a.product-image:hover img:nth-child(2){opacity:1}
+}
+@media(max-width:767px){
+	.catalog-banner{clear:both;}
+}
+.add-wishlist .fa-heart-o, .add-wishlist .fa-heart{transition:opacity 300ms; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms;}
+
+.category-products .category-product-list a.product-image img{padding:0px 10px 10px;}
+.mewe{z-index:1}
+.mewe img {width:60px;}
+.delivered-by{position:absolute; right:5px; top:3px; z-index:1; font-size:12px;}
+.box-golden{color:#daa520 !important}
+@media(max-width:1024px){
+	.mewe img {width:40px;height:41px;}
+}
+<?php
+if(Mage::registry('current_category')){
+	$path = Mage::registry('current_category')->getPath();
+	$categoryID	=	$id=Mage::registry('current_category')->getId();
+	$ids = explode('/', $path);
+	if ((count($ids) > 2 && $ids[2]==267) || $id==251 || $id == 259 || $id==255) { ?>
+	.category-products .category-product-list:hover a.product-image img{-webkit-transform: scale(1.08); transform: scale(1.08);}
+	<?php 
+	} 
+} ?>
+</style>	
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$countryParam = Mage::getModel('countrymapping/country');
+$countryCode = strtolower($countryParam->getCountryParameters()->getCountryCode());
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$showBanners	=	0;	
+$freeProdSku = array('fr','fb','fe','fp');
+if(!$_productCollection->count()): ?>
+	<p class="note-msg"><?php echo $this->__('There are no products matching the selection.');?></p>
+<?php 
+else: 
+	echo $this->getToolbarHtml();
+	$quickWishlist	=	Mage::helper('ajax')->getWishlistStatus(); ?>
+	<div class="category-products">
+		<?php	
+		$extraParams = array();	
+		if($this->getFilteredMetal()){
+			$extraParams[] = 'metal1_type='.urlencode($this->getFilteredMetal());//'?videoplay=1';
+		}	
+		if($this->getFilteredGrade()){
+			$extraParams[] = 'stone1_grade='.urlencode($this->getFilteredGrade());//'?videoplay=1';
+		} 
+		// List mode 
+		if($this->getMode()!='grid'):
+			$_iterator = 0; ?>
+			<ul class="showcase-bg-light-alternate" id="products-list">		  
+			<?php 
+			foreach($_productCollection as $_product):
+				$itemList[] = $_product->getSku(); ?>
+				<li class="showcase-border-thin high-margin-bottom category-product-list-view relative-placeholder">
+					<div class="row no-gutters item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">   
+						<?php // Product Image ?>
+						<div class="col-sm-2 max-padding-bottom">
+							<?php 
+							if(!$_product->isSaleable()){ 
+								echo '<div class="out-of-stock">Out of Stock</div>';
+							}?>
+							<a href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" class="product-image">
+							<?php
+							if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+								if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $_product->getShortDescription() ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+								<?php
+								elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>" alt="<?php echo $_product->getShortDescription() ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+								<?php	
+								else: ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $_product->getShortDescription() ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block"/>
+								<?php
+								endif;
+							else:?>
+								<img data-org="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" alt="<?php echo $_product->getShortDescription() ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+							<?php 
+							endif;?>
+                            </a>
+						</div>
+                        
+						<?php // Product description ?>
+						<div class="col-sm-10 list-view-details-box" style="min-height:185px;">
+							<div class="padding-type-10">
+								<?php $_productNameStripped = $this->stripTags($_product->getShortDescription(), null, true); ?>
+								<div class="product-name low-padding-bottom">
+									<a href="<?php echo $_product->getProductUrl() ?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" itemprop="url"><p itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription() , 'name'); ?></p></a>
+								</div>
+								<?php 
+								$cacheHelper = Mage::helper('helloworld');
+								$key = md5('getReviewsSummaryHtmlShort'.$_product->getId());
+								if($ReviewsSummaryHtmlShort = $cacheHelper->getDataFromCache($key)) {
+								}
+								else{
+									$ReviewsSummaryHtmlShort = $this->getReviewsSummaryHtml($_product, 'short');
+									$cacheHelper->setKey($key)->setData($ReviewsSummaryHtmlShort)->saveDataInCache();
+								}
+								echo $ReviewsSummaryHtmlShort; ?>
+								<div class="high-margin-top"><?php echo $this->getPriceHtml($_product, true);?></div>
+								<?php
+								if(!in_array(99, $_product->getCategoryIds()) && !$_product->getIsBuildYourOwn()):?>
+									<div class="visible-md high-padding-top high-padding-bottom">
+										<button class="btn btn-sm quickview" href="/catalog/ajax_product/view/id/<?php echo $_product->getId();?>" onclick="quickView(this, '<?php echo "catalog-list|".$_product->getSku(); ?>')">Quick View</button>
+										<div class="clearfix"></div>
+									</div>
+								<?php 
+								endif; ?>    
+								<ul class="add-to-links low-margin-top">
+								<?php 
+								if ($this->helper('wishlist')->isAllow()) : ?>
+									<li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+								<?php 
+								endif; ?>					
+								</ul>
+								<?php 
+								if($_product->getDescription()){ ?>
+									<div class="low-margin-top"><?php echo $_product->getDescription(); ?></div>
+								<?php 
+								}?>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php 
+			endforeach; 
+			/* item list set in registry */
+			Mage::register('itemList', $itemList);?>
+			</ul>
+		<?php 
+		else: 
+			// Grid Mode 
+			$_collectionSize = $_productCollection->count();?>
+			<div class="row">
+			<?php 
+			foreach ($_productCollection as $_product):
+				$itemList[] = $_product->getSku();
+				$isIPad	= Mage::helper('function')->isIPad();
+				$request = Mage::app()->getRequest()->getParams();
+				$jewelryStyles = ((is_array($_product->getAttributeText('jewelry_styles')))?array_values($_product->getAttributeText('jewelry_styles')):array($_product->getAttributeText('jewelry_styles')));
+				$stoneNames = ((is_array($_product->getAttributeText('filterable_stone_names')))?array_values($_product->getAttributeText('filterable_stone_names')):array($_product->getAttributeText('filterable_stone_names')));
+				
+				if($showBanners == 1 && $isIPad != '1'){
+					$page =	$request['p'];				
+					if( ($page == $bannerPositionData['banner1']['p']) && ($i == $bannerPositionData['banner1']['position']) ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=1);
+					}
+					if( ($page == $bannerPositionData['banner2']['p']) && ($i == $bannerPositionData['banner2']['position']) ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=2);
+					}
+					if( ($page == $bannerPositionData['banner3']['p']) && ($i == $bannerPositionData['banner3']['position']) && $noOfBanners > 3 ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=3);
+					}
+					if( ($page == $bannerPositionData['banner4']['p']) && ($i == $bannerPositionData['banner4']['position']) && $noOfBanners >= 4 ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=4);
+					}
+				}?>
+				<div class="col-md-3 col-sm-4 max-margin-bottom mp-box">
+					<div class="category-product-list showcase-bg-white" item itemscope itemtype="http://schema.org/Product">
+						
+						<?php if ($categoryID == 476){ ?>
+							<div class="mewe absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/mewe-collection.png"/> </div>
+						<?php }else if ($categoryID == 560 || $categoryID == 561 || $categoryID == 562 || $categoryID == 563 || $categoryID == 564){ ?>
+							<div class="mewe absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/infinity.png"/> </div>
+						<?php }else if ($categoryID == 550){ ?>
+							<div class="mewe absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/knotty-heart.png"/> </div>
+						<?php }else if ($categoryID == 556 || $categoryID == 557 || $categoryID == 558 || $categoryID == 559){ ?>
+							<div class="mewe absolute-placeholder"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/coffee-diamond-collection.png"/> </div>
+						<?php } ?>
+						
+						<?php
+						//	S:VA
+						$skuArray	=	Mage::helper('function')->getSkuFromCoupon();
+						$offerSku	=	'';	
+						if(in_array($_product->getSku(), $skuArray)){							
+							$offerSku	=	1;
+							?>
+							<div class="absolute-placeholder" style="top:2px;left:2px;"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/deal-of-the-day.png"/> </div>
+							<?php
+						}
+						//	S:VA	Delivered by
+						//echo $this->getLayout()->createBlock('catalog/product_deliverydate')->setProduct($_product)->setTemplate('catalog/product/deliverydate.phtml')->toHTML();
+						
+						if($quickWishlist){
+						$productInWishlist	=	Mage::helper('ajax')->getProductInWishlist($_product->getId());
+							if($productInWishlist){ ?>
+								<button id="wishlist_product_<?php echo $_product->getId();?>" data-pid="<?php echo $_product->getId();?>" wishlist-id='<?php echo $productInWishlist;?>' type="button" style="position:absolute;right:0px;color:#999999;background:none;font-size:20px;width:45px;z-index:1;" class="view-wishlist remove-wishlist" ><i class="fa fa-heart-o" style="opacity:0;position:absolute; right:13px;top:9px;"></i><i class="fa fa-heart" style="position:absolute; right:13px;top:9px;"></i></button>
+							<?php } else{?>
+								<button id="wishlist_product_<?php echo $_product->getId();?>" data-pid="<?php echo $_product->getId();?>" type="button" style="position:absolute;right:0px;color:#999999;background:none;font-size:20px;width:45px;z-index:1;" <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){?> data-toggle="modal" <?php } ?> data-target="#wishlistModal" class="view-wishlist add-wishlist"><i class="fa fa-heart-o" style="position:absolute;right:13px;top:9px;"></i><i class="fa fa-heart" style="opacity:0;position:absolute; right:13px;top:9px;"></i></button>
+							<?php } 
+						} ?>
+                        
+					<?php 
+					if(!$_product->getIsBuildYourOwn()){
+						echo $arrivesByDateHtml	=	$this->arrivesByDate($_product);
+					} ?>
+					
+						<?php 
+						if(!$_product->isSaleable()){ 
+							echo '<div class="out-of-stock">Out of Stock</div>';
+						} 
+						
+						
+						?>
+                        
+                        
+						<a id="gemcolor_a_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" class="product-image center-block">
+							<?php
+							$requestPage = $request['p'];
+							if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+								if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="240" height="240" itemprop="image" />
+								<?php
+								elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+								<?php	
+								else: ?>
+									<img id="gemcolor_img_<?php echo $_product->getId(); ?>" src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+								<?php
+								endif;
+							else:?>
+
+								<img id="gemcolor_img_<?php echo $_product->getId(); ?>" <?php if($requestPage != '' && $requestPage > 1){?>data-org="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(240);?>"<?php }?> src="<?php if($requestPage == '' || $requestPage < 2){ echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(240); } else { echo '/skin/frontend/ress/default/images/angara-place-holder.jpg'; }?>" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="240" height="240" itemprop="image" />
+							<?php 
+							endif;?>
+                            <?php 	
+							// S:VA	Toggle Image
+							$toggleImage = Mage::helper('function')->getToggleImage($_product);
+							if($toggleImage){?>
+                                <img id="gemcolor_img_toggle_<?php echo $_product->getId(); ?>" class="img-responsive center-block" width="240" height="240" id="toggle-view-<?php echo $_product->getId() ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $toggleImage)->resize(240); ?>" alt="<?php echo $_product->getShortDescription();?>" title="<?php echo $_product->getShortDescription();?>"/>
+							<?php
+							} else { //	E:VA ?>
+								<img id="gemcolor_img_toggle_<?php echo $_product->getId(); ?>" class="img-responsive center-block" width="0" height="0" id="toggle-view-<?php echo $_product->getId() ?>" src="" alt="" title="" style="display: none;"/>
+							<?php 
+							} ?>
+						</a>						
+						<div class="padding-type-10 padding-type-5-xs details relative-placeholder">
+							<?php /* Start: Gemstone Colors- Asheesh */ ?>
+								<?php 
+									$allowed = false;
+
+									if(Mage::registry('current_category')) {
+										$allowedCat = Mage::getStoreConfig('gemstonecolors/scategories/allowedm');
+										$allowedCategories = explode(',',$allowedCat); /* array(5,264,266,267,270,417); Engagement Rings, Rings, Necklaces(Pendants), Earrings, Bracelets, Wedding Rings. */
+										$exceptionCatDesktopIpad = Mage::getStoreConfig('gemstonecolors/scategories/categorydesktop');
+										$exceptionCategoriesDesktopIPad = explode(',',$exceptionCatDesktopIpad);
+									/*
+									if(Mage::registry('current_category')) { 
+										$allowedCategories = array(3,5,264,266,267,270,413,414,417);  Natural Gemstone Jewelry, Engagement Rings, Rings, Necklaces(Pendants), Earrings, Bracelets, Best Sellers, Shop Jewelry by Rating, Wedding Rings. */
+
+										$currentCategory = Mage::registry('current_category');
+										if($currentCategory && $currentCategory->getId() && in_array($currentCategory->getId(),$allowedCategories) && !in_array($currentCategory->getId(),$exceptionCategoriesDesktopIPad)) {
+											$allowed = true;
+										}
+									}elseif(Mage::app()->getRequest()->getModuleName() == 'catalogsearch') {
+										$allowed = true;
+									}elseif(Mage::app()->getRequest()->getModuleName() == 'adjnav') {
+										$allowed = true;
+									}
+									$storeId = Mage::app()->getStore()->getId();
+									$gemcolorsLinks = $_product->getGemstonecolorLinkCollection();
+									$gemcolorsProducts = $_product->getGemstonecolorProductCollectionOnList($_product->getId(),$this); 
+									/* echo count($gemcolorsProducts);
+									echo $gemcolorsProducts->getSelect();die; */
+									
+								?>
+								<?php if($allowed && count($gemcolorsProducts) && isset($gemcolorsProducts[0]['entity_id'])) { ?>									
+									<?php 
+										/* $_product = $_product->load($_product->getId()); */
+										$gemstoneType = $_product->getAttributeText('filterable_stone_names');
+										$gemTitle = is_array($gemstoneType) && isset($gemstoneType[0])?$gemstoneType[0]:$gemstoneType;
+										$gemstoneType = preg_replace('/\s+/', '-', $gemTitle);
+										/* echo $_product->getId().'==';
+										print_r($gemstoneType);
+										echo "<br>"; */
+										?>
+										<div class="owl-wrapper-outer owl-wrapper-outer<?php echo $_product->getId(); ?>" style="opacity:0">
+											<a href="javascript:void(0)" class="gemcolor-prev hidden" data-scroll="0"><i class="fa fa-chevron-right" style="color:#fa505a;font-size:10px;" aria-hidden="true"></i></a>
+											<div class="owl-wrapper-inner">
+												<div class="item-holder">
+
+										<?php if(strlen($gemstoneType) > 0) {
+										?>
+
+													<?php /* Show main gemstone type color */?>
+													<div onclick="changegemstonecolors('<?php echo $_product->getId(); ?>','<?php echo $_product->getId(); ?>');categoryProductGemstoneChange('<?php echo "gemstone | ".$gemTitle?>');return false;" title="<?php echo $gemTitle; ?>" class="pull-left fis-filterable_stone_names fi-filterable_stone_names-<?php echo strtolower($gemstoneType); ?> catalog-fi gemcolor">&nbsp;</div>
+													<?php 
+													$url = $_product->getProductUrl(); 
+													if(!empty($extraParams)) { 
+														$url .= '?'.implode('&',$extraParams);
+													}
+													
+													echo '<div width="0" style="display: none" id="gem_url_'.$_product->getId().'">'.$url.'</div>';
+													
+													if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())) {
+														if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()) {
+															echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getYellowGoldImage().'</div>';
+															echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$_product->getShortDescription().'</div>';
+														} elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()) {
+															echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getRoseGoldImage().'</div>';
+															echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$_product->getShortDescription().'</div>';
+														} else {
+															echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getWhiteGoldImage().'</div>';
+															echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$_product->getShortDescription().'</div>';														
+														}
+													} else {
+														echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$this->helper('catalog/image')->init($_product, 'small_image')->resize(220).'</div>';
+														echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$_product->getShortDescription().'</div>';
+													}
+													$gemToggleImage	=	Mage::helper('function')->getToggleImage($_product);
+													if($gemToggleImage) {
+														echo '<div width="0" style="display: none" id="gem_toggle_img_src_'.$_product->getId().'">'.$this->helper('catalog/image')->init($_product, 'thumbnail', $gemToggleImage)->resize(220).'</div>';
+														echo '<div width="0" style="display: none" id="gem_toggle_img_alt_'.$_product->getId().'">'.$_product->getShortDescription().'</div>';
+													}
+													echo '<div width="0" style="display: none" id="gem_desc_p_'.$_product->getId().'">'.Mage::helper('core/string')->truncate($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), $length = 70, $etc = '...').'</div>';
+													
+													echo '<div width="0" style="display: none" id="gem_price_'.$_product->getId().'">'.$this->getPriceHtml($_product, true, '-gemstone').'</div>';
+													$key = md5('getReviewsSummaryHtmlShort'.$_product->getId());
+													if($ReviewsSummaryHtmlShortGem = Mage::helper('helloworld')->getDataFromCache($key)) {
+													} else {
+														$ReviewsSummaryHtmlShortGem = $this->getReviewsSummaryHtml($_product, 'short');
+														Mage::helper('helloworld')->setKey($key)->setData($ReviewsSummaryHtmlShortGem)->saveDataInCache();
+													}
+													echo '<div width="0" style="display: none" id="gem_review_'.$_product->getId().'">'.$ReviewsSummaryHtmlShortGem.'</div>';
+												}
+												/* print_r($gemcolorsProducts);die; */
+												?>
+																									
+												<?php foreach($gemcolorsProducts as $gemproduct) { ?>
+													<?php if(1) { ?>
+														<?php 
+															$id = $gemproduct['entity_id'];
+															$gemTitle = isset($gemproduct['title'])?$gemproduct['title']:'';
+															$gemstoneType = isset($gemproduct['gemstone_type'])?$gemproduct['gemstone_type']:'';
+														
+															if(strlen($gemstoneType) > 0) {
+														?>
+															<div onclick="changegemstonecolors('<?php echo $id; ?>','<?php echo $_product->getId(); ?>');categoryProductGemstoneChange('<?php echo "gemstone | ".$gemTitle?>');return false;" title="<?php echo $gemTitle; ?>" class="pull-left fis-filterable_stone_names fi-filterable_stone_names-<?php echo strtolower($gemstoneType); ?> catalog-fi gemcolor">&nbsp;</div>
+															<?php 
+															
+															$url = $gemproduct['url']; 
+															if(!empty($extraParams)) { 
+																$url .= '?'.implode('&',$extraParams);
+															}
+																													
+															echo '<div width="0" style="display: none" id="gem_url_'.$id.'">'.$url.'</div>';
+
+															if($this->getFilteredMetal() && (isset($gemproduct['yellow_gold_image']) || isset($gemproduct['white_gold_image']) || isset($gemproduct['rose_gold_image']))) {
+																if($this->getFilteredMetal() == 'Yellow Gold' && $gemproduct['yellow_gold_image']) {
+																	echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['yellow_gold_image'].'</div>';
+																	echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+																} elseif($this->getFilteredMetal() == 'Rose Gold' && isset($gemproduct['rose_gold_image'])) {
+																	echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['rose_gold_image'].'</div>';
+																	echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+																} else {
+																	echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['white_gold_image'].'</div>';
+																	echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';														
+																}
+															} else {
+																echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$gemproduct['image_url'].'</div>';
+																echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+															}
+															
+																														
+															$gemToggleImage	=	isset($gemproduct['toggle'])?$gemproduct['toggle']:0;
+															if($gemToggleImage) {
+																echo '<div width="0" style="display: none" id="gem_toggle_img_src_'.$id.'">'.$gemToggleImage.'</div>';
+																echo '<div width="0" style="display: none" id="gem_toggle_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+															}
+															
+															echo '<div width="0" style="display: none" id="gem_desc_p_'.$id.'">'.Mage::helper('core/string')->truncate($gemproduct['short_description'], $length = 70, $etc = '...').'</div>';
+															
+															echo '<div width="0" style="display: none" id="gem_price_'.$id.'">'.$gemproduct['price_html'].'</div>';
+															
+															echo '<div width="0" style="display: none" id="gem_review_'.$id.'">'.$gemproduct['review_html'].'</div>';
+															
+																?>
+															<?php													
+																}
+															?>
+														<?php } ?>
+													<?php } ?>
+													
+												</div>
+											</div>
+											<a href="javascript:void(0)" class="gemcolor-next hidden" data-scroll="0"><i class="fa fa-chevron-left"style="color:#fa505a;font-size:10px;" aria-hidden="true"></i></a>
+										</div>
+										
+										<script>
+											function getVariables<?php echo $_product->getId(); ?>(){
+												return {
+													mainWrapper : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?>'),
+													innerWrapper : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner'),
+													itemHolder : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder'),
+													item : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder .gemcolor'),
+													showItem : 6,
+													totalItem : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder .gemcolor').length,
+													itemWidth : jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder .gemcolor').outerWidth(true),
+													msie : window.navigator.userAgent.indexOf("MSIE 9.0")
+												}
+											}
+											
+											function buttonPosition<?php echo $_product->getId(); ?>(){
+												var variables = getVariables<?php echo $_product->getId(); ?>(),
+													mainWrapper = variables.mainWrapper,
+													showItem = variables.showItem,
+													itemWidth = variables.itemWidth;
+												
+												//manage slider button position
+												var btnPos = (mainWrapper.width() - (itemWidth*showItem))/2;
+												mainWrapper.find('a.gemcolor-prev').css('right',(btnPos-20)+'px');
+												mainWrapper.find('a.gemcolor-next').css('left',(btnPos-20)+'px');
+											}
+											
+											function setGemstone<?php echo $_product->getId(); ?>(){
+												
+												var variables = getVariables<?php echo $_product->getId(); ?>(),
+													mainWrapper = variables.mainWrapper,
+													innerWrapper = variables.innerWrapper,
+													itemHolder = variables.itemHolder,
+													item = variables.item,
+													showItem = variables.showItem,
+													totalItem = variables.totalItem,
+													itemWidth = variables.itemWidth;
+													msie = variables.msie;
+												
+												if(msie > 0){
+													var buttonDisable = 'hidden';
+												}else{
+													var buttonDisable = 'button-disabled';
+												}
+												
+												mainWrapper.find('a.gemcolor-prev, a.gemcolor-next').removeClass(' hidden'); //show hidden buttons
+												
+												//set inner wrapper style
+												if(showItem > totalItem){
+													innerWrapper.css({'width':(itemWidth*totalItem)+'px','margin':'5px auto','overflow':'hidden','position':'relative','height':'15px'}); 
+												}else{
+													innerWrapper.css({'width':(itemWidth*showItem)+'px','margin':'5px auto','overflow':'hidden','position':'relative','height':'15px'}); 
+												}
+												
+												itemHolder.css({'width':(itemWidth*totalItem)+'px','position':'absolute','left':'0px'});    //set item holder's style
+												
+												if( totalItem <= showItem){
+													mainWrapper.find('a.gemcolor-prev, a.gemcolor-next').hide(); //manage slider button display or not
+												}
+												
+												buttonPosition<?php echo $_product->getId(); ?>(); //manage slider button position on window load
+												
+												mainWrapper.find('a.gemcolor-next').attr('data-scroll',0 - ((totalItem - showItem)*itemWidth));   //update itemholder's positon
+												
+												if(mainWrapper.find('a.gemcolor-prev').attr('data-scroll') == 0){
+													mainWrapper.find('a.gemcolor-next').addClass(buttonDisable);  //disable slider button
+												}
+
+												mainWrapper.css('opacity','1'); //show gemstone slider
+
+												return buttonDisable;
+											}
+											
+											//set Gemstone on load
+											jQuery(function(){
+												var variables = getVariables<?php echo $_product->getId(); ?>(),
+													mainWrapper = variables.mainWrapper,
+													innerWrapper = variables.innerWrapper,
+													itemHolder = variables.itemHolder,
+													item = variables.item,
+													showItem = variables.showItem,
+													totalItem = variables.totalItem,
+													itemWidth = variables.itemWidth,
+													msie = variables.msie;
+												
+												var buttonDisable = setGemstone<?php echo $_product->getId(); ?>(); //Set gemstone Design
+												
+												//previous button click
+												mainWrapper.find('a.gemcolor-prev').click(function(){
+													var scrollNext =  parseInt(jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-next').attr('data-scroll'));
+													var scrollPrev = parseInt(jQuery(this).attr('data-scroll'));
+													scrollNext += itemWidth;
+													scrollPrev -= itemWidth;
+													itemHolder.animate({
+														left: scrollPrev+'px',
+													}, 500);
+													jQuery(this).attr('data-scroll',scrollPrev);
+													jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-next').attr('data-scroll',scrollNext);
+													if(scrollNext == 0){
+														jQuery(this).addClass(buttonDisable);
+														jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-next').removeClass(buttonDisable);
+													}else{
+														jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-next').removeClass(buttonDisable);
+													}
+												});
+												//next button click
+												mainWrapper.find('a.gemcolor-next').click(function(){
+													var scrollPrev =  parseInt(jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-prev').attr('data-scroll'));
+													var scrollNext = parseInt(jQuery(this).attr('data-scroll'));
+													scrollPrev += itemWidth;
+													scrollNext -= itemWidth;
+													itemHolder.animate({
+														left: scrollPrev+'px',
+													}, 500);
+													jQuery(this).attr('data-scroll',scrollNext);
+													jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-prev').attr('data-scroll',scrollPrev);
+													if(scrollPrev == 0){
+														jQuery(this).addClass(buttonDisable);
+														jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-prev').removeClass(buttonDisable);
+													}else{
+														jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-prev').removeClass(buttonDisable);
+													}
+												});
+											});
+											
+											//manage slider button position on window resize
+											jQuery(window).resize(function(){
+												buttonPosition<?php echo $_product->getId(); ?>();
+											});
+										</script>
+									<?php } ?>
+							<?php /* END */ ?>
+						
+							<a id="gemcolor_desc_<?php echo $_product->getId(); ?>" href="<?php echo $_product->getProductUrl();?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" itemprop="url"><p id="gemcolor_desc_p_<?php echo $_product->getId(); ?>" class="product-name" itemprop="name"><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), $length = 70, $etc = '...'); ?></p></a>                        
+						   	<?php 
+							if(strtolower($countryCode)=='us'){						  
+							   echo '<div id="gemcolor_price_'.$_product->getId().'">';						  				  	
+							}else{
+								 echo '<div id="gemcolor_price_'.$_product->getId().'" class="reduce-price-size">';							
+							}
+							echo $this->getPriceHtml($_product, true);
+							echo '</div>'; 
+
+							/*$relatedProducts 	= 	array();
+							foreach ($_product->getRelatedLinkCollection() as $link) {
+								$relatedProducts[$link->getPosition()]	=	$link->getLinkedProductId();
+							}
+							ksort($relatedProducts);			//	Sort index of an array, Sort by Key
+							$relatedProducts	=	array_slice($relatedProducts,0,5, true);	//	Get first 5 values of array
+							if(count($relatedProducts)>0){ 
+								$relatedProductIds	=	'';
+								foreach($relatedProducts as $relatedPID){
+									$relatedProductIds.=	'"'.$relatedPID.'",';
+								}
+							}*/ ?>
+							<?php /* if(count($relatedProducts) > 0 ){ ?>
+								<a href="javascript:void(0);" class="similar-prod-link hidden-xs" data-pid="<?php echo $_product->getId();?>" data-related-products='<?php echo  substr($relatedProductIds,0,-1);?>'>See Similar Items <i class="fa fa-angle-down"></i></a> 
+								<div class="similer-pro-arrow arrow-<?php echo $_product->getId();?>" style="display:none;"></div>
+							<?php } */ ?>
+							
+							<?php if(in_array(457, $_product->getCategoryIds())){
+								$excludedSkuArr = array('SR1018RD','SR1016RD','SP0694RD');
+								//$excludedSkuArr	=	Mage::helper('function')->certificateExcludedSku();					
+								if(in_array($_product->getSku(), $excludedSkuArr)){
+									echo '<div class="gia-certificate"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>GRS Certified Stone</div>';
+								}else{
+									echo '<div class="gia-certificate"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>GIA Certified Stone</div>';
+								} 
+							}
+							if(in_array(458, $_product->getCategoryIds())){
+								echo '<div class="free-jewelry-appraisal"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>Free Jewelry Appraisal</div>';
+							} ?>
+							<div class="clearfix"></div>                            
+							
+							<?php							
+							$strLowerFreeProd = strtolower(substr($_product->getSku(), 0, 2));
+							if(!in_array(96, $_product->getCategoryIds()) && !in_array($strLowerFreeProd, $freeProdSku)) {?>
+								<div class="block-inline-display apricot-text fontsize-type3 text-center col-sm-12 no-padding">
+								<?php
+								if($offerSku =='1'){
+									echo Mage::helper('function')->getOfferTextForOfferSku();
+								}else{
+									echo Mage::helper('function')->getOfferTextCatalog();
+								} ?>
+								</div>
+							<?php 
+							} ?>                            
+						</div>
+					</div>
+				</div>
+				<?php 
+				if($i==2){
+					//echo $this->getChildHtml('special_products');
+				}
+				$i++; 
+			endforeach;
+			/* item list set in registry */
+			Mage::register('itemList', $itemList);?>
+			</div>
+		<?php 
+		endif; ?>
+		<div class="toolbar-bottom">
+			<?php echo $this->getToolbarBlock()->setTemplate('catalog/product/list/toolbar_bottom.phtml')->toHtml(); ?>
+		</div>
+	</div>
+<?php 
+endif; ?>
+
+<?php  //RV: added to manage floating filter
+$pageType = Mage::helper('function')->getPageType(); ?>
+<?php if($pageType == 'category' || $pageType == 'catalogsearch'){ ?>
+<script>
+	if(jQuery(window).scrollTop() > 200){
+		jQuery(window).scrollTop(jQuery(window).scrollTop()+1);
+	}
+</script>
+<?php } //RV: added to manage floating filter ?>
+
+
+<script type="text/javascript">
+/* Gemstone Colors */
+/* Start */
+function changegemstonecolors(gemcolorprodid,prodid) {
+	//	S:VA
+	if(gemcolorprodid == prodid){
+		jQuery('#wishlist_product_'+prodid).removeClass('hidden');	
+	}else{
+		jQuery('#wishlist_product_'+prodid).addClass('hidden');	
+	}
+	//	E:VA
+	
+	/*  Product url changes */
+	if(document.getElementById('gemcolor_a_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_a_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML;
+	
+	/*  Image changes */
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_src_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).src = document.getElementById('gem_img_src_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_img_alt_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).alt = document.getElementById('gem_img_alt_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_img_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_img_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Toggle image changes */
+	if(document.getElementById('gemcolor_img_toggle_'+prodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 0;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = 'none';
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).src = document.getElementById('gem_toggle_img_src_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_toggle_img_alt_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).width = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).height = 220;
+		document.getElementById('gemcolor_img_toggle_'+prodid).style.display = '';
+		document.getElementById('gemcolor_img_toggle_'+prodid).alt = document.getElementById('gem_toggle_img_alt_'+gemcolorprodid).innerHTML;
+	}
+	if(document.getElementById('gemcolor_img_toggle_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid) && document.getElementById('gem_toggle_img_src_'+gemcolorprodid)) {
+		document.getElementById('gemcolor_img_toggle_'+prodid).title = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	}
+	
+	/* Product name/description changes */
+	if(document.getElementById('gemcolor_desc_'+prodid) && document.getElementById('gem_url_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_'+prodid).href = document.getElementById('gem_url_'+gemcolorprodid).innerHTML;
+	if(document.getElementById('gemcolor_desc_p_'+prodid) && document.getElementById('gem_desc_p_'+gemcolorprodid))
+		document.getElementById('gemcolor_desc_p_'+prodid).innerHTML = document.getElementById('gem_desc_p_'+gemcolorprodid).innerHTML;
+	
+	/* Product price name */
+	if(document.getElementById('gemcolor_price_'+prodid) && document.getElementById('gem_price_'+gemcolorprodid))
+		document.getElementById('gemcolor_price_'+prodid).innerHTML = document.getElementById('gem_price_'+gemcolorprodid).innerHTML;
+	
+	/* Review template changes */
+	if(document.getElementById('gemcolor_review_'+prodid) && document.getElementById('gem_review_'+gemcolorprodid))
+		document.getElementById('gemcolor_review_'+prodid).innerHTML = document.getElementById('gem_review_'+gemcolorprodid).innerHTML;	
+	
+}
+
+/* End */
+
+jQuery(function(){
+	jQuery('div[data-toggle="tooltip"]').tooltip();
+});
+<?php 
+//if( $dontShowSI !='1' ){  ?>
+var oldWindowWidth = jQuery(window).width();
+jQuery(window).resize(function(){
+	if(oldWindowWidth != jQuery(window).width()){
+		jQuery('.similer-pro-arrow').hide();
+		jQuery('.similar-prod-link').removeClass('active');
+		jQuery('.similar-products-row').remove();
+		jQuery('.category-products').removeClass('current-parent');
+		oldWindowWidth = jQuery(window).width();
+	}
+});
+
+<?php //} ?>
+</script>
+<?php echo $this->getChildHtml('ajax_wishlist');?>
+<script>
+	jQuery('.view-wishlist').on('mouseenter', function(){
+		if(jQuery(this).hasClass('add-wishlist')){
+			jQuery(this).find('.fa-heart-o').css('opacity','0');
+			jQuery(this).find('.fa-heart').css('opacity','1');
+		}
+	}).on('mouseleave', function(){
+		if(jQuery(this).hasClass('add-wishlist')){
+			jQuery(this).find('.fa-heart').css('opacity','0');
+			jQuery(this).find('.fa-heart-o').css('opacity','1');
+		}
+	});
+</script>

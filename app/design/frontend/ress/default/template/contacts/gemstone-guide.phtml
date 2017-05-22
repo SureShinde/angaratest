@@ -1,0 +1,108 @@
+<style>
+.google-mailsignup-form{width:100%; background:url(/skin/frontend/ress/default/images/gemstone-download.jpg) no-repeat;}
+.signup-sub-heading{ font-size:30px; line-height:36px; color:#7e0014; margin-bottom: 25px; border-bottom: 1px solid #e0d4d8; padding:20px 0px;}
+.signup-discriptive{ font-size:13px; line-height:18px; color:#7e0014; width:400px; padding:20px 0;}
+.signup-form-wrapper{background:#faf6f3; border:1px solid #ad8d92; padding:20px 15px 30px; width:100%; float:left;}
+.input-text::-moz-placeholder{ color:#000!important;}
+.calender-icon{ position:absolute; bottom:10px; right:10px; curser:pointer;}
+#subscribeForm .row h1{margin-top:0px; padding-bottom:15px; border-bottom:1px solid #ddcfcf; text-align:center;}
+#subscribeForm .input-text{ padding:6px 3px!important;font-size:11px;}
+#subscribeForm label{color:#6b2d3a; padding:0px; line-height:34px; margin:0px;}
+#subscribeForm .row{margin-left:0px; margin-right:0px;}
+#subscribeForm .row .col-sm-12{padding:0px;}
+.col-sm-4{padding:0px;}
+.thankyou-msg{font-size:32px; text-align:center;}
+#subscribeForm .validation-advice{font-size:11px; }
+#subscribeForm .customer-name .validation-advice, #subscribeForm .email .validation-advice{margin-left:42%;}
+</style>
+<div class="container showcase-bg-white min-padding-top relative-placeholder">
+	<div class="google-mailsignup-form">
+		<div class="col-sm-12 signup-sub-heading high-margin-bottom">GEMSTONE JEWELRY ONLINE BUYING GUIDE</div>
+		<div class="clearfix">
+			<div class="col-md-4 col-sm-6" style="line-height: 23px;">
+				<p style="color:#545454">The Internet has revolutionized the buying process, bringing customers and retailers closer together on a global scale. Information is available in the palm of our hands. Other than shopping from the comfort of your own home, you save time, money, and frustration.</p>
+				<p style="color:#545454">With stricter rules and regulations, purchasing gemstone jewelry online has become safe, helping you shop with confidence and convenience. Everything from how to choose the right jewelry for you to making sure you receive the best value for your hard-earned money, this instant e-book,Gemstone Jewelry Online Buying Guide, provides important information on what you need to know.</p>
+				<p style="margin-top:50px; margin-bottom:20px;"><span style="font-size:20px;">Download Today!</span></p>
+			</div>
+			<div class="col-md-4 col-sm-6" style="text-align:center">
+				<img style="margin:0 auto" class="img-responsive" src="/skin/frontend/ress/default/images/gemstone-download-pdf-preview.png" alt="GEMSTONE JEWELRY ONLINE BUYING GUIDE"/>
+			</div>
+			<div class="col-md-4 col-sm-12">
+				<div class="signup-form-wrapper">
+					<form action="<?php echo Mage::getUrl('contacts/index/downloadpost');//$this->getFormAction();?>" id="subscribeForm" method="post">
+						<div class="row heading clearfix">
+							<h1>DOWNLOAD THE GUIDE</h1>
+						</div>
+						<div class="row customer-name">
+							<div class="col-sm-12 high-margin-bottom clearfix">
+								<div class="data_area">  
+									<label class="col-md-5 col-sm-3">First Name<font color='#b94a48'>*</font></label>
+									<input type="text" id="subfname" class="input-text t1 col-md-7 col-sm-9 required-entry" title="First Name" value="" name="fname">
+								</div>
+							</div>
+							<div class="col-sm-12 high-margin-bottom clearfix">
+								<div class="data_area"> 
+									<label class="col-md-5 col-sm-3">Last Name<font color='#b94a48'>*</font></label>    
+									<input type="text" id="sublname" class="input-text t1 col-md-7 col-sm-9 required-entry" title="Last Name" value="" name="lname" >
+								</div>
+							</div>
+						</div>
+						<div class="row email">
+							<div class="high-margin-bottom col-sm-12"> 
+							<label class="col-md-5 col-sm-3">Email Address<font color='#b94a48'>*</font>  </label>            	
+							<input type="text" id="email_address" class="input-text required-entry validate-email col-md-7 col-sm-9" title="Email Address" value="" name="email_address">
+							</div>
+						</div>
+						<div class="row max-margin-top chkbx">
+							<div class="col-md-10 col-md-offset-1 small max-padding-left col-sm-6 high-margin-bottom"><input type="checkbox" checked="checked" name="agreed" class="required-rules col-md-1 col-sm-1 col-xs-1" style="margin-top:0px; margin-bottom:10px;"> <p>I agree to receive newsletters and updates from Angara.com</p></div>
+							<div class="col-md-8 col-md-offset-2 col-sm-6">
+							<button type="submit" class="btn btn-primary btn-block btn-place-order fontsize-type2" title="Get Your Offer">Get Your Copy</button>
+							</div>
+						</div>
+					</form>
+					<script type="text/javascript">
+						var subscribeForm = new VarienForm('subscribeForm',true);
+						
+						//	S:VA	Validation Added
+						//<![CDATA[
+						Validation.add('required-rules', 'Please check the box for your copy.', function (v,elm) {
+							var inputs = $$('input[name="' + elm.name.replace(/([\\"])/g, '\\$1') + '"]');
+							var error = 1;
+							for(var i=0;i<inputs.length;i++) {
+								if((inputs[i].type == 'checkbox' || inputs[i].type == 'radio') && inputs[i].checked == true) {
+									error = 0;
+								}
+								if(Validation.isOnChange && (inputs[i].type == 'checkbox' || inputs[i].type == 'radio')) {
+									Validation.reset(inputs[i]);
+								}
+							}
+							if( error == 0 ) { return true; } else { return false; }
+						});			
+						//]]>
+						//	E:VA	Validation Added
+					</script>
+				</div>
+			</div>
+		</div>
+        <?php 
+		$params 		= 	Mage::app()->getRequest()->getParams();
+		$s				=	$params[s];
+		$dwn_process	=	Mage::getSingleton('core/session')->getData('dwn_process');
+		if($s==1 && $dwn_process){
+			$fileName	=	Mage::getBaseUrl().'media/download/'.'Gemstone Jewelry Online Buying Guide.pdf';
+		?>
+		<div class="thankyou-msg col-sm-12 clearfix" id="dwn">
+			Thanks for downloading! You will have your guide right away!
+		</div>
+		<script>
+			jQuery(document).ready(function () {
+				var url	=	'<?php echo $fileName;?>';
+				jQuery('<form action="'+ url +'" method="post"></form>')
+						.appendTo('body').submit();
+			});
+        </script>
+        <?php } 
+		Mage::getSingleton('core/session')->setData('dwn_process',false);		//	expire the session
+		?>
+	</div>
+</div>

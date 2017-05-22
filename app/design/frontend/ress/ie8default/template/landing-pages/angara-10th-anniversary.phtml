@@ -1,0 +1,293 @@
+<div class="container showcase-bg-white min-padding-top relative-placeholder">
+	<div class="main clearfix  visible-md">
+		<div class="bb-custom-wrapper">
+			<div id="bb-bookblock" class="bb-bookblock">
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_01.jpg" alt="10th_celebration_01"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_02.jpg" alt="10th_celebration_02"/>
+				</div>
+				<div class="bb-item">
+					<a href="/collection/tajmahal-sugarloaf.html"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_03.jpg" alt="10th_celebration_03"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_04.jpg" alt="10th_celebration_04"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_05.jpg" alt="10th_celebration_05"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_06.jpg" alt="10th_celebration_06" usemap="#vid"/>
+					<map name="vid" id="vid">
+						<area shape="poly" coords="917,281,747,282,748,174,916,173" href="https://www.youtube.com/watch?v=g_UDLevy2lM" target="_blank" />
+					</map>
+				</div>
+				<div class="bb-item">
+					<a href="/collection/high-jewelry.html?icid=10th|magazine|page|7|09142015"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_07.jpg" alt="10th_celebration_07"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_08.jpg" alt="10th_celebration_08"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_09.jpg" alt="10th_celebration_09" usemap="#mag"/>
+					<map name="mag" id="mag">
+						<area shape="poly" coords="310,48,364,149,544,150,490,50" href="/p/round-sapphire-and-diamond-three-stone-ring-sr0160s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="506,50,558,150,740,150,686,49" href="/p/matte-finish-comfort-fit-wedding-band-wrm-sr0778.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="699,50,751,149,932,149,878,49" href="/p/oval-sapphire-and-round-diamond-border-ring-sr0169s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="154,165,205,264,386,264,332,163" href="/p/round-blue-sapphire-and-diamond-lever-back-earrings-se0920s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="348,165,401,265,580,264,529,165" href="/p/pear-ruby-and-diamond-v-bale-pendant-sp0169r.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="543,164,594,262,774,265,721,165" href="/p/oval-emerald-and-diamond-split-shank-ring-sr0112e.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="311,277,363,378,543,378,490,279" href="/p/emerald-encrusted-love-knot-heart-pendant-sp0664e.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="507,280,558,379,738,379,685,280" href="/p/round-ruby-studs-in-14k-yellow-gold-se0102r.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="700,279,753,379,931,379,877,279" href="/p/round-ruby-and-diamond-five-stone-ring-sr0101rd.html?icid=10th|magazine|page|cf|09142015" />
+					</map>
+				</div>
+				<div class="bb-item">
+					<a href="/customer-stories.html?icid=10th|magazine|page|10|09142015"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_10.jpg" alt="10th_celebration_10"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/10th_celebration_11.jpg" alt="10th_celebration_11"/>
+				</div>
+				
+			</div>
+			<nav>
+				<?php /* <a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a> */ ?>
+				<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+				<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+				<?php /* <a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a> */ ?>
+			</nav>
+		</div>
+	</div>
+	<script>
+			var Page = (function() {
+				
+				var config = {
+						$bookBlock : jQuery( '#bb-bookblock' ),
+						$navNext : jQuery( '#bb-nav-next' ),
+						$navPrev : jQuery( '#bb-nav-prev' ),
+						$navFirst : jQuery( '#bb-nav-first' ),
+						$navLast : jQuery( '#bb-nav-last' )
+					},
+					init = function() {
+						config.$bookBlock.bookblock( {
+							speed : 800,
+							shadowSides : 0.8,
+							circular	: true,
+							shadowFlip : 0.7
+						} );
+						initEvents();
+					},
+					initEvents = function() {
+						
+						var $slides = config.$bookBlock.children();
+
+						// add navigation events
+						config.$navNext.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrev.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirst.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLast.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeleft' : function( event ) {
+								config.$bookBlock.bookblock( 'next' );
+								return false;
+							},
+							'swiperight' : function( event ) {
+								config.$bookBlock.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						jQuery( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+									config.$bookBlock.bookblock( 'prev' );
+									break;
+								case arrow.right:
+									config.$bookBlock.bookblock( 'next' );
+									break;
+							}
+						} );
+					};
+
+					return { init : init };
+
+			})();
+		</script>
+		<script>
+				Page.init();
+		</script>
+		
+<?php /* For ipad */ ?>		
+		
+	<div class="main clearfix visible-sm">
+		<div class="bb-custom-wrapper ipad">
+			<div id="bb-bookblock-ipad" class="bb-bookblock ipad">
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_01.jpg" alt="10th_celebration_01"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_02.jpg" alt="10th_celebration_02"/>
+				</div>
+				<div class="bb-item">
+					<a href="/collection/tajmahal-sugarloaf.html"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_03.jpg" alt="10th_celebration_03"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_04.jpg" alt="10th_celebration_04"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_05.jpg" alt="10th_celebration_05"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_06.jpg" alt="10th_celebration_06" usemap="#vidipad"/>
+					<map name="vidipad" id="vidipad">
+						<area shape="rect" coords="417,348,637,489" href="https://www.youtube.com/watch?v=g_UDLevy2lM" target="_blank"/>
+					</map>
+				</div>
+				<div class="bb-item">
+					<a href="/collection/high-jewelry.html?icid=10th|magazine|page|7|09142015"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_07.jpg" alt="10th_celebration_07"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_08.jpg" alt="10th_celebration_08"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_09.jpg" alt="10th_celebration_09" usemap="#magipad"/>
+					<map name="magipad" id="magipad">
+						<area shape="poly" coords="20,155,80,266,277,266,219,155" href="/p/round-sapphire-and-diamond-three-stone-ring-sr0160s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="230,154,288,267,488,267,427,154" href="/p/matte-finish-comfort-fit-wedding-band-wrm-sr0778.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="443,158,500,268,697,267,637,155" href="/p/oval-sapphire-and-round-diamond-border-ring-sr0169s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="20,284,79,393,279,394,220,282" href="/p/round-blue-sapphire-and-diamond-lever-back-earrings-se0920s.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="230,282,289,392,486,394,427,283" href="/p/pear-ruby-and-diamond-v-bale-pendant-sp0169r.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="441,283,503,394,696,393,638,283" href="/p/oval-emerald-and-diamond-split-shank-ring-sr0112e.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="21,411,79,519,277,520,218,409" href="/p/emerald-encrusted-love-knot-heart-pendant-sp0664e.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="228,410,288,519,488,520,429,410" href="/p/round-ruby-studs-in-14k-yellow-gold-se0102r.html?icid=10th|magazine|page|cf|09142015" />
+						<area shape="poly" coords="441,409,500,518,696,520,638,410" href="/p/round-ruby-and-diamond-five-stone-ring-sr0101rd.html?icid=10th|magazine|page|cf|09142015" />
+					</map>
+				</div>
+				<div class="bb-item">
+					<a href="/customer-stories.html?icid=10th|magazine|page|10|09142015"><img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_10.jpg" alt="10th_celebration_10"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="skin/frontend/ress/default/images/magazine/ipad/10th_celebration_11.jpg" alt="10th_celebration_11"/>
+				</div>
+				
+			</div>
+			<nav>
+				<?php /* <a id="bb-nav-first-ipad" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a> */ ?>
+				<a id="bb-nav-prev-ipad" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+				<a id="bb-nav-next-ipad" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+				<?php /* <a id="bb-nav-last-ipad" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a> */ ?>
+			</nav>
+		</div>
+	</div>
+	<script>
+			var Page = (function() {
+				
+				var config = {
+						$bookBlockIpad : jQuery( '#bb-bookblock-ipad' ),
+						$navNextIpad : jQuery( '#bb-nav-next-ipad' ),
+						$navPrevIpad : jQuery( '#bb-nav-prev-ipad' ),
+						$navFirstIpad : jQuery( '#bb-nav-first-ipad' ),
+						$navLastIpad : jQuery( '#bb-nav-last-ipad' )
+					},
+					init = function() {
+						config.$bookBlockIpad.bookblock( {
+							speed : 800,
+							shadowSides : 0.8,
+							circular	: true,
+							shadowFlip : 0.7
+						} );
+						initEvents();
+					},
+					initEvents = function() {
+						
+						var $slides = config.$bookBlockIpad.children();
+
+						// add navigation events
+						config.$navNextIpad.on( 'click touchstart', function() {
+							config.$bookBlockIpad.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrevIpad.on( 'click touchstart', function() {
+							config.$bookBlockIpad.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirstIpad.on( 'click touchstart', function() {
+							config.$bookBlockIpad.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLastIpad.on( 'click touchstart', function() {
+							config.$bookBlockIpad.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeleft' : function( event ) {
+								config.$bookBlockIpad.bookblock( 'next' );
+								return false;
+							},
+							'swiperight' : function( event ) {
+								config.$bookBlockIpad.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						jQuery( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+									config.$bookBlockIpad.bookblock( 'prev' );
+									break;
+								case arrow.right:
+									config.$bookBlockIpad.bookblock( 'next' );
+									break;
+							}
+						} );
+					};
+
+					return { init : init };
+
+			})();
+		</script>	
+		<script>
+				Page.init();
+		</script>
+</div>

@@ -1,0 +1,93 @@
+<script type="text/javascript">
+	jQuery(function(){
+		var currentRecentViewed = 1;
+		var totalRecentViewed = jQuery('#recentviewed-items').width() / 175;
+		jQuery('#recentviewed-items-right').click(function(){
+			if(currentRecentViewed < totalRecentViewed){
+				currentRecentViewed++;
+				jQuery('#recentviewed-items').stop(true,true).animate({left:'-=175'})
+			}
+			else{
+				currentRecentViewed = 1;
+				jQuery('#recentviewed-items').stop(true,true).animate({left:0})
+			}
+		})
+		
+		jQuery('#recentviewed-items-left').click(function(){
+			if(currentRecentViewed > 1){
+				currentRecentViewed--;
+				jQuery('#recentviewed-items').stop(true,true).animate({left:'+=175'})
+			}
+			else{
+				currentRecentViewed = totalRecentViewed;
+				jQuery('#recentviewed-items').stop(true,true).animate({left:-(jQuery('#recentviewed-items').width() - 175)})
+			}
+		})
+		
+	})
+</script>
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items= array();
+if($indx == "")
+{
+	$rw_items = $this->CollectRecentlyViewed();
+}
+//$panel_state = $this->checkPanelState();
+if (is_array($rw_items) && count($rw_items) > 0) :
+    ?>
+	
+	
+<div class="itemholder">
+<div class="titlebg">Recently Viewed</div>
+<span id="recentviewed-items-left" class="itemsliderprearrow"></span> <span id="recentviewed-items-right" class="itemslidernextarrow"></span>
+<div class="angara-items-wrapper">
+<div id="recentviewed-items" class="angara-items" style="width:<?php echo count($rw_items) * 175 ?>px">
+<?php foreach ($rw_items as $rw_item) : 
+			$prodmodel = Mage::getModel('catalog/product'); 
+            $prodmodel->load($rw_item);
+			$imagemodel = Mage::helper('catalog/image')->init($prodmodel, 'small_image')->resize(150);
+?>
+
+	<div class="angara-item">
+	<a href="<?php  echo $prodmodel->getProductUrl(); ?>?icid=rv-widget">
+		 	<span class="itemimgholder">
+				<img  width="150" height="150" alt="<?php echo $prodmodel->getName();?>" src="<?php echo $imagemodel;?>">
+			</span>
+		</a>
+		<a href="<?php  echo $prodmodel->getProductUrl(); ?>?icid=rv-widget" rel="nofollow">
+			<span class="itemdetailholder">
+				<span class="itemproname"><?php echo $prodmodel->getName();?></span>
+				<span class="itemproprice"><?php echo $this->helper('core')->currency($prodmodel->getPrice(),true,false) ?></span>
+			</span>
+		</a>
+	</div>
+
+<?php endforeach; ?>
+</div>
+</div>
+</div>
+
+<?php else: ?>
+<div class="itemholder">
+<a href="/collection/sapphire/be-mine.html"><img src="/skin/frontend/angara/default/images/home-banner/hoops-earrings.jpg" width="150" height="150" /></a>
+</div>
+<?php endif; ?>
+<style>
+	.angara-item{
+		width:175px !important;	
+	}
+	.angara-items-wrapper{
+		width:150px !important;	
+	}
+	.itemholder{
+		width:191px !important;	
+	}
+	.itemimgholder{
+		width:175px !important;	
+	}
+	.itemdetailholder{
+		width:150px !important;	
+	}
+</style>

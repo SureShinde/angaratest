@@ -1,0 +1,130 @@
+<?php
+$categoryId	= $this->getCategoryId();
+// Get category name for breadcrumb
+$breadcrumbCategory = Mage::getModel('catalog/category')->load($categoryId);
+$breadcrumbCategoryName = $breadcrumbCategory->getName(); ?>
+<div class="container">
+  	<ul class="breadcrumb">
+    	<li class="home"><a href="<?php echo Mage::helper('core/url')->getHomeUrl();?>">Home</a></li>
+    	<li class="category5"><a href="<?php echo Mage::getUrl().'customer-reviews';?>" >Jewelry Reviews</a></li>
+    	<?php 
+		if($breadcrumbCategoryName!=''){?>
+		<li class="category82"><strong><?php echo $breadcrumbCategoryName;?></strong></li>
+    	<?php 
+		} ?>
+  	</ul>
+</div>
+<style>
+	.btn-block{
+		background: #ffffff;
+		border-radius: 2px;
+		border: 1px solid #000000;
+		color: #000000!important;
+		display: block;
+		padding: 10px;
+		margin-bottom: 10px;
+		text-align: center;
+		text-decoration:none;
+	}
+	.btn-block:hover{border:1px solid #fa505a; color:#fa505a!important}
+</style>
+<div id="review-wrapper" class="container showcase-bg-white high-padding-top">
+   <h1 class="no-margin pB10" style="font-weight:normal; font-size:20px;"><?php echo $breadcrumbCategoryName;?> Reviews</h1>
+  	<?php
+	$leftCategoryIdArray = $this->getLeftCategoryIds($categoryId); // Array of either Parent or Child category ids
+	if( !is_array($leftCategoryIdArray) ){
+		$leftCategoryIdArray = $this->getLeftCategoryIds($leftCategoryIdArray);
+	}
+	
+	if(count($leftCategoryIdArray)>0){ // Load child category in left navigation ?> 
+    <div  class="row no-gutters max-margin-bottom high-padding-bottom high-padding-top showcase-border-bottom">
+      
+        <?php 	
+		foreach($leftCategoryIdArray as $leftCat){
+			$category = Mage::getModel('catalog/category')->load($leftCat);
+			$review	= $this->getReviewsForCategory($leftCat,1);
+			if(count($review) > 0){	?>
+        		<div class="pull-left high-margin-right relative-placeholder visible-md visible-sm" <?php if($categoryId==$category->getId()){?>id="active-review-tab"<?php } ?>>
+					<a href="<?php echo Mage::getUrl("testimonials/index/morereviews/id/".$category->getId()."") ?>" title="<?php echo $category->getName(); ?>" style="" class="btn-block no-underline"><?php echo $category->getName(); ?></a>
+				</div>
+        	<?php
+			}
+		} ?>
+      
+      	<div class="clear"></div>
+    </div>
+  	<?php
+	}?>
+  	<div  class="row no-gutters"> 
+    <?php 
+	$reviewscount = Mage::getStoreConfig('testimonials/general/reviews_count_per_category');
+	$reviewscount = $reviewscount?$reviewscount:5;
+	if($categoryId){
+		$review	= $this->getReviewsForCategory($categoryId,$reviewscount);
+		if(count($review) > 0) {
+			foreach($review as $testimonial){
+				$pro		=	Mage::getModel('catalog/product');
+				$_product	=	$pro->load($testimonial->getEntityPkValue());
+				$status		=	$_product->getStatus();
+				$skuProduct	=	$_product->getSku();
+				$productID	=	$_product->getID(); ?>
+    			<div class="row max-margin-bottom max-padding-bottom no-gutters showcase-dotted-border-bottom-1px">	
+    				
+      					<div class="col-sm-2">
+					  	<?php 
+						if($categoryId=='406' || $categoryId=='407' || $categoryId=='408' || $categoryId=='409'){?>
+					  		<img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>" class="center-block text-center">
+					  	<?php 
+						}
+						else{?>
+					  		<a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=more_testimonial" title="<?php echo $_product->getName();?>"><img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>" class="center-block text-center"></a>
+					  	<?php 
+					  	} ?>
+					  		<div class="star-img center-block text-center">
+							<?php
+							$averageRating = 0;
+							$ratings = array();
+							foreach($testimonial->getRatingVotes() as $vote) {
+								$ratings[] = $vote->getPercent();
+							}
+							$averageRating = array_sum($ratings)/count($ratings);
+							if($averageRating){ ?>
+								<div class="rating-box center-block min-margin-bottom">
+								  <div class="rating" style="width: <?php echo ceil($averageRating) ; ?>%;"></div>
+								</div>								
+							<?php 
+							} ?>
+							</div>
+					  		<div class="dated">
+								<span class="reviewername center-block text-center"><?php echo $this->htmlEscape($testimonial->getNickname());?></span>
+								<span class="center-block text-center small"> 
+								<?php 
+								// Review date
+								$toDateFormat = 'l, F j, Y';	//	Friday, August 30, 2013
+								echo $formattedDate = Mage::getModel('core/date')->date($toDateFormat, strtotime($testimonial->getCreatedAt())); ?>
+								</span>
+							</div>
+					  	</div>
+      					<div class="col-sm-9 col-sm-offset-1 max-margin-top">							
+							<div class="fontsize-type4 max-margin-bottom">
+                            <strong>
+            				<?php 
+							$testi_title = $this->htmlEscape($testimonial->getTitle());
+							if (strlen($testi_title) > 80) {
+								$testi_title = substr($testi_title, 0, 80);
+								$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+								$testi_title .= '...';
+							}
+							echo $testi_title; ?>
+         					 </strong>
+							</div>							
+							<div><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></div>        
+        				</div>   
+       				
+      			</div>    
+    		<?php 
+			}
+		}
+	} ?>
+  	</div>
+</div>

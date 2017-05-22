@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+	<sections>
+		<gemstonecolors translate="label" module="gemstonecolor">
+			<label>Gemstone Colors</label>
+			<tab>catalog</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>500</sort_order>
+			<show_in_website>1</show_in_website>
+			<show_in_default>1</show_in_default>
+			<groups>	
+				<scategories>
+					<label>Gemstone Colors</label>
+					<show_in_website>1</show_in_website>
+					<show_in_default>1</show_in_default>
+					<sort_order>6</sort_order>
+					<fields>				
+						<specificm translate="label">
+							<label>Gemstone Colors Display</label>
+							<frontend_type>select</frontend_type>
+							<source_model>gemstonecolor/system_config_source_category</source_model>
+							<comment></comment>
+							<sort_order>10</sort_order>
+							<show_in_store>1</show_in_store>
+							<show_in_default>1</show_in_default>
+						</specificm>
+						<allowedm translate="label">
+							<label>Allowed Categories</label>
+							<frontend_type>text</frontend_type>
+							<frontend_model>gemstonecolor/adminhtml_system_config_frontend_category</frontend_model>
+							<backend_model>gemstonecolor/system_config_backend_category</backend_model>
+							<depends><specificm>1</specificm></depends>
+							<comment></comment>
+							<sort_order>20</sort_order>
+							<show_in_store>1</show_in_store>
+							<show_in_default>1</show_in_default>
+						</allowedm>
+						<categorydesktop translate="label">
+							<label>Categories to Exclude for Desktop / IPad</label>
+							<frontend_type>textarea</frontend_type>
+							<comment>Enter cagetory ids to exclude for desktop/ipad in comma seperated. For eg. "457,96,358"</comment>
+							<sort_order>30</sort_order>
+							<show_in_store>1</show_in_store>
+							<show_in_default>1</show_in_default>
+						</categorydesktop>
+						<categorymobile translate="label">
+							<label>Categories to Exclude for Mobile</label>
+							<frontend_type>textarea</frontend_type>
+							<comment>Enter cagetory ids to exclude for mobile in comma seperated. For eg. "457,96,358"</comment>
+							<sort_order>50</sort_order>
+							<show_in_store>1</show_in_store>
+							<show_in_default>1</show_in_default>
+						</categorymobile>
+					</fields>
+				</scategories>
+			</groups>
+		</gemstonecolors>
+	</sections>
+</config>

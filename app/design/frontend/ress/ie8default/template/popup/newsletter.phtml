@@ -1,0 +1,116 @@
+<?php
+//	S:VA
+$visitorState	=	Mage::getSingleton("checkout/session")->getData("visitor_state");
+if( $visitorState=='in' ){			//indiana = in, ?>
+	<div class="text-center" style="width:594px; height:364px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/5-state-offer.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-8px; right:-10px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;" data-dismiss="modal"></div>
+		<div style="margin:0 auto; top: 200px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> To ALL <span style="color:#b61038;font-style:italic;font-size:20px">INDIANA</span> CUSTOMERS </div>
+		<div style="margin:0 auto; top: 260px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> Applied Code : <span style="color:#b61038">INDIANA</span> </div>		
+		<div class="continue-shopping" style="position:absolute; width:194px; height:23px; bottom:23px; left:200px; cursor:pointer;" data-dismiss="modal"></div>
+	</div>
+<?php }else if( $visitorState=='pa' ){	//	pennsylvania = pa, ?>
+	
+    <div class="text-center" style="width:594px; height:364px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/5-state-offer.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-8px; right:-10px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;" data-dismiss="modal"></div>
+		<div style="margin:0 auto; top: 200px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> To ALL <span style="color:#b61038;font-style:italic;font-size:20px">PENNSYLVANIA</span> CUSTOMERS </div>
+		<div style="margin:0 auto; top: 260px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> Applied Code : <span style="color:#b61038">PENNSYLVANIA</span> </div>
+		<div class="continue-shopping" style="position:absolute; width:194px; height:23px; bottom:23px; left:200px; cursor:pointer;" data-dismiss="modal"></div>
+	</div>
+    
+<?php }else if( $visitorState=='wi' ){	//	wisconsin = wi, ?>
+
+	<div class="text-center" style="width:594px; height:364px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/5-state-offer.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-8px; right:-10px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;" data-dismiss="modal"></div>
+		<div style="margin:0 auto; top: 200px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> To ALL <span style="color:#b61038;font-style:italic;font-size:20px">WISCONSIN</span> CUSTOMERS </div>
+		<div style="margin:0 auto; top: 260px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> Applied Code : <span style="color:#b61038">WISCONSIN</span> </div>
+		<div class="continue-shopping" style="position:absolute; width:194px; height:23px; bottom:23px; left:200px; cursor:pointer;" data-dismiss="modal"></div>
+	</div>
+    
+<?php }else if( $visitorState=='nc' ){	//	north carolina = nc, ?>
+
+	<div class="text-center" style="width:594px; height:364px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/5-state-offer.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-8px; right:-10px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;;" data-dismiss="modal"></div>
+		<div style="margin:0 auto; top: 200px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> To ALL <span style="color:#b61038;font-style:italic;font-size:20px">NORTH CAROLINA</span> CUSTOMERS </div>
+		<div style="margin:0 auto; top: 260px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> Applied Code : <span style="color:#b61038">NCAROLINA</span> </div>
+		<div class="continue-shopping" style="position:absolute; width:194px; height:23px; bottom:23px; left:200px; cursor:pointer;" data-dismiss="modal"></div>
+	</div>
+	
+<?php }else if( $visitorState=='mi' ){	//	michigan = mi, ?>
+	
+    <div class="text-center" style="width:594px; height:364px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/5-state-offer.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-8px; right:-10px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;" data-dismiss="modal"></div>
+		<div style="margin:0 auto; top: 200px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> To ALL <span style="color:#b61038;font-style:italic;font-size:20px">MICHIGAN</span> CUSTOMERS </div>
+		<div style="margin:0 auto; top: 260px; width: 100%; position: absolute;font-size: 16px;FONT-WEIGHT: BOLD;Letter-spacing: .5px;color: #1a4f8e;"> Applied Code : <span style="color:#b61038">MICHIGAN</span> </div>
+		<div class="continue-shopping" style="position:absolute; width:194px; height:23px; bottom:23px; left:200px; cursor:pointer;" data-dismiss="modal"></div>
+	</div>
+    
+<?php }else{
+//	E:VA
+?>
+
+<style>
+#advice-required-entry-homePopupEmail, #advice-validate-email-homePopupEmail {position:absolute; font-size:12px; font-weight:bold; left:0; bottom:40px; top:45px; margin-top: 5px;}
+#subscription-form-homepopup .input-text::-moz-placeholder{ color:#000;}
+#subscription-form-homepopup .showcase-border-thick{ border-color:#a7a7a7!important;}
+#subscription-form-homepopup .custom-font-style{ font-family:arial; font-size:18px; font-style:italic}
+#subscription-form-homepopup .my-coupon-btn{background:none; width:100%; margin-top:14px; margin-bottom:14px; height:40px; font-size:0px; border-color:#a7a7a7; text-transform:capitalize; text-shadow:1px 1px #000000; filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+</style>
+<div class="text-center" style="width:623px; height:561px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/signup-off-popup.jpg') no-repeat; position:absolute; top:108px; left:0; bottom:0; right:0; margin:auto;">	
+		<div class="dismiss-popup" style="position:absolute; width:18px; height:18px; top:-9px; right:-9px; cursor:pointer; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg') no-repeat;display:none; background-position: -229px -151px; border-radius: 11px;;" data-dismiss="modal"></div>
+	<div style="margin:0 auto; margin-top:323px; width:500px; position:relative;">
+	<form method="post" id="subscription-form-homepopup" action="<?php echo ((Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://').Mage::app()->getRequest()->getHttpHost().'/newsletter/subscriber/confirmed/';?>" onsubmit="return checkFormPopup(this);">
+		<input id="homePopupEmail" class="input-text required-entry validate-email fontsize-type1" type="text" placeholder="Enter your email address" name="email" style="width:294px; height:41px; padding: 0 10px; color: #757575; text-align: left; font-size: 18px; font-style: italic; border: none; float:left">
+		<?php /*?><input type="hidden" value="<?php $currentUrl = Mage::getSingleton('core/session')->getLastUrl(); if(preg_match("#cms/index/index#", $currentUrl)){$currentUrl = Mage::helper('core/url')->getHomeUrl();} echo $currentUrl;?>" name="return_url">
+        <input type="hidden" value="<?php echo $currentUrl = Mage::getBaseUrl(); ?>" name="return_url">
+        <input type="hidden" value="<?php echo $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>" name="return_url"><?php */?>
+        <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="return_url">
+        <input type="hidden" value="02-popup" name="newslettertype">
+		<input class="btn btn-primary hidden-xs subscribe-button my-coupon-btn" onclick="emailSignupSubmit()" style="width:41%; margin-top:0px; margin-bottom:0px; height:41px; float:right;" type="submit" value="Get My Coupon">
+	</form>
+	<script type="text/javascript">
+	//&lt;![CDATA[
+	var dataFormHomePop = new VarienForm('subscription-form-homepopup', false);
+	function checkFormPopup(frm) {
+		var regPopup = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		if(frm.homePopupEmail.value != '' && regPopup.test(frm.homePopupEmail.value) !== false) {
+			return true;												
+		}
+		return false;
+	}
+	//]]&gt;
+	</script>	
+	</div>
+	<div class="clearfix"></div>
+	<div class="" style="font-family:arial;font-size:16px;color:#ffffff;text-align:center;text-decoration:underline;cursor:pointer;display:inline;line-height:48px" data-dismiss="modal">No thanks, I don't like Discounts</div>
+	<div class="clearfix"></div>
+	<div class="block-inline-display fontsize-type1" id="rules-link" style="margin:-9px 30px 0px; color:#222222"><span id="return-policy-link" style="color:#222222; line-height:25px;" class="clickable">Angara insiders get exclusive access to sales, previews of new collection, newsletters and much more.<br><a href="/privacy-and-security.html" target="_blank" style="text-decoration:underline; color:#4a4a4a;">Privacy Policy</a></span>		
+	</div>
+	<div class="clearfix"></div>	
+</div>
+<?php } ?>
+
+<script>
+setTimeout(function() {
+    jQuery('.dismiss-popup').show(300);
+}, 2000);
+jQuery('#official-rules-popup').click(function(e){e.stopPropagation();});
+jQuery('#official-rules-link').click(function(e){
+	e.stopPropagation();
+	jQuery('#official-rules-popup').removeClass('hidden');
+});
+jQuery('body').click(function(){
+	jQuery('#official-rules-popup').addClass('hidden');
+});
+jQuery('.close-rules-popup').click(function(){
+	jQuery('#official-rules-popup').addClass('hidden');
+});
+</script>
+<!--[if IE]>
+<script>
+jQuery(function(){
+jQuery('#homePopupEmail').placeholder();
+jQuery('.close-rules-popup').fadeTo(1,.9).fadeTo(1,1);
+});
+</script>
+<![endif]-->

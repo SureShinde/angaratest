@@ -1,0 +1,19 @@
+<layout>
+    <default>
+        <remove name="notification_security" />
+        <remove name="notification_survey" />
+    </default>
+	
+	<!--	Setting Header Footer for Txn Emails	-->
+	<email_header>
+		<block type="cms/block" name="email_header">
+			<action method="setBlockId"><block_id>email-header-sales</block_id></action>
+		</block>
+	</email_header>
+	<email_footer>
+		<block type="cms/block" name="email_footer">
+			<action method="setBlockId"><block_id>email-footer-sales</block_id></action>
+		</block>
+	</email_footer>
+	
+</layout>

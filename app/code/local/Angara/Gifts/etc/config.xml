@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Angara
+ * @package    Angara_Gifts
+ * @copyright  Copyright (c) 2014 Angara ecommerce. (http://www.angara.com)
+ * @license    http://angara.com/LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+	<modules>
+		<Angara_Gifts>
+			<version>1.0.0</version>
+		</Angara_Gifts>
+	</modules>
+	<frontend>
+		<routers>
+			<gifts>
+				<use>standard</use>
+				<args>
+					<module>Angara_Gifts</module>
+					<frontName>gifts</frontName>
+				</args>
+			</gifts>
+		</routers>
+		<layout>
+			<updates>
+				<gifts>
+					<file>gifts.xml</file>
+				</gifts>
+			</updates>
+		</layout>
+        <translate>
+            <modules>
+                <Angara_Gifts>
+                    <files>
+                        <default>Angara_Gifts.csv</default>
+                    </files>
+                </Angara_Gifts>
+            </modules>
+        </translate>        
+	</frontend>
+	<admin>
+		<routers>
+			<gifts>
+				<use>admin</use>
+				<args>
+					<module>Angara_Gifts</module>
+					<frontName>gifts_admin</frontName>		<!--This will show in admin url-->
+				</args>
+			</gifts>
+		</routers>
+	</admin>
+	<adminhtml>
+		<menu>
+			<gifts module="gifts">
+				<title>Gifts</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="gifts">
+						<title>Manage Rules</title>
+						<sort_order>0</sort_order>
+						<action>gifts/adminhtml_gifts</action>
+					</items>
+				</children>
+			</gifts>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<!--<gifts>
+							<title>Gifts Module</title>		
+							<sort_order>10</sort_order>
+							<children>
+								<items translate="title" module="gifts">
+									<title>Manage Gifts</title>		
+									<sort_order>50</sort_order>
+									<action>gifts/adminhtml_gifts</action>
+								</items>
+							</children>
+						</gifts>-->
+						<Angara_Gifts>
+							<title>Gifts Module</title>
+							<sort_order>10</sort_order>
+						</Angara_Gifts>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<gifts>
+					<file>gifts.xml</file>
+				</gifts>
+			</updates>
+		</layout>
+	</adminhtml>   
+	<global>
+		<resources>
+			<gifts_setup>
+				<setup>
+					<module>Angara_Gifts</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</gifts_setup>
+			<gifts_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</gifts_write>
+			<gifts_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</gifts_read>
+		</resources>
+		<blocks>
+			<gifts><class>Angara_Gifts_Block</class></gifts>
+		</blocks>
+		<models>
+			<gifts>
+				<class>Angara_Gifts_Model</class>
+				<resourceModel>gifts_mysql4</resourceModel>
+			</gifts>
+			<gifts_mysql4>
+				<class>Angara_Gifts_Model_Mysql4</class>
+				<entities>
+					<gifts>
+						<table>angara_gifts</table>
+					</gifts>
+					<product>
+						<table>angara_gifts_product</table>
+					</product>
+				</entities>
+			</gifts_mysql4>
+		</models> 
+		<helpers>
+			<gifts>
+				<class>Angara_Gifts_Helper</class>
+			</gifts>
+		</helpers>
+		
+	</global>
+</config>

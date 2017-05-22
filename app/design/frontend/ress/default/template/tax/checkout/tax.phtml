@@ -1,0 +1,305 @@
+<?php
+/**
+ * @var $this Mage_Tax_Block_Checkout_Tax
+ * @see Mage_Tax_Block_Checkout_Tax
+ */
+?>
+<?php
+	$pageType = Mage::helper('function')->getPageType(); 
+    $_value = $this->getTotal()->getValue();
+    $_style = $this->getTotal()->getStyle();
+	$pageType =	Mage::helper('function')->getPageType();
+	if($pageType == 'cart'){
+		$downAngle = '<i class="fa fa-angle-down"></i>';
+	}
+?>
+<?php global $taxIter; $taxIter++; ?>
+<?php if ($this->helper('tax')->displayFullSummary() && $_value!=0): ?>
+<?php $isTop = 1; ?>
+    <?php foreach ($this->getTotal()->getFullInfo() as $info): ?>
+        <?php if (isset($info['hidden']) && $info['hidden']) continue; ?>
+        <?php $percent = $info['percent']; ?>
+        <?php $amount = $info['amount']; ?>
+        <?php $rates = $info['rates']; ?>
+        <?php $isFirst = 1; ?>
+
+        <?php foreach ($rates as $rate): ?>
+        <tr class="summary-details-<?php echo $taxIter; ?> summary-details<?php if ($isTop): echo ' summary-details-first'; endif; ?>" style="display:none;">
+            <td class="a-left" style="<?php echo $_style ?>" colspan="<?php echo $this->getColspan(); ?>">
+                <?php echo $this->escapeHtml($rate['title']); ?>
+                <?php if (!is_null($rate['percent'])): ?>
+                    (<?php echo (float)$rate['percent']; ?>%)
+                <?php endif; ?>
+                <br />
+            </td>
+            <?php if ($isFirst): ?>
+                <td style="<?php echo $_style ?>" class="a-right" rowspan="<?php echo count($rates); ?>">
+                    <?php echo $this->helper('checkout')->formatPrice($amount); ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <?php $isFirst = 0; ?>
+        <?php $isTop = 0; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif;?>
+<tr <?php if ($this->helper('tax')->displayFullSummary() && $_value!=0): ?> class="summary-total" onclick="expandDetails(this, '.summary-details-<?php echo $taxIter;?>')"<?php endif; ?>>
+    <td style="<?php echo $_style ?>" class="a-left <?php if($pageType== 'cart'){ echo 'clickable'; }?>" data-class="tax" colspan="<?php echo $this->getColspan(); ?>">
+        <?php if ($this->helper('tax')->displayFullSummary()): ?>
+            <div class="summary-collapse"><?php echo $this->getTotal()->getTitle(); echo ' '.$downAngle; ?></div>
+        <?php else: ?>
+            <?php echo $this->getTotal()->getTitle(); echo ' '.$downAngle; ?>
+        <?php endif;?>
+		<?php /* <i id="tax-info" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="Sales tax will be calculated once we collect the shipping address for this order. If you are shipping to NY, NJ & CA, tax will be charged on the order subtotal, shipping and handling at the applicable county rate. Tax rates within counties vary."></i> */ ?>
+    </td>
+    <td style="<?php echo $_style ?>" class="a-right"><?php echo ($_value>0)? $this->helper('checkout')->formatPrice($_value):'- -'; ?></td>
+</tr>
+<tr data-class="open-tax" style="display:none">
+	<td colspan="2" style="padding:0px!important;">
+		<?php 	//	S:VA
+		if($pageType=='cart'){
+			$cart 	= 	Mage::getSingleton('checkout/cart');
+			$quote 	= 	$cart->getQuote();
+			$shippingAddress = $quote->getShippingAddress();
+			$zip 	= 	(int)$shippingAddress->getPostcode();
+			if($zip == 0){
+				$zip = '';
+			}
+			?>
+			<div class="discount-code-block">
+            <?php      $isIPad	= Mage::helper('function')->isIPad();	?>
+				<input type="<?php echo ($isIPad) ? 'number':'text'?>" id="estimate_postcode" name="estimate_postcode" onkeyup="estimateTaxRate(<?php echo $zip; ?>)"  placeholder="Enter Zip Code" maxlength="5" style="width:110px; padding:5px; height:35px; width:100%; box-sizing:border-box;" value="<?php echo $this->htmlEscape($zip); ?>"/>
+			</div>
+			<?php /*
+			<script>
+			<?php $seq_http	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'); ?>
+			jQuery(function(){
+				//jQuery('#tax-info').tooltip();
+				
+				var dataLoaded	=	'';						
+				jQuery("#estimate_postcode").on("keyup", function(){
+					var pLength = jQuery("#estimate_postcode").val().length;
+					var estimate_postcode = jQuery("#estimate_postcode").val();
+					
+					if(pLength=='5' && dataLoaded!='1' && estimate_postcode!='<?php echo $zip;?>'){
+						dataLoaded	=	1;
+						jQuery.ajax({
+							type: 'POST',
+							url: '<?php echo $this->getUrl('checkout/cart/estimateTax', array('_secure'=>$seq_http)) ?>', //	calling controller here
+							// url: '<?php echo Mage::getBaseUrl();?>checkout/cart/estimateTax',			
+							data: { estimate_postcode : estimate_postcode },
+							beforeSend: function( xhr ) {
+								jQuery('#estimate_postcode').attr('disabled','disabled');
+								jQuery('#ajax-loader').removeClass('hide');
+							},
+						}).done(function( html ){
+							window.location = '<?php echo Mage::getUrl('checkout/cart/index/');?>';
+						}).fail(function(jqXHR, textStatus){
+							
+						});
+					}
+				})
+			})
+			</script> */ ?>
+		<?php } ?>
+	</td>
+</tr>
+<?php if($pageType == 'cart'){ ?>
+	<?php
+		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')) {
+			echo $this->renderTotals('footer'); 
+		} 
+	?>
+<?php } ?>
+<?php if(Mage::app()->getRequest()->getModuleName() == 'amazon_payments'){ ?>
+	<?php $sobj = Mage::getBlockSingleton('Mage_Tax_Block_Checkout_Shipping'); ?>
+
+		<tr>
+			<td style="<?php echo $this->getStyle() ?>" class="a-left" colspan="<?php echo $this->getColspan(); ?>">
+				<?php
+					$shippingDescription = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingDescription();
+					if(strlen($shippingDescription) > 0) {
+						echo 'Shipping('.$shippingDescription.')'; 
+					} else {
+						echo 'Shipping'; 
+					}
+					
+				?>
+			</td>
+			<td style="<?php echo $this->getStyle() ?>" class="a-right">
+				<?php $amt = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount(); ?>
+				<?php if($amt > 0.00) { ?>
+					<?php echo $sobj->helper('checkout')->formatPrice($amt); ?>
+				<?php } else { ?>
+					<span class="apricot-text">Free</span>	
+				<?php } ?>
+			</td>
+		</tr>
+
+<?php }elseif(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	<?php
+	$baseCurrencyCode 		= 	Mage::app()->getStore()->getBaseCurrencyCode();				// Base Currency
+	$currentCurrencyCode 	= 	Mage::app()->getStore()->getCurrentCurrencyCode();			// Current Currency
+	$shippingAmount			=	Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();
+	$pageType =	Mage::helper('function')->getPageType();
+		//if($currentCurrencyCode != $baseCurrencyCode){ ?>
+	<tr>
+		<td  data-class="shipping" style="pointer-events:none;" class="a-left <?php if($pageType== 'cart'){ echo 'clickable'; }?>" <?php if($pageType == 'checkout' || $pageType == 'onepagecheckout'){ echo 'colspan="2"'; }?>>
+			Shipping <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ echo '<br>'; }?> 
+			<span class="apricot-text"><?php
+			$shipment_hp 			= 	'';
+			if(Mage::getSingleton('checkout/session')->getData('shipment')){
+				$shipment_hp 		= 	Mage::getSingleton('checkout/session')->getData('shipment');
+			}
+			
+			if($currentCurrencyCode == $baseCurrencyCode){
+				$availableShippingMethods	=	Mage::helper('function')->getDefaultShippingMethods();
+				$i = 0;
+				$shown	=0;
+				foreach($availableShippingMethods as $_method){ 
+					if($shipment_hp == $_method['code']){
+						echo '('.$_method['title'].')';
+						$shown	=1;
+					}
+					$i++;
+				}
+				if($shown==0){
+					$j=0;
+					foreach($availableShippingMethods as $_method){ 
+						if($j == 0){
+							echo '('.$_method['title'].')';
+						}
+						$j++;
+					}
+				}
+			}else{
+				//	S:VA	Solution for non US user case - when they select any shipment method from opc page
+				$availableShippingMethods	=	Mage::helper('function')->getDefaultShippingMethods();
+				//$i = 0;
+				$shown	=0;
+				foreach($availableShippingMethods as $_method){ 
+					if($shipment_hp == $_method['code']){
+						echo '('.$_method['title'].')';
+						$shown	=1;
+					}
+					//$i++;
+				}
+				/*if($shown==0){
+					$j=0;
+					foreach($availableShippingMethods as $_method){ 
+						if($j == 0){
+							echo '('.$_method['title'].')';
+						}
+						$j++;
+					}
+				}*/
+				if($shown==0){
+					echo '(International Shipping)';
+				}
+				//	E:VA
+			}
+			?></span>
+			<?php /* if($pageType == 'cart'){ ?>
+				<i class="fa fa-angle-down"></i>
+			<?php }	*/ ?>
+		</td>
+		<td class="a-right">
+			<?php
+			if($currentCurrencyCode == $baseCurrencyCode){
+				$availableShippingMethods	=	Mage::helper('function')->getDefaultShippingMethods();
+				//print_r($availableShippingMethods);
+				//$i = 0;
+				$priceShown	=0;
+				foreach($availableShippingMethods as $_method){
+					if($shipment_hp == $_method['code']){
+						if($_method['price'] == '' || $_method['price'] == 0 || $_method['price'] == '0.00' || $_method['code'] == 'freeshipping_freeshipping'){
+							echo '<span class="apricot-text">Free</span>';
+						}else{
+							$ang2dayObj=Mage::getModel('ang2dayflatrate/carrier_ang2dayflatrate');
+						    
+						    if($ang2dayObj->getEmailFreeShipping() && $_method['code'] == 'ang2dayflatrate_ang2dayflatrate')
+                             {
+                               echo '<span class="apricot-text">Free</span>';
+                             }
+                             else
+                             {
+								/* s: code for free shipping bound with coupon. */
+								$couponCode = Mage::getSingleton('core/session')->getPromotionCode();
+								$couponShipping = Mage::helper('function')->getCouponShipping($couponCode);
+								/* e: code for free shipping bound with coupon. */
+								if($couponShipping && $couponShipping == $_method['code']){
+									echo '<span class="apricot-text">Free</span>';
+								}
+								else{
+									echo Mage::helper('checkout')->formatPrice($_method['price']);
+								}	
+                             }
+						}
+						$priceShown	=1;
+						break;
+					}
+					//$i++;
+				}
+				if($priceShown==0){
+					$j=0;
+					foreach($availableShippingMethods as $_method){
+						if($j == 0){
+							if($_method['price'] == '' || $_method['price'] == 0 || $_method['price'] == '0.00' || $_method['code'] == 'freeshipping_freeshipping'){
+								echo '<span class="apricot-text">Free</span>';
+							}else{
+								echo Mage::helper('checkout')->formatPrice($_method['price']);
+							}
+						}
+						$j++;
+					}
+				}
+			}else{
+				//	S:VA	Fixed issue when country is Brazil (Non US) and user select US address in opc
+				$shippingMethodCode		=	'angnonusflatrate';
+				$tempShippingMethodCode	=	explode('_',$shipment_hp);
+				if($tempShippingMethodCode[0]){
+					$shippingMethodCode		=	$tempShippingMethodCode[0];
+				}
+				//	E:VA
+				
+				$subTotalWithoutEasyEmi				= 	Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments();
+				$freeInternationalShippingAmount	=	Mage::getStoreConfig("carriers/".$shippingMethodCode."/min_cart_value_for_free_shipping");
+				$price								=	Mage::getStoreConfig("carriers/".$shippingMethodCode."/price");
+				if($subTotalWithoutEasyEmi >= $freeInternationalShippingAmount){
+					$_title 	= 	Mage::getStoreConfig("carriers/".$shippingMethodCode."/title");
+					if($price>0 && $shippingMethodCode!='angnonusflatrate'){
+						echo Mage::helper('core')->currency($price,true,false);
+					}else{
+						echo '<span class="apricot-text">Free</span>'; 
+					}
+				} 
+				else { 
+					//echo Mage::helper('checkout')->formatPrice($price);
+					echo Mage::helper('core')->currency($price,true,false);
+					//echo '$'.$price;
+				}
+			}
+			?>
+		</td>
+	</tr>
+<?php } ?>
+<?php if($pageType == 'cart'){ ?>
+	<tr data-class="open-shipping" style="display:table-row;">
+		<td colspan="2" style="padding:0px!important;">
+			<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('checkout/shipping_dropdown.phtml')->toHtml(); ?>
+		</td>
+	</tr>
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		<tr data-class="open-discount">
+			<td colspan="2" style="padding:0px!important;">
+			<?php 
+			$customerCoupon = Mage::helper('function')->getCustomerCoupon(); 
+			if($customerCoupon != 'CUSTOMORDER'): ?>
+				<div class="discount-code-block padding-type-5 max-margin-top max-margin-bottom"><?php echo $this->getLayout()->createBlock('checkout/cart_coupon')->setTemplate('checkout/cart/coupon.phtml')->toHtml();//echo $this->getChildHtml('coupon'); ?></div>
+			<?php 
+			endif;?>
+			</td>	
+		</tr>
+	<?php } ?>
+<?php } ?>
+	

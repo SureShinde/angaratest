@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<!-- declare module's version information -->
+		<Angara_Angaracart>
+			<!-- this version number will be used for database upgrades -->
+			<version>0.1.0</version>
+		</Angara_Angaracart>
+	</modules>
+	<global>
+		<helpers>
+			<angaracart>
+				<class>Angara_Angaracart_Helper</class>
+			</angaracart>
+		</helpers>
+		<events>
+			<checkout_cart_product_add_after>
+				<observers>
+					<angara_checkoutCartProductAddAfter>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Cart_Observer</class>
+						<method>checkoutCartProductAddAfter</method>
+					</angara_checkoutCartProductAddAfter>
+				</observers>
+			</checkout_cart_product_add_after>
+			
+			<checkout_quote_init>
+				<observers>
+					<angara_checkoutQuoteInit>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Cart_Observer</class>
+						<method>checkoutQuoteInit</method>
+					</angara_checkoutQuoteInit>
+				</observers>
+			</checkout_quote_init>
+				
+			<checkout_cart_remove_item_before>
+				<observers>
+					<angara_checkoutCartRemoveItemBefore>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Cart_Observer</class>
+						<method>checkoutCartRemoveItemBefore</method>
+					</angara_checkoutCartRemoveItemBefore>
+				</observers>
+			</checkout_cart_remove_item_before>
+			
+			<checkout_cart_update_items_after>
+				<observers>
+					<angara_checkoutCartUpdateItemsAfter>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Cart_Observer</class>
+						<method>checkoutCartUpdateItemsAfter</method>
+					</angara_checkoutCartUpdateItemsAfter>
+				</observers>
+			</checkout_cart_update_items_after>
+			
+			<checkout_cart_add_product_complete>
+				<observers>
+					<angara_checkoutCartAddProductComplete>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Cart_Observer</class>
+						<method>checkoutCartAddProductComplete</method>
+					</angara_checkoutCartAddProductComplete>
+				</observers>
+			</checkout_cart_add_product_complete>
+			
+			<sales_quote_add_item>
+				<observers>
+					<angara_salesQuoteAddItem>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Quote_Observer</class>
+						<method>salesQuoteAddItem</method>
+					</angara_salesQuoteAddItem>
+				</observers>
+			</sales_quote_add_item>
+			
+			<sales_order_place_after>
+				<observers>
+					<angaracart_salesOrderSaveAfterInsurance>
+						<type>singleton</type>
+						 <class>Angara_Angaracart_Model_Order_Observer</class>
+						<method>salesOrderSaveAfterInsurance</method>
+					</angaracart_salesOrderSaveAfterInsurance>
+					<angaracart_salesOrderPlaceAfter>
+						<type>singleton</type>
+						<class>Angara_Angaracart_Model_Order_Observer</class>
+						<method>addCustomCommentToCustomOrder</method>
+					</angaracart_salesOrderPlaceAfter>
+				</observers>
+			</sales_order_place_after>
+			  
+		</events>
+		
+		<!-- declare model group for new module -->
+		<models>
+			<!-- model group alias to be used in Mage::getModel() -->
+			<angaracart>
+				<!-- base class name for the model group -->
+				<class>Angara_Angaracart_Model</class>
+				<resourceModel>angaracart_mysql4</resourceModel>
+			</angaracart>
+			<angaracart_mysql4>
+                <class>Angara_Angaracart_Model_Mysql4</class>
+                <entities>
+                    <insurance>
+                        <table>insurance</table>
+                    </insurance>
+                </entities>
+            </angaracart_mysql4>	
+		</models>
+		
+		<!-- declare resource setup for new module -->
+		
+		 <template>
+            <email>
+                <total_warranty_plan_template module="angaracart">
+	                <label>Insurance Mail Send</label>
+	                <file>insurance_template.html</file>
+	                <type>html</type>
+                </total_warranty_plan_template>
+            </email>
+       </template>
+	   
+		
+		<resources>
+			<!-- resource identifier -->
+			<angaracart_setup>
+				<!-- specify that this resource is a setup resource and used for upgrades -->
+				<setup>
+					<!-- which module to look for install/upgrade files in -->
+					<module>Angara_Angaracart</module>
+				</setup>
+				<!-- specify database connection for this resource -->
+				<connection>
+					<!-- do not create new connection, use predefined core setup connection -->
+					<use>core_setup</use>
+				</connection>
+			</angaracart_setup>
+			 <angaracart_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </angaracart_write>
+            <angaracart_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </angaracart_read>
+		</resources>
+	</global>
+</config>

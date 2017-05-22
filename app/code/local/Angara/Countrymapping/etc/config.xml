@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Countrymapping>
+      <version>0.1.2</version>
+    </Angara_Countrymapping>
+  </modules>
+  <global>
+    <models>
+      <countrymapping>
+        <class>Angara_Countrymapping_Model</class>
+      </countrymapping>
+    </models>
+  </global>
+</config>

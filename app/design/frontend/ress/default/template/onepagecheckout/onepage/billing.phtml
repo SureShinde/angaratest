@@ -1,0 +1,270 @@
+<?php 
+
+function isMobile($regexpsConfigPath = 'design/theme/template_ua_regexp')
+{
+
+	if (empty($_SERVER['HTTP_USER_AGENT'])) {
+		return false;
+	}
+	
+	$tablet_browser = 0;
+ 
+	if (preg_match('/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+		$tablet_browser++;
+	}
+	 
+	if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'opera mini') > 0) {
+		//Check for tablets on opera mini alternative headers
+		$stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?$_SERVER['HTTP_X_OPERAMINI_PHONE_UA']:(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?$_SERVER['HTTP_DEVICE_STOCK_UA']:''));
+		if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $stock_ua)) {
+		  $tablet_browser++;
+		}
+	}
+	 
+	if ($tablet_browser > 0) {
+	   /* do something for tablet devices */
+	   return true;
+	}
+
+	$configValueSerialized = Mage::getStoreConfig($regexpsConfigPath, Mage::app()->getStore());
+
+	if (!$configValueSerialized) {
+		return false;
+	}
+
+	$rules = @unserialize($configValueSerialized);
+	if (empty($rules)) {
+		return false;
+	}
+	foreach ($rules as $rule) {
+		$regexp = '/' . trim($rule['regexp'], '/') . '/';
+
+		if (@preg_match($regexp, $_SERVER['HTTP_USER_AGENT'])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+//$mage_ver = Mage::helper('onepagecheckout')->getMagentoVersion();
+$logged		= $this->isCustomerLoggedIn();
+$has_addr	= $this->customerHasAddresses();
+?>
+<?php if(isMobile()){ ?>
+	<style>
+		.pac-icon { display: none; }
+		.google-suggestion, .google-suggestion-shipping { display: none; }
+	</style>
+	<script> var isMobile = '<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode()); ?>'; </script>
+<?php } else { ?>
+	<script>var isMobile = false; </script>
+<?php } ?>
+<div class="onepagecheckout_block">
+	<?php /* <div class="block-sub-heading" style="font-size:22px;">Shipping</div>
+    <small class="px11">(Enter the complete billing address linked to your card.)</small> */ ?>
+	<div class="form_fields high-margin-top">
+		<?php if ($has_addr){ ?>
+		<div>
+			<label class="login-lable"> <?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?> </label>
+			<div class="data_area high-margin-bottom"> <?php echo $this->getCustomerShipAddr() ?> </div>
+		</div>
+		<?php } ?>
+		<div id="ship_form"<?php if ($has_addr) {echo ' style="display:none;" ';} ?>>
+			<input type="hidden" name="billing[address_id]" id="shipping:address_id" value="<?php echo $this->getShipAddress()->getId() ?>" />
+			<div> <?php echo $this->getLayout()->createBlock('onepagecheckout/widget_name')->setObject($this->getShipAddress())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?> </div>
+			<div class='clearfix'></div>
+			
+			<?php $ar	= Mage::getStoreConfig('onepagecheckout/address_form/address');
+			if ($ar !== 'hidden') : 
+			?>
+			<div class="row">
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6">
+					<label class="ielabel hidden"> <?php echo $this->__('Street Address') ?> </label>
+                	<input <?php /* <!-- to enable browser share location --> onFocus="geolocate()" */ ?><?php if(isMobile()){ ?> onClick="googletoggle('block')"<?php } ?> type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="shipping:street1" value="<?php echo $this->htmlEscape($this->getShipAddress()->getStreet(1)) ?>" class="input-text t1<?php if($ar === 'required'){echo ' required-entry';}?>" placeholder="Street Address" />
+				</div>
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6 google-suggestion">
+					<label class="ielabel hidden"> <?php echo $this->__('Apartment, Suite, Floor (optional)') ?> </label>
+					<input type="text" name="billing[street][]" id="shipping:street2" title="<?php echo $this->__('Street Address %s', 2) ?>" value="<?php echo $this->htmlEscape($this->getShipAddress()->getStreet(2)) ?>" class="t1 input-text" placeholder="Apartment, Suite, Floor (optional)"/>
+				</div>
+			</div>
+			<?php
+			endif; ?>
+
+			<?php /*?><?php if($mage_ver == '1.7.0.0' || $mage_ver == '1.7.0.2' || $mage_ver == '1.8.0.0' || $mage_ver == '1.12.0.2'):
+				if ($this->helper('customer/address')->isVatAttributeVisible()) : ?>
+					<div class="data_area">
+						<label class="ielabel hidden"> <?php echo $this->__('VAT Number') ?> </label>
+						<input type="text" id="shipping:vat_id" name="billing[vat_id]" value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()) ?>" title="<?php echo $this->__('VAT Number') ?>" class="input-text t1 <?php echo $this->helper('customer/address')->getAttributeValidationClass('vat_id') ?>" placeholder="VAT Number"/>
+					</div>
+				<?php endif;
+			endif; ?><?php */?>
+			<div class="row">
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6 google-suggestion">
+					<div class="data_area">
+						<label class="ielabel hidden"> <?php echo $this->__('City') ?> </label>
+						<input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" value="<?php echo $this->htmlEscape($this->getShipAddress()->getCity()) ?>" class="input-text t1 required-entry" id="shipping:city" placeholder="City"/>
+					</div>
+				</div>
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6 google-suggestion">
+					<div class="data_area">
+                    	<?php //echo $this->__('State/Province') ?>             	 
+						<label class="ielabel hidden"> <?php echo $this->__('State') ?> </label>
+						<select id="shipping:region_id" name="billing[region_id]" title="<?php echo $this->__('State / Province') ?>" class="input-text validate-select required-entry" style="display:none;">
+							<option value=""><?php echo $this->__('State') ?></option>
+						</select>
+						<script type="text/javascript">
+						//<![CDATA[
+							$('shipping:region_id').setAttribute('defaultValue',  "<?php echo $this->getShipAddress()->getRegionId() ?>");
+						//]]>
+						</script>
+						<input type="text" id="shipping:region" name="billing[region]" value="<?php echo $this->htmlEscape($this->getShipAddress()->getRegion()) ?>"  title="<?php echo $this->__('State / Province') ?>" class="input-text t1 required-entry" style="display:none;" placeholder="State"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6 google-suggestion">
+					<div class="data_area"><label class="ielabel hidden"> <?php echo $this->__('Country') ?> </label> <?php echo $this->getShippingCountriesSelectBox() ?> </div>
+				</div>
+				<?php $zip_r	= Mage::getStoreConfig('onepagecheckout/address_form/zip'); ?>
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6 google-suggestion">
+					<div class="data_area">
+						<?php //Zip Code ?>
+						<label class="ielabel hidden"> <?php echo $this->__('Zip Code') ?> </label>
+						<input type="text" title="<?php echo $this->__('Zip Code') ?>" name="billing[postcode]" id="shipping:postcode" value="<?php echo $this->htmlEscape($this->getShipAddress()->getPostcode()) ?>" class="input-text t1  validate-zip-shipping<?php if($zip_r === 'required'){echo ' required-entry ';}?>" placeholder="Zip Code"/>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<?php if (!$logged)  : ?>
+					<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6">
+						<?php //Email Address ?>
+						<label class="ielabel hidden"> <?php echo $this->__('Email Address') ?> </label>
+						<input type="text" name="billing[email]" value="<?php echo $this->htmlEscape($this->getBillAddress()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" id="billing:email" class="t1 input-text validate-email required-entry" placeholder="Email Address"/>
+					</div>
+				<?php endif; ?>	
+				<?php $phone_r= Mage::getStoreConfig('onepagecheckout/address_form/phone'); ?>
+				<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6">
+					<?php //Telephone ?>
+					<label class="ielabel hidden"> <?php echo $this->__('Phone') ?> </label>
+					<input type="text" name="billing[telephone]" value="<?php echo $this->htmlEscape($this->getShipAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text t1<?php if($phone_r === 'required') { echo ' required-entry ';}?>" id="shipping:telephone" placeholder="Phone"/>
+				</div>
+			</div>
+				
+			<?php
+			/*if($mage_ver == '1.11.2.0' || $mage_ver == '1.12.0.2'):
+			
+                $addressAttributes = $this->getChild('customer_form_billing_address_user_defined_attributes');
+                if ($addressAttributes):
+                    $addressAttributes->setEntity($this->getAddress())->setEntityType('customer_address');
+                    $addressAttributes->setFieldIdFormat('shipping:%1$s')->setFieldNameFormat('billing[%1$s]');
+                    echo $addressAttributes->setExcludeFileAttributes(true)->setShowContainer(false)->toHtml();
+                endif;
+			
+			endif;*/
+			
+			if (!$logged) :
+			
+				$dob	= $this->getLayout()->createBlock('onepagecheckout/widget_dob');
+				$gender	= $this->getLayout()->createBlock('onepagecheckout/widget_gender');
+				$taxvat = $this->getLayout()->createBlock('onepagecheckout/widget_taxvat');
+
+				if ($dob->isEnabled() || $gender->isEnabled()){ ?>
+				<div class="row">
+					<?php if ($dob->isEnabled()):	?>
+					<div class="high-margin-bottom col-sm-12 col-md-6">
+						<?php echo $dob->setDate($this->getQuote()->getCustomerDob())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('billing[%s]')->toHtml(); ?>
+					</div>
+					<?php endif; ?>
+					<?php if ($gender->isEnabled()):	?>
+					<div class="high-margin-bottom col-sm-12 col-md-6">
+						<?php echo $gender->setGender($this->getQuote()->getCustomerGender())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('billing[%s]')->toHtml(); ?>
+					</div>
+					<?php endif ?>
+				</div>
+				<div class='clearfix'></div>
+				<?php 
+				} 
+				if ($taxvat->isEnabled()){	?>
+				<div>
+					<?php echo $taxvat->setTaxvat($this->getQuote()->getCustomerTaxvat())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml(); ?>
+				</div>
+				<?php 
+				}
+				/*if($mage_ver == '1.11.2.0' || $mage_ver == '1.12.0.2'):
+	                $customerAttributes = $this->getChild('customer_form_customer_user_defined_attributes');
+	                if ($customerAttributes):
+	                    $customerAttributes->setEntityModelClass('customer/customer')->setFieldIdFormat('shipping:%1$s');
+	                    $customerAttributes->setFieldNameFormat('billing[%1$s]')->setShowContainer(false);
+	                    echo $customerAttributes->setExcludeFileAttributes(true)->toHtml();
+	                endif;
+				endif;*/
+				$agc = Mage::helper('onepagecheckout')->isGuestCheckoutAllowed($this->getQuote());
+				if ($agc) 
+				{ ?>
+				<ul class="hidden">
+					<li class="options">
+						<input type="checkbox" name="billing[register_account]" value="1" title="<?php echo $this->__('Create an account for later use') ?>" id="shipping:register_account" onclick="if(window.billing) billing.setCreateAccount(this.checked);"<?php if ($this->getShipAddress()->getRegisterAccount()):?> checked="checked"<?php endif;?> class="checkbox" />
+						<label for="shipping:register_account"> <?php echo $this->__('Create an account for later use') ?> </label>
+					</li>
+				</ul>
+				<?php } else{ ?>
+				<input type="hidden" name="billing[register_account]" value="1"/>
+				<?php } ?>
+				<div class="row" id="register-customer-password" <?php //if ($agc) { echo ' style="display: none;" '; } ?>>
+					<div class="max-margin-bottom max-margin-top col-sm-12 col-md-6">
+						<div class="data_area">
+							<label class="ielabel hidden">Password to Create an Account (Optional)</label>
+							<input type="password" name="billing[customer_password]" id="shipping:customer_password" title="<?php echo $this->__('Password') ?>" class="input-text t1 validate-password" placeholder="Password to Create an Account (Optional)"/>
+						</div>
+					</div>
+				</div>
+				<div class='clearfix'></div>
+				<?php endif; ?>
+				<ul>
+					<?php 
+				if ($logged && $has_addr){
+				?>
+					<li class="options">
+						<input type="checkbox" class="checkbox" name="billing[save_in_address_book]" id="shipping:save_in_address_book" value="1" title="<?php echo $this->__('Save in address book') ?>" <?php if ($this->getShipAddress()->getSaveInAddressBook()){ echo ' checked="checked" ';}?> />
+						<label> <?php echo $this->__('Save in address book'); ?> </label>
+					</li>
+					<?php 
+				}
+				else
+				{
+				?>
+					<li class="no-display">
+						<input type="hidden" value="1" name="billing[save_in_address_book]" />
+					</li>
+					<?php 
+				} 
+				?>
+				</ul>
+		</div>
+		<?php /*if($mage_ver == '1.7.0.0' || $mage_ver == '1.7.0.2' || $mage_ver == '1.8.0.0' || $mage_ver == '1.12.0.2'):
+			echo $this->getChildHtml('checkout.onepage.billing.extra')
+		endif; */?>
+		<?php 
+    if (Mage::helper('onepagecheckout')->isShippingAddressAllowed() && $this->canShip()){ 
+    ?>
+		<input type="hidden" name="billing[use_for_shipping]" id="billing:use_for_shipping" value="<?php echo ($this->isUseBillingAddressForShipping())?'1':'0'; ?>" />
+		<?php 
+    }else{ 
+    ?>
+		<input type="hidden" name="billing[use_for_shipping]" value="1" />
+		<?php 
+    } 
+    ?>
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	var shipping = new ShippingAddress('onepagecheckout_orderform');
+<?php /*if($mage_ver == '1.7.0.0' || $mage_ver == '1.7.0.2' || $mage_ver == '1.8.0.0' || $mage_ver == '1.12.0.2'):?>
+	var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'shipping:postcode');
+<?php else: */?>
+	var shippingRegionUpdater = new RegionUpdater('shipping:country_id', 'shipping:region', 'shipping:region_id', countryRegions, undefined, 'shipping:postcode');
+<?php //endif;?>
+//]]>
+</script>

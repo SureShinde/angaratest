@@ -1,0 +1,217 @@
+<?php
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+$_product = $this->getProduct();
+//$_id = $_product->getId();
+?>
+<?php //$_retailPrice = $_taxHelper->getPrice($_product, $_product->getMsrp()) ?>
+<?php //$_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
+<?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+
+<div id="price-block">
+ <div class="price-block-title">Price of current selection:</div>
+ <div id="price-excluding-tax-<?php echo $_product->getId(); ?><?php echo $this->getIdSuffix() ?>" class="finalprice"><?php echo $_coreHelper->currency($_finalPrice,true,false); ?></div>
+ 
+ <!--Add to cart button starts-->
+ <?php if($_product->isSaleable()){ ?>
+ <div id="addcart">
+  <div style='display:none;'>
+   <?php if(!$_product->isGrouped()): ?>
+   <label for="qty"><?php echo $this->__('Qty:') ?></label>
+   <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+   <?php endif; ?>
+  </div>
+  <input  class="addtocart" type="submit" alt="Add to cart" value="Add to Cart"  name="addToCartSubmit">
+  <?php echo $this->getChildHtml('', true, true) ?> </div>
+ <?php } ?>
+ <!--Add to cart button ends-->
+ <div class="textlinks">
+ <?php if($_product->getAttributeText('diamond_color')=='White'): ?>
+  	<div class="textlinksparent returns hover-content"><a href="javascript:;">Free Independent Certified Appraisals</a>
+    	<div class="popupboxblock">Your diamond earrings purchase includes a free independent, certified appraisal. Your appraisal specifications consist of diamond and precious metal details with an estimated total retail value. </div>
+    </div> 
+  <?php endif; ?>  
+  <ul>
+   <!-- Start Add to wishlist link -->
+   <?php 
+        $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+   <?php 
+        if($this->helper('wishlist')->isAllow()){
+            $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+            if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){ 	
+                $wishlist = Mage::getModel('wishlist/item')->getCollection();
+                $wishlist->getSelect()
+                          ->join(array('t2' => 'wishlist'),
+                                 'main_table.wishlist_id = t2.wishlist_id',
+                                 array('wishlist_id','customer_id'))
+                                 ->where('main_table.product_id='.$_product->getId().' AND t2.customer_id='.$customerId);
+                $count = $wishlist->count();
+                
+                if($count!=0){ 
+                    echo "<li class='wishlist'><span class='addedwl'>Added In Your Wishlist.</span></li>";
+                }
+                else{ 
+                    echo "<li class='wishlist'><a id='wishlist-link' href='".$_wishlistSubmitUrl ."'>Add to wishlist</a></li>";
+                }
+            }
+            else{?>
+   <li class='wishlist'><a id="wishlist-link" href="javascript:;" onclick="setWishlistUrlSession('<?php echo $_wishlistSubmitUrl; ?>');" class="customerdiscountlink" style="text-decoration:underline;">Add to wishlist</a></li>
+   <?php
+            }
+        } 
+        ?>
+   <?php $diamondColorID	=	$_product->getDiamondColor();
+		if($diamondColorID!=''){
+			$diamondColor 			= 	strtolower($_product->getAttributeText('diamond_color'));					
+		}
+		//echo 'diamondColor->'.$diamondColor;
+		if($diamondColor=='white'){
+			$diamondColorImg	=	'';   
+		}else{
+			$diamondColorImg	=	$diamondColor.'-';   
+		}?>
+   <!-- End Add to wishlist link -->
+   <?php if($diamondColor=='white'){?>
+   <li class="reduceprice"><a href="#tpr" name="modal">Tips for reducing price</a></li>
+   <?php } ?>
+   <li class="shipdate hover-content"><a href="javascript:;">When will it ship?</a>
+    <div class="popupboxblock" style="width:222px;">
+     <?php /*?><h1>Expected Ship Date</h1>
+     <label class="dyn_vendor_lead_time">9th March 2013</label><?php */?>
+	 <?php
+	 /*$vendorLeadTime = ($_product->getVendorLeadTime() + 4);
+	 $arriveByDate = Mage::helper('function')->skipUsaHolidays($vendorLeadTime);*/ ?>
+	 <?php /*?><div id="valentineDate" style="color:#DE513E; font-size:11px; <?php if($_product->getVendorLeadTime() <= 5){?>display:block;<?php }else{?>display:none;<?php }?>">
+		<img height="16" width="16" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png" class="vdayimgtop">Arrives By <span id="dyn_arrive-date"><?php echo $arriveByDate;?></span>
+	 </div><?php */?>
+		 <div id="valentineDate" style="color:#DE513E; font-size:11px;">
+			<?php 
+				if($_product->getVendorLeadTime() <= 2){?>
+				<img height="12" width="17" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png" class="vdayimgtop" alt="Valentine Gifts" style="text-align:center;">
+				<span id="mother-text">Guaranteed Delivery Before Mother's Day*</span><br /><span id="mother-help" style="color:#292929; font:12px ProximaNova,Arial,Helvetica,sans-serif;">(*Applicable to US customers only.<br />If you like this product to ship internationally before Mother's Day, please call 1-888-926-4272.)</span>
+				<?php 
+				}
+				else{?>
+					<span id="mother-text">Call 1-888-926-4272 to Confirm Guaranteed Mother’s Day Delivery.</span>
+				<?php
+				}?>	
+		</div>	
+    </div>
+   </li>
+   <li class="returns hover-content"><a href="javascript:;">30-Day FREE Returns</a>
+    <div class="popupboxblock">
+     <h1>30-Day FREE Returns</h1>
+     If you don't like the product, simply send it back to us within 30 days and get a 100% refund. We will even email you a FREE return shipping label (for domestic orders).</div>
+   </li>
+   <?php if($diamondColor=='black'){?>
+   <li class="enhancements hover-content"><a href="javascript:;">Enhancements/Treatments</a>
+    <div class="popupboxblock">
+     <h1>Enhancements/Treatments</h1>
+     Diamonds can be color enhanced/treated using three different process.<br />
+     <br />
+     <strong>HPHT :</strong> This process recreates the high pressure and high temperature conditions that existed naturally within the mantel of the earth during the formation of the diamond to allow these different natural elements to display their natural color. Sophisticated machines expose the diamond to heightened heat and pressure resulting in the change of color.<br />
+     <br />
+     <strong>Irradiation :</strong> The most common process for color-enhancing a diamond consists of 2steps: Irradiation and Annealment. In combination these two steps make a nearly colorless stone to obtain a variety of colors. Irradiation promotes changes in the stone’s atomic structure in the laboratory, hence the diamond gains color.<br />
+     <br />
+     <strong>Coating :</strong> This process is not permanent. Angara does not use this for enhancement. </div>
+   </li>
+   <?php } ?>
+   <?php if($diamondColor=='blue'){?>
+   <li class="enhancements hover-content"><a href="javascript:;">Enhancements/Treatments</a>
+    <div class="popupboxblock">
+     <h1>Enhancements/Treatments</h1>
+     Diamonds can be color enhanced/treated using three different process.<br />
+     <br />
+     <strong>HPHT:</strong> This process recreates the high pressure and high temperature conditions that existed naturally within the mantel of the earth during the formation of the diamond to allow these different natural elements to display their natural color. Sophisticated machines expose the diamond to heightened heat and pressure resulting in the change of color.<br />
+     <br />
+     <strong>Irradiation:</strong> The most common process for color-enhancing a diamond consists of 2steps: Irradiation and Annealment. In combination these two steps make a nearly colorless stone to obtain a variety of colors. Irradiation promotes changes in the stone’s atomic structure in the laboratory, hence the diamond gains color.<br />
+     <br />
+     <strong>Coating:</strong> This process is not permanent. Angara does not use this for enhancement. </div>
+   </li>
+   <?php } ?>
+  </ul>
+ </div>
+</div>
+<!--Popup code starts--> 
+<script>
+//	Tooltip Starts
+jQuery('.hover-content').hover(
+			function(){
+				jQuery(this).find('.popupboxblock').show();
+			},function(){
+				jQuery(this).find('.popupboxblock').hide();
+			}
+		); 
+//	Tooltip Ends
+jQuery.noConflict();
+jQuery(document).ready(function() {	
+	//select all the a tag with name equal to modal
+	jQuery('a[name=modal]').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = jQuery(this).attr('href');
+		//Get the screen height and width
+		var maskHeight = jQuery(document).height();
+		var maskWidth = jQuery(window).width();
+		//Set heigth and width to mask to fill up the whole screen
+		jQuery('#mask').css({'width':maskWidth,'height':maskHeight});
+		//transition effect		
+		jQuery('#mask').fadeIn(1000);	
+		jQuery('#mask').fadeTo("slow",0.8);	
+		//Get the window height and width
+		var winH = jQuery(window).height();
+		var winW = jQuery(window).width();
+		//Set the popup window to center
+		jQuery(id).css('top',  winH/2-jQuery(id).height()/2);
+		jQuery(id).css('left', winW/2-jQuery(id).width()/2);
+		//transition effect
+		jQuery(id).fadeIn(2000); 
+	});
+	
+	//if close button is clicked then close the popup
+	jQuery('.window .closelastminutepopup').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		jQuery('#mask').hide();
+		jQuery('.window').hide();
+	});		
+	//if mask is clicked then close the popup
+	jQuery('#mask').click(function () {
+		jQuery(this).hide();
+		jQuery('.window').hide();
+	});			
+	jQuery(window).resize(function () {
+ 		var box = jQuery('#popup_content .window');
+        //Get the screen height and width
+        var maskHeight = jQuery(document).height();
+        var maskWidth = jQuery(window).width();
+        //Set height and width to mask to fill up the whole screen
+        jQuery('#mask').css({'width':maskWidth,'height':maskHeight});
+        //Get the window height and width
+        var winH = jQuery(window).height();
+        var winW = jQuery(window).width();
+        //Set the popup window to center
+        box.css('top',  winH/2 - box.height()/2);
+        box.css('left', winW/2 - box.width()/2);
+	});
+});
+
+</script>
+<div id="popup_content">
+ <div id="tpr" class="window"><a href="javascript:;" class="closelastminutepopup"/> <img alt="close" src="<?php echo $this->getSkinUrl('images/home-banner/closechatpopup.png'); ?>"></a>
+  <h1>Tips for reducing price</h1>
+  <div>Buy studs that have a total carat weight of 0.66, 0.90 or 1.80 ct tw to save up to ~20% vs their slightly larger counterparts.  Prices jump as soon as carat weights reach certain magic numbers - (e.g. 0.75, 1.00, 2.00 ct tw), while there is only a slight increase in size. <img alt="close" src="<?php echo $this->getSkinUrl('images/tip-of-reduce-pricing-chart.jpg') ?>" width="763" height="231"> </div>
+ </div>
+ <div id="dwinfo" class="window"><a href="javascript:;" class="closelastminutepopup"/><img alt="close" src="<?php echo $this->getSkinUrl('images/home-banner/closechatpopup.png'); ?>"></a>
+  <h1>Diamond Carat Total Weight Chart*</h1>
+  <img alt="close" src="<?php echo $this->getSkinUrl('images/round-'.$diamondColorImg.'diamond-carat-weight-chart.jpg'); ?>"> <img alt="close" src="<?php echo $this->getSkinUrl('images/princess-'.$diamondColorImg.'diamond-carat-weight-chart.jpg'); ?>">
+  <div style="font-size:10px; padding-top:15px;">*Diamond carat weights represent the approximate total weight of all diamonds in each setting and may vary no more than .07 below the stated weight.</div>
+ </div>
+ <div id="dqinfo" class="window"><a href="javascript:;" class="closelastminutepopup"/><img alt="close" src="<?php echo $this->getSkinUrl('images/home-banner/closechatpopup.png'); ?>"></a>
+  <h1>Diamond Quality Chart</h1>
+  <img alt="close" src="<?php echo $this->getSkinUrl('images/'.$diamondColorImg.'Diamond-quality-chart.jpg'); ?>"> 
+  </div>
+</div>
+<!--<div id="mask"></div>--> 
+<!--Popup code ends-->

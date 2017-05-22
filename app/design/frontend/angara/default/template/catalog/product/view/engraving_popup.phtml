@@ -1,0 +1,417 @@
+<?php
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+
+$_product = $this->getProduct();
+$product = Mage::getModel("catalog/product")->load($_product->getId());
+$i = 0;
+
+foreach($product->getOptions() as $o){
+	$optionArray[$i] = array('Id'=>$o->getId(),'Title'=>$o->getTitle(),'Sku'=>$o->getSku(),'Price'=>$o->getPrice(),'MaxCharacters'=>$o->getMaxCharacters());
+	$skuArray[] = $o->getSku();
+	
+	//	Code modified by Vaseem for Free Engraving Promotion starts
+	/*$engravingSession	=	Mage::getSingleton('core/session')->getData('engraving_free_user');
+	//echo '<br>engravingSession->'.$engravingSession;
+	if($engravingSession=='1'){
+		if($o->getPrice()=='0.00' && $o->getSku()=='engraving'){
+			$engravingOptionId = $o->getId();
+			$price = $o->getPrice();
+		}
+	}else{
+		if($o->getPrice()=='25.00' &&  $o->getSku()=='engraving'){
+			$engravingOptionId = $o->getId();
+			$price = $o->getPrice();
+		}
+	}*/
+	//	Code modified by Vaseem for Free Engraving Promotion ends
+	$i++;
+}
+/*echo 'product id '.$_product->getId();
+echo '<pre>'; print_r($optionArray);
+echo '<pre>'; print_r($skuArray);*/
+if(in_array('engraving',$skuArray)){
+	$key = array_search( "engraving", $skuArray); 
+	$engravingOptionId = $optionArray[$key]['Id'];
+	$title = $optionArray[$key]['Title'];
+	$price = $optionArray[$key]['Price'];
+	$maxCharacters = $optionArray[$key]['MaxCharacters']-25;
+	$formattedPrice = Mage::helper('core')->currency($price, true, false);
+	$formattedPrice = ($formattedPrice=='$25.00')?'$25':$formattedPrice; 
+	
+	//	Code Added by Vaseem for iPad
+	$iPad	=	0;
+	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+		$iPad	=	1;
+	}
+	
+	if($this->getRequest()->getParam('metal1_type')){
+		$metalParam = $this->getRequest()->getParam('metal1_type');
+		if($metalParam == 'Yellow Gold'){?>
+			<script type="text/javascript" language="javascript">		
+				var metalType = 'yellow';		
+			</script>	
+		<?php		
+		}
+		else {?>
+			<script type="text/javascript" language="javascript">		
+				var metalType = 'white';		
+			</script>	
+		<?php		
+		}
+	}
+	else{
+		if( $_product->getTypeId() == 'simple' ){
+			$metalType = $_product->getAttributeText('metal1_type');
+			if($metalType){
+				if(strpos($metalType,'Yellow Gold')){?>
+					<script type="text/javascript" language="javascript">		
+						var metalType = 'yellow';		
+					</script>	
+				<?php 
+				}
+				else {?>
+					<script type="text/javascript" language="javascript">		
+						var metalType = 'white';		
+					</script>	
+				<?php 
+				}
+			}
+		}
+		else{
+			$metalConfigProd = $_product->getAttributeText('default_metal1_type');
+			if($metalConfigProd){
+				if(strpos($metalConfigProd,'Yellow Gold')){?>
+					<script type="text/javascript" language="javascript">		
+						var metalType = 'yellow';		
+					</script>	
+				<?php 
+				}			
+				else {?>
+					<script type="text/javascript" language="javascript">		
+						var metalType = 'white';		
+					</script>	
+				<?php 
+				}
+			}
+		}		
+	}
+	if( $_product->getTypeId() == 'simple' ){?>
+		<div id="ultimate-engraving" class="addon-option engtop">
+	<?php 
+	}
+	else{
+		$_attributes = $_product->getTypeInstance(true)->getConfigurableAttributes($_product); 
+		foreach($_attributes as $attribute) 
+		{ 
+		    	$attributeId  =  $attribute->getProductAttribute()->getId();  
+		 	$attributeCode[]   =  $attribute->getProductAttribute()->getAttributeCode();     // Get super attributes of configurable product
+  		}
+		if(count($attributeCode)=='1' && $_product->getDefaultRingSize()){ ?>
+			<div id="ultimate-engraving" class="addon-option engtop">
+		<?php }else{ ?>
+			<div id="ultimate-engraving" class="addon-option engtopnone">
+		
+	<?php }
+	} ?>	
+			<span>
+				<input id="engraveringchk" name="engravering" type="checkbox"  autocomplete="off" style="display:none;"/>
+                    <span id="engraveTitle">ADD ENGRAVING FOR <b style="color:#854c64"><?php if($price>0) {echo $formattedPrice;}else{echo 'Free';}?></b></span>
+                    <?php /*?><span id="engraveTitle">ADD ENGRAVING FOR <b style="color:#854c64"><?php if($price>0) {echo $formattedPrice;}?></b></span><?php */?>
+			</span>
+		
+			<!--[if !IE]><!-->
+			<div id="engraving_popup" style="top:-9999px;">
+				<div class="layoverlayer"></div> 
+				<!--<![endif]-->
+			
+				<!--[if IE]> 
+					<div class="engravingwrapperIE" id="engraveDiv"> 
+				<![endif]-->
+				
+				<!--[if !IE]><!--> 
+				<div class="engravingwrapper" id="engraveDiv"> 
+				<!--<![endif]-->
+                <?php //	Code Added by Vaseem for iPad
+				if($iPad=='0'){?>
+					<div class="engravingview">
+						<div id="flashContent"> 
+							<!--[if IE]> 
+							<object id="engraving" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="495" height="311" allowscriptaccess="always" flashvars="">
+							<param name="movie" value="/skin/frontend/angara/default/flash/engraving.swf" /></object>
+							<![endif]--> 
+							<!--[if !IE]><!-->
+							<embed id="engraving" src="/skin/frontend/angara/default/flash/engraving.swf" quality="high" bgcolor="#ffffff" width="495" height="311" name="engraving" align="middle" wmode="window" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+							<!--<![endif]--> 
+						</div>
+					</div>
+				<?php } ?>	
+					<div class="engravingoption">
+						<div class="engraving-price"><?php if($price>0) {echo 'ENGRAVING PRICE: '. $formattedPrice;}?></div>
+						<div class="close-popup"></div>
+						<div class="engravingtxtbox">
+							<div class="engravinputbox">
+								<div class="inputboxstyle">
+									<input name="engravedText" type="text" height="28" id="engravedText" maxlength="<?php echo $maxCharacters;?>" value="Your text here" />
+									<input name="engraveFont" type="hidden" height="10" id="engraveFont" value="(SnellRoundhand Script)" />
+								</div>
+								<div class="btnclose" id="clearTxt">
+									<a href="javascript:void(0);">
+										<img src="<?php echo $skinUrl;?>frontend/angara/default/images/remove_engraving_txt.png" alt="Remove"  style="border:0;" />
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<span class="remainingletters">Remaining: <b style="color:#5d5d5d;" id="remainingChar"><?php echo $maxCharacters;?></b></span>
+						<span id="showFontDiv">(SnellRoundhand Script)</span>
+						<div class="fontthumbmail">
+							<div class="fontbox">
+								<a href="javascript:void(0);" class="activefont" rel="(SnellRoundhand Script)" alt="(SnellRoundhand Script)"  onclick="changeFontType('SnellRoundhand Script')">
+									<img src="<?php echo $skinUrl;?>frontend/angara/default/images/AdobeGaramondfont.jpg" />
+								</a>
+							</div>
+							<div class="fontbox">
+								<a href="javascript:void(0);" rel="(Helvetica 45 Light)" alt="(Helvetica 45 Light)"  onclick="changeFontType('Helvetica 45 Light')">
+									<img src="<?php echo $skinUrl;?>frontend/angara/default/images/Aparajitafont.jpg" />
+								</a>
+							</div>
+						</div>
+						<div class="continueangraving">
+							<div id="engraveContinue" class="continue-engraving-btn"></div>						
+						</div>
+					</div>
+				</div>
+		  
+				<!--[if !IE]><!-->
+			</div> 
+			
+			<!--<![endif]-->
+			<div class="customize-btn">
+				<a href="javascript:void(0);" id="editEng">Edit</a>
+				<a href="javascript:void(0);" id="removeEng">Remove</a>
+				<?php 
+				if($price > 0){?>
+					<span class="refundtxt" id="engCost" style="display:none;">*Engraving cost is non refundable</span>
+				<?php 
+				} 
+				if($price == 0){?>
+					<span class="refundtxt" id="engCost">*Limited Period Offer</span>
+				<?php 
+				}?>
+			</div>
+			
+			<div style="clear:both"></div>
+		</div>	
+	
+		<script type="text/javascript" language="javascript">
+	// Code added by Hitesh
+	function getMovie(movie){
+		var isIE = navigator.appName.indexOf("Microsoft") != -1;
+		return document.getElementById(movie);
+	}
+	
+	function updateEngravingText(str){	
+		getMovie("engraving")._updateEngravingText(str);
+	}
+	
+	function changeFontType(fontType, fontStyle){
+		if(fontStyle){
+			getMovie("engraving")._changeFontType(fontType, fontStyle);
+		}
+		else{
+			getMovie("engraving")._changeFontType(fontType);
+		}
+	}
+	
+	function changeMetal(type){
+		getMovie("engraving")._updateMetal(type);
+	}
+	// Code added by Hitesh
+		
+	//	Opening popup by Vaseem Ansari
+	jQuery(function() {
+		//var metalType = 'white'	;
+		
+		<!--[if !IE]><!-->
+		jQuery('#engraving_popup').appendTo('body');	// Grey box added
+		<!--<![endif]-->
+					
+		//	Function to bind the engraving yellow white image			
+		jQuery(document).bind('variationChanged',function(e1,e2){
+			if(e2.id == 'metal1_type'){
+				if(e2.value.match("Yellow")){ 	// Change in function to match the string by pankaj.
+					metalType = 'yellow';		
+				}
+				else{
+					metalType = 'white';
+				}
+			}
+		});
+				
+		jQuery("#ultimate-engraving,#editEng").click(function(event){
+			var whichClick = jQuery(this).attr('id');
+			var value = jQuery.trim(jQuery("#engravedText").val());
+			
+			if(value != null && value != 'undefined' && value != '' && value != 'Your text here' && whichClick == 'ultimate-engraving'){
+				event.preventDefault();
+			}
+			else{
+				jQuery('#engraveDiv').css('top','-160px');				//	position of pop up when it is open
+				<!--[if !IE]><!-->
+				jQuery('.engravingwrapper').css('top','191px');
+				jQuery('#engraving_popup').css('top','0px');
+				<!--<![endif]-->
+				
+				//	Changing default engraving image
+				if(metalType == 'yellow'){
+					changeMetal('Yellow');	
+				}
+				else{
+					changeMetal('White');	
+				}
+			}
+			estimateShipEngraving();		//	Removed by Vaseem as hitesh removed the estimate ship date code
+		});
+	});
+	
+	//	Getting typed value by Vaseem Ansari
+	// # todo what if user chooses not to engrave text?
+	jQuery(function(){
+		var fontValue;
+		var value = 'Your text here';
+			
+		jQuery('#engravedText').focusin(function(){
+			value = jQuery.trim(jQuery("#engravedText").val());
+			
+			if(value == 'Your text here'){
+				jQuery("#engravedText").val('');
+			}
+		})
+		.focusout(function(){
+			value = jQuery.trim(jQuery("#engravedText").val());
+			if(value == ''){
+				jQuery("#engravedText").val('Your text here');
+				updateEngravingText('Your text here');
+				jQuery('#remainingChar').text('<?php echo $maxCharacters;?>');
+			}
+		})
+		.bind('paste keyup',function(){
+			value 		= 	jQuery.trim(jQuery("#engravedText").val());
+			fontValue 	= 	jQuery("#engraveFont").val();
+			finalValue	=	value + ' ' + fontValue;
+			
+			// Putting the character limit to text
+			var $this = jQuery(this);
+			if(value.length > <?php echo $maxCharacters;?>)
+			$this.val(value.substr(0, <?php echo $maxCharacters;?>));
+	
+			//	Getting remaining characters by Vaseem Ansari
+			var left = <?php echo $maxCharacters;?> - value.length;
+			jQuery('#remainingChar').text(left);
+			updateEngravingText(value);
+			
+		});
+		
+		// Changing the class for selected font
+		jQuery(".fontbox").click(function(){
+			jQuery(this).each(function(){ 
+				jQuery("a.activefont").removeClass("activefont");
+				jQuery(this).find('a').toggleClass("activefont");
+				
+				fontType = jQuery(this).find('a').attr("rel");
+				jQuery("#showFontDiv").html(jQuery(this).find('a').attr("alt"));
+				jQuery("#engraveFont").val(jQuery(this).find('a').attr("alt"));
+				
+				if(value!=null && value!='undefined' && value!=''){		
+					finalValue	=	value + ' ' + fontType;
+					jQuery('#options_<?php echo $engravingOptionId;?>_text').val(finalValue);		//	writing value to custom option input box
+				}
+			});
+		});
+		
+		//	Hide engraving popup when usr click on add to cart popup and if engraving popup is already open
+		jQuery(".add-to-cart, .mycartitem").click(function(){
+			jQuery('#engraveDiv').css('top','-9999px');
+		});
+		
+		// Global function to remove text and reset the engraving
+		function removeText(){
+			jQuery('#engravedText').val('Your text here');
+			<?php //	Code Added by Vaseem for iPad
+			if($iPad=='0'){?>
+			updateEngravingText('Your text here');
+			<?php } ?>
+			jQuery('#remainingChar').text(<?php echo $maxCharacters;?>);
+			jQuery('#options_<?php echo $engravingOptionId;?>_text').val('');		//	removing the value to custom option input box
+			jQuery('#removeEng,#editEng').hide();
+			jQuery('#engraveringchk').attr('checked', false);
+			jQuery('#engraveringchk').attr('disabled', false);
+			jQuery('#ultimate-engraving').removeClass('active');
+			<?php 
+			if($price > 0){?>
+			jQuery('#engCost').hide();
+			<?php
+			}?>
+			opConfig.reloadPrice();
+			estimateShipEngraving();
+		}
+		
+		// Clearing the Text
+		jQuery("#clearTxt").click(function(){
+			removeText();
+			value = '';
+		});
+		
+		// Closing the dialog box
+		jQuery('.close-popup').click(function(e){
+			e.stopPropagation();
+			jQuery('#engraveDiv').css('top','-9999px');
+			<!--[if !IE]><!-->
+			jQuery('#engraving_popup').css('top','-9999px');
+			<!--<![endif]-->
+			removeText();
+			jQuery('#engraveTitle').html('ADD ENGRAVING FOR <b style="color:#854c64"><?php if($price>0){echo $formattedPrice;}else{echo 'Free';}?></b>');
+		});
+		
+		// Remove engraving
+		jQuery('#removeEng').click(function(e){
+			e.stopPropagation();
+			removeText();
+			jQuery('#engraveTitle').html('ADD ENGRAVING FOR <b style="color:#854c64"><?php if($price>0){echo $formattedPrice;}else{echo 'Free';}?></b>');
+		});
+		
+		jQuery("#engraveContinue").click(function(e){
+			e.stopPropagation();
+			var value = jQuery.trim(jQuery("#engravedText").val());
+			jQuery('#engraveDiv').css('top','-9999px');
+			
+			if(value != null && value != 'undefined' && value!='' && value != 'Your text here'){
+				fontValue 	= 	jQuery("#engraveFont").val();
+				finalValue	=	value + ' ' + fontValue;
+				jQuery('#options_<?php echo $engravingOptionId;?>_text').val(finalValue);		//	writing value to custom option input box
+				jQuery('#removeEng,#editEng').show();
+				jQuery('#engraveTitle').html('ENGRAVING ADDED');
+				jQuery('#engraveringchk').attr('checked', true);
+				jQuery('#engraveringchk').attr('disabled', true);
+				jQuery('#ultimate-engraving').addClass('active');
+				jQuery('#engCost').show();
+			}
+			else{
+				jQuery('#options_<?php echo $engravingOptionId;?>_text').val('');
+				jQuery('#removeEng,#editEng').hide();
+				jQuery('#engraveTitle').html('ADD ENGRAVING FOR <b style="color:#854c64"><?php if($price>0){ echo $formattedPrice; }else{echo 'Free';}?></b>');
+				jQuery('#engraveringchk').attr('checked', false);
+				jQuery('#engraveringchk').attr('disabled', false);
+				jQuery('#ultimate-engraving').removeClass('active');
+				jQuery('#engCost').hide();
+			}
+			opConfig.reloadPrice();
+			estimateShipEngraving();
+			<!--[if !IE]><!-->
+			jQuery('#engraving_popup').css('top','-9999px');
+			<!--<![endif]-->
+		});
+	});
+	</script>
+<?php	
+} ?>

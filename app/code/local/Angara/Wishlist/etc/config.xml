@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Wishlist>
+            <version>1.0</version>
+        </Angara_Wishlist>
+    </modules>
+	
+	<adminhtml>
+	<!--Below code is used to enable this module to appear in ACL permission under Role Resources Tab-->
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ajax_wishlist translate="title" module="wishlist">
+                                            <title>Quick Wishlist</title>
+                                        </ajax_wishlist>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+	
+    <global>
+        <blocks>
+            <ajax>
+                <class>Angara_Wishlist_Block</class>
+            </ajax>
+        </blocks>
+		<helpers>
+            <ajax>
+                <class>Angara_Wishlist_Helper</class>
+            </ajax>
+        </helpers> 
+		
+    </global>
+    
+    <frontend>
+        <routers>
+            <ajax>
+                <use>standard</use>
+                <args>
+                    <module>Angara_Wishlist</module>
+                    <frontName>ajax</frontName>
+                </args>
+            </ajax>
+        </routers>
+        <layout>
+            <updates>
+                <ajax>
+                    <file>angara_wishlist.xml</file>
+                </ajax>
+            </updates>
+        </layout>
+    </frontend>
+</config>

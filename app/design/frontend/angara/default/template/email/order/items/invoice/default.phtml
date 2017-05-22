@@ -1,0 +1,159 @@
+<?php $_item 	= 	$this->getItem(); 			//	Data coming from sales_flat_quote_item table 
+$_order 	= 	$this->getItem()->getOrder();	//	Data coming from sales_flat_order table 
+$productId		=	$_item->getProductId();
+$_product 		= 	Mage::getModel('catalog/product')->load($productId);
+$productSku		=	$this->htmlEscape($this->getSku($_item));
+$productSku		=	explode('-',$productSku);
+$modifiedProductSku	=	$productSku[0];
+?>    
+<tr>
+  <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit"><?php echo $modifiedProductSku; ?></td>
+  <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit"><?php echo $this->htmlEscape($_product->getShortDescription()); ?>
+    <?php if ($this->getItemOptions()){ ?>
+    <?php /*?><dl>
+      <?php foreach ($this->getItemOptions() as $option): ?>
+      <dt><em><?php echo $option['label'] ?></em></dt>	<!--Custom Option Title-->
+      <dd><?php echo $option['value'] ?></dd>			<!--Custom Option Value-->
+      <?php endforeach; ?>
+    </dl><?php */?>
+    <?php } ?>
+    <?php //echo 'desc->'.$this->htmlEscape($_item->getDescription()) ?>
+    
+    <?php	//	EMI calculation starts
+    $orderId				=	$_order->getId();
+	$productId				=	$_item->getProductId();
+	//echo '<br>productId->'.$productId;
+	//$noOfInstallments		=	Mage::helper('function')->getInstallmentsForEmailInvoice($orderId,$productId);
+	$shippingAmount 		= 	$_order->getShippingAmount();		//	total shipping amount for this complete order
+	$taxAmount 				= 	$_item->getTaxAmount();				//	Tax per product per item
+	
+	//echo '<br>taxAmount->'.$taxAmount;
+	$ItemDiscountAmt 		= 	$_item->getDiscountAmount(); 		//	
+	$ItemQty 				= 	$_item->getQty();					//	total per product quantity purchased in this order
+	$ItemTotAmt 			= 	$_item->getPrice();					//	
+	
+	$perItemDiscountAmt 	= 	($ItemDiscountAmt / $ItemQty);  	//	discount amount per product
+	$EMIAmount 				= 	(($ItemTotAmt - $perItemDiscountAmt) * $ItemQty ) / $noOfInstallments;
+	//$first_emi 				= 	$EMIAmount + $shippingAmount + $taxAmount;
+	$first_emi 				= 	$EMIAmount + $taxAmount;
+	$first_emi 				= 	$_order->formatPrice($first_emi,true,true);
+	$third_emi				=	$second_emi 			= 	$_order->formatPrice($EMIAmount,true,true);
+	
+	//	Extra Fields Starts
+	$itemUnitPriceIncTax	=	$_item->getPriceInclTax();			//	product price inclusive tax per unit
+	//$itemTotalPriceIncTax	=	$_item->getRowTotalInclTax();		//	product total price inclusive tax 
+	$itemTotalPriceIncTax	=	$ItemTotAmt*$ItemQty;		//	product total price inclusive tax 
+	$finalAmountPaidPerUnit	=	$itemTotalPriceIncTax-$ItemDiscountAmt;	//	amount that was paid by customer for a product
+	
+	$ItemTotAmt				=	$_order->formatPrice($ItemTotAmt,false,true);
+	$ItemDiscountAmt 		= 	$_order->formatPrice($ItemDiscountAmt,true,true);
+	$itemUnitPriceIncTax	=	$_order->formatPrice($itemUnitPriceIncTax,true,true);
+	$itemTotalPriceIncTax	=	$_order->formatPrice($itemTotalPriceIncTax,true,true);	
+	$finalAmountPaidPerUnit	=	$_order->formatPrice($finalAmountPaidPerUnit,true,true);
+	
+	//echo '<br>item id->'.$_item->getId();
+	//echo '<br>orderId->'.$orderId;
+	//echo '<br>productId->'.$productId;
+	//echo '<br>ItemDiscountAmt->'.$ItemDiscountAmt;
+	//echo '<br>ItemQty->'.$ItemQty;
+	//echo '<br>ItemTotAmt->'.$ItemTotAmt;
+	//echo '<br>itemUnitPriceIncTax->'.$itemUnitPriceIncTax;
+	//echo '<br>itemTotalPriceIncTax->'.$itemTotalPriceIncTax;
+	//echo '<br>finalAmountPaidPerUnit->'.$finalAmountPaidPerUnit;
+?> 
+	<?php /*?><?php 
+	if($noOfInstallments!=1){
+    ?>
+	<dl>
+      <dt><em><?php echo 'Installments - '.$noOfInstallments.' EMI';?></em></dt>	
+	<?php 	
+			if($noOfInstallments==3){
+				echo '<dd>1st EMI	- '.$first_emi.'	</dd>';
+				echo '<dd>2nd EMI	- '.$second_emi.'	</dd>';
+				echo '<dd>3rd EMI	- '.$third_emi.'	</dd>';
+			}elseif($noOfInstallments==2){
+				echo '<dd>1st EMI	- '.$first_emi.'	</dd>';
+				echo '<dd>2nd EMI	- '.$second_emi.'	</dd>';
+			}
+     ?>
+	</dl>
+<?php } 
+	?><?php */?> 
+  </td>
+  <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit"><?php echo $_item->getQty()*1 ?></td>
+  <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit"><?php echo $ItemTotAmt; //	Rate?></td>
+  <?php /*?><td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;"><?php echo $itemTotalPriceIncTax; //	Sub Amount?></td>
+  <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;"><?php echo $ItemDiscountAmt; // Discount?></td><?php */?>
+  <?php /*?><td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;"><?php echo $finalAmountPaidPerUnit; // Amount?></td><?php */?>
+  <td style="font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit"><?php if ($this->helper('tax')->displaySalesPriceExclTax($_order->getStore()) || $this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
+    <?php if ($this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
+    <span class="label"><?php echo Mage::helper('tax')->__('Excl. Tax'); ?>:</span>
+    <?php endif; ?>
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'email', $_order->getStore())): ?>
+    <?php echo $_order->formatPrice($_item->getRowTotal()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?>
+    <?php else: ?>
+    <?php echo $_order->formatPrice($_item->getRowTotal()) ?>
+    <?php endif; ?>
+    <?php if (Mage::helper('weee')->getApplied($_item)): ?>
+    <br />
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'email', $_order->getStore())): ?>
+    <small>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount'],true,true); ?></span><br />
+    <?php endforeach; ?>
+    </small>
+    <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email', $_order->getStore())): ?>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount_incl_tax'],true,true); ?></small></span><br />
+    <?php endforeach; ?>
+    <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'email', $_order->getStore())): ?>
+    <small>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span><br />
+    <?php endforeach; ?>
+    </small>
+    <?php endif; ?>
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email', $_order->getStore())): ?>
+    <br />
+    <span class="nobr"><?php echo Mage::helper('weee')->__('Total'); ?>:<br />
+    <?php echo $_order->formatPrice($_item->getCalculationPrice()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?></span>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($this->helper('tax')->displaySalesPriceInclTax($_order->getStore()) || $this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
+    <?php if ($this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
+    <br />
+    <span class="label"><?php echo Mage::helper('tax')->__('Incl. Tax'); ?>:</span>
+    <?php endif; ?>
+    <?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'email', $_order->getStore())): ?>
+    <?php echo $_order->formatPrice($_incl+$_item->getWeeeTaxAppliedRowAmount()); ?>
+    <?php else: ?>
+    <?php echo $_order->formatPrice($_incl-$_item->getWeeeTaxRowDisposition()) ?>
+    <?php endif; ?>
+    <?php if (Mage::helper('weee')->getApplied($_item)): ?>
+    <br />
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'email', $_order->getStore())): ?>
+    <small>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount'],true,true); ?></span><br />
+    <?php endforeach; ?>
+    </small>
+    <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email', $_order->getStore())): ?>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount_incl_tax'],true,true); ?></small></span><br />
+    <?php endforeach; ?>
+    <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'email', $_order->getStore())): ?>
+    <small>
+    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+    <span class="nobr"><?php echo $tax['title']; ?>: <?php echo $_order->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span><br />
+    <?php endforeach; ?>
+    </small>
+    <?php endif; ?>
+    <?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'email', $_order->getStore())): ?>
+    <span class="nobr"><?php echo Mage::helper('weee')->__('Total incl. tax'); ?>:<br />
+    <?php echo $_order->formatPrice($_incl+$_item->getWeeeTaxAppliedRowAmount()); ?></span>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php endif; ?></td>
+</tr>

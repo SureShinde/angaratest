@@ -1,0 +1,18 @@
+<config>    
+    <modules>
+        <Angara_Linkshare>
+            <version>0.1.0</version>
+        </Angara_Linkshare>
+    </modules>
+	<frontend>
+        <routers>
+            <linkshare>
+                <use>standard</use>
+                <args>
+                    <module>Angara_Linkshare</module>
+                    <frontName>linkshare</frontName>
+                </args>
+            </linkshare>
+        </routers>  
+    </frontend>
+</config>

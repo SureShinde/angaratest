@@ -1,0 +1,33 @@
+<?php if(Mage::app()->getRequest()->getModuleName() != 'onepagecheckout'){ ?>
+<div class="footer-newsletter full-width">
+	<div class="row">
+		<div class="newsletter-form">
+			<form id="subscription-form-footer" method="post" action="<?php echo ((Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://').Mage::app()->getRequest()->getHttpHost().'/newsletter/subscriber/confirmed/';?>">
+					<div class="row">
+						<div class="nl-holder">
+							<input id="footerEmail" type="text" style="border-radius:0px; -webkit-appearance:none;" name="email" class="input-text required-entry validate-email showcase-border-thick" placeholder="Enter your email for special offers" title="<?php echo $this->__('Email Address');?>">
+							<input type="hidden" value="<?php echo $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>" name="return_url">
+							<input type="hidden" value="03-footer" name="newslettertype">
+							<div id="subscribe-success-footer" class="text-success"></div>
+							<input type="submit" class="subscribe-button slick-img" value=" " style="background: #fa505a url(/skin/frontend/ress/imobile/images/white-arrow.png) no-repeat center center;background-size: 12px 12px;width: 28px; border-radius:0px; border:1px solid #000000; border-left:none;">
+						</div>
+					</div>
+			</form>
+			<script type="text/javascript">
+			var dataFormFooter = new VarienForm('subscription-form-footer', false);
+			</script> 
+		</div>
+		<div class="help">
+				<div class="help-text text-bold" style="padding-bottom:15px;">We're here to help! </div>
+				<ul>
+								<?php /*?><li><div id="LP_DIV_1434090335997"></div></li><?php */?>
+								<li><a href="/contact-us" class="block-inline-display"><i class="fa fa-phone px22"></i><br><br>1-888-926-4272</a></li>
+								<?php /*?><li class="low-margin-top" id="LP_DIV_1434090335997"></li><?php */?>
+								<li><a href="mailto:customer.service@angara.com"><i class="fa fa-envelope-o px22"></i><br><br>Email</a></li>
+								<li><a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link"><i class="fa fa-comments-o px22"></i><br> <br>Live Chat</a></li>
+								<?php /*?><li><a href="<?php echo (Mage::getSingleton('customer/session')->isLoggedIn())? '/awrma/customer_rma/index/' : '/awrma/guest_rma/index/';?>">Request RMA</a></li><?php */?>
+				</ul>
+		</div>
+	</div>
+</div>
+<?php } ?>

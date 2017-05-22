@@ -1,0 +1,99 @@
+<?php
+if(Mage::helper('flashsale')->getFlashSaleStatus()){
+    $flashSaleData		=	Mage::helper('flashsale')->getFlashSaleProducts();
+    $flashSaleSku		=	$flashSaleData['product_id'];
+    
+    //	Check if sku exist
+    $productId 		= 	Mage::getModel('catalog/product')->getIdBySku($flashSaleSku);
+    if($productId){
+        $_product	=	Mage::getModel('catalog/product')->load($productId);
+        
+        //	Show Timer
+        $flashSaleToDate	=	$flashSaleData['to_date'];
+        
+        $startTime 			= 	Mage::helper('flashsale')->getCurrentServerDateTime();
+        $endTime 			= 	$flashSaleToDate;
+        
+        $start_date 		= 	new DateTime($startTime);
+        $since_start 		= 	$start_date->diff(new DateTime($endTime));
+        
+        $remainingHours		=	$since_start->h;
+        $remainingMins		=	$since_start->i;
+        $remainingSeconds	=	$since_start->s;
+        
+        $totalRemainingMiliSeconds		=	($remainingHours * 60 * 60 * 1000) + ($remainingMins * 60 * 1000) + ($remainingSeconds * 1000); ?>
+        <script type="text/javascript">
+        var difference = <?php echo $totalRemainingMiliSeconds;?>;
+        // ticker work
+        var ticker;
+        jQuery(function(){
+            ticker = jQuery('#flashdealtimer');
+            convertTicker();
+        })
+        function zeroPad (number) {
+            // Pad a number with a zero, to make it 2 digits
+            return ((number < 10) ? "0" : "") + String(number);
+        }
+        function convertTicker(){
+            markupTicker();
+        }
+        function markupTicker(){
+            ticker.hours = jQuery('<span class="hourdigits"></span>');
+            ticker.minutes = jQuery('<span class="minutedegites"></span>');
+            ticker.seconds = jQuery('<span class="secondigits"></span>');
+            
+            ticker.append(ticker.hours);
+            ticker.append(jQuery('<span>:</span>'));
+            
+            ticker.append(ticker.minutes);
+            ticker.append(jQuery('<span>:</span>'));
+            
+            ticker.append(ticker.seconds);
+            updateTicker();
+        }
+        function updateTicker(){
+            difference-=1000;
+            if(difference > 0){
+                ticker.hours.text( zeroPad(parseInt(difference/(1000*60*60))) );
+                ticker.minutes.text( zeroPad(parseInt(difference/(1000*60))%60) );
+                ticker.seconds.text( zeroPad(parseInt(difference/(1000))%60) );
+                setTimeout(function(){updateTicker()},1000);
+            }
+            else{
+                ticker.hide();
+            }
+        }
+        </script>
+        <div class="flash-sale">
+            <p class="hp-block-title light-border-bottom">
+                <span style="float:left">Flash<span class="flash"><img src="skin/frontend/ress/default/images/homepage/tem-img/flash.png" alt="Flash Sale" /></span>Sale</span>
+                <span style="float:right" id="flashdealtimer" class="flashdealtimer"><i class="fa fa-clock-o" style="margin-right:10px;"></i></span>
+            </p>
+            <div class="product hlder">
+                <div class="pro-image">
+                    <a href="<?php echo $_product->getProductUrl(); ?>?icid=home|sale|flash|09142015">
+                        <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(180)->setQuality(70); ?>" alt="<?php echo $this->htmlEscape($_product->getShortDescription()); ?>" title="<?php echo $this->htmlEscape($_product->getShortDescription()); ?>" />
+                    </a>
+                </div>
+                <div class="pro-detail">
+                    <div class="discount">
+                        <img src="skin/frontend/ress/default/images/homepage/tem-img/extra-off.png" alt="Extra 20% Off" />
+                    </div>
+                    <div class="col-xs-7 pro-name" style="padding-right:10px">
+                        <a href="<?php echo $_product->getProductUrl(); ?>?icid=home|sale|flash|09142015">
+                            <p><?php echo  Mage::helper('core/string')->truncate($this->stripTags($_product->getShortDescription(), null, true), $length = 45, $etc = '...'); ?></p>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 btn">
+                        <a href="<?php echo $_product->getProductUrl(); ?>?icid=home|sale|flash|09142015">buy now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php 
+    }
+}
+else{
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId('flashsale-expired')->toHtml();	
+}
+?>

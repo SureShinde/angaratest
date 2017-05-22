@@ -1,0 +1,90 @@
+<?php
+$orderId = $this->getRequest()->getParam('order_id');
+$order = Mage::getModel('sales/order')->load($orderId);
+
+$createRequestRule = $this->getUrl(
+	'additionalinformation/adminhtml_additionalinformation/sendrequest', array('order' => $order->getIncrementId())
+);
+
+$resetRequest = $this->getUrl(
+	'additionalinformation/adminhtml_additionalinformation/resetrequest', array('order' => $order->getIncrementId())
+);
+
+$checkData = Mage::helper('additionalinformation')->_loadByOrderIncrementId($order->getIncrementId());
+/*$button = $this->getLayout()->createBlock('adminhtml/widget_button')              
+	->setType('button')
+	->setStyle('margin:10px 0;')
+	->setOnClick('window.location.href=\'' . $createRequestRule . '\'')
+	->setLabel('Send Request For Fraud Check')
+;
+$resetCustomerData = $this->getLayout()->createBlock('adminhtml/widget_button')
+	->setType('button')
+	->setStyle('margin:10px 0;')
+	->setOnClick('window.location.href=\'' . $resetRequest . '\'')
+	->setLabel('Reset Customer Data')
+;*/
+?>
+<div class="pull-left" >	
+	<fieldset>
+        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>    
+                    <form id="sendmail-form" method="post" action="<?php echo $createRequestRule; ?>"> 
+                        <?php echo $this->getBlockHtml('formkey')?>                 
+                        <td>
+                            <button class="scalable" type="submit" title="Send Request For Fraud Check" id="sendreqfc">
+                                <span>Send Request For Fraud Check</span>
+                            </button>
+                        </td>
+                    </form>
+                    <form id="sendmail-form" method="post" action="<?php echo $createRequestRule; ?>">
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        <td>
+                            <button style="margin-left:15px;" class="scalable" type="submit" id="sendreqfc1">
+                                <span>Send Fraud Check Request for Scan Documents</span>
+                                <input name="request_type" type="hidden" value="scan" />
+                            </button>
+                        </td>
+                    </form>
+                 </tr>
+            </tbody>
+        </table>
+	</fieldset> 
+     
+        <?php //if($checkData[0]['flag']==1 || $checkData[0]['otp_flag']==1):
+		if($checkData[0]['flag']!=0 && $checkData[0]['otp_flag']!=0 || $checkData[0]['flag']!=0 && $checkData[0]['otp_flag']==0): ?>
+        <form id="reset-request-form" method="post" action="<?php echo $resetRequest; ?>">
+			<?php echo $this->getBlockHtml('formkey')?>
+                <fieldset>
+                <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>                        
+                        <td>
+                         <input type="checkbox" class="input-text validate-email required-entry" value="resetreqmail" name="resetreqmail" id="resetreqmail">
+                            <button style="margin:10px 0; width:196px" class="scalable" type="submit" title="Reset Customer Data" id="resetreqfc" onclick="if(confirm('Email will not be sent if checkbox is not checked.')){}else{return false;}">
+                                <span>Reset Customer Data</span>
+                            </button>
+                        </td>
+                     </tr>
+                </tbody>
+                </table>
+                </fieldset> 
+		</form>
+        <?php endif; ?>
+    </div>
+<?php
+//var_dump($checkData);exit;
+if(!empty($checkData[0])):
+?>
+<div class="no-margin" style="width:776px; float:right;">
+	<div>
+		<?php echo $this->getLayout()->createBlock('additionalinformation/adminhtml_additionalinformation')->setTemplate('additionalinformation/imagesupload.phtml')->toHtml(); ?>
+	<div style="clear:both;"></div>
+    </div>
+    <div class="uploaded-img-holder">
+        <?php echo $this->getLayout()->createBlock('additionalinformation/adminhtml_additionalinformation')->setTemplate('additionalinformation/additionalinformationform.phtml')->toHtml();?>
+    <div style="clear:both;"></div>
+    </div>
+    
+</div>
+<?php endif; ?>

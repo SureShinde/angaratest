@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<customerstory_adminhtml_story_index>
+		<reference name="content">
+			<block type="customerstory/adminhtml_story" name="story" />
+		</reference>
+	</customerstory_adminhtml_story_index>
+</layout>

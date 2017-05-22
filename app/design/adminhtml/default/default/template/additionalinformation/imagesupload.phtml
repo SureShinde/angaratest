@@ -1,0 +1,65 @@
+<?php
+$_order = Mage::getModel('sales/order')->load($this->getRequest()->getParam('order_id'));
+$orderIncrementId = $_order->getIncrementId();
+$allImages = $this->_getImages($this->getRequest()->getParam('order_id'));
+$_fraud = Mage::getSingleton('additionalinformation/additionalinformation')->load($this->_getFraudCheckId($this->getRequest()->getParam('order_id')));
+if($allImages=='' ||  $_fraud->getFlag()==0):  //$_fraud->getCustomerBankName()=='' && $_fraud->getCustomerBankAuthCode()==''
+?>
+<form enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+<div class="dropzone-previews"></div>
+ <div class="fallback"> <!-- this is the fallback if JS isn't working -->
+        </div>
+</form>
+<div class="buttonuploadwrapper">
+<button type="submit" id="submit-all" class="dropzonesubmitbutton">Upload</button>
+</div>
+<script type="text/javascript">
+/*override dropzone.js script*/
+/*For Images Drag or Upload*/
+Dropzone.options.myDropzone = {
+	autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 5,
+        maxFiles: 5,
+		maxFilesize: 2,
+		acceptedFiles: '.jpg,.jpeg,.png,.gif,.bmp,.pdf,.doc,.docx',
+		paramName: "additionalinformationimg",
+		params: {order:'<?php echo Mage::helper('core')->urlEncode($orderIncrementId); ?>'},
+		url:'<?php echo $this->getUrl('additionalinformation/adminhtml_additionalinformation/imagesupload',array('_secure'=>true)) ?>',
+		 success: function(response){
+				setTimeout(function () { location.reload(true); }, 1000);
+			},
+    init: function() {
+      this.on("addedfile", function(file) {
+        // Create the remove button
+        var removeButton = Dropzone.createElement("<a class='dz-remove' data-dz-remove='' href='javascript:undefined;'>Remove file</a>");
+		
+        // Capture the Dropzone instance as closure.
+        var _this = this;
+
+        // Listen to the click event
+        removeButton.addEventListener("click", function(e) {
+          // Make sure the button click doesn't submit the form:
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Remove the file preview.
+          _this.removeFile(file);
+          // If you want to the delete the file on the server as well,
+          // you can do the AJAX request here.
+        });
+
+        // Add the button to the file preview element.
+        file.previewElement.appendChild(removeButton);
+      });
+	  var submitButton = document.querySelector("#submit-all")
+        myDropzone = this; // closure
+
+    submitButton.addEventListener("click", function() {
+      myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+    });
+    }
+  };
+</script>
+<?php endif; ?>

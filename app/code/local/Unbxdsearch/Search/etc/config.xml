@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Unbxdsearch_Search>
+            <version>0.1.0</version>
+        </Unbxdsearch_Search>
+    </modules>
+
+	 <global>
+           <blocks>
+              <catalogsearch>
+                  <rewrite>
+<!--                      <result>Unbxdsearch_Search_Block_Result</result>  -->
+                     <autocomplete>Unbxdsearch_Search_Block_Autocomplete</autocomplete>
+		     <!--  <layer>Unbxdsearch_Search_Block_Layer</layer>-->
+                 </rewrite>
+              </catalogsearch>
+           </blocks>
+        </global>
+
+<global>
+	
+     <models>
+        <adjnav>
+            <rewrite>                   
+                    <catalog_layer_filter_attribute>Unbxdsearch_Search_Model_Layer_Filter_Attribute</catalog_layer_filter_attribute>        
+			</rewrite>
+        </adjnav>
+     </models>
+     </global>
+     <global>
+     <models>
+        <catalog_resource>
+            <rewrite>                   
+                    <product_collection>Unbxdsearch_Search_Model_Product</product_collection>        
+			</rewrite>
+        </catalog_resource>
+     </models>
+     
+</global>
+
+ 
+    <frontend>
+        <routers>
+            <catalogsearch>
+                <args>
+                    <modules>
+                        <Unbxdsearch_Search before="Mage_CatalogSearch">Unbxdsearch_Search</Unbxdsearch_Search>
+                    </modules>
+                </args>
+            </catalogsearch>
+        </routers>
+  	</frontend>
+
+	 <global>
+           <models>
+              <catalogsearch>
+                 <rewrite>                   
+		     <layer>Unbxdsearch_Search_Model_Layer</layer>
+                 </rewrite>
+             </catalogsearch>
+           </models>
+        </global>
+
+    <global>
+           <helpers>
+              <catalogsearch>
+                  <rewrite>
+                      <data>Unbxdsearch_Search_Helper_Data</data>
+                 </rewrite>
+              </catalogsearch>
+           </helpers>
+        </global>
+
+
+
+</config>

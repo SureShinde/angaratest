@@ -1,0 +1,378 @@
+<?php
+/* @var $this Mage_Catalog_Block_Product_View_Options
+
+ */
+
+$_product = $this->getProduct();
+$_options = Mage::helper('core')->decorateArray($this->getOptions());
+if(count($_options)):
+	$userAgent = Mage::getUserAgent(); ?>
+	<script type="text/javascript">
+    //<![CDATA[
+    var optionTextCounter = {
+        count : function(field,cntfield,maxlimit){
+            if (field.value.length > maxlimit){
+                field.value = field.value.substring(0, maxlimit);
+            } else {
+                cntfield.innerHTML = maxlimit - field.value.length;
+            }
+        }
+    }
+
+    Product.Options = Class.create();
+    Product.Options.prototype = {
+        initialize : function(config) {
+            this.config = config;
+            this.reloadPrice();
+            document.observe("dom:loaded", this.reloadPrice.bind(this));
+        },
+        reloadPrice : function() {
+            var config = this.config;
+			var pprice = 0;
+            var skipIds = [];
+            $$('body .product-custom-option').each(function(element){
+                var optionId = 0;
+                element.name.sub(/[0-9]+/, function(match){
+                    optionId = parseInt(match[0], 10);
+                });
+                if (config[optionId]) {
+                    var configOptions = config[optionId];
+                    var curConfig = {price: 0};
+                    if (element.type == 'checkbox' || element.type == 'radio') {
+                        if (element.checked) {
+                            if (typeof configOptions[element.getValue()] != 'undefined') {
+                                curConfig = configOptions[element.getValue()];
+                            }
+                        }
+                    } else if(element.hasClassName('datetime-picker') && !skipIds.include(optionId)) {
+                        dateSelected = true;
+                        $$('.product-custom-option[id^="options_' + optionId + '"]').each(function(dt){
+                            if (dt.getValue() == '') {
+                                dateSelected = false;
+                            }
+                        });
+                        if (dateSelected) {
+                            curConfig = configOptions;
+                            skipIds[optionId] = optionId;
+                        }
+                    } else if(element.type == 'select-one' || element.type == 'select-multiple') {
+                        if ('options' in element) {
+                            $A(element.options).each(function(selectOption){
+                                if ('selected' in selectOption && selectOption.selected) {
+                                    if (typeof(configOptions[selectOption.value]) != 'undefined') {
+                                        curConfig = configOptions[selectOption.value];
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        if (element.getValue().strip() != '') {
+                            curConfig = configOptions;
+                        }
+                    }
+                    if(element.type == 'select-multiple' && ('options' in element)) {
+                        $A(element.options).each(function(selectOption) {
+                            if (('selected' in selectOption) && typeof(configOptions[selectOption.value]) != 'undefined') {
+                                if (selectOption.selected) {
+                                    curConfig = configOptions[selectOption.value];
+                                } else {
+                                    curConfig = {price: 0};
+                                }
+                                optionsPrice.addCustomPrices(optionId + '-' + selectOption.value, curConfig);
+                                optionsPrice.reload();
+								
+								// calculating new product price
+								if(curConfig['priceValue'] && curConfig['priceValue'] != 0 ){
+									pprice = pprice + curConfig['price'];
+								}
+                            }
+                        });
+                    } else {
+                        optionsPrice.addCustomPrices(element.id || optionId, curConfig);
+                        optionsPrice.reload();
+						
+						// calculating new product price
+						if(curConfig['priceValue'] && curConfig['priceValue'] != 0 ){
+							pprice = pprice + curConfig['price'];
+						}
+                    }
+                }
+            });
+			try {
+				priceChanged(parseFloat(optionsPrice.productPrice) + pprice);
+			} catch (e) {}
+        }
+    }
+    function validateOptionsCallback(elmId, result) {
+        var container = $(elmId).up('ul.options-list');
+        if (result == 'failed') {
+            container.removeClassName('validation-passed');
+            container.addClassName('validation-failed');
+        } else {
+            container.removeClassName('validation-failed');
+            container.addClassName('validation-passed');
+        }
+    }
+    var opConfig = new Product.Options(<?php echo $this->getJsonConfig() ?>);
+    //]]>
+    </script>
+	<dl class="hidden">
+	<?php 
+	if(!($_product->getIsBuildYourOwn() && !$_product->getByoModel()->hasSettingSelected())):
+		foreach($_options as $_option):
+			if($_option->getTitle() == 'Ring Size'):
+				if($_option->getType() == "drop_down"): ?>
+					<script type="text/javascript">
+						jQuery(function(){
+							jQuery('<div class="row high-padding-bottom">')
+							.append(
+								jQuery('<div class="col-md-2 col-sm-12 padding-type-0">')
+								.append(
+									jQuery('<div><?php if($_product->isConfigurable()){ ?><?php }?>Ring Size</div>')
+									.addClass('low-padding-top low-padding-bottom h3')
+								)
+							)
+							.append(
+								jQuery('<div class="col-md-5 col-sm-12 padding-type-0">').append(
+									jQuery('#select_'+<?php echo $_option->getId(); ?>).addClass('product-custom-option form-control')
+								)
+							)
+							.append(
+								jQuery('<div>').append(
+									jQuery('<a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank" class="ring-size-guide pull-left low-margin-top"><i class="fa fa-fw fa-external-link"></i>Ring Size Guide</a>')
+										.click(function(){
+											customLinkTracking('Ring size guide link');
+									})
+								).addClass('col-md-3 col-sm-12 small')
+							)
+							.prependTo(jQuery('#product-options-wrapper'));						
+						});
+					</script>
+				<?php 
+				else: ?>
+					<script type="text/javascript">	
+						var updateRingSize = function(optionId, size){
+							jQuery('#options_'+optionId+'_text').val(size);
+						}
+						var setRingSizeHtml = function(optionId){
+							jQuery('<div class="row">')
+							.append(
+								jQuery('<div class="col-md-2 col-sm-12 padding-type-0">')
+								.append(
+									jQuery('<div><?php if($_product->isConfigurable()){ ?><?php }?>Ring Size</div>')
+									.addClass('low-padding-top low-padding-bottom h3')
+								)
+							)
+							.append(
+								jQuery('<div class="col-md-5 col-sm-12 padding-type-0">').append(
+									jQuery('<select title="Ring Size" class="required-entry product-custom-option form-control"><option value="">Select Ring Size</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option><option value="10">10</option><option value="10.5">10.5</option><option value="11">11</option><option value="11.5">11.5</option><option value="12">12</option><option value="12.5">12.5</option><option value="13">13</option></select>')
+									.change(function(){
+										var size = jQuery(this).val();
+										updateRingSize(optionId, size);
+										ringSizeSelect(size);
+									})
+								)
+							)
+							.append(
+								jQuery('<div>').append(
+									jQuery('<a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank" class="ring-size-guide pull-left low-margin-top"><i class="fa fa-fw fa-external-link"></i>Ring Size Guide</a>')
+										.click(function(){
+											customLinkTracking('Ring size guide link');
+									})
+								).addClass('col-md-3 col-sm-12 small')
+							)
+							.prependTo(jQuery('#product-options-wrapper'));
+						};
+						
+						jQuery(function(){
+							setRingSizeHtml(<?php echo $_option->getId(); ?>);
+						});
+					</script>
+				<?php 
+				endif;
+			elseif($_option->getTitle() == 'Engraving'): 
+			if(Mage::helper('function')->canShowJAEngraving()){ ?>
+				<div id="engravingContainer" class="block-inline-display">
+					<div data-toggle="modal" data-target="#engravingModal" class="pull-left">
+						<input id="engraving" name="engraving" type="checkbox"  autocomplete="off"/>
+						<label for="engraving" style="white-space:nowrap;">
+							<span class="fa-stack" style="width:13px">
+								<i class="fa fa-pencil fa-stack-x"></i>
+							</span>
+							<?php 
+							if($_option->getPrice()>0){?>
+								Add Engraving For <strong>
+								<?php echo $this->helper('core')->currency($_option->getPrice(),true,false);?>
+								</strong>
+							<?php
+							}
+							else{?>
+								Add <strong>
+								<?php echo '<span class="text-green"><strong>Free</strong></span>';?>
+								</strong> Engraving
+							<?php
+							}?>    
+						</label>
+					</div>
+					<div id="engraving-options" class="text-red high-padding-left hidden nowrap pull-left low-padding-top">
+						<a class="btn btn-warning btn-xs auto-height" href="javascript:void(0);" data-toggle="modal" data-target="#engravingModal"><i class="fa fa-edit fa-lg"></i> Edit</a> <a class="btn btn-danger btn-xs auto-height" href="javascript:void(0);" onclick="removeEngraving();"><i class="fa fa-trash-o fa-lg"></i> Remove</a>
+						<small> <?php if($_option->getPrice()>0) {?>*Engraving cost is non refundable.<?php }else{?>*Limited Period Offer<?php }?></small>
+					</div>
+				</div>
+				<div class="modal offscreen fade" id="engravingModal" tabindex="-1" role="dialog" aria-labelledby="engravingModalLabel" aria-hidden="true">
+					<div class="modal-dialog" style="max-width:557px">
+						<div class="modal-content">
+							<div class="modal-header"> <i class="fa fa-times close" data-dismiss="modal"></i>
+							<div class="modal-title block-sub-heading" id="engravingModalLabel">Engraving</div>
+						</div>
+						<div class="modal-body">
+						<?php 
+						if($userAgent['browser_name'] != 'msie' && $userAgent['browser_version'] != '10.0'): ?>
+							<div id="flashContent" class="text-center visible-md"> 
+								<!--[if IE]> 
+								<object id="engravingMovie" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="495" height="311" allowscriptaccess="always" flashvars="">
+								<param name="movie" value="/skin/frontend/angara/default/flash/engraving.swf" /></object>
+								<![endif--> 
+								<!--[if !IE]><!-->
+								<embed id="engravingMovie" src="/skin/frontend/default/default/flash/engraving.swf" quality="high" bgcolor="#ffffff" width="495" height="311" name="engraving" align="middle" wmode="window" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								<!--<![endif]--> 
+							</div>
+						<?php 
+						endif; ?>
+							<div class="row">
+								<div class="col-sm-5 high-margin-top">
+									<div class="input-group">
+										<input type="text" placeholder="Your text here." maxlength="25" id="engravedText" name="engravedText" class="input-text">
+										<span class="input-group-btn">
+											<button class="btn btn-default showcase-bg-darker text-on-dark" type="button" onclick="clearEngraving()">
+												<i class="fa fa-times"></i>
+											</button>
+										</span> 
+									</div>
+									<input type="hidden" value="SnellRoundhand Script" id="engraveFont" name="engraveFont">
+									<small class="text-light">(Max: 25 Characters)</small> 
+								</div>
+								<div class="col-sm-7 high-margin-top">
+									<div class="btn-group"> <a rel="nofollow" class="clickable active engrave-style2 engraving-font-style-link" onclick="changeFontType('SnellRoundhand Script')"></a> <a rel="nofollow" class="clickable engrave-style1 engraving-font-style-link" onclick="changeFontType('Helvetica 45 Light')"></a> </div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEngraving()">
+								Continue
+							</button>
+							<button type="button" class="btn btn-default showcase-bg-darker text-on-dark" data-dismiss="modal" onclick="removeEngraving()">
+								Cancel
+							</button>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<script>
+				var currentMetal = 'White';
+				function getMovie(movieElement){
+					//var isIE = navigator.appName.indexOf("Microsoft") != -1;
+					var movie = document.getElementById(movieElement);
+					<?php if($userAgent['browser_name'] != 'msie' && $userAgent['browser_version'] != '10.0'): ?>
+					if(typeof(movie._updateMetal) === 'function')
+						movie._updateMetal(currentMetal);
+					<?php endif; ?>
+					return movie;
+				}
+				
+				function updateEngravingText(str){
+					<?php if($userAgent['browser_name'] != 'msie' && $userAgent['browser_version'] != '10.0'): ?>
+					if(typeof(getMovie("engravingMovie")._updateEngravingText) === 'function')
+						getMovie("engravingMovie")._updateEngravingText(str);
+					<?php endif; ?>
+				}
+				
+				function changeFontType(fontType){
+					jQuery('#engraveFont').val(fontType);
+					<?php if($userAgent['browser_name'] != 'msie' && $userAgent['browser_version'] != '10.0'): ?>
+					if(typeof(getMovie("engravingMovie")._changeFontType) === 'function')
+						getMovie("engravingMovie")._changeFontType(fontType);
+					<?php endif; ?>
+					return false;
+				}
+				
+				function changeMetal(type){
+					<?php if($userAgent['browser_name'] != 'msie' && $userAgent['browser_version'] != '10.0'): ?>
+					if(typeof(getMovie("engravingMovie")._updateMetal) === 'function')
+						getMovie("engravingMovie")._updateMetal(type);
+					<?php endif; ?>
+				}
+				
+				function addEngraving(){
+					if(jQuery('#engravedText').val() != ''){
+						jQuery('#engraving').prop('checked',true);
+						jQuery('dt label:contains("Engraving")').parent().next().find('input.product-custom-option').val(jQuery('#engravedText').val() + ' (' + jQuery('#engraveFont').val() + ')');
+						addSelection("Engraving");
+						opConfig.reloadPrice();
+						updateEstimateShipping();
+						specialOfferPrice();
+					}
+					else{
+						removeEngraving();
+					}
+				}
+				
+				function removeEngraving(){
+					jQuery('#engraving').prop('checked',false);
+					jQuery('dt label:contains("Engraving")').parent().next().find('input.product-custom-option').val('');
+					jQuery('#engravedText').val('');
+					removeSelection("Engraving");
+					opConfig.reloadPrice();
+					updateEstimateShipping();
+					specialOfferPrice();
+				}
+				
+				function clearEngraving(){
+					jQuery('#engravedText').val('');
+					updateEngravingText('Your Text Here.');
+				}
+				
+				jQuery(function(){
+					jQuery('body').prepend(jQuery('#engravingModal'));
+					
+					jQuery('#engravingModal').on('show.bs.modal', function () {
+						setTimeout('changeMetal("'+currentMetal+'")', 500);
+						if(jQuery('#engravedText').val() != '')
+						setTimeout('updateEngravingText("'+jQuery('#engravedText').val()+'")', 500);
+					})
+					
+					jQuery('.engraving-font-style-link').click(function(){
+						if(!jQuery(this).hasClass('active')){
+							jQuery('.engraving-font-style-link').removeClass('active');
+							jQuery(this).addClass('active');
+						}
+					})
+					
+					jQuery('#engravedText').bind('paste keyup',function(){
+						value =	jQuery.trim(jQuery("#engravedText").val());
+						updateEngravingText(value);
+					});
+					
+					if(jQuery('.dyn_metal1_type:contains("Yellow")').length > 0)
+						currentMetal = 'Yellow';
+						
+					jQuery(document).on('variationChanged',function(e, params){
+						if(params.id == 'metal1_type'){
+							if(params.value.indexOf('Yellow') >= 0){
+								currentMetal = 'Yellow';
+							}
+							else{
+								currentMetal = 'White';
+							}
+						}
+					});
+				})		
+				</script>
+			<?php }
+			endif;
+			echo $this->getOptionHtml($_option);
+		endforeach;
+	endif; ?>
+</dl>
+<?php 
+endif; ?>

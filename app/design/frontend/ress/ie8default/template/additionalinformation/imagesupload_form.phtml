@@ -1,0 +1,309 @@
+<!--[if IE]>
+<style type="text/css">
+  .left-margin{margin-top:5%;}
+</style>
+<![endif]-->
+<div class="min-padding-bottom">Credit/Debit Card Copy & ID Proof:-</div>
+<div class="max-margin-bottom">
+<?php
+$requestType 	= Mage::app()->getRequest()->getParam('rt');
+if($requestType==''){ ?>If you do not have a business/university/government email, <?php }else{ echo 'Please';} ?> send us a clear, color copy of the credit card used (front), along with a clear, color copy of your state (or country) issued identification. Color photos clicked on your phone will be accepted. To protect your personal information, you may black out the middle eight digits of your credit card as well as the license number from your identification. Angara Security Department needs to see your name, the name of the bank, the type of credit card, expiration date and the last four numbers of the credit card used. Any information shared with us is held in the strictest confidence, never sold or shared, and destroyed once your transaction is complete.</div>
+<div class="max-margin-bottom">To upload images of your credit/debit card and identification to our secure servers, please select the images you would like to submit in the boxes below. To complete, click on upload button. Please note, you may upload up to five files (a maximum size of 2 MB each). All image files must be in gif, jpg, png, pdf or doc format.</div>
+<?php /*	credit card images added by Ashwani	*/	?>
+<div>
+	<img src="/skin/frontend/ress/default/images/credit-card.png" class="img-responsive" style="height:165px;"/>
+</div>
+</br>
+<?php /*	5 images upload code added by Vaseem starts	*/	?>
+<form enctype="multipart/form-data" action="<?php echo Mage::getUrl("additionalinformation/index/uploadimages",array('_secure'=>true)); ?>" method="post" id="fraud_form" style="border:1px solid #EEEEEE;width:30%;padding:15px;">
+    <?php
+		if (stristr($_SERVER['HTTP_USER_AGENT'], "msie 8") || stristr($_SERVER['HTTP_USER_AGENT'], "msie 9") || stristr($_SERVER['HTTP_USER_AGENT'], "msie 10") ){ ?>
+            <div id="browsemain_1"><input id="browsefile_1" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_1" style="display:none;" onclick="reset(jQuery('#browsefile_1'))">Remove</a></div><br style="clear:both; line-height:40px;"/>
+        
+            <div id="browsemain_2"><input id="browsefile_2" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_2" style="display:none;" onclick="reset(jQuery('#browsefile_2'))">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div id="browsemain_3"><input id="browsefile_3" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_3" style="display:none;" onclick="reset(jQuery('#browsefile_3'))">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div id="browsemain_4"><input id="browsefile_4" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_4" style="display:none;" onclick="reset(jQuery('#browsefile_4'))">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div id="browsemain_5"><input id="browsefile_5" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_5" style="display:none;" onclick="reset(jQuery('#browsefile_5'))">Remove</a></div><br style="clear:both; line-height:40px;"/>
+    	
+		<?php }else{?>
+        
+			<div><input id="browsefile_1" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_1" style="display:none;">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div><input id="browsefile_2" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_2" style="display:none;">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div><input id="browsefile_3" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_3" style="display:none;">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div><input id="browsefile_4" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_4" style="display:none;">Remove</a></div><br style="clear:both; line-height:40px;"/>
+            
+            <div><input id="browsefile_5" name="additionalinformationimg[]" type="file" class="file" style="float:left;" /><a href="javascript:;" class="remove_fraudfile" id="removebrowse_5" style="display:none;">Remove</a></div><br style="clear:both; line-height:40px;"/>
+		
+		<?php }?>
+    <input type="hidden" name="order" value="<?php echo $this->getRequest()->getParam('key');?>" />
+    <input type="hidden" name="param" value="<?php echo $this->getRequest()->getParam('param');?>" />
+    <input type="submit" value="Upload" name="submit" id="fraud_form_submit" class="upload" />
+</form>
+<style>
+#email-new-form .btn-primary, #fraud_form .btn-primary { color: #000; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCCCCC), to(#CCCCCC)); /* Safari 5.1, Chrome 10+ */ background: -webkit-linear-gradient(top, #CCCCCC, #CCCCCC); /* Firefox 3.6+ */ background: -moz-linear-gradient(top, #CCCCCC, #ccc); /* IE 10 */ background: -ms-linear-gradient(top, #CCCCCC, #CCCCCC); /* Opera 11.10+ */ background: -o-linear-gradient(top, #CCCCCC, #CCCCCC); filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#CCCCCC', endColorstr='#CCCCCC');/*For IE7-8-9*/
+}
+.fc-module button, #fraud_form input[type="submit"]{ -webkit-appearance: button; padding: 0 12px; outline: none; border: 0; /* for non-css3 browsers */ text-transform: uppercase; color: #000; font-size: 14px; height: 34px; line-height: 34px; cursor: pointer; text-shadow: 0px 1px 1px #333; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCCCCC), to(#CCCCCC)); /* Safari 5.1, Chrome 10+ */ background: -webkit-linear-gradient(top, #CCCCCC, #CCCCCC); /* Firefox 3.6+ */ background: -moz-linear-gradient(top, #CCCCCC, #CCCCCC); /* IE 10 */ background: -ms-linear-gradient(top, #CCCCCC, #CCCCCC); /* Opera 11.10+ */ background: -o-linear-gradient(top, #CCCCCC, #CCCCCC); filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#CCCCCC', endColorstr='#CCCCCC');/*For IE7-8-9*/
+}
+.remove_fraudfile{ padding:5px 0px 0px 50px; vertical-align:middle; float:left; }
+</style>
+
+<script type="text/javascript">
+//	Show hide remove link based on file choosen by browse button
+jQuery("#fraud_form input.file").change(function () {
+	var $this = jQuery(this);
+	var clickedElement	=	$this.attr('id').split('_');
+	var clickedId		=	clickedElement[1];
+	//alert(clickedId);
+	//alert($this.val());
+	if($this.val()){
+		jQuery('#removebrowse_'+clickedId).show(); 
+	}else{
+		jQuery('#removebrowse_'+clickedId).hide(); 
+	}
+});
+
+//	Remove selected file on click of checkbox
+jQuery(".remove_fraudfile").click(function () {
+	var $this = jQuery(this);
+	var clickedElement	=	$this.attr('id').split('_');
+	var clickedId		=	clickedElement[1];
+	//alert(clickedId);
+	jQuery("#browsefile_"+clickedId).val("");
+	document.getElementById('removebrowse_'+clickedId).style.display = 'none'; 
+	<?php if (stristr($_SERVER['HTTP_USER_AGENT'], "msie 10") ){ ?>
+	jQuery("#browsemain_"+clickedId).html('<label>File Removed.</label>');
+	<?php } ?>
+	jQuery('#search').trigger('blur');
+	jQuery('#footerEmail').trigger('blur');
+	jQuery('#govtemail').trigger('blur');
+});
+
+//	Reset the input type file value in IE9
+window.reset = function (e) {
+	e.wrap('<form>').closest('form').get(0).reset();
+	e.unwrap();
+}
+
+//	Perform action on click of submit button
+jQuery("#fraud_form_submit").click(function(e) {
+	var uploadedFiles = [];			//	push values to array
+	//	Loop to check if user tries to submit form without uploading any file
+	jQuery('#fraud_form input[type="file"]').each(function(index) {
+		//alert(index);
+		var $this = jQuery(this);
+		//alert($this.val());
+		//alert(jQuery('#fraud_form input.file')[0].files[0].size);
+		
+		//alert($this.size());
+		if ($this.val() != '') { 
+			uploadedFiles.push($this.val());
+		} 
+	});
+	//alert(uploadedFiles);
+	if (uploadedFiles == "") {
+        alert('Please upload atleast one file.');
+		return false;
+	}else{
+		//	Check if user tries to upload the same file twice or tries to upload the duplicate file
+		var uploadedFilesArray = uploadedFiles.sort(); 		//	sort an array
+		var uploadedFilesDuplicate = [];					//	create another array to store duplicate values
+		for (var i = 0; i < uploadedFilesArray.length - 1; i++) {
+			if (uploadedFilesArray[i + 1] == uploadedFilesArray[i]) {
+				uploadedFilesDuplicate.push(uploadedFilesArray[i]);
+			}
+		}
+		//alert(uploadedFilesDuplicate);
+		if(uploadedFilesDuplicate.length > 0){
+			alert('Please don\'t upload same file more than once.');
+			e.preventDefault();
+			return false;
+		}
+
+		//	Loop to check if user uploaded the file as per the requirement (allowed file size and extension)
+		jQuery('#fraud_form input[type="file"]').each(function(index) {
+			//alert(index);
+			var displayIndex	=	index+1;
+			//alert(displayIndex);
+			if(jQuery('#fraud_form input[type="file"]')[index].files[0]){
+				//alert(jQuery('#fraud_form input[type="file"]')[index].files[0].name);
+				var fname = jQuery('#fraud_form input[type="file"]')[index].files[0].name;
+				var fsize = jQuery('#fraud_form input[type="file"]')[index].files[0].size;
+				var ftype = jQuery('#fraud_form input[type="file"]')[index].files[0].type;
+				//alert(fname);		alert(fsize);		
+				//alert(ftype);
+				var fileExtension = fname.split('.')[fname.split('.').length - 1].toLowerCase();
+				//alert(fileExtension);
+				<?php /*?><?php
+				if (preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) || (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0') !== false)) {?>
+				var fileExtension = fname.split('.')[fname.split('.').length - 1].toLowerCase();
+				//alert(fileExtension);<?php */?>
+				if(fileExtension != 'png' && fileExtension != 'jpg' && fileExtension != 'gif' && fileExtension != 'jpeg' && fileExtension != 'doc' && fileExtension != 'docx' && fileExtension != 'pdf' ) {
+				<?php /*?><?php } else{?>
+				if(ftype != 'image/png' && ftype != 'image/jpg' && ftype != 'image/gif' && ftype != 'image/jpeg' && ftype != 'application/msword' && ftype != 'application/pdf' && ftype != 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+				<?php } ?><?php */?>
+					alert(""+ fname +" doesnt match gif, jpg, png, pdf or doc");
+					e.preventDefault();
+					return false;
+				}else if(fsize > 2097152) {
+					alert(""+ fname +" is too large.");
+					e.preventDefault();
+					return false;
+				}else{
+					//jQuery('form').submit(); 		
+				}
+			}
+		});
+	}
+});	
+</script>
+<?php /*	5 images upload code added by Vaseem ends	*/	?>
+
+
+<?php /*?><?php
+//if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE || strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE ){
+//if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE ){
+	//echo 'Internet explorer';
+	if (stristr($_SERVER['HTTP_USER_AGENT'], "msie 8")  || stristr($_SERVER['HTTP_USER_AGENT'], "msie 9") ){
+		//echo 'IE 8';
+		?>
+<link href="<?php echo Mage::getDesign()->getSkinUrl('css/uploadfile.css');?>" rel="stylesheet">
+<script type="text/javascript" src="<?php echo $this->helper('core/js/additionalinformation')->getJsUrl('jquery.uploadfile.min.js'); ?>"></script>
+
+Please click on the Browse button to select files to Upload <div id="mulitplefileuploader">Browse</div>
+<div id="status"></div>
+<div id="eventsmessage"></div>
+
+<script>
+jQuery(document).ready(function()
+{	
+	var settings = {
+		url:'<?php echo Mage::getUrl("additionalinformation/index/uploadimagesie",array('_secure'=>true)); ?>',
+		dragDrop:true,
+		fileName: "additionalinformationimg",
+		formData: {"order":"<?php echo $this->getRequest()->getParam('key');?>"},
+		maxFileSize:2100000,
+		maxFileCount:5,
+		allowedTypes:"jpg,jpeg,png,gif,bmp,doc,pdf,docx",	
+		returnType:"json",
+		onSuccess:function(files,data,xhr)
+		{
+		   if(data=='already_uploaded'){
+				alert('You have already uploaded images');   
+			}
+		},
+		afterUploadAll:function()
+		{
+			jQuery('#doneupload').show();
+		},
+	}
+	var uploadObj = jQuery("#mulitplefileuploader").uploadFile(settings);
+});
+</script>
+
+<br />
+<span id="doneupload" class="block-sub-heading" style="display:none;">After uploading the files, to complete <a style="text-decoration:underline; color:#d83d29" href="<?php echo Mage::getUrl("additionalinformation/index/thanksyou?param=".$this->getRequest()->getParam('param')."&key=".$this->getRequest()->getParam('key'),array('_secure'=>true)); ?>">Click Here</a>.</span>
+<br />
+
+
+<?php	//}
+}else{
+?>
+<div class="showcase-bg-light max-margin-bottom">
+  <form enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+    <div class="dropzone-previews"></div>
+    <div class="fallback"> <!-- this is the fallback if JS isn't working --> 
+    </div>
+  </form>
+  <div class="clearfix"></div>
+  <div class="buttonuploadwrapper">
+    <button type="submit" id="submit-all" class="btn btn-primary pull-right high-margin-top max-margin-bottom max-margin-right">Upload</button>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="overlay" id="overlay-images-uploaded" style="display:none;"></div>
+<div class="box" id="boximagesuploaded"> <a class="boxclose" id="boxcloseimagesuploaded"></a>
+  <h1>You have already uploaded images</h1>
+</div>
+<script type="text/javascript">
+Dropzone.options.myDropzone = {
+	autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 5,
+		maxFilesize: 2,
+        maxFiles: 5,
+		acceptedFiles: '.jpg,.jpeg,.png,.gif,.bmp,.pdf,.doc,.docx',
+		paramName: "additionalinformationimg",
+		params: {order:'<?php echo $this->getRequest()->getParam('key');?>'},
+		url:'<?php echo Mage::getUrl("additionalinformation/index/uploadimages",array('_secure'=>true)); ?>',
+		success: function(file, response){
+			if(response=='already uploaded'){
+				loadPopUpImagesUploaded();
+				//jQuery('#submit-all').fadeTo("slow",1);
+				//jQuery('#submit-all').removeAttr('disabled');
+			}
+			else if(response=='uploaded'){
+				location.href = "<?php echo Mage::getUrl("additionalinformation/index/thankyou?key=".$this->getRequest()->getParam('key'),array('_secure'=>true)); ?>";
+			}
+		},
+    init: function() {
+      this.on("addedfile", function(file) {
+        // Create the remove button
+        var removeButton = Dropzone.createElement("<a class='dz-remove' data-dz-remove='' href='javascript:undefined;'>Remove file</a>");
+		
+        // Capture the Dropzone instance as closure.
+        var _this = this;
+
+        // Listen to the click event
+        removeButton.addEventListener("click", function(e) {
+          // Make sure the button click doesn't submit the form:
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Remove the file preview.
+          _this.removeFile(file);
+          // If you want to the delete the file on the server as well,
+          // you can do the AJAX request here.
+        });
+
+        // Add the button to the file preview element.
+        file.previewElement.appendChild(removeButton);
+      });
+	  var submitButton = document.querySelector("#submit-all")
+        myDropzone = this; // closure
+
+    submitButton.addEventListener("click", function() {
+		//jQuery('#submit-all').fadeTo("slow",0.15);
+		//jQuery('#submit-all').attr('disabled', 'disabled');
+      	myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+    });
+
+    // You might want to show the submit button only when 
+    // files are dropped here:
+   // this.on("addedfile", function() {
+      // Show submit button here and/or inform user to click it.
+    //});
+    }
+  };
+  	
+	function loadPopUpImagesUploaded() {
+        jQuery('#overlay-images-uploaded').fadeIn('fast',function(){
+            jQuery('#boximagesuploaded').animate({'top':'210px'},500);
+        });
+		jQuery('#boxcloseimagesuploaded').click(function(){
+			jQuery('#boximagesuploaded').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-images-uploaded').fadeOut('fast');
+			});
+		});
+	}
+</script>
+<?php } ?><?php */?>
+<div class="max-margin-bottom" style="margin-top:5px;">We are eager to get your order into full production and would like to avoid any shipment delays; so write to us with either of the above information. As soon as we receive the necessary information your order shall be confirmed and you will be informed by mail.</div>
+<div class="max-margin-bottom">If you have any further queries or concerns about your order please email us at <a href="mailto:webmaster@angara.com" class="text-underline">customer.service@angara.com</a> or call us at 1-888-926-4272 . Our customer care representatives shall be glad to assist you.</div>
+<div>Regards<br>Angara Team</div>
+</div>

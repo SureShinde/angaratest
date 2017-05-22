@@ -1,0 +1,319 @@
+<style>
+.no-padding-LR {padding-left:0px !important; padding-right:0px !important;}
+.container h1 {margin:initial;font-size:26px;color:#545454;font-weight:500;font-weight:600;}
+.container p {font-size:13px;color:#545454;}
+
+.moreview {text-align:center;background:#f7f5f2;}
+.moreview span {display:block;line-height:30px;} 
+.moreview h2 {font-size: 30px;color:#545454;margin:initial;font-weight:600 !important;}
+.moreview p {font-size:12px;font-weight: 500;margin:initial;padding-top:5px;padding-bottom:10px;}
+.moreview a {font-size:16px;color:#7d7863;}
+.moreview .btn {max-width: 180px;margin:10px auto;border: 1px solid #fa505a;background: transparent;line-height: 34px;color: #fa505a;height: 35px;}
+.last {top:10%;left:0;right:0;text-align:center;width:85%;margin:0 auto;}
+.last p {margin-bottom:initial;}
+.last .btn {width:160px;background:transparent;border:1px solid #fa505a;}
+.last h2 {font-size:28px;margin:initial;}
+.relative-placeholder .btn a, .moreview .btn a {color:#fa505a;text-shadow: none;font-size:16px;}
+
+.sbycolor {margin:0 auto;width:260px;}
+.sbycolor span {
+	display: block;
+    line-height:50px;
+    font-size: 28px;
+    text-align: center;
+    border-bottom: 1px solid #fa505a;
+}
+.sbycolor .stonetype:last-child {border-bottom:initial !important;}
+.stonebox {border: 1px solid #fa505a;
+    padding: 7px;}
+.stonebox a {font-size:16px;color:#fa505a;}
+.stonebox span {border-bottom:initial;line-height:30px;}
+.stonebox .btn {background: transparent;
+    border: 1px solid #fa505a;
+    line-height: 20px;
+    width: 140px;}
+.stonebox .btn a {font-size: 13px;
+    color: #fa505a;
+    text-shadow: none;
+}
+
+.stonetype a:hover, .stonetype a:focus, .stonetype a.active {text-decoration: none;}
+
+h2.review-slider{font-size:26px;color:#404141;margin:initial;}
+#review-slider .title{font-size:16px;color:#404141;}
+
+.rview {border-top:2px solid #acacac;border-bottom:2px solid #acacac;}
+.bdr {border-top:1px solid #acacac;}
+.fullmargin img {margin:0 auto;}
+.rating-box {display:inline-block;height:13px;}
+.moreview a:hover, .moreview a.active, .moreview a:focus {text-decoration:none;color:#fa505a;}
+.black {margin-top:45px;}
+.golden {margin-top:25px;}
+.default:hover, .default.active, .default:focus  {text-decoration:none;}
+
+.slick-next, .slick-prev{top: 180px !important;}
+
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+
+<script type="text/javascript">
+function switchTab(index){
+	jQuery(".stonebox").addClass('hidden');
+	jQuery(".togglediv").removeClass('hidden');
+	jQuery(".stonebox:eq("+index+")").removeClass('hidden');
+}
+</script>
+<div class="banner max-padding-bottom high-margin-bottom">
+	<a href="/products?filterable_stone_names=6417-6419-6416&icid=pearhome|hb|03242017">
+		<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/main-mob-banner-01.jpg" alt="Explore Cultured Pearl Jewelry" title="Angara's Pearl Jewelry" />
+	</a>
+</div>
+	<div class="container">
+		<div class="fullwidth max-padding-bottom text-center">
+			<h1 class="high-padding-bottom">Shop By Color</h1>
+			<p>From pristine white to mysterious black and majestic golden, the choice in colors will delight every jewelry lover.</p>
+		</div>
+		<div class="col-sm-12 col-xs-12 no-padding-LR">
+			<a href="">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/02-mob.jpg" alt="Explore Cultured Pearl Jewelry" title="Angara's Pearl Jewelry" />
+			</a>
+		</div>
+		<div class="col-sm-12 col-xs-12 no-padding-LR pull-left" style="background:#f7f5f2;">
+			<div class="sbycolor max-padding-top">
+					<div class="pull-left" style="height:180px;margin-top:10px;width:100px;">
+						<span class="stonetype"><a href="javascript:void(0)" style="color:#fa505a;">White</a></span>
+						<span class="stonetype"><a href="javascript:void(0)">Black</a></span>
+						<span class="stonetype"><a href="javascript:void(0)">Golden</a></span>
+					</div>
+					<div class="pull-left togglediv max-padding-bottom max-margin-top">
+						<div class="stonebox">
+							<span><a href="/jewelry/freshwater-cultured-pearl-jewelry">Freshwater</a></span>
+							<span><a href="/jewelry/akoya-cultured-pearl-jewelry">White Akoya</a></span>
+							<span><a href="/jewelry/south-sea-cultured-pearl-jewelry/white-south-sea-cultured-pearl-jewelry">White South Sea</a></span>
+							<span class="btn"><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6416&icid=pearhome|color|white|10102016">Browse Collection</a></span>
+						</div>
+						<div class="black stonebox hidden">
+							<span><a href="javascript:void(0)" class="default">Tahitian</a></span>
+							<span class="btn"><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6419&icid=pearhome|color|black|10102016">Browse Collection</a></span>
+						</div>
+						<div class="golden stonebox hidden">
+							<span><a href="/jewelry/golden-japanese-cultured-pearl-jewelry">Golden Japanese </a></span>
+							<span><a href="/jewelry/south-sea-cultured-pearl-jewelry/golden-south-sea-cultured-pearl-jewelry">Golden South Sea</a></span>
+							<span class="btn"><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry?order=position&dir=asc&no_cache=true&filterable_stone_names=6417&icid=pearhome|color|golden|10102016">Browse Collection</a></span>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-sm-12 col-xs- 12 no-padding-LR text-center max-padding-top max-padding-bottom high-margin-bottom high-margin-top">
+			<h1 class="high-padding-bottom">Shop By Jewelry Type</h1>
+			<p>Discover a gorgeous assortment of exquisitely crafted pendants, rings and earrings.</p>
+		</div>
+		<div class="col-sm-6 col-xs- 12 no-padding-LR ">
+			<a href="/pendants/pearl-necklace-pendants?icid=pearhome|sbj|pendant|10122016">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/03-mob.jpg" alt="Explore Cultured Pearl Pendants" title="Angara's Pearl Pendants" />
+			</a>
+		</div>
+		<div class="clearfix"></div>
+		<div class="moreview no-padding-LR max-padding-bottom max-padding-top max-margin-bottom">
+				<h2>Pearl Pendants</h2>
+				<p>Authentic and versatile designs that embody<br> unmatched luxury and grace.</p>
+				<span>
+					<a href="/pendants/freshwater-cultured-pearl-pendant-necklaces?icid=pearhome|sbj|pendant|freshwater|10122016">Freshwater Pendants</a>
+				</span>
+				<span>
+					<a href="/pendants/akoya-cultured-pearl-pendant-necklaces?icid=pearhome|sbj|pendant|akoya|10122016">Akoya Pendants</a>
+				</span>
+				<span>
+					<a href="/pendants/pearl-necklace-pendants?filterable_stone_names=6419?icid=pearhome|sbj|pendant|tahitian|10122016">Tahitian Pendants</a>
+				</span>
+				<span>
+					<a href="/pendants/south-sea-cultured-pearl-pendant-necklaces?icid=pearhome|sbj|pendant|southsea|10122016">South Sea Pendants</a>
+				</span>
+				<span class="btn max-padding-top">
+					<a href="/pendants/pearl-necklace-pendants?icid=pearhome|sbj|viewall|pendant|10122016" class="apricot-text">Browse Collection</a>
+				</span>
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-sm-6 col-xs- 12 no-padding-LR ">
+			<a href="/rings/pearl-rings?icid=pearhome|sbjt|rings|10122016">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/04-mob.jpg" alt="Explore Cultured Pearl Rings" title="Angara's Pearl Rings" />
+			</a>
+		</div>
+		<div class="clearfix"></div>
+		<div class="moreview no-padding-LR max-padding-bottom max-padding-top max-margin-bottom">
+				<h2>Pearl Rings</h2>
+				<p>Elegantly simple to extravagantly ornate, there's <br> a broad variety to choose from.</p>
+				<span>
+					<a href="/rings/freshwater-cultured-pearl-rings?icid=pearhome|sbjt|rings|freshwater|10122016">Freshwater Rings</a>
+				</span>
+				<span>
+					<a href="/rings/akoya-cultured-pearl-rings?icid=pearhome|sbjt|rings|akoya|10122016">Akoya Rings</a>
+				</span>
+				<span>
+					<a href="/rings/pearl-rings?filterable_stone_names=6419?icid=pearhome|sbjt|rings|tahitian|10122016">Tahitian Rings</a>
+				</span>
+				<span>
+					<a href="/rings/south-sea-cultured-pearl-rings?icid=pearhome|sbjt|rings|southsea|10122016">South Sea Rings</a>
+				</span>
+				<span class="btn max-padding-top">
+					<a href="/rings/pearl-rings?icid=pearhome|sbjt|viewall|rings|10122016" class="apricot-text">Browse Collection</a>
+				</span>
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-sm-12 col-xs- 12 no-padding-LR">
+			<a href="/earrings/pearl-earrings?icid=pearhome|sbjt|earrings|10122016">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/06-mob.jpg" alt="Explore Cultured Pearl Earrings" title="Angara's Pearl Earrings" />
+			</a>
+		</div>
+		<div class="clearfix"></div>
+		<div class="moreview no-padding-LR max-padding-bottom max-padding-top">
+				<h2>Pearl Earrings</h2>
+				<p>Flawlessly designed pieces that exude<br>the essence of timeless style.</p>
+				<span>
+					<a href="/earrings/freshwater-cultured-pearl-earrings?icid=pearhome|sbjt|earrings|freshwater|10122016">Freshwater Earrings</a>
+				</span>
+				<span>
+					<a href="/earrings/akoya-cultured-pearl-earrings?icid=pearhome|sbjt|earrings|akoya|10122016">Akoya Earrings</a>
+				</span>
+				<span>
+					<a href="/earrings/pearl-earrings?filterable_stone_names=6419?icid=pearhome|sbjt|earrings|tahitian|10122016">Tahitian Earrings</a>
+				</span>
+				<span>
+					<a href="/earrings/south-sea-cultured-pearl-earrings?icid=pearhome|sbjt|earrings|southsea|10122016">South Sea Earrings</a>
+				</span>
+				<span class="btn max-padding-top">
+					<a href="/earrings/pearl-earrings?icid=pearhome|sbjt|viewall|earrings|10122016" class="apricot-text">Browse Collection</a>
+				</span>
+		</div>
+		<!-- slider box -->
+			<div class="full-width no-padding-LR max-padding-bottom rview pull-left">
+				<h2 class="review-slider heading max-padding-top text-center pB10">See Recent Reviews</h2>
+				<div id="review-slider" class="review-slider">
+				<?php 
+				$categoryId = $this->getCategoryId();
+				if($categoryId){
+					$categoryObj =Mage::getModel('catalog/category')->load($categoryId);
+					if($categoryObj){
+						$productCollection = Mage::getResourceModel('catalog/product_collection')
+							->addCategoryFilter($categoryObj)
+							->addAttributeToFilter('status', 1)
+							->addAttributeToFilter('visibility','4')
+							->addAttributeToSort('entity_id', 'DESC');
+					}
+					
+					if(count($productCollection) > 0){
+						foreach($productCollection as $_product){
+							if($_product){
+								$prodIds[] = $_product->getId();
+							}	
+						}
+						
+						$reviewLimit = (($this->getReviewLimit()) ? $this->getReviewLimit() : 15);					
+						$reviews = Mage::getModel('review/review')
+							->getResourceCollection()
+							->addStoreFilter(Mage::app()->getStore()->getId())
+							->addFieldToFilter('entity_pk_value',array('in'=>$prodIds))
+							->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+							->setDateOrder()
+							->setPageSize($reviewLimit)
+							->setCurPage(0)
+							->addRateVotes();
+							
+						if(count($reviews) > 0) {
+							foreach($reviews as $testimonial){
+								$prodObj = Mage::getModel('catalog/product');
+								$product = $prodObj->load($testimonial->getEntityPkValue()); ?>
+								<div class="full-width white-bg pull-left">
+									<div class="full-width">
+										<div class="fullmargin">
+											<?php
+											$reviewTitle = $this->htmlEscape($testimonial->getTitle());
+											if (strlen($reviewTitle) > 50) {
+												$reviewTitle = substr($reviewTitle, 0, 50);
+												$reviewTitle = substr($reviewTitle,0,strrpos($reviewTitle," "));
+												$reviewTitle .= '...';
+											}?>
+											<div class="title max-padding-bottom text-center"><?php echo $reviewTitle;?>
+											<?php 										
+											$averageRating = 0;
+											$ratings = array();										
+											foreach($reviews->getItems() as $review) {
+												foreach($review->getRatingVotes() as $vote) {
+													$ratings[] = $vote->getPercent();
+												}
+											}
+											$averageRating = array_sum($ratings)/count($ratings);
+											if($averageRating){?>
+												<div class="rating-box center-align">
+													<div class="rating" style="width:<?php echo ceil($averageRating); ?>%;"></div>
+												</div>
+											<?php 
+											}?>	
+											</div>
+											<a href="<?php echo $product->getProductUrl();?>?icid=pearhome|custmr-reviews|<?php echo $product->getSku(); ?>|04032017">
+												<img class="img-responsive" src="<?php echo Mage::helper('catalog/image')->init($product, 'image');?>"alt="<?php echo $product->getShortDescription(); ?>" title="<?php echo $product->getShortDescription(); ?>" />
+											</a>
+										</div>
+									</div>
+									<div class="full-width">
+										<div class="full-width no-padding max-margin-bottom max-padding-bottom max-margin-top">
+											<p class=""><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></p>
+											<div class="full-width">
+												<span class="" style="display:block;"><strong><?php echo $this->htmlEscape($testimonial->getNickname());?></strong></span>
+											</div>
+											<p class="no-margin fontsize-type0" style="color:#666666; font-size:12px;"><?php echo Mage::helper('core')->formatDate($testimonial->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);?></p>
+										</div>
+									</div>
+								</div>
+							<?php
+							}
+						}
+					} 
+				} ?>	
+				</div>
+				<script type="text/javascript">
+					jQuery(document).ready(function(){
+						jQuery('#review-slider').slick({
+							arrows			: 	true,
+							dots			: 	false,
+							slidesToShow	: 	1,
+							slidesToScroll	: 	1,
+							autoplay: true,
+							autoplaySpeed: 5000,
+							adaptiveHeight: true
+						});
+					});
+				</script>
+			</div>
+		<!-- slider box -->
+		<div class="clearfix"></div>
+		<div class="col-sm-6 no-padding-LR col-xs- 12 relative-placeholder max-padding-top">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/pearl/08-mob.jpg" alt="Explore Cultured Pearl Jewelry" title="Angara's Pearl Jewelry" />
+			<div class="absolute-placeholder last">
+			<h2 class="high-padding-bottom">Pearl Education</h2>
+			<p>Pearls are natural gems created by living organisms.This fascinating process begins when a foreign body lodges itself in the shell of an oyster or mussel.</p>
+				<span class="btn max-margin-top"><a href="/cultured-pearls">Learn More</a></span>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+jQuery(function(){
+		jQuery( ".stonetype" ).click(function() {
+			jQuery(".stonetype").css({"border-bottom":"1px solid #7d7863"}).find("a").css({"color":"#363636",});
+			jQuery(this).css({"border-bottom":"1px solid #fa505a","color":"#fa505a",}).find("a").css({"color":"#fa505a",});
+		var index = jQuery(this).index();
+			switchTab(index);
+		});
+})
+</script>
+
+
+
+
+
+
+
+

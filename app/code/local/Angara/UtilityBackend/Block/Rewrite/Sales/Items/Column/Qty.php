@@ -1,0 +1,5 @@
+<?php 
+
+class Angara_UtilityBackend_Block_Rewrite_Sales_Items_Column_Qty extends Angara_UtilityBackend_Block_Rewrite_Sales_Items_Column_Default
+{}
+?>

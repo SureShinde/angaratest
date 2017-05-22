@@ -1,0 +1,96 @@
+<?php $_order = $this->_getOrder($this->getRequest()->getParam('key')); ?>
+<div class="container showcase-bg-white max-padding-top max-padding-bottom">
+    <div class="block-heading max-margin-bottom">Email Verification</div>
+    <div class="max-margin-bottom">To verify your Angara <strong>Order# <?php echo $_order->getIncrementId(); ?></strong>, please enter the <strong>Verification Code</strong> received on your <strong>Business/Military/Government email address</strong> and click on <strong>'VERIFY'.</strong> </div>
+    <div class="padding-type-16 showcase-bg-light max-margin-bottom">
+    <div class="row">
+    <form name="submit-otp-new-form" id="submit-otp-new-form"  onsubmit="return false;">
+        <div class="col-sm-3 col-md-3">
+            <input class="input-text required-entry" type="text" name="otpval" id="otpval" />
+            <input type="hidden" name="ord" value="<?php echo $this->getRequest()->getParam('key');?>" />
+        </div>
+        <div class="col-sm-2 fc-module"><button type="button" onclick="doAjax();" title="<?php echo $this->__('Submit') ?>" class="btn btn-block btn-primary"><?php echo $this->__('Verify') ?></button></div>
+        <!--<span id="formLoader" style="display:none;">&nbsp;</span>-->
+    </form>
+        </div>
+    </div>
+    <div class="max-margin-bottom">If you have any questions about your order please email us at <a href="mailto:webmaster@angara.com" class="fontcolor-type1 text-underline">customer.service@angara.com</a> or call us at <strong>1-888-926-4272 </strong>. Our customer care representatives are glad to assist you with your questions or concerns.</div>
+    <div class="block-sub-heading">Angara Team</div>
+</div>
+<!--<div id="formSuccess" style="display:none;">&nbsp;</div>-->
+<div class="overlay" id="overlay-otpnot" style="display:none;"></div>
+<div class="overlay" id="overlay-already" style="display:none;"></div>
+<div class="box" id="boxotpnotverified">
+ <a class="boxclose" id="boxcloseotpnotverified"></a>
+ <h1>OTP not verified!!!</h1>
+</div>
+<div class="box" id="boxalreadyverified">
+ <a class="boxclose" id="boxclosealreadyverified"></a>
+ <h1>You have already verified your email account</h1>
+</div>
+<script type="text/javascript">
+
+jQuery(document).ready(function () {
+	jQuery("form").submit(function (e) {
+		e.preventDefault(); // this will prevent from submitting the form.
+		doAjax();
+	});
+});
+
+//<![CDATA[
+var formId = 'submit-otp-new-form';
+    var myForm = new VarienForm(formId, true);
+    var postUrl = '<?php echo $this->getUrl("additionalinformation/index/otpsubmit",array('_secure'=>true)); ?>';
+    function doAjax() {
+        if (myForm.validator.validate()) {
+            new Ajax.Updater(
+                { success:'formSuccess' }, postUrl, {
+                    method:'post',
+                    asynchronous:true,
+                    evalScripts:false,
+                    onComplete:function(request, json) {
+                        //Element.hide(formId);
+						//Element.show('formSuccess');
+						if(request.responseText=='OTP not verified!!!'){
+							loadPopUpOtpNotVerified();
+						}
+						else if(request.responseText=='You have already verified your email account'){
+							loadPopUpAlreadyVerified();
+						}
+						else if(request.responseText=='OTP Verified!!!'){
+							location.href="<?php echo $this->getUrl("additionalinformation/index/thankyou?key=".$this->getRequest()->getParam('key'),array('_secure'=>true)); ?>";
+						}
+                    },
+                    onLoading:function(request, json){
+                        Element.show('formLoader');
+                    },
+                    parameters: $(formId).serialize(true),
+                }
+            );
+        }
+    }
+//]]>
+
+	/*Custom popup load*/
+	function loadPopUpOtpNotVerified() {
+        jQuery('#overlay-otpnot').fadeIn('fast',function(){
+            jQuery('#boxotpnotverified').animate({'top':'210px'},500);
+        });
+		jQuery('#boxcloseotpnotverified').click(function(){
+			jQuery('#boxotpnotverified').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-otpnot').fadeOut('fast');
+			});
+		});
+	}
+	
+	function loadPopUpAlreadyVerified() {
+        jQuery('#overlay-already').fadeIn('fast',function(){
+            jQuery('#boxalreadyverified').animate({'top':'210px'},500);
+        });
+		jQuery('#boxclosealreadyverified').click(function(){
+			jQuery('#boxalreadyverified').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-already').fadeOut('fast');
+			});
+		});
+	}
+</script>

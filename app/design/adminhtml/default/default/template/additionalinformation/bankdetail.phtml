@@ -1,0 +1,9 @@
+<?php 
+$additionalinformationId = $this->_getFraudCheckId($this->getRequest()->getParam('order_id'));
+$_additionalinformation = Mage::getModel('additionalinformation/additionalinformation')->load($additionalinformationId);
+?>
+<div class="received-details">
+<div style="padding-bottom:10px; font-size:15px;"><strong>Bank Details</strong></div>
+<div><?php echo $_additionalinformation->getCustomerBankName()!=''?"Bank Name : ".$_additionalinformation->getCustomerBankName():''; ?></div>
+<div><?php echo $_additionalinformation->getCustomerBankAuthCode()!=''?"Transaction Id : ".$_additionalinformation->getCustomerBankAuthCode():''; ?></div>
+</div>

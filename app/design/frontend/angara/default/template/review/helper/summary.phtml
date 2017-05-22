@@ -1,0 +1,24 @@
+<?php 
+if($this->getReviewsCount()): ?>
+    <div class="pro-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><?php // Added by Vaseem for Google Rich Snippets?>
+    <?php 
+	if($this->getRatingSummary()):?>	
+    	<?php // Added by Vaseem for Google Rich Snippets?>
+            <meta itemprop="ratingValue" content="<?php echo ($this->getRatingSummary()* .05); ?>">
+            <meta itemprop="reviewCount" content="<?php echo $this->getReviewsCount(); ?>">
+            <meta itemprop="bestRating" content="5">
+            <meta itemprop="worstRating" content="1">
+        <?php // Added by Vaseem for Google Rich Snippets?>
+            
+        <div style="float:right; color:#959595">
+			<span style="color:#959595"><?php printf("%.1f",($this->getRatingSummary()* .05))?></span> 
+			<a id="show-review-btn" href="#customer-reviews" style="color:#959595">View Reviews</a>
+        </div>
+        <div class="rating-box">
+        	<div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div> 
+        </div>		
+    <?php 
+	endif;?>
+    </div>
+<?php 
+endif; ?>

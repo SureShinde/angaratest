@@ -1,0 +1,40 @@
+<?php 
+$items	= $this->getItemsArray();
+foreach ($items as $_item){
+	echo $_item;
+}
+?>
+
+<?php /*?><?php 
+$items	= 	$this->getItemsArray();
+$i		=	1;
+//echo count($items);
+//echo '<pre>';print_r($items);die;
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+	$filterCount = 8;
+}else{
+	$filterCount = 10;
+}
+$showMore	=	false;
+foreach ($items as $_item){
+	if($i==$filterCount){ 
+		$showMore	=	true;
+		$randomNo	=	rand(0,9999);?>
+		<a class="filter-showmore" href="javascript:void(0)" id="filter_read_more_<?php echo $randomNo?>">Show More</a>
+        <div class="more_filter_<?php echo $randomNo?> hidden">
+            <?php echo $_item;?>
+		<script>
+		jQuery(document).ready(function(){
+			jQuery("#filter_read_more_<?php echo $randomNo?>").click(function(){
+				jQuery(".more_filter_<?php echo $randomNo?>").removeClass('hidden').slideDown();
+				jQuery("#filter_read_more_<?php echo $randomNo?>").hide();
+			})
+		});
+		</script>
+	<?php }else{
+		echo $_item;
+	} 
+	if(count($items) == $i && $showMore){ ?></div><?php }
+$i++;
+} ?>
+<?php */?>

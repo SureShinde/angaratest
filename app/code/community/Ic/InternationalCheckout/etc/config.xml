@@ -1,0 +1,40 @@
+<config>
+	<modules>
+		<Ic_InternationalCheckout>
+			<version>1.0.4</version>
+		</Ic_InternationalCheckout>
+	</modules>
+	
+	<global>
+        <blocks>
+            <internationalcheckout>
+                <class>Ic_InternationalCheckout_Block</class>
+            </internationalcheckout>
+        </blocks>
+        <helpers>
+            <internationalcheckout>
+                <class>Ic_InternationalCheckout_Helper</class>
+            </internationalcheckout>
+        </helpers>
+    </global>
+	
+	<frontend>		
+		<layout>
+			<updates>
+                  <internationalcheckout>
+                        <file>internationalcheckout.xml</file>
+                  </internationalcheckout>
+             </updates>
+		</layout>
+	</frontend>
+	
+	<default>
+		<checkout>
+			<internationalcheckout>				
+					<image_width>75</image_width>
+					<image_height>75</image_height>
+			</internationalcheckout>
+		</checkout>
+	</default>
+	
+</config>

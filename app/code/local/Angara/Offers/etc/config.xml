@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Offers>
+            <version>0.1.0</version>
+        </Angara_Offers>
+    </modules>
+    <global>
+        <blocks>
+            <offers>
+                <class>Angara_Offers_Block</class>
+            </offers>
+        </blocks>
+        <helpers>
+			<offers>
+				<class>Angara_Offers_Helper</class>
+			</offers>
+		</helpers>
+    </global>
+
+    <frontend>
+        <routers>
+          <offers>
+              <use>standard</use>
+              <args>
+                  <module>Angara_Offers</module>
+                  <frontName>offers</frontName>
+              </args>
+        </offers>
+    </routers>
+    </frontend>
+</config>

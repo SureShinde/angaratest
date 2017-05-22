@@ -1,0 +1,388 @@
+<style>
+body{
+	padding:0;
+	margin:0 0 48px 0;
+}
+.topnav{
+	display:none;	
+}
+/* add fonts css */
+@font-face {
+ 	font-family: 'myriadprosemibold';
+ 	src: url('/skin/frontend/angara/mobile/fonts/myriadpro-semibold-webfont.eot');
+ 	src: url('/skin/frontend/angara/mobile/fonts/myriadpro-semibold-webfont.eot?#iefix') format('eot'), url('/skin/frontend/angara/mobile/fonts/myriadpro-semibold-webfont.woff') format('woff'), url('/skin/frontend/angara/mobile/fonts/myriadpro-semibold-webfont.ttf') format('truetype'), url('/skin/frontend/angara/mobile/fonts/myriadpro-semibold-webfont.svg#webfontZwUD6gtg') format('svg');
+ 	font-weight: normal;
+ 	font-style: normal;
+}
+
+@font-face {
+ 	font-family: 'myriadpro';
+ 	src: url('/skin/frontend/angara/mobile/fonts/myriadpro-webfont.eot');
+ 	src: url('/skin/frontend/angara/mobile/fonts/myriadpro-webfont.eot?#iefix') format('eot'), url('/skin/frontend/angara/mobile/fonts/myriadpro-webfont.woff') format('woff'), url('/skin/frontend/angara/mobile/fonts/myriadpro-webfont.ttf') format('truetype'), url('/skin/frontend/angara/mobile/fonts/myriadpro-webfont.svg#webfontZwUD6gtg') format('svg');
+ 	font-weight: normal;
+ 	font-style: normal;
+}
+</style>
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View 
+ */
+
+# @todo wtf is that? remove that shit!@#
+
+$cumbs= $this->getLayout()->getBlock('breadcrumbs'); $cumbs=$cumbs->_crumbs; $count_cumbs =  count($cumbs);
+if($cumbs && is_array($cumbs)) {
+	$i=1;$tracCategory;
+   	foreach($cumbs as $_crumbName=>$_crumbInfo){
+		if($_crumbInfo['link']){
+			if($i!=$count_cumbs-1){$i = $i+1; } else {$tracCategory= $_crumbInfo['label'] ; $i = $i+1;}
+	  	}
+   	}
+} 
+
+$_helper = $this->helper('catalog/output'); 
+$_product = $this->getProduct(); ?>
+
+<script>
+	var ie = (function(){
+		var undef, v = 3, div = document.createElement('div');
+	
+		while (
+			div.innerHTML = '<!--[if gt IE '+(++v)+']><i></i><![endif]-->',
+			div.getElementsByTagName('i')[0]
+		);
+	
+		return v> 4 ? v : undef;
+	}());
+	
+	if(ie){
+		if(ie < 9){
+			jQuery(function(){
+				jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+			});
+		}
+		else{
+			jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+		}
+	}
+	else{
+		jewelProduct.setup(<?php echo $this->getJewelProductConfig(); ?>).appendTo('body');
+	}	
+</script>
+
+<!--start tracking for number of clicks by user-->
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('.add-to-cart').click(function(){	
+	 <!-- Added by Saurabh -->
+		jQuery(".attribValue option:selected").each(function() {
+			if(jQuery(this).text()=='SELECT RING SIZE' || jQuery(this).text()=='select ring size' || jQuery(this).text()=='Select Ring Size'){
+				event.preventDefault();
+				jQuery('.attribValue').addClass('validation-failed');
+				jQuery('#required-entry-show-msg').show();
+				return false;	
+			}
+			else{
+				jQuery('.attribValue').removeClass('validation-failed');
+				jQuery('#required-entry-show-msg').hide();
+			}
+		});
+		 <!-- Added by Saurabh -->	
+		track('<?php echo Mage::getBaseUrl().'rnd/cartclick/tracker.php?uid='.Mage::getSingleton("core/session")->getEncryptedSessionId(); ?>' , function(){});		
+	});
+});
+function track(url, callback) {  
+        var xhr;  
+          
+        if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();  
+        else {  
+            var versions = ["MSXML2.XmlHttp.5.0",   
+                            "MSXML2.XmlHttp.4.0",  
+                            "MSXML2.XmlHttp.3.0",   
+                            "MSXML2.XmlHttp.2.0",  
+                            "Microsoft.XmlHttp"]  
+  
+             for(var i = 0, len = versions.length; i < len; i++) {  
+                try {  
+                    xhr = new ActiveXObject(versions[i]);  
+                    break;  
+                }  
+                catch(e){}  
+             } // end for  
+        }  
+          
+        xhr.onreadystatechange = ensureReadiness;  
+          
+        function ensureReadiness() {  
+            if(xhr.readyState < 4) {  
+                return;  
+            }  
+              
+            if(xhr.status !== 200) {  
+                return;  
+            }  
+  
+            // all is well    
+            if(xhr.readyState === 4) {  
+                callback(xhr);  
+            }             
+        }  
+          
+        xhr.open('GET', url, false);  
+        xhr.send('');  
+    } 
+</script>
+<!--End tracking for number of clicks by user-->
+
+<script type="text/javascript">
+	var curid = <?php echo $_product->getId(); ?>;
+	var cursku = "<?php echo $_product->getSku(); ?>";
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig(); ?>);
+</script>
+
+<div id="messages_product_view">
+	<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+</div>
+
+<div class="productpagewrapper">
+	<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+		<div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+            <input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/>
+        </div>
+		
+       	<div class="ppmid">
+            <div>
+                <div id="wrapper" style="display: block;">
+                    <div id="fullsize"><?php echo $this->getChildHtml('video') ?>
+                        <div class="product-img-box"> 
+						<?php
+						# @todo handle product video here
+						$video = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+						if($video != ''){
+							echo $this->getChildHtml('videoupload');
+						}
+						
+						echo $this->getChildHtml('media'); ?>
+						                    
+                        <!--	Added by Vaseem on 10 Jan 2013 for packaging box task no 239	-->	
+                        <?php echo $this->getChildHtml('packaging') ?>	
+                        <!--	Added by Vaseem on 10 Jan 2013 for packaging box task no 239	-->	
+                        </div>
+						
+                        <div style="clear:both"></div>                        
+                    </div>
+					
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            
+			<div>
+				<div id="detailsection" >
+                    <h1 class="productname"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>					
+                    
+					<div><?php echo $this->getReviewsSummaryHtml($_product, false, true); ?></div>
+										
+					<div class="spacing" style="padding-top:0px;">
+                        <?php 
+						if ($_product->isSaleable() && $this->hasOptions()):
+							echo $this->getChildChildHtml('container2', '', true, true); 
+						endif;?>
+                    </div>
+					
+					<div id="pricesection"><?php echo $this->getChildHtml('product_type_data'); echo $this->getChildHtml('addtocart'); ?></div>
+					
+					<!-- S: Add to Wishlist Button Starts -->
+					<?php
+					if($_product->isSaleable()):
+						$_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+						
+						<div class="add-wishlist">
+						<?php 
+						if($this->helper('wishlist')->isAllow()){
+							$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+							
+							if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){ 	
+								
+								$wishlist = Mage::getModel('wishlist/item')->getCollection();
+								$wishlist->getSelect()
+										  ->join(array('t2' => 'wishlist'),
+												 'main_table.wishlist_id = t2.wishlist_id',
+												 array('wishlist_id','customer_id'))
+												 ->where('main_table.product_id='.$_product->getId().' AND t2.customer_id='.$customerId);
+								$count = $wishlist->count();
+								
+								if($count!=0){ 
+									echo "<span class='addedwl'>Added In Your Wish list.</span>";
+								}
+								else{
+									echo "<a id='wishlist-link' href='".$_wishlistSubmitUrl ."' style='text-decoration:underline;'>Add to wish list +</a>";
+								}
+							}
+							else{?>
+								<a id="wishlist-link" href="<?php echo $_wishlistSubmitUrl; ?>" class="customerdiscountlink" style="text-decoration:underline;">Add to wishlist +</a>
+							<?php
+							}
+						}?>
+						</div>
+					<?php 
+					endif;?>	
+					<!-- E: Add to Wishlist Button Starts -->	
+					
+					<?php 
+					if ($_product->getDescription()): ?>
+						<div class="stone-detail-box-odd accordiancontainer">
+							<div class="small-title accordianlink"><strong>About This Design</strong></div>
+							
+							<div class="prodiscrip accordiancontent"><?php echo $_product->getDescription(); ?></div>
+						</div>
+					<?php 
+					endif; ?>
+					
+					<div class="ppbottom">			
+						<div class="productalldetail">
+							<div id="product-description" class="descriptiontab">
+								<?php echo $this->getChildHtml('description'); ?> 
+								<div style="clear:both"></div>
+							</div>				
+						</div>
+					</div>
+					
+					<div class="clear"></div>              
+                </div>               
+            </div>
+            
+			<div class="clear"></div>
+        </div>
+	</form>
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		function trackShoppingCart(res, form){
+			if(res){
+				_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart', "<?php echo $_product->getSku() ?>", undefined,true]);
+			}
+		}
+			
+		var productAddToCartForm = new VarienForm('product_addtocart_form');
+		_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview', "<?php echo $_product->getSku() ?>", undefined, true]);
+		var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+		
+		productAddToCartForm.submit = function(button, url) {
+			
+			if (this.validator.validate()) {
+				var form = this.form;
+				var oldUrl = form.action;
+	
+				if (url) {
+				   form.action = url;
+				}
+				var e = null;
+				try {
+					this.form.submit();
+				} catch (e) {
+				}
+				this.form.action = oldUrl;
+				if (e) {
+					throw e;
+				}
+	
+				if (button && button != 'undefined') {
+					button.disabled = true;
+				}
+			}
+		}.bind(productAddToCartForm);
+	
+		productAddToCartForm.submitLight = function(button, url){
+			if(this.validator) {
+				var nv = Validation.methods;
+				delete Validation.methods['required-entry'];
+				delete Validation.methods['validate-one-required'];
+				delete Validation.methods['validate-one-required-by-name'];
+				if (this.validator.validate()) {
+					if (url) {
+						this.form.action = url;
+					}
+					this.form.submit();
+				}
+				Object.extend(Validation.methods, nv);
+			}
+		}.bind(productAddToCartForm);
+		//]]>
+		</script>
+		
+	<div>
+		<div class="item-details-box-wrapper">
+			<div id="details-heading-top" class="stone-detail-box-odd accordiancontainer">
+				<div class="small-title accordianlink"><strong>Customer Review:</strong></div>
+				
+				<div class="accordiancontent">
+					<div class="writeareviewlink">		
+						Write a Review <span>+</span>
+					</div>
+					
+					<div class="clear"></div>
+					
+					<div class="field">
+						<?php echo $this->getChildHtml('reviews'); ?>
+					</div>	
+				</div>
+				
+				<div class="clear"></div>
+			</div>						
+		</div>	
+	</div>	
+	
+	<div class="clear"></div>
+</div>
+
+<script>
+// Mobile script
+jQuery('.accordianlink').click(function(){
+	if(!jQuery(this).hasClass('accordianselected')){
+		jQuery(this).removeClass('accordianselected');
+		
+		var index = jQuery(this).index();
+		jQuery(this).parent('.accordiancontainer').find('.accordiancontent').hide();
+		jQuery(this).addClass('accordianselected');
+	}
+	else{
+		jQuery(this).removeClass('accordianselected');
+		jQuery(this).parent('.accordiancontainer').find('.accordiancontent').show();
+	}
+});
+
+jQuery(function(){
+	if(typeof(s)!='undefined')
+		s.t();
+});
+</script>

@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_UtilityBackend>
+      <version>0.1.0</version>
+    </Angara_UtilityBackend>
+  </modules>
+  <global>
+    <helpers>
+      <utilitybackend>
+        <class>Angara_UtilityBackend_Helper</class>
+      </utilitybackend>
+	  
+		<catalog>
+			<rewrite>
+				<product_configuration>Angara_UtilityBackend_Helper_Rewrite_Catalog_Product_Configuration</product_configuration>
+			</rewrite>
+		</catalog>
+		<customer>
+			<rewrite>
+				<data>Angara_UtilityBackend_Helper_Rewrite_Customer_Data</data>
+			</rewrite>
+		</customer>
+		
+    </helpers>
+	<blocks>
+		<utilitybackend>
+			<class>Angara_UtilityBackend_Block</class>
+		</utilitybackend>
+		<adminhtml>
+			<rewrite>
+				<newsletter_subscriber_grid>Angara_UtilityBackend_Block_Rewrite_Newsletter_Subscriber_Grid</newsletter_subscriber_grid>
+				<sales_items_column_default>Angara_UtilityBackend_Block_Rewrite_Sales_Items_Column_Default</sales_items_column_default>
+				<sales_items_column_name>Angara_UtilityBackend_Block_Rewrite_Sales_Items_Column_Name</sales_items_column_name>
+				<sales_items_column_qty>Angara_UtilityBackend_Block_Rewrite_Sales_Items_Column_Qty</sales_items_column_qty>
+				<!-- <sales_order_grid>Angara_UtilityBackend_Block_Rewrite_Sales_Order_Grid</sales_order_grid> -->
+				<sales_totals>Angara_UtilityBackend_Block_Rewrite_Sales_Totals</sales_totals>
+			</rewrite>
+		</adminhtml>
+		
+		<catalog>
+        	<rewrite>
+            	<product_list_related>Angara_UtilityBackend_Block_Rewrite_Product_List_Related</product_list_related>
+            </rewrite>
+      	</catalog>
+		<payment>
+			<rewrite>
+				<info_cc>Angara_UtilityBackend_Block_Rewrite_Payment_Info_Cc</info_cc>
+			</rewrite>
+		</payment>
+		<review>
+			<rewrite>
+				<product_view>Angara_UtilityBackend_Block_Rewrite_Review_Product_View</product_view>
+				<product_view_list>Angara_UtilityBackend_Block_Rewrite_Review_Product_View_List</product_view_list>
+			</rewrite>
+		</review>
+		<rss>
+			<rewrite>
+				<catalog_category>Angara_UtilityBackend_Block_Rewrite_Rss_Catalog_Category</catalog_category>
+			</rewrite>
+		</rss>
+		<rss>
+			<rewrite>
+				<catalog_special>Angara_UtilityBackend_Block_Rewrite_Rss_Catalog_Special</catalog_special>
+			</rewrite>
+		</rss>
+		<rss>
+			<rewrite>
+				<catalog_new>Angara_UtilityBackend_Block_Rewrite_Rss_Catalog_New</catalog_new>
+			</rewrite>
+		</rss>
+		<rss>
+			<rewrite>
+				<catalog_salesrule>Angara_UtilityBackend_Block_Rewrite_Rss_Catalog_Salesrule</catalog_salesrule>
+			</rewrite>
+		</rss>
+		<sales>
+			<rewrite>
+				<order_email_items_default>Angara_UtilityBackend_Block_Rewrite_Sales_Order_Email_Items_Default</order_email_items_default>
+				<order_email_items_order_default>Angara_UtilityBackend_Block_Rewrite_Sales_Order_Email_Items_Order_Default</order_email_items_order_default>
+				<order_item_renderer_default>Angara_UtilityBackend_Block_Rewrite_Sales_Order_Item_Renderer_Default</order_item_renderer_default>
+			</rewrite>
+		</sales>
+	</blocks>
+	
+	<models>
+		<checkout>
+			<rewrite>
+				<cart>Angara_UtilityBackend_Model_Checkout_Cart</cart>
+				<type_onepage>Angara_UtilityBackend_Model_Checkout_Type_Onepage</type_onepage>
+			</rewrite>
+		</checkout>
+		<!-- <payment>
+			<rewrite>
+				<method_cc>Angara_UtilityBackend_Model_Payment_Method_Cc</method_cc>
+			</rewrite>
+		</payment> -->
+		<sales>
+			<rewrite>
+				<order>Angara_UtilityBackend_Model_Sales_Order</order>
+				<order_item>Angara_UtilityBackend_Model_Sales_Order_Item</order_item>
+			</rewrite>
+		</sales>
+		<utilitybackend>
+			<class>Angara_UtilityBackend_Model</class>
+		</utilitybackend>
+	</models>
+	<template>
+        <email>
+			<!-- Angara Modification Start -->
+			<newsletter_subscription_success_email_template_cart translate="label" module="newsletter">
+				<label>Newsletter subscription success cart</label>
+				<file>newsletter_subscr_success_cart.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_cart>
+			<newsletter_subscription_success_email_template_catalog translate="label" module="newsletter">
+				<label>Newsletter subscription success catalog</label>
+				<file>newsletter_subscr_success_catalog.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_catalog>
+			<!-- start new by anil -->
+			<newsletter_subscription_success_email_template_catalog_bottom translate="label" module="newsletter">
+				<label>Sapphire-Sweepstake</label>
+				<file>newsletter_subscr_success_catalog_bottom.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_catalog_bottom>
+			<!-- end new by anil -->
+			<newsletter_subscription_success_email_template_home translate="label" module="newsletter">
+				<label>Newsletter subscription success home</label>
+				<file>newsletter_subscr_success_home.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_home>
+			<newsletter_subscription_success_email_template_footer translate="label" module="newsletter">
+				<label>Newsletter subscription success footer</label>
+				<file>newsletter_subscr_success_footer.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_footer>
+			<!-- Angara Modification End -->
+			<!-- Angara Modification Start -->
+			<newsletter_subscription_success_email_template_popup translate="label" module="newsletter">
+				<label>Newsletter subscription success popup</label>
+				<file>newsletter_subscr_success_popup.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_popup>
+			<newsletter_subscription_success_email_template_military translate="label" module="newsletter">
+				<label>Newsletter subscription success military</label>
+				<file>newsletter_subscr_success_popup.html</file>
+				<type>html</type>
+			</newsletter_subscription_success_email_template_military>
+			<!-- Angara Modification End -->
+		</email>
+	</template>
+	<events>
+		<sales_quote_item_set_product>
+			<observers>
+				<angara_checkout_cart_add_product_short_description>
+					<type>model</type> 
+					<class>utilitybackend/observer</class> 
+					<method>changeProductName</method> 
+				</angara_checkout_cart_add_product_short_description>
+			</observers>
+		</sales_quote_item_set_product>
+	</events>
+  </global>
+  <adminhtml>
+		<events>
+			<catalog_product_prepare_save>
+				<observers>
+					<downloadable_observer>
+						<type>disabled</type>
+					</downloadable_observer>
+				</observers>
+			</catalog_product_prepare_save>
+            <sales_order_item_save_commit_after>
+                <observers>
+                    <downloadable_observer>
+                        <type>disabled</type>
+                    </downloadable_observer>
+                </observers>
+            </sales_order_item_save_commit_after>
+            <sales_order_save_commit_after>
+                <observers>
+                    <downloadable_observer>
+                        <type>disabled</type>
+                    </downloadable_observer>
+                </observers>
+            </sales_order_save_commit_after>
+			<admin_system_config_changed_section_payment>
+				<observers>
+                    <angara_force_enable_paypal_express>
+						<class>utilitybackend/observer</class> 
+						<method>forceEnablePayPalExpress</method> 
+                    </angara_force_enable_paypal_express>
+                </observers>
+            </admin_system_config_changed_section_payment>
+		</events>
+		<layout>
+			<updates>
+				<utilitybackendmatch>
+					<file>utilitybackend.xml</file>
+				</utilitybackendmatch>
+			</updates>
+		</layout>
+  </adminhtml>
+
+  <admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Adminhtml">Angara_UtilityBackend_Adminhtml</utilitybackend>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	
+	<frontend>
+		<routers>
+			<catalog>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Catalog">Angara_UtilityBackend_Catalog</utilitybackend>
+					</modules>
+				</args>
+			</catalog>
+			<newsletter>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Newsletter">Angara_UtilityBackend_Newsletter</utilitybackend>
+					</modules>
+				</args>
+			</newsletter>
+			<checkout>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Checkout">Angara_UtilityBackend_Checkout</utilitybackend>
+					</modules>
+				</args>
+			</checkout>
+			<sendfriend>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Sendfriend">Angara_UtilityBackend_Sendfriend</utilitybackend>
+					</modules>
+				</args>
+			</sendfriend>
+			<cms>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Cms">Angara_UtilityBackend_Cms</utilitybackend>
+					</modules>
+				</args>
+			</cms>
+			<contacts>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Contacts">Angara_UtilityBackend_Contacts</utilitybackend>
+					</modules>
+				</args>
+			</contacts>
+			<customer>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Customer">Angara_UtilityBackend_Customer</utilitybackend>
+					</modules>
+				</args>
+			</customer>
+			<wishlist>
+				<args>
+					<modules>
+						<utilitybackend before="Mage_Wishlist">Angara_UtilityBackend_Wishlist</utilitybackend>
+					</modules>
+				</args>
+			</wishlist>
+		</routers>
+		<events>
+			<!--starting rss-->
+			<sales_order_save_after>
+                <observers>
+                    <notifystock>
+                       <type>disabled</type>
+                    </notifystock>
+                </observers>
+            </sales_order_save_after>
+            <sales_order_save_after>
+                <observers>
+                    <ordernew>
+                       <type>disabled</type>
+                    </ordernew>
+                </observers>
+            </sales_order_save_after>
+            <!-- end rss-->
+			<sales_order_item_save_commit_after>
+                <observers>
+                    <downloadable_observer>
+                        <type>disabled</type>
+                    </downloadable_observer>
+                </observers>
+            </sales_order_item_save_commit_after>
+            <sales_order_save_commit_after>
+                <observers>
+                    <downloadable_observer>
+                        <type>disabled</type>
+                    </downloadable_observer>
+                </observers>
+            </sales_order_save_commit_after>
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <checkout_type_onepage_save_order_after>
+                        <type>disabled</type>
+                    </checkout_type_onepage_save_order_after>
+                </observers>
+            </checkout_type_onepage_save_order_after>
+            <checkout_type_multishipping_create_orders_single>
+                <observers>
+                    <checkout_type_multishipping_create_orders_single>
+                        <type>disabled</type>
+                    </checkout_type_multishipping_create_orders_single>
+                </observers>
+            </checkout_type_multishipping_create_orders_single>
+            <checkout_allow_guest>
+                <observers>
+                    <checkout_allow_guest>
+                       <type>disabled</type>
+                    </checkout_allow_guest>
+                </observers>
+            </checkout_allow_guest>
+		</events>
+		<!-- Added for secure cart as per requirement of Pay with Amazon button -->
+		<!-- Start -->
+		<secure_url>
+			<checkout_cart>/checkout/cart</checkout_cart>
+			<checkout>/checkout/cart</checkout>
+		</secure_url>
+		<!-- End -->
+	</frontend>
+	<stores>
+        <admin>
+            <design>
+                <package>
+                    <name>default</name>
+                </package>
+                <theme>
+                    <default>find</default>
+                </theme>
+            </design>
+        </admin>
+    </stores>
+</config> 

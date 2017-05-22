@@ -1,0 +1,136 @@
+<?php
+$categoryId			= 	$this->getCategoryId();	
+//echo $categoryId; die;
+//	Get category name for breadcrumb
+$breadcrumbCategory 	= 	Mage::getModel('catalog/category')->load($categoryId);
+$breadcrumbCategoryName	=	$breadcrumbCategory->getName();
+//echo $breadcrumbCategoryName; 
+?>
+<div class="breadcrumbs">
+  <ul>
+    <li style="list-style:none;" class="crumb1"><a href="<?php echo Mage::helper('core/url')->getHomeUrl();?>">Home</a> </li>
+    <li style="list-style:none;" class="crumb2"><a href="<?php echo Mage::getUrl().'customer-testimonials.html';?>" >Jewelry Reviews</a> </li>
+    <?php if($breadcrumbCategoryName!=''){?>
+		<li style="list-style:none;" class="crumb3"><a><b><?php echo $breadcrumbCategoryName;?></b></a></li>
+    <?php } ?>
+    <li style="list-style:none;" class="crumbblank"><a></a></li>
+  </ul>
+</div>
+<div id="review-wrapper">
+   <h1 id="pagemain-heading"><?php echo $breadcrumbCategoryName;?> Reviews</h1>
+  <?php
+	$leftCategoryIdArray		= 	$this->getLeftCategoryIds($categoryId);			//	Array of either Parent or Child category ids
+	
+	if( !is_array($leftCategoryIdArray) ){
+		$leftCategoryIdArray		= 	$this->getLeftCategoryIds($leftCategoryIdArray);
+	}
+	//echo '<pre>'; print_r($leftCategoryIdArray);
+	if(count($leftCategoryIdArray)>0){		//	Load child category in left navigation
+	?> 
+    <div id="left-part">
+      <ul>
+        <?php 	
+			foreach($leftCategoryIdArray as $leftCat){
+				$category = Mage::getModel('catalog/category')->load($leftCat);
+				$review	= $this->getReviewsForCategory($leftCat,1);
+				if(count($review) > 0){
+		?>
+        <li <?php if($categoryId==$category->getId()){?>class="active"<?php } ?>><a href="<?php echo Mage::getUrl("testimonials/index/morereviews/id/".$category->getId()."") ?>" title="<?php echo $category->getName(); ?>"><?php echo $category->getName(); ?></a><span></span></li>
+        	<?php } // end if review count
+		}	//	end foreach	?>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  <?php
+	}
+ ?>
+  <div id="right-part"> 
+    <?php 
+		$reviewscount 		= 	Mage::getStoreConfig('testimonials/general/reviews_count_per_category');
+		$reviewscount 		= 	$reviewscount?$reviewscount:5;
+		//echo '<br>reviewscount->'.$reviewscount;
+		if($categoryId){
+			//echo $categoryId; 
+			$review	= $this->getReviewsForCategory($categoryId,$reviewscount);
+			//echo '<pre>'; print_r($review); die;
+			if(count($review) > 0) {
+				//$category = Mage::getModel('catalog/category')->load($categoryId);
+					foreach($review as $testimonial){
+						$pro		=	Mage::getModel('catalog/product');
+						$_product	=	$pro->load($testimonial->getEntityPkValue());
+						$status		=	$_product->getStatus();
+						$skuProduct	=	$_product->getSku();
+						$productID	=	$_product->getID();
+					?>
+    <div id="review-main-page">
+    <div class="product-review-part">
+      <div class="product-review-part-img">
+      <?php if($categoryId=='406' || $categoryId=='407' || $categoryId=='408' || $categoryId=='409'){?>
+      <img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>">
+      <?php }else{?>
+      <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>?icid=more_testimonial" title="<?php echo $_product->getName();?>"><img  width="120" height="120" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(120, 120);?>"></a>
+      <?php } ?>
+	  <?php /*?><?php echo $_product->getName();?> <?php */?>
+      <div class="star-img">
+								<?php
+								$averageRating = 0;
+								$ratings = array();
+								foreach($testimonial->getRatingVotes() as $vote) {
+									$ratings[] = $vote->getPercent();
+								}
+								$averageRating = array_sum($ratings)/count($ratings);
+								if($averageRating){ ?>
+                                    <div class="rating-box" style="float:left;">
+                                      <div class="rating" style="width: <?php echo ceil($averageRating) ; ?>%;"></div>
+                                    </div>
+                                <div class="rating-digit" ><?php printf("%.1f",($averageRating* .05))?></div>
+                                <?php } ?>
+                          	</div>
+      <div class="dated"><span class="reviewername"><?php echo $this->htmlEscape($testimonial->getNickname());?></span><span> 
+                            <?php //	Review date
+							//echo $testimonial->getCreatedAt();
+							$toDateFormat = 'l, F j, Y';	//	Friday, August 30, 2013
+							echo $formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($testimonial->getCreatedAt()));
+							
+							/*if(strtotime('1 month ago') < strtotime($testimonial->getCreatedAt())) {
+								list($fromDate,$fromTime) = explode(' ',$testimonial->getCreatedAt());
+								$toDateFormat = 'D, F j, Y';
+								$formattedDate = Mage::getModel('core/date')->date($toDateFormat , strtotime($fromDate));
+								echo $formattedDate;
+							}
+							else {
+								echo 'Older than a month';
+							} */?>
+							</span></div>
+      </div>
+      <div class="product-review-part-rvw">
+           <div class="testimonial-arrow"></div>
+           <h2>
+            <?php 
+									$testi_title = $this->htmlEscape($testimonial->getTitle());
+									if (strlen($testi_title) > 80) {
+										$testi_title = substr($testi_title, 0, 80);
+										$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+										$testi_title .= '...';
+									}
+									echo $testi_title;
+									//$_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL;
+								?>
+         </h2>
+           <div class="contant"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())); ?></div>        
+        </div>   
+       </div> 
+       <div class="clear"></div>
+      </div>
+    
+    <?php 
+					} //	end foreach?>
+    <?php
+			} //	end if
+			/*else{
+				echo '<h2>Sorry there are no reviews posted yet in this category. Please browse other categories.</h2>';	
+			}*/
+		}	//	end if
+	?>
+  </div>
+</div>

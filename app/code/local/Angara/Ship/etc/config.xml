@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Ship>
+      <version>0.1.0</version>
+    </Angara_Ship>
+  </modules>
+  <global>
+    <helpers>
+      <ship>
+        <class>Angara_Ship_Helper</class>
+      </ship>
+    </helpers>
+	<blocks>
+	  <ship>
+		<class>Angara_Ship_Block</class>
+	  </ship>
+	</blocks>
+	<models>
+	  <ship>
+		<class>Angara_Ship_Model</class>
+		<resourceModel>ship_mysql4</resourceModel>
+	  </ship>
+	  <ship_mysql4>
+		<class>Angara_Ship_Model_Mysql4</class>
+		<entities>		  
+			  <ship>
+				<table>ship</table>
+			  </ship>
+        </entities>
+	  </ship_mysql4>
+	</models>
+	<resources>
+	  <ship_setup>
+		<setup>
+		  <module>Angara_Ship</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </ship_setup>
+	  <ship_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </ship_write>
+	  <ship_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </ship_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <ship>
+	    <use>admin</use>
+		<args>
+		  <module>Angara_Ship</module>
+		  <frontName>admin_ship</frontName>
+		</args>
+	  </ship>
+	</routers>
+  </admin>
+  <adminhtml>
+  
+	<!--<menu>
+	  <ship module="ship">
+		<title>Ship</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <ship module="ship">
+		    <title>Manage Ship</title>
+			<sort_order>0</sort_order>
+			<action>admin_ship/adminhtml_ship</action>
+		  </ship>
+		</children>
+	  </ship>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<ship translate="title" module="ship">
+			  <title>Ship</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <ship translate="title">
+			<title>Manage Ship</title>
+			<sort_order>0</sort_order>
+		  </ship>
+			  </children>
+			</ship>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>-->
+	
+	<layout>
+	  <updates>
+		<ship>
+		  <file>ship.xml</file>
+		</ship>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

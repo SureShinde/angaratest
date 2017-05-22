@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    function testConnection() {
+        var elem = $('<?php echo $this->getHtmlId() ?>_button');
+
+        params = {
+            port: 100,
+            timeout: 300
+        };
+
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            parameters: params,
+            onSuccess: function(response) {
+                result = '<?php echo $this->__('Connection failed! Test again?') ?>';
+                try {
+                    response = response.responseText;
+                    if (response) { 
+                        $('<?php echo $this->getHtmlId() ?>').value = response;
+                        elem.removeClassName('fail').addClassName('success');
+                        $('connection_test_result').innerHTML="Module Setup Completed !";
+                    } else {
+                        elem.removeClassName('success').addClassName('fail');
+                        $('connection_test_result').innerHTML="Module Setup Failed ! (Try Again)";
+                    }
+                } catch (e) {
+                    elem.removeClassName('success').addClassName('fail');
+                    $('connection_test_result').innerHTML="Module Setup Failed ! (Try Again)";
+                }
+                //$('connection_test_result').update(result);
+                $('runa_promo_keygen').value = response;
+            }
+        });
+    }
+</script>
+
+<style>
+    button.success {
+        background: #46745E;
+        border-color: #46745E;
+    }
+
+    button.fail{
+        background: #A92000;
+        border-color: #D24403 #A92000 #A92000 #D24403;
+        color: #FFFFFF;
+    }
+</style>
+
+
+<input class="input-text" readonly="true" type="text" id="<?php echo $this->getHtmlId() ?>" name="<?php echo $this->getName() ?>" value="<?php echo $this->getValue() ?>" style="color:brown;border:none;background:#FAF8CC; width:260px;margin-bottom:10px;"/><br/>
+<button  onclick="testConnection();return false;" class="scalable connect_button" type="button" id="<?php echo $this->getHtmlId() ?>_button">
+    <span id="connection_test_result"><?php echo $this->getButtonLabel() ?></span>
+</button>
+<span id="results">
+
+</span>

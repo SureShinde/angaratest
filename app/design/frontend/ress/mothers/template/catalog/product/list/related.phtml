@@ -1,0 +1,58 @@
+<?php
+$_coreHelper = $this->helper('core');
+
+if($this->getItems()->getSize()): ?>
+	<div id="similar-items" class="full-width pull-left max-margin-top <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ echo 'padding-type-0'; }?>">
+		<div class="block-sub-heading high-padding-bottom pull-left full-width">
+			Similar Items
+			<?php //S: Code for add Default category link
+			$current_cat=Mage::getModel('catalog/layer')->getCurrentCategory();
+			if($current_cat && $current_cat->getId()){?>
+				<a href='<?php echo $current_cat->getUrl(); ?>' class="pull-right apricot-text" style="font-size:16px; line-height:24px;">View all <?php echo $current_cat->getName(); ?></a>
+			<?php } //E: Code for add Default category link ?>
+		</div>
+		<div id="similar-item-holder" class="item-holder full-width showcase-border-1px pull-left text-center">	
+            <?php 
+			$rw_count_prod = 0;
+            foreach($this->getItems() as $_item): 
+				//if($rw_count_prod <= 4){?>                
+               		<div class="low-padding low-margin-bottom col-md-2 col-sm-3">
+                         <a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014" title="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" style="display:inline-block"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(150); ?>" alt="<?php echo $this->htmlEscape($_item->getShortDescription()); ?>" class="img-responsive" /></a>
+                     	<div class="fontsize-type1 text-bold low-padding-top">
+                        	<a href="<?php echo $_item->getProductUrl(); ?>?icid=si-widget-10132014"><?php echo Mage::helper('core/string')->truncate($this->helper('catalog/output')->productAttribute($_item, $this->htmlEscape($_item->getShortDescription()) , 'name'), $length = 35, $etc = '...');?></a>
+                    	</div>
+                    	<div class="regular-price"><?php echo $this->getPriceHtml($_item, true, '-related'); ?></div>
+                    	<div class="text-center low-padding-top hidden"><button href="/catalog/ajax_product/view/id/<?php echo $_item->getId(); ?>" onclick="quickView(this, '<?php echo "si-widget|".$_item->getSku(); ?>')" class="btn btn-sm quickview">Quick View</button>
+  							<div class="clearfix"></div>
+						</div>						
+                	</div>                
+            	<?php
+				//}
+			$rw_count_prod++;
+            endforeach; ?>           
+        </div>
+		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+		<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#similar-item-holder').slick({
+					arrows			: 	true,
+					slidesToShow	: 	4,
+					slidesToScroll	: 	1
+				});
+			});
+			</script>
+		<?php } else { ?>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#similar-item-holder').slick({
+					arrows			: 	true,
+					slidesToShow	: 	6,
+					slidesToScroll	: 	1
+				});
+			});
+			</script>
+		<?php } ?>
+	</div> 
+<?php 
+endif; ?>

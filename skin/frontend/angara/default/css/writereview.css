@@ -1,0 +1,189 @@
+#engagementbodyhome {
+	width: 920px;
+	margin: 0 auto;
+	padding: 18px 19px 18px 19px;
+	background-color: #fff;
+	border: solid 1px #D4D4D4;
+	margin-top: 15px;
+}
+.welcomecustomer {
+	font-size:30px;
+	color: #000;
+	margin-bottom: 10px;
+}
+.colheading {
+	height: 38px;
+	border-bottom: solid 1px #d4d4d4;
+	border-top: solid 1px #d4d4d4;
+	font-size:12px;
+	font-weight:bold;
+	line-height:34px;
+}
+.colorderitem {
+	height: 34px;
+	width: 140px;
+	background-color: #efefef;
+	margin: 2px 0;
+	padding-left: 10px;
+	float: left;
+}
+.colorderdetail {
+	height: 34px;
+	width: 239px;
+	background-color: #efefef;
+	margin: 2px;
+	padding-left: 10px;
+	float: left;
+}
+.colreviewstatus {
+	height: 34px;
+	width: 507px;
+	background-color: #efefef;
+	margin: 2px 0;
+	padding-left: 10px;
+	float: left;
+}
+.productdetails {
+	width: 920px;
+	margin: 10px 0;
+	padding: 10px 0;
+	background: url(../images/reviewdivider.jpg) bottom no-repeat;
+}
+.orderitemimg {
+	width: 122px;
+	height: 112px;
+	margin-left: 10px;
+	float: left;
+	background: url(../images/reviewimgbg.jpg) top left no-repeat;
+	padding: 8px;
+	padding-left: 8px;
+}
+.orderdetails {
+	width: 241px;
+	margin-left: 12px;
+	float: left;
+}
+.productname {
+	width: 230px;
+	font-size:13px;
+	font-weight:bold;
+	padding-bottom: 8px;
+	margin-bottom: 6px;
+	display: block;
+	background: url(../images/namesapretor.jpg) bottom no-repeat;
+}
+.details {
+	margin: 0;
+	padding: 0;
+}
+.details dt {
+	float: left;
+	margin: 0 5px 0 0;
+	padding: 3px 0;
+	width: auto;
+	font: bold 11px Arial, Helvetica, sans-serif;
+}
+.details dd {
+	margin: 0;
+	padding: 3px 0;
+	font: 11px Arial, Helvetica, sans-serif;
+}
+.reviewstatus {
+	width: 507px;
+	margin-left: 12px;
+	float: left;
+}
+.reviewstatustxt {
+	width: 170px;
+	font: bold 14px Arial, Helvetica, sans-serif;
+}
+.clickhere {
+	margin-top: 10px;
+	width: 165px;
+	height: 31px;
+	text-align: center;
+	cursor: pointer;
+}
+.form-list textarea {
+	border: 1px solid #B6B6B6;
+}
+.buttons-set {
+	border-top: none;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	float: left;
+}
+.buttons-set button.button {
+	float: left;
+}
+.form-add, .form-list {
+	padding-top: 15px;
+}
+.data-table {
+	border-style: solid none solid solid;
+}
+.data-table tr.last th {
+	border-bottom: 1px solid #D9DDE3 !important;
+	border-right: 1px solid #D9DDE3;
+}
+.data-table tr.odd th {
+	border-bottom: none !important;
+	;
+}
+.data-table tr.last td {
+	border-right: 1px solid #D9DDE3;
+}
+.col-main {
+	min-height: 100px;
+	height: auto!important;
+	height: 100px;
+}
+.buttons-set .submit-review-btn {
+	background: url("../images/allbuttonbgleft.jpg") no-repeat scroll left top transparent;
+	height: 31px;
+}
+.buttons-set .submit-review-btn span {
+	background: url("../images/allbuttonbgright.jpg") no-repeat scroll right top transparent;
+	border: medium none;
+	height: 31px;
+}
+.cancel {
+	margin-left: 116px;
+	width: 70px;
+}
+.cancel .cancelbtn {
+	background: url("../images/allbuttonbgleft.jpg") no-repeat scroll left top transparent;
+	height: 31px;
+}
+.cancel .cancelbtn span {
+	background: url("../images/allbuttonbgright.jpg") no-repeat scroll right top transparent;
+	border: medium none;
+	height: 31px;
+}
+.cancel .cancelbtn span span {
+	display: inline-block;
+	padding: 3px 8px 0;
+}
+.cancel button {
+	border: none;
+	outline: none;
+}
+button.button span {
+	background: none repeat scroll 0 0 #F18200;
+	border: 1px solid #DE5400;
+	color: #FFFFFF;
+	display: block;
+	font: bold 12px/23px Arial, Helvetica, sans-serif;
+	height: 19px;
+	text-align: center;
+	white-space: nowrap;
+}
+.loader {
+	position: absolute;
+	top: 0px;
+	left: 185px;
+	width: 200px;
+	height: 31px;
+}

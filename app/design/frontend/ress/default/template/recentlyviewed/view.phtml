@@ -1,0 +1,94 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items = array();
+
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+	foreach($rw_items as $product){		
+		$prod_data = Mage::getModel('catalog/product');
+		$prod_data->load($product);
+		$productCategories = $prod_data->getCategoryIds();
+		/*if($prod_data && in_array(454, $productCategories)):
+			unset($rw_items[array_search($product,$rw_items)]);
+		endif;*/			
+	}
+}
+
+if(count($rw_items) >= 1){ ?>	
+		<div id="recently-view" class="full-width pull-left">
+		<div class="block-sub-heading high-padding-bottom pull-left full-width">Recently Viewed Jewelry</div>
+		<div id="recently-view-holder" class="item-holder full-width pull-left text-center">	
+        <?php
+        $rw_count_prod = 0;
+        foreach($rw_items as $product){
+            if($rw_count_prod <= 7){
+                $prod_data = Mage::getModel('catalog/product');
+                $prod_data->load($product);				
+				$_helper = $this->helper('catalog/output');
+				$image = $this->helper('catalog/image')->init($prod_data,'image')->resize(210,210);
+				$_coreHelper = $this->helper('core');?>
+				<div class="related-item pro-extra-item">
+					<div class="pro-extra-item-box"> 
+						<a href="<?php echo $prod_data->getProductUrl();?>?icid=rv-widget" style="display:block"> 
+							<img class="img-responsive" alt="<?php echo $prod_data->getShortDescription();?>" title="<?php echo $prod_data->getShortDescription();?> - Angara.com" src="<?php echo $image;?>">
+						</a>
+						<div class="pro-extra-item-detail-box">
+							<?php 
+							$_productNameStripped = $this->stripTags($prod_data->getShortDescription(), null, true); 
+							$remainder = ''; ?>
+							<a href="<?php echo $prod_data->getProductUrl(); ?>?icid=rv-widget" title="<?php echo $_productNameStripped; ?>" class="fontsize-type3"><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($prod_data, $prod_data->getShortDescription(), 'short_description'), $length = 42, $etc = '...', $remainder, false);?></a>
+							<style type="text/css">
+							#recently-view .ratings .rating-box{
+								margin :10px auto 0px; 
+							}
+							</style>
+							<?php //echo $this->getReviewsSummaryHtml($prod_data, 'short', false); ?>		
+							<div class="regular-price">
+								<?php echo $this->getPriceHtml($prod_data, true, '-recent'); ?>
+							</div>
+						</div>
+					</div>         
+				</div>         
+			<?php				
+            }
+        $rw_count_prod++;
+        }?>
+		</div>
+		<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#recently-view-holder').slick({
+				arrows			: 	true,
+				slidesToShow	: 	6,
+				slidesToScroll	: 	1,
+				responsive: [
+					{
+					  breakpoint: 1281,
+					  settings: {
+						slidesToShow: 5,
+						slidesToScroll: 1,
+					  }
+					},
+					{
+					  breakpoint: 1025,
+					  settings: {
+						slidesToShow: 4,
+						slidesToScroll: 1,
+					  }
+					},
+					{
+					  breakpoint:769,
+					  settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1
+					  }
+					}
+				]
+			});
+			window.scrollBy(0,1);
+		});
+		</script>
+		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+	</div>   
+<?php
+}?>

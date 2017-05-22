@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<!--
+    Default layout, loads most of the pages
+    -->
+    <default>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/common.css</name></action>
+			<!--Magento default js are clubbed into one common_head.js-->
+			<action method="addJs"><script>minify-js/common_head.js</script></action>
+			<!--jQuery and other related plugins are in script-ck.js-->
+			<action method="addItem"><type>skin_js</type><name>js/script-ck.js</name></action>
+			<!--Theme specific js for custom js operations-->
+			<action method="addItem"><type>skin_js</type><name>js/script.js</name></action>
+			<action method="addJs"><script>mbox.js</script></action>
+		</reference>
+		<reference name="header">
+			<block type="page/html_header" name="cart_opener_new" template="page/html/header/cartopener.phtml"></block>
+		</reference>
+		<reference name="footer">
+			<block type="directory/country" name="country" template="directory/country.phtml"></block>
+			<block type="page/html_footer" name="footer_showcase" template="page/html/footer/showcase.phtml"></block>
+		</reference>
+    </default>
+
+
+	<!--	Home Page	-->
+	<cms_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/home.css</name></action>
+			<action method="removeItem"><type>skin_css</type><name>css/cms.css</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/slick.min.js</name></action>
+		</reference>
+    </cms_index_index>
+	
+	
+	<!--	All Catalog Pages	-->
+	<!--<catalog_category_view>
+    	<reference name="head">
+        	<action method="addItem"><type>skin_css</type><name>css/catalog.css</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/slick.min.js</name></action>
+        </reference>
+		<reference name="root">
+			Showing breadcrumbs on catalog pages only
+			<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+		</reference>
+	</catalog_category_view>-->
+	
+	
+	<!--	All Catalog Pages with Display Settings Products Only	-->
+	<catalog_category_layered>
+		<reference name="head">
+        	<action method="addItem"><type>skin_css</type><name>css/catalog.css</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/slick.min.js</name></action>
+        </reference>
+		<!--S:VA	Removing layered navigation layer.phtml file-->
+		<!--<remove name="catalog.adjnav"/>-->
+    </catalog_category_layered>
+	
+	
+	<!--	All Catalog Pages with Display Settings Static Block Only	-->
+	<catalog_category_default>
+		<reference name="head">
+        	<action method="addItem"><type>skin_css</type><name>css/cms.css</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/slick.min.js</name></action>
+        </reference>
+	</catalog_category_default>
+	
+	 
+	<!--	All Product Pages	-->
+	<catalog_product_view>
+        <reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/product.css</name></action>
+			<action method="addJs"><script>varien/product.js</script></action>
+			<action method="addJs"><script>varien/configurable.js</script></action>
+			<action method="addItem"><type>skin_js</type><name>js/simple_product_pricing.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/slick.min.js</name></action>
+		</reference>
+		
+		<!--	S:VA	Data is coming from ajax
+		<reference name="product.info">
+			<block type="recentlyviewed/view" name="product.info.recently.viewed" as="recently_viewed" template="recentlyviewed/view.phtml"/>
+		</reference>-->
+		
+		<!--Removed product tags from the page	-->
+		<reference name="product.info.additional">
+			<remove name="product_tag_list" />
+		</reference>
+    </catalog_product_view>
+	
+	
+	<!--	All Cart Pages	-->
+	<checkout_cart_index>
+        <reference name="head">
+			<remove name="top.menu"/>
+			<remove name="top.search"/>
+			<action method="addItem"><type>skin_css</type><name>css/cart.css</name></action>
+			<action method="removeItem"><type>js</type><name>varien/weee.js</name></action>
+		</reference>
+    </checkout_cart_index>
+	
+	
+	<!--	All Cart Pages	-->
+	<onepagecheckout_index_index>
+        <reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/checkout.css</name></action>
+		</reference>
+    </onepagecheckout_index_index>
+	
+	
+	<!--	All Cms Pages	-->
+    <cms_page>
+		<!--<reference name="root">-->
+            <reference name="head">
+				<action method="addItem"><type>skin_css</type><name>css/cms.css</name></action>
+			</reference>
+        <!--</reference>-->
+    </cms_page>
+</layout>

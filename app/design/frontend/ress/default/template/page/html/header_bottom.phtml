@@ -1,0 +1,88 @@
+<?php
+$pageType = Mage::helper('function')->getPageType();
+if($pageType == 'category' || $pageType == 'product'){
+	$_category = Mage::registry('current_category');
+}
+
+if((Mage::app()->getRequest()->getRouteName()=='cms') && (Mage::getSingleton('cms/page')->getIdentifier()=='thanksgiving-gift' || Mage::getSingleton('cms/page')->getIdentifier()=='thanksgiving-thankyou' )) { 
+	$isThanksGiving = true;
+}else{
+	$isThanksGiving = false;
+}
+
+if($pageType!='cart' && $pageType!='checkout' && $pageType != 'amazon_payments' && $pageType != 'success' && $isThanksGiving == false){ ?>
+	<div id="main-head">
+		<div id="main-head-inner">
+			<div class="container">
+				<div class="row no-gutters low-padding-top low-padding-bottom relative-placeholder">
+					<?php  //S: Visible if page related to pearl 
+						$current_identifier = Mage::getSingleton('cms/page')->getIdentifier();
+						if(($current_identifier && stripos($current_identifier, 'pearl') !== false) || (($pageType == 'category' || $pageType == 'product') && ($_category && stripos($_category->getName(), 'pearl') !== false)) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'pearl') !== false) || strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+							echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/sidemenu-pearl.phtml')->toHTML();
+						}else{
+							if(($current_identifier && stripos($current_identifier, 'diamond') !== false) || (($pageType == 'category' || $pageType == 'product') && ($_category && stripos($_category->getName(), 'diamond') !== false)) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'diamond') !== false) || ($current_identifier && stripos($current_identifier, 'diamond-jewelry') !== false)){
+								if(($current_identifier && stripos($current_identifier, 'blue') !== false)|| ($current_identifier && stripos($current_identifier, 'black') !== false) || ($current_identifier && stripos($current_identifier, 'coffee') !== false) || ($current_identifier && stripos($current_identifier, 'colored') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'blue') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'black') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'coffee') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'colored') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'blue') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'black') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'coffee') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'colored') !== false)){
+								}else{
+									echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/sidemenu-pearl.phtml')->toHTML();
+								}
+							}
+						} //S: Visible if page related to pearl 
+					?>
+					
+					<div class="pull-left logo-box">
+						<a href="<?php echo $this->getUrl('');?>" title="Angara Jewelry" class="logo">
+							<?php /*
+							if($pageType == 'home'){ ?>
+									<img src="/skin/frontend/ress/default/images/logo-white.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+									<img src="/skin/frontend/ress/default/images/logo.png" class="ori-logo" style="display:none"/>
+								<?php }else{ ?>
+									<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+								<?php }
+							*/ ?>
+							<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+							
+						</a>
+					</div>
+					<?php  /*
+					if($pageType == 'home'){ ?>
+					<script>
+						jQuery(function(){
+							jQuery('.ori-logo').remove();
+						});
+						jQuery('.navbar-nav li').mouseover(function(){
+							jQuery('.logo img').attr('src','/skin/frontend/ress/default/images/logo.png');
+						}).mouseleave(function(){
+							jQuery('.logo img').attr('src','/skin/frontend/ress/default/images/logo-white.png');
+						});
+					</script>
+					<?php }
+					*/ ?>
+					<?php 
+					if($pageType!='cart' && $pageType!='checkout'){ 
+						//S: switch navigation if page related to pearl 
+						if(($current_identifier && stripos($current_identifier, 'pearl') !== false) || (($pageType == 'category' || $pageType == 'product') && ($_category && stripos($_category->getName(), 'pearl') !== false)) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'pearl') !== false)){ 
+							echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu-pearl.phtml')->toHTML(); //Pearl Navigation
+						}else{
+							if(($current_identifier && stripos($current_identifier, 'diamond') !== false) || (($pageType == 'category' || $pageType == 'product') && ($_category && stripos($_category->getName(), 'diamond') !== false)) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'diamond') !== false)){
+								if(($current_identifier && stripos($current_identifier, 'blue') !== false)|| ($current_identifier && stripos($current_identifier, 'black') !== false) || ($current_identifier && stripos($current_identifier, 'coffee') !== false) || ($current_identifier && stripos($current_identifier, 'colored') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'blue') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'black') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'coffee') !== false) || (($pageType == 'category' || $pageType == 'product') && stripos($_category->getName(), 'colored') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'blue') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'black') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'coffee') !== false) || ($pageType == 'catalogsearch' && stripos(Mage::app()->getRequest()->getParam('q'), 'colored') !== false)){
+									if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+										echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu.phtml')->toHTML();  //Common Navigation
+									}
+								}else{
+									echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu-diamond.phtml')->toHTML(); //Diamond Navigation
+								}
+							}else{
+								if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+									echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu.phtml')->toHTML();  //Common Navigation
+								}
+							}
+						} //E: switch navigation if page related to pearl 
+						echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('catalogsearch/form.mini.phtml')->toHTML(); //Search box
+					} 
+					echo $this->getChildHtml('topContainer');
+					?>
+				</div>
+			</div> 
+		</div> 
+	</div>
+<?php } ?>

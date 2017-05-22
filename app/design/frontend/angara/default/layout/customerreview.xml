@@ -1,0 +1,17 @@
+<layout version="0.1.0">
+	<customerreview_index_review>
+        <reference name="head">
+            <action method="addJs"><script>mage/adminhtml/form.js</script></action>
+			<action method="removeItem"><type>js</type><name>varien/form.js</name></action>
+        </reference>	
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="customerreview/review" template="customerreview/review.phtml">
+				 <block type="review/customreviewform" name="reviewform" as="reviewform"/>
+			</block>
+		</reference>
+	</customerreview_index_review>
+	 
+</layout>

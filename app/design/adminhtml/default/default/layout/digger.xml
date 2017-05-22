@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+  <digger_adminhtml_index_index>
+     <reference name="content">
+	           <block type="digger/adminhtml_synonym"  name="synonym" />	
+	 	      </reference>
+  </digger_adminhtml_index_index>
+  <digger_adminhtml_grammar_index>
+     <reference name="content">
+	           <block type="digger/adminhtml_grammar"  name="grammar" />	
+	 	      </reference>
+  </digger_adminhtml_grammar_index>
+  
+  
+	<digger_adminhtml_index_import>
+		<reference name="content">
+			<block type="digger/adminhtml_synonym"  name="synonym.import" template="digger/import.phtml" />	
+		</reference>
+	</digger_adminhtml_index_import>
+  
+</layout>

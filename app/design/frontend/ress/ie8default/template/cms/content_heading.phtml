@@ -1,0 +1,50 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if($_heading = $this->getContentHeading()): ?>
+    <div class="page-title">
+        <h1><?php echo $_heading; ?></h1>
+    </div>
+<?php endif; ?>
+<?php 
+$dataCurrentPage = $this->getHelper('cms/page')->getPage()->getData();
+//echo '<pre>'; print_r($dataCurrentPage);
+if ($dataCurrentPage) {
+	$pageTitle	=	$dataCurrentPage['title'];
+	$pageUrl	=	$dataCurrentPage['identifier'];
+}
+if(strstr($pageUrl,'jewelry-guide')){?>
+<style>.social-share a.twitter{background:url('/skin/frontend/ress/default/images/twitter.png');background-repeat: no-repeat;} .container .container{width:initial}</style>
+    <div class="container showcase-bg-white" data-remove-classes="container">
+        <div class="social-share" style="width:100%;float:left;height:25px;">
+            <div style="float:left; margin-right:10px;"><a style="display:block; height:25px; width:56px; font-size:0px;" class="twitter popup" href="http://twitter.com/share?text=<?php echo $pageTitle;?>">Tweet</a></div>
+            <script>
+			jQuery(document).ready(function() {
+			  jQuery('.popup').click(function(event) {
+				var width  = 575,
+					height = 400,
+					left   = (jQuery(window).width()  - width)  / 2,
+					top    = (jQuery(window).height() - height) / 2,
+					url    = this.href,
+					opts   = 'status=1' +
+							 ',width='  + width  +
+							 ',height=' + height +
+							 ',top='    + top    +
+							 ',left='   + left;
+				
+				window.open(url, 'twitter', opts);
+				return false;
+			  });
+			});
+			</script>				
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-555c45cb760fa438" async="async"></script>
+            <div class="addthis_native_toolbox"></div>
+        </div>
+        <?php //	E:VA	Social Sharing icons added ?>
+    </div>
+<?php } ?>

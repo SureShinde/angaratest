@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_Feedback>
+		  	<version>0.1.0</version>
+		</Angara_Feedback>
+	</modules>
+	<frontend>
+		<routers>
+			<feedback>
+				<use>standard</use>
+				<args>
+					<module>Angara_Feedback</module>
+					<frontName>feedback</frontName>
+				</args>
+			</feedback>
+		</routers>
+		<layout>
+			<updates>
+				<feedback>
+					<file>feedback.xml</file>
+				</feedback>
+			</updates>
+		</layout>
+	</frontend>
+  <global>
+	<helpers>
+		<feedback>
+			<class>Angara_Feedback_Helper</class>
+		</feedback>
+	</helpers>
+	<blocks>
+		<feedback>
+			<class>Angara_Feedback_Block</class>
+		</feedback>
+	</blocks>
+	<models>
+		<feedback>
+			<class>Angara_Feedback_Model</class>
+			<resourceModel>feedback_mysql4</resourceModel>
+		</feedback>
+		<feedback_mysql4>
+			<class>Angara_Feedback_Model_Mysql4</class>
+			<entities>		  
+				<feedback><table>ang_feedback</table></feedback>
+				<category><table>ang_feedback_category</table></category>		<!--S:VA1	Define new db table for multiple grid-->
+			</entities>
+		</feedback_mysql4>
+	</models>
+	<resources>
+		<feedback_setup>
+			<setup>
+				<module>Angara_Feedback</module>
+			</setup>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+		</feedback_setup>
+		<feedback_write>
+			<connection>
+				<use>core_write</use>
+			</connection>
+		</feedback_write>
+		<feedback_read>
+			<connection>
+				<use>core_read</use>
+			</connection>
+		</feedback_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <feedback>
+	    <use>admin</use>
+		<args>
+		  <module>Angara_Feedback</module>
+		  <frontName>admin_feedback</frontName>
+		</args>
+	  </feedback>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+		<feedback module="feedback">
+			<title>Feedback</title>
+			<sort_order>90</sort_order>
+			<depends>
+				<config>feedback/settings/status</config>
+			</depends>
+			<children>
+				<feedback module="feedback">
+					<title>Manage Feedback</title>
+					<sort_order>0</sort_order>
+					<action>admin_feedback/adminhtml_feedback</action>
+				</feedback>
+				<!--S:VA2	Define new menu item for multiple grid-->
+				<category module="feedback">
+					<title>Manage Categories</title>
+					<sort_order>1</sort_order>
+					<action>admin_feedback/adminhtml_category</action>
+				</category>
+			</children>
+		</feedback>
+	</menu>
+	<acl>
+		<resources>
+			<all>
+			  <title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<feedback translate="title" module="feedback">
+						<title>Feedback</title>
+						<sort_order>1000</sort_order>
+						<children>
+							<feedback translate="title">
+								<title>Manage Feedback</title>
+								<sort_order>0</sort_order>
+							</feedback>
+							<!--S:VA3	Define new menu item for acl for multiple grid-->
+							<category translate="title">
+								<title>Manage Categories</title>
+								<sort_order>1</sort_order>
+							</category>
+						</children>
+					</feedback>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	<layout>
+		<updates>
+			<feedback>
+				<file>feedback.xml</file>
+			</feedback>
+		</updates>
+	</layout>
+  </adminhtml>
+</config> 

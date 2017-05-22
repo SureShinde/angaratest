@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+    </default>
+	<additionalinformation_index_index>
+	<reference name="head">
+		<action method="addCSS"><type>additionalinformation/css/basic.css</type><stylesheet>media="all"</stylesheet></action>
+		<action method="addCSS"><type>additionalinformation/css/dropzone.css</type><stylesheet>media="all"</stylesheet></action>
+		<action method="addJs"><script>additionalinformation/dropzone.js</script></action>
+	</reference>
+	<reference name="root">
+		<action method="setTemplate"><template>page/1column.phtml</template></action>
+	</reference>
+	<reference name="content">
+		<block type="additionalinformation/additionalinformation" name="additionalinformation" template="additionalinformation/form.phtml" />
+		<block type="additionalinformation/additionalinformation" name="govt-email-new" template="additionalinformation/govt_email_form.phtml" />
+		<!--<block type="additionalinformation/additionalinformation" name="bankdetail" template="additionalinformation/bankdetail_form.phtml" />-->
+		<block type="additionalinformation/additionalinformation" name="imagesupload" template="additionalinformation/imagesupload_form.phtml" />
+	</reference>
+	</additionalinformation_index_index>
+	<additionalinformation_index_uploadimages>
+	<reference name="head">
+		<action method="addCSS"><type>additionalinformation/css/basic.css</type><stylesheet>media="all"</stylesheet></action>
+		<action method="addCSS"><type>additionalinformation/css/dropzone.css</type><stylesheet>media="all"</stylesheet></action>
+		<action method="addJs"><script>additionalinformation/dropzone.js</script></action>
+	</reference>
+	<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+	    <reference name="content">
+    		<block type="additionalinformation/additionalinformation" name="imagesupload" template="additionalinformation/imagesupload_form.phtml" />
+		</reference>
+	</additionalinformation_index_uploadimages>
+	<additionalinformation_index_getgovtemail>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="govt-email-new" template="additionalinformation/govt_email_form.phtml" />
+		</reference>
+	</additionalinformation_index_getgovtemail>
+	<!--<additionalinformation_index_savebankdetail>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="bankdetail" template="additionalinformation/bankdetail_form.phtml" />
+		</reference>
+	</additionalinformation_index_savebankdetail>-->
+	<additionalinformation_index_otpcheck>
+		<reference name="head">
+			<action method="addCSS"><type>additionalinformation/css/basic.css</type><stylesheet>media="all"</stylesheet></action>
+			<action method="addJs"><script>additionalinformation/dropzone.js</script></action>
+		</reference>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="additionalinformation" template="additionalinformation/otpform.phtml" />
+		</reference>
+	</additionalinformation_index_otpcheck>
+	<additionalinformation_index_otpsubmit>
+		<reference name="head">
+			<action method="addCSS"><type>additionalinformation/css/basic.css</type><stylesheet>media="all"</stylesheet></action>
+		</reference>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="additionalinformation" template="additionalinformation/otpform.phtml" />
+		</reference>
+	</additionalinformation_index_otpsubmit>
+	<additionalinformation_index_thankyou>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="additionalinformation" template="additionalinformation/thankyou.phtml" />
+		</reference>
+	</additionalinformation_index_thankyou>
+	<additionalinformation_index_thanksyou>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="additionalinformation/additionalinformation" name="additionalinformation" template="additionalinformation/thankyou.phtml" />
+		</reference>
+	</additionalinformation_index_thanksyou>
+</layout>

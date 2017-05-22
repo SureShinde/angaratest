@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+<!-- ... -->
+  <modules>
+<!-- ... -->
+<!-- declare YourCompany_NewModule module -->
+    <Angara_Angnonusflatrate>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Angara_Angnonusflatrate>
+<!-- ... -->
+  </modules>
+<!-- ... -->
+</config>

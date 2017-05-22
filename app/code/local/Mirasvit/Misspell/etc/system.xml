@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <misspell translate="label" module="misspell">
+            <label>Search Spell-Correction</label>
+            <tab>mstcore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general>
+                    <label>General Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <reindex>
+                            <label></label>
+                            <button_label>Reindex Words</button_label>
+                            <button_action>reindex</button_action>
+                            <frontend_model>misspell/adminhtml_system_btnAction</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </reindex>
+                    </fields>
+                </general>
+            </groups>
+        </misspell>
+    </sections>
+</config>

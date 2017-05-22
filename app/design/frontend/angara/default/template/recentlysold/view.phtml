@@ -1,0 +1,17 @@
+<div class="itemholder">
+  <h2 class="titlebg"><a href="javascript:void(0);" class="tooltip-home">Recently Bought Jewelry<span class="classic-home">Take a look at some of these beautiful pieces that customers bought recently on Angara!</span></a></h2>
+  <span id="recentsold-items-left" class="itemsliderprearrow"></span> <span id="recentsold-items-right" class="itemslidernextarrow"></span>
+  <div class="angara-items-wrapper">
+    <div id="recentsold-items" class="angara-items" style="width:<?php echo count($this->getRecentItems()) * 211 ?>px">
+      <?php
+foreach($this->getRecentItems() as $item):
+	?>
+      <div class="angara-item"> <a href="<?php echo $item->getLink(); ?>?icid=rb-widget"> <span class="itemimgholder"> <img  width="170" height="170" alt="<?php echo $item->getProductName();?>" src="<?php echo Mage::helper('function')->getResizedUrl('catalog/product/'.$item->getImage(),170,170);?>"> </span> </a> <a href="<?php echo $item->getLink(); ?>?icid=rb-widget" rel="nofollow"> <span class="itemdetailholder"> <span class="itemproname"><?php echo $item->getProductName();?></span> <span class="itemproprice"><?php echo $this->helper('core')->currency($item->getPrice(),true,false) ?></span> </span> </a> <span class="boughtbyitme">Bought by <?php echo $item->getBoughtBy(); ?> from <br />
+        <span style="color:#33aa33"><?php echo $item->getLocation();?></span><br />
+        </span> </div>
+      <?php
+endforeach;
+?>
+    </div>
+  </div>
+</div>

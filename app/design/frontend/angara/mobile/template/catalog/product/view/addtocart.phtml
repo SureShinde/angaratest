@@ -1,0 +1,234 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$_product = $this->getProduct(); 
+$buttonTitle = $this->__('Add to Cart'); 
+
+if($_product->isSaleable()): ?>
+	<div id="addcart" class="addcart">	
+			
+           <div class="add-to-cart">
+					<?php /*?><div style='display:none;'>
+                        <?php 
+                        if(!$_product->isGrouped()): ?>
+                            <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                            <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                        <?php 
+                        endif; ?>
+                        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)">
+                            <span>
+                                <span><?php echo $buttonTitle ?></span>
+                            </span>
+                        </button>
+                    </div><?php */?>
+                    
+                    <input style="margin:0px; padding:0px" type="submit" value="Add To Cart" alt="Add to cart"  class="addtocartbtn" img="" name="addToCartSubmit">
+                    <?php echo $this->getChildHtml('', true, true) ?> 
+                </div>
+           <div class="button-overlay"></div>		
+	</div>
+<?php 
+endif; ?>
+
+<div class="estimatedtime"> 
+	<b>
+		<span class="estimatedtext"><?php echo $this->__('Estimated ship date'); ?></span>
+		
+		<span class="shipdateicon">
+			<div id="estimatedshipdate">
+				<div class="popup-mid" style="width:220px; text-align:left; font:12px/17px Arial, Helvetica, sans-serif;"> Our products are all made to order. Based on the selection of stone size, stone quality, metal etc. we manufacture each piece of custom made jewelry from scratch. The date mentioned here is the date we estimate that your unique piece of jewelry will be ready for shipment. Shipping costs are typically free, but if you need the item to ship soon, you can choose faster shipping options on the next page. </div>
+			</div>
+		</span>
+	</b> 
+	
+	<br/>
+	
+	<div id="expected-shipping-date-original" class="dyn_vendor_lead_time">
+	<?php 	
+	// Code Added by Vaseem Ends
+	echo $estimatedDate	= Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime()); ?>
+	
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#jewelryappraisal').click(function(){
+			estimateShipEngraving();
+		});
+	});
+
+	function estimateShipEngraving(){
+		if(jQuery('#jewelryappraisal').is(":checked")){
+			jewelProduct.setAppraisal(true);
+			jQuery('#nonjewelry').show();
+		}else{
+			jewelProduct.setAppraisal(false);
+			jQuery('#nonjewelry').hide();
+		}
+		if(jQuery('#engraveringchk').is(":checked")){
+			jewelProduct.setEngraving(true);
+		}else{
+			jewelProduct.setEngraving(false);
+		}
+		jewelProduct.updateShippingDate();
+	}
+	</script>
+	
+	<?php // Code Added by Vaseem for BT 346?>
+	</div>	
+	<?php
+	 $vendorLeadTime = ($_product->getVendorLeadTime() + 4);
+	 $arriveByDate = Mage::helper('function')->skipUsaHolidays($vendorLeadTime); ?>
+	 <div id="valentineDate" style="color:#DE513E; font-size:11px; <?php if($_product->getVendorLeadTime() <= 5){?>display:block;<?php }else{?>display:none;<?php }?>">
+		<img height="16" width="16" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png" class="vdayimgtop">Arrives By <span id="dyn_arrive-date"><?php echo $arriveByDate;?></span>
+	 </div>
+</div>
+
+<script>
+jQuery(function(){
+	<?php 
+	if(in_array(279, $cids)): ?>
+		var cert_shown = false;
+		jQuery('.certpopup').click(function(){
+			if(!cert_shown){
+				jQuery.get('/skin/frontend/angara/default/staticdata/AGL-studs.html',function(res){
+					jQuery('#studcert').html(res);
+					jQuery('#translayer').show();
+					cert_shown = true;
+				});
+			} 
+			else {
+				jQuery('#translayer').show();
+				jQuery('#studcert').show();
+			}
+		});
+		
+		jQuery('#closecert-popup').click(function(){
+			jQuery('#translayer').hide();
+			jQuery('#studcert').hide();
+		});
+	<?php
+	else: ?>
+	<?php /*?>jQuery('.certpopup').click(function(){
+		jQuery('.appraisalcertimg').show();
+	})<?php */?>
+	jQuery('.appraisalclose').click(function(){jQuery('.appraisalcertimg').hide();})
+	<?php
+	endif; ?>	
+});
+
+function getShipmentDate(){
+	var id = '';
+	if(document.getElementById('cert_id')) {
+		id = document.getElementById('cert_id').value;
+	}
+	//jQuery.post('/catalog/product/getfinalshipmentdate/',{id:id},shippingdateval);	
+}
+
+function shippingdateval(dataval){	
+	//document.getElementById('expected-shipping-date-original').innerHTML = dataval;
+}
+
+getShipmentDate();
+
+jQuery(function(){
+	jQuery('.insruanceicon').click(function(event){
+		event.stopPropagation();
+		insurancepop();
+	});
+	jQuery('.whatiseasypay').click(function(event){
+		event.stopPropagation();
+		easypaypop();
+	});
+	jQuery('.certpopup').click(function(event){
+		event.stopPropagation();
+		appraisalpop();
+	});
+	jQuery('.shipdateicon').click(function(event){
+		event.stopPropagation();
+		estimateddate();
+	});	
+	
+	jQuery('body').click(function(){
+		if (document.getElementById("insurancepopupbox").style.display=='block'){
+			document.getElementById("insurancepopupbox").style.display='none';
+		}
+		
+		if (document.getElementById("paymentpop").style.display=='block'){
+			document.getElementById("paymentpop").style.display='none';
+		}
+		
+		if (document.getElementsByClassName("appraisalcertimg")[0].style.display=='block'){
+			document.getElementsByClassName("appraisalcertimg")[0].style.display='none';
+		}
+		
+		if (document.getElementById("estimatedshipdate").style.display=='block'){
+			document.getElementById("estimatedshipdate").style.display='none';
+		}
+	});
+});
+
+/************************insurance***********************************/
+
+function insurancepop(){
+	if (document.getElementById("insurancepopupbox").style.display=='block'){
+		dispPayment='none';
+	}else{
+		dispPayment='block';
+	}
+document.getElementById("insurancepopupbox").style.display=dispPayment;
+}
+
+/**********************easypay***************************************/
+
+function easypaypop(){
+	if (document.getElementById("paymentpop").style.display=='block'){
+		dispPayment='none';
+	}else{
+		dispPayment='block';
+	}
+document.getElementById("paymentpop").style.display=dispPayment;
+}
+
+/****************************Appraisal***************************/
+
+function appraisalpop(){
+	if (document.getElementsByClassName("appraisalcertimg")[0].style.display=='block'){
+		dispPayment='none';
+	}else{
+		dispPayment='block';
+	}
+document.getElementsByClassName("appraisalcertimg")[0].style.display=dispPayment;
+}
+
+/*************************estimated shipping popup*******************/
+function estimateddate(){
+	if (document.getElementById("estimatedshipdate").style.display=='block'){
+		dispPayment='none';
+	}else{
+		dispPayment='block';
+	}
+	document.getElementById("estimatedshipdate").style.display=dispPayment;
+}
+</script>

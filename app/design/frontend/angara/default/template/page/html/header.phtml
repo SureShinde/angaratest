@@ -1,0 +1,121 @@
+
+<?php 
+$requrl1 = stripos($_SERVER["REQUEST_URI"], 'checkout');
+$share_ref_url = (isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'');
+if(stripos($share_ref_url, 'shareasale.com') !== false) {
+	Mage::getModel('core/cookie')->set('ShareReferal', 'shareasale', time()+3600);		
+}
+$shopping_ref = '';
+if(isset($_REQUEST['utm_campaign']) && !empty($_REQUEST['utm_campaign'])){
+	$shopping_ref = $_REQUEST['utm_campaign'];
+	if($shopping_ref == 'Shopping.com-Main') {
+		Mage::getModel('core/cookie')->set('ShareReferal', 'shopping', time()+3600);		
+	}
+	else if($shopping_ref == 'Nextag') {
+		Mage::getModel('core/cookie')->set('ShareReferal', 'nextag', time()+3600);		
+	}
+	else if($shopping_ref == 'PriceGrabber') {
+		Mage::getModel('core/cookie')->set('ShareReferal', 'pricegrabber', time()+3600);		
+	}
+}
+//	Code Added by Vaseem for Engraving Price Off starts
+//$todayDate	=	Mage::getModel('core/date')->date('Y-m-d');
+//$cidString	=	Mage::app()->getRequest()->getParam('cid');
+//$position 	= 	stripos($cidString, 'afl-ls-');
+//if ($position !== false) {
+	//Mage::getSingleton('core/session')->setData('engraving_free_user','1');
+//}
+//	Unset session if promotion date date is over
+//if($todayDate>'2013-09-30'){
+	//Mage::getSingleton('core/session')->setData('engraving_free_user','0');
+//}
+//$engravingSession	=	Mage::getSingleton('core/session')->getData('engraving_free_user');
+//	Code Added by Vaseem for Engraving Price Off ends
+
+
+//	Code Added by Vaseem for 172 returning customer starts
+/*$todayDate		=	Mage::getModel('core/date')->date('Y-m-d--h-i-s');
+$cookieval 		= 	Mage::getModel('core/cookie');	
+$cookieValue 	= 	$cookieval->get('firsttime');
+//echo '<br>cookieValue->'.$cookieValue;
+if($cookieValue==''){ 
+	$cookieval->set('firsttime', $todayDate, 30*86400);			// 	Set cookie of 20 mins (1200 seconds)		
+} */
+//	Code Added by Vaseem for 172 returning customer ends
+//echo '<br>cookieValue->'.$cookieValue;
+
+
+?>
+<div id="layoverlayer"></div>
+<div class="header-container">
+<?php 
+//	Code modified by Vaseem to hide the top strip for default users asked by Hitesh Sir.
+$bannerCollection = $this->getLayout()->createBlock('bannerslider/bannerslider')->getBannerCatalogCollection();
+$bannerTitle	=	$bannerCollection[0]['title'];
+//echo '<br>bannerTitle->'.$bannerTitle; 
+//echo 'bannerCollection-><pre>'; print_r($bannerCollection);
+//if(count($bannerCollection) > 0 && $bannerTitle!='catalog'){
+	if($this->getRequest()->getControllerName()!='onepage'){
+		echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_offer_strip')->toHtml();
+	}
+//}/*else{
+	//echo 'Dont show header top banner for default users.';	
+//}*/
+?>
+<div class="header">
+  <?php 
+	if ($this->getIsHomePage()):?>
+  <div class="logo"> <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" > <img src="<?php echo $this->getLogoSrc(); ?>" width="230" height="51" /> </a> </div>
+  <?php 
+	else:?>
+  <div class="logo"> <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"> <img src="<?php echo $this->getLogoSrc(); ?>" width="230" height="51" /> </a> </div>
+  <?php 
+	endif?>
+  <div class="topnav">
+        <div class="toplinks">
+          <div style="float:right;">
+            <div class="header-top-links">
+              <?php //$countryParam = $this->getCountryParams();?>
+              <div id="countrybox" class="topnavquickaccess">
+                <div class="countryflagheader country-<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode()); //strtolower($countryParam->getCountryCode());?>-small"></div>
+              </div>
+              <?php echo $this->getChildHtml('topLinks'); ?>
+              <div class="topnavquickaccess top-icon-divider"><a href="/tracking" class="track-order">Track Your Order</a></div>
+              <div class="topnavquickaccess top-icon-divider"> <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;"  class="top-nav-live-chat">Live Chat</a></div>
+              <div class="calltocontact"><a rel="nofollow" href="/contact-us.html" title="888 926 4272" target="_new" ><?php echo Mage::getModel('countrymapping/country')->getCountryPhone();?> </a><b style="color:#008906"> </b></div>
+            </div>
+            <div class="clear"></div>
+            <div class="searchcart">
+              <div class="cart-items mycartitem">
+                <?php
+                  $total_cart_item = $this->helper('checkout/cart')->getQuote()->getItemsCount();  //get total items in cart
+                  if($total_cart_item > 0 && $total_cart_item!=''){	
+                    echo $this->__('<a href="/checkout/cart/"><span>%s Items</span></a>',$total_cart_item);
+                  }else{			  	
+                     echo ('<span>0 Items</span>');
+                  } 	
+                  ?>
+              </div>
+              <div  <?php if($requrl1 != '1') {?>class="searchbarsection search"<?php }?>>
+                <?php 
+                if($requrl1 != '1') {
+                    echo $this->getChildHtml('topSearch');
+                } 
+                ?>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="quick-access"> <?php echo $this->getChildHtml('store_language') ?> </div>
+        <?php echo $this->getChildHtml('topContainer'); ?> 
+    </div>
+</div>
+</div>
+<?php 
+echo $this->getChildHtml('topMenu'); 
+if($requrl1 === false) {
+	if ($this->helper('customer')->isLoggedIn()){?>
+<?php
+	}?>
+<?php
+} ?>

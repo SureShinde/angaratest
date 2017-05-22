@@ -1,0 +1,61 @@
+<?php 
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$newslettertext = "Enter Your Email Address"; ?>
+
+<span class="subtext">Get Exclusive Angara Offers Instantly in Your Inbox</span>
+
+<span class="homeblocksubscribe">   
+	<!--Start edited by Pankaj regarding display thankyou popup-->
+  	<?php 
+	$thankPopupAction = (Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://';
+	$thankPopupAction .= 'www2.angara.com/l/17452/2012-11-19/26qd';
+	 
+	$thankPopupReqValues = $this->getRequest()->getParams(); 
+	
+	if(isset($thankPopupReqValues['newslettertype']) && $thankPopupReqValues['newslettertype'] !='' && $thankPopupReqValues['newslettertype'] == '01-Home-Ruby-Pendant-Contest') {?>    	<script>
+		jQuery(function(){
+			if(document.getElementById("thanks-wrapper")){
+				document.getElementById("thanks-wrapper").style.display = "block" ;
+				document.getElementById("layoverlayer").style.display = "block" ;
+			}
+		});
+		</script>
+	<?php
+	} ?>
+	<form action="<?php echo $thankPopupAction;?>" method="post" id="frm-newsletter-validate-footer"> 
+	<!--End edited by Pankaj regarding display thankyou popup-->      
+		<span class="emailcaptureinputbg">            
+        	<input type="text" name="email" id="newsletter11" value="<?php echo $newslettertext; ?>" class="input-text required-entry validate-email searchinput" onfocus="if(this.value=='<?php echo $newslettertext; ?>') this.value = ''" onblur="if(this.value=='') this.value = '<?php echo $newslettertext; ?>'" />
+            <input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+            <input type="hidden" name="newslettertype" value="01-Home-Ruby-Pendant-Contest" />
+        </span>
+        
+		<span class="emailsavemorebtn">
+			<button type="submit" class="searchbtn">SUBSCRIBE</button>
+        </span> 
+	</form>
+		    
+    <script type="text/javascript">	    
+		//<![CDATA[
+			var dataForm = new VarienForm('frm-newsletter-validate-footer', false);
+		//]]>     
+    </script>
+</span>
+
+<style>
+#frm-newsletter-validate-footer .emailcaptureinputbg .validation-advice {
+	background:none;
+	font-size:10px;
+	position:none;	
+	margin:0;
+	padding:0;
+	text-align:left;	
+}
+
+#frm-newsletter-validate-footer .validation-failed {
+    background: none repeat scroll 0 0 #FAEBE7 !important;
+    border: 1px dashed #EB340A !important;
+	font: 11px/23px Arial,Helvetica,sans-serif !important;;
+    height: 23px !important;;
+}
+</style>

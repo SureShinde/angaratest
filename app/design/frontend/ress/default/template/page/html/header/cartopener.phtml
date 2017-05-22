@@ -1,0 +1,12 @@
+<?php 
+$pageType 	= 	Mage::helper('function')->getPageType();
+if ($pageType!='cart' && $pageType!='checkout' && $pageType!='success' && $pageType!='amazon_payments'){ 
+
+	$totalCartItems = Mage::helper('function')->getCartItemsCount();
+	if(empty($totalCartItems)){
+		$totalCartItems = 0;
+	}
+	$userAgent = Mage::getUserAgent(); 
+?>
+<li class="fontsize-type4 color555" style="margin-right:10px;"><a id="cart-opener" href="<?php echo $this->getUrl('checkout/cart/index');?>"><span class="header-cart-icon"><span class="header-cart-items-count <?php if($totalCartItems>0){echo 'has-items';} ?>"><?php echo $totalCartItems;?></span></span><span class="header-cart-text color555">Cart</span></a></li>
+<?php } ?>

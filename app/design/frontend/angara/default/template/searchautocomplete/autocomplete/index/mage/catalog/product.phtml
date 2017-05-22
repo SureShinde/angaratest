@@ -1,0 +1,41 @@
+<?php
+$_product      = $this->getItem();
+$_configHelper = Mage::helper('searchautocomplete/config');
+?>
+<li data-url="<?php echo $_product->getProductUrl() ?>">
+    <?php if ($_configHelper->isShowImage()): ?>
+    <div class="searchautocomlete-image">
+        <a href="<?php echo $_product->getProductUrl() ?>">
+		<img src="<?php echo $this->helper('mstcore/image')->init($_product, 'thumbnail', 'catalog/product')->resize($_configHelper->getImageWidth(), $_configHelper->getImageHeight()) ?>" width="<?php echo $_configHelper->getImageWidth() ?>px" height="<?php echo $_configHelper->getImageHeight() ?>px"/></a>
+    </div>
+    <?php endif ?>
+    <?php //pr(get_class_methods($this)); die(); ?>
+    <div class="search_pro-details">
+        <div style="line-height:14px; padding-bottom:5px;">
+        	<?php
+			$pname = $_product->getName();
+			$pname_arr = explode(' ',$pname);
+			$pname_temp = '';
+			for($i=0;$i<count($pname_arr);$i++){
+				if($i>=3){
+					$pname_temp = $pname_temp.'...';
+					break;	
+				}
+				$pname_temp = $pname_temp.' '.$pname_arr[$i];	
+			}
+			?>
+            <a class="name highlight" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->htmlEscape($pname_temp) ?></a>
+        </div>
+
+    <?php if ($_configHelper->isShowShortDescription()): ?>
+        <div class="highlight">
+        <?php echo Mage::helper('core/string')->truncate(strip_tags($_product->getShortDescription()), $_configHelper->getShortDescriptionLen()) ?>
+        </div>
+    <?php endif ?>
+
+    <?php if ($_configHelper->isShowPrice()): ?>
+        <?php echo $this->getPriceHtml($_product, false) ?>
+        <div class="clearfix"></div>
+    <?php endif ?>
+    </div>
+</li>

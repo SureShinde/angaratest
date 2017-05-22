@@ -1,0 +1,13 @@
+<?php
+$_suggest = $this->getSuggestText();
+?>
+<?php if ($this->isSuggested()): ?>
+<p class="note-msg">
+    <?php echo $this->__("Your search '%s' did not match any products.", $this->getOriginalQueryText()) ?>
+    <?php echo $this->__('Did you mean:') ?> <a href="<?php echo $this->getQueryUrl($_suggest) ?>"><?php echo $this->highlight($_suggest) ?></a>
+</p>
+<?php elseif ($_suggest && 0): ?>
+<p class="notice-msg">
+    <?php echo $this->__('Did you mean:') ?> <a href="<?php echo $this->getQueryUrl($_suggest) ?>"><?php echo $this->highlight($_suggest) ?></a>
+</p>
+<?php endif ?>

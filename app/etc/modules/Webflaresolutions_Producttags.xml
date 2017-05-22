@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Webflaresolutions_Producttags>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Webflaresolutions_Producttags>
+    </modules>
+</config>

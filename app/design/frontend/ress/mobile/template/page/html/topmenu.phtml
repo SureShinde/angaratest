@@ -1,0 +1,310 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+ 
+if (Mage::getSingleton('customer/session')->isLoggedIn()){
+	$accountUrl = Mage::helper('customer')->getAccountUrl();
+}
+else{
+	$loginUrl = Mage::helper('customer')->getLoginUrl();
+} ?>
+
+<div id="main-menu-xs" style="display:none" class="showcase-box-shadow">
+  <div class="showcase-border-bottom">
+    <nav id="navbar-main-xs" class="navbar navbar-main-xs no-margin" role="navigation">
+      <ul class="parent-category">
+        <li> Rings <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+        <li> Necklaces <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+        <li> Earrings <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+        <li> Engagement <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+        <li> Wedding <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+		<li> Bracelets <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+		<li> High Jewelry <i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-top"></i></li>
+        <li> Gifts<i class="fa fa-fw fa-chevron-right px10 text-lighter pull-right min-padding-topt"></i></li>
+        <li class="showcase-dotted-border-bottom-1px no-padding max-margin-top max-margin-bottom" style="border-color:#939393;"></li>
+        <li>
+          <?php if(isset($accountUrl)):?>
+          <a rel="nofollow" href="<?php echo $accountUrl;?>" onclick="categoryNavSelect('My Account|mobtopnav')">My Account</a>
+          <?php else:?>
+          <a rel="nofollow" href="<?php echo $loginUrl;?>" onclick="categoryNavSelect('Log In|mobtopnav')">Log In</a>
+          <?php endif;?>
+        </li>
+        <li><a href="/contact-us.html" onclick="categoryNavSelect('Contact Us|mobtopnav')">Contact Us</a> </li>
+        <li><a href="/return-policy.html" onclick="categoryNavSelect('Return Policies|mobtopnav')">Return Policies</a> </li>
+        <li><a href="/shipping.html" onclick="categoryNavSelect('Shipping|mobtopnav')">Shipping</a> </li>
+      </ul>
+      <div class="child-category">
+		<!-- Rings category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Rings</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/rings/sapphire-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Sapphire Rings|mobtopnav')">Sapphire</a></li>
+                <li><a href="/rings/sapphire-rings/blue-sapphire.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Sapphire Rings|mobtopnav')">Blue Sapphire</a></li>
+                <li><a href="/rings/sapphire-rings/pink-sapphire.html"  rel="nofollow"  onclick="categoryNavSelect('Pink Sapphire Rings|mobtopnav')">Pink Sapphire</a></li>
+                <li><a href="/rings/ruby-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Ruby Rings|mobtopnav')">Ruby</a></li>
+                <li><a href="/rings/emerald-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Emerald Rings|mobtopnav')">Emerald</a></li>
+                <li><a href="/rings/tanzanite-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Tanzanite Rings|mobtopnav')">Tanzanite</a></li>
+                <li><a href="/rings/diamond-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Rings|mobtopnav')">Diamond</a></li>
+                <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html"  rel="nofollow"  onclick="categoryNavSelect('Pearl Rings|mobtopnav')">Pearl</a></li>
+                <li><a href="/rings/peridot-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Peridot Rings|mobtopnav')">Peridot</a></li>
+                <li><a href="/rings/citrine-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Citrine Rings|mobtopnav')">Citrine</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/rings/opal-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Opal Rings|mobtopnav')">Opal</a></li>
+                <li><a href="/rings/garnet-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Garnet Rings|mobtopnav')">Garnet</a></li>
+                <li><a href="/rings/black-onyx-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Black Onyx Rings|mobtopnav')">Black Onyx</a></li>
+                <li><a href="/rings/amethyst-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Amethyst Rings|mobtopnav')">Amethyst</a></li>
+                <li><a href="/rings/aquamarine-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Aquamarine Rings|mobtopnav')">Aquamarine</a></li>
+                <li><a href="/rings/colored-diamond-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Colored Diamond Rings|mobtopnav')">Colored Diamond</a></li>
+                <li><a href="/rings/colored-diamond-rings/enhanced-black-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Black Diamond Rings|mobtopnav')">Black Diamond</a></li>
+                <li><a href="/rings/colored-diamond-rings/enhanced-blue-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Diamond Rings|mobtopnav')">Blue Diamond</a></li>
+                <li><a href="/birthstone-jewelry/birthstone-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Birthstone Rings|mobtopnav')">Birthstone</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- Necklaces category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Necklaces</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/pendants/sapphire-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Sapphire Necklaces|mobtopnav')">Sapphire</a></li>
+                <li><a href="/pendants/ruby-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Ruby Necklaces|mobtopnav')">Ruby</a></li>
+                <li><a href="/pendants/emerald-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Emerald Necklaces|mobtopnav')">Emerald</a></li>
+                <li><a href="/pendants/tanzanite-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Tanzanite Necklaces|mobtopnav')">Tanzanite</a></li>
+                <li><a href="/pendants/diamond-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Necklaces|mobtopnav')">Diamond</a></li>
+                <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html"  rel="nofollow"  onclick="categoryNavSelect('Pearl Necklaces|mobtopnav')">Pearl</a></li>
+                <li><a href="/pendants/peridot-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Peridot Necklaces|mobtopnav')">Peridot</a></li>
+                <li><a href="/pendants/citrine-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Citrine Necklaces|mobtopnav')">Citrine</a></li>
+                <li><a href="/pendants/opal-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Opal Necklaces|mobtopnav')">Opal</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/pendants/garnet-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Garnet Necklaces|mobtopnav')">Garnet</a></li>
+                <li><a href="/pendants/black-onyx-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Black Onyx Necklaces|mobtopnav')">Black Onyx</a></li>
+                <li><a href="/pendants/amethyst-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Amethyst Necklaces|mobtopnav')">Amethyst</a></li>
+                <li><a href="/pendants/aquamarine-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Aquamarine Necklaces|mobtopnav')">Aquamarine</a></li>
+                <li><a href="/pendants/colored-diamond-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Colored Diamond Necklaces|mobtopnav')">Colored Diamond</a></li>
+                <li><a href="/pendants/colored-diamond-necklace-pendants/enhanced-black-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Black Diamond Necklaces|mobtopnav')">Black Diamond</a></li>
+                <li><a href="/pendants/colored-diamond-necklace-pendants/enhanced-blue-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Diamond Necklaces|mobtopnav')">Blue Diamond</a></li>
+                <li><a href="/birthstone-jewelry/birthstone-necklace-pendants.html"  rel="nofollow"  onclick="categoryNavSelect('Birthstone Necklaces|mobtopnav')">Birthstone</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- Earrings category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Earrings</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/earrings/sapphire-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Sapphire Earrings|mobtopnav')">Sapphire</a></li>
+                <li><a href="/earrings/ruby-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Ruby Earrings|mobtopnav')">Ruby</a></li>
+                <li><a href="/earrings/emerald-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Emerald Earrings|mobtopnav')">Emerald</a></li>
+                <li><a href="/earrings/tanzanite-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Tanzanite Earrings|mobtopnav')">Tanzanite</a></li>
+                <li><a href="/earrings/diamond-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Earrings|mobtopnav')">Diamond</a></li>
+                <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html"  rel="nofollow"  onclick="categoryNavSelect('Pearl Earrings|mobtopnav')">Pearl</a></li>
+                <li><a href="/earrings/peridot-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Peridot Earrings|mobtopnav')">Peridot</a></li>
+                <li><a href="/earrings/citrine-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Citrine Earrings|mobtopnav')">Citrine</a></li>
+                <li><a href="/earrings/opal-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Opal Earrings|mobtopnav')">Opal</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/earrings/garnet-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Garnet Earrings|mobtopnav')">Garnet</a></li>
+                <li><a href="/earrings/black-onyx-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Black Onyx Earrings|mobtopnav')">Black Onyx</a></li>
+                <li><a href="/earrings/amethyst-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Amethyst Earrings|mobtopnav')">Amethyst</a></li>
+                <li><a href="/earrings/aquamarine-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Aquamarine Earrings|mobtopnav')">Aquamarine</a></li>
+                <li><a href="/earrings/colored-diamond-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Colored Diamond Earrings|mobtopnav')">Colored Diamond</a></li>
+                <li><a href="/earrings/colored-diamond-earrings/enhanced-black-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Black Diamond Earrings|mobtopnav')">Black Diamond</a></li>
+                <li><a href="/earrings/colored-diamond-earrings/enhanced-blue-diamond.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Diamond Earrings|mobtopnav')">Blue Diamond</a></li>
+                <li><a href="/birthstone-jewelry/birthstone-earrings.html"  rel="nofollow"  onclick="categoryNavSelect('Birthstone Earrings|mobtopnav')">Birthstone</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- Engagement category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Engagement</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/engagement-rings/blue-sapphire-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Sapphire Engagement|mobtopnav')">Blue Sapphire</a></li>
+                <li><a href="/engagement-rings/pink-sapphire-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Pink Sapphire Engagement|mobtopnav')">Pink Sapphire</a></li>
+                <li><a href="/engagement-rings/ruby-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Ruby Engagement|mobtopnav')">Ruby</a></li>
+                <li><a href="/engagement-rings/emerald-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Emerald Engagement|mobtopnav')">Emerald</a></li>
+                <li><a href="/engagement-rings/tanzanite-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Tanzanite Engagement|mobtopnav')">Tanzanite</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/engagement-rings/diamond-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Engagement|mobtopnav')">Diamond</a></li>
+                <li><a href="/engagement-rings/black-onyx-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Black Onyx Engagement|mobtopnav')">Black Onyx</a></li>
+                <li><a href="/engagement-rings/colored-diamond-engagement-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Colored Diamond Engagement|mobtopnav')">Colored Diamond</a></li>
+                <li><a href="/engagement-rings/colored-diamond-engagement-rings/enhanced-black-diamond-engagement.html"  rel="nofollow"  onclick="categoryNavSelect('Black Diamond Engagement|mobtopnav')">Black Diamond</a></li>
+                <li class="border-bottom-none"><a href="/engagement-rings/colored-diamond-engagement-rings/enhanced-blue-diamond-engagement.html"  rel="nofollow"  onclick="categoryNavSelect('Blue Diamond Engagement|mobtopnav')">Blue Diamond</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- Wedding category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Wedding</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li class="no-bg"><b>For Him</b></li>
+                <li><a href="/wedding-rings/mens-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Mens Wedding Band|mobtopnav')">Men's Rings</a></li>
+                <li><a href="/wedding-rings/mens-plain-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Plain Wedding Band|mobtopnav')">Plain</a></li>
+                <li><a href="/wedding-rings/mens-diamond-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Wedding Band|mobtopnav')">Diamond</a></li>
+                <li><a href="/wedding-rings/mens-gemstone-and-diamond-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Gemstone Wedding Band|mobtopnav')">Gemstone</a></li>
+                <?php /*?><li><a href="/rings/eternity-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Shipping Wedding Band|mobtopnav')">Eternity</a></li><?php */?>
+                <li><a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4160&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('White Gold Wedding Band|mobtopnav')">White Gold</a></li>
+                <li><a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4161&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('Yellow Gold Wedding Band|mobtopnav')">Yellow Gold</a></li>
+                <li><a href="/wedding-rings/mens-wedding-bands.html?filterable_metal_types=4162&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('Platinum Wedding Band|mobtopnav')">Platinum</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li class="no-bg"><b>For Her</b></li>
+                <li><a href="/wedding-rings/womens-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Womens Wedding Band|mobtopnav')">Women's Rings</a></li>
+                <li><a href="/wedding-rings/womens-plain-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Plain Wedding Band|mobtopnav')">Plain</a></li>
+                <li><a href="/wedding-rings/womens-diamond-wedding-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Wedding Band|mobtopnav')">Diamond</a></li>
+                <li><a href="/wedding-rings/womens-gemstone-and-diamond-bands.html"  rel="nofollow"  onclick="categoryNavSelect('Gemstone Wedding Band|mobtopnav')">Gemstone</a></li>
+                <li><a href="/rings/eternity-rings.html"  rel="nofollow"  onclick="categoryNavSelect('Eternity Wedding Band|mobtopnav')">Eternity</a></li>
+                <li><a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4160&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('White Gold Wedding Band|mobtopnav')">White Gold</a></li>
+                <li><a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4161&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('Yellow Gold Wedding Band|mobtopnav')">Yellow Gold</a></li>
+                <li><a href="/wedding-rings/womens-wedding-bands.html?filterable_metal_types=4162&order=position&dir=asc"  rel="nofollow"  onclick="categoryNavSelect('Platinum Wedding Band|mobtopnav')">Platinum</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- Bracelets category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Bracelets</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/bracelets/diamond-bracelets.html"  rel="nofollow"  onclick="categoryNavSelect('Diamond Bracelets|mobtopnav')">Diamond</a></li>
+                <li><a href="/bracelets/gemstone-bracelets.html?filterable_stone_names=4144"  rel="nofollow"  onclick="categoryNavSelect('Sapphire Bracelets|mobtopnav')">Sapphire</a></li>
+                <li><a href="/bracelets/gemstone-bracelets.html?filterable_stone_names=4143"  rel="nofollow"  onclick="categoryNavSelect('Ruby Bracelets|mobtopnav')">Ruby</a></li>
+                <li><a href="/bracelets/gemstone-bracelets.html?filterable_stone_names=4131"  rel="nofollow"  onclick="categoryNavSelect('Emerald Bracelets|mobtopnav')">Emerald</a></li> 
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/bracelets.html?jewelry_styles=4180"  rel="nofollow"  onclick="categoryNavSelect('Fashion Bracelets|mobtopnav')">Fashion</a></li>
+                <li><a href="/bracelets.html?jewelry_styles=6188"  rel="nofollow"  onclick="categoryNavSelect('Tennis Bracelets|mobtopnav')">Tennis</a></li>
+                <li><a href="/bracelets.html?jewelry_styles=6189"  rel="nofollow"  onclick="categoryNavSelect('Infinity Bracelets|mobtopnav')">Infinity</a></li>
+                <li><a href="/bracelets.html?jewelry_styles=4184"  rel="nofollow"  onclick="categoryNavSelect('Heart Bracelets|mobtopnav')">Heart</a></li>
+                <li><a href="/bracelets/charm-bracelets.html"  rel="nofollow"  onclick="categoryNavSelect('Charms Bracelets|mobtopnav')">Charms</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		<!-- High jewelry category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul style="margin-bottom:0px">
+                <li class="active"> <b>High Jewelry</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+			  <div>
+				<a href="/collection/high-jewelry.html?icid=highjewelry|topnav|viewcollection|05012015" style="display:block;background:#f4fafa;border-bottom:3px solid #383b4c">
+					<img class="img-responsive" style="margin:0 auto" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/high-jewelry-banner-xs.jpg" alt="High Jewelry"/>
+				</a>
+			  </div>
+            </div>
+          </div>
+        </div>
+		<!-- Gifts category start -->
+        <div class="container-fluid mob-menu">
+          <div class="row no-gutters">
+            <div class="col-xs-12">
+              <ul>
+                <li class="active"> <b>Gifts</b><span class="pull-right back-btn"><i class="fa fa-fw fa-chevron-left px10 min-padding-top"></i>Back</span></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+			  <li><a href="/jewelry-gifts/valentine-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Valentine Gifts|mobtopnav')">Valentine</a></li>
+                <li><a href="/jewelry-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Shipping Gifts|mobtopnav')">All Jewelry Gifts</a></li>
+                <li><a href="/jewelry-gifts/graduation-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Graduation Gifts|mobtopnav')">Graduation</a></li>
+                <li><a href="/jewelry-gifts/anniversary-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Anniversary Gifts|mobtopnav')">Anniversary</a></li>
+                <li><a href="/jewelry-gifts/birthday-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Birthday Gifts|mobtopnav')">Birthday</a></li>
+                <li><a href="/jewelry-gifts/christmas-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Christmas Gifts|mobtopnav')">Christmas</a></li>                
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <ul>
+                <li><a href="/jewelry-gifts/st-patricks-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('St. Patricks Gifts|mobtopnav')">St. Patricks</a></li>
+                <li><a href="/jewelry-gifts/thanksgiving-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Thanks Giving Gifts|mobtopnav')">Thanks Giving</a></li>
+                <li><a href="/jewelry-gifts/sweet-16-gifts.html"  rel="nofollow"  onclick="categoryNavSelect('Sweet 16 Gifts|mobtopnav')">Sweet 16</a></li>
+                <li><a href="/jewelry-gifts/baby-jewelry.html"  rel="nofollow"  onclick="categoryNavSelect('Baby Gifts|mobtopnav')">Baby</a></li>
+                <li class="border-bottom-none"><a href="/jewelry-gifts/prom-jewelry.html"  rel="nofollow"  onclick="categoryNavSelect('Prom Gifts|mobtopnav')">Prom</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

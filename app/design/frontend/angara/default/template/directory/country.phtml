@@ -1,0 +1,93 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Country switcher
+ *
+ * @see Mage_Directory_Block_Currency
+ */
+
+if($this->getCountryCount()>1): ?>
+  	<?php /*?><div class="maincountry">
+    <ul>
+      	<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl('US') ?>');"><span class="selectedcountry"><span class="countryflaglist country-us-small"></span>United States</span></li>
+      	<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl('CA') ?>');"><span class="selectedcountry"><span class="countryflaglist country-ca-small"></span>Canada</span></li>
+      	<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl('MX') ?>');"><span class="selectedcountry"><span class="countryflaglist country-mx-small"></span>Mexico</span></li>
+      	<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl('GB') ?>');"><span class="selectedcountry"><span class="countryflaglist country-gb-small"></span>United Kingdom</span></li>
+      	<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl('AU') ?>');"><span class="selectedcountry"><span class="countryflaglist country-au-small"></span>Australia</span></li>
+    </ul>
+ 	</div><?php */?>
+	
+  	<span class="countrydroplist"> 
+  		<a class="account"> 			
+				<span class="countryfootflag country-<?php echo strtolower($this->getCurrentCountryCode()); ?>-smallf showcountry">
+				<?php 
+					if($this->getCurrentCountryCode()=='GS'){
+						echo 'SGSSI';
+					} 
+					else{
+						echo $this->getCurrentCountryName();
+					} ?>
+				</span> 
+			</a> 
+			
+			<span class="submenu" style="display:none;">
+				<ul class="root">
+					<?php 
+					$count = 0; 
+					$totalCnt = count($this->getCountries()); 
+					
+					foreach ($this->getCountries() as $_code => $_name): ?>
+						<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl($_code) ?>');"> 
+							<span class="selectedcountry">
+								<span class="countflagspan countryfootflag country-<?php echo strtolower($_code); ?>-smallf"><?php echo $_name; ?></span>
+							</span> 
+						</li>
+					<?php 
+					endforeach;?>
+				</ul>
+			</span> 
+
+		
+		<span class="submenu" style="display:none;">
+  			<ul class="root">
+    			<?php 
+				$count = 0; 
+				$totalCnt = count($this->getCountries()); 
+				
+				foreach ($this->getCountries() as $_code => $_name): ?>
+    				<li onclick="javascript:executeCountryUrl('<?php echo $this->getSwitchCountryUrl($_code) ?>');"> 
+						<span class="selectedcountry">
+							<span class="countflagspan countryfootflag country-<?php echo strtolower($_code); ?>-smallf"><?php echo $_name; ?></span>
+						</span> 
+					</li>
+    			<?php 
+				endforeach;?>
+  			</ul>
+  		</span> 
+	</span> 
+<?php 
+endif; ?>

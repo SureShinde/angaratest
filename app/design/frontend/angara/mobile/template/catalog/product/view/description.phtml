@@ -1,0 +1,55 @@
+<?php 
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output'); ?>
+
+<div class="item-details-box-wrapper">
+	<div id="details-heading-top" class="stone-detail-box-odd accordiancontainer">
+		<div class="small-title accordianlink"><strong>Product Details:</strong></div>
+		
+		<div class="accordiancontent">
+			<div class="field">
+				<?php echo $this->getAttributeHtml('Angara Item #', $_helper->productAttribute($_product, $_product->getSku(), 'sku')); ?>
+				<?php echo $this->getMetalsHtml(); ?>
+				<?php
+					if($_product->getChain1Length()){ 
+						echo $this->getAttributeHtml('Chain Length', $_helper->productAttribute($_product, $_product->getChain1Length().' inches', 'chain1_length')); 
+					}
+					//	Added by Saurabh
+			if($_product->getBandWidth()!=''){ 
+				//echo $this->getAttributeHtml($_product->getResource()->getAttribute('mens_band_width')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getMensBandWidth(), 'mens_band_width')); 
+				echo $this->getAttributeHtml($_product->getResource()->getAttribute('band_width')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getBandWidth()),'dyn_band_width');
+			}
+			if($_product->getBandHeight()!=''){  
+				echo $this->getAttributeHtml($_product->getResource()->getAttribute('band_height')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getBandHeight()),'dyn_band_height');
+			}
+			if($_product->getApproximateMetalWeight()!=''){ ?>
+			<?php 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('approximate_metal_weight')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getApproximateMetalWeight()),'dyn_approximate_metal_weight');
+			}
+			if($_product->getFit()!=''){ 
+				echo $this->getAttributeHtml($_product->getResource()->getAttribute('fit')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('fit')),'fit');
+			}
+					?>
+			</div>
+			
+			<div class="field" style="margin-top:10px; border-bottom:none;">	
+				<div class="stones-details-box">
+					<?php echo $this->getStonesHtml(); ?>
+				</div>	
+			</div>	
+			
+			<div class="clear"></div>
+			
+			<div class="text-message">Note: - Image of product may have been enlarged and/or enhanced.</div>
+		</div>
+	</div>	
+</div>
+
+<script type="text/javascript">
+function getCertificate(){
+	if(typeof(variations)!='undefined'){
+		jQuery('#cert_id').val(variations.getCurrentProduct());
+	}
+	jQuery('#cert_form').submit();
+}
+</script>

@@ -1,0 +1,39 @@
+<?php 
+if (Mage::getStoreConfigFlag('catalog/frontend/useajaxscroll')):  
+	// Get the default setting for grid or list mode
+	$productListMode = Mage::getStoreConfig('catalog/frontend/list_mode');
+	if ($productListMode == 'grid-list')
+		$productListMode = 'grid';
+	elseif ($productListMode == 'list-grid')
+		$productListMode = 'list';
+	
+	// Check if this setting is overwritten by the user
+	if ($this->getRequest()->getParam('mode')) {
+		if($this->getRequest()->getParam('mode') == 'grid')
+			$productListMode = 'grid';
+		else
+			$productListMode = 'list';
+	} ?>
+	
+	<script type="text/javascript">
+	jQuery.ias({
+		container : '.category-products',
+		item: '.proddetails',
+		pagination: '.displayoption .pages',
+		next: '.i-next',
+		loader: '<img class="loadertop" src="<?php echo($this->getSkinUrl('images/ajaxscroll/loader.gif')); ?>" /><span class="loadtext"><?php echo __('Loading more products...'); ?></span>',
+		history: false,
+		onPageChange: function(pageNum, pageUrl, scrollOffset) {
+        	// This will track a pageview every time the user
+        	// scrolls up or down the screen to a different page.
+			path = jQuery('<a/>').attr('href',pageUrl)[0].pathname.replace(/^[^\/]/,'/');
+			_gaq.push(['_trackPageview', path]);
+		}
+	});
+	
+	jQuery(document).ready(function() {
+		jQuery().UItoTop({ easingType: 'easeOutQuart' });		
+	});
+	</script>
+<?php 
+endif; ?>

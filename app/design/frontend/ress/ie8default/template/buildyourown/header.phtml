@@ -1,0 +1,53 @@
+<?php
+$jewelryModel = $this->getJewelryModel();
+$userStartWithSetting = ($jewelryModel->getUserStartWithPreference() == 'setting');
+if($jewelryModel->getJewelryType() == 'ring'){
+	$jewelryType = 'RING';
+}
+else if($jewelryModel->getJewelryType() == 'earrings'){
+	$jewelryType = 'EARRINGS';
+}
+else if($jewelryModel->getJewelryType() == 'pendant'){
+	$jewelryType = 'PENDANT';
+}
+else if($jewelryModel->getJewelryType() == 'threeStoneRing'){
+	$jewelryType = 'THREE STONE RING';
+}
+?>
+<div class="dyo-head">
+	<h1>CREATE YOUR OWN <?php echo $jewelryType; ?></h1>
+	<div class="heading high-margin-bottom">
+		<div class="title showcase-border-thin col-sm-12 no-padding">
+			<?php if(!$userStartWithSetting): ?>
+				<?php echo $this->getDiamondBlock(1); ?>
+				<?php if($jewelryModel->isDiamondPairRequired()): ?>
+					<?php echo $this->getDiamondPairBlock(2); ?>
+					<?php echo $this->getSettingBlock(3); ?>
+					<?php echo $this->getFinalBlock(4, $jewelryType); ?>
+				<?php else: ?>
+					<?php echo $this->getSettingBlock(2); ?>
+					<?php echo $this->getFinalBlock(3, $jewelryType); ?>
+				<?php endif; ?>
+			<?php else: ?>
+				<?php echo $this->getSettingBlock(1); ?>
+				<?php if($jewelryModel->isDiamondPairRequired()): ?>
+					<?php echo $this->getDiamondBlock(2); ?>
+					<?php echo $this->getDiamondPairBlock(3); ?>
+					<?php echo $this->getFinalBlock(4, $jewelryType); ?>
+				<?php else: ?>
+					<?php echo $this->getDiamondBlock(2); ?>
+					<?php echo $this->getFinalBlock(3, $jewelryType); ?>
+				<?php endif; ?>
+			<?php endif; ?>
+		</div>
+	</div>
+<div class="clearfix"></div>
+
+<script>
+//S:manage header
+jQuery(function(){
+	jQuery('.title-block.active').siblings('.title-block').removeClass('prev-active');
+	jQuery('.title-block.active').prev('.title-block').addClass('prev-active');
+});
+//E:manage header
+</script>

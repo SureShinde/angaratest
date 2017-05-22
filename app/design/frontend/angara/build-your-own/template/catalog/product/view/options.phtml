@@ -1,0 +1,490 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* @var $this Mage_Catalog_Block_Product_View_Options */
+?>
+
+<?php $_options = Mage::helper('core')->decorateArray($this->getOptions()) ?>
+<?php
+	// currency conversion for engraving price	
+	$temp_price =  1;
+	$currentCurrencyCode =   Mage::app()->getStore()->getCurrentCurrencyCode(); 
+	$baseCurrencyCode =  Mage::app()->getStore()->getBaseCurrencyCode();
+	$currencySymbol = Mage::app()->getLocale()->currency($currentCurrencyCode)->getSymbol();
+ 
+	$convFactor =	Mage::helper('directory')->currencyConvert($temp_price, $baseCurrencyCode, $currentCurrencyCode);
+?>
+<?php if (count($_options)){?>
+    <script type="text/javascript">
+    //<![CDATA[
+    var optionFileUpload = {
+        productForm : $('product_addtocart_form'),
+        formAction : '',
+        formElements : {},
+        upload : function(element){
+            this.formElements = this.productForm.select('input', 'select', 'textarea', 'button');
+            this.removeRequire(element.readAttribute('id').sub('option_', ''));
+
+            template = '<iframe id="upload_target" name="upload_target" style="width:0; height:0; border:0;"><\/iframe>';
+
+            Element.insert($('option_'+element.readAttribute('id').sub('option_', '')+'_uploaded_file'), {after: template});
+
+            this.formAction = this.productForm.action;
+
+            var baseUrl = '<?php echo $this->getUrl('*/product/upload') ?>';
+            var urlExt = 'option_id/'+element.readAttribute('id').sub('option_', '');
+
+            this.productForm.action = parseSidUrl(baseUrl, urlExt);
+            this.productForm.target = 'upload_target';
+            this.productForm.submit();
+            this.productForm.target = '';
+            this.productForm.action = this.formAction;
+        },
+        removeRequire : function(skipElementId){
+            for(var i=0; i<this.formElements.length; i++){
+                if (this.formElements[i].readAttribute('id') != 'option_'+skipElementId+'_file' && this.formElements[i].type != 'button') {
+                    this.formElements[i].disabled='disabled';
+                }
+            }
+        },
+        addRequire : function(skipElementId){
+            for(var i=0; i<this.formElements.length; i++){
+                if (this.formElements[i].readAttribute('name') != 'options_'+skipElementId+'_file' && this.formElements[i].type != 'button') {
+                    this.formElements[i].disabled='';
+                }
+            }
+        },
+        uploadCallback : function(data){
+            this.addRequire(data.optionId);
+            $('upload_target').remove();
+
+            if (data.error) {
+
+            } else {
+                $('option_'+data.optionId+'_uploaded_file').value = data.fileName;
+                $('option_'+data.optionId+'_file').value = '';
+                $('option_'+data.optionId+'_file').hide();
+                $('option_'+data.optionId+'').hide();
+                template = '<div id="option_'+data.optionId+'_file_box"><a href="#"><img src="var/options/'+data.fileName+'" alt=""><\/a><a href="#" onclick="optionFileUpload.removeFile('+data.optionId+')" title="Remove file" \/>Remove file<\/a>';
+
+                Element.insert($('option_'+data.optionId+'_uploaded_file'), {after: template});
+            }
+        },
+        removeFile : function(optionId)
+        {
+            $('option_'+optionId+'_uploaded_file').value= '';
+            $('option_'+optionId+'_file').show();
+            $('option_'+optionId+'').show();
+
+            $('option_'+optionId+'_file_box').remove();
+        }
+    }
+    var optionTextCounter = {
+        count : function(field,cntfield,maxlimit){
+            if (field.value.length > maxlimit){
+                field.value = field.value.substring(0, maxlimit);
+            } else {
+                cntfield.innerHTML = maxlimit - field.value.length;
+            }
+        }
+    }
+
+    Product.Options = Class.create();
+    Product.Options.prototype = {
+        initialize : function(config) {
+            this.config = config;
+            this.reloadPrice();
+            document.observe("dom:loaded", this.reloadPrice.bind(this));
+        },
+        reloadPrice : function() {
+            var config = this.config;
+            var skipIds = [];
+            $$('body .product-custom-option').each(function(element){
+                var optionId = 0;
+                element.name.sub(/[0-9]+/, function(match){
+                    optionId = parseInt(match[0], 10);
+                });
+                if (config[optionId]) {
+                    var configOptions = config[optionId];
+                    var curConfig = {price: 0};
+                    if (element.type == 'checkbox' || element.type == 'radio') {
+                        if (element.checked) {
+                            if (typeof configOptions[element.getValue()] != 'undefined') {
+                                curConfig = configOptions[element.getValue()];
+                            }
+                        }
+                    } else if(element.hasClassName('datetime-picker') && !skipIds.include(optionId)) {
+                        dateSelected = true;
+                        $$('.product-custom-option[id^="options_' + optionId + '"]').each(function(dt){
+                            if (dt.getValue() == '') {
+                                dateSelected = false;
+                            }
+                        });
+                        if (dateSelected) {
+                            curConfig = configOptions;
+                            skipIds[optionId] = optionId;
+                        }
+                    } else if(element.type == 'select-one' || element.type == 'select-multiple') {
+                        if ('options' in element) {
+                            $A(element.options).each(function(selectOption){
+                                if ('selected' in selectOption && selectOption.selected) {
+                                    if (typeof(configOptions[selectOption.value]) != 'undefined') {
+                                        curConfig = configOptions[selectOption.value];
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        if (element.getValue().strip() != '') {
+                            curConfig = configOptions;
+                        }
+                    }
+                    if(element.type == 'select-multiple' && ('options' in element)) {
+                        $A(element.options).each(function(selectOption) {
+                            if (('selected' in selectOption) && typeof(configOptions[selectOption.value]) != 'undefined') {
+                                if (selectOption.selected) {
+                                    curConfig = configOptions[selectOption.value];
+                                } else {
+                                    curConfig = {price: 0};
+                                }
+                                optionsPrice.addCustomPrices(optionId + '-' + selectOption.value, curConfig);
+                                optionsPrice.reload();
+                            }
+                        });
+                    } else {
+                        optionsPrice.addCustomPrices(element.id || optionId, curConfig);
+                        optionsPrice.reload();
+                    }
+                }
+            });
+        }
+    }
+    function validateOptionsCallback(elmId, result) {
+        var container = $(elmId).up('ul.options-list');
+        if (result == 'failed') {
+            container.removeClassName('validation-passed');
+            container.addClassName('validation-failed');
+        } else {
+            container.removeClassName('validation-failed');
+            container.addClassName('validation-passed');
+        }
+    }
+    var opConfig = new Product.Options(<?php echo $this->getJsonConfig() ?>);
+    //]]>
+    </script>
+    <dl>
+    <?php 
+	$p=1;
+	$s = 0;
+	$s1=0;
+	$s2=0;
+	$s3=0;
+	$s4=0;
+	$s5=0;
+	$steps_arr = array();
+	?>   	
+    <?php foreach($_options as $_option){ ?>
+   	<?php $optionType = $_option->getType(); ?>
+    	<?php //echo $optionType.'=='; ?>            
+    	<?php $values = $_option->getValues(); ?>		
+        <?php
+		$skuArr = '';
+		$product_option_type = '';	
+		if(count($values)>0)
+		{
+			foreach ($values as $k => $v):
+				$skuArr[] = $v->getSku();					
+				if (stripos($v->getSku(), 'CS') !== false) {					
+					$product_option_type = 'stone_size';
+					$display_on_load = 'style="display:block;"';
+					$s1 = 1;
+				}elseif (stripos($v->getSku(), 'SS') !== false) {
+					$product_option_type = 'side_stone';	
+					$display_on_load = 'style="display:none;"';
+					$s2 = 1;
+				}elseif (stripos($v->getSku(), 'SQ') !== false) {
+					$product_option_type = 'stone_quality';
+					$display_on_load = 'style="display:none;"';
+					$s3 = 1;
+				}elseif (stripos($v->getSku(), 'MT') !== false) {
+					$product_option_type = 'metal_type';
+					$display_on_load = 'style="display:none;"';		
+					$s4 = 1;
+				}else {
+					$product_option_type = 'ring_size';
+					$display_on_load = 'style="display:none;"';
+				}
+			endforeach;
+		}else{
+			if($optionType=='field')
+			{	
+				$product_option_type = 'engraving';
+				$display_on_load = 'style="display:none;"';
+				$s5 = 1;
+			}
+		}
+		$steps_arr[] = $product_option_type;
+		?>
+        <?php //echo '<pre>';print_r($skuArr);echo '</pre>';?>
+        <?php
+        if(isset($_REQUEST['build_step_last']))
+		{
+		?>
+            <?php 
+			if($product_option_type!='ring_size')
+			{
+			?>
+                <div name="prod_options-<?php echo $product_option_type;?>" id="prod_options_<?php echo $p;?>" <?php echo $display_on_load;?>>
+                     <div class="clear"></div>
+                     <?php
+                     switch ($_option->getTitle()) {
+						case 'Stone Size':
+							$step_title_val = 'Select Center Gemstone Size';
+							break;
+						case 'Side Stone':
+							$step_title_val = 'Select Side Stone(s)';
+							break;	
+						case 'Stone Quality':
+							$step_title_val = 'Select Gemstone Quality';
+							break;
+						case 'Metal Type':
+							$step_title_val = 'Select Metal Type';
+							break;
+						case 'Engraving':
+							$step_title_val = 'Engraving';
+							break;				
+					}
+
+					 ?>
+                    <div class="pagetitle" id="pageheading"><?php echo $step_title_val; ?></div><div class="clear"></div>
+                    <?php
+                    if($product_option_type!='engraving')
+					{
+					?>
+                        <div class="alldetailbox1" id="product_options_html">
+                        <?php
+                        $x=1;
+						$price_calculation = 'fixed';
+                        foreach ($values as $k => $v):                            
+							if($product_option_type=='stone_size'){
+								if(stripos($_SESSION['code_arr']['product_default_stone_size'], trim(str_replace('mm','',$v->getDefaultTitle()))) !== false) {
+									$sel = 'active';
+									$default_sel_div_id = 'img_options_'.$_option->getId().'_'.$x;
+								}else{
+									$sel = '';
+								}
+								$price_calculation = 'fixed';
+							}elseif($product_option_type=='side_stone'){
+								if(trim($_SESSION['code_arr']['product_side_stone_val']) == trim($v->getDefaultTitle())) {
+									$sel = 'active';
+									$default_sel_div_id = 'img_options_'.$_option->getId().'_'.$x;
+								}else{
+									$sel = '';
+								}
+								$price_calculation = 'fixed';
+							}elseif($product_option_type=='stone_quality'){
+								if(trim($_SESSION['code_arr']['product_default_grade']) == trim($v->getDefaultTitle())) {
+									$sel = 'active';
+									$default_sel_div_id = 'img_options_'.$_option->getId().'_'.$x;
+								}else{
+									$sel = '';
+								}
+								$price_calculation = 'percentage';
+							}elseif($product_option_type=='metal_type'){		
+								if(stripos($_SESSION['code_arr']['product_default_metal'], trim($v->getDefaultTitle())) !== false) {
+									$sel = 'active';
+									$default_sel_div_id = 'img_options_'.$_option->getId().'_'.$x;
+								}else{
+									$sel = '';
+								}
+								$price_calculation = 'percentage';
+							}							
+							$skuname_arr = explode('-',$v->getSku());
+							$sub_img_suff = strtolower($skuname_arr[count($skuname_arr)-1]);							
+							
+							if($product_option_type=='metal_type'){																
+								$item_img_name = $sub_img_suff.'.jpg';								
+							}elseif($product_option_type=='side_stone'){																
+								$item_img_name = 'ss-'.$sub_img_suff.'-'.@$_SESSION['code_arr']['stone_shape_code_ss_img'].'.jpg';	
+								//ss-stonename-shape.jpg
+							}else{
+								$item_img_name = @$_SESSION['code_arr']['stone_type_code'].'-'.@$_SESSION['code_arr']['stone_shape_code'].'-'.$sub_img_suff.'.jpg';								
+							}
+                        ?>              
+                        <div class="selectoptions" id="div_options_<?php echo $_option->getId() ?>_<?php echo $x; ?>">                       
+                        <a href="javascript:calculateAmountByAjax('options_<?php echo $_option->getId() ?>_<?php echo $x; ?>','options[<?php echo $_option->getid() ?>]','<?php echo $x; ?>','<?php echo count($values);?>','<?php echo $_option->getId() ?>',<?php echo ($v->getPrice()!=''?$v->getPrice():'0'); ?>,<?php echo $p; ?>,'<?php echo $_option->getTitle(); ?>','<?php echo $price_calculation; ?>','<?php echo $v->getDefaultTitle();?>');" id="img_options_<?php echo $_option->getId() ?>_<?php echo $x; ?>" name="img_options[<?php echo $_option->getid() ?>]" class="<?php echo $sel; ?>">
+                        <img src="/media/build_your_images/<?php echo $item_img_name;?>"/>
+                            <div class="selectoptionsprice">
+                                <div class="flexisize"><?php echo $v->getDefaultTitle();?></div>
+                                <div class="flexiprice"><?php //echo $v->getPrice();?></div>
+                            </div>
+                         </a>   
+                        </div>		                        
+                        <?php
+                            $x++;
+                        endforeach;						
+                        ?>
+                        	<?php
+                            if($product_option_type=='stone_size'){
+                            ?>       
+                                <div class="clear"></div>
+                                <div class="notetxt"><strong>Note:</strong> Size of the side/accent gemstones will be adjusted to maintain proportions to the center gemstone.</div>
+                            <?php
+							}elseif($product_option_type=='side_stone'){
+							?>
+                                <!--<div class="clear"></div>
+                                <div><strong>Note:</strong> Total Carat Weight of the side gemstones is approximately 0.22 Carats. The actual weight will vary with the gemstone(s) chosen.</div>-->
+							<?php
+							}elseif($product_option_type=='stone_quality'){
+							?>
+								<div class="clear"></div>
+                                <div class="notetxt"><strong>Note:</strong> Quality chosen will apply to all gemstones in this jewelry piece.</div>
+							<?php
+							}elseif($product_option_type=='metal_type'){
+							?>
+                                <div class="clear"></div>
+                                <div class="notetxt" id='matel_msg'>
+                                	<?php
+									if(stripos($_SESSION['code_arr']['product_default_metal'], 'Silver') !== false) {
+									?>
+									 	<strong>Silver:</strong> 
+                                        The same great look as white gold at a lower price. Angara uses the highest standard available, .925 sterling silver. 
+                                        Silver is lighter to wear than gold.
+                                        <script>
+										var matel_msg_note='<strong>Silver:</strong> The same great look as white gold at a lower price. Angara uses the highest standard available, .925 sterling silver. Silver is lighter to wear than gold.';
+                                        </script>
+									<?php	
+									}elseif(stripos($_SESSION['code_arr']['product_default_metal'], 'Yellow Gold') !== false) {
+									?>
+										<strong>14K Yellow Gold:</strong> 
+                                       	Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, 
+                                       	please note that women generally have a clear preference for Yellow or White Gold - see 
+                                       	what other jewelry she has to determine her preference.	
+                                        <script>
+										var matel_msg_note='<strong>14K Yellow Gold:</strong> Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Yellow or White Gold - see what other jewelry she has to determine her preference.';
+                                        </script>
+									<?php
+									}elseif(stripos($_SESSION['code_arr']['product_default_metal'], 'White Gold') !== false) {
+									?>
+										<strong>14K White Gold:</strong> 
+                                        The standard for fine jewelry. 14K White gold has been the most popular choice for fine jewelry over the last twenty years as 
+                                        it blends well with diamonds.
+                                        <script>
+										var matel_msg_note='<strong>14K White Gold:</strong> The standard for fine jewelry. 14K White gold has been the most popular choice for fine jewelry over the last twenty years as it blends well with diamonds.';	
+                                        </script>
+									<?php
+									}elseif(stripos($_SESSION['code_arr']['product_default_metal'], 'Platinum') !== false) {
+									?>
+										<strong>Platinum:</strong> 
+                                    	The most durable and premium metal for fine jewelry. Platinum feels more substantial to wear due to its greater weight.
+                                        <script>
+										var matel_msg_note='<strong>Platinum:</strong> The most durable and premium metal for fine jewelry. Platinum feels more substantial to wear due to its greater weight.';
+                                        </script>
+									<?php
+									}
+									?>                                    
+                                </div>                               
+							<?php
+							}
+							?>
+                        </div>			    
+                    <?php
+					}else{
+					?>
+						<div class="alldetailbox">
+                          <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_FIELD): ?>
+                          <div class="yourtxtbox"> 
+                          	<span class="yourtxt"><strong>Your Text</strong></span> 
+                            <span class="engravetxt">
+                            	<script>var engraving_inputbox_id = 'options_<?php echo $_option->getId() ?>_text';</script>
+                            	<input type="text" onkeyup="javascript:OnChangeEngravingText(this.value)" onchange="javascript:OnChangeEngravingText(this.value)" id="options_<?php echo $_option->getId() ?>_text" class="input-text<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> product-custom-option" name="options[<?php echo $_option->getId() ?>]" value="<?php echo $this->escapeHtml($this->getDefaultValue()) ?>" style="width:176px; height:18px; font:12px Arial, Helvetica, sans-serif, Tahoma;" />
+                            </span> 
+                            <?php if ($_option->getMaxCharacters()): ?>
+                            <small>(<?php echo Mage::helper('catalog')->__('Maximum number of characters:')?> <strong><?php echo $_option->getMaxCharacters() ?></strong>)</small> 
+                            <?php endif; ?>
+                            <span class="yourtxt">
+                            	<strong>Engraving Price:</strong> <?php echo $currencySymbol.round($convFactor*$_option->getPrice(),2); ?>
+                            </span> 
+                          </div>
+                          <div class="engravingfont"> 
+                              <span class="fontstyle">
+                                <a href="javascript:;" onclick="javascript:selectEngravingStyle(0);" class="active" id="fonttype0"><img src="/skin/frontend/angara/default/images/build-your-own/engraving-font1.jpg" alt="style1" /></a>
+                              </span> 
+                              <span class="fontstyle" style="float:right">
+                                <a href="javascript:;" onclick="javascript:selectEngravingStyle(1);" id="fonttype1"><img src="/skin/frontend/angara/default/images/build-your-own/engraving-font2.jpg" alt="style2" /></a>
+                              </span> 
+                          </div>
+                          <div class="clear"></div>
+                          <div class="engravingnote">Any engraving will make this product not returnable!</div>
+                          <?php endif; ?>
+                        </div>
+					<?php	
+					}
+					?>   
+                </div>
+                <?php $p++; ?>	
+			<?php
+			}
+			?>
+		<?php
+		}
+		?>
+        <?php
+        if(isset($_REQUEST['build_step_last']))
+		{
+		?>
+                <div style="display:none;">	
+                    <?php echo $this->getOptionHtml($_option) ?>
+                </div>
+        <?php
+		}else{
+		?>
+                <div style="display:block;">	
+                    <?php echo $this->getOptionHtml($_option) ?>
+                </div>
+		<?php
+		}
+		?>        
+	<?php } //endforeach ?>
+    <?php $tot_steps = $s1+$s2+$s3+$s4+$s5; ?>
+    <?php //echo '<pre>';print_r($steps_arr);echo '</pre>'; ?>
+    <?php
+	if(in_array('side_stone',$steps_arr) && in_array('engraving',$steps_arr)){
+		$steps_code = 'all';
+	}elseif(!in_array('side_stone',$steps_arr) && in_array('engraving',$steps_arr)){
+		$steps_code = 'no_ss';
+	}elseif(in_array('side_stone',$steps_arr) && !in_array('engraving',$steps_arr)){
+		$steps_code = 'no_eng';
+	}elseif(!in_array('side_stone',$steps_arr) && !in_array('engraving',$steps_arr)){
+		$steps_code = 'no_ss_eng';		
+	}
+	//echo $steps_code;
+	?>
+    <script>
+    	var tot_steps = <?php echo $tot_steps; ?>;
+		var steps_code = '<?php echo $steps_code; ?>';
+    </script>	
+    </dl>
+<?php } //endif ?>

@@ -1,0 +1,345 @@
+<style>.option-details-text{display:none!important;} #customize-product-panel{display:block!important}</style>
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct(); 
+$currentCountryCode = Mage::getModel('countrymapping/country')->getCountryParamCode();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div class="quick-view  shadow-none">
+<div class="showcase-bg-white relative-placeholder padding-type-15">
+    <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml(); ?></div>
+	<div class="product-view">
+		<div class="product-essential">
+			<div class="row">
+				<div class="col-sm-5">
+					<?php /* S: Media */ ?>
+                    <div class="product-img-box"> <?php echo $this->getChildHtml('media'); ?> </div>
+                    <?php /* E: Media */ ?>
+					<div class="max-margin-top max-padding-top text-center"><div class="high-padding-bottom text-light fontsize-type2">Angara Item #: <?php echo $_product->getSku();?></div><a target="_top" class="low-padding-top text-bold fontsize-type4 text-red text-underline" href="<?php echo $_product->getProductUrl() ?>">View Full Product Details </a><i class="fa fa-fw fa-angle-right text-bold text-red"></i></div>
+                </div>
+            	<div class="col-sm-7">
+					<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" target="_top" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>       
+                        <div class="no-display">
+                            <input type="hidden" name="product" value="<?php echo $_product->getId(); ?>" />
+                            <input type="hidden" name="related_product" id="related-products-field" value="" />
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12"> 
+                                <?php /* S: Product Name */ ?>               		
+                                 <div class="product-name">
+									<div class="row">
+									<div class="col-sm-9">
+									<h1 class="fontsize-type5 text-capitalize no-margin low-margin-bottom dyn_short_description" itemprop="name"><?php echo $_helper->productAttribute($_product,$_product->getShortDescription(),'name');?></h1>
+									
+									</div>
+									<div  class="col-sm-3 social-media pull-right">
+										<i class="pinShare fa fa-pinterest-square px22 min-margin-right clickable" onclick="myPinFunction()" style="color:#C92228;"></i>									
+										<i class="twwetShare fa fa-twitter-square px22 min-margin-right clickable" onclick="myTweetFunction()" style="color:#1dcaff;"></i>
+										<i class="googleShare fa fa-google-plus-square px22 min-margin-right clickable" onclick="myGoogleFunction()" style="color:#d34836;"></i>						
+										<i class="fbShare fa fa-facebook-square px22 min-margin-right clickable" onclick="myFbFunction()" style="color:#3B5998;"></i>
+										<script type="text/javascript">						
+										function myPinFunction(){
+										var url = jQuery('#image').attr('src');
+										window.open( 'https://pinterest.com/pin/create/bookmarklet/?media='+url+'&url=<?php echo $_product->getProductUrl();?>&description=Love this Jewelry Style from Angara! <?php echo  urlencode($_product->getShortDescription());?>','pin','height=600,width=650').focus();	
+										}
+										function myGoogleFunction(){							
+										window.open('https://plus.google.com/share?url=<?php echo $_product->getProductUrl();?>','gplus','height=600,width=650,scrollbars=yes').focus();	
+										}
+										function myFbFunction(){							
+										window.open('https://www.facebook.com/share.php?u=<?php echo $_product->getProductUrl();?>','fb','height=600,width=650,scrollbars=yes').focus();	
+										}
+										function myTweetFunction(){							
+										window.open('https://twitter.com/intent/tweet?url=<?php echo $_product->getProductUrl();?>&text=Love this Jewelry Style from Angara! <?php echo urlencode($_product->getShortDescription());?>&via=Angara','tweet','height=600,width=650').focus();	
+										}								
+									</script>
+									
+									</div>
+									</div>
+									<div class="row">
+									<div class="col-sm-12">
+								<?php /* E: Product Reviews */      
+                                 if((strtolower(substr($_product->getSku(),0,3)) != 'sd_') && (strtolower(substr($_product->getSku(),0,4)) != 'agif')){?>
+                                    <div class="min-padding-bottom pull-left text-light"><?php echo '<span class="fontsize-type0">Handcrafted in the USA</span> <i id="aa" class="fa fa-info-circle fa-fw valign-middle text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="Artisans of the USA hand craft this made to order jewelry piece. Based on the selection of stone size, stone quality, metal etc. they manufacture each custom order piece from scratch. The eye-catching beauty and detailing of each piece of jewelry is the result of uncompromising artistry."></i>'; ?> |</div>  
+                                <?php 
+                                } ?> 
+								<div class="pull-left <?php if(!in_array(96, $_product->getCategoryIds())):?>low-padding-left<?php endif;?> text-light"> 								
+								<?php echo '<span class="fontsize-type0">Free Shipping Worldwide</span> <i class="fa fa-info-circle fa-fw valign-middle text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="Free Shipping within the USA. We ship FREE to 64 countries on all International orders over $500. International orders below $500 are charged $39.99 each."></i>'; ?>	
+								</div>
+								</div>
+									</div>
+								</div>                               
+                            </div>
+                            <?php /* S: Product Reviews */ ?>
+                            <div class="col-sm-4 col-md-3">
+								<?php //echo $this->getReviewsSummaryHtml($_product, false, true); echo $this->getChildHtml('alert_urls'); ?>
+                                <div class="pull-right share-buttons share-buttons-panel" data-style="small" data-counter="false" data-oauth="true" data-hover="false" data-promo-callout="none" data-buttons="facebook,twitter,google,pinterest"></div>
+                            </div>
+                            <?php /* E: Product Reviews */ ?>                  
+                        </div>  
+						<?php 
+                        echo $this->getChildHtml('product_type_data');
+                        echo $this->getTierPriceHtml(); 
+                        echo $this->getChildHtml('extrahint'); ?>                  
+                        <div class="showcase-border-top-1px min-margin-top low-padding-top">
+                        <?php 
+                        if($this->hasOptions()):
+                            echo $this->getChildChildHtml('container2', '', true, true);
+                        endif;?> 
+                        </div>
+						<?php // Added by Vaseem on 13/12/14
+						if($_product->getVendorLeadTime()<=3 && $_product->isSaleable()){?> 
+                        	<div class="high-margin-top fontsize-type2 text-bold"><i class="fa fa-truck"></i> <span class="text-green">Ships Fast</span></div>
+                        <?php } ?> 
+                        <div class="add-to-box text-left">
+                        <?php 
+                        if($_product->isSaleable()){
+                            echo $this->getChildHtml('addtocart'); ?> 
+                            <script type="text/javascript">
+                        	//<![CDATA[
+                            var productAddToCartForm = new VarienForm('product_addtocart_form');
+                            productAddToCartForm.submit = function(button, url) {
+                                if (this.validator.validate()) {
+                                    var form = this.form;
+                                    var oldUrl = form.action;
+                    
+                                    if (url) {
+                                       form.action = url;
+                                    }
+                                    var e = null;
+                                    try {
+										jQuery('#add-cart-wait').removeClass('hide');
+										jQuery('.add-to-cart button').attr('disabled','disabled');
+                                    	setTimeout(function(){form.submit();}, 1);
+										//this.form.submit();
+                                    } catch (e) {
+                                    }
+                                    this.form.action = oldUrl;
+                                    if (e) {
+                                        throw e;
+                                    }
+                    
+                                    /*if (button && button != 'undefined') {
+                                        button.disabled = true;
+                                    }*/
+                                }
+								else{
+									if(jQuery('#add-cart-stopper').length == 1){
+										jQuery('#add-cart-stopper-msg').removeClass('hidden');
+									}
+									else{
+										jQuery('#add-cart-stopper-msg').remove();
+									}
+								}
+                            }.bind(productAddToCartForm);
+                    
+                            productAddToCartForm.submitLight = function(button, url){
+                                if(this.validator) {
+                                    var nv = Validation.methods;
+                                    delete Validation.methods['required-entry'];
+                                    delete Validation.methods['validate-one-required'];
+                                    delete Validation.methods['validate-one-required-by-name'];
+                                    // Remove custom datetime validators
+                                    for (var methodName in Validation.methods) {
+                                        if (methodName.match(/^validate-datetime-.*/i)) {
+                                            delete Validation.methods[methodName];
+                                        }
+                                    }
+                    
+                                    if (this.validator.validate()) {
+                                        if (url) {
+                                            this.form.action = url;
+                                        }
+                                        this.form.submit();
+                                    }
+                                    Object.extend(Validation.methods, nv);
+                                }
+                            }.bind(productAddToCartForm);
+							//]]>
+							</script>
+                        <?php }else{ ?>
+							<div class="row">
+        						<div class="col-sm-5 col-md-4">
+            						<div class="add-to-cart">
+                                            <button type="button" title="Sold Out" disabled="disabled" class="btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" ><i class="fa fa-shopping-cart low-padding-right"></i> Sold Out</button>
+                                    </div>
+						        </div>
+        				    </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 fontsize-type0 text-bold text-green low-padding-top">
+                                    <span>We can customize this item for you. For further assistance, give us a call on 1-888-926-4272 or <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="text-green text-underline live-chat-link">click here</a> to chat.</span>
+                                </div>
+                            </div>
+						<?php }
+                        if($this->helper('wishlist')->isAllow()):
+                            echo $this->getChildHtml('addto') ?>
+                        <?php 
+                        endif; ?>
+                        </div>
+                        
+                        <?php 
+						if(!in_array(96, $_product->getCategoryIds())):?>
+                        <?php if($_product->isSaleable()){?>
+                            <div class="fontsize-type1 high-margin-top low-margin-bottom">
+								<i class="fa fa-gift fa-fw"></i>
+								<span class="text-bold">Delivered By: <span class="dyn_arrive_lead_time" style="color:#D83D29"><i class="fa fa-spinner fa-spin"></i></span></span>
+							</div>                       
+                            <?php /*?><style type="text/css">
+                            #countdownticker{
+                                color:green;	
+                                text-align:center;
+                                font:bold 13px Arial, Helvetica, sans-serif;	
+                                display:block;
+                            }
+                            .timeleftxt{display:inline-block; }
+                            .hourdigits{display:inline-block; min-width:12px; }
+                            .minutedegites{display:inline-block; min-width:12px; }
+                            .secondigits{display:inline-block; min-width:12px;}
+                            .colondigit{display:inline-block; padding:0 3px;}
+                            .colon-no-padding{ padding-right:0;}
+                            </style>
+                            <script type="text/javascript">
+                            //alert(" new alert");
+                                var today1 = new Date();
+                                var dd1 = today1.getDate() + 1;
+                                var mm1 = '0' + today1.getMonth(); //January is 0!
+                                var yy1 = today1.getFullYear();
+                                var counter_time = new Date(yy1,mm1,dd1,3,0,0); // Wed Aug 14 2013 02:00:00 GMT+0530 (India Standard Time)
+                                //alert(counter_time);
+                                var client_time = new Date();
+                                //alert(client_time);			//	Tue Aug 13 2013 10:30:23 GMT+0530 (India Standard Time)
+                                var difference = counter_time - client_time;	
+                                var ticker;
+                                jQuery(function(){
+                                    ticker = jQuery('#countdownticker');
+                                    convertTicker();
+                                })
+                                function zeroPad (number) {		
+                                    return ((number < 10) ? "0" : "") + String(number);
+                                }
+                                function convertTicker(){
+                                    markupTicker();
+                                }
+                                function markupTicker(){
+                                    ticker.hours = jQuery('<span class="hourdigits"></span>');
+                                    ticker.minutes = jQuery('<span class="minutedegites"></span>');
+                                    ticker.seconds = jQuery('<span class="secondigits"></span>');
+                                    //ticker.append(jQuery('<span class="timeleftxt">Time Left</span><span class="colondigit">: </span>'));
+                                    ticker.append(ticker.hours);
+                                    ticker.append(jQuery('<span class="colondigit">hrs</span>'));
+                                    ticker.append(ticker.minutes);
+                                    ticker.append(jQuery('<span class="colondigit ">mins</span>'));
+                                    //ticker.append(ticker.seconds);
+                                    //ticker.append(jQuery('<span class="colondigit colon-no-padding">seconds</span>'));
+                                    updateTicker();
+                                }
+                                function updateTicker(){
+                                    difference-=1000;
+                                    if(difference > 0){
+                                        ticker.hours.text( zeroPad(parseInt(difference/(1000*60*60))) );
+                                        ticker.minutes.text( zeroPad(parseInt(difference/(1000*60))%60) );
+                                        ticker.seconds.text( zeroPad(parseInt(difference/(1000))%60) );
+                                        setTimeout(function(){updateTicker()},1000);
+                                    }
+                                    else{
+                                        ticker.hide();
+                                    }
+                                }							
+                            </script>						
+                            <div class="low-padding-top low-padding-bottom low-margin-top low-margin-bottom" style="border:1px dashed #a8a8a8; padding:5px;"><strong>Want it <span id="getItToday"> <i class="fa fa-spinner fa-spin"></i>  </span>?</strong> Order within <span id="countdownticker" class="countdownticker block-inline-display"></span>   and choose <strong> <span id="shippingMethod"><i class="fa fa-spinner fa-spin"></i></span></strong> at cart. <i id="easy-pay-info" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="
+                            <div class='block-sub-heading high-margin-bottom'>About Guaranteed Accelerated Delivery</div>
+                            <div class='fontsize-type1 high-padding-bottom'>Guaranteed expedited delivery is available on products highlighting &Prime;Want it delivered . . .&Prime; message, which includes a delivery date and shipping options available. This is the earliest delivery date anticipated.</div>
+                            <div class='fontsize-type1 high-padding-bottom'>If your order meets the qualifications for Guaranteed Expedited Delivery, and your delivery does not take place on time, we will refund your shipping costs.</div>
+                            <div>However, if your purchase is not eligible for Expedited shipping options, we offer guaranteed express delivery on standard domestic shipping, and international shipping when applicable.</div>"></i> </div><?php */?>
+                        <?php } ?>   
+                        <?php endif; ?>
+						
+						
+						
+						<?php /*?><div class="fontsize-type1 low-margin-top"><i class="fa fa-truck fa-fw"></i>Estimated Ship Date: <span class="fontcolor-type1 dyn_vendor_lead_time"> <i class="fa fa-spinner fa-spin"></i> </span> <i id="aa" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="Our products are all made to order. Based on the selection of stone size, stone quality, metal etc. we manufacture each piece of custom made jewelry from scratch. The date mentioned here is the date we estimate that your unique piece of jewelry will be ready for shipment. Shipping costs are typically free, but if you need the item to ship soon, you can choose faster shipping options on the next page."></i> </div><?php */?>
+                        <?php 
+                        echo $this->getChildHtml('other');
+                        if($_product->isSaleable() && $this->hasOptions()):
+                            echo $this->getChildChildHtml('container1', '', true, true); 
+                        endif;?>                
+                        <div class="product-collateral">
+                        <?php 
+                        foreach($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+                            <div class="box-collateral <?php echo "box-{$alias}";?>">
+                            <?php 
+                            if($title = $this->getChildData($alias, 'title')):?>
+                                <h2><?php echo $this->escapeHtml($title); ?></h2>
+                            <?php 
+                            endif;
+                            echo $html; ?> 
+                            </div>
+                        <?php 
+                        endforeach;						
+                        echo $this->getChildHtml('product_additional_data'); ?> 
+                        </div>
+                        <?php
+                        /* S: Add-ons Selection */
+                        if(!in_array(96, $this->getProduct()->getCategoryIds()) && (strtolower(substr($_product->getSku(), 0, 3)) != 'sd_')): 	/* excluding gift cards */?>
+                            <div id="add-ons-panel-container" class="showcase-bg-white low-margin-top min-padding-bottom clearfix">
+                                <div class="h3 high-margin-top min-padding-bottom">Add-ons</div>
+                                <div id="add-ons-panel" class="small clearfix block-inline-display showcase-border-top-1px">      
+									<?php 
+									// S: Jewelry Appraisal?>
+                                    <div class="row no-gutters">
+                                        <div class="col-xs-12">
+                                        <?php 
+										$_options = $_product->getOptions();
+										if($_options){
+											foreach($_options as $_option){
+												$optionArr[] = $_option->getTitle();
+											}
+										}
+										
+                                        if(in_array('Free Jewelry Appraisal',$optionArr) && (in_array(353, $this->getProduct()->getCategoryIds()) || in_array(457, $this->getProduct()->getCategoryIds()) || in_array(458, $this->getProduct()->getCategoryIds()))){?>                             
+                                            <input id="appraisal0" name="appraisal0" type="checkbox" autocomplete="off" checked="checked" disabled="disabled"/>
+                                            <label for="appraisal0"><i class="fa fa-file-text-o fa-fw"></i><strong><?php echo '<span class="text-green">Free</span>'; ?></strong> Jewelry Appraisal</label> 
+                                            <script type="text/javascript">
+                                            jQuery(function(){
+                                                if(jQuery('#appraisal0').is(":checked")){
+                                                    jQuery('dt label:contains("Jewelry Appraisal")').parent().next().find('input.product-custom-option').val('JA0050');
+                                                    addSelection("Appraisal");
+                                                    updateEstimateShipping();
+                                                }
+                                            });
+                                            </script>                                               
+                                        <?php 
+                                        }
+										else{?>
+                                        	<input id="appraisal" name="appraisal" type="checkbox" autocomplete="off" />
+                                            <label for="appraisal"><i class="fa fa-file-text-o fa-fw"></i>Add Jewelry Appraisal For <strong><?php echo Mage::helper('function')->getJewelryAppraisalPrice(); ?></strong></label>
+                                        <?php
+                                        }?> <i id="aa" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="<img  c alt='The Classic Three-Stone Ring' src='/skin/frontend/ress/default/images/appraisalcertificate.jpg' class='img-responsive'>"></i><small id="jewel-appraisal" class="text-red high-padding-left hidden nowrap">*Jewelry Appraisal cost is non refundable.</small>
+                                        </div>
+                                    </div>
+									<?php 
+									// E: Jewelry Appraisal
+                                
+									/* S: Insurance */ 
+									if( $this->canShowWarranty() && !$_product->getIsBuildYourOwn() ){?>
+										<div class="row no-gutters">
+											<div class="col-xs-12">
+												<input id="insurance" name="insurance" type="checkbox" autocomplete="off" />
+												<label for="insurance" style="white-space:nowrap;"><i class="fa fa-file-text-o fa-fw"></i>Add Warranty For <strong class="dyn_warranty_price"><?php echo (($_product->getPrice() < 200)? $this->helper('core')->currency(50,true,false): $this->helper('core')->currency($_product->getPrice() * .15,true,false)); ?></strong></label> <i id="aa" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="The Total Protection Warranty Plan protects your jewelry for the next 5 years against any accidental damage and/or wear and tear in order to ensure that your jewelry looks like new whenever you wear it. We offer FREE domestic round trip shipping for our Jewelry Protection Warranty Plan users. You may take advantage of this offer if your order date comes after October 30, 2014. If the warranty is unused over the next 5 years, you can use the full amount paid for the warranty towards any future Angara purchase. <a href='/total-protection-warranty.html' class='fontcolor-type1' target='_blank'>Click here</a> for more information."></i> 
+											</div>
+										</div>
+									<?php
+									}
+									/* E: Insurance */ ?>     
+								</div>
+							</div>							
+                        <?php 
+                        endif; 
+                        /* E: Add-ons Selection */ ?>
+                    </form>
+              	</div>
+            </div>
+        </div>      
+    </div> 	
+</div>
+</div>

@@ -1,0 +1,78 @@
+<?php
+	
+	if ($this->isEnabled()) {
+	
+		if (Mage::getStoreConfig('checkout/internationalcheckout/ic_server') == 1) {
+			$this->IC_URL = "http://www.internationalcheckoutsolutions.com/sandbox/checkout/index.php";
+		}
+
+?>
+
+<form name="icForm" id="icForm" method="post" action="<?php echo $this->IC_URL;?>">
+	
+	<?php
+	
+	$session = Mage::getSingleton('checkout/session');
+
+	$output = "";
+	$i = 1;
+	foreach ($session->getQuote()->getAllVisibleItems() as $item) {
+		
+		$output .= "<input type=\"hidden\" name=\"ItemDescription$i\" value=\"".$this->buildItemDescription($item)."\"/>\n";
+		$output .= "<input type=\"hidden\" name=\"ItemSKU$i\" value=\"".$this->htmlEscape($item->getSku())."\"/>\n";
+		$output .= "<input type=\"hidden\" name=\"ItemQuantity$i\" value=\"".$item->getQty()."\"/>\n";
+		$output .= "<input type=\"hidden\" name=\"ItemPrice$i\" value=\"".$item->getPrice()."\"/>\n";
+		
+		$imgWidth = trim(Mage::getStoreConfig('checkout/internationalcheckout/image_width'));
+		$imgHeight = trim(Mage::getStoreConfig('checkout/internationalcheckout/image_height'));
+		
+		if ($imgWidth == "" || $imgWidth <=0) {
+			$imgWidth = 75;
+		}
+		if ($imgHeight == "" || $imgHeight <=0) {
+			$imgHeight = 75;
+		}
+		
+		
+		$output .= "<input type=\"hidden\" name=\"ItemImage$i\" value=\"".$this->getProductThumbnail($item)->resize($imgWidth)."\"/>\n";
+		
+		
+		$output .= "<input type=\"hidden\" name=\"ImgHeight$i\" value=\"".$imgHeight."\"/>\n";
+		$output .= "<input type=\"hidden\" name=\"ImgWidth$i\" value=\"".$imgWidth."\"/>\n";
+		
+		$i++;
+	}
+	
+	echo $output;
+	
+	?>
+	
+<input type="hidden" name="p" value="<?php echo $this->formatCompany(Mage::getStoreConfig('checkout/internationalcheckout/name_of_company'))?>" />
+
+<input type="hidden" name="shipping_method" value="<?php echo trim(Mage::getStoreConfig("checkout/internationalcheckout/shipping_method"))?>" /> 
+
+<input type="hidden" name="external_domesticshipping" value="<?php echo $this->shippingPrice()?>" />
+
+<input type="hidden" name="Discount" value="<?php echo Mage::getStoreConfig('checkout/internationalcheckout/discount')?>" />
+
+<?php
+$address = $session->getQuote()->getShippingAddress();
+$coupon_code = $session->getQuote()->getCouponCode();
+$coupon_discount = $address->getDiscountAmount();
+if (($coupon_discount != 0) && $coupon_code ) {
+?>
+<input type="hidden" name="coupon_code" value="<?php echo $coupon_code ?>" />
+
+<input type="hidden" name="coupon_discount" value="<?php echo $coupon_discount ?>" />
+<?php
+}
+?>
+
+<button title="<?php echo $this->__('International Checkout') ?>" class="<?php echo $this->buttonClassName(); ?>" <?php echo $this->buttonImagePath(); ?> type="submit"><span><span><?php echo $this->buttonText(); ?></span></span></button>	
+
+</form>
+
+<?php
+	} // isEnabled	
+?>
+

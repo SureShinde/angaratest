@@ -1,0 +1,63 @@
+<?php 
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>
+
+<div id="div_news_popup" style="display:none; margin:0 auto; position:fixed; padding-bottom:6px; width:100%; height:100%; z-index:10000; top:0; layer-background-color:#000; left:0;">
+  <div style="margin:0 auto; position:absolute; padding-bottom:6px; width:100%; opacity:0.5; height:100%; filter:alpha(opacity = 50); top:0; left:0; background: none repeat scroll 0 0 #636363;"></div>
+  <div style="margin:0 auto;padding:0">
+    <div id="innerdivpopoup" style="height:auto; width:370px; margin:0 auto; top:100px; z-index:10001; position:relative;">
+      <div id="popsubform" style="height:auto; width:367px; height:392px; background-image:url(<?php echo $skinUrl; ?>frontend/angara/default/images/win-a-gemstone-pendant.png); background-repeat:no-repeat;"> <a href="JavaScript:void(0);" onclick="closepopup()" style="position:absolute; top:28px; right:57px; width:25px; height:25px; display:block; z-index:10;"><img src="<?php echo $skinUrl; ?>frontend/angara/default/images/popup/closepopup.png" /></a>
+        <div style="clear:both"></div>
+        <!--Start edited by Pankaj regarding display thankyou popup-->
+        <?php 
+				$thankPopupAction = (Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://';
+				$thankPopupAction .= 'www2.angara.com/l/17452/2012-11-19/26qd';
+				 
+				$thankPopupReqValues = $this->getRequest()->getParams(); 
+				
+				if(isset($thankPopupReqValues['newslettertype']) && $thankPopupReqValues['newslettertype'] !='' && $thankPopupReqValues['newslettertype'] == '04-Home-Pop-Up-Sign-Up') {?>
+        <script>
+					jQuery(function(){
+						if(document.getElementById("thanks-wrapper")){
+							document.getElementById("thanks-wrapper").style.display = "block" ;
+							document.getElementById("layoverlayer").style.display = "block" ;
+						}
+					});
+					</script>
+        <?php
+				} ?>
+        <form action="<?php echo $thankPopupAction;?>" method="post" id="frm-email-capture-popup_global">
+          <!--End edited by Pankaj regarding display thankyou popup-->
+          
+          <div style="padding:275px 71px 0 17px; position:relative;"> <span style=" width:215px; float:left;" class="validation-msg">
+            <input type="text" name="email" id="newsletter" class="required-entry validate-email" value="Enter Your Email Address"  style="width:151px;height:17px; padding:0px 0 0px 3px;color:#565555; margin-left:58px; border:none; font:12px/22px Arial, Helvetica, sans-serif;" onfocus="if(this.value=='Enter Your Email Address') this.value = ''" onblur="if(this.value=='') this.value = 'Enter Your Email Address'" />
+            </span>
+            <input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+            <input type="hidden" name="newslettertype" value="04-Home-Pop-Up-Sign-Up" />
+            <span>
+            <button type="submit" style="width:61px; height:27px; float:right; background:#ce210a; margin-top:-3px;border:none; outline:none; cursor:pointer; font-weight:bold; color:#FFF;">SUBMIT</button>
+            </span> <span id="official-rules-link" style="font:9px Verdana, Arial, Helvetica, sans-serif; color:#868686; text-decoration:underline; display:inline-block; cursor:pointer; position:absolute; right:153px; top:315px;">Official Rules <span id="official-rules-popup" class="pointpopup" style="display:none;" >
+            <ul>
+              <li>No purchase is required to win the Gemstone Pendant.</li>
+              <li>Angara.com will bear all shipping expenses.</li>
+              <li>A purchase won't improve chances of winning.</li>
+              <li>Retail worth of the Gemstone Pendant is $100.</li>
+              <li>A lucky winner will be identified once every week untill the contest is valid and notified via email that is used to participate.</li>
+              <li>The winner will send the proof of age and address in reply to the winning notification email from Angara at the earliest.</li>
+              <li>After receiving verification details from the winner, we will publish it on Angara.com, Angara Blog, Angara Facebook page and our other sites.</li>
+              <li>It will be delivered in 1-2 weeks after verifying the details of the identified winner.</li>
+              <li>Participants must be legal resident(s) of the United States of America and at least 18 years of age.</li>
+              <li>Online entries must be made by an individual from a stand-alone computer device and must not be made by proxy or any electronic / automated means such as script, bot, macro or any other similar software or program.</li>
+              <li>All federal, state and local laws, regulations and ordinances apply. This contest is void where such contests are prohibited, licensed, restricted or taxed.</li>
+              <li>A prize will be awarded only if it is claimed properly according to these Official Rules.</li>
+              <li>All discovered entries made in violation of these Official Rules will be eliminated from the contest.</li>
+              <li>By participating in this contest, you agree to be bound by these Official Rules and the decisions of Angara.com.</li>
+              <li>The displayed Gemstone pendant is a symbolic representation. The type, color, shape, style might vary of the actual pendant.</li>
+              <li>By enrolling for this contest, you also confirm to receive promotional offers from Angara.com which you may opt out any time.</li>
+            </ul>
+            </span> </span> <span style="font: bold 9px Verdana,Arial,Helvetica,sans-serif; color: rgb(134, 134, 134); text-decoration: underline; display: inline-block; cursor: pointer; position: absolute; right: 145px; top: 340px;"><img src="<?php echo $skinUrl; ?>frontend/angara/default/images/popup/nothanks.png" href="JavaScript:void(0);" onclick="closepopup()" /></span> </div>
+        </form>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+  </div>
+</div>

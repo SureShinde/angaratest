@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <angaracart>
+                                            <title>Angara - Cart Section</title>
+                                        </angaracart>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+        </resources>
+    </acl>
+	<layout>
+		<updates>
+			<angaracart>
+				<file>angaracart.xml</file>
+			</angaracart>
+		</updates>
+	</layout>
+</config>

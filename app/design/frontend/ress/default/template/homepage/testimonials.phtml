@@ -1,0 +1,73 @@
+<style>
+.HP1 {height:306px;}
+.HP2 {height:252px;}
+</style>
+<?php $reviews	= $this->getReviews()->getItems(); ?>
+
+	<div id="latest-reviews" class="col-xs-12 has-slider">
+		<div class="showcase-bg-white padding-type-10 HP1">
+			<div class="HP2">
+				<div id="homepage-latest-reviews">
+					<?php 
+					#todo don't load complete product each time. store the product image with review itself.
+					foreach($reviews as $review):
+						$_product	= Mage::getModel('catalog/product')->load($review->getEntityPkValue()); ?>
+						<div style="min-height:252px;">
+							<?php /* <div class="lr-box-rating text-center">
+								<?php 
+								$_percentRating = 0;
+								foreach($review->getRatingVotes() as $_vote){
+									$_percentRating = $_percentRating + $_vote->getPercent();
+								}
+								$_percentRating = $_percentRating / count($review->getRatingVotes()); ?>
+								<div class="rating-box center-block low-margin-bottom">
+									<div style="width:<?php echo $_percentRating; ?>%;" class="rating"></div>
+								</div>
+							</div> */ ?>
+							<div class="clearbox"></div>
+							<div class="lr-box">
+								<div class="col-sm-3 text-center lr-box-cell">
+                                	<a href="<?php echo $_product->getProductUrl();?>?icid=valentinepage|cr-widget|01282017" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="center-block text-center">
+										<img data-org="<?php echo str_replace('www.','cdn.',Mage::helper('catalog/image')->init($_product, 'image')->resize(175)->setQuality(80)); ?>" title="<?php echo $this->htmlEscape($_product->getName()); ?>" alt="<?php echo $this->htmlEscape($_product->getName()); ?>" style="margin:0 auto; max-width:175px; max-height:175px" />
+									</a>
+								</div>
+								<div class="col-sm-9 lr-box-cell" style="border-left:1px solid #eeeeee; padding:0px 50px;">
+                                    <div class="high-margin-top text-center">
+										<p>
+											<?php 
+											$_percentRating = 0;
+											foreach($review->getRatingVotes() as $_vote){
+												$_percentRating = $_percentRating + $_vote->getPercent();
+											}
+											$_percentRating = $_percentRating / count($review->getRatingVotes()); ?>
+											<div class="rating-box center-block low-margin-bottom">
+												<div style="width:<?php echo $_percentRating; ?>%;" class="rating"></div>
+											</div>
+										</p>
+                                        <p class="text-uppercase fontsize-type4 text-bold"><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getTitle()), null, true), $length = 50, $etc = '...');?></p>
+                                        <p class="fontsize-type2" style="color:#666666"><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getDetail()), null, true), $length = 380, $etc = '...');?></p>
+										<p class="no-margin fontsize-type2 text-bold text-uppercase low-margin-bottom">- <?php echo $this->htmlEscape($review->getNickname()); ?></p>
+										<p class="no-margin fontsize-type0" style="color:#666666; font-size:12px;"><?php echo Mage::helper('core')->formatDate($review->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_FULL);?></p>
+                                    </div>
+                                </div>
+								<?php /* <div class="col-sm-3 text-center lr-box-cell"></div> */ ?>
+							</div>
+						</div>
+					<?php 
+					endforeach; ?>
+				</div>
+			</div>
+			<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#homepage-latest-reviews').slick({
+					arrows			: 	false,
+					dots: true,
+					slidesToShow	: 	1,
+					slidesToScroll	: 	1,
+					autoplay: true,
+					autoplaySpeed: 5000
+				});
+			});
+			</script>
+		</div>
+	</div>

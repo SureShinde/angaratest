@@ -1,0 +1,232 @@
+/* common */
+.my-account{width:100%;float:left}
+
+.account-login, .account-create{width:100%; float:left; padding:10px;}
+.account-login .page-title h1, .account-create .page-title h1, .customer-account-forgotpassword .page-title h1{font-size:20px;}
+.account-login .col-1 h2, .account-login .col-2 h2, .account-create h2, .customer-account-forgotpassword h2{font-size:16px;}
+
+label{position:relative}
+label.required em {float: right;font-style: normal;color: #b94a48;position: absolute;top: 0;right: -8px;}
+
+.awrma-customer-rma-new input[type="text"], .awrma-guest-rma-index [type="text"], .awrma-customer-rma-new select, #tracking_form input[type="text"], #tracking_form input[type="password"], .customer-address-form .my-account input[type="text"], .customer-address-form .my-account input[type="password"], .customer-address-form .my-account input[type="email"], .customer-account-edit .my-account input[type="text"], .customer-account-edit .my-account input[type="password"], .customer-account-edit .my-account input[type="email"], .account-login input[type="text"], .account-login input[type="password"], .account-create input[type="text"], .account-create input[type="password"], .customer-account-forgotpassword .main .col-main .container input[type="text"], .customer-account-forgotpassword .main .col-main .container input[type="password"], .customer-address-form select{display: block; width: 100%; height: 34px; padding: 6px 12px; font-size: 13px; line-height: 1.428571429; color: #555555; vertical-align: middle;  background-color: #ffffff; background-image: none; border: 1px solid #cccccc; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; box-sizing: border-box; margin-bottom: 15px; }
+
+.account-login .col-2 .login_with_facebook_btn{border:none;}
+
+.awrma-guest-rma-index #awrma-new-submit, .awrma-customer-rma-new #awrma-new-submit, #tracking_form button, #awrma-comment-submit, .customer-address-form .buttons-set button, .customer-address-index .my-account .page-title button, .customer-account-edit .my-account .buttons-set button, .newsletter-manage-index .my-account .buttons-set button, .account-login .col-1 .buttons-set button, .account-login .col-2  .buttons-set button, .account-create .buttons-set button, .customer-account-forgotpassword .main .col-main .container .buttons-set button, .wishlist-submit-btn{background:#fa505a; color:#ffffff; padding:10px; float:right; border:none}
+
+.awrma-guest-rma-index .buttons-set p.required, .awrma-customer-rma-new .buttons-set p.required, #tracking_form p.required, .customer-address-form .buttons-set p.required, .account-login  p.required, .account-create .buttons-set .required, .customer-account-edit .my-account .buttons-set .required, .customer-account-edit .my-account .buttons-set .required, .customer-account-forgotpassword .main .col-main .container .buttons-set .required{float:right;width:100%; color:#b94a48; text-align:right}
+
+.account-create form, .customer-account-forgotpassword .main .col-main .container form{width:100%; float:left; padding:10px; background:#f8f8f8;box-sizing: border-box;}
+
+/* account login */
+.account-login .col-1, .account-login .col-2{width:100%; float:left; padding:10px;background:#f8f8f8; margin-bottom:20px;line-height:18px;}
+.account-login .col-1 .content .list-style-disc{padding:10px}
+.account-login .col-1 .content .list-style-disc li{line-height: 25px;}
+.account-login .col-2 .buttons-set{line-height:40px;}
+.account-create form .fieldset:first-child{margin-bottom:20px;}
+
+/* account create */
+.account-create form .fieldset{width:100%; float:left;}
+.account-create form .fieldset .fields .field{width:50%; float:left; padding:10px;}
+.account-create form .fieldset .fields .field:first-child{padding-left:0px}
+.account-create form .fieldset .fields .field:last-child{padding-right:0px}
+.account-create li.control .input-box{float:left}
+.account-create li.control label {line-height:22px;}
+.account-create .buttons-set .back-link{float:left;}
+
+/* forget password */
+.customer-account-forgotpassword .main .col-main .container{width:100%; float:left; padding:10px; margin-bottom:20px; line-height:18px;}
+.customer-account-forgotpassword .main .col-main .container{width:100%; float:left; padding:10px;}
+.customer-account-forgotpassword .main .col-main .container .captcha-image{position:relative;width:100%; float:left;}
+.customer-account-forgotpassword .main .col-main .container .captcha-image .captcha-reload{position:absolute; left: 175px;}
+.customer-account-forgotpassword .main .col-main .container .captcha-image .captcha-img{float:left;}
+.customer-account-forgotpassword .main .col-main .container .buttons-set{border-top:1px solid #e5e5e5; width:100%; float:left; margin-top:20px;}
+.customer-account-forgotpassword .main .col-main .container .back-link{float:left;}
+
+/* My Account Dashboard */
+.customer-account-index .block-banner, .customer-account-index .block-account,
+.sales-order-view .block-banner, .sales-order-view .block-account,
+.sales-order-history .block-banner, .sales-order-history .block-account,
+.customer-account-edit .block-banner, .customer-account-edit .block-account,
+.newsletter-manage-index .block-banner, .newsletter-manage-index .block-account,
+.customer-address-index .block-banner, .customer-address-index .block-account,
+.customer-address-form .block-banner, .customer-address-form .block-account,
+.awrma-customer-rma-list .block-banner, .awrma-customer-rma-list .block-account,
+.awrma-customer-rma-new .block-banner, .awrma-customer-rma-new .block-account,
+.awrma-guest-rma-index .block-banner, .awrma-guest-rma-index .block-account,
+.wishlist-index-index .block-banner, .wishlist-index-index .block-account,
+.review-customer-view .block-banner, .review-customer-view .block-account,
+.awrma-customer-rma-view .block-banner, .awrma-customer-rma-view .block-account,
+.review-customer-index .block-banner, .review-customer-index .block-account{display:none;}
+.my-account .dashboard{width:100%; float:left; padding:0px 10px;}
+.my-account .page-title, .my-account .welcome-msg, .my-account .box-account{width:100%; float:left;}
+.my-account .page-title h1{float:left}
+.my-account .page-title span{margin-top: 25px;}
+.my-account .page-title span a{display:black; padding:10px;}
+.my-account .box-account{border:1px solid #e5e5e5; margin-bottom:15px; border-radius:5px; overflow:hidden}
+.my-account .box-account .box-head{background:#f8f8f8; border-bottom:1px solid #e5e5e5; }
+.my-account .box-account .box-head .view-all{line-height: 53px;}
+.my-account.order-item{}
+.my-account .order-item-holder{border:1px solid #e5e5e5; padding:5px; border-radius: 3px; box-shadow: 0px 0px 6px -2px #dedede;}
+.my-account .order-item .top{border-bottom:1px solid #eeeeee}
+.my-account .order-item .top .order-detail{}
+.my-account .order-item .top .order-detail .order-no{font-size:14px; line-height:25px;}
+.my-account .order-item .top .order-detail .date{ font-size:12px; color:#999999}
+.my-account .order-item .top .status{font-size:14px; color:#db3b24; line-height:25px;}
+.my-account .order-item .mid{border-bottom:1px solid #eeeeee; padding: 30px 0px;}
+.my-account .order-item .mid .ship-to{}
+.my-account .order-item .mid .order-total{}
+.my-account .order-item .bottom{margin-top: 5px;}
+.my-account .order-item .bottom a{display:inline-block; padding:5px; box-sizing:border-box; width:33.3333%; text-align:center; float:left; border-right:1px solid #eeeeee;}
+.my-account .order-item .bottom a:last-child{border:none;}
+.box-info .box-title{border-bottom:1px solid #eeeeee;}
+.box-info .edit-link, .box-info .manage-add{line-height:48px;}
+
+/* sales-order-view */
+.sales-order-view .page-title h1{margin-bottom:13px;}
+.sales-order-view .order-info-box .holder{border:1px solid #dedede; padding:10px; border-radius:3px;}
+.order-details .item-container{border:1px solid #dedede; border-radius:3px; overflow:hidden}
+.order-details .item-container .box-head{background:#f8f8f8; border-bottom:1px solid #dedede}
+.order-details .item-container .items-ordered{padding:0px 10px}
+.order-details .item-container .items-ordered .mid{margin:15px 0px}
+.order-details .item-container .items-ordered .item{padding-bottom:15px; border-bottom:1px solid #dedede}
+.order-details .item-container .items-ordered .item h3{margin-bottom:5px;}
+.order-details .item-container .items-ordered .item .pro-code{font-size:11px; color:#999999; text-transform:uppercase;}
+.order-details .item-container .items-ordered .item .pro-detail{ float:left; width:60%}
+.order-details .item-container .items-ordered .item .pro-detail .item-options .full-width span{line-height:20px;}
+.order-details .item-container .items-ordered .item .pro-detail .item-options .full-width span:first-child{float:left}
+.order-details .item-container .items-ordered .item .pro-detail .item-options .full-width span:last-child{float:right}
+.order-details .item-container .items-ordered .item .pro-qty{ float:right; text-align:right; width:30%; line-height:20px;}
+.order-details .item-container .items-ordered .bottom{text-align:right}
+.sales-order-view .order-total{padding:15px 0px; }
+.sales-order-view .order-total td:first-child{float: left;}
+
+/* sales-order-history */
+.customer-address-index .my-account .page-title, .sales-order-history .page-title{padding:0px 10px;}
+.sales-order-history .pager, .review-customer-index .pager, .awrma-customer-rma-list .pager{width:100%; float:left; padding:0px 10px;}
+.sales-order-history .pager .amount, .review-customer-index .pager .amount, .awrma-customer-rma-list .pager .amount{float:left; margin:0px;}
+.sales-order-history .pager .limiter, .review-customer-index .pager .limiter, .awrma-customer-rma-list .pager .limiter{float:right;}
+.sales-order-history .pager .pages, .awrma-customer-rma-list .pager .pages{width:100%; float:left; text-align:center;}
+.sales-order-history .pager .pages ol, .awrma-customer-rma-list .pager .pages ol{margin-left:10px; padding:0px; border:1px solid #dedede; border-radius:3px;} 
+.sales-order-history .pager .pages ol, .sales-order-history .pager .pages ol li, .awrma-customer-rma-list .pager .pages ol, .awrma-customer-rma-list .pager .pages ol li{display:inline-block}
+.sales-order-history .pager .pages ol li, .awrma-customer-rma-list .pager .pages ol li{padding: 5px; width: 15px; height: 15px; border-right:1px solid #dedede}
+.sales-order-history .pager .pages ol li:last-child, .awrma-customer-rma-list .pager .pages ol li:last-child{border-right:none}
+.sales-order-history .my-account .order-item .bottom a{width:50%;}
+.sales-order-history .buttons-set{width:100%; float:left; padding:0px 10px;}
+
+/* customer-account-edit */
+.customer-account-edit .my-account, .awrma-guest-rma-index .awrma-account, .awrma-customer-rma-new .awrma-account, .awrma-customer-rma-list .awrma-account, .awrma-customer-rma-list .buttons-set, .review-customer-index .my-account, .newsletter-manage-index .my-account, .customer-address-form .my-account{width:100%; float:left; padding:0px 10px;}
+.customer-account-edit .my-account form, .newsletter-manage-index .my-account form, .customer-address-form .my-account form{width:100%; float:left; padding:0px 10px 10px; box-sizing:border-box; border:1px solid #dedede; border-radius:3px;}
+.customer-account-edit .my-account form .back-link, .newsletter-manage-index .my-account form .back-link, .customer-address-form .my-account form .back-link{float:left;}
+.customer-address-index .my-account .page-title button{margin-top:14px;}
+.customer-address-index .my-account .col2-set, .customer-address-index .my-account .col2-set .col-1, .customer-address-index .my-account .col2-set .col-2{width:100%; float:left; padding:0px 10px;}
+.customer-address-index .my-account .col2-set .col-1, .customer-address-index .my-account .col2-set .col-2{border:1px solid #dedede; border-radius:3px; margin-bottom:15px;}
+.customer-address-index .my-account .buttons-set{width:100%; float:left; padding:0px 10px;}
+
+/* Wishlist */
+#wishlist-view-form{border: 1px solid #dedede; border-radius: 5px;}
+#wishlist-table tr{border-bottom:1px solid #dedede; display:block; padding:5px}
+#wishlist-table tr td, #wishlist-table tr th{width:25%; padding:5px;}
+#wishlist-table tr td:nth-child(1), #wishlist-table tr th:nth-child(1){width:25%}
+#wishlist-table tr td:nth-child(2), #wishlist-table tr th:nth-child(2){width:35%}
+#wishlist-table tr td:nth-child(3), #wishlist-table tr th:nth-child(3){width:35%}
+#wishlist-table tr td:nth-child(4), #wishlist-table tr th:nth-child(4){width:5%}
+.wishlist-view-btn{background: #ededed; background: -moz-linear-gradient(top,  #ededed 0%, #b5b5b5 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#b5b5b5)); background: -webkit-linear-gradient(top,  #ededed 0%,#b5b5b5 100%); background: -o-linear-gradient(top,  #ededed 0%,#b5b5b5 100%); background: -ms-linear-gradient(top,  #ededed 0%,#b5b5b5 100%); background: linear-gradient(to bottom,  #ededed 0%,#b5b5b5 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#b5b5b5',GradientType=0 ); border: 1px solid #A0A0A0; color:#333333;}
+.wishlist-view-btn, .wishlist-submit-btn{padding: 5px; width: 100%; margin-top: 10px; display: block; box-sizing: border-box; text-align: center;} 
+
+/* review-customer-index */
+.review-customer-index{}
+.review-customer-index .pager { line-height: 21px; }
+.review-customer-index .my-reviews-section{border:1px solid #dedede; border-radius:3px; padding:0px 10px; }
+.review-customer-index .my-reviews-section .my-review{border-bottom: 1px dotted #dedede;}
+.review-customer-index .my-reviews-section .my-review:last-child{border-bottom:none}
+.review-customer-index .my-reviews-section .my-review .pro-name h2{margin: 0px 0px 3px; font-size:18px;}
+.review-customer-index .my-reviews-section .my-review .pro-name small{ color:#888888}
+.review-customer-index .my-reviews-section .my-review .review-detail{margin: 20px 0px;}
+.review-customer-index .my-reviews-section .my-review .my-review-btn{text-align:center; border-top:1px dotted #dedede}
+.review-customer-index .my-reviews-section .my-review .my-review-btn .half-width{height: 35px;}
+.review-customer-index .my-reviews-section .my-review .my-review-btn .half-width:first-child{padding-top: 10px; border-right: 1px dotted #dedede;}
+.review-customer-index .my-reviews-section .my-review .my-review-btn .half-width:last-child{line-height:35px;}
+.review-customer-index .buttons-set{width:100%; float: left; margin-top:10px;}
+.review-customer-view .product-img-box{text-align:center; width:100%; float:left; padding:0px 10px}
+.review-customer-view .product-img-box .ratings{display:inline-block}
+.review-customer-view .product-details{padding:0px 10px}
+.review-customer-view .product-details, .review-customer-view .product-detail h2, .review-customer-view .product-detail h3, .review-customer-view .buttons-set{width:100%; float:left}
+.review-customer-view .buttons-set{padding:10px}
+.review-customer-view .product-details h2{margin-top:10px; margin-bottom:0px; font-size:16px}
+.review-customer-view .product-details h3{margin-top:10px; margin-bottom:0px; font-size:14px}
+.review-customer-view .product-details dl dd{margin:20px 0px}
+
+/* awrma-customer-rma-list */
+.awrma-customer-rma-list{}
+.awrma-customer-rma-list .pager{padding:0px!important}
+.awrma-customer-rma-list .link-awrma-newrma{display:block; margin-bottom:20px;}
+.awrma-customer-rma-list .box-account{width:100%; float:left; margin: 20px 0px; overflow-x:auto}
+.awrma-customer-rma-list #my-rmas-table{width:100%; border:1px solid #dedede;}
+.awrma-customer-rma-list #my-rmas-table tr th,
+.awrma-customer-rma-list #my-rmas-table tr td{padding:10px; border-right:1px solid #dedede; border-bottom:1px solid #dedede; white-space: nowrap;}
+.awrma-customer-rma-list #my-rmas-table tr th:last-child,
+.awrma-customer-rma-list #my-rmas-table tr td:last-child{border-right:none}
+.awrma-customer-rma-list #my-rmas-table tr:last-child th,
+.awrma-customer-rma-list #my-rmas-table tr:last-child td{border-bottom:none}
+
+/* awrma-customer-rma-view */
+.awrma-customer-rma-view{}
+.awrma-customer-rma-view .awrma-account{padding:0px 10px;}
+.awrma-customer-rma-view .awrma-account .fieldset{}
+.awrma-customer-rma-view .awrma-account .fieldset h2.legend,
+.awrma-customer-rma-view .awrma-account .fieldset .form-list{width:100%; float:left;}
+.awrma-customer-rma-view .awrma-account .fieldset .form-list{line-height:20px;}
+.awrma-customer-rma-view .awrma-account h4{font-size:14px;}
+.awrma-customer-rma-view .awrma-account #awrma-requested-items{width:100%; float:left; text-align:left; border: 1px solid #dedede;}
+.awrma-customer-rma-view .awrma-account #awrma-requested-items tr td,
+.awrma-customer-rma-view .awrma-account #awrma-requested-items tr th{padding:10px 5px; border-right:1px solid #dedede;}
+.awrma-customer-rma-view .awrma-account #awrma-requested-items tr td:last-child,
+.awrma-customer-rma-view .awrma-account #awrma-requested-items tr th:last-child{border:none;}
+.awrma-customer-rma-view .awrma-account #awrma-requested-items tr td h3{margin-top:0px;}
+ul.awrma-comments-list{width:100%; float:left}
+#awrma-comment-form textarea{width:100%; box-sizing:border-box}
+#awrma-comments-list li strong{margin-bottom: 10px;display: block;}
+#awrma-comment-form .buttons-set{width: 100%; float: left; padding:0px 10px;}
+#awrma-comment-form .buttons-set .required{float:left;}
+.awrma-customer-rma-view .buttons-set{width: 100%; float: left; padding:0px 10px;}
+
+/* awrma-customer-rma-new */
+.awrma-customer-rma-new .form-list, .awrma-guest-rma-index .form-list{line-height:20px;}
+.awrma-customer-rma-new .buttons-set p.required, .awrma-guest-rma-index .buttons-set p.required{float:left;}
+.awrma-customer-rma-new .container .buttons-set, .awrma-guest-rma-index .container .buttons-set{padding:10px; width:100%; float:left;}
+.awrma-customer-rma-new textarea, .awrma-guest-rma-index textarea{width: 100%; box-sizing: border-box; height: 70px;}
+.awrma-guest-rma-index .container{padding:0px 10px;}
+
+
+/* checkout */
+.onepagecheckout_block label.login-lable{margin-bottom: 10px; line-height: 18px; width: 100%; float: left;}
+#shipping_customer_address{margin-bottom:10px;}
+#ship_address_block .row.customer-name{margin-top:10px;}
+
+
+.my-wishlist .page-title {text-align:center;border-bottom: 1px solid #fa505a;}
+#wishlist-view-form {border:initial;border-radius:initial;}
+#wishlist-table .last {position:relative;}
+.wishlist-item-1 {width:30%;float:left;}
+.wishlist-item-2 {width:70%;float:left;padding-left:20px;}
+.wishlist-item-3 {width: 70%;margin-left: 30%;padding-left: 20px;}
+.wishlist-item-4 {position:absolute;right:0px;top:0px;}
+.bg-close {background: url(/skin/frontend/ress/default/images/optionpopupclose.png) no-repeat center center;background-size: 12px;font-size: 0px;width: 30px;height: 30px;display:block;}
+.wishlist-item-2 .product-name {padding-right:30px;margin-top: initial;}
+.wishlist-item-3 .cart-cell div {width:50%;float:left;}
+.wishlist-item-3 .cart-cell div:first-child {padding-right:10px;}
+.wishlist-item-2 .price-box {padding-bottom:20px;}
+.wishlist-index-index  .buttons-set-bk {float:left;width:30%;}
+.wishlist-index-index  .buttons-set-wishbtn {float:left;width:70%;}
+.wishlist-index-index  .buttons-set2 button {margin-top: 10px;display: block;float: right;}
+.wishlist-item-2 .product-retail-price del {display:none;}
+.buttons-set-wishbtn button {width: 92%;height: 30px;border: 1px solid #cccccc;background: #ffffff;}
+.full-width.pT10.pB10.relative {border-bottom:1px solid #cccccc;}
+.wishlist-item-3 .wishlist-view-btn {background: #a7a7a7;color: #ffffff;}
+.wishlist-index-share  aside[role=complementary] {display:none;}
+.wishlist-index-share  .my-account {padding:10px;}
+.wishlist-index-share  .back-link {width:50%;margin:initial;float:left;margin-top: 10px;line-height:30px;}
+.wishlist-index-share  .form-buttons button {float:right;margin-top:10px;background: #fa505a;border: none;color: #ffffff;font-size: 14px;padding: 0 12px;line-height: 30px;border-radius: 2px;}
+.wishlist-index-share  .form-buttons .required {display:none;}
+.wishlist-index-share  .form-list textarea {width:98%;}

@@ -1,0 +1,128 @@
+<?php $_invoice = $this->getInvoice();
+//echo '<pre>'; print_r($_invoice); die; ?>
+<?php $_order   = $this->getOrder();
+//echo '<pre>'; print_r($_order); die; ?>
+<?php if ($_invoice && $_order){ ?>
+
+<tr>
+  <td valign="top" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0"  style="border:1px solid #333; border-bottom:none;" >
+      <tr>
+        <th scope="col" width="150" style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Item Code</th>
+        <th scope="col" width="380" style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Description</th>
+        <th scope="col" class="90" style="padding:8px 0 8px 5px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Quantity</th>
+        <th scope="col" class="95" style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Rate</th>
+        <?php /*?><th scope="col" width="160"  style="padding:8px 0 8px 5px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Sub Amount</th>
+        <th scope="col" width="80"  style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333; border-right:1px solid #333;">Discount</th><?php */?>
+        <th scope="col" width="80"  style="padding:8px 0 8px 15px; text-align:left;font:13px Arial, Helvetica, sans-serif; background-color:#999; color:#fff;border-bottom:1px solid #333;">Amount</th>
+      </tr>
+      <?php $i=0; foreach ($_invoice->getAllItems() as $_item){ ?>
+      <?php if($_item->getOrderItem()->getParentItem()) continue; else $i++; ?>
+      <?php //echo get_class($this);die;
+	  	echo $this->getItemHtml($_item); //	default.phtml code includes?>
+      <?php }	//	endforeach; ?>
+<?php 
+$roleName	=	Mage::helper('function')->getAdminData();
+if($roleName=='Administrators'){
+?>     
+<tr>
+    <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit">Add more</td>
+    <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit">Add more</td>
+    <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit">1</td>
+    <td style="border-right:1px solid #333; font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit">$0.00</td>
+    <td style="font:12px Arial, Helvetica, sans-serif; padding:8px 15px; color:#000; text-align:left; vertical-align:top;" class="edit">$0.00</td>
+</tr>
+<?php } ?>
+    </table></td>
+</tr>
+<tr>
+  <td valign="top" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-left:1px solid #333; border-right:1px solid #333; border-bottom:1px solid #333;">
+      <tr>
+        <td width="413"  valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style=" padding:15px 15px 0 15px; border-top:1px solid #333; font-size:15px;"><?php
+				$orderId		=	$_order->getId();
+				$order 			= 	Mage::getModel('sales/order')->load($orderId);
+				
+				$subTotal 		= 	$order->getSubtotal();
+				$discountAmount = 	$order->getDiscountAmount();
+				$shippingAmount = 	$order->getShippingAmount();		//	get shipping amount for order
+				$taxAmount 		= 	$order->getTaxAmount();
+				
+				$totalAmount			=	$subTotal+$discountAmount+$shippingAmount+$taxAmount;	//	as discount is already in minus
+				$totalPaidByCustomer 	= 	$order->getGrandTotal();	//	total amount that needs to be paid by customer after deductions(discount and EMI)
+				//$emiInstallments		=	$totalAmount - $totalPaidByCustomer;
+				
+				$i=1;
+				$insFlag	=	array();
+				foreach ($order->getAllItems() as $_item){
+					$productId				=	$_item->getProductId();
+					$noOfInstallments		=	'';
+					$noOfInstallments		=	Mage::helper('function')->getInstallmentsForEmailInvoice($orderId,$productId);
+					if($noOfInstallments>1){
+						$shippingAmount 		= 	$order->getShippingAmount();		//	total shipping amount for this complete order
+						$taxAmount 				= 	$_item->getTaxAmount();				//	Tax per product per item
+						$ItemDiscountAmt 		= 	$_item->getDiscountAmount(); 		//	
+						$ItemQty 				= 	$_item->getQtyOrdered();					//	total per product quantity purchased in this order
+						$ItemTotAmt 			= 	$_item->getPrice();					//	
+					
+						$perItemDiscountAmt 	= 	($ItemDiscountAmt / $ItemQty);  	//	discount amount per product
+					
+						$EMIAmount 				= 	(($ItemTotAmt - $perItemDiscountAmt) * $ItemQty ) / $noOfInstallments;
+						$first_emi 				= 	$EMIAmount + $taxAmount;
+						//$firstEmiArray[]		=	$first_emi;
+						$third_emi				=	$second_emi 			= 	$EMIAmount;
+						//echo '<br>noOfInstallments->'.$noOfInstallments; 
+						if($noOfInstallments==3){
+							$firstEmi[]		=	$first_emi;
+							$secondEmi[]	=	$second_emi;
+							$thirdEmi[]		=	$third_emi;
+							$insFlag[]		=	3;
+							/*echo '<dd>1st EMI	- '.$first_emi.'	</dd>';
+							echo '<dd>2nd EMI	- '.$second_emi.'	</dd>';
+							echo '<dd>3rd EMI	- '.$third_emi.'	</dd>';*/
+						}elseif($noOfInstallments==2){
+							$firstEmi[]		=	$first_emi;
+							$secondEmi[]	=	$second_emi;
+							$insFlag[]		=	2;
+							/*echo '<dd>1st EMI	- '.$first_emi.'	</dd>';
+							echo '<dd>2nd EMI	- '.$second_emi.'	</dd>';*/
+						}
+					}
+					$i++;
+				}
+				//echo '<pre>insFlag->'; print_r($insFlag);die;
+				$maxNoOfInstallments		=	max($insFlag);
+				if($maxNoOfInstallments==2 || $maxNoOfInstallments==3){
+					$firstInstallment	=	array_sum($firstEmi)+$taxAmount;				//	tax will be added to first emi only
+					$secondInstallment	=	array_sum($secondEmi);
+					//echo '<br>secondInstallment->'.$secondInstallment;
+					$thirdInstallment	=	array_sum($thirdEmi);
+					//echo '<br>thirdInstallment->'.$thirdInstallment;
+				}
+				if(count($insFlag)>0){
+				?>
+                    Total order <?php echo $_order->formatPrice($totalAmount,false,true);?> in installments 
+                    1st <?php echo $_order->formatPrice($totalPaidByCustomer,false,true); 
+					if($secondInstallment){ 
+						if($thirdInstallment){
+							echo ',';
+						}else{
+							echo ' and';
+						}
+					}elseif($thirdInstallment){ echo ' and';}?> 
+                    <?php if($secondInstallment) {?>2nd <?php echo $_order->formatPrice($secondInstallment,false,true); 
+                    } ?> 
+                    <?php if($thirdInstallment) {?>and 3rd <?php echo $_order->formatPrice($thirdInstallment,false,true);
+                    }
+				}//die;
+				?>
+                </td>
+            </tr>
+          </table></td>
+        <td width="330" valign="top" ><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-left:1px solid #333;">
+            <?php echo $this->getChildHtml('invoice_totals');?>
+          </table></td>
+      </tr>
+    </table></td>
+</tr>
+<?php }	//	end if; ?>

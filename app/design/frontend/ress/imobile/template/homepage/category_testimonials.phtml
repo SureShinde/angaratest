@@ -1,0 +1,72 @@
+<?php 
+//$reviews = $this->getReviews()->getItems();
+//$reviews = $this->getCatalogReviews()->getItems();
+$categoryId = Mage::getSingleton('catalog/session')->getLastVisitedCategoryId();
+if($categoryId){
+	$reviews = $this->getCatalogReviews($categoryId)->getItems();
+}
+if(count($reviews) > 1):
+	//$category = Mage::registry('current_category'); 
+	if($categoryId){
+		$categoryName = Mage::getModel('catalog/category')->load($categoryId)->getName();
+	}
+	$rCount = 1; ?>
+	<div class="full-width review-slider rs-catalog">
+    <div class="testimonial-heading uppercase mT5 mB5">Latest Jewelry Reviews for <?php echo $categoryName; ?></div>
+	<div class="slider-category-testimonal mB10 mT10">
+	<?php 
+    foreach($reviews as $review):
+        //$_product	= Mage::getModel('catalog/product')->load($review->getEntityPkValue());
+        $_product = Mage::getModel('catalog/product')->getCollection()
+            ->addAttributeToSelect('product_url')
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('image')
+            ->addAttributeToFilter('entity_id', $review->getEntityPkValue())
+            ->addUrlRewrite()
+            ->load()
+            ->getFirstItem(); ?>
+        <div>
+            <span class="image half-width"><a href="<?php echo $_product->getProductUrl(); ?>?icid=home|rr-widget" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="center-block text-center"><img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(175); ?>" title="<?php echo $this->htmlEscape($_product->getName()); ?>" class="img-responsive center-block" alt="<?php echo $this->htmlEscape($_product->getName()); ?>"/></a></span>
+            <span class="half-width">
+                <span class="review-title center-align mB10">
+                    <strong><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getTitle()), null, true), $length = 50, $etc = '...');?></strong>
+                </span>
+                <span class="pro-rating center-align mB10">
+                    <span class="rating-box">
+                        <?php $_percentRating = 0;
+                            foreach($review->getRatingVotes() as $_vote){
+                                $_percentRating = $_percentRating + $_vote->getPercent();
+                            }
+                            $_percentRating = $_percentRating / count($review->getRatingVotes());
+                        ?>
+                        <span style="width:<?php echo $_percentRating; ?>%;" class="rating"></span>
+                    </span> 
+                    <span class="rating-num"><strong><?php printf("%.1f",($_vote->getPercent() * .05));?></strong></span>
+                </span>
+                <span class="customer-name center-align mB10">
+                    <i>- <?php echo $this->htmlEscape($review->getNickname()); ?> -</i>
+                </span>
+            </span>            
+            <span class="full-width review center-align"><?php echo Mage::helper('core/string')->truncate($this->stripTags($this->htmlEscape($review->getDetail())), $length = 300, $etc = '...'); ?></span>
+        </div>					
+    <?php 
+	
+	if($rCount >= 5){
+		break;
+	}
+	$rCount++;
+	
+    endforeach; ?>
+	</div>
+	</div>
+    <script>
+		jQuery(document).ready(function(){
+			jQuery('.slider-category-testimonal').slick({
+				dots	: 	true,
+				arrows	: 	false
+			});
+		});
+	</script>
+    <div class="read-more-reviews full-width pL10 pR10"><a href="/testimonials/index/morereviews/id/<?php echo $categoryId;?>/" class="fontcolor-type1 max-margin-bottom text-underline pull-right">Read More Reviews <i class="fr fa fa-chevron-right" style="margin-left: 5px; font-size:9px; margin-top: 2px;"></i></a></div>
+<?php 
+endif; ?>

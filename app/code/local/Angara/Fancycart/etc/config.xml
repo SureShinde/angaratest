@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Fancycart>
+            <version>0.1.0</version>
+        </Angara_Fancycart>
+    </modules>
+    <global>
+        <blocks>
+            <fancycart>
+                <class>Angara_Fancycart_Block</class>
+            </fancycart>
+        </blocks>
+        <helpers>
+			<fancycart>
+				<class>Angara_Fancycart_Helper</class>
+			</fancycart>
+		</helpers>
+    </global>
+
+    <frontend>
+        <layout>
+			<updates>
+				<fancycart>
+					<file>fancycart.xml</file>
+				</fancycart>
+			</updates>
+		</layout>
+        <routers>
+          <fancycart>
+              <use>standard</use>
+              <args>
+                  <module>Angara_Fancycart</module>
+                  <frontName>fancycart</frontName>
+              </args>
+        </fancycart>
+    </routers>
+    </frontend>
+</config>

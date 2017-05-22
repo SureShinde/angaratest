@@ -1,0 +1,28 @@
+@font-face {
+ font-family: 'open_sansregular';
+ src: url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.eot');
+ src: url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.woff') format('woff'),  url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/default/fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'open_sanssemibold';
+ src: url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.eot');
+ src: url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),  url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.woff') format('woff'),  url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.ttf') format('truetype'),  url('/skin/frontend/angara/default/fonts/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'ProximaNova';
+ src: url('/skin/frontend/angara/diamondstud/fonts/proximanova-regular-webfont.eot');
+ src: url('/skin/frontend/angara/diamondstud/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-regular-webfont.woff') format('woff'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-regular-webfont.ttf') format('truetype'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-regular-webfont.svg#ProximaNova') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+@font-face {
+ font-family: 'ProximaNova_Bold';
+ src: url('/skin/frontend/angara/diamondstud/fonts/proximanova-bold-webfont.eot');
+ src: url('/skin/frontend/angara/diamondstud/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-bold-webfont.woff') format('woff'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-bold-webfont.ttf') format('truetype'), url('/skin/frontend/angara/diamondstud/fonts/proximanova-bold-webfont.svg#ProximaNova_Bold') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}

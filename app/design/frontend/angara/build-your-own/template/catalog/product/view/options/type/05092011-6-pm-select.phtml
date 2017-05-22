@@ -1,0 +1,144 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php /* @var $this Mage_Catalog_Block_Product_View_Options_Type_Select */ ?>
+<?php $_option = $this->getOption() ?>
+<?  $sel = ''; ?>
+<?php
+if(isset($_REQUEST['build_step_last']))
+{
+	if(isset($_REQUEST['options']) && !empty($_REQUEST['options'])){
+		foreach($_REQUEST['options'] as $ky=>$val){
+			$rsize = $val;	
+		}
+	}	
+		//echo '<pre>';print_r($_REQUEST['options']);echo '</pre>';
+?>	
+	<?php
+    $optionType = $_option->getType();
+	//echo $optionType.'<br><br>';
+    if ($optionType == 'drop_down')
+	{
+    	$values = $_option->getValues();
+    ?>
+    <dt>
+        <label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><!--<?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>--><?php echo $_option->getTitle() ?></label>
+        <?php echo $this->getFormatedPrice() ?>
+    </dt>
+    <dd>
+    	<select class="required-entry product-custom-option" id="<?php echo $_option->getId() ?>" name="options[<?php echo $_option->getid() ?>]" onchange="opConfig.reloadPrice()">
+            <option value="">Select</option>
+            <?php
+            foreach ($values as $k => $v):        	
+                if($rsize==$v->getOptionTypeId()){
+                    $sel = 'selected="selected"';
+                }else{
+                    $sel = '';
+                }
+            ?>
+            <option value="<?php echo $v->getOptionTypeId() ?>" <?php echo $sel;?>><?php echo $v->getDefaultTitle()?></option>
+            <?php
+            endforeach;
+            ?>
+        </select>
+    </dd>
+    <?php
+	}elseif ($optionType == 'radio')
+	{
+		$values = $_option->getValues();
+	?>
+    <dt>
+        <label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><!--<?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>--><?php echo $_option->getTitle() ?></label>
+        <?php echo $this->getFormatedPrice() ?>
+    </dt>
+    <dd><?php
+		$x=1;
+        foreach ($values as $k => $v):
+		//print_r($v);
+        	if($x==1){
+				$sel = 'checked="checked"';
+			}else{
+				$sel = '';
+			}
+		?>
+        <input <?php echo $sel;?> type="radio" price="<?php echo $v->getPrice() ?>" id="options_<?php echo $_option->getId() ?>_<?php echo $x; ?>" name="options[<?php echo $_option->getid() ?>]" onclick="opConfig.reloadPrice()" class="radio  validate-one-required-by-name product-cust" value="<?php echo $v->getOptionTypeId() ?>" id="options_2838_2" name="options[<?php echo $_option->getid() ?>]" onclick="opConfig.reloadPrice()" class="radio  validate-one-required-by-name product-custom-option"><?php echo $v->getDefaultTitle()?>          
+        <?php
+        	$x++;
+		endforeach;
+        ?>
+    </dd>
+    <?	
+	}
+    ?>    
+	<?php
+    /*
+	?>  
+    <dt><label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><!--<?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>--><?php echo  $this->htmlEscape($_option->getTitle()) ?></label>: </dt>
+    <dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+        <div class="input-box">
+            <?php echo $this->getValuesHtml() ?>
+            <?php if ($_option->getIsRequire()): ?>
+                <?php if ($_option->getType()==Mage_Catalog_Model_Product_Option::OPTION_TYPE_RADIO || $_option->getType()==Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX): ?>
+                    <span id="options-<?php echo $_option->getId() ?>-container"></span>
+                <?php endif; ?>
+            <?php endif;?>
+        </div>
+    </dd>
+	<?php
+	*/
+	?>    
+<?php
+}else{
+?>  
+    <?php
+    $optionType = $_option->getType();
+    if ($optionType == 'drop_down'):
+    $values = $_option->getValues();
+    ?>
+    <dt>
+        <label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><!--<?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>--><?php echo $_option->getTitle() ?></label>
+        <?php echo $this->getFormatedPrice() ?>
+    </dt>
+    <dd><select class="required-entry product-custom-option" id="<?php echo $_option->getId() ?>" name="options[<?php echo $_option->getid() ?>]" onchange="opConfig.reloadPrice()">
+        <option value="">Select</option>
+        <?php
+        foreach ($values as $k => $v):
+        ?>    
+        <option value="<?php echo $v->getOptionTypeId() ?>"><?php echo $v->getDefaultTitle()?></option>
+        <?php
+        endforeach;
+        ?>
+        </select>
+    </dd>
+    <?php
+    endif;
+    ?>
+<?php
+}
+?>	
+
+<!--<input type="radio" price="15" value="59524" id="options_2838_3" name="options[2838]" onclick="opConfig.reloadPrice()" class="radio  validate-one-required-by-name product-custom-option">-->

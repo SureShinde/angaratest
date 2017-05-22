@@ -1,0 +1,133 @@
+<?php
+/**
+ * @category   Angara
+ * @package    Angara_Gifts
+ * @copyright  Copyright (c) 2014 Angara ecommerce. (http://www.angara.com)
+ * @license    http://angara.com/LICENSE-COMMUNITY.txt
+ */
+ ?>
+
+<?php 
+//$products = 	$this->getGiftProducts();
+$productsData 	= 	$this->getLayout()->createBlock('gifts/gifts')->getGiftProducts();
+$products		=	$productsData['products'];
+$ruleTitle		=	$productsData['ruletitle'][0];
+//echo '<pre>';print_r($ruleTitle);die;
+//$ruletitle	=	'';
+?>
+<?php if(is_array($products) && count($products) && !Mage::helper('gifts')->isGiftUsed()){?>
+<?php $checkout	=	'';
+	if( $this->getRequest()->getModuleName() == 'checkout' ){
+	$checkout	=	1;?>
+	<div class="gifts-popup" id="gifts_popup" style="display:none;">
+<?php }else{?>
+	<div class="gifts-popup" id="gifts_popup">
+<?php } ?>
+		<div class="gifts-popup-wrapper">
+      
+			<a href="javascript:;" onclick="$('gifts_popup').hide()" class="gifts-popup-close" title="<?php echo $this->__('Close Popup') ?>"><?php echo $this->__('&times') ?></a>
+			<h2 class="no-margin text-center showcase-deshed-border-bottom-1px max-padding-bottom">Choose your Free Jewelry Gift(s) here</h2>           
+    		<div class="gifts-products-wrapper">
+              <div class="row">
+               <div class="col-sm-12 col-xs-5">
+       			<div class="row showcase-deshed-border-bottom-1px no-gutters showcase-bg-light">
+                <div class="col-sm-2 hidden-xs"><div class="max-padding-top max-margin-top low-padding-left"><?php echo $ruleTitle;?></div></div>
+                <div class="col-sm-10 col-xs-12">
+                <div class="row no-gutters visible-xs showcase-deshed-border-bottom-mob-1px low-padding-top low-padding-bottom text-center showcase-bg-white"><div class="col-xs-12  fontsize-type0 text-bold"><?php echo $ruleTitle;?></div></div>
+                    <div class="row no-gutters showcase-bg-white low-padding-top low-padding-bottom">
+                        <div class="col-sm-1 hidden-xs"><i class="fa fa-caret-right valign-middle" style="line-height:80px;"></i></div>
+                            <?php $counter = 0 ?>
+                            <?php foreach ($products as $product){ ?>
+                                <?php if($checkout==1){?>
+                                <div class="clickable col-sm-3 col-xs-12 add_free_gift_check" onclick="setLocation('<?php echo Mage::getUrl('checkout/cart/add/', array('product'=>$product->getId()))?>')">
+                                <?php }else{?>
+                                <div class="add_free_gift clickable col-sm-3 col-xs-12" id="gift_<?php echo $product->getId();?>">
+                                <?php } ?>
+                                    <div class="fontsize-type0 text-center"><img src="<?php echo Mage::helper('catalog/image')->init($product, 'small_image')->resize(50); ?>" width="50" height="50" alt="<?php echo $this->stripTags($product->getName(), null, true) ?>" /><br /><?php echo $product->getName(); ?></div>
+                                </div>
+                                <?php if( count($products) != ($counter+1) ){?>
+                                     <div class="col-sm-1 col-xs-12 fontsize-type0 text-center max-padding-top"><b>OR</b></div>
+                                <?php } ?>
+                            <?php $counter++ ?>
+                            <?php } ?>
+                    </div>
+                </div>
+         	</div>
+           		 </div>
+                
+             
+   		
+			<?php //	Showing upper range products
+            //$products 	=	$this->getGiftProductsUpperRange();
+            $productsUpperData 	= 	$this->getLayout()->createBlock('gifts/gifts')->getGiftProductsUpperRange();
+			$productsUpper		=	$productsUpperData['products'];
+			$ruleUpperTitle		=	$productsUpperData['ruletitle'][0];
+			if(count($productsUpper)>0){
+            ?>
+            <div class="col-sm-12 col-xs-2"></div>
+            <div class="col-sm-12 col-xs-5">	
+            <div class="relative-placeholder">
+                <div class="absolute-placeholder" style="background-color:#fff; top:0; left:0; bottom:0; right:0; opacity:.7; filter: alpha(opacity=70); z-index:1112;"></div>
+                <div class="gifts-products-wrapper">
+                    <div class="row showcase-deshed-border-bottom-1px no-gutters showcase-bg-light">
+                    	<div class="col-sm-2 hidden-xs"><div class="max-padding-top max-margin-top low-padding-left"><?php echo $ruleUpperTitle;?></div></div>
+                    	<div class="col-sm-10 col-xs-12">
+                        <div class="row no-gutters visible-xs showcase-deshed-border-bottom-mob-1px low-padding-top low-padding-bottom text-center showcase-bg-white"><div class="col-xs-12  fontsize-type0 text-bold"><?php echo $ruleUpperTitle;?></div></div>
+                        <div class="row no-gutters showcase-bg-white low-padding-top low-padding-bottom">
+                            <div class="col-sm-1 hidden-xs"><i class="fa fa-caret-right valign-middle" style="line-height:80px;"></i></div>
+                                <?php $j = 0; ?>
+                                <?php foreach ($productsUpper as $product){ ?>
+                                        <div class="col-sm-3 col-xs-12 fontsize-type0 text-center"><img src="<?php echo Mage::helper('catalog/image')->init($product, 'small_image')->resize(50); ?>" width="50" height="50" alt="<?php echo $this->stripTags($product->getName(), null, true) ?>" /><br /><?php echo $product->getName(); ?></div>
+                                    <?php if( count($productsUpper) != ($j+1) ){?>
+                                         <div class="col-sm-1 col-xs-12 fontsize-type0 text-center max-padding-top"><b>OR</b></div>
+                                    <?php } ?>
+                                <?php $j++; ?>
+                                <?php } ?>
+                        </div>
+                    </div>
+                	</div>
+            	</div>
+			</div>
+            </div>
+            <?php } ?>
+		</div>
+        </div>
+        </div>
+        	</div>
+	</div>
+<?php } ?>
+
+
+<script type="text/javascript">
+jQuery('.add_free_gift_check').click(function() {
+	jQuery(".gifts-popup-wrapper").hide();
+});
+
+jQuery('.add_free_gift').click(function() {
+	var whichClick = jQuery(this).attr('id').replace('gift_','');
+	jQuery(".gifts-popup-wrapper").hide();
+		jQuery.ajax({
+			type: 'GET',
+			url: '/fancycart/ajax/add/product/'+whichClick,
+			context: document.body,
+			cache: false,
+			beforeSend: function ( xhr ) {
+			   //Add your image loader here
+			   //alert('test');
+			},
+			success: function(htmldata){
+				//alert( "Data Saved: " + htmldata );
+				jQuery(".gifts-popup").show();
+				//jQuery("#lightboxContentGift").html(htmldata);
+				dataLoaded	=	1;
+				jQuery('#cartModal').load('/fancycart/ajax/index');
+				jQuery('.dyn_cart-items-count').load('/fancycart/ajax/getItemsCount');
+			},
+			error: function()
+			{
+				//jQuery("#lightboxContentGift").html('Error occurred.');
+			}
+		});
+	//}
+});
+</script>

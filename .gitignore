@@ -1,0 +1,16 @@
+/promotions/*
+/.svn/*
+/.svn_org/*
+/APC/*
+/rnd/*
+/certificate/temp/*
+/certificate/html/*
+/certificate/pdf/*
+/media/*
+/var/*
+/stats/*
+/app/etc/local.xml
+/ordersheet.html
+/.htaccess
+/includes/src
+/robots.txt

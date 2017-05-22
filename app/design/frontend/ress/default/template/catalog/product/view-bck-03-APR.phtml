@@ -1,0 +1,1277 @@
+<style> .delivered-by{margin-bottom:15px;} .delivered-by .fa{font-size:28px; margin-right:7px;} .box-golden{color:#daa520 !important}
+.delivered-by span {font-size:16px;font-weight:500;}
+.social-media-icons {display: flex;justify-content: center;margin-bottom: 6px;margin-top:10px;}
+.social-media-icons i {height: 30px;width: 30px;background:#525252;color:#ffffff;border-radius: 15px;line-height: 30px;font-size:17px !important;}
+
+html[data-useragent*='MSIE 9.0'] .social-media-icons,
+html[data-useragent*='MSIE 10.0'] .social-media-icons 
+{ width:200px;margin:10px auto;float:none;text-align:center; }
+</style>
+<?php
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+ 
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct(); 
+$freeProdSku = array('fr','fb','fe','fp');
+$strLowerFreeProd = strtolower(substr($_product->getSku(), 0, 2));
+$userAgent = Mage::getUserAgent();
+if($userAgent['browser_name'] == 'msie'): ?>
+	<style>.quickview{display:none;}</style>
+<?php 
+endif;
+$currentCountryCode = Mage::getModel('countrymapping/country')->getCountryParamCode();?>
+<script type="text/javascript">
+	var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig();?>);
+</script>
+<script type="text/javascript">
+var RingSizeTrio = function(cl,id,name,change){
+jQuery(cl)
+	.append(
+		jQuery('<select title="Ring Size" class="required-entry" id='+id+' name='+name+' onchange='+change+'><option value=""><?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>Select<?php } ?> Ring Size</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option><option value="10">10</option><option value="10.5">10.5</option><option value="11">11</option><option value="11.5">11.5</option><option value="12">12</option><option value="12.5">12.5</option><option value="13">13</option></select>')
+	)
+};
+jQuery(function(){
+	RingSizeTrio(".t1","trioRing1","trioRing1","trioRingSize1()");
+	RingSizeTrio(".t2","trioRing2","trioRing2","trioRingSize2()");
+	RingSizeTrio(".t3","trioRing3","trioRing3","trioRingSize3()");
+});
+</script>
+<?php 
+if(!$_product->IsConfigurable()){?>
+	<script type="text/javascript">
+		jQuery(function(){
+			specialOfferPrice();
+		});
+	</script>
+<?php 
+}
+if($_product->getIsBuildYourOwn() && $_product->getByoModel()->hasSettingSelected()){ ?>
+	<style>
+		.price-hlder{height:0px; overflow:hidden}
+		.price-hlder .price-box, .price-hlder #view-sp-offers{display:none}
+	</style>
+<?php } ?>
+<div class="normal-pro-container container showcase-bg-white min-padding-top relative-placeholder <?php if($_product->getIsBuildYourOwn()):?>design-your-own<?php endif;?><?php if(in_array(470, $_product->getCategoryIds())){?> dyo-ring<?php }else if(in_array(469, $_product->getCategoryIds())){?> dyo-pendant<?php }?>">                    
+    <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml(); ?></div>
+	<div class="product-view pull-left">
+		<div class="product-essential">
+			<div class="min-padding-bottom">
+				<div class="col-sm-12 no-padding" <?php if($_product->getIsBuildYourOwn()){echo 'style="width:100%!important"';} ?>>
+					<?php // specific for build your own header
+					if($_product->getIsBuildYourOwn()){
+						echo $this->getLayout()->createBlock('buildyourown/header')->setTemplate('buildyourown/header.phtml')->toHTML();
+					} ?>
+					<div class="clearfix"></div>
+					<?php /* Code for Notify me Out of Stock */ ?>
+					<?php /* Asheesh:Start */ ?>
+					<?php $_storeId = Mage::app()->getStore()->getId(); ?>
+					<?php $_isActive = Mage::getStoreConfig('outofstocksubscription/mail/active', $_storeId); ?>
+					<?php if(!$_product->isSaleable() && $_isActive): ?>
+						<?php $_url = $this->getUrl('outofstocksubscription') ?>
+					<?php else: ?>
+						<?php $_url = $this->getSubmitUrl($_product); ?>
+					<?php endif; ?>
+					<?php /* Asheesh:End */ ?>
+					<form autocomplete="off" action="<?php echo $_url ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+						<?php /* S: Product Name & Rating */ ?>
+						<div class="img-title-holder">
+							<div class="col-sm-12 no-padding">
+								<h1 class="col-sm-12 no-padding product-name dyn_short_description" itemprop="name"><?php echo $_helper->productAttribute($_product,$_product->getShortDescription(),'name');?></h1>
+								<div class="col-sm-12 no-padding product-rating"><?php echo $this->getReviewsSummaryHtml($_product, false, true); echo $this->getChildHtml('alert_urls'); ?></div>
+							</div>
+							<?php /* E: Product Name & Rating */ ?> 
+							<div class="clearfix"></div>
+							<div class="col-sm-12 no-padding product-images">
+								<?php echo $this->getChildHtml('media'); ?>
+							</div>													
+						</div>
+						<div class="clearfix"></div>
+						
+						<?php if($this->hasOptions()): 	?>
+							<div class="col-sm-12 no-padding">
+								<div class="pro-options" <?php echo $this->canShowOptionBoxBorder();?>>
+									<?php echo $this->getChildChildHtml('container2', '', true, true); ?> 
+								</div> 
+							</div>
+							<div class="clearfix"></div>
+						<?php endif; ?>
+						
+						<div class="add-to-cart-container" style="top:0px">
+						<div class="add-to-cart-container-holder">
+							<div class="col-sm-12 add-to-cart-container-box <?php if(!$_product->isSaleable() && $_isActive){ echo 'notify-me-box'; } ?> padding-type-10">
+								<div class="col-sm-12 no-padding price-holder">
+									<div class="no-display">
+										<input type="hidden" name="product" value="<?php echo $_product->getId(); ?>" />
+										<input type="hidden" name="related_product" id="related-products-field" value="" />													
+									</div>      
+									<div class="product-type-data">
+										<?php echo $this->getChildHtml('product_type_data'); ?>
+									</div>
+									<?php
+									echo $this->getTierPriceHtml();
+									echo $this->getChildHtml('extrahint'); ?> 		
+								</div>
+								
+								<div class="clearfix"></div>
+								<?php 
+								if(!in_array($strLowerFreeProd, $freeProdSku)){?>
+								<div class="add-to-cart-btn-holder absolute-placeholder text-center">
+									<div class="add-to-box low-padding-top text-left">
+									<?php /* Code for Notify me Out of Stock */ ?>
+									<?php /* Bypass the saleable check if Out of stock notify feature is enable. */ ?>
+									<?php /* Asheesh:Start */ ?>
+									<?php if($_isActive || $_product->isSaleable()){ ?>
+									<?php /* Asheesh:End */ ?>
+									<?php	echo $this->getChildHtml('addtocart'); ?> 
+										<script type="text/javascript">
+										//<![CDATA[
+										var productAddToCartForm = new VarienForm('product_addtocart_form');
+										productAddToCartForm.submit = function(button, url) {
+											
+											<?php if(Mage::registry('current_product')->getTrioSku()){ ?>
+												var validt = false;
+												var isTrioprod = jQuery('#trioRing1').length;
+												if(isTrioprod){
+													validt = (jQuery('#trioRing1').hasClass('validation-failed') && jQuery('#trioRing1')=='') || (jQuery('#trioRing2').hasClass('validation-failed') && jQuery('#trioRing2')=='') || (jQuery('#trioRing3').hasClass('validation-failed') && jQuery('#trioRing3')=='');
+													isvalid = false;
+													if(validt) {
+														jQuery('.trio-box').css({'height':'0px','overflow':'hidden'}).show();
+														isvalid = this.validator.validate();												
+														
+														if(isvalid == false){
+															var elemWidth = jQuery('#option-list-tab-trio').outerWidth(),
+															topPosition = jQuery('#option-list-tab-trio').offset().top - jQuery('#product_addtocart_form').offset().top,
+															leftPosition = jQuery('#option-list-tab-trio').position().left;
+															jQuery('.trio-box').removeAttr('style').css({'position':'absolute','width':elemWidth+'px','top':topPosition+'px', 'left':leftPosition+'px','z-index':'99'}).show();
+														}else{
+															jQuery('.trio-box').removeAttr('style');
+														}
+
+													}else{
+														jQuery('.trio-box').css({'height':'0px','overflow':'hidden'}).show();
+														isvalid = this.validator.validate();												
+														
+														if(isvalid == false){
+															var elemWidth = jQuery('#option-list-tab-trio').outerWidth(),
+															topPosition = jQuery('#option-list-tab-trio').offset().top - jQuery('#product_addtocart_form').offset().top,
+															leftPosition = jQuery('#option-list-tab-trio').position().left;
+															jQuery('.trio-box').removeAttr('style').css({'position':'absolute','width':elemWidth+'px','top':topPosition+'px', 'left':leftPosition+'px','z-index':'99'}).show(); 
+														}else{
+															jQuery('.trio-box').removeAttr('style');
+														}
+														
+														/*if(document.getElementById('advice-required-entry-trioRing1')) {
+															document.getElementById('advice-required-entry-trioRing1').style.display = "block";
+														}
+														if(document.getElementById('advice-required-entry-trioRing2')) {
+															document.getElementById('advice-required-entry-trioRing2').style.display = "block";
+														}
+														if(document.getElementById('advice-required-entry-trioRing3')) {
+															document.getElementById('advice-required-entry-trioRing3').style.display = "block";
+														}*/
+														
+														if(jQuery('#add-cart-stopper').length == 1){
+															jQuery('#add-cart-stopper-msg').removeClass('hidden');
+														}
+														else{
+															jQuery('#add-cart-stopper-msg').remove();
+														}
+													}
+													if(isvalid) {
+														var form = this.form;
+														var oldUrl = form.action;
+										
+														if (url) {
+														   form.action = url;
+														}
+														var e = null;
+														try {
+																jQuery('#add-cart-wait').removeClass('hide');
+																jQuery('.add-to-cart button').attr('disabled','disabled');
+																setTimeout(function(){form.submit();}, 1);
+														} catch (e) {
+														}
+														this.form.action = oldUrl;
+														if (e) {
+															throw e;
+														}
+													}
+												} 
+											<?php } else { ?>
+												if (this.validator.validate()) {
+													
+													var form = this.form;
+													var oldUrl = form.action;
+									
+													if (url) {
+													   form.action = url;
+													}
+													var e = null;
+													try {
+															jQuery('#add-cart-wait').removeClass('hide');
+															jQuery('.add-to-cart button').attr('disabled','disabled');
+															setTimeout(function(){form.submit();}, 1);
+													} catch (e) {
+													}
+													this.form.action = oldUrl;
+													if (e) {
+														throw e;
+													}
+												} else {
+													//open trio rings size box on add to cart
+
+													if(jQuery('#add-cart-stopper').length == 1){
+														jQuery('#add-cart-stopper-msg').removeClass('hidden');
+													}
+													else{
+														jQuery('#add-cart-stopper-msg').remove();
+													}
+												}
+											<?php } ?>
+											
+										}.bind(productAddToCartForm);
+								
+										productAddToCartForm.submitLight = function(button, url){
+											if(this.validator) {
+												var nv = Validation.methods;
+												delete Validation.methods['required-entry'];
+												delete Validation.methods['validate-one-required'];
+												delete Validation.methods['validate-one-required-by-name'];
+												// Remove custom datetime validators
+												for (var methodName in Validation.methods) {
+													if (methodName.match(/^validate-datetime-.*/i)) {
+														delete Validation.methods[methodName];
+													}
+												}
+								
+												if (this.validator.validate()) {
+													if (url) {
+														this.form.action = url;
+													}
+													this.form.submit();
+												}
+												Object.extend(Validation.methods, nv);
+											}
+										}.bind(productAddToCartForm);
+										
+										//]]>
+										</script>
+									<?php 
+									}else{ ?>
+										<div class="row">
+											<div class="col-sm-12 no-padding fontsize-type0 text-bold text-green low-padding-top high-padding-left high-padding-right">
+												<span>We can customize this item for you. For further assistance, give us a call on 1-888-926-4272 or <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="text-green text-underline live-chat-link">click here</a> to chat.</span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12 no-padding">
+												<div class="add-to-cart">
+														<button type="button" title="Sold Out" disabled="disabled" class="btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" ><i class="fa fa-shopping-cart low-padding-right"></i> Sold Out</button>
+												</div>
+											</div>
+										</div>
+									<?php } ?>
+									</div>	
+							<div class="clearfix"></div>		
+								<?php /* S: Share code */ ?>
+									<div class="social-media-icons p10 full-width">
+										<?php
+										if($_product->getAttributeText('jewelry_type') == 'Earrings'){
+											$socialUrlParamPin = 'Make a statement with these elegant '.$_product->getShortDescription().' from Angara.com. Explore a fascinating array of designs';
+										}
+										else{	
+											$socialUrlParamPin = 'Make a statement with this '.$_product->getShortDescription().' from Angara.com. Explore a fascinating array of designs';
+										}	
+										$socialUrlParamTweet = $_product->getShortDescription().' at Angara.com&via=Angara'; ?>
+										<div class="i-holder pull-left"><i class="fbShare fa fa-facebook px22 high-margin-right clickable" onclick="myFbFunction()"></i></div>
+										<div class="i-holder pull-left"><i class="googleShare fa fa-google-plus px22 high-margin-right clickable" onclick="myGoogleFunction()"></i></div>
+										<div class="i-holder pull-left"><i class="pinShare fa fa-pinterest px22 high-margin-right clickable" onclick="myPinFunction()"></i></div>
+										<div class="i-holder pull-left"><i class="tweetShare fa fa-twitter px22 high-margin-right clickable" onclick="myTweetFunction()"></i></div>
+										<div class="i-holder pull-left"><i class="fl emailShare fa fa-envelope-o clickable" style="font-size:19px;" onclick="myEmailFunction();"></i></div>
+										<script type="text/javascript">						
+										function myPinFunction(){
+											var url = jQuery('#image').attr('src');
+											window.open("https://pinterest.com/pin/create/bookmarklet/?media="+url+"&url=<?php echo $_product->getProductUrl()."?cid=sm-pin-organic-website&resetChannel=true&description=".urlencode($socialUrlParamPin);?>",'pin','height=600,width=650').focus();	
+										}
+										function myGoogleFunction(){							
+											window.open('https://plus.google.com/share?url=<?php echo urlencode($_product->getProductUrl());?>','gplus','height=600,width=650').focus();	
+										}
+										function myEmailFunction(){
+											jQuery('#emailModal').modal({remote: '<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>'});
+											jQuery('#emailModal').css({"overflow-y": "hidden"});
+										}	
+										function myFbFunction(){							
+											window.open('https://www.facebook.com/share.php?u=<?php echo $_product->getProductUrl().'?cid=sm-fb-organic-website&amp;resetChannel=true';?>','face','height=600,width=650').focus();
+										}
+										function myTweetFunction(){							
+											window.open("https://twitter.com/intent/tweet?url=<?php echo Mage::helper('utilitybackend/shortner')->shorten($_product->getProductUrl()."?cid=sm-tweet-organic-website&resetChannel=true");?>&text=<?php echo $socialUrlParamTweet;?>",'tweet','height=600,width=650').focus();	
+										}
+										</script>
+									</div>
+								<?php /* E: Share code */ ?>	
+							<div class="clearfix"></div>
+									<?php if(!in_array(96, $_product->getCategoryIds())): ?>
+										<?php if($_product->isSaleable()){?>
+											<div class="estimated-arrival-date pull-left">
+												<?php 
+												//echo $this->getLayout()->createBlock('catalog/product_deliverydate')->setProduct($_product)->setTemplate('catalog/product/deliverydate.phtml')->toHTML(); ?>
+												
+												<span class="col-sm-12 no-padding display-inline-block"><span class="">Want it by</span> <span class="dyn_arrive_lead_time apricot-text"><i class="fa fa-spinner fa-spin"></i></span></span> <i class="fa fa-question-circle clickable" data-html="true" data-placement="left" data-trigger="click" data-toggle="tooltip" title="Every Angara item is custom made-to-order after your order is placed. The Estimated Arrival date is calculated based on the production time of your item." ></i>
+												<div class="clearfix"></div>
+												<span class="col-sm-12 no-padding display-inline-block">Select Priority Overnight Shipping at Checkout</span>
+											</div>
+										<?php } ?>
+									<?php endif; ?>
+									
+									<div class="product-page-usp text-center visible-md">
+										<div class="usp-near-add-to-cart fontsize-type3">
+											<div class="col-sm-12 no-padding">
+												<span data-html="true" data-placement="left" data-trigger="hover" data-toggle="tooltip" title="We will refund up to 110% of the purchase price, if any accredited jewelry appraiser values your piece for less than 125% of the purchase price.">
+													<img alt="110% Refund Policy" style="margin-top:-4px" width="20" src="/skin/frontend/ress/default/images/110refund.png">
+													<span style="display:inline-block">110% Refund Policy</span>
+												</span>
+											</div>
+											<div class="col-sm-12 no-padding">
+												<span data-html="true" data-placement="left" data-trigger="hover" data-toggle="tooltip" title="If you don't like the product, simply send it back to us within <?php echo Mage::helper('function')->freeReturnDays();?> days and get a 100% refund. We will even email you a FREE return shipping label (for domestic orders).">	
+													<img alt="<?php echo Mage::helper('function')->freeReturnDays();?> Day Return" style="margin-top:-4px" width="20" src="/skin/frontend/ress/default/images/30dayreturn.png">
+													<span style="display:inline-block"><?php echo Mage::helper('function')->freeReturnDays();?> Day Returns</span>
+												</span>
+											</div>
+											<div class="col-sm-12 no-padding">
+												<span data-html="true" data-placement="left" data-trigger="hover" data-toggle="tooltip" title="Free Shipping within the USA. We ship FREE to 64 countries on all International orders over <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?>. International orders below <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?> are charged <?php echo Mage::helper('function')->getInternationalShippingPrice();?> each.">
+													<img alt="Free Shipping Worldwide" style="margin-top:-4px" width="20" src="/skin/frontend/ress/default/images/freeshipping.png">
+													<span style="display:inline-block">Free Shipping</span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<?php 
+								}
+								else{?>
+								<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+									<div class="row apricot-text text-center max-padding-bottom max-padding-top px22">Free with Purchase</div>
+									<div class="row text-center max-padding-bottom text-light">In the event you return qualifying item(s), please be sure to include the free gift(s) with the return for a full refund and in the state that they were shipped. If you would like to keep the free gift(s) but not the qualifying item(s), you will be charged for the retail value of the free gift(s).</div>
+									<div class="absolute-placeholder gf">
+										<div class="text-center auto-gift padding-bt5 text-light">Your free gift will be added automatically at cart as per the offer.</div>
+										<div class="text-center padding-tp5 text-light">In case you would like to order this, call your Angara Advisor on</div>
+										<div class="col-sm-12 text-center max-padding-bottom max-padding-top text-light">
+												<span class="fontsize-type4"><a rel="nofollow" target="_new" href="/contact-us" class="text-light"><i class="fa fa-phone fa-fw text-light"></i>1-888-926-4272</a></span>
+												<span class="text-light">&nbsp; or click &nbsp; <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="text-light live-chat-link"><i class="fa fa-comments fa-fw text-light"></i>Live Chat</a></span>
+										</div>
+										
+										<div class="max-margin-top">
+											<div class="add-to-cart">
+												<button type="button" id="addtocart-btn" title="Continue" class="btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow"><i class="fa fa-shopping-cart low-padding-right"></i> Continue</button>
+											</div>
+											<?php 
+											$refererHttpUrl = Mage::helper('core/http')->getHttpReferer();
+											if($refererHttpUrl && stripos($refererHttpUrl, 'checkout/cart') !== false){
+												$returnUrlHref = Mage::getUrl('checkout/cart/index/');
+											}
+											else{
+												$returnUrlHref = Mage::getBaseUrl();
+											}?>
+											<script type="text/javascript">
+											jQuery(function(){
+												jQuery('#addtocart-btn').click(function(e){
+													window.location.href = '<?php echo $returnUrlHref;?>';
+													return false;
+												})
+											});
+											</script>
+										</div>
+									</div>	
+								<?php } ?>
+								<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+									<div class="row apricot-text text-center max-padding-bottom max-padding-top px22">Free with Purchase</div>
+									<div class="row text-center max-padding-bottom text-light">In the event you return qualifying item(s), please be sure to include the free gift(s) with the return for a full refund and in the state that they were shipped. If you would like to keep the free gift(s) but not the qualifying item(s), you will be charged for the retail value of the free gift(s).</div>
+									<div class="text-center auto-gift padding-bt5 text-light">Your free gift will be added automatically at cart as per the offer.</div>
+									<div class="text-center padding-tp5 text-light">In case you would like to order this, call your Angara Advisor on</div>
+									<div class="absolute-placeholder gf">
+										<div class="col-sm-12 text-center max-padding-bottom max-padding-top text-light">
+											<span class="fontsize-type4"><a rel="nofollow" target="_new" href="/contact-us" class="text-light"><i class="fa fa-phone fa-fw text-light"></i>1-888-926-4272</a></span>
+											<span class="text-light">&nbsp; or click &nbsp; <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="text-light live-chat-link"><i class="fa fa-comments fa-fw text-light"></i>Live Chat</a></span>
+										</div>
+										
+										<div class="max-margin-top">
+											<div class="add-to-cart">
+												<button type="button" id="addtocart-btn" title="Continue" class="btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow"><i class="fa fa-shopping-cart low-padding-right"></i> Continue</button>
+											</div>
+											<?php 
+											$refererHttpUrl = Mage::helper('core/http')->getHttpReferer();
+											if($refererHttpUrl && stripos($refererHttpUrl, 'checkout/cart') !== false){
+												$returnUrlHref = Mage::getUrl('checkout/cart/index/');
+											}
+											else{
+												$returnUrlHref = Mage::getBaseUrl();
+											}?>
+											<script type="text/javascript">
+											jQuery(function(){
+												jQuery('#addtocart-btn').click(function(e){
+													window.location.href = '<?php echo $returnUrlHref;?>';
+													return false;
+												})
+											});
+											</script>
+										</div>
+									</div>	
+								<?php } ?>
+								<?php
+								}?>
+								<?php echo $this->getChildHtml('other');
+								if($_product->isSaleable() && $this->hasOptions()):
+									echo $this->getChildChildHtml('container1', '', true, true); 
+								endif; ?>                
+								<div class="product-collateral">
+									<?php foreach($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+										<div class="box-collateral <?php echo "box-{$alias}";?>">
+											<?php if($title = $this->getChildData($alias, 'title')):?>
+											<h2><?php echo $this->escapeHtml($title); ?></h2>
+											<?php endif;
+											echo $html; ?> 
+										</div>
+									<?php endforeach;						
+									echo $this->getChildHtml('product_additional_data'); ?> 
+								</div>
+							</div>
+							
+							<?php 
+                            if($this->helper('wishlist')->isAllow() && !$_product->getIsBuildYourOwn() && !in_array($strLowerFreeProd, $freeProdSku)){
+                            	echo $this->getChildHtml('addto');
+                            }?>							
+						</div>
+						</div>
+						
+						
+						<div class="product-page-usp visible-sm text-center">
+							<div class="usp-near-add-to-cart fontsize-type3">
+								<div class="col-sm-12 no-padding">
+									<span data-html="true" data-placement="top" data-trigger="hover" data-toggle="tooltip" title="We will refund up to 110% of the purchase price, if any accredited jewelry appraiser values your piece for less than 125% of the purchase price.">
+										<img alt="110% Refund Policy" width="20" src="/skin/frontend/ress/default/images/110refund.png">
+										<span>110% Refund Policy</span>
+									</span>
+								</div>
+								<div class="col-sm-12 no-padding">
+									<span data-html="true" data-placement="top" data-trigger="hover" data-toggle="tooltip" title="If you don't like the product, simply send it back to us within <?php echo Mage::helper('function')->freeReturnDays();?> days and get a 100% refund. We will even email you a FREE return shipping label (for domestic orders).">	
+										<img alt="<?php echo Mage::helper('function')->freeReturnDays();?> Day Return" width="20" src="/skin/frontend/ress/default/images/30dayreturn.png">
+										<span><?php echo Mage::helper('function')->freeReturnDays();?> Day Returns</span>
+									</span>
+								</div>
+								<div class="col-sm-12 no-padding">
+									<span data-html="true" data-placement="top" data-trigger="hover" data-toggle="tooltip" title="Free Shipping within the USA. We ship FREE to 64 countries on all International orders over <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?>. International orders below <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?> are charged <?php echo Mage::helper('function')->getInternationalShippingPrice();?> each.">
+										<img alt="Free Shipping Worldwide" width="20" src="/skin/frontend/ress/default/images/freeshipping.png">
+										<span>Free Shipping Worldwide</span>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+					<?php if(Mage::registry('current_product')->getTrioSku()){ ?>
+						<div class="clearfix"></div>
+						<div class="trio-box relative-placeholder">
+							<ul id="trios" class="trio-product absolute-placeholder">
+								<?php 
+								$skus=Mage::registry('current_product')->getTrioSku();
+								$curr_product_sku=Mage::registry('current_product')->getSku();
+								$curr_product_id = Mage::getModel('catalog/product')->getIdBySku($curr_product_sku);
+								$curr_product = Mage::getModel('catalog/product')->load($curr_product_id);
+								$custom_options=array();
+                                $custom_options_sku=array();
+                                foreach ($curr_product->getOptions() as $o) {
+                                	$custom_options[]=$o->getId();
+                                	$custom_options_sku[]=$o->getSku();
+                                	
+                                }
+								$ids = explode('|', $skus);
+								
+								?>
+								
+								
+								<?php
+								
+								if($skus){
+								  $block = new Mage_Review_Block_Helper();
+								  
+								  $url =  Mage::getModel('catalog/product')->loadByAttribute('sku',$ids[0])->getProductUrl();
+								  $product_id = Mage::getModel('catalog/product')->getIdBySku($ids[0]); 
+					              $trio1_product = Mage::getModel('catalog/product')->load($product_id);					
+								
+								?>
+								<li>
+									<h2 id="name1"></h2>
+									<div class="right-box relative-placeholder pull-left">
+										<div class="left-box absolute-placeholder">
+											<img id="trio1" class="img-responsive" src="" alt="">
+											<a href="">Product Detail</a>
+										</div>
+										<?php echo $block->getSummaryHtml($trio1_product); ?>
+										
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding price-box low-margin-top low-margin-bottom">
+											<span id="price1" class="col-sm-12 no-padding regular-price block-inline-display"></span>
+											<span id="price_trad1" class="col-sm-12 no-padding traditional-price block-inline-display"></span>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding ring-size">
+											<div class="t1"></div>
+										</div>
+									</div>
+								</li>
+								<?php
+								
+								  $url =  Mage::getModel('catalog/product')->loadByAttribute('sku',$ids[1])->getProductUrl();
+								  $product_id = Mage::getModel('catalog/product')->getIdBySku($ids[1]);
+								  $trio2_product = Mage::getModel('catalog/product')->load($product_id);
+								  ?>
+
+								<li>
+									<h2 id="name2"></h2>
+									<div class="right-box relative-placeholder pull-left">
+										<div class="left-box absolute-placeholder">
+											<img id="trio2" class="img-responsive" src="" alt="">
+											<a href="">Product Detail</a>
+										</div>
+										<?php echo $block->getSummaryHtml($trio2_product); ?>
+										
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding price-box low-margin-top low-margin-bottom">
+											<span id="price2" class="col-sm-12 no-padding regular-price block-inline-display"></span>
+											<span id="price_trad2" class="col-sm-12 no-padding traditional-price block-inline-display"></span>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding ring-size">
+											<div class="t2"></div>
+										</div>
+									</div>
+								</li>
+
+								<?php
+								
+								  $url =  Mage::getModel('catalog/product')->loadByAttribute('sku',$ids[2])->getProductUrl();
+								  $product_id = Mage::getModel('catalog/product')->getIdBySku($ids[2]);
+								  $trio3_product = Mage::getModel('catalog/product')->load($product_id);
+								  ?>
+
+								<li>
+									<h2 id="name3"></h2>
+									<div class="right-box relative-placeholder pull-left">
+										<div class="left-box absolute-placeholder">
+											<img id="trio3" class="img-responsive" src="" alt="">
+											<a href="">Product Detail</a>
+										</div>
+										<?php echo $block->getSummaryHtml($trio3_product); ?>
+										
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding price-box low-margin-top low-margin-bottom">
+											<span id="price3" class="col-sm-12 no-padding regular-price block-inline-display"></span>
+											<span id="price_trad3" class="col-sm-12 no-padding traditional-price block-inline-display"></span>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col-sm-12 no-padding ring-size">
+											<div class="t3"></div>
+										</div>
+									</div>
+								</li>
+								<?php  }?>								
+							</ul>
+							<script>
+								/* Trio */
+								jQuery(document).click(function(e){
+									if (!jQuery(e.target).closest('.trio-box').length && !jQuery(e.target).closest('.customize-ring-btn').length && !jQuery(e.target).closest('#addtocart-btn').length) {		//	find if we have a class
+										jQuery('.trio-box').css({'display':'none'});
+									}
+								});
+								/*jQuery(function(){
+									var newCaratImageSrc = jQuery('#moreviews ul li:eq(0) img').attr('src');
+									
+									jQuery('#option-list-tab-trio').find('.user-option-ring-image').append('<img src="'+newCaratImageSrc+'" class="img-responsive" />');
+								});*/
+								jQuery(window).resize(function(){									
+									var elemWidth = jQuery('#option-list-tab-trio').outerWidth(),
+									topPosition = jQuery('#option-list-tab-trio').offset().top - jQuery('#product_addtocart_form').offset().top,
+									leftPosition = jQuery('#option-list-tab-trio').position().left;
+									jQuery('.trio-box').css({'position':'absolute','width':elemWidth+'px','top':topPosition+'px', 'left':leftPosition+'px'});
+								});
+								
+							</script>
+							<script>
+							if(Prototype.Browser.IE){}else{
+								jQuery(window).load(function(){
+								 setTimeout(function(){
+								 	$('trioRing1').observe('blur',function(e){
+								    Validation.validate($('trioRing1'))
+								   });
+								 	$('trioRing1').observe('change',function(e){
+								    Validation.validate($('trioRing1'))
+								   });
+								 $('trioRing2').observe('blur', function(e){
+								    Validation.validate($('trioRing2'))
+								   });
+								 $('trioRing2').observe('change',function(e){
+								    Validation.validate($('trioRing2'))
+								   });
+								 $('trioRing3').observe('blur', function(e){
+								    Validation.validate($('trioRing3'))
+								   });
+								$('trioRing3').observe('change',function(e){
+								    Validation.validate($('trioRing3'))
+								   });},1000);
+								 });
+								}
+							function trioRingSize1() {
+							    var x = document.getElementById("trioRing1").value;
+							   document.getElementById("options_<?php echo $custom_options[0];?>_text").value = x;
+							 			    
+							}
+							function trioRingSize2() {
+							    var x = document.getElementById("trioRing2").value;
+							   document.getElementById("options_<?php echo $custom_options[2];?>_text").value = x;
+							 			    
+							}
+							function trioRingSize3() {
+							    var x = document.getElementById("trioRing3").value;
+							   document.getElementById("options_<?php echo $custom_options[4];?>_text").value = x;
+							 			    
+							}
+							</script>
+						</div>
+						<?php } ?>
+						<div class="clearfix"></div>
+						
+						
+						<div class="col-sm-12 no-padding add-ons">
+							<?php
+							$addOnClass		=	'';	
+							$minPrice	=	Mage::helper('function')->minPriceToShowAddOns();
+							if($_product->getPrice() < $minPrice){
+								$addOnClass	=	'hidden';	
+							}
+							/* S: Add-ons Selection */
+							if(!in_array(96, $this->getProduct()->getCategoryIds()) && (strtolower(substr($_product->getSku(), 0, 3)) != 'sd_') && !in_array($strLowerFreeProd, $freeProdSku)): 	/* excluding gift cards & free gifts */
+								if(!($_product->getIsBuildYourOwn() && !$_product->getByoModel()->hasSettingSelected())):?>
+                                <?php // if($this->canShowWarranty()){ ?>
+									<div id="add-ons-panel-container" class="showcase-bg-white low-margin-top min-padding-bottom">
+										<div class="h3 max-margin-top min-padding-bottom">Add-ons</div>
+										<div id="add-ons-panel" class="col-sm-12 no-padding">      
+											<?php // S: Jewelry Appraisal ?>                                
+                                        <?php if(Mage::helper('function')->canShowJAEngraving()){ ?>
+											<div class="add-ons-item <?php echo $addOnClass;?>" id="jewelryAppraisalContainer">
+												<div class="addons-item">
+												<?php 
+												$_options = $_product->getOptions();
+												if($_options){
+													foreach($_options as $_option){
+														$optionArr[] = $_option->getTitle();
+													}
+												}
+												
+												if(in_array('Free Jewelry Appraisal',$optionArr) && (in_array(353, $this->getProduct()->getCategoryIds()) || in_array(457, $this->getProduct()->getCategoryIds()) || in_array(458, $this->getProduct()->getCategoryIds()))){?>                             
+													<div class="cb-holder"><input id="appraisal0" name="appraisal0" type="checkbox" autocomplete="off" checked="checked" disabled="disabled"/></div>
+													<div class="od-holder">
+													<label for="appraisal0"><i class="fa fa-file-text-o fa-fw"></i><strong><?php echo '<span class="text-green">Free</span>'; ?></strong> Jewelry Appraisal</label> 
+													<script type="text/javascript">
+													jQuery(function(){
+														if(jQuery('#appraisal0').is(":checked")){
+															jQuery('dt label:contains("Jewelry Appraisal")').parent().next().find('input.product-custom-option').val('JA0050');
+															addSelection("Appraisal");
+															<?php 
+															if(!$_product->IsConfigurable()){?>
+																updateEstimateShipping();
+															<?php 
+															}?>	
+														}
+													});
+													</script>                                               
+												<?php 
+												}
+												else{?>
+													<div class="cb-holder"><input id="appraisal" name="appraisal" type="checkbox" autocomplete="off" /></div>
+													<div class="od-holder">
+													<label for="appraisal"><i class="fa fa-file-text-o fa-fw"></i>Add Jewelry Appraisal For <strong class="apricot-text"><?php echo Mage::helper('function')->getJewelryAppraisalPrice(); ?></strong></label>
+													<?php
+												}?><i id="aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="right" data-trigger="click" data-toggle="tooltip" title="The jewelry appraisal document includes the details of the stone (carat, quality & grade) and other product specifications. It provides the documentation needed for customers to obtain  insurance for the item.  The appraisal is an advantage because it will reflect the  difference between the price offered by Angara and the market rates. All pieces of jewelry are only appraised by GIA certified gemologists. Jewelry appraisals provide customers  with a better understanding of what they purchased  and enhances confidence in the purchase."></i><small id="jewel-appraisal" class="text-red high-padding-left hidden nowrap">*Jewelry Appraisal cost is non refundable.</small>
+													</div>
+												</div>
+											</div>
+                                            <?php } ?>
+											<?php // E: Jewelry Appraisal 
+										
+											/* S: Insurance */ 
+											if( $this->canShowWarranty() && !$_product->getIsBuildYourOwn() ){?>
+												<div class="add-ons-item" id="warrantyContainer">
+													<div class="addons-item">
+														<div class="cb-holder"><input id="insurance" name="insurance" type="checkbox" autocomplete="off" /></div>
+														<div class="od-holder">
+															<label for="insurance"><i class="fa fa-file-text-o fa-fw"></i>Add Warranty For <strong class="dyn_warranty_price apricot-text"><?php echo (($_product->getPrice() < 200)? $this->helper('core')->currency(50,true,false): $this->helper('core')->currency($_product->getPrice() * .20,true,false)); ?></strong></label> 	<i id="aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ echo 'bottom'; }else{ echo 'right'; }?>" data-trigger="click" data-toggle="tooltip" title="The Jewelry Protection Warranty Plan protects your jewelry for the next 5 years against any accidental damage and/or wear and tear in order to ensure that your jewelry looks like new whenever you wear it. We offer FREE domestic round trip shipping for our Jewelry Protection Warranty Plan users. <a href='/total-protection-warranty' class='fontcolor-type1' target='_blank'>Click here</a> for more information."></i> 
+														</div>
+													</div>
+												</div>
+											<?php 
+											} /* E: Insurance */ ?>     
+										</div>
+									</div>							
+								<?php 
+								endif;
+							endif; 
+							/* E: Add-ons Selection */ ?>
+						</div>
+						
+						<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+							<div class="clearfix"></div>
+							<?php if(!$_product->getIsBuildYourOwn() && !in_array($strLowerFreeProd, $freeProdSku)){ ?>
+								<div class="relative-placeholder">
+									<?php //S: Code for add Default category link
+									$current_cat=Mage::getModel('catalog/layer')->getCurrentCategory();
+									if($current_cat && $current_cat->getId()){ ?>
+										<a href="<?php echo $current_cat->getUrl(); ?>" class="absolute-placeholder apricot-text" style="font-size:16px; top:20px; right:10px; z-index:1">View all <?php echo $current_cat->getName(); ?></a>
+									<?php
+									} //E: Code for add Default category link ?>
+                                    <?php	/*	S:VA	Similar Items */?>
+									<div id="similarItemsAjax-4" class="col-sm-12 hidden no-padding similarItems">
+										<?php echo $this->getChildHtml('related_products'); ?>
+									</div>
+                                    <?php	/*	E:VA	Similar Items */?>
+								</div>
+							<?php } ?>
+							<div class="clearfix"></div>
+                            <?php	/*	S:VA	Recently Viewed Jewelry */?>
+							<div class="col-sm-12 no-padding" style="background-color:#ffffff;">
+								<div id="recently-viewed-jewelry-container"><?php //echo $this->getChildHtml('recently_viewed');?></div>
+							</div>
+                            <?php	/*	E:VA	Recently Viewed Jewelry */?>
+						<?php } ?>
+					</form>
+					<script>
+						jQuery(window).load(function(){
+							var elm = jQuery('.add-to-cart-container-holder');
+							var elmHeight = elm.height();
+							var elmPosTop = elm.offset().top;
+							var bottomElm = jQuery('#product-extra-info-tabs');
+							var bottomElmPosTop = bottomElm.offset().top;
+							if(jQuery(window).width() < 1280 ){
+								var headHeight = jQuery('#main-head-inner').height() + 40;
+							}else{
+								var headHeight = jQuery('#main-head-inner').height();
+							}
+							jQuery(window).scroll(function(){
+								if(jQuery(window).width() > 1024 ){
+									var windowpos = jQuery(window).scrollTop();
+									var windowposBottom = windowpos+elm.height();
+									var bottomElmPos = bottomElmPosTop;
+									
+									var vv = ((windowpos + jQuery(window).height()) - (jQuery(window).height() - elmHeight)) + (headHeight - 60) ;
+									var ss = (jQuery('#product_addtocart_form').height() + jQuery('#product_addtocart_form').offset().top) - headHeight;
+									
+									//console.log(vv+' : '+ss);
+									
+									if(windowpos >= (elmPosTop-headHeight)){
+										jQuery('.add-to-cart-container').removeAttr('style');
+										jQuery('.add-to-cart-container').css("top","0px");
+										elm.css({'position':'fixed','top':headHeight+'px', 'width':'320px', 'z-index':'2'});
+									}else {
+										elm.removeAttr('style');
+									}
+									if (vv >= ss){
+										elm.removeAttr('style');
+										jQuery('.add-to-cart-container').removeAttr('style');
+										jQuery('.add-to-cart-container').css("bottom","14px");
+									}
+								}
+							});
+							
+							jQuery('#similarItemsAjax-4').removeClass('hidden');
+						});
+						jQuery(window).resize(function(){
+							if(jQuery(window).width() < 1024 ){
+								jQuery('.add-to-cart-container-holder').removeAttr('style');
+								jQuery('.add-to-cart-container').removeAttr('style');
+								jQuery('.add-to-cart-container').css("top","0px");
+							}
+						});
+						jQuery(function(){
+							//:RV - Auto scroll on page load
+							var topHeight = jQuery('.top-quick-access').height();
+							topHeight = topHeight + jQuery('.header-offer-holder').height();
+							var scroll = jQuery(window).scrollTop();
+							if(jQuery(window).width() > 1279){
+								if(scroll <= topHeight){
+									jQuery('html, body').animate({
+									scrollTop: jQuery('#main-head').offset().top}, 1000);
+								}
+							}else{
+								if(scroll <= topHeight){
+									jQuery('html, body').animate({
+									scrollTop: jQuery('#main-head').offset().top}, 1000);
+								}
+							}
+						});
+						//close customize options when click outside
+						jQuery(document).click(function(e){
+							var elem = e.target;
+							if(!elem.closest('.customize-product-tab-content') && !elem.closest('#user-option-tabs')){
+								jQuery('.option-list-container.customize-product-tab-content').addClass('hidden');
+								jQuery('.option-list-tab').removeClass('active');
+							}
+							if (jQuery(e.target).closest('.customize-ring-btn').length) {
+								jQuery('.option-list-container.customize-product-tab-content').addClass('hidden');
+								jQuery('.option-list-tab').removeClass('active');
+							}
+						});
+						/* jQuery(function(){
+							var i = 1
+							var ii = jQuery('.product-dh .carat-weight').length - 1;
+							jQuery('.product-dh .carat-weight').each(function(){
+								if(i == ii){
+									jQuery(this).parents('.product-dh').append('<span class="most-popular-icon"><span>Most<br>Popular</span></span>');
+								}
+								i++;
+							});
+						}); */
+					</script>
+					<div class="clearfix"></div>
+				</div>	
+			</div>
+		</div>      
+	</div> 	
+</div>
+
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+<div class="col-md-12 col-sm-12 no-padding low-margin-top <?php if($_product->getIsBuildYourOwn() && $_product->getByoModel()->hasSettingSelected()){?>hidden<?php } ?>">					  						
+	<?php /*S: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference */ ?>
+	<div id="product-extra-info-tabs" class="high-padding-top ress-nav" data-open-on-click="true" data-nav-type="pills"> 
+		<div class="container hidden-xs">
+			<div class="col-sm-12 no-padding block-inline">
+				<ul class="nav nav-pills">
+					<li class="product-tab ress-nav-item active">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Product Details">Product Details</a></h2>
+					</li>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Customer Reviews"><span class="block-inline-display">Reviews </span> <span class="block-inline-display valign-middle"><?php echo $this->getReviewsSummaryHtml($_product, 'short'); ?></span> </a></h2>
+					</li>
+					<?php 
+					if(!in_array($strLowerFreeProd, $freeProdSku)){ ?>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Shipping And Returns">Shipping & Returns</a></h2>
+					</li>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="The Angara Difference">The Angara Difference</a></h2>
+					</li>
+					<?php 
+					}?>
+				</ul>
+			</div>
+		</div>
+		<div class="pro-detail">
+			<div class="container">
+				<div class="col-xs-12">
+					<div id="product-details-tab" class="product-tab-content max-padding-top ress-nav-content show fontsize-type1"> 
+						<?php 
+						/* S: Product Summary */
+						echo $this->getChildHtml('description');
+						/* E: Product Summary */ ?>
+						<div style="clear:both"></div>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div id="customer-reviews-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						<div class="customer-review-list custom-scroll" onScroll="javascript:void(0);">
+							<?php if($this->getReviewsSummaryHtml($_product, 'short')){ ?>
+								<h5 style="font-size:16px; font-weight:500;">Reviews of <?php echo $_helper->productAttribute($_product,$_product->getShortDescription(),'name');?></h5>
+							<?php } ?>
+							<?php echo $this->getChildHtml('reviews'); ?>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php 
+				if(!in_array($strLowerFreeProd, $freeProdSku)){ ?>
+				<div class="col-xs-12">
+					<div id="shipping-returns-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						
+						<p class="low-margin-bottom text-bold">Shipping Policy:</p>
+						<p>We ship FREE to 64 countries - We offer FREE FedEx Ground shipping within the USA and FedEx International Shipping worldwide over <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?>. Upgraded shipping options are available at Cart for nominal fees. If you need the item to be shipped faster than the shipping date indicated above, please call 888 926 4272 to speak to one of our Angara Advisors or click <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="fontcolor-type1 text-underline live-chat-link"> Live Chat</a>. A tracking number will be sent to your email upon shipment.</p>
+						<p>All international orders under <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?> will be charged <?php echo Mage::helper('function')->getInternationalShippingPrice();?> each, and the order recipients will have to bear the VAT / TAX as applicable in their respective countries.</P>
+						<p>Please note that the arrival times listed on our website apply to US shipping addresses only. Estimates of the international shipping delivery times can be provided by our Angara Advisors at customer.service@angara.com or 1-888-926-4272.</P>
+						<p>The Estimated Arrival Date DOES NOT take the following into account:</p>
+						<ul class="list-style-disc">
+							<li>Delays in credit approval.</li>
+							<li>Weather delays.</li>
+							<li>Other shipping/vendor service issues.</li>
+						</ul>
+						
+						<p class="low-margin-bottom text-bold">Return Policy:</p>
+						<div id="requestlabel-dialog" title="Request For Return Shipping Label"></div>
+						<p>if you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days return  of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them. We have an extended return policy for special occasions, for instance, orders placed from Angara starting October 28th – November 15th are eligible for 75 day extended holiday return policy, orders placed between November 15th – November 30th are eligible for 60 day extended holiday return policy, and orders placed between December 1st – December 15th are eligible for 45 day extended holiday return policy. All orders placed before October 28th and after December 15th are subjected to standard <?php echo Mage::helper('function')->freeReturnDays();?> day return policy unless specified in a promotion.</p>
+						<p>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill the <a id="returnshipping-dialog-opener" href="/awrma/guest_rma/index/" class="clickable fontcolor-type1 text-underline">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</p>
+						<p>For international returns, return shipping and insurance are the responsibility of the customer.</p>     
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div id="angara-difference-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						<p class="low-margin-bottom text-bold">The Internet's Family Jeweler:</p>
+						<?php /* S: Popup DIV for Customer Say Best */ ?>
+						<div id="internetjewelerpopup" class="popupboxnew"></div>
+						<?php /* E: Popup DIV for Customer Say Best */ ?>
+						<p>We live and breathe gemstones and fine jewelry. We are family owned and have been in the gemstone business for 3 generations. As with a traditional family jeweler experience, we will work with you to find or create the jewelry piece of your dreams. If you cannot find the gemstone or fine jewelry piece that you are looking for on the website, simply call us at 888 926 4272 and our team will find or create your piece. If we can't source it, it probably doesn't exist. <span href="/skin/frontend/ress/default/html/internetjeweler.html" data-target="#ajaxModal" data-toggle="modal" class="clickable fontcolor-type1 text-underline">Our Customers Say It Best</span></p>
+						
+						<p class="low-margin-bottom text-bold">Direct From The Source:</p>
+						<p>With manufacturing and sourcing offices in Jaipur, India (commonly known as the World's Gemstone Capital), Thailand (where the majority of the world's rubies and sapphires are cut and polished), and the USA, we are able to source the best quality gemstones directly from the mines and manufacturers. Further, we manufacture the large majority of our gemstone jewelry - thus, we cut out all middlemen and are able to offer unparalleled prices. Independent appraisal tests have verified that our jewelry routinely appraises at 125-200% of purchase price. </p>
+						
+						<p class="low-margin-bottom text-bold">Exceptional Value And Quality, Guaranteed By A 110% Refund Policy:</p>
+						<p>We guarantee exceptional value and quality. We will refund 110% of the purchase price (up to an additional $250 refund) if any accredited jewelry appraiser values the piece for less than 125% of the purchase price or writes that the craftsmanship is not of exceptional quality. </p>
+						
+						<p class="low-margin-bottom text-bold"><?php echo Mage::helper('function')->freeReturnDays();?>-Day Money Back Guarantee:</p>
+						<p>If you don't love it, simply send it back in its original condition for a full refund. </p>
+						
+						<p class="low-margin-bottom text-bold">Higher Quality:</p>
+						<p>Our jewelry is meant to last for generations. The focus is on maximizing beauty rather than on saving gold or gemstone weight by reducing quality. While our competitors have reduced weight to 2-3 grams for most products as gold costs have gone up, our average product weight remains at 3-5 grams. Even if this philosophy and commitment to fine jewelry costs us more, we believe that the customer will be much happier as a result. </p>
+						
+						<p class="low-margin-bottom text-bold">100% Conflict free:</p>
+						<p>All our diamonds are conflict free and are untouched by any kind of human exploitation.</p>
+					</div>
+				</div>
+				<?php 
+				}?>
+			</div>	
+		</div>	
+	</div>
+	<?php /*E: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference */ ?>
+</div>	
+<div class="clearfix"></div>
+<?php if(!$_product->getIsBuildYourOwn() && !in_array($strLowerFreeProd, $freeProdSku)){ ?>
+	<div class="col-sm-12 no-padding similarItems relative-placeholder" style="padding-left:8px !important;padding-top:25px !important;">
+		<?php //S: Code for add Default category link
+		$current_cat=Mage::getModel('catalog/layer')->getCurrentCategory();
+		if($current_cat && $current_cat->getId()){ ?>
+			<a href="<?php echo $current_cat->getUrl(); ?>" class="absolute-placeholder apricot-text" style="font-size:16px; top:30px; right:10px; z-index:1">View all <?php echo $current_cat->getName(); ?></a>
+		<?php } //E: Code for add Default category link ?>
+		<div id="similarItemsAjax">
+			<?php //echo $this->getChildHtml('related_products'); ?>
+		</div>
+	</div>
+<?php } ?>
+<div class="clearfix"></div>
+<div class="col-sm-12 no-padding" style="background-color:#ffffff;padding-left:8px !important;padding-top:25px !important;">
+	<div id="recently-viewed-jewelry-container"></div>
+</div>
+<?php } else { ?>
+<div class="col-md-12 col-sm-12 no-padding low-margin-top <?php if($_product->getIsBuildYourOwn() && $_product->getByoModel()->hasSettingSelected()){?>hidden<?php } ?>" style="margin-top:40px;">					  						
+	<?php /*S: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference */ ?>
+	<div id="product-extra-info-tabs" class="high-padding-top ress-nav" data-open-on-click="true" data-nav-type="pills"> 
+		<div class="container hidden-xs">
+			<div class="col-sm-12 no-padding block-inline">
+				<ul class="nav nav-pills">
+					<li class="product-tab ress-nav-item active">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Product Details">Product Details</a></h2>
+					</li>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Customer Reviews"><span class="block-inline-display">Reviews </span> <span class="block-inline-display valign-middle"><?php echo $this->getReviewsSummaryHtml($_product, 'short'); ?></span> </a></h2>
+					</li>
+					<?php 
+					if(!in_array($strLowerFreeProd, $freeProdSku)){ ?>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="Shipping And Returns">Shipping & Returns</a></h2>
+					</li>
+					<li class="product-tab ress-nav-item">
+						<h2 class="no-margin"><a rel="nofollow" href="javascript:void(0)" title="The Angara Difference">The Angara Difference</a></h2>
+					</li>
+					<?php 
+					}?>
+				</ul>
+			</div>
+		</div>
+		<div class="pro-detail">
+			<div class="container">
+				<div class="col-xs-12">
+					<div id="product-details-tab" class="product-tab-content max-padding-top ress-nav-content show fontsize-type1"> 
+						<?php 
+						/* S: Product Summary */
+						echo $this->getChildHtml('description');
+						/* E: Product Summary */ ?>
+						<div style="clear:both"></div>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div id="customer-reviews-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						<div class="customer-review-list custom-scroll" onScroll="javascript:void(0);">
+							<?php if($this->getReviewsSummaryHtml($_product, 'short')){ ?>
+								<h5 style="font-size:16px; font-weight:500;">Reviews of <?php echo $_helper->productAttribute($_product,$_product->getShortDescription(),'name');?></h5>
+							<?php } ?>
+							<?php echo $this->getChildHtml('reviews'); ?>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php 
+				if(!in_array($strLowerFreeProd, $freeProdSku)){ ?>
+				<div class="col-xs-12">
+					<div id="shipping-returns-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						<p class="low-margin-bottom text-bold">Shipping Policy:</p>
+						<p>We ship FREE to 64 countries - We offer FREE FedEx Ground shipping within the USA and FedEx International Shipping worldwide over <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?>. Upgraded shipping options are available at Cart for nominal fees. If you need the item to be shipped faster than the shipping date indicated above, please call 888 926 4272 to speak to one of our Angara Advisors or click <a rel="nofollow" id="_lpChatBtn" href='javascript:;' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&file=visitorWantsToChat&site=609151&imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="fontcolor-type1 text-underline live-chat-link"> Live Chat</a>. A tracking number will be sent to your email upon shipment.</p>
+						<p>All international orders under <?php echo Mage::helper('function')->getFreeInternationalShippingPrice();?> will be charged <?php echo Mage::helper('function')->getInternationalShippingPrice();?> each, and the order recipients will have to bear the VAT / TAX as applicable in their respective countries.</P>
+						<p>Please note that the arrival times listed on our website apply to US shipping addresses only. Estimates of the international shipping delivery times can be provided by our Angara Advisors at customer.service@angara.com or 1-888-926-4272.</P>
+						<p>The Estimated Arrival Date DOES NOT take the following into account:</p>
+						<ul class="list-style-disc">
+							<li>Delays in credit approval.</li>
+							<li>Weather delays.</li>
+							<li>Other shipping/vendor service issues.</li>
+						</ul>
+						<p class="low-margin-bottom text-bold">Return Policy:</p>
+						<div id="requestlabel-dialog" title="Request For Return Shipping Label"></div>
+						<p>if you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days return  of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</p>
+						<p>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill the <a id="returnshipping-dialog-opener" href="/awrma/guest_rma/index/" class="clickable fontcolor-type1 text-underline">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</p>
+						<p>For international returns, return shipping and insurance are the responsibility of the customer.</p>     
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div id="angara-difference-tab" class="product-tab-content ress-nav-content hidden fontsize-type1">
+						<p class="low-margin-bottom text-bold">The Internet's Family Jeweler:</p>
+						<?php /* S: Popup DIV for Customer Say Best */ ?>
+						<div id="internetjewelerpopup" class="popupboxnew"></div>
+						<?php /* E: Popup DIV for Customer Say Best */ ?>
+						<p>We live and breathe gemstones and fine jewelry. We are family owned and have been in the gemstone business for 3 generations. As with a traditional family jeweler experience, we will work with you to find or create the jewelry piece of your dreams. If you cannot find the gemstone or fine jewelry piece that you are looking for on the website, simply call us at 888 926 4272 and our team will find or create your piece. If we can't source it, it probably doesn't exist. <span href="/skin/frontend/ress/default/html/internetjeweler.html" data-target="#ajaxModal" data-toggle="modal" class="clickable fontcolor-type1 text-underline">Our Customers Say It Best</span></p>
+						<p class="low-margin-bottom text-bold">Direct From The Source:</p>
+						<p>With manufacturing and sourcing offices in Jaipur, India (commonly known as the World's Gemstone Capital), Thailand (where the majority of the world's rubies and sapphires are cut and polished), and the USA, we are able to source the best quality gemstones directly from the mines and manufacturers. Further, we manufacture the large majority of our gemstone jewelry - thus, we cut out all middlemen and are able to offer unparalleled prices. Independent appraisal tests have verified that our jewelry routinely appraises at 125-200% of purchase price. </p>
+						<p class="low-margin-bottom text-bold">Exceptional Value And Quality, Guaranteed By A 110% Refund Policy:</p>
+						<p>We guarantee exceptional value and quality. We will refund 110% of the purchase price (up to an additional $250 refund) if any accredited jewelry appraiser values the piece for less than 125% of the purchase price or writes that the craftsmanship is not of exceptional quality. </p>
+						<p class="low-margin-bottom text-bold"><?php echo Mage::helper('function')->freeReturnDays();?>-Day Money Back Guarantee:</p>
+						<p>If you don't love it, simply send it back in its original condition for a full refund. </p>
+						<p class="low-margin-bottom text-bold">Higher Quality:</p>
+						<p>Our jewelry is meant to last for generations. The focus is on maximizing beauty rather than on saving gold or gemstone weight by reducing quality. While our competitors have reduced weight to 2-3 grams for most products as gold costs have gone up, our average product weight remains at 3-5 grams. Even if this philosophy and commitment to fine jewelry costs us more, we believe that the customer will be much happier as a result. </p>
+						<p class="low-margin-bottom text-bold">100% Conflict free:</p>
+						<p>All our diamonds are conflict free and are untouched by any kind of human exploitation.</p>
+					</div>
+				</div>
+				<?php 
+				}?>
+			</div>	
+		</div>	
+	</div>
+	<?php /*E: Tabs of Product Details || Customer Review || Shipping & Returns || Angara Difference */ ?>
+</div>	
+<?php } ?>
+
+<script language="javascript">
+if(typeof(s)!='undefined')
+	s.t();
+</script>
+
+<?php if($_product->getIsBuildYourOwn()){ ?>
+	<script>
+	jQuery(function(){
+		var img = jQuery('#moreviews ul li:eq(0) img').attr('src');
+		jQuery('#settingImg img').attr('src',img);
+	});
+	</script>
+<?php } ?>
+
+<style> 
+@media (min-width: 768px ) and (max-width: 999px) {.ipad-rules{bottom: 2px !important; left: 105px !important;}} 
+</style>
+<?php	//	Code added by Vaseem for bt 766 to disable ipad promotion
+$todaysCouponCode	=	strtolower(Mage::helper('function')->getTodaysCouponCode());
+$iPadImage		=	'/skin/frontend/ress/default/images/special-price-offer-banner-sm-new.jpg';
+$desktopImage	=	'/skin/frontend/ress/default/images/special-price-offer-banner-md-new.jpg';
+
+$skuArray	=	Mage::helper('function')->getSkuFromCoupon();
+if(is_array($skuArray) && in_array($_product->getSku(), $skuArray)){
+	$offerSku		=	1;
+	$iPadImage		=	'/skin/frontend/ress/default/images/special-price-offer-banner-sm-'.$todaysCouponCode.'.jpg';
+	$desktopImage	=	'/skin/frontend/ress/default/images/special-price-offer-banner-md-'.$todaysCouponCode.'.jpg';
+}
+    
+    
+$ipadStatus		=	Mage::helper('function')->iPadPromotionStatus(); 
+if ($ipadStatus) { 
+	$class= 'hidden';
+	if($_product->getFinalPrice()>2500 || $offerSku==1){
+		$class= '';
+	}
+	?>
+	
+	<?php if($offerSku == 1){ ?>
+		<div class="clickable deactive <?php echo $class; ?>" id="exclusive-offer-footer-opener-new" style="padding:10px 20px; position:fixed; bottom:0px; right:20px; background-color:#fa505a; color:#ffffff; transition:all 0.1s ease-in-out; -webkit-transition:all 0.2s ease-in-out; z-index:2; border-radius:2px 2px 0px 0px;">
+		<span class="pull-left" style="font-size:16px;">Special Holiday Deal Of The Day - <strong>20% Off</strong></span> 
+		<span class="pull-left high-margin-left"><i class="fa fa-fw fa-angle-up min-padding-left valign-middle" style="font-size:15px;"></i></span>
+	</div>
+	<?php }else{ ?>
+		<div class="clickable deactive <?php echo $class; ?>" id="exclusive-offer-footer-opener-new" style="padding:10px; position:fixed; bottom:0px; right:20px; background-color:#fa505a; color:#ffffff; transition:all 0.1s ease-in-out; -webkit-transition:all 0.2s ease-in-out; z-index:2; border-radius:2px 2px 0px 0px;">
+			<span class="pull-left">We Upgraded Your Offer</span> 
+			<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+				<span class="pull-left high-margin-left"><i class="fa fa-fw fa-angle-up min-padding-left valign-middle" style="font-size:12px;"></i></span>
+			<?php }else{ ?>
+				<span class="pull-left high-margin-left">Know More <i class="fa fa-fw fa-angle-up min-padding-left valign-middle" style="font-size:12px;"></i></span>
+			<?php } ?>
+		</div>
+	<?php } ?>
+	
+	<div class="" id="exclusive-offer-footer-offer-new" style="position:fixed; left:0px; right:0px; bottom:-100%; color:#ffffff; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; z-index:2;">
+		<?php /* Ticker Start */
+				$tickerHtml		=	Mage::helper('function')->getOfferCatalogTickerHtml();
+				if($tickerHtml && $offerSku == 1){ ?>
+						<style>
+						.tickr-width{width:100%; position:absolute; float:left; top:21%; left:0px; right:0px;}
+						.tickr-holder{}
+						.tickr-style{
+							font-weight: bold;
+							font-size: 15px;
+							position: absolute;
+							right: 14%;
+							margin-top: 4px;
+							color: #000000;
+							background:transparent;
+							text-align: center;
+							width: 186px;
+							margin-left: -93px;
+							transform:scale(1.5);
+							-webkit-transform:scale(1.5);
+							-moz-transform:scale(1.5);
+						}
+						.ofrend, .text-format {display:block; padding: 0px 0px 0px;}
+						.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+						.ofrend{font-size: 18px; font-weight: normal; display:none; /* position: absolute; left: -170px; top: 11px; */}
+						.daydigits{display:none;}
+						.hourdigits, .minutedegites, .secondigits{
+							height: 40px;
+							width: 50px;
+							display: inline-block;
+							text-align: center;
+							line-height: 40px;
+							color: #ffffff;
+							background: #000000;
+							font-size: 35px;
+							font-weight: normal;
+						}
+						.text-format span{float:left}
+						span.daydigits + span { display: none;}
+						span.hourdigits + span, span.minutedegites + span{width: 18px; display: block; float: left; font-size: 28px; line-height: 40px;} 
+						.text-format + span span{width:50px; float:left; margin-right:18px; font-weight:300; font-size:8px;}
+						.text-format + span span:last-child{margin-right:0px;}
+						
+						@media(max-width:1680px){.tickr-width{top:15%;}}
+						@media(max-width:1600px){}
+						@media(max-width:1500px){.tickr-style{transform: scale(1.1);  -webkit-transform: scale(1.1);  -moz-transform: scale(1.1);}}
+						@media(max-width:1440px){}
+						@media(max-width:1368px){.tickr-width{top:8%;}}
+						@media(max-width:1280px){.tickr-style{transform: scale(1.0);  -webkit-transform: scale(1.0);  -moz-transform: scale(1.0);}}
+						@media(max-width:1155px){.tickr-style{transform: scale(0.9);  -webkit-transform: scale(0.9);  -moz-transform: scale(0.9); right:8%;} .tickr-width{top:-6%;}}
+						<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+							@media(max-width:1024px){.tickr-style{transform: scale(1.2);  -webkit-transform: scale(1.2);  -moz-transform: scale(1.2); right:5%;} .tickr-width{top:20%;}}
+							@media(max-width:768px){.tickr-style{transform: scale(1.0);  -webkit-transform: scale(1.0);  -moz-transform: scale(1.0); right:3%;} .tickr-width{top:10%;}}
+						<?php } ?>
+						
+						</style>
+						<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+							<div class="product-page-ticker fl full-width">
+								<?php echo $tickerHtml; ?>
+							</div>
+							<script>
+								jQuery(window).load(function(){
+									jQuery('.ofrend').show().text("Today's Deal Ends In");
+								})
+							</script>
+				<?php 
+				}
+		/* Ticker Ends */ ?>	
+				
+        
+        <?php	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			<img src="<?php echo $iPadImage;?>" style="margin:0 auto;" class="img-responsive">
+		<?php }else{ ?>
+			<img src="<?php echo $desktopImage;?>" style="margin:0 auto;" class="img-responsive">
+		<?php } ?>
+	</div>
+	<script>
+		jQuery(function(){
+			jQuery('#exclusive-offer-footer-opener-new').on('click',function(){
+				if(jQuery('#exclusive-offer-footer-opener-new').hasClass('deactive')){
+					openProductOffer();
+				}else{
+					closeProductOffer();
+				}
+				jQuery('#exclusive-offer-footer-opener-new i').toggleClass('fa-angle-up fa-angle-down');
+			});
+		});
+		jQuery(window).resize(function(){
+			var h = jQuery('#exclusive-offer-footer-offer-new img').height();
+			if(jQuery('#exclusive-offer-footer-opener-new').hasClass('active')){
+				jQuery('#exclusive-offer-footer-opener-new').css({'bottom':h+'px'});
+			}
+		});
+		jQuery(window).load(function(){
+			<?php if($_product->getFinalPrice()>2500 || $offerSku==1 ){ ?>
+				openProductOffer();
+				<?php if($offerSku==1){ ?>
+					setTimeout(function(){
+						if(jQuery('#exclusive-offer-footer-opener-new').hasClass('active')){
+							closeProductOffer();
+							jQuery('#exclusive-offer-footer-opener-new').addClass('first-time');
+						}
+					}, 10000);
+				<?php }else{ ?>
+					setTimeout(function(){
+						if(jQuery('#exclusive-offer-footer-opener-new').hasClass('active')){
+							closeProductOffer();
+							jQuery('#exclusive-offer-footer-opener-new').addClass('first-time');
+						}
+					}, 5000);
+				<?php } ?>
+			<?php }else{ ?>
+				closeProductOffer();
+				jQuery('#exclusive-offer-footer-opener-new').addClass('first-time');
+			<?php } ?>
+		}); 
+	</script>
+<?php } ?>
+<?php
+	$appraisal = $this->getRequest()->getParam('appraisal',false);
+	$appraisal = (boolean)$appraisal;
+	$insurance = $this->getRequest()->getParam('insurance',false);
+	$insurance = (boolean)$insurance;
+?>
+<script>
+	jQuery(function(){
+		<?php if($appraisal){ ?>
+			jQuery('#appraisal').prop('checked',true);
+		<?php } ?>
+		<?php if($insurance){ ?>
+			jQuery('#insurance').prop('checked',true);
+		<?php } ?>
+	});
+</script>
+<?php //S: Share Email ?>
+<style>
+	.send-friend{ background: #ffffff; position: absolute;width:500px;height:80%;left:0; right:0;margin:5% auto;border-radius: 3px;padding-bottom:25px;}
+	.send-friend .page-title{ margin-top:35px; }
+	.send-friend .page-title h1{ font-size: 20px; color: #414b56; text-align:center;}
+	.send-friend h2{ font-size:18px; margin-bottom: 0px;  text-align:center;}
+	.send-friend label{ width: 100%; display: block; padding-bottom: 3px; text-align: left; }
+	.send-friend label em{ color:red; padding-right:3px; } 
+	.send-friend .validation-advice{ text-align:left; } 
+	.send-friend input[type="text"], .send-friend input[type="email"]{ height: 35px; border: 1px solid #dedede; width: 100%; margin-top: 20px; padding-left: 20px; font-size: 14px; -webkit-appearance: none; box-sizing:border-box; border-radius: 1px; } 
+	.send-friend textarea{ width: 100%; resize: vertical; margin-top: 20px; margin-bottom: 0px; border: 1px solid #dedede; border-radius: 1px; font-size: 14px; padding-left: 20px; padding-top: 10px; box-sizing: border-box; } 
+	.send-friend button{ width:100%; margin-top: 20px; border:none; background:#fa505a; border-radius:1px; font-size:20px; line-height:50px; color:#ffffff; }
+	.send-friend .buttons-set{position:relative;}
+	#send-friend-message .sf-text {display: table-cell;vertical-align: middle;}
+	#share-email-wait{color: #ffffff; top: 38px; right: 90px;}
+	@media (max-width:768px){
+		#share-email-wait{right: 215px;}
+		.send-friend{width:100%;height:100%;margin:0px;}
+		.close-popup {top:8px !important;right:8px !important;}
+	}
+</style>
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1"></div>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery(window).load(function() {
+			jQuery("#emailModal").html('<div class="loading-indicator hide text-center"><div class="modal-backdrop fade in"></div><div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div></div>');
+		});
+	});
+</script>
+<?php //E: Share Email ?>

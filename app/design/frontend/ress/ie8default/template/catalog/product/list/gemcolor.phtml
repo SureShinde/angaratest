@@ -1,0 +1,249 @@
+<?php
+$_product = $this->getProduct();
+$i = $this->getGemLoopId();
+$allowed = false;
+$currentCategory = Mage::registry('current_category');
+$_helper = $this->helper('catalog/output');
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+if($currentCategory) {
+	$allowedCat = Mage::getStoreConfig('gemstonecolors/scategories/allowedm');
+	$allowedCategories = explode(',',$allowedCat); /* array(5,264,266,267,270,417); Engagement Rings, Rings, Necklaces(Pendants), Earrings, Bracelets, Wedding Rings. */
+	$exceptionCatMobile = Mage::getStoreConfig('gemstonecolors/scategories/categorymobile');
+	$exceptionCategoriesMobile = explode(',',$exceptionCatMobile);	
+	if($currentCategory && $currentCategory->getId() && in_array($currentCategory->getId(),$allowedCategories) && !in_array($currentCategory->getId(),$exceptionCategoriesMobile)) {
+		$allowed = true;
+	}
+}
+elseif(Mage::app()->getRequest()->getModuleName() == 'catalogsearch') {
+	$allowed = true;
+}
+elseif(Mage::app()->getRequest()->getModuleName() == 'adjnav') {
+	$allowed = true;
+}
+elseif(stripos(Mage::app()->getRequest()->getPathInfo(), 'top-twenty-gifts') !== false) {
+	$allowed = true;
+}
+$storeId = Mage::app()->getStore()->getId();
+$gemcolorsLinks = $_product->getGemstonecolorLinkCollection();
+$gemcolorsProducts = $_product->getGemstonecolorProductCollectionOnList($_product->getId(),$this); 
+if($allowed && count($gemcolorsProducts) && isset($gemcolorsProducts[0]['entity_id'])) {
+	$gemstoneType = $_product->getAttributeText('filterable_stone_names');
+	$gemTitle = is_array($gemstoneType) && isset($gemstoneType[0])?$gemstoneType[0]:$gemstoneType;
+	$gemstoneType = preg_replace('/\s+/', '-', $gemTitle);?>
+	
+	<div class="owl-wrapper-outer owl-wrapper-outer<?php echo $_product->getId(); ?>" style="opacity:0;padding-top:10px;">
+		<a href="javascript:void(0)" class="gemcolor-prev hidden" data-scroll="0"><i class="fa fa-chevron-right" style="color:#fa505a;font-size:10px;" aria-hidden="true"></i></a>
+		<div class="owl-wrapper-inner">
+			<div class="item-holder" style="width:150px;">
+			<?php if(strlen($gemstoneType) > 0) {
+				/* Show main gemstone type color */?>
+				<div onclick="changegemstonecolors('<?php echo $_product->getId(); ?>','<?php echo $_product->getId(); ?>','<?php echo $_product->getSku()?>');categoryProductGemstoneChange('<?php echo "gemstone | ".$gemTitle?>');return false;" title="<?php echo $gemTitle; ?>" class="pull-left fi-filterable_stone_names-<?php echo strtolower($gemstoneType); ?> gemcolor">&nbsp;</div>
+				<?php 
+				$url = $_product->getProductUrl(); 
+				if(!empty($extraParams)) { 
+					$url .= '?'.implode('&',$extraParams);
+				}
+				
+				echo '<div width="0" style="display: none" id="gem_url_'.$_product->getId().'">'.$url.'</div>';
+				
+				if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())) {
+					if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()) {
+						echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getYellowGoldImage().'</div>';
+						echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$this->stripTags($this->getImageLabel($_product, 'small_image'), null, true).'</div>';
+					} elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()) {
+						echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getRoseGoldImage().'</div>';
+						echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$this->stripTags($this->getImageLabel($_product, 'small_image'), null, true).'</div>';
+					} else {
+						echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$mediaUrl.'import'.$_product->getWhiteGoldImage().'</div>';
+						echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$this->stripTags($this->getImageLabel($_product, 'small_image'), null, true).'</div>';														
+					}
+				} else {
+					echo '<div width="0" style="display: none" id="gem_img_src_'.$_product->getId().'">'.$this->helper('catalog/image')->init($_product, 'small_image')->resize(220).'</div>';
+					echo '<div width="0" style="display: none" id="gem_img_alt_'.$_product->getId().'">'.$this->stripTags($this->getImageLabel($_product, 'small_image'), null, true).'</div>';
+				}
+				$gemToggleImage	=	Mage::helper('function')->getToggleImage($_product);
+				if($gemToggleImage) {
+					echo '<div width="0" style="display: none" id="gem_toggle_img_src_'.$_product->getId().'">'.$this->helper('catalog/image')->init($_product, 'thumbnail', $gemToggleImage)->resize(220).'</div>';
+					echo '<div width="0" style="display: none" id="gem_toggle_img_alt_'.$_product->getId().'">'.$this->stripTags($this->getImageLabel($_product, 'thumbnail', $gemToggleImage), null, true).'</div>';
+				}
+				echo '<div width="0" style="display: none" id="gem_desc_p_'.$_product->getId().'">'.Mage::helper('core/string')->truncate($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), $length = 70, $etc = '...').'</div>';
+				
+				echo '<div width="0" style="display: none" id="gem_desc_p_d_'.$_product->getId().'">'.$_helper->productAttribute($_product, $_product->getDescription() , 'description').'</div>';
+				
+				echo '<div width="0" style="display: none" id="gem_price_'.$_product->getId().'">'.$this->getPriceHtml($_product, true).'</div>';
+				$key = md5('getReviewsSummaryHtmlShort'.$_product->getId());
+				if($ReviewsSummaryHtmlShortGem = Mage::helper('helloworld')->getDataFromCache($key)) {
+				} else {
+					$ReviewsSummaryHtmlShortGem = $this->getReviewsSummaryHtml($_product, 'short');
+					Mage::helper('helloworld')->setKey($key)->setData($ReviewsSummaryHtmlShortGem)->saveDataInCache();
+				}
+				echo '<div width="0" style="display: none" id="gem_review_'.$_product->getId().'">'.$ReviewsSummaryHtmlShortGem.'</div>';
+			}
+			foreach($gemcolorsProducts as $gemproduct) { ?>
+				<?php if(1) { ?>
+					<?php 
+						$id = $gemproduct['entity_id'];
+						$sku = $gemproduct['sku'];
+						$gemTitle = isset($gemproduct['title'])?$gemproduct['title']:'';
+						$gemstoneType = isset($gemproduct['gemstone_type'])?$gemproduct['gemstone_type']:'';
+					
+						if(strlen($gemstoneType) > 0) {
+					?>
+						<div onclick="changegemstonecolors('<?php echo $id; ?>','<?php echo $_product->getId(); ?>','<?php echo $sku;?>');categoryProductGemstoneChange('<?php echo "gemstone | ".$gemTitle?>');return false;" title="<?php echo $gemTitle; ?>" class="pull-left fi-filterable_stone_names-<?php echo strtolower($gemstoneType); ?> gemcolor">&nbsp;</div>
+						<?php 
+						
+						$url = $gemproduct['url']; 
+						if(!empty($extraParams)) { 
+							$url .= '?'.implode('&',$extraParams);
+						}
+																				
+						echo '<div width="0" style="display: none" id="gem_url_'.$id.'">'.$url.'</div>';
+
+						if($this->getFilteredMetal() && (isset($gemproduct['yellow_gold_image']) || isset($gemproduct['white_gold_image']) || isset($gemproduct['rose_gold_image']))) {
+							if($this->getFilteredMetal() == 'Yellow Gold' && $gemproduct['yellow_gold_image']) {
+								echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['yellow_gold_image'].'</div>';
+								echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+							} elseif($this->getFilteredMetal() == 'Rose Gold' && isset($gemproduct['rose_gold_image'])) {
+								echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['rose_gold_image'].'</div>';
+								echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+							} else {
+								echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$mediaUrl.'import'.$gemproduct['white_gold_image'].'</div>';
+								echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';														
+							}
+						} else {
+							echo '<div width="0" style="display: none" id="gem_img_src_'.$id.'">'.$gemproduct['image_url'].'</div>';
+							echo '<div width="0" style="display: none" id="gem_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+						}
+						
+																					
+						$gemToggleImage	=	isset($gemproduct['toggle'])?$gemproduct['toggle']:0;
+						if($gemToggleImage) {
+							echo '<div width="0" style="display: none" id="gem_toggle_img_src_'.$id.'">'.$gemToggleImage.'</div>';
+							echo '<div width="0" style="display: none" id="gem_toggle_img_alt_'.$id.'">'.$this->stripTags($gemproduct['short_description'], null, true).'</div>';
+						}
+						
+						echo '<div width="0" style="display: none" id="gem_desc_p_'.$id.'">'.Mage::helper('core/string')->truncate($gemproduct['short_description'], $length = 70, $etc = '...').'</div>';
+						
+						echo '<div width="0" style="display: none" id="gem_desc_p_d_'.$id.'">'.$gemproduct['description'].'</div>';
+						
+						echo '<div width="0" style="display: none" id="gem_price_'.$id.'">'.$gemproduct['price_html'].'</div>';
+						
+						echo '<div width="0" style="display: none" id="gem_review_'.$id.'">'.$gemproduct['review_html'].'</div>';
+						
+							?>
+						<?php													
+							}
+						?>
+					<?php } ?>
+				<?php } ?>
+				
+			</div>
+		</div>
+		<a href="javascript:void(0)" class="gemcolor-next hidden" data-scroll="0"><i class="fa fa-chevron-left" style="color:#fa505a;font-size:10px;" aria-hidden="true"></i></a>
+	</div>
+					
+	<script>
+		jQuery(function(){
+			var mainWrapper = jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?>');
+			var innerWrapper = jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner');
+			var itemHolder = jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder');
+			var item = jQuery('.owl-wrapper-outer<?php echo $_product->getId(); ?> .owl-wrapper-inner .item-holder .gemcolor');
+			var showItem = 6;
+			var totalItem = item.length;
+			var itemWidth = item.outerWidth(true);
+			
+			//Browser
+			var uaBrowser = window.navigator.userAgent;
+			var msie = uaBrowser.indexOf("MSIE 9.0");
+			
+			if(msie > 0){
+				var buttonDisable = 'hidden';
+			}else{
+				var buttonDisable = 'button-disabled';
+			}
+			
+			//show hidden buttons
+			mainWrapper.find('a.gemcolor-prev, a.gemcolor-next').removeClass(' hidden');
+			
+			//set inner wrapper style
+			if(showItem > totalItem){
+				innerWrapper.css({'width':(itemWidth*totalItem)+'px','margin':'5px auto','overflow':'hidden','position':'relative','height':'15px'}); 
+			}else{
+				innerWrapper.css({'width':(itemWidth*showItem)+'px','margin':'5px auto','overflow':'hidden','position':'relative','height':'15px'}); 
+			}
+			
+			//set item holder's style
+			itemHolder.css({'width':(itemWidth*totalItem)+'px','position':'absolute','left':'0px'});    
+			
+			//manage slider button display or not
+			if( totalItem <= showItem){
+				mainWrapper.find('a.gemcolor-prev, a.gemcolor-next').hide();
+			}
+			
+			//manage slider button position
+			var buttonPosition = function(){
+				var btnPos = (mainWrapper.width() - (itemWidth*showItem))/2;
+				pos = btnPos/2;
+				mainWrapper.find('a.gemcolor-prev').css('right',pos+'px');
+				mainWrapper.find('a.gemcolor-next').css('left',pos+'px');
+			}
+			
+			
+			//manage slider button position on window load
+			buttonPosition();
+			
+			//manage slider button position on window resize
+			jQuery(window).resize(function(){
+				buttonPosition();
+			});
+			
+			//update itemholder's positon
+			mainWrapper.find('a.gemcolor-next').attr('data-scroll',0 - ((totalItem - showItem)*itemWidth));  
+			
+			//disable 
+			if(mainWrapper.find('a.gemcolor-prev').attr('data-scroll') == 0){
+				mainWrapper.find('a.gemcolor-next').addClass(buttonDisable);
+			}
+			
+			//show gemstone slider
+			mainWrapper.css('opacity','1');
+			
+			//previous button click
+			mainWrapper.find('a.gemcolor-prev').click(function(){
+				var scrollNext =  parseInt(jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-next').attr('data-scroll'));
+				var scrollPrev = parseInt(jQuery(this).attr('data-scroll'));
+				scrollNext += itemWidth;
+				scrollPrev -= itemWidth;
+				itemHolder.animate({
+					left: scrollPrev+'px',
+				}, 300);
+				jQuery(this).attr('data-scroll',scrollPrev);
+				jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-next').attr('data-scroll',scrollNext);
+				if(scrollNext == 0){
+					jQuery(this).addClass(buttonDisable);
+					jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-next').removeClass(buttonDisable);
+				}else{
+					jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-next').removeClass(buttonDisable);
+				}
+			});
+			//next button click
+			mainWrapper.find('a.gemcolor-next').click(function(){
+				var scrollPrev =  parseInt(jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-prev').attr('data-scroll'));
+				var scrollNext = parseInt(jQuery(this).attr('data-scroll'));
+				scrollPrev += itemWidth;
+				scrollNext -= itemWidth;
+				itemHolder.animate({
+					left: scrollPrev+'px',
+				}, 300);
+				jQuery(this).attr('data-scroll',scrollNext);
+				jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('a.gemcolor-prev').attr('data-scroll',scrollPrev);
+				if(scrollPrev == 0){
+					jQuery(this).addClass(buttonDisable);
+					jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-prev').removeClass(buttonDisable);
+				}else{
+					jQuery(this).parents('.owl-wrapper-outer<?php echo $_product->getId(); ?>').find('.gemcolor-prev').removeClass(buttonDisable);
+				}
+			});
+		});
+	</script>
+<?php } ?>

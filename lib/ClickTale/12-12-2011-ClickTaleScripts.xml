@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scripts>
+  <script name="Top" DoNotReplaceCondition = "&lt;!-- ClickTale Top part --&gt;">
+    <![CDATA[	
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+</script>
+<!-- ClickTale end of Top part -->
+]]>
+  </script>
+  <script name="Bottom" DoNotReplaceCondition="&lt;!-- No ClickTale --&gt;" InsertBefore="&lt;!-- ClickTale Bottom part Here --&gt;|&lt;/body&gt;">
+    <![CDATA[
+
+<!-- ClickTale Bottom part -->
+<div id="ClickTaleDiv" style="display: none;"></div>
+<script type='text/javascript' src="https://www.angara.com/lib/ClickTale/ClickTaleControl.php">
+</script>
+<script type="text/javascript">
+var ClickTaleSSL=1;
+if(typeof ClickTale=='function') ClickTale(47787,1,"www");
+</script>
+<script type="text/javascript">
+var CTdropHandler = jQuery('#chromemenu > ul > li');
+for(i=0;i<CTdropHandler.length;i++){
+if(CTdropHandler[i].id == "") {
+CTdropHandler[i].id = "tra"+i;
+}
+}
+if(typeof ClickTaleExec != 'undefined'){
+jQuery('#chromemenu li').mouseover(function() {var CTid = this.id; ClickTaleExec("jQuery('#" + CTid + "').mouseover()");})
+jQuery('#chromemenu li').mouseout(function() {var CTid = this.id; ClickTaleExec("jQuery('#" + CTid + "').mouseout()");})
+}
+</script>
+<!-- ClickTale end of Bottom part -->
+
+]]>
+  </script>
+</scripts>

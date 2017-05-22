@@ -1,0 +1,106 @@
+<div class="loading-indicator hide text-center">
+	<div class="modal-backdrop fade in"></div>
+	<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+</div>
+<?php
+$block = Mage::app()->getLayout()->createBlock('checkout/cart');
+$block->setCartTemplate('checkout/cart.phtml')->chooseTemplate();
+$block->setEmptyTemplate('fancycart/noItems.phtml');
+$block->chooseTemplate();
+$block->addItemRender('simple', 'checkout/cart_item_renderer', 'checkout/cart/item/default.phtml');
+$block->addItemRender('grouped', 'checkout/cart_item_renderer_grouped', 'checkout/cart/item/default.phtml');
+$block->addItemRender('configurable', 'checkout/cart_item_renderer_configurable', 'checkout/cart/item/default.phtml');
+
+$methodsChild = Mage::app()->getLayout()->createBlock('core/text_list');
+$methodsChild->setNameInLayout('checkout.cart.methods');
+$methodsChild->setIsAnonymous(false);
+
+$amazonChild = Mage::app()->getLayout()->createBlock('amazonpayments/link_shortcut');
+$amazonChild->setTemplate('amazonpayments/link_bottom.phtml');
+$amazonChild->setNameInLayout('checkout.cart.methods.amazon_cba');
+$amazonChild->setIsAnonymous(false);
+$methodsChild->setChild('checkout.cart.methods.amazon_cba',$amazonChild);
+
+$fireChild = Mage::app()->getLayout()->createBlock('onepagecheckout/onepage_link');
+$fireChild->setTemplate('onepagecheckout/onepage/link.phtml');
+$fireChild->setNameInLayout('checkout.cart.methods.fire');
+$fireChild->setIsAnonymous(false);
+$methodsChild->setChild('checkout.cart.methods.fire',$fireChild);
+
+$paypalChild = Mage::app()->getLayout()->createBlock('paypal/express_shortcut');
+$paypalChild->setTemplate('paypal/express/shortcut.phtml');
+$paypalChild->setIsQuoteAllowed(1);
+$paypalChild->setNameInLayout('checkout.cart.methods.paypal_express.bottom');
+$paypalChild->setIsAnonymous(false);
+$methodsChild->setChild('checkout.cart.methods.paypal_express.bottom',$paypalChild);
+
+$block->setChild('methods',$methodsChild);
+
+$couponChild = Mage::app()->getLayout()->createBlock('checkout/cart_coupon');
+$couponChild->setTemplate('checkout/cart/coupon.phtml');
+$block->setChild('coupon',$couponChild);
+
+$totalsChild = Mage::app()->getLayout()->createBlock('checkout/cart_totals');
+$totalsChild->setTemplate('checkout/cart/totals.phtml');
+$block->setChild('totals',$totalsChild); ?>
+				
+<div class="max-padding-bottom max-padding-top max-margin-top"></div>
+<div class="container showcase-bg-white low-margin-top">
+	<div class="low-margin-top"><i class="fa fa-times close high-padding-left high-padding-top" data-dismiss="modal"></i></div>
+</div>
+<?php echo $block->toHtml(); ?>
+<div class="container showcase-bg-white">
+   	<?php echo $block->getLayout()->createBlock('core/template')->setTemplate('page/html/whyshop.phtml')->toHTML();?>
+</div>            
+ 
+<script>
+jQuery(function(){
+	jQuery('.remove-item, .addchain, #removechain').click(function(){
+		jQuery.get(jQuery(this).attr('href').replace('checkout/cart','fancycart/ajax'), function(result){
+			if(!isNaN(result) && parseInt(result) == result) {
+				jQuery('.dyn_cart-items-count').text(result);
+			}
+			jQuery('#cartModal').load('/fancycart/ajax/index');
+			jQuery('.dyn_cart-items-count').load('/fancycart/ajax/getItemsCount');
+		}).done(function() {
+			// request successfully completed
+		}).fail(function() {
+			// request not completed
+			//alert("Unable to process cart. Please try again after some time!");
+		});
+		return false;
+	})
+	
+	
+	
+	jQuery('#discount-coupon-form, #updatepost_form').submit(function(){
+		var postData = jQuery(this).serialize();
+		jQuery.post(jQuery(this).attr('action').replace('checkout/cart','fancycart/ajax'), postData, function(result){
+			if(!isNaN(result) && parseInt(result) == result) {
+				jQuery('.dyn_cart-items-count').text(result);
+			}
+			jQuery('#cartModal').load('/fancycart/ajax/index');
+			jQuery('.dyn_cart-items-count').load('/fancycart/ajax/getItemsCount');
+		}).done(function() {
+			// request successfully completed
+		}).fail(function() {
+			// request not completed
+			//alert("Unable to process cart. Please try again after some time!");
+		});
+		return false;
+	})
+	
+	jQuery('.continue-btn').attr('onclick','').click(function(){
+		jQuery('#cartModal').modal('hide');
+		return false;
+	})
+	
+	jQuery('#cartModal div[data-toggle="tooltip"]').tooltip();
+	
+})
+var oldPageName = s.pageName;
+clearSVars();
+<?php echo $this->getSVars(); ?>
+<?php echo $this->getCartScript();?>
+</script>
+<div class="max-padding-bottom max-padding-top max-margin-top"></div>

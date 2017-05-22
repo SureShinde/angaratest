@@ -1,0 +1,29 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <ajaxview_index_index>   
+    <!--<reference name="root">   
+      <action method="setTemplate"><template>page/2columns-left.phtml</template></action>   
+    </reference>
+    <reference name="left">   
+      <block type="ajaxview/left" name="ajaxview_left" template="ajaxview/left.phtml"/>   
+    </reference>   
+    <reference name="content">   
+      <block type="ajaxview/index" name="ajaxview_index" template="ajaxview/index.phtml"/>   
+    </reference> -->
+    <block type="ajaxview/index" name="root" output="toHtml" template="ajaxview/index.phtml"/>   <!--Using name="root" will not load header footer-->
+  </ajaxview_index_index>   
+  
+  	<!--Showing a block on all pages of website starts-->
+	<!--<default>
+		<reference name="root">  
+			<block type="ajaxview/promotion" name="mypromotion" template="ajaxview/promotion.phtml" > 
+				<reference name="head">
+					<action method="addCss"><stylesheet>css/cart-page-offer.css</stylesheet></action>
+				</reference>
+			</block>
+		</reference>
+	</default>-->
+	<!--Showing a block on all pages of website starts-->
+	
+</layout>   
+	

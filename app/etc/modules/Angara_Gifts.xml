@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+ * @category   Angara
+ * @package    Angara_Gifts
+ * @copyright  Copyright (c) 2014 Angara ecommerce. (http://www.angara.com)
+ * @license    http://angara.com/LICENSE-COMMUNITY.txt
+ */
+ -->
+<config>
+	<modules>
+		<Angara_Gifts>
+			<active>true</active>
+			<codePool>local</codePool>
+			<version>1.0.0</version>
+        </Angara_Gifts>
+	</modules>
+</config>

@@ -1,0 +1,240 @@
+<style>
+#detailsform
+{
+	width:400px;
+	display:block;
+	background-color:#fff;
+	z-index:100;
+}
+
+#detailsform .freesizerimg
+{
+width:328px;
+height:83px;
+text-align:center;
+width:400px;
+margin-top:10px;
+padding-bottom:10px;
+margin-bottom:10px;
+border-bottom: 5px solid #8c8c8c;
+background:url(/skin/frontend/angara/default/images/popup/get-a-free-ringsizer.jpg) center top no-repeat;
+position:relative;
+}
+
+
+#detailsform .fieldholder
+{
+display:inline-block;
+padding:0 20px;
+padding-bottom:10px;
+width:360px;
+}
+
+#detailsform .fiendname
+{
+width:82px;
+height:20px;
+font:12px/20px Arial, Helvetica, sans-serif;
+float:left;
+text-align:right;
+}
+.fieldinput
+{
+float:right;
+width:262px;
+text-align:left;
+}
+
+
+#detailsform .fieldinput .userinput
+{
+font:11px/18px Arial, Helvetica, sans-serif;
+width:248px;
+padding:0 2px;
+height:18px;
+border:1px solid #D3D3D3;
+}
+#detailsform .fieldinput select
+{
+width:260px;
+height:20px;
+border-color:#D3D3D3;
+}
+
+
+#detailsform .getintouch
+{
+padding:15px 0 2px 0;
+margin-bottom:10px;
+}
+
+#detailsform .fieldinput .calltime
+{
+width:143px;
+margin-right:20px;
+padding-left:5px;
+height:18px;
+font:11px/18px Arial, Helvetica, sans-serif;
+border:1px solid #D3D3D3;
+float:left;
+}
+#LoadingImage
+{
+display:block;
+}
+#result
+{
+padding-top:200px;
+}
+#rs-country{
+	color:#FF0000;
+}
+
+.ui-widget-header{background:#ccc}
+.ringsizerwrapper .ui-dialog-title
+{display:none;}
+
+.ringsizerwrapper.ui-dialog
+{
+padding:0;
+}
+.ringsizerwrapper .ui-widget-header
+{
+border:none;
+background:none;
+}
+
+.ringsizerwrapper.ui-dialog .ui-dialog-content
+{
+overflow:hidden;
+padding:0;
+}
+
+.ringsizerwrapper.ui-dialog .ui-dialog-titlebar
+{
+padding:0;
+}
+
+.ringsizerwrapper.ui-dialog .ui-dialog-titlebar-close
+{
+margin:0;
+margin-top:8px;
+right:8px;
+z-index:1000;
+background-color:#999999;
+}</style>
+
+<div id="detailsform">
+
+<form action="/popup/index/requestringsizer" method="post" name="formringsizer" class="formringsizer" id="formringsizer">
+                           <div class="freesizerimg"></div>
+                               <span class="fieldholder input-box">
+                                    <span class="fiendname">First Name*:</span>
+                                    <span class="fieldinput"><input name="rs-fname" type="text"  id="rs-fname required-entry" class="userinput required-entry validate-alpha"/></span>
+                               </span>
+                               <span class="fieldholder input-box">
+                                    <span class="fiendname">Last Name*:</span>
+                                    <span class="fieldinput"><input name="rs-lname" type="text" id="rs-lname" class="userinput required-entry validate-alpha"/></span>
+                               </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">Address I*:</span>
+                                    <span class="fieldinput"><input name="rs-addressI" type="text" id="rs-addressI" class="userinput required-entry"/></span>
+                               </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">Address II:</span>
+                                    <span class="fieldinput"><input name="rs-addressII" type="text" id="rs-addressII" class="userinput"/></span>
+                               </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">City*:</span>
+                                    <span class="fieldinput"><input name="rs-city" type="text" id="rs-city" class="userinput required-entry"/>
+                                    <!--<select name="rs-city" id="rs-city">
+                                    	<option  type="text"></option>
+                                    </select>-->
+                                    </span>
+                               </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">Zip Code*:</span>
+                                    <span class="fieldinput"><input name="rs-zipcode" id="rs-zipcode" type="text" class="userinput required-entry"/></span>
+                               </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">State*:</span>
+                                    <span class="fieldinput"><input name="rs-state" type="text" id="rs-state" class="userinput required-entry"/>
+                                    <!--<select name="rs-state" id="rs-state">
+                                   	 <option  type="text"></option>
+                                    </select>-->
+                                    </span>
+                               </span>
+							   <span class="fieldholder">
+							   		<span class="fiendname">Country:</span>
+									<span class="fieldinput"><input disabled="disabled" name="rs-country" type="text" id="rs-country" class="userinput required-entry" value="Only for United States"/></span>
+							   </span>
+                               <span class="fieldholder">
+                                    <span class="fiendname">Email Id*:</span>
+                                    <span class="fieldinput"><input name="rs-emailId" id="rs-emailId" type="text" class="userinput validate-email required-entry"/></span>
+                               </span>
+							   <span class="fieldholder">
+										<span class="fiendname">Contact No*:</span>
+										<span class="fieldinput"><input name="rs-contact" id="rs-contact" type="text" class="userinput required-entry validate-number"/></span>
+								   </span>
+                              
+                                <span class="fieldholder">
+                                    <span class="fiendname"><input name="rs-getintouch" id="rs-getintouch" type="checkbox" value="ON"  /></span>
+                                    <span class="fieldinput">I would like an Angara Jewelry Consultant to get in 
+touch with me to help out</span>
+ 								</span>
+								<div style="border-bottom: 5px solid #8C8C8C;margin-bottom:5px">
+                                <div class="getintouch" style="display:none">
+									
+                                 <span class="fieldholder">
+                                    <span class="fiendname">Preferred date:</span>
+                                    <span class="fieldinput"> 
+									<input name="rs-Preferreddate" id="rs-Preferreddate" type="text" class="userinput" />
+									</span>
+                               </span>
+                                <span class="fieldholder">
+                                    <span class="fiendname">Preferred time:</span>
+                                    <span class="fieldinput">
+									
+                                    <input name="rs-Preferredtime" id="rs-Preferredtime" type="text" class="userinput" value="e.g. 8:30 PM"/>
+                                    </span>
+                               </span>
+							   <span class="fieldholder">
+                                    <span class="fiendname">Time Zone:</span>
+                                    <span class="fieldinput">
+									<select name="rs-timezone" id="rs-timezone" class="userinput">
+										<option  type="text">UTC -05:00 EST</option>
+                                        <option  type="text">UTC -06:00 CST</option>
+										<option  type="text">UTC -07:00 MST</option>
+										<option  type="text">UTC -08:00 PST</option>
+                                    </select>
+                                    </span>
+                               </span>
+                               
+								<div class="clear"></div>
+                               </div>
+							   </div>
+                               <span class="fieldholder" style="text-align:center;">
+							   		<div id="result_success" style="display:none;padding-bottom:3px"><span id="rs-req-result"></span></div>
+							   		<div style="width:120px;position:relative;margin:0 auto">
+								   		<input type="image" src="/skin/frontend/angara/default/images/popup/submitform.jpg" name="rs-submit" value="Request Ringsizer" onclick="javascript:submitRingSizer();return false;"/>
+										<div style="position:absolute;right: -48px;top: 4px;">
+											<span id="LoadingImage" style="display: none" align="center">
+												<img src="/skin/frontend/angara/default/images/loading.gif" width="48"/>
+											</span>
+										</div>
+									</div>
+                               </span>
+                           </form>
+						   </div>
+<script>
+jQuery('#rs-getintouch').click(function() {
+    if( jQuery('#rs-getintouch').is(":checked")) {
+        jQuery(".getintouch").show();
+		//jQuery('#ringsizer-dialog').height(jQuery('#detailsform').height());
+    } else {
+        jQuery(".getintouch").hide();
+		//jQuery('#ringsizer-dialog').height(jQuery('#detailsform').height());
+    }
+});
+	
+</script>

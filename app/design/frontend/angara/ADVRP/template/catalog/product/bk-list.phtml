@@ -1,0 +1,266 @@
+<style>
+/* Start css for tooltip on catalog page */
+a.tooltip-catalog {
+	cursor: pointer;
+	position: relative;
+	color: #B90000;
+}
+a.tooltip-catalog span {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	width: 150px;
+	opacity: 0;
+	text-decoration: none !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow:0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	z-index:99999;
+	color: #000000;
+	display:none;
+}
+a.tooltip-catalog:hover span {
+	margin-left: 0;
+	opacity: 1;
+	font:11px Arial, Helvetica, sans-serif;
+	display:block;
+}
+.classic-catalog {
+	padding: 0.8em 1em;
+}
+.classic-catalog {
+	background: #fff;
+	border: 1px solid #999999;
+}
+/* End css for tooltip on catalog page */
+.cat-play-icon
+{
+width:22px; 
+height:21px; 
+position:absolute; 
+top:9px; 
+right:9px;
+display:block;
+}
+/*.relevanceselect{
+	display:none !important;	
+}
+.pages{
+	display:none !important;	
+}*/
+</style>
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<div class="mboxDefault">
+</div>
+<script type="text/javascript">
+//mboxCreate('mboxCatalogpage');
+//mboxUpdate('tntGlobal','isCatalog=yes');
+</script>
+<?php
+	$_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<?php /*?><p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p><?php */?>
+<?php else: ?>
+<div class="category-products">
+    <?php echo $this->getToolbarHtml() ?>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <ol class="productlist" id="products-list">
+    <?php foreach ($_productCollection as $_product): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+            <?php // Product Image ?>
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop">
+                <div class="f-fix">
+                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+                    <?php if($_product->getRatingSummary()): ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                    <?php endif; ?>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                    <?php if($_product->isSaleable()): ?>
+                        <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onClick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+                    <?php else: ?>
+                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                    <?php endif; ?>
+                    <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                    </div>
+                    <ul class="add-to-links">
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                        <?php endif; ?>
+                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                            <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+    <?php else: ?>
+	<div class="productlist">
+    <div class="products-grid-new" style="float:left;">
+	<ul id="list_results">
+    <?php // Grid Mode ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php $_columnCount = 4;//$this->getColumnCount(); ?>
+    <?php $i=0; foreach ($_productCollection as $_product): ?>
+        <?php if ($i++%$_columnCount==0 && $i!=1): ?>
+        <li class="partition" style="list-style:none"><a href="#"></a></li>
+        <?php endif ?>        
+            <li class="proddetails<?php if ($i%$_columnCount==0 && $i!=1): ?> last<?php endif?>">
+                <?php 
+				$newmediaval = Mage::getModel('catalog/product')->load($_product->getId())->getVideo();
+				$extraParams = array();
+				if($this->getFilteredMetal()){
+					$extraParams[] = 'metal1_type='.urlencode($this->getFilteredMetal());//'?videoplay=1';
+				}
+				if($this->getFilteredGrade()){
+					$extraParams[] = 'stone1_grade='.urlencode($this->getFilteredGrade());//'?videoplay=1';
+				}
+				?>
+                <a href="<?php echo $_product->getProductUrl() ?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" title="<?php echo $this->stripTags($_product->getName(), null, true); ?>"  class="product-image">
+                <?php				
+				if($newmediaval!='')
+				{					
+				?>
+                    <img src="/skin/frontend/angara/default/images/catalog-play-icon.png" style="width:22px; height:21px;border:0px;" class="cat-play-icon">
+				<?php
+				}
+				?>
+				<?php 
+				if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage())):
+					if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()):
+					?>
+						<img class="catalog-image" src="<?php echo '/media/import'.$_product->getYellowGoldImage();?>" width="150" height="150" style="display:block" title="<?php echo $_product->getShortDescription() ?>" alt="<?php echo $_product->getShortDescription() ?>"/>
+					<?php
+					else:
+					?>
+						<img class="catalog-image" src="<?php echo '/media/import'.$_product->getWhiteGoldImage();?>" width="150" height="150" style="display:block" title="<?php echo $_product->getShortDescription() ?>" alt="<?php echo $_product->getShortDescription() ?>"/>
+					<?php
+					endif;
+					?>
+				<?php
+				else:
+				$hoverEffect = '';
+				if($_product->getAlternateImage()){
+					$hoverEffect = ' onmouseover="this.src=\''.$this->helper('catalog/image')->init($_product, 'alternate_image')->resize(150).'\';" onmouseout="this.src=\''.$this->helper('catalog/image')->init($_product, 'small_image')->resize(150).'\';"';
+				}
+				?>
+                	<img class="catalog-image" <?php echo $hoverEffect; ?> src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150); ?>" width="150" height="150" style="display:block" title="<?php echo $_product->getShortDescription() ?>" alt="<?php echo $_product->getShortDescription() ?>"/>
+				<?php
+				endif;
+				?>
+                <div class="catlogp-name"><?php echo $this->stripTags($_product->getName(), null, true); ?></div></a>
+                <?php echo $this->getPriceHtml($_product, true) ?>
+                <?php if($_product->getRatingSummary()): ?><?php echo $this->getReviewsSummaryHtml($_product, 'short') ?><?php endif; ?>
+            </li>
+        <?php endforeach ?>
+    <?php endif; ?>
+		</ul>
+	</div>	
+        <div class="clear"></div>
+        <div id="ae_extra_proddetails"></div>
+		
+		
+        <script type="text/javascript">
+	jQuery('window').load(function(){
+		jQuery('.col-main').css('min-height','');
+		jQuery('.catleftnav').css('min-height','');
+		var cm_oheight = jQuery('.col-main').outerHeight();
+		var cln_oheight = jQuery('.catleftnav').outerHeight();
+		if(cln_oheight>cm_oheight){
+			//jQuery('.col-main').css('min-height',jQuery('.catleftnav').height() - 20 );
+		}
+		else{
+			jQuery('.catleftnav').css('min-height',jQuery('.col-main').height() + 20 );
+		}
+		})
+		  
+		jQuery(function(){
+		
+		jQuery('.col-main').css('min-height','');
+		jQuery('.catleftnav').css('min-height','');
+		var cm_oheight = jQuery('.col-main').outerHeight();
+		var cln_oheight = jQuery('.catleftnav').outerHeight();
+		if(cln_oheight>cm_oheight){
+			//jQuery('.col-main').css('min-height',jQuery('.catleftnav').height() - 20 );
+		}
+		else{
+			jQuery('.catleftnav').css('min-height',jQuery('.col-main').height() + 20 );
+		}
+	});
+	
+	function changeonhover(me){
+		jQuery(me).css({"text-decoration":"underline"});
+	}
+	function changeonout(me){
+		jQuery(me).css({"text-decoration":"none"});
+	}
+	var buttonsource='<span class="cat-play-icon1" style="color:red;display: none;position: absolute;right: -7px;top: 135px;" onmouseover="changeonhover(this)" onmouseout="changeonout(this)"><b>Customize</b></span>';
+	jQuery('.proddetails').each(function(i, obj){
+	  var ispricerange=jQuery(this).find('.angarapricerange');
+	  if(ispricerange.length>0)jQuery(buttonsource).insertBefore('.catalog-image:eq('+i+')');
+	});
+		  </script>
+    </div>
+    <div class="toolbar-bottom">
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+    <?php /* Start product reviews */ ?>
+    <div class="clear"></div>
+    <br />        
+	<?php echo $this->getLayout()->createBlock('testimonials/items')->setTemplate('testimonials/catalog_review.phtml')->toHTML(); ?>
+	<?php /* End product reviews */ ?>
+</div>
+<?php endif; 
+	//echo $this->getLayout()->createBlock('recentlyviewed/view')->setTemplate('recentlyviewed/footer-strip.phtml')->toHTML();
+?>
+<script>
+var isCatalog=1;
+jQuery(function()
+{jQuery('.pricerange').each(function(){jQuery(this).find('.currencysymbol').width(jQuery(this).parent().width()).css('display','');})})</script>

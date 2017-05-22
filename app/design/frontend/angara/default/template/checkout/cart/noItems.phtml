@@ -1,0 +1,192 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<style>
+.main {
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 15px;
+	text-align: left;
+	background-color: #fff;
+	border: solid 1px #D4D4D4;
+}
+#onepage-header-steps {
+	border-bottom: 1px solid #C9B988;
+	height: 44px;	
+	margin-bottom: 10px;
+}
+.onepage-header-step {
+	float: right;
+	padding: 8px 10px 20px;
+	color: #A79356;
+	font-size: 14px;
+	height: 16px
+}
+.header-step-active {
+	font-weight: bold;
+	background: url("/skin/frontend/angara/default/images/arrow-u.jpg") no-repeat bottom center transparent
+}
+.emcartheading {
+	height: 65px;
+	background-color: #f2fcf1;
+}
+.emcartheadingtxt {
+	font-size: 18px;
+	color: #000;
+	padding: 9px 15px;
+}
+.emcartheadingtxt span {
+	font-size: 12px;
+	color: #000;
+}
+.linksection {
+	padding-top: 20px;
+	height: auto;
+	margin-bottom: 20px;
+	padding-bottom: 30px;
+	background: url(/skin/frontend/angara/default/images/borderbottomsc.jpg) bottom left no-repeat;
+}
+.shopbygemstone {
+	width: 361px;
+	padding-top: 28px;
+	float: left;
+	background: url(/skin/frontend/angara/default/images/shopbygemstone.jpg) top left no-repeat;
+}
+.innerimages {
+	float: left;
+	margin-right: 20px;
+	margin-top: 30px;
+}
+.gemslink {
+	float: left;
+	margin-top: 15px;
+}
+.gemslink ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.gemslink li {
+	background: url(/skin/frontend/angara/default/images/gemsdot.jpg) top left no-repeat;
+	padding-left: 12px;
+}
+.gemslink li a {
+	font-size: 12px;
+	color: #000;
+	text-decoration: none;
+	line-height: 18px;
+}
+.gemslink li a:hover {
+	text-decoration: underline;
+}
+.shopbyjewelry {
+	width: 510px;
+	padding-top: 28px;
+	float: right;
+	background: url(/skin/frontend/angara/default/images/shopbyjewelry.jpg) top left no-repeat;
+}
+.trustseal {
+	width: 611px;
+	height: 52px;
+	margin: 0 auto;
+}
+a {
+	color: #000;
+	text-decoration: underline;
+}
+</style>
+
+<div id="onepage-header">
+  <div id="onepage-header-steps">
+    <h1 style="float:left; margin:5px 0 0 0;"><?php echo $this->__('Secure Checkout') ?></h1>
+    <div class="onepage-header-step" id="onepage-header-step-receipt">Order Receipt</div>
+    <div class="onepage-header-step" id="onepage-header-step-billing">Billing &amp; Shipping</div>
+    <div class="onepage-header-step header-step-active" id="onepage-header-step-shopping">Shopping Cart</div>
+  </div>
+</div>
+<div class="cart">
+  <div class="emcartheading">
+    <div class="emcartheadingtxt">Shopping Cart is Empty.<br>
+      <span><?php echo $this->__('You have no items in your shopping cart.') ?> <?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?></span> </div>
+  </div>
+  <div class="linksection">
+    <div class="shopbygemstone">
+      <div class="innerimages"><a href="http://www.angara.com/loose-gemstones.html"><img src="/skin/frontend/angara/default/images/loose-gemstone-sc.jpg" width="195" height="96"></a></div>
+      <div class="gemslink">
+        <ul>
+          <li><a href="http://www.angara.com/loose-gemstones/sapphire.html">Sapphire</a></li>
+          <li><a href="http://www.angara.com/loose-gemstones/ruby.html">Ruby</a></li>
+          <li><a href="http://www.angara.com/loose-gemstones/emerald.html">Emerald</a></li>
+          <li><a href="http://www.angara.com/loose-gemstones/tanzanite.html">Tanzanite</a></li>
+          <li><a href="http://www.angara.com/natural-color-diamonds.html">Colored Diamonds</a></li>
+          <li><a href="http://www.angara.com/loose-gemstones/aquamarine.html">Aquamarine</a></li>
+          <li><a href="http://www.angara.com/loose-gemstones/citrine.html">Citrine</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="shopbyjewelry">
+      <div class="innerimages"><a href="http://www.angara.com/rings.html"><img src="/skin/frontend/angara/default/images/shopjewelry.jpg" alt="Gemstone Rings" width="218" height="96"></a></div>
+      <div class="gemslink">
+        <ul>
+          <li><a href="http://www.angara.com/jewelry/sapphire-jewelry.html">Sapphire Jewelry</a></li>
+          <li><a href="http://www.angara.com/jewelry/emerald-jewelry.html">Emerald  Jewelry</a></li>
+          <li><a href="http://www.angara.com/jewelry/diamond-jewelry.html">Diamond Jewelry</a></li>
+         <li><a href="http://www.angara.com/birthstone-jewelry/january-birthstone-garnet-jewelry.html">Garnet  Jewelry</a></li>
+         <li><a href="http://www.angara.com/birthstone-jewelry/august-birthstone-peridot-jewelry.html">Peridot Jewelry</a></li>
+          <li><a href="http://www.angara.com/birthstone-jewelry/october-birthstone-opal-jewelry.html">Opal Jewelry</a></li>
+        </ul>
+      </div>
+      <div class="gemslink" style="margin-left:15px;">
+        <ul>
+        <li><a href="http://www.angara.com/jewelry/ruby-jewelry.html">Ruby Jewelry</a></li>
+        <li><a href="http://www.angara.com/jewelry/tanzanite-jewelry.html">Tanzanite Jewelry</a></li>
+         <li><a href="http://www.angara.com/jewelry/aquamarine-jewelry.html">Aquamarine Jewelry</a></li>
+          <li><a href="http://www.angara.com/birthstone-jewelry/february-birthstone-amethyst-jewelry.html">Amethyst Jewelry</a></li>
+          <li><a href="http://www.angara.com/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl Jewelry</a></li>
+          <li><a href="http://www.angara.com/birthstone-jewelry/november-birthstone-citrine-jewelry.html">Citrine Jewelry</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear:both"> </div>
+  </div>
+  <div class="trustseal">
+  <script type="text/javascript">// <![CDATA[
+function vrsn_splash(){sw=window.open('https://seal.verisign.com/splash?form_file=fdf/splash.fdf&dn=WWW.ANGARA.COM&lang=en','VRSN_Splash','location=yes,status=yes,resizable=yes,scrollbars=yes,width=560,height=500');sw.focus();}
+// ]]></script>
+<img style="cursor: pointer; margin-right:36px;" onClick="vrsn_splash();" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/verisign.gif" border="true" alt="Click to Verify - This site has chosen a VeriSign SSL Certificate to improve Web site security" width="85" height="48"  />
+  <img src="/skin/frontend/angara/default/images/trustsealcartpage.jpg" width="327" height="52" border="0" usemap="#Map">
+  <a rel="nofollow"  target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.angara.com">
+<img id="scanalertimg" name="scanalertimg" width="115" height="30"  style="margin:12px 0 0 36px;" border="0" src="/skin/frontend/angara/default/images/32.gif" alt="McAfee Secure sites help keep you safe from identity theft, credit card fraud, spyware, spam, viruses and online scams" oncontextmenu="alert('Copying prohibited by Law - McAfee Secure is a Trademark of McAfee, Inc.'); return false;">
+</a>
+<script>
+function getScanalertImg(){var saImg=document.getElementsByName("scanalertimg");saImg[0].src="https://images.scanalert.com/meter/www.angara.com/32.gif";if(saImg[1]){saImg[1].src="https://images.scanalert.com/meter/www.angara.com/32.gif";}}
+setTimeout('getScanalertImg()',10000);</script>
+<map name="Map"><area shape="rect" coords="0,5,142,47" href="http://www.la.bbb.org/Business-Report/AngaraCom-100082531"  target="_blank">
+<area shape="rect" coords="182,3,324,48" href="http://www.trustlink.org/Reviews/AngaraCom-205983643"  target="_blank">
+</map>
+  </div>
+</div>

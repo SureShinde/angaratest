@@ -1,0 +1,1084 @@
+.angaracustomblock {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	position: relative;
+}
+.countrywrapper {
+	width: 546px;
+	margin: 0 auto;
+	background-color: #fff;
+	position: relative;
+	z-index: 100001;
+	top: 50px;
+}
+.popuplogo {
+	width: 199px;
+	height: 64px;
+	float: left;
+}
+.closebtn {
+	width: 11px;
+	height: 12px;
+	float: right;
+	margin: 5px 5px 0 0;
+	cursor: pointer;
+}
+.clear {
+	clear: both;
+}
+.countrybox {
+	padding: 7px;
+	height: 41px;
+	background-color: #eeeeee;
+	position: relative;
+}
+.flagbox {
+	height: 41px;
+	background-color: #fff;
+	padding: 0 31px 0 31px;
+}
+.countryflag {
+	width: 35px;
+	height: 23px;
+	background: url(/skin/frontend/angara/default/images/popup/countryflags.jpg) no-repeat top left;
+	float: left;
+	margin-top: 10px;
+}
+.countryname {
+	font-size: 20px;
+	line-height: 41px;
+	color: #000;
+	text-transform: capitalize;
+	float: left;
+	margin-left: 10px;
+}
+.shippingarrow {
+	background: url(/skin/frontend/angara/default/images/popup/arrow.jpg) no-repeat;
+	width: 22px;
+	height: 17px;
+	position: absolute;
+	top: 48px;
+	left: 68px;
+}
+.bottomstrip {
+	height: 44px;
+	width: 546px;
+	background: url(/skin/frontend/angara/default/images/popup/bottom-bg.jpg) repeat-x;
+	font-size: 12px;
+	line-height: 44px;
+	color: #000;
+	text-align: center;
+}
+.bottomstrip span a {
+	color: ba0000;
+	text-decoration: none;
+}
+.bottomstrip span a:hover {
+	text-decoration: underline;
+}
+.heading {
+	font-size: 18px;
+	color: #ba0000;
+	padding: 21px 0 0 37px;
+}
+.points {
+	padding: 5px 10px 0 37px;
+	height: 200px;
+	margin-right: 25px;
+	overflow: auto;
+}
+.points ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.points li {
+	list-style: disc outside none;
+	padding: 0;
+	font-size: 12px;
+	color: #000;
+	margin: 10px 0 0 13px;
+	line-height: 17px;
+}
+.moreinfo {
+	font-size: 12px;
+	color: #7f7f7f;
+	width: 546px;
+	text-align: center;
+	padding: 25px 0;
+}
+.continuebtn {
+	width: 235px;
+	height: 44px;
+	width: 546px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.country-ar-big {
+	background-position: 0 0;
+	width: 35px;
+	height: 23px;
+}
+.country-at-big {
+	background-position: -40px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-au-big {
+	background-position: -80px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-be-big {
+	background-position: -120px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-bg-big {
+	background-position: -160px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-bo-big {
+	background-position: -200px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-br-big {
+	background-position: -240px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ca-big {
+	background-position: -280px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ch-big {
+	background-position: -320px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-cl-big {
+	background-position: -360px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-co-big {
+	background-position: -400px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-cr-big {
+	background-position: -440px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-cy-big {
+	background-position: -480px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-cz-big {
+	background-position: -520px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-de-big {
+	background-position: -560px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-dk-big {
+	background-position: -600px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ec-big {
+	background-position: -640px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ee-big {
+	background-position: -680px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-es-big {
+	background-position: -720px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-fi-big {
+	background-position: -760px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-fk-big {
+	background-position: -800px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-fr-big {
+	background-position: -840px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gb-big {
+	background-position: -880px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gf-big {
+	background-position: -920px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gr-big {
+	background-position: -960px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gs-big {
+	background-position: -1000px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gt-big {
+	background-position: -1040px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gu-big {
+	background-position: -1080px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-gy-big {
+	background-position: -1120px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-hk-big {
+	background-position: -1160px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-hn-big {
+	background-position: -1200px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-hu-big {
+	background-position: -1240px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ie-big {
+	background-position: -1280px 0;
+	width: 35px;
+	height: 21px;
+}
+.country-it-big {
+	background-position: -1320px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-jp-big {
+	background-position: -1360px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-lt-big {
+	background-position: -1400px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-lu-big {
+	background-position: -1440px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-lv-big {
+	background-position: -1480px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-mo-big {
+	background-position: -1520px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-mp-big {
+	background-position: -1560px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-mt-big {
+	background-position: -1600px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-mx-big {
+	background-position: -1640px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-ni-big {
+	background-position: -1680px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-nl-big {
+	background-position: -1720px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-no-big {
+	background-position: -1760px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-nz-big {
+	background-position: -1800px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-pa-big {
+	background-position: -1840px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-pe-big {
+	background-position: -1880px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-pl-big {
+	background-position: -1920px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-pr-big {
+	background-position: -1960px 0;
+	width: 35px;
+	height: 23px;
+}
+.country-pt-big {
+	background-position: 0 -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-py-big {
+	background-position: -40px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-ro-big {
+	background-position: -80px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-se-big {
+	background-position: -120px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-si-big {
+	background-position: -160px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-sk-big {
+	background-position: -200px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-sr-big {
+	background-position: -240px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-sv-big {
+	background-position: -280px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-us-big {
+	background-position: -320px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-uy-big {
+	background-position: -360px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-ve-big {
+	background-position: -400px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-vi-big {
+	background-position: -440px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-sg-big {
+	background-position: -480px -28px;
+	width: 35px;
+	height: 23px;
+}
+.country-ae-big {
+	background-position: -520px -28px;
+	width: 35px;
+	height: 23px;
+}
+#countrybox {
+	float: left
+}
+.countrynameheader {
+	font-size: 12px;
+	color: #000;
+	text-transform: capitalize;
+	margin-right: 10px;
+	float: left;
+}
+.countryflagheader {
+	width: 23px;
+	height: 15px;
+	background: url(/skin/frontend/angara/default/images/popup/headercountryflags.jpg) no-repeat top left;
+	float: left;
+	margin-top:1px;
+	cursor: pointer;
+}
+.maincountry {
+	height: 36px;
+	display: inline-block
+}
+.maincountry ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.maincountry li {
+	float: left;
+	margin: 5px 11px 0 11px;
+	cursor: pointer;
+}
+.maincountry li a {
+	font-size: 11px;
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+}
+.maincountry li span {
+	font-size: 11px;
+	font-weight: bold;
+	color: #000;
+	cursor: pointer;
+}
+.countrypopbox {
+	margin: 14px;
+}
+.countrylist {
+	width: 184px;
+	float: left;
+	text-align: left;
+}
+.countrylist ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.countrylist li {
+	height: 26px;
+	width: 184px;
+}
+.countrylist li a {
+	font-size: 11px;
+	color: #000;
+	text-decoration: none;
+}
+.countryflaglist {
+	width: 23px;
+	height: 15px;
+	background: url(/skin/frontend/angara/default/images/popup/headercountryflags.jpg) no-repeat top left;
+	float: left;
+	margin: 0px 6px 0 0px;
+	border: solid 1px #666666;
+}
+.shippingtxt {
+	font-size: 11px;
+	line-height: 38px;
+	color: #000;
+	vertical-align: top;
+	display: inline-block;
+}
+.country-droparrow {
+	width: 18px;
+	height: 17px;
+	display: inline-block;
+	position: relative;
+	z-index: 9999;
+}
+.country-droparrow img {
+	vertical-align: baseline
+}
+.countrypopupbox {
+	width: 958px;
+	height: 35px;
+	text-align: center;
+	margin-top: 13px;
+	padding-top: 10px;
+	border: 1px solid #D4D4D4;
+}
+.country-popup {
+	width: 948px;
+	height: 394px;
+	border: solid 1px #bfbfbf;
+	background-color: #fff;
+	position: absolute;
+	top: -394px;
+	left: 10px;
+	z-index: 999;
+}
+.popuparrow {
+	background: url(/skin/frontend/angara/default/images/popup-arrow.png) no-repeat;
+	width: 27px;
+	height: 8px;
+	position: absolute;
+	top: -10px;
+	left: -5px;
+	z-index: 9999;
+}
+.country-ar-small {
+	background-position: 0 0;
+}
+.country-at-small {
+	background-position: -28px 0;
+}
+.country-au-small {
+	background-position: -56px 0;
+}
+.country-be-small {
+	background-position: -84px 0;
+}
+.country-bg-small {
+	background-position: -112px 0;
+}
+.country-bo-small {
+	background-position: -140px 0;
+}
+.country-br-small {
+	background-position: -168px 0;
+}
+.country-ca-small {
+	background-position: -196px 0;
+}
+.country-ch-small {
+	background-position: -224px 0;
+}
+.country-cl-small {
+	background-position: -252px 0;
+}
+.country-co-small {
+	background-position: -280px 0;
+}
+.country-cr-small {
+	background-position: -308px 0;
+}
+.country-cy-small {
+	background-position: -336px 0;
+}
+.country-cz-small {
+	background-position: -364px 0;
+}
+.country-de-small {
+	background-position: -392px 0;
+}
+.country-dk-small {
+	background-position: -420px 0;
+}
+.country-ec-small {
+	background-position: -448px 0;
+}
+.country-ee-small {
+	background-position: -476px 0;
+}
+.country-es-small {
+	background-position: -504px 0;
+}
+.country-fi-small {
+	background-position: -532px 0;
+}
+.country-fk-small {
+	background-position: -560px 0;
+}
+.country-fr-small {
+	background-position: -588px 0;
+}
+.country-gb-small {
+	background-position: -616px 0;
+}
+.country-gf-small {
+	background-position: -644px 0;
+}
+.country-gr-small {
+	background-position: -672px 0;
+}
+.country-gs-small {
+	background-position: -700px 0;
+}
+.country-gt-small {
+	background-position: -728px 0;
+}
+.country-gu-small {
+	background-position: -756px 0;
+}
+.country-gy-small {
+	background-position: -784px 0;
+}
+.country-hk-small {
+	background-position: -812px 0;
+}
+.country-hn-small {
+	background-position: -840px 0;
+}
+.country-hu-small {
+	background-position: -868px 0;
+}
+.country-ie-small {
+	background-position: -896px 0;
+}
+.country-it-small {
+	background-position: -924px 0;
+}
+.country-jp-small {
+	background-position: -952px 0;
+}
+.country-lt-small {
+	background-position: -980px 0;
+}
+.country-lu-small {
+	background-position: -1008px 0;
+}
+.country-lv-small {
+	background-position: -1036px 0;
+}
+.country-mo-small {
+	background-position: -1064px 0;
+}
+.country-mp-small {
+	background-position: -1092px 0;
+}
+.country-mt-small {
+	background-position: -1120px 0;
+}
+.country-mx-small {
+	background-position: -1148px 0;
+}
+.country-ni-small {
+	background-position: -1176px 0;
+}
+.country-nl-small {
+	background-position: -1204px 0;
+}
+.country-no-small {
+	background-position: -1232px 0;
+}
+.country-nz-small {
+	background-position: -1260px 0;
+}
+.country-pa-small {
+	background-position: -1288px 0;
+}
+.country-pe-small {
+	background-position: -1316px 0;
+}
+.country-pl-small {
+	background-position: -1344px 0;
+}
+.country-pr-small {
+	background-position: -1372px 0;
+}
+.country-pt-small {
+	background-position: -1400px 0;
+}
+.country-py-small {
+	background-position: -1428px 0;
+}
+.country-ro-small {
+	background-position: -1456px 0;
+}
+.country-se-small {
+	background-position: -1484px 0;
+}
+.country-si-small {
+	background-position: -1512px 0;
+}
+.country-sk-small {
+	background-position: -1540px 0;
+}
+.country-sr-small {
+	background-position: -1568px 0;
+}
+.country-sv-small {
+	background-position: -1596px 0;
+}
+.country-us-small {
+	background-position: -1624px 0;
+}
+.country-uy-small {
+	background-position: -1652px 0;
+}
+.country-ve-small {
+	background-position: -1680px 0;
+}
+.country-vi-small {
+	background-position: -1708px 0;
+}
+.country-sg-small {
+	background-position: -1736px 0;
+}
+.country-ae-small {
+	background-position: -1764px 0;
+}
+.countryfootflag {
+	padding-left: 23px;
+	height: 25px;
+	background: url(/skin/frontend/angara/default/images/popup/footercountryflags.png) no-repeat center left;
+}
+.country-ar-smallf {
+	background-position: 0 0;
+}
+.country-at-smallf {
+	background-position: 0 -25px;
+}
+.country-au-smallf {
+	background-position: 0 -50px;
+}
+.country-be-smallf {
+	background-position: 0 -75px;
+}
+.country-bg-smallf {
+	background-position: 0 -100px;
+}
+.country-bo-smallf {
+	background-position: 0 -125px;
+}
+.country-br-smallf {
+	background-position: 0 -150px;
+}
+.country-ca-smallf {
+	background-position: 0 -175px;
+}
+.country-ch-smallf {
+	background-position: 0 -200px;
+}
+.country-cl-smallf {
+	background-position: 0 -225px;
+}
+.country-co-smallf {
+	background-position: 0 -250px;
+}
+.country-cr-smallf {
+	background-position: 0 -275px;
+}
+.country-cy-smallf {
+	background-position: 0 -300px;
+}
+.country-cz-smallf {
+	background-position: 0 -325px;
+}
+.country-de-smallf {
+	background-position: 0 -350px;
+}
+.country-dk-smallf {
+	background-position: 0 -375px;
+}
+.country-ec-smallf {
+	background-position: 0 -400px;
+}
+.country-ee-smallf {
+	background-position: 0 -425px;
+}
+.country-es-smallf {
+	background-position: 0 -450px;
+}
+.country-fi-smallf {
+	background-position: 0 -475px;
+}
+.country-fk-smallf {
+	background-position: 0 -500px;
+}
+.country-fr-smallf {
+	background-position: 0 -525px;
+}
+.country-gb-smallf {
+	background-position: 0 -550px;
+}
+.country-gf-smallf {
+	background-position: 0 -575px;
+}
+.country-gr-smallf {
+	background-position: 0 -600px;
+}
+.country-gs-smallf {
+	background-position: 0 -625px;
+}
+.country-gt-smallf {
+	background-position: 0 -650px;
+}
+.country-gu-smallf {
+	background-position: 0 -675px;
+}
+.country-gy-smallf {
+	background-position: 0 -700px;
+}
+.country-hk-smallf {
+	background-position: 0 -725px;
+}
+.country-hn-smallf {
+	background-position: 0 -750px;
+}
+.country-hu-smallf {
+	background-position: 0 -775px;
+}
+.country-ie-smallf {
+	background-position: 0 -800px;
+}
+.country-it-smallf {
+	background-position: 0 -825px;
+}
+.country-jp-smallf {
+	background-position: 0 -850px;
+}
+.country-lt-smallf {
+	background-position: 0 -875px;
+}
+.country-lu-smallf {
+	background-position: 0 -900px;
+}
+.country-lv-smallf {
+	background-position: 0 -925px;
+}
+.country-mo-smallf {
+	background-position: 0 -950px;
+}
+.country-mp-smallf {
+	background-position: 0 -975px;
+}
+.country-mt-smallf {
+	background-position: 0 -1000px;
+}
+.country-mx-smallf {
+	background-position: 0 -1025px;
+}
+.country-ni-smallf {
+	background-position: 0 -1050px;
+}
+.country-nl-smallf {
+	background-position: 0 -1075px;
+}
+.country-no-smallf {
+	background-position: 0 -1100px;
+}
+.country-nz-smallf {
+	background-position: 0 -1125px;
+}
+.country-pa-smallf {
+	background-position: 0 -1150px;
+}
+.country-pe-smallf {
+	background-position: 0 -1175px;
+}
+.country-pl-smallf {
+	background-position: 0 -1200px;
+}
+.country-pr-smallf {
+	background-position: 0 -1225px;
+}
+.country-pt-smallf {
+	background-position: 0 -1250px;
+}
+.country-py-smallf {
+	background-position: 0 -1275px;
+}
+.country-ro-smallf {
+	background-position: 0 -1300px;
+}
+.country-se-smallf {
+	background-position: 0 -1325px;
+}
+.country-si-smallf {
+	background-position: 0 -1350px;
+}
+.country-sk-smallf {
+	background-position: 0 -1375px;
+}
+.country-sr-smallf {
+	background-position: 0 -1400px;
+}
+.country-sv-smallf {
+	background-position: 0 -1425px;
+}
+.country-us-smallf {
+	background-position: 0 -1450px;
+}
+.country-uy-smallf {
+	background-position: 0 -1475px;
+}
+.country-ve-smallf {
+	background-position: 0 -1500px;
+}
+.country-vi-smallf {
+	background-position: 0 -1525px;
+}
+.country-sg-smallf {
+	background-position: 0 -1550px;
+}
+.country-ae-smallf {
+	background-position: 0 -1575px;
+}
+/*
+\\ Email Capture block footer
+\\-----------------
+*/
+
+
+.emailcapture-footer {
+	margin: 0 auto;
+	padding-top: 10px;
+	width: 310px;
+}
+.offertxt-footer {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+	padding: 5px 0 0 13px;
+}
+.captureinput-footer {
+	width: 152px;
+	padding: 0 4px 0 4px;
+	height: 22px;
+	height: 20px;
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 12px;
+}
+.capturebtn-footer {
+	text-align: center;
+	width: 89px;
+	height: 24px;
+	display: block;
+	color: #fff;
+	background: url(../images/offer-btn-footer.jpg) no-repeat;
+	float: left;
+	margin-left: 2px;
+}
+.capturebtn-footer button {
+	background: none;
+	border: none;
+	outline: none;
+	width: 89px;
+	height: 24px;
+	display: block;
+	padding: 0;
+	cursor: pointer;
+}
+.respect-footer {
+	position: absolute;
+	right: 31px;
+	top: 11px;
+	text-align: center;
+	font-size: 11px;
+}
+.respect-footer a {
+	text-decoration: underline;
+	color: #000;
+}
+.respect-footer a:hover {
+	text-decoration: none;
+}
+
+/* Email Capture block footer*/
+
+.hide {
+	display: none;
+}
+.bordernone {
+	border: 0;
+	margin: 0;
+}
+.countrylistwrapper {
+	position: relative;
+	width: 239px;
+	height: 32px;
+	margin-left: 20px;
+}
+.countrydroplist {
+	width: 223px;
+	height: 23px;
+	background: url(../images/popup/countrylistarrow.png) #fff top right no-repeat;
+	display: inline-block;
+	position:absolute;	
+	top:160px;
+	right:205px;
+	border: solid 1px #e0e0e0;
+	font-family: noto_sansregular, Arial, Helvetica, sans-serif;
+}
+a.account {
+	font-size: 12px;
+	line-height: 25px;
+	cursor: pointer;
+	display: block;
+	padding-left: 5px;
+	text-align: left;
+}
+.countrydroplist li {
+	list-style: none;
+	text-align: left;
+	cursor: pointer;
+}
+.countrydroplist li span.selectedcountry {
+	color: #555555;
+	display: block;
+	cursor: pointer;
+	text-decoration: none;
+}
+.countrydroplist li span.selectedcountry:hover {
+	background: #155FB0;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+span.submenu {
+	width: 223px;
+	top:-153px;
+	left:-1px;
+	height: 150px;
+	overflow-y: scroll;
+	-moz-box-shadow:0px 0px 2px 0px #797979;
+	-webkit-box-shadow:0px 0px 2px 0px #797979;
+	box-shadow:0px 0px 2px 0px #797979;
+	border: solid 1px #c7c7c7;
+	position: absolute;
+	background-color: #fff;
+	z-index:1;
+}
+.countflagspan {
+	height: 25px;
+	display: inline-block;
+	margin-right: 10px;
+	padding-left: 40px;
+	font-size: 12px;
+	line-height: 25px;
+}
+.showcountry {
+	font-size: 12px;
+	line-height: 25px;
+	padding-left: 32px;
+	display: inline-block;
+}
+

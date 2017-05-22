@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<layout>
+	<gemstone_product_edit_tab>
+		<reference name="product_tabs">
+			<action method="addTabAfter">
+				<name>gemstonecolor</name>
+				<block>gemstonecolor/adminhtml_catalog_product_edit_tab</block>
+				<aftertabid>crosssell</aftertabid>
+			</action>
+		</reference>
+	</gemstone_product_edit_tab>
+	
+	<adminhtml_catalog_product_new>
+		 <update handle="gemstone_product_edit_tab"/>
+	</adminhtml_catalog_product_new>
+	
+	<adminhtml_catalog_product_edit>
+		<update handle="gemstone_product_edit_tab"/>
+	</adminhtml_catalog_product_edit>
+	
+	<adminhtml_adminhtml_gemstonecolor_gemstonecolor>
+		<block type="core/text_list" name="root">
+			<block type="gemstonecolor/adminhtml_catalog_product_edit_tab_gemstonecolor" name="adminhtml.catalog.product.edit.tab.gemstonecolor"/>
+			<block type="adminhtml/widget_grid_serializer" name="upsell_grid_serializer">
+				<reference name="upsell_grid_serializer">
+					<action method="initSerializerBlock">
+						<grid_block_name>adminhtml.catalog.product.edit.tab.gemstonecolor</grid_block_name>
+						<data_callback>getSelectedGemstonecolorProducts</data_callback>
+						<hidden_input_name>links[gemstonecolor]</hidden_input_name>
+						<reload_param_name>products_gemstonecolor</reload_param_name>
+					</action>
+					<action method="addColumnInputName">
+						<input_name>position</input_name>
+					</action>
+				</reference>
+			</block>
+		</block>
+	</adminhtml_adminhtml_gemstonecolor_gemstonecolor>
+	
+	<adminhtml_adminhtml_gemstonecolor_gemstonecolorgrid>
+		<block type="core/text_list" name="root">
+			<block type="gemstonecolor/adminhtml_catalog_product_edit_tab_gemstonecolor" name="adminhtml.catalog.product.edit.tab.gemstonecolor"/>
+		</block>
+	</adminhtml_adminhtml_gemstonecolor_gemstonecolorgrid>
+</layout>

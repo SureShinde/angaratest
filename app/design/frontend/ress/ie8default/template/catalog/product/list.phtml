@@ -1,0 +1,497 @@
+<style>
+	.out-of-stock{
+		position: absolute; 
+		padding: 3px 5px; 
+		border-radius: 2px; color: #ffffff;
+		background: #f58a7c; /* Old browsers */
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1OGE3YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjZjc4NmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(top,  #f58a7c 0%, #cf786c 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f58a7c), color-stop(100%,#cf786c)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #f58a7c 0%,#cf786c 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #f58a7c 0%,#cf786c 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #f58a7c 0%,#cf786c 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #f58a7c 0%,#cf786c 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58a7c', endColorstr='#cf786c',GradientType=0 ); /* IE6-8 */
+	}
+	.similar-prod-link{display:block; font-weight:normal; color:#593132; position:absolute; bottom:0px; font-size:12px; background-color:rgba(250,251,252, .7);}
+	.similar-prod-link:hover{color: #593132;}
+	.similer-pro-holder{width:100%; float:left; border:1px solid #593132;margin-bottom:20px}
+	.similer-pro-holder .similer-pro-heading{width:100%; float:left; padding:1%; font-weight: bold; color: #593132; font-size: 15px; box-shadow: 0px 1px 3px 0px #eeeeee; position:relative}
+	.similer-pro-holder .col-pro{width:20%; float:left; padding:1%;}
+	.similar-products-row .regular-price .price-box span.price-extra-text-similar{ display:none !important;}
+	.similar-products-row .price{ white-space: normal!important;}
+	.similar-products-row .loader{width:100%; float:left; border:1px solid #593132; margin-bottom:20px}
+	.similar-products-row .loader .loader-holder{width:100px;margin:0 auto;text-align:center; color:#593132}
+	.similar-products-row .close{float: right; font-size: 21px; font-weight: bold; line-height: 41px; color: #000000; text-shadow: 0 1px 0 #ffffff; opacity: 0.2; position: absolute; right: 0px; height: 40px; top: 0px; width: 40px; text-align: center;}
+	.category-products .details {height:115px!important;}
+	.similer-pro-arrow{position:absolute; bottom:0px; left:100px;}
+	.similer-pro-arrow:before{content:""; border-bottom:10px solid #593132; border-top:6px solid transparent; border-left:6px solid transparent;
+	border-right:6px solid transparent; position:absolute;}
+	
+	@media(max-width:767px){
+		.catalog-banner{clear:both;}
+	}
+</style>	
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$countryParam = Mage::getModel('countrymapping/country');
+$countryCode = strtolower($countryParam->getCountryParameters()->getCountryCode());
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+// S:VA
+/*if($category = Mage::registry('current_category')){
+	$bannerSliderBlock 	= 	$this->getLayout()->createBlock('bannerslider/bannerslider');
+	$banners			= 	$bannerSliderBlock->getNewBannerCatalogCollection();
+	$noOfBanners		=	count($banners);
+	if( $noOfBanners > 0 ){
+		// Check $banners to perform rendering calculation
+		//$bannerPositionData	=	Mage::helper('function')->checkBannerData($banners);
+		$bannerPositionData	=	Mage::helper('function')->calculateBannerPositioning($banners);
+		if(count ($bannerPositionData) > 0){
+			$showBanners	=	1;	
+		}
+	}
+}*/
+$showBanners	=	0;	
+//echo $this->getLayout()->createBlock('bannerslider/bannerslider')->setTemplate('bannerslider/banner_catalog.phtml')->toHtml(); 
+// E:VA
+if(!$_productCollection->count()): ?>
+	<p class="note-msg"><?php echo $this->__('There are no products matching the selection.');?></p>
+<?php 
+else: 
+	echo $this->getToolbarHtml(); ?>
+	<div class="category-products">
+        <div class="catalog-loader hidden">
+            <div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+        </div>
+		<?php	
+		$extraParams = array();	
+		if($this->getFilteredMetal()){
+			$extraParams[] = 'metal1_type='.urlencode($this->getFilteredMetal());//'?videoplay=1';
+		}	
+		if($this->getFilteredGrade()){
+			$extraParams[] = 'stone1_grade='.urlencode($this->getFilteredGrade());//'?videoplay=1';
+		} 
+		// List mode 
+		if($this->getMode()!='grid'):
+			$_iterator = 0; ?>
+			<ul class="showcase-bg-light-alternate" id="products-list">		  
+			<?php 
+			foreach($_productCollection as $_product): 
+				$itemList[] = $_product->getSku();?>
+				<li class="showcase-border-thin high-margin-bottom category-product-list-view relative-placeholder">
+					<div class="row no-gutters item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">   
+						<?php // Product Image ?>
+						<div class="col-sm-2 max-padding-bottom">
+							<?php 
+							if(!$_product->isSaleable()){ 
+								echo '<div class="out-of-stock">Out of Stock</div>';
+							}?>
+							<a href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" class="product-image">
+							<?php
+							if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+								if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+								<?php
+								elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+								<?php	
+								else: ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block"/>
+								<?php
+								endif;
+							else:?>
+								<img data-org="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" />
+							<?php 
+							endif;?>
+                            </a>
+						</div>
+                        
+						<?php // Product description ?>
+						<div class="col-sm-10 list-view-details-box" style="min-height:185px;">
+							<div class="padding-type-10">
+								<?php $_productNameStripped = $this->stripTags($_product->getShortDescription(), null, true); ?>
+								<div class="product-name low-padding-bottom">
+									<a href="<?php echo $_product->getProductUrl() ?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription() , 'name'); ?></a>
+								</div>
+								<?php 
+								$cacheHelper = Mage::helper('helloworld');
+								$key = md5('getReviewsSummaryHtmlShort'.$_product->getId());
+								if($ReviewsSummaryHtmlShort = $cacheHelper->getDataFromCache($key)) {
+								}
+								else{
+									$ReviewsSummaryHtmlShort = $this->getReviewsSummaryHtml($_product, 'short');
+									$cacheHelper->setKey($key)->setData($ReviewsSummaryHtmlShort)->saveDataInCache();
+								}
+								echo $ReviewsSummaryHtmlShort; ?>
+								<div class="high-margin-top"><?php echo $this->getPriceHtml($_product, true);?></div>
+								<?php
+								if(!in_array(99, $_product->getCategoryIds()) && !$_product->getIsBuildYourOwn()):?>
+									<div class="visible-md high-padding-top high-padding-bottom">
+										<button class="btn btn-sm quickview" href="/catalog/ajax_product/view/id/<?php echo $_product->getId();?>" onclick="quickView(this, '<?php echo "catalog-list|".$_product->getSku(); ?>')">Quick View</button>
+										<div class="clearfix"></div>
+									</div>
+								<?php 
+								endif; ?>    
+								<ul class="add-to-links low-margin-top">
+								<?php 
+								if ($this->helper('wishlist')->isAllow()) : ?>
+									<li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+								<?php 
+								endif; ?>					
+								</ul>
+								<?php 
+								if($_product->getDescription()){ ?>
+									<div class="low-margin-top"><?php echo $_product->getDescription(); ?></div>
+								<?php 
+								}?>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php 
+			endforeach; 
+			/* item list set in registry */
+			Mage::register('itemList', $itemList);?>
+			</ul>
+		<?php 
+		else: 
+			// Grid Mode 
+			$_collectionSize = $_productCollection->count();?>
+			<div class="row">
+			<?php 
+			$i = 0; 
+			foreach ($_productCollection as $_product):
+				$itemList[] = $_product->getSku();
+				$isIPad	= Mage::helper('function')->isIPad();
+				$request = Mage::app()->getRequest()->getParams();
+				if($showBanners == 1 && $isIPad != '1'){
+					$page =	$request['p'];				
+					if( ($page == $bannerPositionData['banner1']['p']) && ($i == $bannerPositionData['banner1']['position']) ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=1);
+					}
+					if( ($page == $bannerPositionData['banner2']['p']) && ($i == $bannerPositionData['banner2']['position']) ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=2);
+					}
+					if( ($page == $bannerPositionData['banner3']['p']) && ($i == $bannerPositionData['banner3']['position']) && $noOfBanners > 3 ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=3);
+					}
+					if( ($page == $bannerPositionData['banner4']['p']) && ($i == $bannerPositionData['banner4']['position']) && $noOfBanners >= 4 ){
+						echo Mage::helper('function')->formatBannerHtml($banners, $whichBanner=4);
+					}
+				}?>
+				<div class="col-md-3 col-sm-4 col-xs-6 max-margin-bottom">
+					<div class="category-product-list showcase-bg-white" item itemscope itemtype="http://schema.org/Product">
+					
+					<?php 
+					if(!$_product->getIsBuildYourOwn()){
+						echo $arrivesByDateHtml	=	$this->arrivesByDate($_product);
+					} ?>
+					
+						<?php 
+						if(!$_product->isSaleable()){ 
+							echo '<div class="out-of-stock">Out of Stock</div>';
+						} 
+						if(in_array(457, $_product->getCategoryIds())){
+							$excludedSkuArr = array('SR1018RD','SR1016RD','SP0694RD');
+							//$excludedSkuArr	=	Mage::helper('function')->certificateExcludedSku();					
+							if(in_array($_product->getSku(), $excludedSkuArr)){?>
+								<div class="gia-certificate"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>GRS Certified Stone</div>
+							<?php
+							}
+							else{?>
+								<div class="gia-certificate"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>GIA Certified Stone</div>
+							<?php 
+							} 
+						}									
+						if(in_array(458, $_product->getCategoryIds())){?>
+							<div class="free-jewelry-appraisal"><span class="fa-stack special-merged-icon-20"><i class="fa fa-certificate fa-stack-x"></i><i class="fa fa-bookmark fa-stack-x low-margin-top px7"></i></span>Free Jewelry Appraisal</div>
+						<?php 
+						} ?>
+						
+						<a href="<?php echo $_product->getProductUrl(); echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" class="product-image center-block">
+							<?php
+							if($this->getFilteredMetal() && ($_product->getYellowGoldImage() || $_product->getWhiteGoldImage() || $_product->getRoseGoldImage())):
+								if($this->getFilteredMetal() == 'Yellow Gold' && $_product->getYellowGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getYellowGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+								<?php
+								elseif($this->getFilteredMetal() == 'Rose Gold' && $_product->getRoseGoldImage()): ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getRoseGoldImage();?>"alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+								<?php	
+								else: ?>
+									<img src="<?php echo $mediaUrl.'import'.$_product->getWhiteGoldImage();?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+								<?php
+								endif;
+							else:?>
+								<img data-org="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(220);?>" src="/skin/frontend/ress/default/images/angara-place-holder.jpg" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true);?>" title="<?php echo $_product->getShortDescription();?>" class="img-responsive center-block" width="220" height="220" itemprop="image" />
+							<?php 
+							endif;?>
+						</a>
+						<div class="padding-type-10 padding-type-5-xs details">
+							<a href="<?php echo $_product->getProductUrl();?><?php echo !empty($extraParams)?'?'.implode('&',$extraParams):''; ?>" itemprop="url">
+							<p class="product-name" itemprop="name"><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($_product, $_product->getShortDescription() , 'name'), $length = 59, $etc = '...');?></p></a>                        
+						   	<?php 
+							if(strtolower($countryCode)=='us'){						  
+							   echo '<div>';						  				  	
+							}else{
+								 echo '<div class="reduce-price-size">';							
+							}
+							echo $this->getPriceHtml($_product, true);
+							echo '</div>'; 
+							if(!in_array(99, $_product->getCategoryIds()) && !$_product->getIsBuildYourOwn()):?>
+								<button class="btn btn-sm quickview pull-right visible-md" href="/catalog/ajax_product/view/id/<?php echo $_product->getId();?>" onclick="quickView(this, '<?php echo "catalog-grid|".$_product->getSku(); ?>')">Quick View</button>
+							<?php 
+							endif;
+							// code for creating cache in reviews section :S
+							$cacheHelper = Mage::helper('helloworld');
+							$key = md5('getReviewsSummaryHtmlShort'.$_product->getId());
+							if($ReviewsSummaryHtmlShort = $cacheHelper->getDataFromCache($key)) {
+							}
+							else{
+								$ReviewsSummaryHtmlShort = $this->getReviewsSummaryHtml($_product, 'short');
+								$cacheHelper->setKey($key)->setData($ReviewsSummaryHtmlShort)->saveDataInCache();
+							}
+							echo $ReviewsSummaryHtmlShort;
+							// code for creating cache in reviews section :E
+							// S:VA
+							/*$currentUrl 		= 	Mage::helper('core/url')->getCurrentUrl();
+							$category_id		=	$request['id'];
+							if( strstr( $currentUrl, 'gemstone-jewelry.html') || $category_id=='3' ){
+								$dontShowSI	=	1;
+							}
+							if( $dontShowSI !='1') {*/
+								$relatedProducts 	= 	array();
+								foreach ($_product->getRelatedLinkCollection() as $link) {
+									$relatedProducts[$link->getPosition()]	=	$link->getLinkedProductId();
+								}
+								ksort($relatedProducts);			//	Sort index of an array, Sort by Key
+								$relatedProducts	=	array_slice($relatedProducts,0,5, true);	//	Get first 5 values of array
+								if(count($relatedProducts)>0){ 
+									$relatedProductIds	=	'';
+									foreach($relatedProducts as $relatedPID){
+										$relatedProductIds.=	'"'.$relatedPID.'",';
+									}
+								} 
+								if(count($relatedProducts) > 0 ){ ?>
+									<a href="javascript:void(0);" class="similar-prod-link hidden-xs" data-pid="<?php echo $_product->getId();?>" data-related-products='<?php echo  substr($relatedProductIds,0,-1);?>'>See Similar Items <i class="fa fa-caret-down"></i></a>
+									<div class="similer-pro-arrow arrow-<?php echo $_product->getId();?>" style="display:none;"></div>
+								<?php 
+								} 
+							//}
+							//	E:VA ?>
+						</div>
+					</div>
+				</div>
+				<?php 
+				if($i==2){
+					//echo $this->getChildHtml('special_products');
+				}
+				$i++; 
+			endforeach; 
+			/* item list set in registry */
+			Mage::register('itemList', $itemList);?>
+			</div>
+		<?php 
+		endif; ?>
+		<div class="toolbar-bottom">
+			<?php echo $this->getToolbarBlock()->setTemplate('catalog/product/list/toolbar_bottom.phtml')->toHtml(); ?>
+		</div>
+	</div>
+<?php 
+endif; ?>
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('div[data-toggle="tooltip"]').tooltip();
+	
+	if(jQuery(window).width() > 1279){
+		//jQuery('.category-products .col-md-3.col-sm-4.max-margin-bottom').removeAttr('class').addClass('col-md-2 col-sm-4 max-margin-bottom');
+	}
+});
+<?php 
+//if( $dontShowSI !='1' ){  ?>
+var oldWindowWidth = jQuery(window).width();
+jQuery(window).resize(function(){
+	if(oldWindowWidth != jQuery(window).width()){
+		jQuery('.similer-pro-arrow').hide();
+		jQuery('.similar-prod-link').removeClass('active');
+		jQuery('.similar-products-row').remove();
+		jQuery('.category-products').removeClass('current-parent');
+		oldWindowWidth = jQuery(window).width();
+	}
+});
+
+jQuery(document).on('click','.close',function(e){
+	var prvItem = jQuery(this).parents('.similar-products-row').prevAll('.col-md-3').length;	
+	var prvBanner = jQuery(this).parents('.similar-products-row').prevAll('.col-md-6').length;	
+	
+	/* var prvItemFull = jQuery(this).parents('.similar-products-row').prevAll('.col-md-2').length;	
+	var prvBannerFull = jQuery(this).parents('.similar-products-row').prevAll('.col-md-4').length;	
+	
+	if(jQuery(window).width() > 1279){
+		prvItemFull = (prvBannerFull * 2) + prvItemFull;
+		var cRow = Math.ceil(prvItemFull/6);
+	} */
+	if(jQuery(window).width() > 768){
+		prvItem = (prvBanner * 2) + prvItem;
+		var cRow = Math.ceil(prvItem/4);
+	}
+	if(jQuery(window).width() <= 768){
+		var cRow = Math.ceil(prvItem/3);
+	}
+	
+	var secParent = jQuery(this).parents('.similar-products-row').prevAll('.col-md-3').find('.similar-prod-link.active');
+	
+	/* if(jQuery(window).width() < 1279){
+		var secParent = jQuery(this).parents('.similar-products-row').prevAll('.col-md-3').find('.similar-prod-link.active');
+	}else{
+		var secParent = jQuery(this).parents('.similar-products-row').prevAll('.col-md-2').find('.similar-prod-link.active');
+	} */
+	
+	
+	jQuery('.arrow-for-row-'+cRow).hide();
+	secParent.removeClass('active');
+	jQuery(this).parents('.similar-products-row').remove();
+});
+
+jQuery(".similar-prod-link").click(function(){
+	customLinkTracking('Catalog Similar Items Clicked');
+	currentElement = jQuery(this);
+	currentWindowWidth = jQuery(window).width();
+	
+	proDiv = 'col-md-3';
+	bannerDiv = 'col-md-6';
+	
+	/* if(currentWindowWidth <= 1279){
+		proDiv = 'col-md-3';
+		bannerDiv = 'col-md-6';
+	}else{
+		proDiv = 'col-md-2';
+		bannerDiv = 'col-md-4';
+	} */
+	
+	jQuery('.category-products').removeClass('current-parent');
+	currentElement.parents('.category-products').addClass('current-parent');
+	currentElement.parents('#adj-nav-container').find('.similar-prod-link').addClass('disabled');
+	
+	var totalPro = currentElement.parents('.current-parent').find('.'+proDiv).length;
+	var prevDiv = currentElement.parents('.'+proDiv).prevAll('.'+proDiv).length;
+	var nextDiv = currentElement.parents('.'+proDiv).nextAll('.'+proDiv).length;
+	
+	//banner count
+	var prevBanner = currentElement.parents('.'+proDiv).prevAll('.'+bannerDiv).length;
+	var nextBanner = currentElement.parents('.'+proDiv).nextAll('.'+bannerDiv).length;
+	
+	prevDiv = (prevBanner * 2) + prevDiv;
+	nextDiv = (nextBanner * 2) + nextDiv;
+	totalPro = totalPro + (prevBanner * 2) + (nextBanner * 2);
+	
+	/* if(currentWindowWidth > 1279){
+		var pd = (prevDiv + 1)/6;
+		var rowCount = Math.ceil(totalPro/6);
+		var currentRow = Math.ceil(pd);
+		var divPos = (6 * currentRow)-1;
+		var mod = (prevDiv + 1)%6;
+		if(mod !=0 && currentRow == rowCount){
+			divPos = divPos - (6 - mod) + nextDiv;
+		}
+		divPos = divPos - (prevBanner * 2);
+		if(mod == 1 || mod == 2){			
+			if(currentElement.parents('.'+proDiv).next().hasClass(bannerDiv) || currentElement.parents('.'+proDiv).next().next().hasClass(bannerDiv)){
+				var isNextBanner = 'true';
+			}else{
+				var isNextBanner = 'false';
+			}
+		}else{
+			var isNextBanner = 'false';
+		}
+	} */
+	
+	/* if(currentWindowWidth > 768 && currentWindowWidth <= 1279){ */
+	if(currentWindowWidth > 768){
+		var pd = (prevDiv + 1)/4;
+		var rowCount = Math.ceil(totalPro/4);
+		var currentRow = Math.ceil(pd);
+		var divPos = (4 * currentRow)-1;
+		var mod = (prevDiv + 1)%4;
+		if(mod !=0 && currentRow == rowCount){
+			divPos = divPos - (4 - mod) + nextDiv;
+		}
+		divPos = divPos - (prevBanner * 2);
+		if(mod == 1 || mod == 2){			
+			if(currentElement.parents('.'+proDiv).next().hasClass(bannerDiv) || currentElement.parents('.'+proDiv).next().next().hasClass(bannerDiv)){
+				var isNextBanner = 'true';
+			}else{
+				var isNextBanner = 'false';
+			}
+		}else{
+			var isNextBanner = 'false';
+		}
+		//alert(isNextBanner);
+
+	}
+	if(currentWindowWidth <= 768){
+		var pd = (prevDiv + 1)/3;
+		var rowCount = Math.ceil(totalPro/3);
+		var currentRow = Math.ceil(pd);
+		var divPos = (3 * currentRow)-1;
+		var mod = (prevDiv + 1)%3;
+		if(mod !=0 && currentRow == rowCount){
+			divPos = divPos - (3 - mod) + nextDiv;
+		}
+	}
+
+	jQuery('.similar-prod-link').removeClass('active');
+	currentElement.addClass('active');
+	
+	var pid 				= 	jQuery(this).data('pid');
+	var related_products 	= 	JSON.parse('[' + jQuery(this).data('related-products') + ']');	
+	
+	if(related_products.length > 0){
+		if ( currentElement.data('requestRunning') ) {
+			return;
+		}
+		currentElement.data('requestRunning', true);
+		jQuery.ajax({
+			type: 'POST',
+			data: { pid : pid, related_products : related_products },
+			url: '<?php echo Mage::getUrl("ajaxview/index/index/")?>',
+			beforeSend: function( xhr ) {
+				jQuery('.arrow-'+pid).addClass('arrow-for-row-'+currentRow);
+				currentElement.parents('.current-parent').find('.arrow-for-row-'+currentRow).css('display','none');
+				currentElement.parents('.current-parent').find('.for-row-'+currentRow).remove();
+				if(isNextBanner == 'true'){
+					jQuery('.current-parent .row .'+bannerDiv+':eq('+prevBanner+')').after('<div class="similar-products-row for-row-'+currentRow+' col-md-12" style="display:block; clear:left"><div class="loader"><div class="loader-holder"><div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div></div></div></div>');
+				}else{
+					jQuery('.current-parent .row .'+proDiv+':eq('+divPos+')').after('<div class="similar-products-row for-row-'+currentRow+' col-md-12" style="display:block; clear:left"><div class="loader"><div class="loader-holder"><div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div></div></div></div>');
+				}
+			},
+			context: document.body
+			//timeout:3000 //3 second timeout
+		}).done(function( html ){
+			currentElement.parents('.current-parent').find('.for-row-'+currentRow).remove();
+			jQuery('.arrow-'+pid+'.arrow-for-row-'+currentRow).css('display','block');
+			if(isNextBanner == 'true'){
+				jQuery('.current-parent .row .'+bannerDiv+':eq('+prevBanner+')').after('<div class="similar-products-row for-row-'+currentRow+' col-md-12" style="display:block; clear:left">'+html+'</div>');
+			}else{
+				jQuery('.current-parent .row .'+proDiv+':eq('+divPos+')').after('<div class="similar-products-row for-row-'+currentRow+' col-md-12" style="display:block; clear:left">'+html+'</div>');
+			}
+			currentElement.parents('#adj-nav-container').find('.similar-prod-link').removeClass('disabled');
+			currentElement.data('requestRunning', false);	
+		}).fail(function(jqXHR, textStatus){
+			if(textStatus === 'timeout'){     
+				jQuery('.similar-products-row').html('error');
+				currentElement.parents('#adj-nav-container').find('.similar-prod-link').removeClass('disabled');
+			}
+		});
+	}
+}); 
+
+<?php //} ?>
+</script>

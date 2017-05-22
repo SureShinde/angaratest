@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Matchingband>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Angara_Matchingband>
+  </modules>
+</config>

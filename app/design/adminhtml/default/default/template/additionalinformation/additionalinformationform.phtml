@@ -1,0 +1,77 @@
+<?php 
+if(isset($allImages)){
+	unset($allImages);
+}
+$order_id = $this->getRequest()->getParam('order_id');
+$incrementId = $this->_getIncrementId($order_id);
+$allImages = $this->_getImages($order_id);
+$additionalinformationId = $this->_getFraudCheckId($order_id);
+if(count($allImages)>0):
+foreach($allImages as $key => $images):
+?>
+<div class="pull-left" style="margin-bottom:10px;">
+<?php if(strpos($images,'.jpg')!='' || strpos($images,'.jpeg')!='' || strpos($images,'.png')!='' || strpos($images,'.gif')!='' || strpos($images,'.bmp')!=''): ?>
+	<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'additionalinformation/'.$incrementId.'/'.$images; ?>" height="120px;" width="120px;" onmouseover='show_large_image(this)' onmouseout='hide_large_image(this)' onclick="openimgintab(this);"/>
+<?php else: ?>
+	<?php if(strpos($images,'.pdf')!=''): ?>
+        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'additionalinformation_images/pdf.png'; ?>" height="120px;" width="120px;" onclick="openimgintabpdf('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'additionalinformation/'.$incrementId.'/'.$images;?>')"/>
+    <?php else: ?>
+        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'additionalinformation_images/doc.png'; ?>" height="120px;" width="120px;" onclick="openimgintabpdf('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'additionalinformation/'.$incrementId.'/'.$images;?>')"/>
+    <?php endif; ?>
+<?php endif; ?>
+<span style="display:block; text-align:center;"><input type="button" value="delete" onclick="if(confirm('Are you sure you want to delete?')){deleteimage('<?php echo $key;?>','<?php echo $additionalinformationId; ?>')}else{return false;}" class="delete-img-btn" /></span>
+<div style="position:absolute; left:-491px; top:0;"><img id="image_holder" src="" width="510" height="510" style="position:absolute;display:none;"  /></div>
+</div>
+<?php endforeach; ?>
+
+
+<script type="text/javascript">
+function deleteimage(delid,additionalinformationid){
+	var url = '<?php echo Mage::helper('adminhtml')->getUrl('additionalinformation/adminhtml_additionalinformation/deleteimages',array('_secure'=>true)); ?>';
+	new Ajax.Request(url, {
+		method: "post",
+		parameters: {
+			image : delid,
+			id : additionalinformationid,
+			order_id:<?php echo $order_id;?>,
+		},
+		onSuccess: function(transport){
+			setTimeout(function () { location.reload(true); }, 500);
+		}
+	});
+}
+function getTopPos(inputObj)
+{
+ var returnValue = inputObj.offsetTop;
+ while((inputObj = inputObj.offsetParent) != null){returnValue += inputObj.offsetTop;}
+ return returnValue;
+ }
+function getLeftPos(inputObj)
+{
+ var returnValue = inputObj.offsetLeft;
+ while((inputObj = inputObj.offsetParent) != null){returnValue += inputObj.offsetLeft;}
+ return returnValue;
+ }
+
+function show_large_image(obj)
+{
+ var large_image_obj = document.getElementById("image_holder");
+ large_image_obj.src = obj.src;
+ large_image_obj.style.display = "block";
+ }
+function hide_large_image(obj)
+{
+ var large_image_obj = document.getElementById("image_holder");
+ large_image_obj.src = obj.src;
+ large_image_obj.style.display = "none";
+ }
+function openimgintab(obj) {
+	var large_image_obj = document.getElementById("image_holder");
+	large_image_obj.src = obj.src;
+	window.open(large_image_obj.src,'_blank');
+}
+function openimgintabpdf(obj) {
+	window.open(obj,'_blank');
+}
+</script>
+<?php endif; ?>

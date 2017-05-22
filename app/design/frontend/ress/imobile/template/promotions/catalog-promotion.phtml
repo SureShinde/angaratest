@@ -1,0 +1,30 @@
+<style>
+	.cat-promotion{padding: 5px 10px; background: #e7f7eb;float: left; width: 100%; margin-bottom:15px;}
+	.cat-promotion .offer-detail{width: 100%;float: left;text-align: center;line-height: 19px;}
+	.cat-promotion .clr{color:#fa505a}
+	.cat-promotion .code-ticker{float:left; padding:3px; font-size:13px; width:100%; margin-top:3px;}
+	.cat-promotion .code-ticker .c-code{width:100%; float:left; line-height:23px; text-align:center}
+	.cat-promotion .code-ticker .tickr-holder{width:55%; float:left; border: 1px dashed #000000;padding: 3px;text-align: center;}
+</style>
+<?php $catlogTicker = false; ?>
+
+<?php if($catlogTicker == true){ ?>
+<style>
+	.cat-promotion .code-ticker .c-code{width:45%!important; text-align:left}
+</style>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/js/countdown-timer.js"></script>
+<?php } ?>
+<div class="cat-promotion">
+	<div class="offer-detail">
+		<span class="clr"><strong>15% Off</strong></span> + <span class="clr"><strong>Free Gift(s)</strong></span> orders $500 and above. 
+	</div>
+	<div class="code-ticker">
+		<div class="c-code">
+			Use Code <span class="clr"><strong>ESALE</strong></span>
+		</div>
+		<?php if($catlogTicker == true){ ?>
+			<?php echo Mage::helper('function')->getHomePageTickerHtml();?>
+		<?php } ?>
+	</div>
+</div>
+			

@@ -1,0 +1,142 @@
+<style>.fleft li{float:left;margin-bottom:10px;}</style>
+<div class="showcase-bg-dark showcase-border-top showcase-border-bottom low-padding-top low-padding-bottom">
+	<div class="container">
+    	<div class="row no-gutters">
+			<div class="col-md-4 col-xs-12 col-sm-12">
+				<div class="high-padding-top high-padding-bottom high-padding-right-md">
+					<div class="padding-type-2 showcase-border-thick showcase-bg-white">
+						<div class="block-heading text-center high-margin-top"> Get Exclusive Angara Offers Instantly In Your Inbox! </div>
+						<div>
+							<form id="subscription-form-footer" method="post" action="<?php echo ((Mage::app()->getStore()->isCurrentlySecure())?'https://':'http://').Mage::app()->getRequest()->getHttpHost().'/newsletter/subscriber/confirmed/';?>" onsubmit="return checkFormFooter(this);">
+								<div class="padding-type-10">
+									<div class="row">
+										<div class="col-md-12 col-xs-8">
+											<input id="footerEmail" type="text" name="email" class="input-text required-entry validate-email showcase-border-thick" placeholder="Enter your email address" title="<?php echo $this->__('Email Address');?>">
+											<input type="hidden" value="<?php echo $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>" name="return_url">
+											<input type="hidden" value="03-footer" name="newslettertype">
+											<div class="high-padding-top visible-md"></div>
+											<div id="subscribe-success-footer" class="text-success"></div>
+										</div>
+										<div class="col-md-12 col-xs-4">
+											<input type="submit" value="JOIN" class="btn btn-block btn-primary visible-xs subscribe-button">
+											<input type="submit" value="SUBSCRIBE" class="btn btn-block btn-primary hidden-xs subscribe-button">
+										</div>
+									</div>
+                                    <div class="row low-margin-top">
+                                        <div class="col-sm-12 small text-left">We will never publish, share, or sell your information in any way. <a href="/privacy-and-security.html" class="text-underline" target="_blank">Privacy Policy</a></div>
+                                    </div>
+								</div>
+							</form>
+							<script type="text/javascript">
+							//&lt;![CDATA[
+							var dataFormFooter = new VarienForm('subscription-form-footer', false);
+							function checkFormFooter(frm) {
+								var regFooter = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+								if(frm.footerEmail.value != '' && regFooter.test(frm.footerEmail.value) !== false) {
+									return true;												
+								}
+								return false;
+							}
+							//]]&gt;
+							</script> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-12 nowrap">
+				<div class="navigations low-padding-left-md ress-accordion-xs">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header text-right"><strong class="pull-left">Jewelry by Collections</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="hidden-xs footer-links">
+						<li><a href="/birthstone-jewelry.html">Birthstone Jewelry</a></li>
+						<li><a href="/jewelry/gemstone-jewelry.html">Gemstone Jewelry</a></li>
+						<li><a href="/jewelry/diamond-jewelry.html">Diamond Jewelry</a></li>
+						<li><a href="/jewelry/colored-diamond-jewelry.html">Colored Diamond Jewelry</a></li>
+						<li><a href="/bridal-jewelry.html">Bridal Jewelry</a></li>
+						<li><a href="/lab-jewelry.html">Lab Created Jewelry</a></li>
+						<li><a href="/jewelry.html">Jewelry</a></li>
+					</ul>
+				</div>
+				<div class="navigations low-padding-left-md secondlast ress-accordion-xs">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Partner with Angara</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="hidden-xs footer-links">
+						<li><a href="/ls-index.html">Affiliate Program</a></li>
+						<li><a href="/site-map.html">Sitemap</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-12 nowrap">
+				<div class="navigations low-padding-left-md ress-accordion-xs max-padding-left-xs max-margin-left-xs">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Get to Know Us</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="hidden-xs footer-links">
+						<li><a href="/about-us.html">About Angara</a></li>
+						<li><a href="http://blog.angara.com/">Blog</a></li>
+						<li><a href="/faq.html">FAQ's</a></li>
+						<li><a href="/angara-in-the-press.html">Angara in the News</a></li>
+						<li><a href="/customer-testimonials.html">Customer Testimonials</a></li>
+					</ul>
+				</div>
+				<div class="navigations low-padding-left-md ress-accordion-xs max-padding-left-xs max-margin-left-xs">
+			  		<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Policies</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+				  	<ul class="hidden-xs footer-links">
+						<li><a href="/return-policy.html">Return Policies</a></li>
+						<li><a href="/privacy-and-security.html">Privacy and Security</a></li>
+						<li><a href="/term-of-use.html">Terms of Use</a></li>
+						<li><a href="/shipping.html">Shipping</a></li>
+						<li><a href="/international-policies.html">International Shipping Policies</a></li>
+						<li><a href="/total-protection-warranty.html">Warranty Plan</a></li>
+				  	</ul>
+				</div>
+		 	</div>
+			<div class="col-md-3 col-sm-4 col-xs-12">
+				<div class="navigations last max-margin-left-md max-padding-left-md ress-accordion-xs nowrap">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Contact Us</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="hidden-xs footer-links">
+						<style>.live-chat-footer div{font-size:13px!important; line-height:14px!important; width:60px!important}</style>
+                    	<li class="live-chat-footer"><div id="LP_DIV_1434090335997"></div></li>
+						<li><a href="mailto:customer.service@angara.com">Email Us</a></li>
+                        <li><a href="/tracking">Track Your Order</a></li>
+						<li><a href="/contact-us.html" class="block-inline-display">Call Us: 1-888-926-4272 <span style="color:#008906"> </span></a></li>
+					</ul>
+				</div>
+				<div class="navigations max-margin-left-md max-padding-left-md ress-accordion-xs nowrap">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Connect with Us</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="socialicons hidden-xs list-inline fleft">
+						<li class="ficon social-icons-footer"><a href="https://www.facebook.com/Angaradotcom"><i class="fa px32 fa-facebook-square" style="color:#314987"></i></a></li>
+						<li class="pinticon social-icons-footer"><a href="https://www.pinterest.com/angarajewelry/"><i class="fa px32 fa-pinterest-square" style="color:#cb2026"></i></a></li>
+						<li class="twiticon social-icons-footer"><a href="https://twitter.com/angara"><i class="fa px32 fa-twitter-square" style="color:#38b7da"></i></a></li>
+						<li class="gplusicon social-icons-footer"><a href="https://plus.google.com/+Angara"><i class="fa px32 fa-google-plus-square" style="color:#c53113"></i></a></li>
+						<li class="utubeicon social-icons-footer"><a href="http://www.youtube.com/user/angarainc"><i class="fa px32 fa-youtube" style="color:#c80b07"></i></a></li>
+						<li class="blogicon social-icons-footer"><a href="http://blog.angara.com/">
+							<img src="<?php echo $this->getSkinUrl();?>images/blog-sm.png"/>
+						</a></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+				<div class="navigations max-margin-left-md max-padding-left-md ress-accordion-xs">
+					<p class="low-padding-top low-margin-bottom visible-xs ress-accordion-header showcase-border-top text-right"><strong class="pull-left">Shipping Destination:</strong><i class="fa fa-ul fa-angle-down low-padding-right"></i></p>
+					<ul class="hidden-xs">
+						<li>
+							<div><?php echo $this->getChildHtml('country'); ?></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+    	</div>
+ 	</div>
+</div>
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '583174048479877']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=583174048479877&amp;ev=PixelInitialized" /></noscript>

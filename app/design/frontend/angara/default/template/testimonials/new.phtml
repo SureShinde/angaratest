@@ -1,0 +1,179 @@
+<?php 
+$review	= $this->getReviews()->getItems(); ?>
+
+<div class="customerreviewholder">
+  <h2 class="reviewtitlebg">Latest Jewelry Reviews</h2>
+  <?php if (stristr($_SERVER['HTTP_USER_AGENT'], "msie 7")){ //	Code added by Vaseem for IE 7?>
+  <style>
+/* new banner slider */
+#slideshowContainer-testi {
+	width:960px;	
+	position:relative;
+}
+.slideshow-new-testi {
+	height: 231px;
+	overflow:hidden;
+}
+
+#nav-slide-testi {
+	display:none;
+}
+
+.recently-view-block
+{
+	position:relative;
+}
+
+.review-contorller-testi
+{
+	padding:0 ;
+	margin:0;
+	position:absolute;
+	right:0px;
+	top:200px;
+	width:70px;
+}
+.review-contorller-testi #prev
+{
+	position:absolute;
+	left:0;
+	top:0;
+	background:url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/home-banner/media-control-nav.jpg) no-repeat;
+	height:25px;
+	width:35px;
+	background-position:0 0;
+	cursor:pointer;
+}
+
+.review-contorller-testi #next
+{
+	position: absolute;
+	right:0;
+	top:0;
+	background:url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/angara/default/images/home-banner/media-control-nav.jpg) no-repeat;
+	height:25px;
+	width:35px;
+	background-position:-105px 0;
+		cursor:pointer;
+}
+.slide-container-testi
+{
+	position:relative;
+}
+/* end banner slider */
+</style>
+  <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.cycle.all.js'); ?>"></script> 
+  <script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery('.slideshow-new-testi').cycle({
+        fx:      'fade',
+        pause: 	 1,
+		prev:    '#prev',
+        next:    '#next',
+        pager:   '#nav-slide-testi',
+        pagerAnchorBuilder: pageSlideUpdater
+    });
+    function pageSlideUpdater(idx, slide) {
+        var s = idx > 2 ? ' style="display:none"' : '';
+        return '<li'+s+'><a href="javascript:;">'+(idx+1)+'</a></li>';
+    };
+});
+</script>
+  <div id="slider-1-testi" class="slide-container-testi">
+    <div id="slideshowContainer-testi" class="slideshow-new-testi customerreviewdetails">
+      <?php 
+    foreach($review as $testimonial){
+    $pro		=	Mage::getModel('catalog/product');
+    $_product	=	$pro->load($testimonial->getEntityPkValue());
+    $status		=	$_product->getStatus();
+    $skuProduct	=	$_product->getSku();
+    $productID	=	$_product->getID();	?>
+      <div class="customerreviewlist">
+        <div class="reviewedproduct"> <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product); ?>?icid=rr-widget"> <img width="230" height="230" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(230, 230); ?>"> </a> </div>
+        <div class="reviewholderhome">
+          <div class="reviewedheading">
+            <?php 
+            $testi_title = $this->htmlEscape($testimonial->getTitle());
+            if(strlen($testi_title) > 50) {
+                $testi_title = substr($testi_title, 0, 50);
+                $testi_title = substr($testi_title,0,strrpos($testi_title," "));
+                $testi_title .= '...';
+            }
+            echo $testi_title; ?>
+          </div>
+          <?php 
+            $_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL;
+            $value = $this->__('%s', $this->formatDate($testimonial->getCreatedAt()), 'medium'); ?>
+          <div class="reviewedtext"><?php echo nl2br(Mage::helper('function')->truncateOnWord($this->htmlEscape($testimonial->getDetail()),460)); ?></div>
+          <div class="reviewercountry"><?php echo $this->htmlEscape($testimonial->getNickname()); ?> <small class="reviewdate">
+            <?php 
+                    if(strtotime('1 month ago') < strtotime($testimonial->getCreatedAt())) {
+                        echo Mage::helper('core')->formatDate($value, $_coreFormat);
+                    }
+                    else {
+                        echo 'Older than a month';
+                    } ?>
+            </small> </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <?php 
+}
+        ?>
+    </div>
+    <?php
+    if(count($review) > 1)
+    {
+    ?>
+    <div class="review-contorller-testi"> <span id="prev"><a href="javascript:;"></a></span> <span id="next"><a href="javascript:;"></a></span>
+      <ul id="nav-slide-testi">
+      </ul>
+    </div>
+    <?php
+    }
+    ?>
+  </div>
+  <?php } else{ ?>
+  <div class="customerreviewdetails  showoff-content">
+    <?php 
+	foreach($review as $testimonial){
+		$pro		=	Mage::getModel('catalog/product');
+		$_product	=	$pro->load($testimonial->getEntityPkValue());
+		$status		=	$_product->getStatus();
+		$skuProduct	=	$_product->getSku();
+		$productID	=	$_product->getID();	?>
+    <div class="customerreviewlist">
+      <div class="reviewedproduct"> <a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product); ?>?icid=rr-widget"> <img width="230" height="230" src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(230, 230); ?>"> </a> </div>
+      <div class="reviewholderhome">
+        <div class="reviewedheading">
+          <?php 
+				$testi_title = $this->htmlEscape($testimonial->getTitle());
+				if(strlen($testi_title) > 50) {
+					$testi_title = substr($testi_title, 0, 50);
+					$testi_title = substr($testi_title,0,strrpos($testi_title," "));
+					$testi_title .= '...';
+				}
+				echo $testi_title; ?>
+        </div>
+        <?php 
+				$_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL;
+				$value = $this->__('%s', $this->formatDate($testimonial->getCreatedAt()), 'medium'); ?>
+        <div class="reviewedtext"><?php echo nl2br(Mage::helper('function')->truncateOnWord($this->htmlEscape($testimonial->getDetail()),460)); ?></div>
+        <div class="reviewercountry"><?php echo $this->htmlEscape($testimonial->getNickname()); ?> <small class="reviewdate">
+          <?php 
+						if(strtotime('1 month ago') < strtotime($testimonial->getCreatedAt())) {
+							echo Mage::helper('core')->formatDate($value, $_coreFormat);
+						}
+						else {
+							echo 'Older than a month';
+						} ?>
+          </small> </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <?php 
+	}
+	?>
+  </div>
+  <?php } ?>
+</div>

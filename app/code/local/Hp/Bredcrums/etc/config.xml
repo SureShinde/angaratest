@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+		<modules>
+			<Hp_Bredcrums>
+					<version>0.1.0</version>
+			</Hp_Bredcrums>
+        </modules>
+		<blocks>
+			<bredcrums>
+				<rewrite>
+					<bredcrums>Hp_Bredcrums_Block_Bredcrums</bredcrums>
+				</rewrite>
+			</bredcrums>
+		 </blocks>
+	</global>
+	<frontend>
+		<routers>
+			<bredcrums>
+				<use>standard</use>
+				<args>
+					  <module>Hp_Bredcrums</module>
+					  <frontName>bredcrums</frontName>
+				</args>
+			</bredcrums>
+		</routers>
+		<layout>
+			<updates>
+				<bredcrums>
+		   		      <file>bredcrums.xml</file>
+				</bredcrums>
+			</updates>
+		</layout>
+    </frontend>
+</config>

@@ -1,0 +1,160 @@
+<?php 
+if($this->hasOffer()):?>
+	<style>
+	#offer-choose-your-gift-shadow {
+		opacity:0.6;
+		background:#999;
+		position:fixed;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		z-index:1
+	}
+	#offer-choose-your-gift{
+		position:relative;
+		z-index:2;
+		background:#fff;
+		margin-bottom:15px;
+	}
+	#offer-choose-your-gift .gift-box-header{
+		background: none repeat scroll 0 0 #422F2A;
+		border-color: #824F4A #624F4A;
+		border-width: 1px;
+		height:20px;
+		padding: 10px;
+	}
+	.gift-box-title{
+		color: #FFFFFF;
+		position:absolute;
+		z-index:5;
+		top:12px;
+		left:12px;
+		text-shadow: 0 2px 2px #000000;
+	}
+	.offer-choose-your-gift-content{
+		border-color: #000000;
+		border-width: 1px;
+		padding-right: 6px;
+		min-height: 152px;
+	}
+	.cart-offer-product{
+		float:right;
+		text-align:center;
+		width:33.2258064516129%;
+		padding: 8px 0;
+	}
+	.cart-offer-product img{
+		clear:both;
+	}
+	.cart-offer-product-title{
+		display:block;
+	}
+	/*#fancy-ribbon{
+		background:url("/skin/frontend/angara/default/images/fancy-ribbon.png") no-repeat center center transparent;
+		width:255px;
+		height:286px;
+		position:absolute;
+		top:-74px;
+		left:-51px;
+	}*/
+	a.offer-select-button{
+		background:#920;
+		color:#fff;
+		position:relative;
+		z-index:10;
+		text-shadow: 0 1px 1px #300302;
+		width:75%;
+		font-family:open_sanssemibold,Arial,Helvetica,sans-serif;
+		text-decoration:none;
+		padding:5px;
+		display:block;
+		cursor:pointer;
+		margin:5px auto 0;
+		text-transform:uppercase;
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMjM3LCA0NywgNDkpIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSJyZ2IoMjE2LCA4MSwgNjIpIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYigyMTYsIDgxLCA2MikiIC8+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+		background-image: -webkit-gradient(radial, 100% 100%, 0, 100% 100%, 227, color-stop(0%, rgb(237, 47, 49)), color-stop(100%, rgb(216, 81, 62)));
+		background-image: -webkit-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+		background-image: -moz-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+		background-image: -ms-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+		background-image: -o-radial-gradient(right bottom, farthest-side, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+		background-image: radial-gradient(farthest-side at right bottom, rgb(237, 47, 49) 0%, rgb(216, 81, 62) 100%);
+	}
+	a.offer-select-button:hover{
+		color:#770000;
+		text-shadow: 0 1px 1px #FB9392;
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZDg1MTNlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWQyZjMxIi8+PC9yYWRpYWxHcmFkaWVudD48cmVjdCB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlZDJmMzEiIC8+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+		background-image: -webkit-gradient(radial, 100% 100%, 0, 100% 100%, 227, color-stop(0%, #d8513e), color-stop(100%, #ed2f31));
+		background-image: -webkit-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+		background-image: -moz-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+		background-image: -ms-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+		background-image: -o-radial-gradient(right bottom, farthest-side, #d8513e 0%, #ed2f31 100%);
+		background-image: radial-gradient(farthest-side at right bottom, #d8513e 0%, #ed2f31 100%);
+	}
+	.showhide-offer-arrow {
+		background: url("/skin/frontend/angara/mobile/images/choose-offer-strip-arrow-in.png") no-repeat ;
+		top:6px;
+		cursor: pointer;
+		height:29px;
+		right:7px;
+		position: absolute;
+		width:29px;
+	}
+	.offer-hiiden .showhide-offer-arrow {
+	  	background: url("/skin/frontend/angara/mobile/images/choose-offer-strip-arrow-out.png") no-repeat ;
+	}
+	</style>
+	
+	<div id="offer-choose-your-gift-shadow"></div>
+	
+	<div id="offer-choose-your-gift" class="clear">
+		<?php /*?><div id="fancy-ribbon"></div><?php */?>
+		<div class="gift-box-header"></div>
+		<h3 class="gift-box-title">CHOOSE YOUR FREE GIFT</h3>
+		<div class="offer-choose-your-gift-content">
+			<?php 
+			foreach($this->getProducts() as $product):?>
+				<div class="cart-offer-product">
+					<img width="100" height="100" alt="<?php echo $product->getName();?>" src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(100); ?>">
+					<span class="cart-offer-product-title"><?php echo $product->getShortDescription();?></span>
+					<a class="offer-select-button" href="/checkout/cart/selectOfferProduct/sku/<?php echo $product->getSku();?>">Select</a>
+				</div>
+			<?php 
+			endforeach;?>
+			<div class="clear"></div>
+		</div>
+		<div class="showhide-offer-arrow"></div>
+	</div>
+	
+	<script>
+	jQuery(function(){
+		jQuery('.showhide-offer-arrow').toggle(
+			function(){
+				jQuery('.offer-choose-your-gift-content').hide();
+				jQuery('#offer-choose-your-gift').animate({
+					marginLeft:0,
+					marginRight:0
+				});
+				jQuery('.gift-box-title').animate({
+					left:12
+				});
+				jQuery('#offer-choose-your-gift-shadow').fadeOut('fast');
+				jQuery('#offer-choose-your-gift').addClass('offer-hiiden');
+			},
+			function(){
+				jQuery('.offer-choose-your-gift-content').show();
+				jQuery('#offer-choose-your-gift').animate({
+					marginLeft:0,
+					marginRight:0
+				});
+				jQuery('.gift-box-title').animate({
+					left:12
+				});
+				jQuery('#offer-choose-your-gift-shadow').fadeIn('fast');
+				jQuery('#offer-choose-your-gift').removeClass('offer-hiiden');
+			}
+		);	
+	});
+	</script>
+<?php 
+endif; ?>

@@ -1,0 +1,27 @@
+<!--@subject {{var store.getFrontendName()}} Order # {{var order.increment_id}} update @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$billing.getName()":"Guest Customer Name",
+"var order.increment_id":"Order Id",
+"var order.getStatusLabel()":"Order Status",
+"var comment":"Order Comment",
+"var store.getFrontendName()":"Store Name"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{layout handle="email_header"}} 
+<!--S:VA Email Content-->
+<tr>
+	<td colspan="2" valign="top"><h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Hi {{htmlescape var=$billing.getFirstname()}},</h1>
+        <p style="font-size:12px; line-height:16px; margin:0 0 10px 0;"> This is to confirm that Your order # {{var order.increment_id}} has been <strong>{{var order.getStatusLabel()}}</strong>. </p>
+        <p style="font-size:12px; line-height:16px; margin:0 0 10px 0;">{{var comment}}</p>
+        <p style="font-size:12px; line-height:16px; margin:0;">If you have any questions or concerns call us at {{config path='general/store_information/phone'}} or email us at <a href="mailto:customer.service@angara.com" style="color:#1E7EC8;">customer.service@angara.com</a>.</p>
+        <br /><br />
+        <p style="font-size:12px; line-height:16px; margin:0;">Thank you for choosing us as your one-stop jewelry destination. We look forward to seeing you again soon.<br /><br />Angara.com</p>
+	</td>
+</tr>
+<!--E:VA Email Content--> 
+{{layout handle="email_footer"}}

@@ -1,0 +1,26 @@
+<?php
+if($crumbs && is_array($crumbs)): ?>
+<div class="breadcrumbs">
+    <ul xmlns:v="http://rdf.data-vocabulary.org/#">		<?php // Added by Vaseem for Google Rich Snippets?>
+        <?php $i=0; foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $this->__('crumb').++$i ?>" style="list-style:none;" typeof="v:Breadcrumb">		<?php // Added by Vaseem for Google Rich Snippets?>
+            <?php if($_crumbInfo['link']): ?>
+                <?php
+				$chkDiamondStudUrl = stripos($_crumbInfo['link'], 'earrings/diamondstud.html');
+				if ($chkDiamondStudUrl !== false){
+					echo '<a href="/earrings/diamond-studs.html" title="'.$this->htmlEscape($_crumbInfo['title']).'" rel="v:url" property="v:title">'.$this->htmlEscape($_crumbInfo['label']).'</a>';		// Added by Vaseem for Google Rich Snippets
+				}else{
+					echo '<a href="'.$_crumbInfo['link'].'" title="'.$this->htmlEscape($_crumbInfo['title']).'" rel="v:url" property="v:title">'.$this->htmlEscape($_crumbInfo['label']).'</a>';		// Added by Vaseem for Google Rich Snippets
+				}
+				?>
+            <?php elseif($_crumbInfo['last']): ?>
+                <?php // Added by Vaseem for Google Rich Snippets?>
+                <a rel="v:child" property="v:title"><b><?php echo $this->htmlEscape($_crumbInfo['label']) ?></b></a><li class="crumbblank"  style="list-style:none;"><a></a></li>
+            <?php else: ?>
+                <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+            <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

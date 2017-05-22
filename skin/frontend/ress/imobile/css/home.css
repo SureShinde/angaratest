@@ -1,0 +1,44 @@
+.px22{font-size:22px;}
+/* Navigation */
+#home-nav #home-menu{background:#ffffff;}
+#home-nav #home-menu .nav-holder{width:100%; overflow-y:initial;}
+#home-nav #home-menu .nav-heading{display:none;}
+#home-nav #home-menu ul.level1{background-color:#fafafa}
+#home-nav #home-menu ul.level2{background-color:#fcfcfc}
+
+.category-icon{background:url(/skin/frontend/ress/default/images/sprites/catalog-filters.jpg) no-repeat; width:48px; height:48px; margin:3px auto; display:block;}
+.icon-holder{border:1px solid #cccccc; border-radius:50px; display:block; width:54px; height:54px; padding:3px;  margin:0 auto 5px; overflow:hidden}
+.category-icon.rings{background-position: 0px -2650px;}
+.category-icon.pendants{background-position: 0px -6676px}
+.category-icon.earrings{background-position: 0px -6626px;}
+.category-icon.bracelets{background-position: 0px -6726px}
+
+
+/* Skeleton */
+#skeleton .title{color:#000000; line-height:35px; padding:0px 10px; text-transform:uppercase; font-size:16px;}
+#skeleton .content{ height:122px; background:#ffffff;  border-bottom:1px solid #d6d6d6; border-top:1px solid #d6d6d6; overflow-y:hidden}
+#skeleton .content .image{width:40%;}
+#skeleton .content .links{width:60%;}
+#skeleton .content .links a{font-size:12px; line-height:40px;}
+#skeleton .content .links a{display:block; width:100%; border-bottom:1px solid #e8e8e8; border-left:1px solid #e8e8e8; padding:0px 10px; color:#000000; box-sizing:border-box;}
+#skeleton .content .links a:last-child{border-bottom:none}
+#skeleton .content .links a i{font-size:8px; line-height:40px}
+
+
+/* For latest Review Slider */
+.review-slider .testimonial-heading{ margin-top: 10px; color: #000000; line-height: 35px; padding: 0px 10px; text-transform: uppercase; font-size: 16px;}
+.review-slider{ box-sizing:border-box; margin-bottom: 20px;}
+.review-slider .review-title{font-size:14px;margin-top: 38px;display:block;}
+.review-slider .customer-name, .review-slider .pro-rating{display:block}
+.review-slider .pro-rating{}
+.review-slider .pro-rating .rating-num{display:inline-block; height:16px; position:Relative; top:-5px; left:2px;}
+.review-slider .slick-dots{bottom:-25px!important}
+.review-slider .review{font-size:12px; line-height:15px;}
+
+/* New Skeleton */
+.img-box-1 {width:65.55%;}
+.img-box-2 {width:31.11%;}
+.img-box-3 {width:48.44%;}
+.mg-left {margin-left:3.33%;}
+.mg-right {margin-right:3.11%;}
+.shop-all-button{color:#fa505a; line-height:40px; font-size:18px; text-align:center; border:1px solid #fa505a; border-radius:2px; padding:0px 24px; display:inline-block; text-decoration:none!important}

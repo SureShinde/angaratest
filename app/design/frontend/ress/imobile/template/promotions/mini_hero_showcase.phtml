@@ -1,0 +1,115 @@
+<?php $pageType = Mage::helper('function')->getPageType(); ?>
+<?php if($pageType != 'product'){ ?>
+<?php
+//$banner = $this->getBanner();?>
+<style>
+.mini-hero-newletter{display:none !important; visibility:hidden}
+/*#content-showcase{display:none;}*/
+#mini-hero-showcase-md {
+    background: none repeat scroll 0 0 #e6f5f5;
+}
+/*.countdownticker2 { display:none; background-color: #000; height: 27px; width: 152px; position: absolute; bottom:27px; left:78px; text-align: center; font: bold 14px/27px "Arial", Helvetica, serif; color: #fff;  border-radius: 5px; display:none; }*/
+.countdownticker2 { display:none; height: 30px; width: 150px; position: absolute; bottom: 5px; right: 173px; text-align: center; font: bold 14px/30px "Arial", Helvetica, serif; color: #000000; border-radius: 2px; border: dashed 1px;}
+.actionbtn{ position: absolute; bottom: 45px; left:124px;}
+.timeleftxt2 { display: inline-block; }
+.hourdigits2 { display: inline-block; min-width: 12px; padding-left: 5px; }
+.minutedegites2 { display: inline-block; min-width: 12px; }
+.secondigits2 { display: inline-block; min-width: 12px; }
+.colondigit2 { display: inline-block; font-size: 14px; }
+.global-offer-wrapper { height: 27px; }
+
+.cat-offer-banner img{max-width:100%!important}
+
+.tickr-width{width:100%; max-width:1500px; margin: 0 auto; position:relative;}
+.tickr-holder{    margin-right: 0px; position: absolute; top:1px; left: 186px; bottom: 0px; right: 0px;}
+.tickr-style{font-weight:bold;font-size:15px;float:left; position:absolute; right:5px; margin-top:4px; color:#000000; background:transparent;text-align: center; width:186px;}
+.ofrend{display:block; padding: 10px 0px 3px;}
+.text-format{display:block; padding:0px 0px 3px;}
+.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+.ofrend{    font-size:12px; margin-top: 5px;}
+.daydigits{display:none;}
+.hourdigits, .minutedegites, .secondigits{
+	height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px;
+    color: #000000;
+    background: transparent;
+    font-size: 30px;
+    font-weight: normal;
+}
+.text-format span{float:left}
+span.daydigits + span { display: none;}
+span.hourdigits + span, span.minutedegites + span{width: 6px; display: block; float: left; font-size: 15px;} 
+.text-format + span span{width:50px; float:left; margin-right:13px; font-weight:300; font-size:14px;}
+.text-format + span span:last-child{margin-right:0px;}
+
+@media(max-width:767px){
+	.tickr-holder{top:7px; left:224px}
+	.tickr-style{width:72px; left:84px;}
+	.hourdigits, .minutedegites, .secondigits{
+		width: 20px;
+		height: 22px;
+		line-height: 23px;
+		font-size: 12px;
+	}
+	span.hourdigits + span, span.minutedegites + span{
+		line-height:23px;
+	}
+	.ofrend, .text-format{
+		padding:1px 0px;
+	}
+	.text-format + span span{
+		width: 20px;
+		font-size: 7px;
+		margin-right: 6px;
+	}
+	.ofrend {
+		font-size: 12px;
+		margin-top: 5px;
+	}
+}
+@media(max-width:414px){
+	.tickr-holder{top:1px; left:176px}
+}
+@media(max-width:375px){
+	.tickr-holder{left:148px;}
+}
+@media(max-width:360px){
+	.tickr-style{zoom: 0.90;}
+}
+@media(max-width:320px){
+	.tickr-holder{top:-3px; left:127px;}
+	.tickr-style{zoom:0.85;}
+}
+</style>
+<?php $minitickerState = true; ?>
+<?php if($minitickerState == true){ ?>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+<?php } ?>
+
+<div id="content-showcase" class="cat-offer-banner container-fluid">
+    <?php $channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+	if($channel):?> 
+        <div class="container-fluid" id="catalogBannerMobile">
+        <?php
+			if($channel->getCatalogBannerMobile()):
+				$bannerMobile = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerMobile());	 
+				if($bannerMobile){?>
+					<div class="relative">
+						<?php //ticker code start here
+						if($minitickerState == true){ ?>
+								<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerMobile->getTickerTime());?>
+						<?php } //ticker code End here ?>
+						<?php echo $bannerMobile->getHtml(); ?>
+					</div>
+				<?php
+				}
+			endif;
+		
+		?>	
+        </div>
+	<?php endif;?>
+</div>
+<?php } ?>

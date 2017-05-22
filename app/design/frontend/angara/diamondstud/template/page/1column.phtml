@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<meta name="google-site-verification" content="P7gBjUPnpRdqFFa8-iIzWzhYegT4zdvstyshs9sh7U0" />
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<div class="mboxDefault"></div>
+<script type="text/javascript">	mboxCreate('tntGlobal');</script>
+<div id="dhtmltooltip"></div>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="main-container col1-layout">
+            <div class="main">
+                <?php //echo $this->getChildHtml('breadcrumbs') ?>
+				<?php echo $this->getChildHtml('promotions') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+                </div>	
+            </div>	
+			<!-- angara custom block -->
+			<div class="angaracustomblock"><?php echo $this->getChildHtml('angaracustomblock') ?><div style="clear:both"></div></div>
+			<!-- angara custom block -->	
+			<div style="clear:both"></div>	
+        </div>			
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<style>
+	.explore-button{
+		display:inline-block;
+		border:1px solid #000000;
+		color:#000000;
+		font-size:24px;
+		font-weight:300;
+		border-radius:2px;
+		line-height:58px;
+		padding:0px 50px;
+		text-decoration:none!important;
+	}
+	.explore-button.white-btn{
+		border:1px solid #ffffff;
+		color:#ffffff;
+	}
+	.explore-button:hover{
+		border-color:#fa505a;
+		color:#fa505a;
+		text-decoration:none;
+	}
+	.explore-button.white-btn:hover{
+		border-color:#000000;
+		color:#000000!important;
+		text-decoration:none;
+	}
+	.pendant-earrings .col-sm-6:first-child .eb{
+		top:30%; 
+		left:23%;
+	}
+	.pendant-earrings .col-sm-6:last-child .eb{
+		top:30%; 
+		left:10%;
+	}
+	.new-collection .eb{
+		bottom:20%; 
+		left:0px; 
+		right:0px;
+	}
+	.love-affection .eb{
+		top:25%; 
+		left:33%;
+	}
+	.birthstone .eb{
+		bottom:4%; 
+		left:0px; 
+		right:0px;
+	}
+	.top-gifts-review-section .cs{
+		font-size:40px; 
+		font-weight:300
+	}
+	.top-gifts-review-section .cs i{
+		font-size:28px; 	
+	}
+	.explore-button:focus,
+	.explore-button:active{
+		border-color:#000000!important;
+		color:#000000!important;
+	}
+	.explore-button.white-btn:focus,
+	.explore-button.white-btn:active{
+		border-color:#ffffff!important;
+		color:#ffffff!important;
+	}
+	@media (max-width:1680px){
+		.the-perfect-gift .heading-image{
+			max-width:620px;
+		}
+		.pendant-earrings .heading-image{
+			max-width:240px;
+		}
+		.pendant-earrings .explore-button,
+		.love-affection .explore-button,
+		.new-collection .explore-button{
+			font-size:22px;
+			line-height:48px;
+			padding:0px 30px;
+		}
+		.top-gifts-section .heading-image,
+		.love-affection .heading-image{
+			max-width:300px;
+		}
+	}
+	@media (max-width:1440px){
+		.the-perfect-gift .heading-image{
+			max-width:510px;
+		}
+	}
+	@media (max-width:1360px){
+		.pendant-earrings .heading-image{
+			max-width:200px;
+		}
+		.pendant-earrings .explore-button,
+		.new-collection .explore-button{
+			padding:0px 20px;
+		}
+	}
+	@media (max-width:1280px){
+		.pendant-earrings .col-sm-6:first-child .eb{
+			left:15%;
+		}
+		.new-collection .eb{
+			bottom:17%; 
+		}
+		.new-collection .explore-button{
+			font-size:18px;
+			line-height:40px;
+		}
+		.love-affection .eb {
+			top: 22%;
+			left: 30%;
+		}
+	}
+	@media (max-width:1024px){
+		.the-perfect-gift .heading-image {
+			max-width: 380px;
+		}
+		.pendant-earrings .col-sm-6:first-child .eb{
+			left:11%;
+		}
+		.pendant-earrings .col-sm-6:last-child .eb{
+			left:5%;
+		}
+		.the-perfect-gift  .explore-button,
+		.pendant-earrings .explore-button,
+		.love-affection .explore-button,
+		.birthstone .explore-button,
+		.new-collection .explore-button{
+			font-size: 18px;
+			line-height: 40px;
+			padding: 0px 20px;
+		}
+		.top-gifts-section .heading-image,
+		.love-affection .heading-image{
+			max-width:220px;
+		}
+		.love-affection .eb {
+			left: 32%;
+		}
+		.top-gifts-review-section .cs{
+			font-size:30px; 
+			font-weight:300
+		}
+		.top-gifts-review-section .cs i{
+			font-size:18px; 	
+		}
+	}
+	@media (max-width:768px){
+		.the-perfect-gift .heading-image{
+			max-width: 280px;
+		}
+		.the-perfect-gift .explore-button, 
+		.pendant-earrings .explore-button, 
+		.love-affection .explore-button, 
+		.birthstone .explore-button, 
+		.new-collection .explore-button {
+			font-size: 16px;
+			line-height: 35px;
+			padding: 0px 15px;
+		}
+		.pendant-earrings .heading-image {
+			max-width: 160px;
+		}
+		.top-gifts-section .heading-image, .love-affection .heading-image {
+			max-width: 180px;
+		}
+		.love-affection .eb {
+			top: 14%;
+			left: 31%;
+		}
+		.new-collection .eb {
+			bottom: 12%;
+		}
+		.birthstone .eb{
+			bottom: 0px;
+		}
+		.top-gifts-review-section .cs{
+			font-size:25px; 
+			font-weight:300
+		}
+		.top-gifts-review-section .cs i{
+			font-size:16px; 	
+		}
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+
+<div class="relative relative-placeholder the-perfect-gift">
+	<a href="/rings?icid=valentinepage|rings|01282017">
+		<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/perfect-gift.jpg" alt="Valentine's Special Collection" title="Gemstone Rings"/>
+		<div class="col-sm-12 clearfix text-center">
+			<img class="heading-image max-margin-bottom" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/heading-1.jpg" alt="" title=""/><br>
+			<span class="explore-button max-margin-top max-margin-bottom">
+				Explore Rings
+			</span>
+		</div>
+	</a>
+</div>
+<div class="clearfix"></div>
+<div class="high-padding-top max-margin-top pendant-earrings">
+	<div class="col-sm-6">
+		<a href="/pendants?icid=valentinepage|pendants|01282017">
+			<div class="relative-placeholder" style="max-width:889px; margin:0 auto">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/gift-from-heart.jpg" alt="Valentine's Special Collection" title="Gemstone Pendants"/>
+				<div class="eb absolute-placeholder text-center">
+					<img class="heading-image max-margin-bottom" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/heading-2.jpg" alt="" title=""/><br>
+					<span class="explore-button white-btn max-margin-top max-margin-bottom">
+						Explore Pendants
+					</span>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-sm-6">
+		<a href="/earrings?icid=valentinepage|earrings|01282017">
+			<div  class="relative-placeholder" style="max-width:889px; margin:0 auto">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/diamond-earrings.jpg" alt="Valentine's Special Collection" title="Gemstone Earrings"/>
+				<div class="eb absolute-placeholder text-center">
+					<img class="heading-image max-margin-bottom" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/heading-2-1.jpg" alt="" title=""/><br>
+					<span class="explore-button white-btn max-margin-top max-margin-bottom">
+						Explore Earrings
+					</span>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="new-collection" style="margin-bottom:0px;">
+	<div class="relative-placeholder hide">
+		<a href="/jewelry/infinity-jewelry?icid=valentinepage|infinity-j|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/infinity.jpg" alt="Valentine's Special Collection" title="Infinity Collection"/>
+			<div class="eb absolute-placeholder text-center">
+				<span class="explore-button max-margin-top max-margin-bottom">
+					Explore Collection
+				</span>
+			</div>
+		</a>
+	</div>
+	<div class="relative-placeholder">
+		<a href="/jewelry/knoty-heart-jewelry?icid=valentinepage|knotty-h|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/knotty-heart.jpg" alt="Valentine's Special Collection" title="Knotty Heart Collection"/>
+			<div class="eb absolute-placeholder text-center">
+				<span class="explore-button max-margin-top max-margin-bottom">
+					Explore Collection
+				</span>
+			</div>
+		</a>
+	</div>	
+	<div class="relative-placeholder hide">
+		<a href="/jewelry/coffee-diamond-jewelry?icid=valentinepage|coffeed-j|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/coffee-diamond.jpg" alt="Valentine's Special Collection" title="Coffee Diamond Collection"/>
+			<div class="eb absolute-placeholder text-center">
+				<span class="explore-button max-margin-top max-margin-bottom">
+					Explore Collection
+				</span>
+			</div>
+		</a>
+	</div>
+	<div class="relative-placeholder">
+		<a href="/jewelry/two-stone-jewelry?icid=valentinepage|twost-j|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/mewe-collection.jpg" alt="Valentine's Special Collection" title="MEWE Collection"/>
+			<div class="eb absolute-placeholder text-center">
+				<span class="explore-button max-margin-top max-margin-bottom">
+					Explore Collection
+				</span>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="love-affection relative-placeholder">
+	<img class="img-responsive la" style="display:none" src="" alt="Token of Love" title="Token of Love"/>
+	<video style="width:100%" autoplay loop muted>
+		<source src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/token-of-love.mp4" type="video/mp4">
+	</video>
+	<script>
+		var doc = document.documentElement;
+		var ie = doc.getAttribute('data-useragent', navigator.userAgent);
+		if(ie.indexOf('MSIE 9.0') > -1 || ie.indexOf('MSIE 10.0') > -1){
+			jQuery('.love-affection').find('video').remove();
+			jQuery('.love-affection').find('.la').attr('src','<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/tokan-of-love.jpg').show();
+		}
+	</script>
+	<div class="eb absolute-placeholder text-center">
+		<img class="heading-image max-margin-bottom" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/token-of-love.png" alt="" title=""/><br>
+		<a class="explore-button white-btn max-margin-top max-margin-bottom" href="/engagement-rings/promise-rings?icid=valentinepage|promsring|01282017">
+			Explore Promise Rings
+		</a><br>
+		<a class="explore-button white-btn max-margin-top max-margin-bottom" href="/products?jewelry_styles=4184?icid=valentinepage|heart-J|01282017">
+			Explore Heart Jewelry
+		</a>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="birthstone relative-placeholder">
+	<a href="/birthstone-jewelry/february-birthstone-amethyst-jewelry?icid=valentinepage|amethyst-j|01282017">
+		<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/birthstone.jpg" alt="Amethyst: February Birthstone Jewelry" title="Amethyst: February Birthstone Jewelry"/>
+		<div class="eb absolute-placeholder text-center">
+			<span class="explore-button max-margin-top max-margin-bottom">
+				Explore Amethyst Jewelry
+			</span>
+		</div>
+	</a>
+</div>
+<div class="clearfix"></div>
+<div class="top-gifts-section high-padding-top max-margin-top" style="border-bottom:1px solid #c2c2c2; padding-bottom:40px;">
+	<div class="col-sm-12 text-center">
+		<img class="heading-image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/heading-5.jpg" alt="Top Gifts"/>
+	</div>
+	<div class="clearfix"></div>
+	<div class="top-gifts max-padding-top container">
+		<div class="col-sm-3">
+			<a href="/p/oval-sapphire-and-round-diamond-border-ring-sr0169s?icid=valentinepage|top-g|sr0169s|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0169s.jpg" alt="Princess Diana Inspired Blue Sapphire Ring with Diamond Halo" title="Princess Diana Inspired Blue Sapphire Ring with Diamond Halo"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/pear-ruby-and-diamond-v-bale-pendant-sp0169r?icid=valentinepage|top-g|sp0169r|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0169r.jpg" alt="Pear Ruby Teardrop Pendant Necklace with Diamond" title="Pear Ruby Teardrop Pendant Necklace with Diamond"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/classic-four-prong-basket-set-diamond-stud-earrings-se0976d?icid=valentinepage|top-g|se0976d|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/se0976d.jpg" alt="4 Prong Basket Setting Round Diamond Stud Earrings" title="4 Prong Basket Setting Round Diamond Stud Earrings"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-aquamarine-studs-in-14k-white-gold-se0102aq?icid=valentinepage|top-g|se0102aq|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/se0102aq.jpg" alt="Basket Set Round Genuine Aquamarine Stud Earrings" title="Basket Set Round Genuine Aquamarine Stud Earrings"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/pear-emerald-and-diamond-v-bale-pendant-sp0169e?icid=valentinepage|top-g|sp0169e|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0169e.jpg" alt="Pear Emerald Teardrop Pendant Necklace with Diamond" title="Pear Emerald Teardrop Pendant Necklace with Diamond"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/blue-sapphire-and-diamond-halo-engagement-ring-sr0955s?icid=valentinepage|top-g|sr0955s|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0955s.jpg" alt="Oval Sapphire Halo Ring with Diamond Accents" title="Oval Sapphire Halo Ring with Diamond Accents"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-ruby-solitaire-pendant-sp0108r?icid=valentinepage|top-g|sp0108r|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0108r.jpg" alt="Prong Set Round Ruby Solitaire Pendant" title="Prong Set Round Ruby Solitaire Pendant"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-sapphire-bezel-set-pendant-sp0159s?icid=valentinepage|top-g|sp0159s|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0159s.jpg" alt="Bezel Set Round Blue Sapphire Solitaire Pendant" title="Bezel Set Round Blue Sapphire Solitaire Pendant"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/tulip-bud-inspired-dancing-ruby-solitaire-pendant-sd-sp0761r?icid=valentinepage|top-g|sd_sp0761r|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sd_sp0761r.gif" alt="Solitaire Dancing Open Drop Floating Ruby Pendant" title="Solitaire Dancing Open Drop Floating Ruby Pendant"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-ruby-studs-in-14k-yellow-gold-se0102r?icid=valentinepage|top-g|se0102r|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/se0102r.jpg" alt="Basket Set Round Genuine Ruby Stud Earrings" title="Basket Set Round Genuine Ruby Stud Earrings"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-sapphire-and-diamond-five-stone-ring-sr0101sd?icid=valentinepage|top-g|sr0101sd|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0101sd.jpg" alt="Half Eternity Five Stone Sapphire and Diamond Wedding Ring" title="Half Eternity Five Stone Sapphire and Diamond Wedding Ring"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-sapphire-and-diamond-v-bale-pendant-sp0155s?icid=valentinepage|top-g|sp0155s|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0155s.jpg" alt="V-Bale Round Blue Sapphire Solitaire Pendant with Diamond" title="V-Bale Round Blue Sapphire Solitaire Pendant with Diamond"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-emerald-solitaire-pendant-sp0108e?icid=valentinepage|top-g|sp0108e|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0108e.jpg" alt="Prong Set Round Emerald Solitaire Pendant" title="Prong Set Round Emerald Solitaire Pendant"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-sapphire-and-diamond-seven-stone-ring-sr0118sd?icid=valentinepage|top-g|sr0118sd|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0118sd.jpg" alt="Round Diamond & Blue Sapphire Half Eternity Wedding Ring" title="Round Diamond & Blue Sapphire Half Eternity Wedding Ring"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/aquamarine-solitaire-pendant-sp0108aq?icid=valentinepage|top-g|sp0108aq|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0108aq.jpg" alt="Prong Set Round Aquamarine Solitaire Pendant" title="Prong Set Round Aquamarine Solitaire Pendant"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-ruby-and-diamond-seven-stone-ring-sr0118rd?icid=valentinepage|top-g|sr0118rd|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0118rd.jpg" alt="Round Diamond & Ruby Half Eternity Wedding Ring" title="Round Diamond & Ruby Half Eternity Wedding Ring"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/round-sapphire-studs-in-14k-white-gold-se0102s?icid=valentinepage|top-g|se0102s|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/se0102s.jpg" alt="Basket Set Round Genuine Blue Sapphire Stud Earrings" title="Basket Set Round Genuine Blue Sapphire Stud Earrings"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/cushion-sapphire-and-round-diamond-vintage-ring-sr0152s-n?icid=valentinepage|top-g|sr0152s_n|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0152s_n.jpg" alt="Vintage Diamond Halo Cushion-Cut Blue Sapphire Ring" title="Vintage Diamond Halo Cushion-Cut Blue Sapphire Ring"/></a>
+		</div>
+		<div class="col-sm-3">
+			<a href="/p/heart-ruby-solitaire-pendant-sp0152r?icid=valentinepage|top-g|sp0152r|01282017">
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sp0152r.jpg" alt="Bezel Set Solitaire Heart Shaped Ruby Pendant" title="Bezel Set Solitaire Heart Shaped Ruby Pendant"/></a>
+		</div>
+		<?php /* <div class="col-sm-3">
+			<a href=""><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/pro/sr0256r.jpg" alt="" title=""/></a>
+		</div> */ ?>
+	</div>	
+</div>
+<div class="clearfix"></div>
+<div class="top-gifts-review-section max-padding-top">
+	<div class="col-sm-12 text-center high-padding-top high-padding-bottom max-margin-bottom cs">
+		We Love <i class="fa fa-heart apricot-text"></i> Hearing From Our Happy Customers
+	</div>
+	<div class="clearfix"></div>
+	<div class="top-gifts-review">
+	<?php
+	try{
+		$content = $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/testimonials.phtml')->toHTML();
+		echo $content;
+	}
+	catch(Exception $e){
+		echo $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/testimonials.phtml')->toHTML();
+	} ?>
+	</div>
+</div>
+<div class="clearfix"></div>
+
+
+<style>
+	.top-gifts-review-section .slick-dots{
+		text-align:center;
+	}
+	.new-collection .slick-dots{
+		text-align:center;
+		bottom:55px;
+	}
+	.top-gifts .slick-dots{
+		text-align:center;
+		bottom:-40px;
+	}
+	.slick-dots li{
+		width:30px
+	}
+	.slick-dots li button:before{
+		font-size:55px;
+	}
+	.slick-dots li.slick-active button:before,
+	.slick-dots li:hover button:before{
+		background:url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/valentine/active-heart.png) no-repeat center center; 
+		color:transparent;
+	}
+	@media (max-width:1280px){
+		.new-collection .slick-dots{
+			bottom:25px;
+		}
+	}
+	@media (max-width:768px){
+		.new-collection .slick-dots{
+			bottom:0px;
+		}
+	}
+</style>
+<script>
+	jQuery(function(){
+		jQuery('.new-collection').slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			dots:true,
+			arrows:false,
+			autoplay:true,
+			autoplaySpeed: 2000
+		});
+		jQuery('.new-collection').find('.relative-placeholder').removeClass('hide');
+		
+		jQuery('.top-gifts').slick({
+			slidesToShow: 4,
+			slidesToScroll: 4,
+			dots:true,
+			arrows:false,
+			autoplay:true,
+			autoplaySpeed: 2000
+		});
+		jQuery('.top-gifts').find('.pro').removeClass('hide');
+	});
+</script>

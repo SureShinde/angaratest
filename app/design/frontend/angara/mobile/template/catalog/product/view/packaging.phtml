@@ -1,0 +1,70 @@
+<?php
+	$_product 					= 	$this->getProduct();
+	$productPrice				= 	$_product->getPrice();
+	//$sku 						= 	$_product->getSku();
+	$jewelryTypeID 				= 	$_product->getJewelryType();
+	if($jewelryTypeID!=''){
+		$jewelryType			= 	$_product->getAttributeText('jewelry_type');					//	Jewelry Type
+	}
+	// Check if attribute is defined or not
+	$stone1TypeValue			= 	$_product->getStone1Type();	
+	if($stone1TypeValue!=''){
+		$stone1Type 				= 	$_product->getAttributeText('stone1_type');					//	Center Stone Type
+	}
+	$productType				=	Mage::helper('function')->packagingImageST($stone1Type,$sku,$jewelryType);
+?>
+<script type="text/javascript" language="javascript">
+finalboxImage	=	showPkgImage('<?php echo $productType?>',<?php echo $productPrice; ?>);
+//alert('<?php //echo $productPrice; ?>');alert('<?php //echo $productType?>');alert(finalboxImage);
+jQuery(function(){
+	if(finalboxImage!=''){
+		jQuery('#pckImg').show();	
+		jQuery('#pckImg').html(finalboxImage);
+	}
+})
+
+function showPkgImage(productType,normalFinalPrice){
+	//alert(productType);alert(normalFinalPrice);
+	var boxImage 		= 	'';
+	var boxImageHtml	=	'';
+	if(normalFinalPrice>1000){
+		if(productType=='DiamondRing'){
+			var boxImage = 'brownbox-with-light-r';
+		}else if(productType=='DiamondEarrings' || productType=='DiamondPendant'){
+			var boxImage = 'brownbox-with-light-ep';
+		}else if(productType=='ColorJewelryRing'){
+			var boxImage = 'brownbox-no-light-r';
+		}else if(productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant'){
+			var boxImage = 'brownbox-no-light-ep';
+		}/*else if(productType=='Shah'){
+			var boxImage = '';
+		}*/else{
+			var boxImage = '';
+		}
+	}else if(normalFinalPrice>250 && normalFinalPrice<1000){
+		if(productType=='DiamondRing' || productType=='ColorJewelryRing'){
+			var boxImage = 'woodenbox';
+		}else if(productType=='DiamondEarrings' || productType=='DiamondPendant' || productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant'){
+			var boxImage = 'brownbox-no-light-ep';
+		}/*else if(productType=='Shah'){
+			var boxImage = '';
+		}*/else{
+			var boxImage = '';
+		}
+	}else if( normalFinalPrice<250 && (productType=='DiamondRing' || productType=='DiamondEarrings' || productType=='DiamondPendant' || productType=='ColorJewelryRing' || productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant') ){
+		var boxImage = 'orangebox';
+	}/*else if(productType=='Jewelry'){
+		var boxImage = 'orangebox';
+	}else if(productType=='Shah'){
+		var boxImage = '';
+	}*/else{
+		//var boxImage = 'orangebox';
+		var boxImage = '';
+	}
+	//alert(boxImage);
+	if(boxImage!=''){
+		boxImageHtml	=	'<ul><li><img width="56" height="56" alt="'+boxImage+'" src="<?php echo Mage::getDesign()->getSkinUrl('images/packaging_box/');?>'+boxImage+'.jpg" onclick="$(\'image\').src=\'<?php echo Mage::getDesign()->getSkinUrl('images/packaging_box/');?>'+boxImage+'.jpg\';"></li></ul>';
+	}
+	return boxImageHtml;
+}
+</script>

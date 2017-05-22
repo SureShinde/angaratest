@@ -1,0 +1,345 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/code/local/AdjustWare/Nav/Helper/Data.php
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<?php
+class AdjustWare_Nav_Helper_Data extends Mage_Core_Helper_Abstract
+{
+    protected $_params = null;
+    protected $_continueShoppingUrl = null;
+    
+    public function isSearch()
+    {
+        $mod = Mage::app()->getRequest()->getModuleName();
+        if ('catalogsearch' === $mod)
+        {
+            return true;
+        }
+            
+        if ('adjnav' === $mod && 'search' == Mage::app()->getRequest()->getActionName())
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function getContinueShoppingUrl()
+    {
+        if (is_null($this->_continueShoppingUrl))
+        {
+            $url = '';
+            
+            $allParams = $this->getParams();
+            $keys = $this->getNonFilteringParamKeys();
+            
+            $query = array();
+            foreach ($allParams as $k=>$v){
+                if (in_array($k, $keys))
+                    $query[$k] = $v;
+            }
+            
+            if ($this->isSearch()){
+                $url = Mage::getModel('core/url')->getUrl('catalogsearch/result/index', array('_query'=>$query));
+            }
+            else {
+                $category = Mage::registry('current_category');
+                $rootId = Mage::app()->getStore()->getRootCategoryId();
+                if ($category && $category->getId() != $rootId){
+                    $url = $category->getUrl();
+                }
+                else {
+                    $url = Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
+                }
+                $url .= $this->toQuery($query);
+            } 
+            $this->_continueShoppingUrl = $url;      
+        }
+        
+        return $this->_continueShoppingUrl;
+    }
+    
+    public function wrapProducts($html)
+    {
+        $html = str_replace('onchange="setLocation', 'onchange="adj_nav_toolbar_make_request', $html);
+          
+        $loaderHtml =  '<div class="adj-nav-progress text-center default-adjnav" style="display:none"><i class="fa fa-spinner fa-spin px36"></i> <span style="vertical-align: super;display:inline-block">Loading More Results...</span></div>';  
+        $html .= $loaderHtml;
+        
+        if (Mage::app()->getRequest()->isXmlHttpRequest()){
+            $html = str_replace('?___SID=U&amp;', '?', $html);
+            $html = str_replace('?___SID=U', '', $html);
+            $html = str_replace('&amp;___SID=U', '', $html);
+            
+            $k = Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED;
+            $v = Mage::helper('core')->urlEncode($this->getContinueShoppingUrl());
+            $html = preg_replace("#$k/[^/]+#","$k/$v", $html);
+            
+        }
+        else {
+            $html = '<div id="adj-nav-container">'
+                  . $html
+                  . '</div>'
+                  . '';
+        }    
+        return $html;        
+    }
+    
+    public function wrapHomepage($html)
+    {
+        $loaderHtml =  '<div class="adj-nav-progress" style="display:none"><img src="'. Mage::getDesign()->getSkinUrl('images/adj-nav-progress.gif') .'" /></div>';  
+
+        $html = '<div id="adj-nav-container">'
+              . $html
+              . $loaderHtml
+              . '</div>'
+              . '<script>adj_nav_toolbar_init()</script>';
+        return $html;       
+    }
+    
+    
+    public function getParam($k){
+        $p = $this->getParams();
+        $v = isset($p[$k]) ? $p[$k] : null;
+        return $v;
+    }  
+    
+    
+    // currently we use $without only if $asString=true
+    public function getParams($asString=false, $without=null)
+    {
+        if (is_null($this->_params)){			
+            $sessionObject = Mage::getSingleton('catalog/session');
+
+            $bNeedClearAll = false;
+            
+            if (Mage::getStoreConfig('design/adjnav/reset_filters') AND Mage::registry('adjnav_new_category'))
+            {
+                $bNeedClearAll = true;
+            }
+            
+            if ($this->isSearch())
+            {
+                $sessionObject = Mage::getSingleton('catalogsearch/session');
+                $query = Mage::app()->getRequest()->getQuery();
+                if (isset($query['q']))
+                {
+                    if ($sessionObject->getData('advnavquery') && $sessionObject->getData('advnavquery') != $query['q'])
+                    {
+                        $bNeedClearAll = true;
+                    }
+                    $sessionObject->setData('advnavquery', $query['q']);
+                }
+            }
+
+            // start fix for diff currency and input type
+            
+            $nSavedCurrencyRate = $sessionObject->getAdjNavCurrencyRate();
+            
+            $nCurrentCurrencyRate =  Mage::app()->getStore()->convertPrice(1000000, false);
+            $nCurrentCurrencyRate = $nCurrentCurrencyRate / 1000000;
+            
+            $nSavedPriceStyle = $sessionObject->getAdjNavPriceStyle();
+            $nCurrentPriceStyle = Mage::getStoreConfig('design/adjnav/price_style');
+            
+            $bNeedClearPriceFilter = false;
+            
+            if ($nSavedCurrencyRate AND $nSavedCurrencyRate != $nCurrentCurrencyRate)
+            {
+                $bNeedClearPriceFilter = true;
+            }
+            
+            if ($nSavedPriceStyle != $nCurrentPriceStyle)
+            {
+                $bNeedClearPriceFilter = true;
+            }
+            
+            if ($bNeedClearPriceFilter)
+            {
+                $sess  = (array)$sessionObject->getAdjNav();
+                
+                if ($sess)
+                {
+                    $aNonFilteringParamKeys = $this->getNonFilteringParamKeys();
+                    
+                    foreach ($sess as $sKey => $sVal)
+                    {
+                        if (!in_array($sKey, $aNonFilteringParamKeys))
+                        {
+                            $attribute = Mage::getModel('eav/entity_attribute');
+
+                            $attribute->load($sKey, 'attribute_code');
+                            
+                            if ($attribute->getFrontendInput() == 'price')
+                            {
+                                unset($sess[$sKey]);
+                            }
+                        }
+                    }
+                    
+                    $sessionObject->setAdjNav($sess);
+                }
+            }
+            
+            $sessionObject->setAdjNavCurrencyRate($nCurrentCurrencyRate);
+            $sessionObject->setAdjNavPriceStyle($nCurrentPriceStyle);
+            
+            // end fix for diff currency and stores
+            
+            // in case of direct results (no ajax) remove session parameters in new category
+            $query = Mage::app()->getRequest()->getQuery();
+            $sess  = (array)$sessionObject->getAdjNav();
+			$this->_params = array_merge($sess, $query);
+			if($bNeedClearAll){
+				//$this->_params = array();
+				//if(Mage::app()->getRequest()->getRouteName() != 'adjnav'){
+            		$this->_params = $query;
+				//}
+                if ($this->isSearch() && isset($query['q']))
+                    $this->_params['q'] = $query['q'];
+			}
+            if (!empty($query['adjclear'])){
+                $this->_params = array();
+                if ($this->isSearch() && isset($query['q']))
+                    $this->_params['q'] = $query['q'];
+            }
+            if (Mage::registry('adjnav_new_category') && isset($this->_params['cat']))
+            {
+                unset($this->_params['cat']);
+            }
+            //remove empty
+            $sess = array();
+            foreach ($this->_params as $k => $v){
+                if ($v && 'clear' != $v)
+                    $sess[$k] = $v;
+            }
+            
+            if (Mage::registry('adjnav_new_category') AND isset($sess['p']))
+            {
+                unset($sess['p']);
+            }
+            
+            $sessionObject->setAdjNav($sess);
+            $this->_params = $sess;
+            
+            Mage::register('adjnav_current_session_params', $sess);
+            
+            // add values from session to request for product list toolbar
+            // this code assumes we call the function BEFORE toolbar,
+            // in general it is not correct
+            foreach ($this->getNonFilteringParamKeys() as $k){
+                if (!empty($sess[$k])){
+                   # Mage::app()->getRequest()->setParam($k, $sess[$k]);     <-- this string add to url $_GET params like join("/",$_GET)
+                }
+            }
+            
+            Mage::dispatchEvent('adjustware_nav_layer_set_params_after', array(
+                'helper' =>  $this,
+            ));
+        }
+
+        if ($asString)
+        {
+            return $this->toQuery($this->_params, $without);
+        }
+
+        return $this->_params;
+    }
+    
+    /**
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return AdjustWare_Nav_Helper_Data 
+     */
+    public function setParam($key, $value = null)
+    {        
+        $this->_params[$key] = $value;
+        return $this;
+    }
+    
+    /**
+     *
+     * @param string $key
+     * @return AdjustWare_Nav_Helper_Data 
+     */
+    public function unsetParam($key)
+    {        
+        unset($this->_params[$key]);        
+        return $this;
+    }
+    
+    public function toQuery($params, $without=null)
+    {           
+        if (!is_array($without))
+            $without = array($without);
+            
+        $queryStr = '?';
+        foreach ($params as $k => $v){
+            if (!in_array($k, $without))
+                $queryStr .= $k . '=' . urlencode($v) . '&';    
+        }
+        return substr($queryStr, 0, -1);           
+    }
+    
+    public function stripQuery($url)
+    {
+        $pos = strpos($url, '?');
+        if (false !== $pos)
+            $url = substr($url, 0, $pos);
+            
+        return $url;
+    }
+    
+    public function getClearAllUrl($baseUrl)
+    {
+        $baseUrl .= '?adjclear=true';
+        if ($this->isSearch())
+            $baseUrl .= '&q=' . urlencode($this->getParam('q')).'&dir=asc';
+               
+        return $baseUrl;
+    }
+    
+    public function bNeedClearAll()
+    {
+        if ($aParams = Mage::registry('adjnav_current_session_params'))
+        {
+            $bNeedClearAll = false;
+            
+            $aNonFilteringParamKeys = $this->getNonFilteringParamKeys();
+            
+            foreach ($aParams as $sKey => $sVal)
+            {
+                if (!in_array($sKey, $aNonFilteringParamKeys))
+                {
+                    $bNeedClearAll = true;
+                }
+            }
+            
+            return $bNeedClearAll;
+        }
+        else 
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public function getCacheKey($attrCode){
+        $keys = $this->getNonFilteringParamKeys();
+        $keys[] = $attrCode;        
+        return md5($this->getParams(true, $keys) . $attrCode);
+    }
+    
+    protected function getNonFilteringParamKeys(){
+        return array('x','y','mode','p','order','dir','limit','q','___store', '___from_store','sns');
+    }
+    
+} 

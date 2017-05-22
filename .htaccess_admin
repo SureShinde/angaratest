@@ -1,0 +1,223 @@
+#blcok RSS STRING
+#RewriteCond %{REQUEST_URI} ^.*/RSS/CATALOG [OR,NC]
+
+# BLOCK BLANK USER AGENTS
+RewriteCond %{HTTP_USER_AGENT} ^-?$
+RewriteRule ^ - [F]
+#RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} ^.*(moz.com|help.yahoo.com|rogerbo|SeznamBot|ltx71|pingdom.com|MojeekBot|pinterest|python-requests|semrush|PaperLiBot|semrush|curl|mj12bot.com|thefind.com|ahrefs.com|Baiduspider|yandex.com).*$ [NC]
+RewriteRule .* - [F,L]
+#Block the below file type access
+RedirectMatch 403 \.zip$
+RedirectMatch 403 \.rar$
+RedirectMatch 403 \.gz$
+RedirectMatch 403 \.sql$
+RedirectMatch 403 \.bz2$
+RedirectMatch 403 \.tgz$
+RedirectMatch 403 \.bz2$
+
+# BLOCK USER AGENTS Chrome/18.0.1025
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} Chrome/18\.0\.1025 [NC]
+RewriteRule !^robots\.txt$ - [F]
+##Admin access allow only listed ip address
+RewriteCond %{REQUEST_URI} ^/(index.php/)?admin [NC]
+#india office
+#RewriteCond %{HTTP:X-FORWARDED-FOR} !^115.111.245.97
+RewriteCond %{REMOTE_ADDR} !^14.141.251.118
+RewriteCond %{REMOTE_ADDR} !^115.111.245.97
+RewriteCond %{REMOTE_ADDR} !^192.168.1
+RewriteCond %{REMOTE_ADDR} !^59.90.194.72
+#jet
+RewriteCond %{HTTP:X-FORWARDED-FOR} !^24.5.97.219
+#Ankur sir
+RewriteCond %{REMOTE_ADDR} !^72.225.151.142
+RewriteCond %{REMOTE_ADDR} !^223.176.152.111
+RewriteCond %{REMOTE_ADDR} !^69.57.165
+RewriteCond %{REMOTE_ADDR} !^115.252.208.65
+#babra
+RewriteCond %{REMOTE_ADDR} !^104.0.129
+RewriteCond %{REMOTE_ADDR} !^2602:306:8008
+#neelm
+RewriteCond %{REMOTE_ADDR} !^103.253
+RewriteCond %{REMOTE_ADDR} !^117.222
+#hitesh sir papa
+RewriteCond %{REMOTE_ADDR} !^162.158.64.139
+#om
+RewriteCond %{REMOTE_ADDR} !^59.89.122
+RewriteCond %{REMOTE_ADDR} !^35.162.154.214
+#sumit
+RewriteCond %{REMOTE_ADDR} !^106.221.133
+RewriteCond %{REMOTE_ADDR} !^106.221.129
+RewriteCond %{REMOTE_ADDR} !^106.221.136
+#####Ramesh jee
+RewriteCond %{REMOTE_ADDR} !^115.252.208.222
+RewriteCond %{REMOTE_ADDR} !^108.250.128.144
+RewriteCond %{REMOTE_ADDR} !^115.252.210.39
+RewriteCond %{REMOTE_ADDR} !^184.152.110.199
+RewriteCond %{REMOTE_ADDR} !^108.85.136.105
+RewriteCond %{REMOTE_ADDR} !^180.188.253.70
+#Ankur sir
+RewriteCond %{REMOTE_ADDR} !^108.85.136
+RewriteCond %{REMOTE_ADDR} !^2602:306:c558:8690
+RewriteCond %{REMOTE_ADDR} !^2604:2000:4046:e500
+RewriteCond %{REMOTE_ADDR} !^116.202.252
+#vinod
+RewriteCond %{REMOTE_ADDR} !^104.0.128.242
+RewriteCond %{REMOTE_ADDR} !^23.125.222.67
+RewriteCond %{REMOTE_ADDR} !^106.215
+RewriteCond %{REMOTE_ADDR} !^116.202.251
+#babra
+RewriteCond %{REMOTE_ADDR} !^24.5.105.78
+RewriteCond %{REMOTE_ADDR} !^42.106.22.84
+#joyec
+RewriteCond %{REMOTE_ADDR} !^42.106.64.36
+RewriteCond %{REMOTE_ADDR} !^42.106.118.23
+
+#hitesh sir papa
+RewriteCond %{REMOTE_ADDR} !^59.97.247.43
+#####Ramesh jee
+RewriteCond %{REMOTE_ADDR} !^1.39
+RewriteCond %{REMOTE_ADDR} !^122.180.240.207
+#Vinod
+RewriteCond %{REMOTE_ADDR} !^115.252.209
+RewriteCond %{REMOTE_ADDR} !^73.158.82.8
+RewriteCond %{REMOTE_ADDR} !^115.252.211.123
+RewriteCond %{REMOTE_ADDR} !^104.172.50
+#mumbai office
+RewriteCond %{REMOTE_ADDR} !^122.170
+RewriteCond %{REMOTE_ADDR} !^120.63.160
+RewriteCond %{REMOTE_ADDR} !^103.48.59
+#nand jee
+RewriteCond %{REMOTE_ADDR} !^59.91
+RewriteCond %{REMOTE_ADDR} !^117.203.3
+#neelam
+RewriteCond %{REMOTE_ADDR} !^14.98.44
+RewriteCond %{REMOTE_ADDR} !^59.89.145
+#hitesh sir
+RewriteCond %{REMOTE_ADDR} !^166.170.46.40
+RewriteCond %{REMOTE_ADDR} !^166.170.5.52
+RewriteCond %{REMOTE_ADDR} !^104.35.36.76
+RewriteCond %{REMOTE_ADDR} !^117.203.21.239
+#request vinod
+RewriteCond %{REMOTE_ADDR} !^122.162
+RewriteCond %{REMOTE_ADDR} !^223.176.158.15
+#US office
+RewriteCond %{REMOTE_ADDR} !^108.251.173
+#neelm
+RewriteCond %{REMOTE_ADDR} !^14.98.115
+#mumbai office
+RewriteCond %{REMOTE_ADDR} !^183.83.50
+#haru jee
+RewriteCond %{REMOTE_ADDR} !^122.169
+#jagrti
+RewriteCond %{REMOTE_ADDR} !^61.2.247
+#jet
+RewriteCond %{REMOTE_ADDR} !^24.5.97.219
+###################################################
+
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/ [F,L]
+## disable automatic session start
+## before autoload was initialized
+    php_flag session.auto_start off
+
+## enable resulting html compression
+    php_flag zlib.output_compression on
+
+# disable user agent verification to not break multiple image upload
+    php_flag suhosin.session.cryptua off
+
+# turn off compatibility with PHP4 when dealing with objects
+    php_flag zend.ze1_compatibility_mode Off
+
+## enable rewrites
+    Options +FollowSymLinks
+    RewriteEngine on
+	
+# handling Non WWW urls
+	RewriteCond %{HTTP_HOST} ^angara\.com$
+	RewriteRule (.*) http://www.angara.com/$1 [R=301,NC,L]
+
+## Added by Hitesh
+	#prevent xss attack
+	RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+    RewriteRule (.*) /$1? [R,L]
+	
+	RewriteCond %{REQUEST_URI} (\<|%3C).*script.*(\>|%3E) [NC]
+	RewriteRule (.*) / [R,L]
+
+	# handling .html with https
+	RewriteCond %{HTTPS} on
+	RewriteCond %{REQUEST_URI} \.html
+	RewriteRule (.*) http://%{HTTP_HOST}%{REQUEST_URI} [R,NC,L]
+
+## always send 404 on missing files in these folders
+
+    RewriteCond %{REQUEST_URI} !^/(media|skin|js)/
+
+## never rewrite for existing files, directories and links
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+## rewrite everything else to index.php
+    RewriteRule .* index.php [L]
+	RedirectMatch 404 /\\.svn(/|$)
+
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+
+    # Insert filter on all content
+    SetOutputFilter DEFLATE
+    # Insert filter on selected content types only  
+    #uncommented by anil below line
+	
+	# please do not repeat it, see bottom
+    # AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript
+	# AddOutputFilterByType text/css
+
+    # Netscape 4.x has some problems...
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+    # Netscape 4.06-4.08 have some more problems
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+    # MSIE masquerades as Netscape, but it is fine
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Don't compress images
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+    # Make sure proxies don't deliver the wrong content
+    #Header append Vary User-Agent env=!dont-vary
+
+## Prevent character encoding issues from server overrides
+## If you still have problems, use the second line instead
+
+    AddDefaultCharset Off
+    #AddDefaultCharset UTF-8
+
+############################################
+## By default allow all access
+    Order allow,deny
+    Allow from all
+
+## If running in cluster environment, uncomment this
+## http://developer.yahoo.com/performance/rules.html#etags
+    FileETag none
+
+############################################
+## set developer mode equal to true on developer server
+SetEnv MAGE_IS_DEVELOPER_MODE "false"
+#######disable by om 10-8-15
+ExpiresActive On
+	<FilesMatch ".(ico|jpg|jpeg|gif|png|js|css|swf)$">
+		ExpiresDefault "access plus 2 years"		
+	</FilesMatch>
+############
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/javascript application/x-javascript  application/rss+xml application/atom_xml text/javascript text/css
+<FilesMatch ".(eot|ttf|otf|woff)">
+ Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

@@ -1,0 +1,336 @@
+<style>
+@media (min-width:1650px){
+.valentines_heart { background: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/special/signup-sticker.png) no-repeat ; height: 224px; position: fixed; right:5px; top:-18px; width: 142px; z-index: 1025;}
+.valentines_heart.spoffer-5-state{background: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/special/5-state-signup-sticker.png) no-repeat;}
+.clickable-area{ width:131px; height:133px; position:absolute; right:6px; top:86px; outline:none; border:none;}
+.valentines_heart.spoffer-5-state a span{position:absolute; width: 100%; text-align: center; color: #1a4f8e; top:58px; font-size: 14px; font-weight:bold}
+}
+@media (max-width:999px){
+	.usp{display:none;}
+}
+.live-chat-link span div{display:inline-block!important; position:initial!important; margin-right:2px!important;}
+.checkout-cart-index .snow-f:before, .onepagecheckout-index-index .snow-f:before{background:none!important}
+.checkout-cart-index .snow-f:after, .onepagecheckout-index-index .snow-f:after{background:none!important}
+.checkout-cart-index .header-offer-holder, 
+.catalog-product-view .header-offer-holder{background:#ffffff!important; border-bottom:1px solid #fa505a;}
+.checkout-cart-index header[role=banner] .header-offer-holder a, 
+.catalog-product-view header[role=banner] .header-offer-holder a{color:#333333!important}
+.checkout-cart-index header[role=banner] .header-offer-holder a .top-head-cc, 
+.catalog-product-view header[role=banner] .header-offer-holder a .top-head-cc{color:#fa505a!important}
+.checkout-cart-index header[role=banner] .header-offer-holder a .offer-icon i, 
+.catalog-product-view header[role=banner] .header-offer-holder a .offer-icon i{color:#999999!important}
+.checkout-cart-index header[role=banner] .header-offer-holder a:hover, .checkout-cart-index header[role=banner] .header-offer-holder a:focus, .checkout-cart-index header[role=banner] .header-offer-holder a:active,
+.catalog-product-view header[role=banner] .header-offer-holder a:hover, .catalog-product-view header[role=banner] .header-offer-holder a:focus, .catalog-product-view header[role=banner] .header-offer-holder a:active{color:#333333!important}
+.checkout-cart-index header[role=banner] .header-offer-holder a:hover .offer-icon i,
+.catalog-product-view header[role=banner] .header-offer-holder a:hover .offer-icon i{color:#fa505a!important}
+
+.top-quick-access{background:#f4f4f4; height:40px;}
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ 
+	echo 'html,body{cursor:pointer}';
+} ?>
+
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	.logo-box{margin-left:155px;}
+	@media(min-width:769px){
+		.logo-box{margin-left:270px;}
+	}
+	@media (max-width:768px){
+		html,body{width:768px; overflow-x:hidden;}
+	}
+<?php }else{ ?>
+	.secondary-navbar li {margin-top: 2px; padding: 2px 0; font-size: 13px}
+	.secondary-navbar li:first-child {padding-bottom: 4px;color: #333}
+	.navbar-nav>li {display: inline-block;}
+	
+	.onepagecheckout-index-index #opc-step1{width:100%;}
+	
+	
+	@media (min-width:1025px){
+		body{overflow-x:hidden;}
+		#other-main-menu{top:75px!important}
+	}
+	@media(max-width: 1024px) {
+		body {min-width: 1000px; overflow-x: auto}
+		.top-quick-access{width:100%;}
+		header{width:1000px}
+		#sub-navigation{left:-256px!important; right:-120px!important}
+		#main-head-inner{width:1000px;}
+		#product_addtocart_form{width:1000px!important;}
+		.visible-md, .visible-sm{display:block!important}
+		.shoppingcarttitle{font-size:40px!important}
+	}
+	@media (max-width:996px){
+		.foo-box-1{width:33.33333%!important}
+		.foo-box-2{width:25%!important; float:left}
+		.foo-box-3{width:41.66667%!important; float:left}
+		.foo-box-3 .col-sm-6{width:50%!important; float:left}
+		.contact-box li{margin-right:8px!important;}
+	}
+	@media (max-width:768px){
+		.cms-home .col-sm-6{width:50%!important; float:left}
+		.gem-2{padding-top:10px!important;}
+		.mp-box{width:33.33333%; float:left;}
+		.adj-nav-filter-scroll-box .col-sm-2{width:16.66667%; float:left;}
+		.adj-nav-filter-scroll-box .col-sm-8{width:66.66667%; float:left;}
+		.overflow-holder{width:1000px!important;}
+		.more-views-box{display:block!important;}
+		.simpleLens-big-image-container {
+			margin: 0 auto!important;
+			padding-left:60px!important;
+			width:500px!important;
+		}
+		.simpleLens-lens-image{
+			margin:0px auto;
+		}
+		h1.h1_opc{font-size:40px!important; text-align:center!important;}
+	}
+	#filter-panel .filter-title{float:left}
+<?php }
+$pageType = Mage::helper('function')->getPageType(); 
+
+if((Mage::app()->getRequest()->getRouteName()=='cms') && (Mage::getSingleton('cms/page')->getIdentifier()=='thanksgiving-gift' || Mage::getSingleton('cms/page')->getIdentifier()=='thanksgiving-thankyou' )) { 
+	$isThanksGiving = true;
+}else{
+	$isThanksGiving = false;
+}
+
+if(Mage::app()->getRequest()->getRouteName()=='cms' && Mage::getSingleton('cms/page')->getIdentifier()=='share-your-story.html') { 
+	$isShareStory = true;
+}else{
+	$isShareStory = false;
+}
+
+if($pageType=='cart'){
+	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+		echo ".logo{position:absolute; left:0px; top:-13px;}";
+		if($pageType=='cart'){
+			echo ".snow-f{height:41px!important; border-bottom: 1px solid #fa505a;}";
+		}else{
+			echo ".snow-f{height:40px!important;}";
+		}
+	} else {
+		echo ".logo{position:absolute; left:0px; top:-5px;}";
+		echo ".snow-f{height:40px!important;}";
+	}
+}elseif($pageType=='checkout' || $pageType=='amazon_payments' || $pageType=='success'){
+	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+		echo ".logo{position:absolute; left:0px; top:-13px;}";
+		echo ".snow-f{height:40px!important;}";
+	}else{
+		echo ".logo{position:absolute; left:0px; top:-5px;}";
+		echo ".snow-f{height:40px!important;}";
+	}
+}
+if($pageType =='success'){
+	echo ".snow-f{height:40px!important;}";
+} 
+if($pageType != 'home'){
+	echo "header{background:#ffffff!important}";
+	echo ".top-quick-access{background:#f4f4f4!important}";
+}
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+	if($pageType != 'home' && $pageType != 'cart' && $pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType != 'amazon_payments' && $pageType != 'success'){
+		if($pageType == 'category'){
+			$channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+			if(is_object($channel))
+				$bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerTablet());	 
+			if(is_object($channel) && !$channel->getCatalogBannerTablet()){
+				echo ".snow-f{height:145px!important}";
+			}else{
+				echo ".snow-f{border-bottom:none!important;}";
+			}
+		}else{
+			if($pageType != 'cart'){
+				echo ".snow-f{height:145px!important}";
+			}else{
+				echo ".snow-f{border-bottom:none!important;}";
+			}
+		}
+		if($pageType == 'cart' && !strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+			echo ".snow-f{height:71px!important;}";
+		}
+	} 
+}else{
+	if($pageType != 'home' && $pageType != 'cart' && $pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType != 'amazon_payments' && $pageType != 'success'){
+		if($pageType == 'category'){
+			$channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+			if(is_object($channel))
+				$bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerDesktop());	 
+			if(is_object($channel) && !$channel->getCatalogBannerDesktop()){
+				echo ".snow-f{height:145px!important}";
+			}else{
+				echo ".snow-f{border-bottom:none!important;}";
+			}
+		}else{
+			if($pageType != 'cart'){
+				echo ".snow-f{height:145px!important}";
+			}else{
+				echo ".snow-f{border-bottom:none!important;}";
+			}
+		}
+		if($pageType == 'cart' && !strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+			echo ".snow-f{height:71px!important;}";
+		}
+	} 	
+} 
+
+//S:Holiday Special Offer
+if($pageType != 'home' && $pageType != 'cart' && $pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType != 'amazon_payments' && $pageType != 'success'){
+$offerText = Mage::helper('function')->getOfferText();
+if(!$offerText){
+	echo ".snow-f{height:114px!important}";
+}
+}
+//E:Holiday Special Offer
+
+if($isThanksGiving == true){
+	echo ".snow-f{height:40px!important;}";
+}
+
+if($isShareStory == true){
+	echo ".snow-f{height:115px!important;}";
+}
+?>
+</style>
+<script>
+var doc = document.documentElement;
+doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
+<?php 
+$totalCartItems = Mage::helper('function')->getCartItemsCount();
+$userAgent = Mage::getUserAgent(); ?>
+<script type="application/javascript">(function(w,d,t,r,u){w[u]=w[u]||[];w[u].push({'projectId':'10000','properties':{'pixelId':'37535'}});var s=d.createElement(t);s.src=r;s.async=true;s.onload=s.onreadystatechange=function(){var y,rs=this.readyState,c=w[u];if(rs&&rs!="complete"&&rs!="loaded"){return}try{y=YAHOO.ywa.I13N.fireBeacon;w[u]=[];w[u].push=function(p){y([p])};y(c)}catch(e){}};var scr=d.getElementsByTagName(t)[0],par=scr.parentNode;par.insertBefore(s,scr)})(window,document,"script","https://s.yimg.com/wi/ytc.js","dotq");</script>
+<div class="snow-f container-fluid header-hover">
+	<header role="banner" class="nav-header header-hover" style="position:relative; z-index:3;">
+		<div class="top-quick-access pull-left col-sm-12 no-padding">
+			<div class="container">
+				<div class="row no-gutters">
+					<div class="col-sm-12">
+						<div class="quick-access hidden-xs">
+							<div class="top-left-links pull-left">
+								<ul>
+									<li><span class="fontsize-type4"><a rel="nofollow" target="_new" href="/contact-us" class="color555"><i class="fa fa-phone fa-fw apricot-text"></i>1-888-926-4272</a></span></li>
+									<li><a id="_lpChatBtn" href='javascript:void(0);' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&amp;referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="low-padding-left max-padding-right fontsize-type4 color555 live-chat-link"><i class="fa fa-comments fa-fw apricot-text"></i>Live Chat</a></li>
+								</ul>
+							</div>
+							<?php
+							if($pageType=='cart'){ ?>
+								<style>header[role=banner] .usp-box{max-width:270px!important;right:0px!important}</style>
+							    <div id="ry-slider" class="usp-box">
+									<ul>
+										<li class="active"><a target="_blank" href="/shipping">Free shipping & returns on all orders</a></li>
+									</ul>
+								</div>
+							<?php } else{ ?>							
+								<div id="ry-slider" class="usp-box">
+									<ul>
+										<span class="rear-text"><a target="_blank" href="/shipping">Free Shipping & Free Returns</a></span>
+									</ul>
+								</div>
+							<?php } ?>
+							<div class="top-right-links pull-right">
+								<ul>
+                                	<?php echo $this->getChildHtml('cart_opener_new'); ?>									
+										<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+											<?php if($pageType!='cart' && $pageType!='checkout' && $pageType!='amazon_payments'){ ?>
+												<li><a rel="nofollow" href="<?php echo $this->getUrl('wishlist'); ?>" class="fontsize-type4 color555"><i class="fa fa-heart fa-fw color888"></i>Wishlist</a></li>
+												<?php echo $this->getChildHtml('sign_in_link'); ?>
+											<?php } ?>
+										<?php }else{ ?>
+											<li><a rel="nofollow" href="<?php echo $this->getUrl('wishlist'); ?>" class="fontsize-type4 color555"><i class="fa fa-heart fa-fw color888"></i>Wishlist</a></li>
+											<?php echo $this->getChildHtml('sign_in_link'); ?>
+										<?php } ?>
+										
+										<?php if(Mage::app()->getRequest()->getModuleName() != 'checkout' && Mage::app()->getRequest()->getModuleName() != 'onepagecheckout'){ ?>
+										<li class="first"><a rel="nofollow" class="country-dropdown-list-trigger fontsize-type4" href="javascript:void(0)"><i class="fa country-list-item pull-left countflagspan country-flag country-<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode());?>-smallf" title="Click to Change the Country or Currency"></i></a><div><?php echo $this->getChildHtml('country'); ?></div></li>
+										<?php }else{ ?>
+										<li><i class="fa country-list-item countflagspan country-flag country-<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode());?>-smallf"></i></li>
+										<?php } ?>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<?php 
+			if($pageType != 'home' && $pageType != 'cart' && $pageType != 'checkout' && $pageType != 'onepagecheckout' && $pageType != 'amazon_payments' && $pageType != 'success' && $isThanksGiving != true && $isShareStory != true){
+				if($pageType == 'category'){
+					if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+						$channel = Mage::getSingleton('core/session')->getVisitorChannel();  
+						if(is_object($channel) && !$channel->getCatalogBannerTablet()){
+							$offerText	=	Mage::helper('function')->getOfferText();
+							if($offerText){
+								$offerData 		= 	$this->getLayout()->createBlock('promotions/offer')->getOfferHeaderImage();
+								$image_path		=	$offerData['image_path'];
+								$image_title	=	$offerData['image_title'];
+								$image_alt_text	=	$offerData['image_alt_text']; ?>
+								<div class="col-sm-12 header-offer-holder">
+									<div class="container text-center">
+										<div class="col-sm-12"><a href="javascript:void(0)" id="open-header-offer" onclick="showFreegifts();" data-offer-status="close" ><span><?php echo $offerText;?><span class="offer-icon absolute-placeholder"><i class="fa fa-plus-circle"></i><i class="fa fa-times-circle hide"></i></span></span></a></div>		
+										<div class="col-sm-12 free-gift-detail hide"><img src="<?php echo $image_path;?>" alt="<?php echo $image_alt_text;?>" title="<?php echo $image_title;?>"/></div>
+									</div>
+								</div> <?php
+							}
+						}
+					}else{
+						$channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+						if(is_object($channel) && !$channel->getCatalogBannerDesktop()){
+							$offerText	=	Mage::helper('function')->getOfferText();
+							if($offerText){
+								$offerData 		= 	$this->getLayout()->createBlock('promotions/offer')->getOfferHeaderImage();
+								$image_path		=	$offerData['image_path'];
+								$image_title	=	$offerData['image_title'];
+								$image_alt_text	=	$offerData['image_alt_text']; ?>
+								<div class="col-sm-12 header-offer-holder">
+									<div class="container text-center">
+										<div class="col-sm-12"><a href="javascript:void(0)" id="open-header-offer" onclick="showFreegifts();" data-offer-status="close" ><span><?php echo $offerText;?><span class="offer-icon absolute-placeholder"><i class="fa fa-plus-circle"></i><i class="fa fa-times-circle hide"></i></span></span></a></div>		
+										<div class="col-sm-12 free-gift-detail hide"><img src="<?php echo $image_path;?>" alt="<?php echo $image_alt_text;?>" title="<?php echo $image_title;?>"/></div>
+									</div>
+								</div> <?php
+							}
+						}
+					}
+				}else{
+					if($pageType == 'cart'){
+						if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+							$offerText	=	Mage::helper('function')->getOfferText();
+							if($offerText){
+								$offerData 		= 	$this->getLayout()->createBlock('promotions/offer')->getOfferHeaderImage();
+								$image_path		=	$offerData['image_path'];
+								$image_title	=	$offerData['image_title'];
+								$image_alt_text	=	$offerData['image_alt_text']; ?>
+								<div class="col-sm-12 header-offer-holder">
+									<div class="container text-center">
+										<div class="col-sm-12"><a href="javascript:void(0)" id="open-header-offer" onclick="showFreegifts();" data-offer-status="close" ><span><?php echo $offerText;?><span class="offer-icon absolute-placeholder"><i class="fa fa-plus-circle"></i><i class="fa fa-times-circle hide"></i></span></span></a></div>		
+										<div class="col-sm-12 free-gift-detail hide"><img src="<?php echo $image_path;?>" alt="<?php echo $image_alt_text;?>" title="<?php echo $image_title;?>"/></div>
+									</div>
+								</div> <?php
+							}
+						}
+					}else{
+						$offerText	=	Mage::helper('function')->getOfferText();
+						if($offerText){
+							if($isThanksGiving != true) { 
+								$offerData 		= 	$this->getLayout()->createBlock('promotions/offer')->getOfferHeaderImage();
+								$image_path		=	$offerData['image_path'];
+								$image_title	=	$offerData['image_title'];
+								$image_alt_text	=	$offerData['image_alt_text']; ?>
+								<div class="col-sm-12 header-offer-holder">
+									<div class="container text-center">
+										<div class="col-sm-12"><a href="javascript:void(0)" id="open-header-offer" onclick="showFreegifts();" data-offer-status="close" ><span><?php echo $offerText;?><span class="offer-icon absolute-placeholder"><i class="fa fa-plus-circle"></i><i class="fa fa-times-circle hide"></i></span></span></a></div>		
+										<div class="col-sm-12 free-gift-detail hide"><img src="<?php echo $image_path;?>" alt="<?php echo $image_alt_text;?>" title="<?php echo $image_title;?>"/></div>
+									</div>
+								</div> <?php
+							} 
+						}
+					}
+				}
+			} 
+		?>
+		<div class="clearfix"></div>	
+		<?php echo $recentlyViewedHtml = $this->getLayout()->createBlock('core/template')->setTemplate('page/html/header_bottom.phtml')->toHTML(); ?>
+	</header>
+</div>

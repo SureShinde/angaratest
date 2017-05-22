@@ -1,0 +1,123 @@
+<?php 
+$reviews = $this->getStoneReviews($product_id, $stone,$quality);
+//$product = Mage::getModel('catalog/product')->load($product_id);
+?>
+<?php if($reviews->count() > 0): ?>
+	<?php //$stones = array();?>
+    <div class="ppreviewheading review-category-title">
+      <div class="previewtitle">
+         Other reviews for <?php echo $stone;?> in <?php
+		 if($quality == 'A'){
+		  	echo 'Good';
+		 }
+		 else if($quality == 'AA'){
+		  	echo 'Better';
+		 }
+		 else if($quality == 'AAA'){
+		  	echo 'Best';
+		 }
+		 else if($quality == 'AAAA'){
+		  	echo 'Heirloom';
+		 }
+		 else{
+			 echo $quality;
+		 }
+		  ?> quality <span id="review3overtxt"><img src="/skin/frontend/angara/default/images/knowmorereviews.png"   width="15" height="16"/>
+         <div id="review3popup">These reviews are for product sold with the same gemstone quality.</div>
+         </span>
+      </div>
+  </div>
+  <style>
+#review3popup
+{
+position:absolute;
+top:20px;
+left:10px;
+width: 231px;
+border:solid 1px #999999;
+text-decoration: none !important;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-moz-box-shadow:0px 0px 5px #797979;
+-webkit-box-shadow: 0px 0px 5px #797979;
+box-shadow: 0px 0px 5px #797979;
+padding:8px;
+z-index:999;
+display:none;
+font:11px/16px Arial, Helvetica, sans-serif;
+color:#000;
+cursor:default;
+background-color:#fff;
+}
+#review3overtxt
+{
+vertical-align:middle;
+width:15px;
+height:16px;
+display:inline-block;
+position:relative;
+}
+
+.stonerelatedreview .date
+{
+display:none;
+}
+</style>
+  <script>
+  jQuery(function(){
+	  jQuery('#review3overtxt').hover(function(){jQuery('#review3popup').show()},function(){jQuery('#review3popup').hide()})
+  })
+  </script>
+	
+	<?php foreach($reviews as $review): ?>
+	<?php //if(!in_array($review->getStone(), $stones)):?>
+	<?php //$stones[] = $review->getStone();?>
+	<?php //endif;?>
+    
+	<dl class="ppreviewholder"> 
+      <dt>
+      <div class="ppreview stonerelatedreview">
+       		<span class="ppreviewby">    
+			<span style="padding-right:4px;"><strong>Review by: </strong></span>
+			<span><?php echo $review->getNickname(); ?>
+            <small class="date"><?php echo $this->__('(Posted on %s)', $this->formatDate($review->getCreatedAt()), 'long') ?></small>
+            </span>
+           
+   			</span>
+ 		    <span class="pprating">
+   <table class="ratings-table">
+            <colgroup><col width="1">
+            <col>
+            </colgroup>
+            
+            <tbody>
+                <tr>
+                    <th class="review-headings">Overall Rating:</th>
+                    <td nowrap="nowrap" style="padding:4px 0 0 0"><div class="rating-box">
+                        <div style="width:<?php echo $review->getRating(); ?>%;" class="rating"></div>
+                        </div>
+                    </td><td valign="middle" style="padding:5px 0 0 5px"><?php  echo number_format((5 * floatval($review->getRating())/100),1);?></td>
+                </tr>
+            </tbody>
+        </table>
+   </span>                         
+		  <div style="clear:both"></div>
+      </div>
+   </dt>
+    <dd></dd> 
+     <dt>
+	<div style="float:left; width:152px; padding-left:10px;">
+		<div class="review-headings"> <strong>Summary</strong> </div>
+		<div><?php echo $review->getTitle();?></div>
+    </div>    
+    <div style="float:right; width:636px;">
+		<div class="review-headings"><strong>Review</strong></div>
+		<div> <?php echo $review->getDetail(); ?> </div>
+    </div>
+    <div style="clear:both"></div>
+	 </dt>
+     <dd></dd> 
+    </dl>
+	<?php endforeach; ?>
+<?php endif; ?>

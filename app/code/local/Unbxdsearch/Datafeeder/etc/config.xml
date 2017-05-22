@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Unbxdsearch_Datafeeder>
+            <version>0.1.0</version>
+        </Unbxdsearch_Datafeeder>
+    </modules>
+    
+    
+    <frontend>
+    	<routers>
+		<datafeeder>
+			<use>standard</use>
+		        <args>
+                        <module>Unbxdsearch_Datafeeder</module>
+                        <frontName>datafeeder</frontName>
+                </args>
+		</datafeeder>
+	   </routers>
+    </frontend>
+    
+    
+    
+    <global>
+		<models>	
+			<unbxdsearch_datafeeder>
+				<class>Unbxdsearch_Datafeeder_Model</class>
+			</unbxdsearch_datafeeder>
+		</models>
+		<blocks>	
+			<unbxdsearch_datafeeder>
+				<class>Unbxdsearch_Datafeeder_Block</class>
+			</unbxdsearch_datafeeder>
+		</blocks>
+    </global>
+        <global>
+           <helpers>
+              <unbxdsearch_datafeeder>
+              	<class>Unbxdsearch_Datafeeder_Helper</class>
+              </unbxdsearch_datafeeder>
+           </helpers>
+        </global>
+    
+    <crontab>
+	    <jobs>
+		<Unbxdsearch_Datafeeder>
+		    <schedule><cron_expr>*/1 * * * *</cron_expr></schedule>
+		    <run><model>unbxdsearch_datafeeder/observer::feed</model></run>
+		</Unbxdsearch_Datafeeder>
+	    </jobs>
+	</crontab>
+    
+    
+    
+
+	
+	  <admin>
+        <routers>
+            <the_name_of_this_element_is_not_important_it_should_be_unique>
+                <use>admin</use>
+                <args>
+                    <module>Unbxdsearch_Datafeeder</module>
+                    <frontName>datafeeder</frontName>
+                </args>
+            </the_name_of_this_element_is_not_important_it_should_be_unique>
+        </routers>
+    </admin>
+	
+</config>
+
+    
+

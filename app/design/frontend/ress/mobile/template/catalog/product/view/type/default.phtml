@@ -1,0 +1,93 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+ /* @var $this Mage_Catalog_Block_Product_View_Abstract */
+ 
+$_product = $this->getProduct();
+$_taxHelper = $this->helper('tax');
+$_coreHelper = Mage::helper('core');
+
+echo $this->getChildHtml('product_type_data_extra');?>
+<div class="row high-margin-top relative-placeholder"> 
+	<div class="col-xs-12" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>" />
+		<link itemprop="availability" href="http://schema.org/InStock" />
+		<div class="pull-left high-padding-right">
+			<span class="pull-right"><?php echo $this->getPriceHtml($_product);?></span>
+        </div>
+    	<div id="special-offer-click" class="pull-left padding-type-2 fontsize-type0 text-green clickable block-inline-display" style="border:dashed 1px #b5b5b5; background-color:#fffce4; margin-top:20px;">
+        	<div class="pull-left" style="white-space:nowrap;">Tap For Offer</div> <div class="pull-right low-margin-left"><i class="fa fa-caret-right fontsize-type2"></i></div>
+        </div>
+        <div class="clearfix"></div>     
+     	<div class="row absolute-placeholder zi1" style="width:100%; top:33px; display:none;" id="special-offer-details">
+        	<div class="col-xs-12">
+            	<div class="padding-type-5 showcase-bg-white text-center" style="border:dashed 1px #b5b5b5;">
+                	<div id="spinner-offer" class="high-padding-top high-padding-bottom" style="display:none;"><i class="fa fa-spinner fa-2x fa-spin"></i></div>      	
+                	<div class="clearfix"><i id="close-special-offer" class="fa fa-times close fontsize-type5"></i></div>
+                    <div id="special-offer-text" class="max-padding-bottom text-center" style="display:none;"></div>
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+$categories = $this->getProduct()->getCategoryIds();
+/* excluding specific categories from easy pay */ 
+if(!in_array(96, $categories)): 
+	$_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_taxHelper->getPrice($_product, $_product->getFinalPrice())); ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="fontcolor-type3 low-padding-bottom small text-light">Or</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4 col-sm-7 col-xs-7">		
+            <label for="#easy-pay-box">Easy Pay Installments <i id="easy-pay-info" class="fa fa-info-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="
+                <div class='block-sub-heading high-margin-bottom'>What is Easy Pay?</div>
+                <ul class='list-style-disc'>
+                    <li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+                    <li class='low-padding-bottom'>First payment is charged at the time of purchase.</li>
+                    <li class='low-padding-bottom'>The order is processed for shipment immediately upon checkout.</li>
+                    <li class='low-padding-bottom'>Your credit card will be charged for 2 or 3 equal installments starting 30 days from the date of purchase.
+                    <li class='low-padding-bottom'>No interest or additional fees are charged by Angara.</li>
+                    <li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the right to collect the same or send a collection agency if a payment is not made.</li>
+                </ul>"></i>
+            </label>
+            <select id="easy-pay-box" class="form-control high-margin-bottom input-text" name="easyopt">
+            <?php 
+            foreach($_easyPayOptions as $key => $val): ?>
+                <option value="<?php echo $key; ?>" <?php if($key == 0): ?> selected="selected" <?php endif; ?>><?php echo ($key + 1) . ' payment(s) of ' . $_coreHelper->currency($val, true, false) ?></option>
+            <?php 
+            endforeach; ?>
+            </select>
+        </div>
+    </div>    
+<?php
+else:?>
+<style>
+.product-retail-price-range, .product-retail-price { visibility: hidden; }
+</style>
+<?php	 
+endif; ?>

@@ -1,0 +1,194 @@
+.errorwrapper {
+	margin: 10px 0 0 0;
+	width: 940px;
+	background-color: #fff;
+	border: solid 1px #D4D4D4;
+	padding: 10px 9px 10px 9px;
+}
+.bottomcontentpart {
+	padding: 9px;
+	width: 922px;
+	min-height: 190px;
+	height: auto!important;
+	height: 190px;
+}
+.headingstyle {
+	width: 920px;
+	background-color: #fff;
+	min-height: 190px;
+	height: auto!important;
+	height: 190px;
+	border: solid 1px #D4D4D4;
+}
+.contantheading {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000;
+	line-height: 32px;
+	padding-left: 12px;
+	margin: 0 1px 0 1px;
+	height: 32px;
+	width: auto;
+	background: url(../images/headingbg.jpg) repeat-x bottom;
+}
+.contantstyle {
+	font-size: 12px;
+	line-height: 18px;
+	padding: 12px;
+	color: #000;
+}
+p {
+	padding: 0 0 10px 0;
+	margin: 0;
+}
+.jcarousel-skin-tango .jcarousel-container {
+	width: 920px;
+	padding: 12px 0 12px 0;
+}
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+	width: 864px;
+	padding: 18px 28px 18px 28px;
+}
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+	width: 864px;
+	height: 150px;
+}
+.jcarousel-skin-tango .jcarousel-item a {
+	width: 131px;
+	height: 131px;
+	text-decoration: none;
+	color: #000;
+}
+.jcarousel-skin-tango .jcarousel-item a img {
+	width: 129px;
+	height: 129px;
+	border: solid 1px #D4D4D4;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+	padding-left: 6px;
+	padding-right: 7px;
+}
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+	background: #fff;
+	color: #000;
+}
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+	position: absolute;
+	top: 43px;
+	right: 0px;
+	width: 27px;
+	height: 95px;
+	cursor: pointer;
+	background: transparent url(../images/next-horizontal.png) no-repeat 0 0;
+}
+.jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-next-horizontal {
+	left: 5px;
+	right: auto;
+	background-image: url(../images/prev-horizontal.png);
+}
+.jcarousel-skin-tango .jcarousel-next-horizontal:hover {
+	background-position: -27px 0;
+}
+.jcarousel-skin-tango .jcarousel-next-horizontal:active {
+	background-position: -54px 0;
+}
+.jcarousel-skin-tango .jcarousel-next-disabled-horizontal, .jcarousel-skin-tango .jcarousel-next-disabled-horizontal:hover, .jcarousel-skin-tango .jcarousel-next-disabled-horizontal:active {
+	cursor: default;
+	background-position: -81px 0;
+}
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+	position: absolute;
+	top: 43px;
+	left: 0px;
+	width: 27px;
+	height: 95px;
+	cursor: pointer;
+	background: transparent url(../images/prev-horizontal.png) no-repeat 0 0;
+}
+.jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+	left: auto;
+	right: 5px;
+	background-image: url(../images/next-horizontal.png);
+}
+.jcarousel-skin-tango .jcarousel-prev-horizontal:hover {
+	background-position: -27px 0;
+}
+.jcarousel-skin-tango .jcarousel-prev-horizontal:active {
+	background-position: -54px 0;
+}
+.jcarousel-skin-tango .jcarousel-prev-disabled-horizontal, .jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:hover, .jcarousel-skin-tango .jcarousel-prev-disabled-horizontal:active {
+	cursor: default;
+	background-position: -81px 0;
+}
+.errormsgbox {
+	margin: 9px;
+	position: relative;
+	width: 920px;
+	height: 80px;
+	border: solid 1px #D4D4D4;
+}
+.errormsg {
+	height: 80px;
+	background: url(../images/errorboxbg.jpg) repeat-x;
+	margin: 0 1px 0 1px;
+	font-size: 18px;
+	color: #000;
+	line-height: 36px;
+	padding-left: 45px;
+}
+.errorimg {
+	position: absolute;
+	top: 0px;
+	left: 15px;
+}
+.topdisplayitems {
+	padding: 9px;
+	width: 922px;
+	min-height: 212px;
+	height: auto!important;
+	height: 212px;
+}
+.topdispalaybox {
+	width: 292px;
+	float: left;
+	background-color: #fff;
+	min-height: 210px;
+	height: auto!important;
+	height: 210px;
+	border: solid 1px #D4D4D4;
+	margin-right: 20px;
+}
+.toplisting {
+	padding: 16px;
+}
+.toplisting ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.toplisting li {
+	font-size: 12px;
+}
+.toplisting li a {
+	line-height: 22px;
+	color: #000;
+	text-decoration: none;
+}
+.toplisting li a:hover {
+	text-decoration: underline;
+}
+.moreview {
+	margin-top: 8px;
+}
+.moreview a {
+	padding: 0 0 0 16px;
+	background: url(../images/moreview.jpg) no-repeat;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+}

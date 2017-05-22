@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>    
+    <modules>
+        <Angara_Helloworld>
+            <version>0.1.0</version>
+        </Angara_Helloworld>
+    </modules>
+    <frontend>
+        <routers>
+            <helloworld>
+                <use>standard</use>
+                <args>
+                    <module>Angara_Helloworld</module>
+                    <frontName>helloworld</frontName>
+                </args>
+            </helloworld>
+        </routers>  
+    </frontend>
+	<global>
+		<helpers>
+            <helloworld>
+                <class>Angara_Helloworld_Helper</class>
+            </helloworld>
+        </helpers>
+		<events>
+			<controller_front_init_routers>
+				<observers>
+					<angara_helloworld_model_observer>
+						<type>singleton</type>							
+						<class>Angara_Helloworld_Model_Observer</class>
+						<method>checkForConfigRequest</method>
+					</angara_helloworld_model_observer>
+				</observers>
+			</controller_front_init_routers>
+		</events>
+	</global>    
+</config>

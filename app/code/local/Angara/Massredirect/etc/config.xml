@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Angara_Massredirect>
+            <version>1.0.0</version>
+        </Angara_Massredirect>
+    </modules>
+    <global>
+        <models>
+            <massredirect>
+                <class>Massredirect_Model</class>
+            </massredirect>
+        </models>
+    </global>
+    <frontend>
+        <events>
+        	<controller_action_predispatch>
+        		<observers>
+					<angara_massredirect_model_redirector>
+						<type>singleton</type>
+						<class>Angara_Massredirect_Model_Redirector</class>
+						<method>observe</method>
+					</angara_massredirect_model_redirector>        		
+        		</observers>
+        	</controller_action_predispatch>
+        </events>    
+    </frontend>
+</config>

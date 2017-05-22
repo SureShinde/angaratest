@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<hometabs_ajax_index>
+		<block type="hometabs/hometabs" name="root" output="toHtml" template="hometabs/hometabs.phtml" />
+	</hometabs_ajax_index>
+		
+</layout>

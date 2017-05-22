@@ -1,0 +1,491 @@
+<style>
+.valentines_heart {
+	display:none !important;
+}
+.h1_opc {
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0px 0px 15px 0px;
+    padding: 15px;
+    border-bottom: 1px solid #fa505a;
+}
+a.active, a:focus, a:hover {
+    color: #fa505a !important;
+    text-decoration: underline;
+    outline: 0;
+    transition: all .2s ease-in-out;
+}
+<?php /* S: Social Sharing */ ?>
+.social-share-wrapper{float: right;border: 1px solid #dedede; border-radius: 2px; width: 620px;}
+.social-share-tabs{width: 100%; float: left; background: #f1f1f1; height: 50px; border-bottom:1px solid #dedede;}
+.social-share-tabs span{float: left;font-size: 18px;line-height: 50px;margin-left: 10px;}
+.social-share-tabs ul{float: right;margin-bottom: 0px;}
+.social-share-tabs ul li{display:inline-block; height:50px; border-left:1px solid transparent; border-right:1px solid transparent; padding: 12px;cursor: pointer;}
+.social-share-tabs ul li.active{background:#ffffff; border-left:1px solid #dedede; border-right:1px solid #dedede;}
+#twitter.active {border-right:initial !important;}
+
+.share-box-wrapper{width:100%;float:left}
+.share-box-wrapper .share-box{}
+
+.ss-btn{background:#fa505a; color:#ffffff; padding:8px 15px; border-radius:2px;}
+.ss-btn:hover, .ss-btn.active, .ss-btn:focus{text-decoration:none!important; color:#ffffff!important;}
+.share-box .ss-btn{padding: 3px 10px; float: left; margin-top: 6px;}
+
+
+@media (max-width:1260px){
+	.left-box, .right-box{width:100%!important; float:left;}
+	.left-box{text-align:center;}
+	.left-box .ss-btn{float:none!important;}
+	.right-box{padding-left:0px; margin-top:50px;}
+	.social-share-wrapper{ float:left; margin:0 auto;width:100%;}
+	.share-box-wrapper .share-box {float: left;}
+	.form-list li, .high-margin-bottom {margin-bottom: 15px;}
+}
+@media (max-width:768px){
+	.left-box{text-align:center;}
+	.left-box .ss-btn{float:none!important;}
+	.social-share-wrapper{width:100%;}
+}
+@media (max-width:767px){
+	.h1_opc{display:none!important;}
+	.social-share-tabs{height:100px;}
+	.social-share-tabs span{margin:0px; width:100%; text-align:center;}
+	.social-share-tabs ul{margin:0px; width:100%;}
+	.social-share-tabs ul li{padding:12px 6px; width:50%; box-sizing:border-box; float:left; border-top:1px solid transparent;}
+	.social-share-tabs ul li.active{border-top:1px solid #dedede;}
+	.social-share-tabs ul li:first-child{border-left:none;}
+	.social-share-tabs ul li:last-child{border-right:none;}
+	.share-box .ss-btn{margin-bottom:15px;line-height: 25px;}
+	.social-share-wrapper {float:left !important;}
+	.share-box {padding-top:10px;}
+	.share-box .col-sm-3 {width:40%;float:left;}
+	.share-box .col-sm-9 {width: 60%;float: left;padding-left: 10px;}
+	.share-box .col-sm-9 strong {line-height:25px;}
+	.share-box .col-sm-9 p {margin:initial;}
+	.share-box .col-sm-9 span:nth-child(2) {display:block;padding-top: 10px;padding-bottom: 10px;}
+	.social-share-tabs li img{display:block;margin:0 auto;}
+}
+<?php /* E: Social Sharing */ ?>	
+</style>
+<?php $orderId = $this->getOrderId(); ?>
+<h1 class="h1_opc">
+	<div class="container relative-placeholder">
+		<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			<a href="http://www.angara.com/" title="Angara Jewelry" class="logo absolute-placeholder pull-left" onclick="s_objectID=&quot;http://www.angara.com/_1&quot;;return this.s_oc?this.s_oc(e):true">
+				<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+			</a>	
+		<?php } ?>
+		Order Confirmation
+	</div>
+</h1>
+<div class="container showcase-bg-white max-padding-top max-padding-bottom">
+	<?php 
+	$lastId = Mage::getSingleton('checkout/session')->getLastOrderId();
+	$order  = Mage::getSingleton('sales/order')->load($lastId);?>
+	<div class="col-sm-12 no-padding-left no-padding-right pull-left max-margin-bottom max-padding-bottom">
+		<div class="left-box col-sm-6 no-padding-left">
+			<?php echo $this->getMessagesBlock()->getGroupedHtml();?>
+			<h1 style="font-size:25px; font-weight:normal; margin-bottom:0px;"><?php echo $this->__('Thank you for your purchase!');?></h1>
+			<p style="margin-bottom:0px;">Your order has been received.</p>
+			<br>
+			<?php			
+			if($orderId):
+				if($this->getCanViewOrder()):?>
+					<p style="font-size:18px; margin-bottom:5px;"><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s"><span class="apricot-text">%s</span></a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($orderId)));?></p>
+				<?php
+				else :?>
+					<p style="font-size:18px; margin-bottom:5px;"><?php echo $this->__('Your order # is: %s.', sprintf('<span class="apricot-text">%s</span>',$this->escapeHtml($orderId)));?></p>
+				<?php 
+				endif;
+				//for mailchimp 2-day express free-shipping
+				if(Mage::getSingleton('checkout/session')->getEmailFreeShipping())
+				{
+					Mage::getSingleton('checkout/session')->unsEmailFreeShipping();
+				} 
+				?>
+				<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.');?></p>
+				<?php 
+				if($this->getCanViewOrder() && $this->getCanPrintOrder()):?>
+					<p><?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl());?> <?php echo $this->getChildHtml();?></p>
+				<?php 
+				endif;
+			endif;?>
+			<br>
+			<a href="<?php echo $this->getUrl();?>" class="ss-btn pull-left" title="<?php echo $this->__('Continue Shopping');?>">Continue Shopping</a>
+		</div>
+		<div class="right-box col-sm-6 no-padding-right">
+			<div class="social-share-wrapper">
+				<div class="social-share-tabs">
+					<span>Share your purchase on:</span>
+					<ul>
+						<li class="active" id="facebook"><img src="/skin/frontend/ress/default/images/ss-fb.png" alt="Facebook"/></li>
+						<li id="twitter"><img src="/skin/frontend/ress/default/images/ss-tw.png" alt="Twitter"/></li>
+					</ul>
+					<script>
+					jQuery(function(){
+						jQuery('.social-share-tabs ul li').click(function(){
+							var parentId = jQuery(this).attr("id");	
+							
+							jQuery(this).addClass('active').siblings().removeClass('active');
+							jQuery('.share-box-wrapper .share-box').addClass('hide');										  
+							
+							jQuery('.share-box-wrapper .share-box').each(function(){
+								if(jQuery(this).hasClass(parentId)){
+									jQuery(this).removeClass('hide');
+								}
+							});	
+						});
+					});	
+					</script>
+				</div>
+				<div class="share-box-wrapper">
+				<?php 
+				$_visibleItemCount = count($order->getAllVisibleItems());
+				$_itemCount = 0;
+				$request = Mage::app()->getRequest();
+				foreach($order->getAllVisibleItems() as $item): 
+					$itemCount++;
+					$isVisibleProduct = $item->getProduct()->isVisibleInSiteVisibility();
+					if($item->getProduct()->getPrice() > 0 && $isVisibleProduct) {
+						$_prodItem = Mage::getModel('catalog/product');
+						//$configItem = $_prodItem->load($item->getProduct()->getId()); 
+						
+						$itemSku = $item->getSku();
+						$realItemSku = Mage::helper('function')->getRealChildSku($itemSku);							
+						$configItemChild = $_prodItem->loadByAttribute('sku', $realItemSku); ?>
+						
+						<div style="width:100%; float:left">
+							<div class="share-box facebook<?php if($itemCount < $_visibleItemCount){?> high-margin-bottom<?php }?>">
+								<div class="col-sm-3"> <img class="img-responsive" src="<?php echo Mage::helper('catalog/image')->init($configItemChild, 'small_image')->resize(200); ?>" alt="<?php echo $configItemChild->getShortDescription();?> - Angara.com"/> </div>
+								<div class="col-sm-9 high-padding-top high-padding-bottom">
+									<p><span class="col-sm-12 block-inline-display no-padding" style="font-size:16px;"><strong>I just bought:</strong> <?php echo $configItemChild->getShortDescription(); ?></span>
+									<span class="col-sm-12 block-inline-display no-padding" style="font-size:12px;"><?php echo $request->getHttpHost(); ?></span></p>
+									<p style="font-size:12px;"><?php echo $configItemChild->getDescription(); ?></p>
+									<a href="javascript:void(0);" onclick="myFbFunction_<?php echo $configItemChild->getId(); ?>();" class="ss-btn">Share this item</a>
+								</div>
+							</div>
+							<div class="share-box twitter hide<?php if($itemCount < $_visibleItemCount){?> high-margin-bottom<?php }?>">
+								<div class="col-sm-3"> <img class="img-responsive" src="<?php echo Mage::helper('catalog/image')->init($configItemChild, 'small_image')->resize(200); ?>" alt="<?php echo $configItemChild->getShortDescription();?> - Angara.com"/> </div>
+								<div class="col-sm-9 high-padding-top high-padding-bottom">
+									<p><span class="col-sm-12 block-inline-display no-padding" style="font-size:16px;"><strong>I just bought:</strong> <?php echo $configItemChild->getShortDescription(); ?></span>
+									<span class="col-sm-12 block-inline-display no-padding" style="font-size:12px;"><?php echo $request->getHttpHost(); ?></span></p>
+									<p style="font-size:12px;"><?php echo $configItemChild->getDescription(); ?></p>
+									<a href="javascript:void(0);" onclick="myTweetFunction_<?php echo $configItemChild->getId(); ?>();" class="ss-btn">Share this item</a>
+								</div>
+							</div>						
+							<script type="text/javascript">
+							function myFbFunction_<?php echo $configItemChild->getId(); ?>(){	
+								window.open('https://www.facebook.com/share.php?u=<?php echo $configItemChild->getProductUrl();?>','face','height=600,width=650,scrollbars=yes').focus();	
+							}
+							function myTweetFunction_<?php echo $configItemChild->getId(); ?>(){							
+								window.open('https://twitter.com/intent/tweet?url=<?php echo $configItemChild->getProductUrl();?>&text=Love this Jewelry Style from Angara! <?php echo urlencode($configItemChild->getShortDescription());?>&via=angara','tweet','height=600,width=650').focus();	
+							}
+							</script>
+						</div>
+					<?php
+					}
+				endforeach;?>
+				</div>				
+			</div>	
+		</div>
+	</div>
+	<img src="https://www.momsaffiliate.com/track/4017.png?amount=<?php echo $order->getData('grand_total')?>&amp;order=<?php echo $order->getData('increment_id')?>" />
+	<?php 
+	if($this->getAgreementRefId()): ?>
+		<p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())));?></p>
+	<?php 
+	endif;
+	
+	if($profiles = $this->getRecurringProfiles()):?>
+	<p><?php echo $this->__('Your recurring payment profiles:');?></p>
+	<ul class="disc">
+	<?php 
+	foreach($profiles as $profile):
+		$profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+		<li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')));?></li>
+	<?php 
+	endforeach;?>
+	</ul>
+	<?php 
+	endif;?>
+</div>
+<?php
+$skus = array();
+$names = array();
+$qtys = array();
+$amountsExcludingZero = array();
+foreach($this->getTrackingItems() as $item){
+	$skus[] = $item['sku'];
+	$names[] = rawurlencode($item['name']);
+	$qtys[] = $item['qty'] * 1;
+	$amountsExcludingZero[] = round($item['amount'], 2) * 100;
+}
+$skusPipe = implode("|", $skus);
+$namesPipe = implode("|", $names);
+$qtysPipe = implode("|", $qtys);
+$amountsPipe = implode("|", $amountsExcludingZero);
+//$purchasedSku	=	implode("','", $skus);			//	Purchase event for FB Remarketing
+
+// start pay mode updation in sales_flat_order table
+try{
+	if(isset($_SESSION['pay_mode'])){
+		if(trim($_SESSION['pay_mode'])!=''){
+			$payMode = trim($_SESSION['pay_mode']);
+		}
+		else{
+			$payMode = '';
+		}
+		
+		//$payModeUpdate = Mage::getBlockSingleton('checkout/cart')->updateOrderPayMode($orderId, $payMode);
+		
+		if($order && $orderId){
+			$order->setPayMode($payMode);
+			$order->save();
+		}
+		
+		if($_SESSION['pay_mode'] != 'FULL'){
+			if(isset($_SESSION['emi_profile_id_info'])){
+				if($_SESSION['emi_profile_id_info']!=''){
+					$comment = $_SESSION['pay_mode'].' '.$_SESSION['emi_profile_id_info'];
+					if($order && $orderId){
+						$order->addStatusHistoryComment($comment);
+						$order->save();
+					}
+					//$emiInfoHistoryUpdate = Mage::getBlockSingleton('checkout/cart')->addEasyPayHistoryWithOrder($orderId, $comment);
+				}
+				unset($_SESSION['emi_profile_id_info']);
+			}
+		}
+		unset($_SESSION['pay_mode']);
+	}
+}
+catch(Exception $e){
+	Mage::log('Easy Pay Status Update: '.$acturl, null, 'easy_pay.log');
+}
+// end pay mode updation in sales_flat_order table
+
+/* Start linkshare */
+if (isset($_COOKIE['siteID'])){
+	$siteIdCookie = $_COOKIE['siteID'];	 
+	/*linkshare vars*/
+	$discountAmount = round(abs($this->getBaseDiscountAmount()),2);
+	if($discountAmount > 0){
+		$skusPipe .= '|Discount';
+		$namesPipe .= '|Discount';
+		$qtysPipe .= '|0';
+		$amountsPipe .= '|-'.($discountAmount  * 100);
+	}?>
+	<img src="https://track.linksynergy.com/ep?mid=35520&ord=<?php echo $orderId; ?>&skulist=<?php echo $skusPipe ?>&qlist=<?php echo $qtysPipe ?>&amtlist=<?php echo $amountsPipe ?>&cur=USD&namelist=<?php echo $namesPipe ?>" border="0" width="1" height="1">
+<?php
+	setcookie('siteID','',time()-3600);
+}
+/* End linkshare */
+
+/* Start ShareASale tracking code */ ?>
+<?php if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shareasale'): ?>
+	<img src="https://shareasale.com/sale.cfm?tracking=<?php echo $orderId ?>&amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>&transtype=sale&merchantID=34037" width="1" height="1" />
+<?php endif; ?>
+<?php /* End ShareASale tracking code */
+
+//Start New Tracking scripts start - 10-11-2011. Shopping.com: Start ROI Script?>
+<script type="text/javascript">
+var _roi = _roi || [];
+
+<?php // Step 1: add base order details?>
+_roi.push(['_setMerchantId', '477936']); // required
+_roi.push(['_setOrderId', '<?php echo $orderId ?>']); // unique customer order ID
+_roi.push(['_setOrderAmount', '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>']); // order total without tax and shipping
+_roi.push(['_setOrderNotes', '']); // notes on order, up to 50 characters
+
+<?php // Step 2: add every item in the order
+// where your e-commerce engine loops through each item in the cart and prints out _addItem for each
+// please note that the order of the values must be followed to ensure reporting accuracy
+foreach ($this->getTrackingItems() as $item) { ?>
+	_roi.push(['_addItem',
+		'<?php echo $item['sku']; ?>', // Merchant sku
+		'<?php echo $item['name']; ?>', // Product name
+		'', // Category id
+		'', // Category name
+		'<?php echo $item['amount']; ?>', // Unit price
+		'<?php echo $item['qty']; ?>' // Item quantity
+	]);
+<?php
+}
+
+// Step 3: submit transaction to ECN ROI tracker?>
+_roi.push(['_trackTrans']);
+</script>
+<script type="text/javascript" src="https://stat.dealtime.com/ROI/ROI2.js"></script>
+<?php //Shopping.com: End ROI Script
+
+//S Pronto.com:?>
+<script language="Javascript">
+var merchant_account_id='68799';
+var m_order_id = '<?php echo $orderId ?>';
+var m_order_value = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>';
+var m_category_name = '';
+var m_product_id = '';
+var m_product_name = '';
+var m_price = '';
+var m_quantity = '';
+</script>
+<script language="Javascript" src="https://merchant.pronto.com/js/roi.js"></script>
+<?php
+//E Pronto.com
+ 
+//S Become.com:?>
+<script type="text/javascript" language="javascript" src="https://partner.become.com/roi-tracker2/conversion.js"></script> 
+<noscript>
+	<img src="https://partner.become.com/roi-tracker2/t.gif?merchantid=FB03A5511A8ABA22&order_id=<?php echo $orderId; ?>&order_value=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>" style="display:none;border:0;"/>
+</noscript>
+</script>
+<?php //E Become.com:
+
+//MyShopping.com.au Code for Purchase Conversion Page ?>
+<img height=0 width=0  src="https://www.myshopping.com.au/sale.asp?mid=22806767&amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>&order=<?php echo $orderId ?>">
+
+
+<?php //S ShopZilla.com:?>
+<script language="javascript">
+<?php /* Performance Tracking Data */?>
+	var mid            = '150815';
+	var cust_type      = '';
+	var order_value    = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+	var order_id       = '<?php echo $orderId ?>';
+	var units_ordered  = '';
+</script>
+<script language="javascript" src="https://www.shopzilla.com/css/roi_tracker.js"></script>
+
+<?php //NexTag.com:?>
+<script type="text/javascript">
+<?php /* NexTag ROI Optimizer Data */?>
+    var id = '4196092';
+    var rev = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+    var order = '<?php echo $orderId ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<?php //End New Tracking scripts start - 10-11-2011?>
+
+<?php //Start New Tracking scripts start - 01-02-2012?>
+<script type="text/javascript">
+<?php /* NexTag ROI Optimizer Data */?>
+    var id = '5079551';
+    var rev = '<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>';
+    var order = '<?php echo $orderId ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<?php //End New Tracking scripts start - 01-02-2012?>
+
+<?php //Start New Tracking scripts for Google Adwords - 12-04-2016. 
+//Google Code for Purchase|SA Conversion Page ?> 
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_conversion_language = "en";
+	var google_conversion_format = "2";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "bS06COOaiQQQ-ZLp-wM";
+	var google_conversion_value = <?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>;
+	var google_conversion_currency = "USD";
+	var google_remarketing_only = false;
+	/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1064978809/?value=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>&amp;currency_code=USD&amp;label=bS06COOaiQQQ-ZLp-wM&amp;guid=ON&amp;script=0"/>	
+	</div>
+</noscript>
+<?php //End New Tracking scripts for Google Adwords - 12-04-2016. ?>
+
+<?php // S: New Tracking scripts for Google Adwords- Diamond ?>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 858907089;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "2C2QCMym_m4Q0cPHmQM";
+var google_conversion_value = <?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>;
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline;">		
+		<?php // S: New Tracking scripts for Google Adwords- Diamond ?>
+		<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/858907089/?value=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2) ?>&amp;currency_code=USD&amp;label=2C2QCMym_m4Q0cPHmQM&amp;guid=ON&amp;script=0"/>
+		<?php // E: New Tracking scripts for Google Adwords- Diamond ?>
+	</div>
+</noscript>
+<?php // E: New Tracking scripts for Google Adwords- Diamond ?>
+
+<?php //Start New Tracking scripts for Bing start - 11-06-2012 Replace on 28042015?>
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4021092"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+<?php //Start New Tracking scripts for Bing End - 11-06-2012 Replace on 28042015
+
+//Start New Survey Popup scripts - 03-08-2012
+if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shopping'): ?>
+	<script type="text/javascript" language="JavaScript" src="https://www.shopping.com/xMSJ?pt=js&mid=477936&lid=1"></script>
+<?php 
+elseif(Mage::getModel('core/cookie')->get('ShareReferal') == 'nextag'): ?>
+	<link rel="stylesheet" href="https://merchants.nextag.com/serv/main/buyer/dhtmlpopup/dhtmlwindow.css" type="text/css" />
+	<script type="text/javascript">
+		var seller_id = 4196092;
+		var order = '<?php echo $orderId ?>';
+		var prods = '<?php echo $skusPipe ?>';
+		document.write('<'+ 'script type="text/javascript" src="https://merchants.nextag.com/seller/review/popup_include.js"><\/script>'); 
+	</script>
+<?php 
+else: // default popup ?>	
+	<?php //Start Bizrate POS Code ?> 
+	<script language="JavaScript"> 
+		<?php // var passin_x =''; //comment out to default center or adjust horizontal position by pixel 
+		// var passin_y =''; //comment out to default center or adjust vertical position by pixel ?>
+		var orderId='<?php echo $orderId; ?>'; 
+		<?php // var z_index =''; //default 1,000,000 ?>
+		var cartTotal='<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>'; 
+		<?php // var billingZipCode=''; 
+		// Pass up to 5 products from customer shopping cart ?>
+		var productsPurchased= '';		
+		<?php //'URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE='; ?>
+	</script> 
+	<script type="text/javascript" src="//eval.bizrate.com/js/pos_150815.js"></script> 
+	<?php //End Bizrate POS Code 
+endif; ?>
+<?php Mage::getModel('core/cookie')->delete('ShareReferal');
+//End New Survey Popup scripts - 03-08-2012
+
+// Annex code start ?>
+<script src="https://c.socialannex.com/c-sale-track/?site_id=1343431&order_id=<?php echo $orderId ?>&sale_amount=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>"></script>
+<script type="text/javascript"> var sa_page='3';(function() {function sa_async_load() { var sa = document.createElement('script');sa.type = 'text/javascript';sa.async = true;sa.src = '//cdn.socialannex.com/partner/1343431/universal.js';var sax = document.getElementsByTagName('script')[0];sax.parentNode.insertBefore(sa, sax); }if (window.attachEvent) {window.attachEvent('onload', sa_async_load);}else {window.addEventListener('load', sa_async_load,false);}})();</script>
+<?php //Annex code end 
+
+// BEGIN COMMISSION JUNCTION TRACKING CODE ?>
+<?php	
+$iCounter = 1;
+$cjItems = '';
+foreach ($this->getTrackingItems() as $item){
+	$cjItems .= '&ITEM'.$iCounter.'='.$item['sku'].'&AMT'.$iCounter.'='.$item['amount'].'&QTY'.$iCounter.'='.round($item['qty']);
+	$iCounter++;
+} ?>
+<iframe height="1" width="1" frameborder="0" scrolling="no" src="https://www.emjcd.com/tags/c?containerTagId=2057<?php echo $cjItems; ?>&CID=1525432&OID=<?php echo $orderId; ?>&TYPE=356648&CURRENCY=USD&DISCOUNT=<?php echo abs($this->getBaseDiscountAmount()); ?>" name="cj_conversion" ></iframe>
+<?php //END COMMISSION JUNCTION TRACKING CODE 
+
+// Start mediaforge Script ?>
+<script type="text/javascript" src="https://tags.mediaforge.com/js/1009/?orderNumber=<?php echo $orderId; ?>&price=<?php echo round($this->getBaseSubtotal() + $this->getBaseDiscountAmount(), 2); ?>"></script>
+<?php //End mediaforge Script  
+
+//S PinInterest Conversion Tracking Code
+if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'onepagecheckout' && $this->getRequest()->getActionName() == 'success'){?>
+	<img height="1" width="1" alt="" src="https://ct.pinterest.com/?tid=M494VRgD8iE"/>
+<?php 
+} //E PinInterest Conversion Tracking Code?>

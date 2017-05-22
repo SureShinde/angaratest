@@ -1,0 +1,21 @@
+<?php
+/* @var $this Mage_Core_Block_Template */
+/* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
+$catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl();?>" method="get">
+    <div class="form-search">
+        <div class="has-feedback min-padding-bottom">            
+            <input id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName();?>" placeholder="What can we help you find?" value="<?php if(Mage::app()->getRequest()->getParam('showdeal') != 'true') echo $catalogSearchHelper->getEscapedQueryText();?>" class="input-text form-control box-shadow-none" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" style="-webkit-appearance:none;">  
+            <input type="hidden" name="dir" value="asc" />          
+            <button type="submit" title="<?php echo $this->__('Search');?>" class="search fa fa-search"></button>
+            <button type="submit" title="<?php echo $this->__('Close');?>" class="close fa fa-times" id="close-serarch"></button>
+        </div>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+        //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
+            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl();?>', 'search_autocomplete');
+        //]]>
+        </script>
+    </div>
+</form>

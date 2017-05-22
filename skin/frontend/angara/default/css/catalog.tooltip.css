@@ -1,0 +1,248 @@
+.prototip {
+	font-size: 11px;
+	color: #000;
+}
+.prototip .default {
+	width: 250px;
+	color: #808080;
+}
+.prototip .default .toolbar {
+	background: #f1f1f1;
+	font-weight: bold;
+}
+.prototip .default .title {
+	padding: 5px;
+}
+.prototip .default .content {
+	padding: 5px;
+	background: #fff;
+	background: url(../images/boxbg.jpg) repeat-x;
+}
+.prototipLoader {
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	height: 14px;
+	width: 14px;
+	border: 1px solid #ddd;
+	overflow: hidden;
+}
+.prototip {
+	position: absolute;
+	overflow: hidden;
+}
+.prototip .tooltip, .prototip .toolbar, .prototip .toolbar .title {
+	position: relative;
+}
+.prototip .content {
+	clear: both;
+}
+.prototip .toolbar .close {
+	position: relative;
+	text-decoration: none;
+	float: right;
+	width: 19px;
+	height: 15px;
+	display: block;
+	line-height: 0;
+	font-size: 0;
+	border: 0;
+	cursor: pointer;
+}
+.prototip .tooltip {
+	height: 230px;
+	clear: both;
+	float: left;
+}
+.prototip .borderLeftWrapper, .prototip .borderRightWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 20px;
+}
+.prototip .borderFrame {
+	height: 100%;
+	width: 100%;
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+.prototip .borderTop, .prototip .borderBottom {
+	overflow: hidden;
+}
+.prototip .borderRow {
+	list-style-type: none;
+	float: left;
+	width: 100%;
+	position: relative;
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+.prototip_CornerWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	clear: both;
+}
+.prototip_Corner {
+	float: left;
+	position: relative;
+}
+.prototip canvas {
+	position: relative;
+	float: left;
+}
+.prototip_CornerTr, .prototip_CornerBr {
+	float: right;
+}
+.prototip_BetweenCorners {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+}
+.prototip .borderMiddle {
+	position: relative;
+	float: left;
+}
+.prototip .borderCenter {
+	position: relative;
+	float: left;
+	height: 100%;
+}
+.prototip_StemWrapper {
+	position: relative;
+	width: 100%;
+	height: auto;
+	clear: both;
+}
+.prototip_StemBox {
+	float: left;
+	position: relative;
+}
+.prototip_Stem {
+	width: 100%;
+	position: absolute;
+	overflow: hidden;
+}
+.iframeShim {
+	position: absolute;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background: none;
+	overflow: hidden;
+}
+.prototip .clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.prototip .clearfix {
+	display: inline-block;
+}
+/* IE Mac Hide \*/ .prototip .clearfix {
+	display: block;
+}
+/* IE Mac Hide End */ @media screen and(-webkit-min-device-pixel-ratio:0) {
+div.chat-wrap {
+height:61%!important;
+}
+}
+.search-tip {
+	padding: 9px;
+	height: 202px;
+}
+.search-tip .tip-pic {
+	width: 182px;
+	float: left;
+}
+.search-tip .tip-pic a {
+	text-decoration: none!important;
+}
+.search-tip .tip-pic a span {
+	display: block;
+	margin: 0;
+	text-align: left!important;
+	font-size: 14px;
+	text-decoration: none!important;
+	color: #581616;
+	position: absolute;
+	top: 199px;
+}
+.search-tip .tip-pic a span b {
+	color: #A30000;
+	font-size: 18px;
+	padding: 0 0 0 15px;
+}
+.search-results .grid-row.mini li a span:hover, .search-tip .tip-pic a span:hover {
+	text-decoration: none!important;
+}
+.search-tip .tip-pic a img {
+	float: left;
+	border: 1px solid #bbb;
+	width: 180px;
+	height: 180px;
+}
+.search-tip .tip-content {
+	display: block;
+	float: left;
+	padding-left: 17px;
+	margin-left: 17px;
+	width: 200px;
+	position: relative;
+	left: 0;
+	height: 202px;
+	background: url(../images/proboxdivider.jpg) no-repeat;
+}
+.tip-left .tip-content {
+	padding-right: 17px;
+	margin-right: 17px;
+	width: 200px;
+	position: relative;
+	left: 0;
+	height: 202px;
+	background: url(../images/proboxdivider.jpg) right no-repeat;
+	padding-left: 0;
+	margin-left: 0;
+}
+.search-tip .tip-pic a span span {
+	margin-left: 1px!important;
+}
+h5 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #581616;
+}
+h5 a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #581616;
+	text-decoration: none;
+}
+h5 a:hover {
+	text-decoration: underline;
+}
+.search-tip .links {
+	padding-top: 15px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #581616;
+}
+.search-tip .links a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #581616;
+	text-decoration: underline;
+}

@@ -1,0 +1,61 @@
+<form name="feedbackFrm" id="feedbackFrm" action="" method="post">
+    <div class="input-box">
+		<label>Email<span>*</span><label>
+		<input type="email" value="" maxlength="255" name="email" placeholder="Email" class="required-entry validate-email">
+    </div>
+	<div class="input-box">
+		<label>Contact Number<label>
+		<input type="text" value="" maxlength="15" name="contact_number" placeholder="Contact Number">
+    </div>
+	<div class="input-box">
+		<label>Category <label>
+		<?php $categories	=	$this->getFeedbackCategories();?>
+		<select name="category_id">
+			<?php if(count($categories)){
+				foreach($categories as $key => $value){?>
+					<option value="<?php echo $key;?>"><?php echo $value;?></option>
+			<?php }
+				} ?>
+		</select>
+    </div>
+	<div class="input-box">
+		<label>Message<span>*</span><label>
+		<textarea name="message" maxlength="16380" class="required-entry"></textarea>
+    </div>
+	<div class="input-box relative-placeholder">
+		<input type="submit" value="Submit">
+		<div class="progress-ind text-center absolute-placeholder hidden">
+			<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	var customForm = new VarienForm('feedbackFrm');
+	jQuery('#feedbackFrm').on('submit', function(e) {
+		e.preventDefault();
+		if(customForm.validator.validate()) {
+			jQuery('.progress-ind').removeClass('hidden');
+			var url =  '<?php echo Mage::getBaseUrl();?>feedback/index/ajaxPost';
+			var dataString = jQuery(this).serialize();
+			jQuery.ajax({
+				type: 'POST',
+				url: url,
+				data: dataString
+			})
+			.done(function(result,textStatus){
+				if(textStatus == 'success'){          
+					jQuery("#ajaxData").html('<span class="loading">'+result+'</span>');
+					jQuery('#show_feedback').addClass('thanks');
+					jQuery('.feedback').css('z-index','2');
+					jQuery('.progress-ind').addClass('hidden');
+				}
+			})
+			.fail(function(){         
+				// just in case posting your form failed
+				//alert( "Posting failed." );             
+			});			 
+			// to prevent refreshing the whole page page
+			return false;
+		}
+	});	
+</script>

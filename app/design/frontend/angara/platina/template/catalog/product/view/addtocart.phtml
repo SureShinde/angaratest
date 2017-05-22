@@ -1,0 +1,21 @@
+<?php 
+$_product = $this->getProduct(); 
+
+if($_product->isSaleable()): ?>
+	<!-- S: User selection details -->
+	<div id="user-selection-details" class="prodetails"></div>
+	<div id="user-selection-addons" class="prodetails"></div>
+	<!-- E: User selection details -->
+					
+	<div id="addcart" class="addcart">
+		<div style='display:none;'>
+		<?php 
+		if(!$_product->isGrouped()): ?>
+			<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+		<?php 
+		endif; ?>
+		</div>
+		<input type="submit"  name="addToCartSubmit" value="ADD TO CART" class="add-to-cart">
+	</div>
+<?php 
+endif; ?>

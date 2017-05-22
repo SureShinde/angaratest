@@ -1,0 +1,539 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<style type="text/css">
+#onepage-header-steps {
+    border-bottom: 1px solid #C9B988;
+    height: 44px;
+    margin-bottom: 10px;
+}
+.onepage-header-step {
+    color: #A79356;
+    float: right;
+    font-size: 14px;
+    height: 16px;
+    padding: 8px 10px 20px;
+}
+.header-step-active {
+    background: url("/skin/frontend/angara/default/images/arrow-u.jpg") no-repeat scroll center bottom transparent;
+    font-weight: bold;
+}
+.page-title {
+    border-bottom: 0 none;
+}
+</style>
+<div id="engagementbodyhome">
+<div class="page-title">
+    <h1>Express Checkout</h1>
+    <div id="onepage-header">
+    	<div id="onepage-header-steps">
+            <div class="onepage-header-step header-step-active" id="onepage-header-step-receipt">Order Receipt</div>
+            <div class="onepage-header-step" id="onepage-header-step-billing">Billing &amp; Shipping</div>
+            <div class="onepage-header-step" id="onepage-header-step-login">Account Login</div>
+        </div>
+    </div>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<!-- SOCIAL ANNEX Tracking Code-->
+<div class="socialannex" style="display:none;"></div>
+<br /><br />
+<!-- SOCIAL ANNEX Tracking Code-->
+
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?>.</p>
+<?php endif;?>
+	<?php
+	$l_order_id = Mage::getSingleton('checkout/session')->getLastOrderId();
+	$order_data = Mage::getModel('sales/order')->load($l_order_id);
+	$billing_email_add = $order_data->getBillingAddress()->getEmail();	
+	?>
+    <p><?php echo $this->__('An email confirmation has been sent to <b>'.$billing_email_add.'</b>. If the email is not found in your inbox, please check your bulk/junk mail folder.') ?></p>
+    <p></p>
+<?php if ($this->getViewOrder() && $this->getCanPrintOrder()) :?>
+    <p>
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+<?php
+$order_id = Mage::getSingleton('checkout/session')->getLastOrderId();
+$order = Mage::getModel('sales/order')->load($order_id);
+$_totalData = $order->getData();
+
+// start pay mode updation in sales_flat_order table
+if(isset($_SESSION['pay_mode'])){
+	if(trim($_SESSION['pay_mode'])!=''){
+		$pay_mode = trim($_SESSION['pay_mode']);
+	}else{
+		$pay_mode = '';
+	}
+	$pay_mode_update = Mage::getBlockSingleton('checkout/cart')->updateOrderPayMode($_totalData['increment_id'],$pay_mode);
+	if($_SESSION['pay_mode'] != 'FULL'){
+		if(isset($_SESSION['emi_profile_id_info'])){
+			if($_SESSION['emi_profile_id_info']!=''){
+				$comment = '';
+				$comment = $_SESSION['pay_mode'].' '.$_SESSION['emi_profile_id_info'];
+				$emi_info_history_update = Mage::getBlockSingleton('checkout/cart')->addEasyPayHistoryWithOrder($order_id, $comment);
+			}
+			unset($_SESSION['emi_profile_id_info']);
+		}
+	}
+	unset($_SESSION['pay_mode']);
+}
+// end pay mode updation in sales_flat_order table
+
+$customer_orderid = $_totalData['increment_id'];
+
+	$skus = array();
+	$qtys = array();
+	$amounts = array();
+	
+	$base_discount_amount_orginal = $_totalData['base_discount_amount'];
+	 
+	foreach ($order->getAllVisibleItems() as $item) {
+	    // start easy pay		
+		$quote_item_id = $item->getQuoteItemId();
+		$no_of_inst = Mage::getBlockSingleton('checkout/cart')->getNoOfInstallmentByQuoteItemId($quote_item_id);
+		$newRowTotal = round(($item->getPrice() / $no_of_inst),2);		
+		$_totalData['base_discount_amount'] = round(($_totalData['base_discount_amount'] / $no_of_inst),2);
+		// end easy pay
+		$skus[$item->getProductId()] = $item->getSku();
+		//$skuslinkshare[$item->getProductId()] = $item->getProduct()->_data['sku'];
+		$names[$item->getProductId()] = rawurlencode($item->getName());
+		$qtys[$item->getProductId()] = $item->getQtyOrdered() * 1;	
+		$amounts[$item->getProductId()] = round($newRowTotal,2) * 100;	
+	}
+// 	linkshare
+if (isset($_COOKIE['siteID'])){
+	$siteIdCookie = $_COOKIE['siteID'];	 
+	/*linkshare vars*/
+	
+	 
+	//$order_id = $_totalData['increment_id'];
+	 
+	$skuspipe = implode("|", $skus);
+	$namespipe = implode("|", $names);
+	$qtyspipe = implode("|", $qtys);
+	$amountspipe = implode("|", $amounts);
+	
+	$tot_order_discount_amt = round(abs($_totalData['base_discount_amount']),2);
+	if($tot_order_discount_amt > 0){
+		$skuspipe = $skuspipe.'|Discount';
+		$namespipe = $namespipe.'|Discount';
+		$qtyspipe = $qtyspipe.'|0';
+		$amountspipe = $amountspipe.'|-'.($tot_order_discount_amt * 100);
+	}
+?>
+<img src="https://track.linksynergy.com/ep?mid=35520&ord=<?php echo $customer_orderid ?>&skulist=<?php echo $skuspipe ?>&qlist=<?php echo $qtyspipe ?>&amtlist=<?php echo $amountspipe ?>&cur=USD&namelist=<?php echo $namespipe ?>" border="0" width="1" height="1">
+
+<?php
+	setcookie('siteID','',time()-3600);
+}//close of isset Cookie if condition 
+?>
+
+<?php //Start ShareASale tracking code ?>
+
+<?php 
+$order_grant_total_amt = round($_totalData['base_grand_total'],2);
+$order_discount_amt = round(abs($base_discount_amount_orginal),2);
+$subtotal_amt = round($_totalData['base_subtotal'],2);
+$diff_order_amt = $subtotal_amt - $order_discount_amt;
+$order_total_amt = round($diff_order_amt,2); 
+?>
+<?php
+
+if(Mage::getModel('core/cookie')->get('ShareReferal')){
+	if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shareasale'){
+	?>
+		<img src="https://shareasale.com/sale.cfm?tracking=<?php echo $customer_orderid ?>&amount=<?php echo $order_total_amt ?>&transtype=sale&merchantID=34037" width="1" height="1" />
+	<?php
+	}
+}	
+?>
+<?php //End ShareASale tracking code ?>
+
+<?php /*?><!-- BEGIN: BizRate Survey Invitation HTML -->
+<!--<script language="javascript" src="https://eval.bizrate.com/js/pos_150815.js" type="text/javascript"></script>-->
+<!-- END: BizRate Survey Invitation HTML --><?php */?>
+
+<div class="buttons-set">
+    <button type="button" class="red-stylish-btn button successbtnlast" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+</div>
+<!--Start New Tracking scripts start - 10-11-2011-->
+<!--Shopping.com: Start ROI Script-->
+<script type="text/javascript">
+var _roi = _roi || [];
+
+// Step 1: add base order details
+
+_roi.push(['_setMerchantId', '477936']); // required
+_roi.push(['_setOrderId', '<?php echo $customer_orderid ?>']); // unique customer order ID
+_roi.push(['_setOrderAmount', '<?php echo $order_total_amt ?>']); // order total without tax and shipping
+_roi.push(['_setOrderNotes', '']); // notes on order, up to 50 characters
+
+// Step 2: add every item in the order
+// where your e-commerce engine loops through each item in the cart and prints out _addItem for each
+// please note that the order of the values must be followed to ensure reporting accuracy
+
+<?php
+foreach ($order->getAllItems() as $item) 
+{
+	?>
+	_roi.push(['_addItem',
+		'<?php echo $item->getSku(); ?>', // Merchant sku
+		'<?php echo $item->getName(); ?>', // Product name
+		'', // Category id
+		'', // Category name
+		'<?php echo $item->getPrice(); ?>', // Unit price
+		'<?php echo $item->getQtyOrdered(); ?>' // Item quantity
+	]);
+	<?php
+}
+?>
+// Step 3: submit transaction to ECN ROI tracker
+
+_roi.push(['_trackTrans']);
+</script>
+<script type="text/javascript" src="https://stat.dealtime.com/ROI/ROI2.js"></script> 
+<!--Shopping.com: End ROI Script-->
+
+<!--Pronto.com:-->
+<script language="Javascript">
+var merchant_account_id='68799';
+var m_order_id = '<?php echo $customer_orderid ?>';
+var m_order_value = '<?php echo $order_total_amt ?>';
+var m_category_name = '';
+var m_product_id = '';
+var m_product_name = '';
+var m_price = '';
+var m_quantity = '';
+</script>
+<script language="Javascript" src="https://merchant.pronto.com/js/roi.js"></script>
+
+<!--Become.com:-->
+<script type="text/javascript"> 
+var become_merchant_id = 'FB03A5511A8ABA22'; 
+var become_order_num = '<?php echo $customer_orderid ?>'; 
+var become_purchased_items = new Array(); 
+// adding cart items FOR EACH PURCHASED ITEM... 
+// add cart item 
+var become_item = new Object(); 
+become_item.productid = ''; 
+become_item.category = ''; 
+become_item.price = ''; 
+become_item.quantity = 1; 
+become_purchased_items.push(become_item); 
+//NEXT PURCHASED ITEM 
+//become_item = new Object(); 
+//become_item.productid = 'PRODUCT_ID'; 
+//become_item.category ='CATEGORY'; 
+//become_item.price = 'PRICE'; 
+//become_item.quantity = 1; 
+//become_purchased_items.push(become_item); 
+</script> 
+
+<!-- Google Code for Remarketing Tag -->
+<?
+foreach ($order->getAllVisibleItems() as $item) {
+	$skus[$item->getProductId()] = "'".$item->getSku()."'";
+	$amounts[$item->getProductId()] = round($item->getPrice(),2) * 100;	
+}
+$skuspipe = implode(",", $skus);
+$amountspipe = implode(",", $amounts);
+?>
+<script type="text/javascript">
+	var google_tag_params = {
+	ecomm_prodid: [<?php echo $skuspipe; ?>],
+	ecomm_pagetype: 'purchase',
+	ecomm_totalvalue: [<?php echo $amountspipe; ?>]
+	};
+</script>
+<!-- Google Code for Remarketing Tag -->
+
+<script type="text/javascript" language="javascript" src="https://partner.become.com/roi-tracker2/conversion.js"></script> 
+<noscript>
+	<img src="https://partner.become.com/roi-tracker2/t.gif?merchantid=FB03A5511A8ABA22&order_id=<?php echo $customer_orderid ?>&order_value=<?php echo $order_total_amt ?>" style="display:none;border:0;"/>
+</noscript>
+<!--PriceGrabber.com:-->
+
+<?php	//	Showing banner 1 to 50% user and banner 2 rest 50% user
+$promotion	=	1;						//	Show Bizrate
+if ($this->getOrderId()){
+	$orderId	=	$this->getOrderId();
+	//echo 'orderId->'.$orderId;
+	
+	$modRandom	=	($orderId % 2);		// This will divide users in 50 50 ratio
+	//echo 'modRandom->'.$modRandom;
+	if($modRandom=='0'){
+		$promotion	=	0;				//	Show PriceGrabber
+	}
+}
+
+/*$todayDate	=	Mage::getModel('core/date')->date('Y-m-d');
+$promotionStartDate	=	'2014-04-15';
+$promotionEndDate	=	'2014-04-20';*/
+//if($todayDate>=$promotionStartDate && $todayDate<=$promotionEndDate){
+if($promotion==0){	?>
+	<!-- PriceGrabber Merchant Evaluation Code -->
+	<script type="text/javascript" charset="UTF-8" src="https://www.pricegrabber.com/rating_merchrevpopjs.php?retid=18605"></script> [^]
+    <noscript><a href="http://www.pricegrabber.com/rating_merchrev.php?retid=18605" [^] target=_blank>
+    <img src="https://images.pricegrabber.com/images/mr_noprize.jpg" [^] border="0" width="272" height="238" alt="Merchant Evaluation"></a></noscript>
+	<!-- End PriceGrabber Code -->
+<?php } 	//	end if	?>
+<?php // Comment: Item Detail Tracking (This Integration will allow us to provide the merchant with detailed product sales reporting) ?>
+<?php
+$param_string = '';
+$itemnum = 1;
+foreach ($order->getAllItems() as $item) 
+{
+	$itemname = 'item'.$itemnum;
+	$sku = $item->getSku();
+	$itemPrice = $item->getPrice();		
+	$qty = $item->getQtyOrdered();
+	$param_string.='&'.$itemname.'=Angara|'.$sku.'|'.$itemPrice.'|'.$sku.'|'.$customer_orderid.'|'.$qty;
+	$itemnum++;
+}
+echo '<img src="https://www.pricegrabber.com/conversion.php?retid=18605'.$param_string.'">';
+?>
+<?php // comment: [ a=Manufacturer, b=Manufacturer Part Number, c=Retailer Price, d=Internal Merchant SKU, e=UPC, f=Quantity ] ?>
+
+
+<!--MyShopping.com.au:-->
+<!--MyShopping.com.au Code for Purchase Conversion Page -->
+
+<img height=0 width=0  src="https://www.myshopping.com.au/sale.asp?mid=22806767&amount=<?php echo $order_total_amt ?>&order=<?php echo $customer_orderid ?>">
+<!--ShopZilla.com:-->
+<script language="javascript">
+<!--
+	/* Performance Tracking Data */
+	var mid            = '150815';
+	var cust_type      = '';
+	var order_value    = '<?php echo $order_total_amt ?>';
+	var order_id       = '<?php echo $customer_orderid ?>';
+	var units_ordered  = '';
+//-->
+</script>
+<script language="javascript" src="https://www.shopzilla.com/css/roi_tracker.js"></script>
+
+<!--NexTag.com:-->
+<script type="text/javascript">
+<!--
+    /* NexTag ROI Optimizer Data */
+    var id = '4196092';
+    var rev = '<?php echo $order_total_amt ?>';
+    var order = '<?php echo $customer_orderid ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+//-->
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<!--End New Tracking scripts start - 10-11-2011-->
+
+<!--Start New Tracking scripts start - 01-02-2012-->
+<script type="text/javascript">
+<!--
+    /* NexTag ROI Optimizer Data */
+    var id = '5079551';
+    var rev = '<?php echo $order_total_amt ?>';
+    var order = '<?php echo $customer_orderid ?>';
+    var cats = '';
+    var prods = '';
+    var units = '';
+//-->
+</script>
+<script type="text/javascript" src="https://imgsrv.nextag.com/imagefiles/includes/roitrack.js"></script>
+<!--End New Tracking scripts start - 01-02-2012-->
+
+<!--Start New Tracking scripts for Google Adwords start - 24-05-2012-->
+<!-- Google Code for Purchase|SA Conversion Page --> 
+<script type="text/javascript">
+	/* <![CDATA[ */
+		var google_conversion_id = 1064978809;
+		var google_conversion_language = "en";
+		var google_conversion_format = "2";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "bS06COOaiQQQ-ZLp-wM"; var google_conversion_value = 0;
+	/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" 
+		src="https://www.googleadservices.com/pagead/conversion/1064978809/?value=0&amp;label=bS06COOaiQQQ-ZLp-wM&amp;guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+<!--End New Tracking scripts for Google Adwords start - 24-05-2012-->
+
+<!--Start New Tracking scripts for Bing start - 11-06-2012-->
+<script type="text/javascript"> 
+	if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};
+</script> 
+<script id="mstag_tops" type="text/javascript" src="//flex.atdmt.com/mstag/site/ad1df72e-f88f-4480-b485-e22a26e3b073/mstag.js"></script> 
+<script type="text/javascript"> 
+	mstag.loadTag("analytics", {dedup:"1",domainId:"210948",type:"1",actionid:"61344"})
+</script> 
+<noscript>
+	<iframe src="//flex.atdmt.com/mstag/tag/ad1df72e-f88f-4480-b485-e22a26e3b073/analytics.html?dedup=1&domainId=210948&type=1&actionid=61344" 
+	frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> 
+</noscript>
+<!--Start New Tracking scripts for Bing End - 11-06-2012-->
+
+<!--Start New Tracking scripts for Adroll End - 08-08-2012-->
+<script type="text/javascript">
+	adroll_conversion_value_in_dollars = '<?php echo $order_total_amt ?>';
+	adroll_custom_data = {"ORDER_ID": '<?php echo $customer_orderid ?>', 'USER_ID':'<?php echo $billing_email_add; ?>'};
+</script>
+<!--End New Tracking scripts for Adroll End - 08-08-2012-->
+
+<!--Start New Survey Popup scripts - 03-08-2012-->
+<?php
+if(Mage::getModel('core/cookie')->get('ShareReferal')){
+	if(Mage::getModel('core/cookie')->get('ShareReferal') == 'shopping')
+	{
+	?>
+		<script type="text/javascript" language="JavaScript" src="https://www.shopping.com/xMSJ?pt=js&mid=477936&lid=1"></script>
+	<?php	
+	}else if(Mage::getModel('core/cookie')->get('ShareReferal') == 'nextag'){
+	?>
+		<link rel="stylesheet" href="https://merchants.nextag.com/serv/main/buyer/dhtmlpopup/dhtmlwindow.css" type="text/css" />
+		<script type="text/javascript">
+			var seller_id = 4196092;
+			var order = '<?php echo $customer_orderid ?>';
+			var prods = '<?php echo $skuspipe ?>';
+			//popup_left and popup_top default to the center of browser window if commented
+			//var popup_left=50;
+			//var popup_top=50;
+			//var popup_width=345; // default 345
+			//var popup_height=205; // default 205
+			//var popup_resize=0; // default 0
+			document.write('<'+ 'script type="text/javascript" src="https://merchants.nextag.com/seller/review/popup_include.js"><\/script>'); 
+		</script>
+	<?php
+	}else if(Mage::getModel('core/cookie')->get('ShareReferal') == 'pricegrabber'){
+	?>
+		<script type="text/javascript"><!--
+			// Adjust the values of popup_pos_x, popup_pos_y to change the location of the popup layer on your confirmation page
+			popup_pos_x=50;
+			popup_pos_y=50;
+			// fill in the order number below
+			popup_order_number = '<?php echo $customer_orderid ?>';
+			// fill in the email address below
+			popup_email = '<?php echo $billing_email_add; ?>';
+			//-->
+		</script>
+		<!-- PriceGrabber Merchant Evaluation Code -->
+		<script type="text/javascript" charset="UTF-8" src="https://www.pricegrabber.com/rating_merchrevpopjs.php?retid=18605"></script>
+		<noscript><a href="http://www.pricegrabber.com/rating_merchrev.php?retid=18605" target=_blank>
+		<img src="https://images.pricegrabber.com/images/mr_noprize.jpg" border="0" width="272" height="238" alt="Merchant Evaluation"></a></noscript>
+		<!-- End PriceGrabber Code -->
+	<?php
+	}else{
+		// default popup
+		if($promotion==1){
+	?>	
+		<!-- Start Bizrate POS Code --> 
+		<script language="JavaScript"> 
+			// var passin_x =''; //comment out to default center or adjust horizontal position by pixel 
+			// var passin_y =''; //comment out to default center or adjust vertical position by pixel 
+			var orderId='<?php echo $customer_orderid ?>'; 
+			// var z_index =''; //default 1,000,000 
+			var cartTotal='<?php echo $order_total_amt ?>'; 
+			// var billingZipCode=''; 
+			// Pass up to 5 products from customer shopping cart 
+			var productsPurchased= '';//'URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE='; 
+		</script> 
+		<script type="text/javascript" src="//eval.bizrate.com/js/pos_150815.js"></script> 
+		<!-- End Bizrate POS Code -->
+	<?php }	//	end if
+	}
+	Mage::getModel('core/cookie')->delete('ShareReferal');
+}else{
+	// default popup
+	if($promotion==1){
+	?>
+	<!-- Start Bizrate POS Code --> 
+	<script language="JavaScript"> 
+		// var passin_x =''; //comment out to default center or adjust horizontal position by pixel 
+		// var passin_y =''; //comment out to default center or adjust vertical position by pixel 
+		var orderId='<?php echo $customer_orderid ?>'; 
+		// var z_index =''; //default 1,000,000 
+		var cartTotal='<?php echo $order_total_amt ?>'; 
+		// var billingZipCode=''; 
+		// Pass up to 5 products from customer shopping cart 
+		var productsPurchased= '';//'URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE=|URL=^SKU=^GTIN=^PRICE='; 
+	</script> 
+	<script type="text/javascript" src="//eval.bizrate.com/js/pos_150815.js"></script> 
+	<!-- End Bizrate POS Code -->
+	<?php	}	//	end if
+}
+?>
+<!--End New Survey Popup scripts - 03-08-2012-->
+
+<!-- Annex code start -->
+<script src="https://c.socialannex.com/c-sale-track/?site_id=1343431&order_id=<?php echo $customer_orderid ?>&sale_amount=<?php echo $order_total_amt ?>"></script>
+<script type="text/javascript"> var sa_page='3';(function() {function sa_async_load() { var sa = document.createElement('script');sa.type = 'text/javascript';sa.async = true;sa.src = '//cdn.socialannex.com/partner/1343431/universal.js';var sax = document.getElementsByTagName('script')[0];sax.parentNode.insertBefore(sa, sax); }if (window.attachEvent) {window.attachEvent('onload', sa_async_load);}else {window.addEventListener('load', sa_async_load,false);}})();</script>
+<!-- Annex code end -->
+
+<!-- BEGIN COMMISSION JUNCTION TRACKING CODE -->
+<?php	
+$itemnumber = 1;
+$cj_items = '';
+foreach($skus as $key => $sku){
+	$cj_items .= '&ITEM'.$itemnumber.'='.$sku.'&AMT'.$itemnumber.'='.($amounts[$key]/100).'&QTY'.$itemnumber.'='.$qtys[$key];
+	$itemnumber++;
+}
+
+?>
+<iframe height="1" width="1" frameborder="0" scrolling="no" src="https://www.emjcd.com/tags/c?containerTagId=2057<?php echo $cj_items; ?>&CID=1525432&OID=<?php echo $customer_orderid; ?>&TYPE=356648&CURRENCY=USD&DISCOUNT=<?php echo abs($_totalData['base_discount_amount']); ?>" name="cj_conversion" ></iframe>
+<!-- END COMMISSION JUNCTION TRACKING CODE -->
+
+<!-- Start mediaforge Script -->
+<script type="text/javascript" src="https://tags.mediaforge.com/js/1009/?orderNumber=<?php echo $customer_orderid; ?>&price=<?php echo $order_total_amt; ?>"></script>
+<!-- End mediaforge Script -->

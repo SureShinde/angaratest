@@ -1,0 +1,692 @@
+.wrapperstuds
+{
+width:922px;
+margin:0 auto;
+padding:18px;
+border:solid 1px #d3d3d3;
+background:url(../images/diamondstuds/topbg.jpg) top repeat-x;
+}
+
+.clr
+{
+clear:both;
+}
+
+a, img
+{
+border:none;
+outline:none;
+}
+
+.appheading
+{
+padding:0;
+margin:0;
+height:85px;
+font:22px Arial, Helvetica, sans-serif, Tahoma;
+color:#000;
+}
+
+.appheading span
+{
+font:normal 12px Arial, Helvetica, sans-serif, Tahoma;
+padding-top:8px;
+display:block;
+}
+
+.studsstep1
+{
+width:239px;
+float:left;
+}
+
+
+.stepheading
+{
+height:38px;
+background-color:#f7fdd2;
+padding:12px 12px 0 12px;
+font:18px Arial, Helvetica, sans-serif, Tahoma;
+margin-bottom:13px;
+}
+
+.topgap
+{
+margin-bottom:25px;
+}
+
+
+
+.stepheading span.tagline
+{
+padding-left:5px;
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+}
+
+.stepheading span.metaltype
+{
+padding-left:5px;
+}
+
+.stepheading span.metaltype .selection
+{
+height:20px;
+width:121px;
+font:12px Arial, Helvetica, sans-serif, Tahoma;
+}
+
+.diamondtype
+{
+width:80px;
+float:left;
+background:url(../images/diamondstuds/step1divider.jpg) right no-repeat;
+height:125px;
+padding-right:20px;
+}
+
+.heading2
+{
+padding:7px 0;
+color:#4B2A23;
+font:18px Arial, Helvetica, sans-serif;
+text-align:center;
+}
+
+.diamond-img-type
+{
+width:80px;
+text-align:center;
+
+
+}
+
+.bgnone
+{
+background-image:none;
+width:95px;
+margin-left:20px;
+}
+
+.studsstep2
+{
+width:657px;
+margin-left:26px;
+float:left;
+}
+
+.step2heading
+{
+margin-left:27px;
+width:157px;
+text-align:center;
+height:31px;
+background-color:#edf1d1;
+font:bold 14px/31px Arial, Helvetica, sans-serif;
+}
+
+.selectstyle
+{
+width:auto;
+float:left;
+border:solid 1px #dee993;
+height:86px;
+
+}
+
+
+/*  4 prong white gold  */
+.studstype1
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+.studstype1 a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/r4pwg.jpg) no-repeat;
+display:block;
+}
+
+.studstype1 a:hover
+{
+background:url(../images/diamondstuds/r4pwgho.jpg) no-repeat;
+}
+
+/*  4 prong white gold  */
+
+/*  7-stone white gold  */
+.studstype4
+{
+width:164px;
+height:86px;
+float:left;
+background:url(../images/diamondstuds/step2devider.jpg) left no-repeat;
+}
+
+.studstype4 a
+{
+margin-left:1px;
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/rsevenswg.jpg) no-repeat;
+display:block;
+}
+
+.studstype4 a:hover
+{
+background:url(../images/diamondstuds/rsevenswgho.jpg) no-repeat;
+}
+#ds_ddl_metal
+{
+margin-left:30px;
+}
+/*  7-stone white gold  */
+
+
+/*  4 prong yellow gold  */
+
+.studstypeY1
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+
+.studstypeY1 a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/r4pyg.jpg) no-repeat;
+display:block;
+}
+
+.studstypeY1 a:hover
+{
+background:url(../images/diamondstuds/r4pygho.jpg) no-repeat;
+}
+
+/*  4 prong yellow gold  */
+
+
+/*  4 prong Platimun  */
+
+.studstypeP1
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+.studstypeP1 a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/r4pwg.jpg) no-repeat;
+display:block;
+}
+
+.studstypeP1 a:hover
+{
+background:url(../images/diamondstuds/r4pwgho.jpg) no-repeat;
+}
+
+/*  4 prong Platimun  */
+
+/* martini white gold */
+
+.studstype2
+{
+width:164px;
+height:86px;
+float:left;
+background:url(../images/diamondstuds/step2devider.jpg) left no-repeat;
+}
+
+.studstype2 a
+{
+margin-left:1px;
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/rmiwg.jpg) no-repeat;
+display:block;
+}
+
+.studstype2 a:hover
+{
+background:url(../images/diamondstuds/rmiwgho.jpg) no-repeat;
+}
+
+/* martini white gold */
+
+/* martini yellow gold */
+
+.studstypeY2
+{
+width:164px;
+height:86px;
+float:left;
+background:url(../images/diamondstuds/step2devider.jpg) left no-repeat;
+}
+
+.studstypeY2 a
+{
+margin-left:1px;
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/rmiyg.jpg) no-repeat;
+display:block;
+}
+
+.studstypeY2 a:hover
+{
+background:url(../images/diamondstuds/rmiygho.jpg) no-repeat;
+}
+
+/* martini yellow gold */
+
+
+
+/* martini Platinum */
+
+.studstypeP2
+{
+width:164px;
+height:86px;
+float:left;
+background:url(../images/diamondstuds/step2devider.jpg) left no-repeat;
+}
+
+.studstypeP2 a
+{
+margin-left:1px;
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/rmiwg.jpg) no-repeat;
+display:block;
+}
+
+.studstypeP2 a:hover
+{
+background:url(../images/diamondstuds/rmiwgho.jpg) no-repeat;
+}
+
+/* martini Platinum */
+
+
+
+
+/* magrita white gold */
+
+
+.studstype3
+{
+width:164px;
+height:86px;
+float:left;
+background:url(../images/diamondstuds/step2devider.jpg) left no-repeat;
+}
+
+.studstype3 a
+{
+margin-left:1px;
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/rmawg.jpg) no-repeat;
+display:block;
+}
+
+.studstype3 a:hover
+{
+background:url(../images/diamondstuds/rmawgho.jpg) no-repeat;
+}
+
+/* magrita white gold */
+
+
+/*  princess 4 prong white gold  */
+.studstype1p
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+.studstype1p a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/p4pwg.jpg) no-repeat;
+display:block;
+}
+
+.studstype1p a:hover
+{
+background:url(../images/diamondstuds/p4pwgho.jpg) no-repeat;
+}
+
+/*  4 prong white gold  */
+
+
+/*  4 prong yellow gold  */
+
+.studstypeY1p
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+
+.studstypeY1p a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/p4pyg.jpg) no-repeat;
+display:block;
+}
+
+.studstypeY1p a:hover
+{
+background:url(../images/diamondstuds/p4pygho.jpg) no-repeat;
+}
+
+/*  4 prong yellow gold  */
+
+
+/*  4 prong Platimun  */
+
+.studstypeP1p
+{
+width:163px;
+height:86px;
+float:left;
+}
+
+.studstypeP1p a
+{
+width:163px;
+height:86px;
+background:url(../images/diamondstuds/p4pp.jpg) no-repeat;
+display:block;
+}
+
+.studstypeP1p a:hover
+{
+background:url(../images/diamondstuds/p4ppho.jpg) no-repeat;
+}
+
+/*  4 prong Platimun  */
+
+
+.studsstep3
+{
+margin-top:20px;
+}
+
+.pricevariation
+{
+width:871px;
+margin-left:27px;
+min-height:500px;
+height:auto!important;
+height:500px;
+}
+
+.pricevariation4
+{
+width:871px;
+margin-left:27px;
+min-height:500px;
+height:auto!important;
+height:500px;
+}
+
+.pricevariation3
+{
+width:642px;
+margin-left:27px;
+}
+
+.pricevariation2
+{
+width:529px;
+margin-left:27px;
+}
+
+
+
+
+.oddrow
+{
+background-color:#f3f1f1;
+height:61px;
+margin-bottom:2px;
+}
+
+.evenrow
+{
+background-color:#f8f7f7;
+height:61px;
+margin-bottom:2px;
+}
+
+.sizeguide
+{
+width:303px;
+height:60px;
+padding-top:30px;
+float:left;
+position:relative;
+}
+
+.sizeguide a
+{
+padding-top:15px;
+font:18px Arial, Helvetica, sans-serif, Tahoma;
+text-decoration:underline;
+color:#000;
+}
+
+.sizeguide img
+{
+	position:absolute;
+	top:10px;
+	right:37px;
+}
+
+.diamonclarity
+{
+height:90px;
+margin-bottom:2px;
+}
+
+.clarity-img
+{
+width:142px;
+height:57px;
+text-align:center;
+
+}
+
+.diamondsize
+{
+background:url(../images/diamondstuds/dividerline.jpg) right repeat-y;
+width:93px;
+height:61px;
+float:left;
+display:block;
+}
+.diamondsize img
+{
+text-align:left;
+width:92px;
+height:61px;
+}
+
+.diamondweight
+{
+background:url(../images/diamondstuds/dividerline.jpg) right repeat-y;
+width:210px;
+height:41px;
+padding-top:20px;
+float:left;
+font:18px Arial, Helvetica, sans-serif, Tahoma;
+text-align:center;
+color:#000;
+display:block;
+}
+
+.diamondrate
+{
+background:url(../images/diamondstuds/dividerline.jpg) right repeat-y;
+width:142px;
+height:61px;
+float:left;
+}
+
+.diamondrate a
+{
+width:141px;
+height:42px;
+padding-top:20px;
+font:18px Arial, Helvetica, sans-serif, Tahoma;
+text-decoration:none;
+color:#000;
+display:block;
+text-align:center;
+}
+
+
+.diamondrate a:hover
+{
+
+background-color:#dedede;
+}
+
+.diamondratelast a:hover
+{
+background-color:#dedede;
+}
+
+
+.diamondrate a img
+{
+margin-right:5px;
+padding-top:6px;
+}
+
+
+
+.diamondratelast
+{
+width:142px;
+height:61px;
+float:left;
+display:block;
+}
+
+
+.diamondratelast a
+{
+width:142px;
+height:42px;
+padding-top:20px;
+font:18px Arial, Helvetica, sans-serif, Tahoma;
+text-decoration:none;
+color:#000;
+display:block;
+float:left;
+}
+
+.diamondratelast a img
+{
+margin-left:27px;
+margin-right:5px;
+}
+
+.clarity-txt
+{
+width:142px;
+font:11px Arial, Helvetica, sans-serif;
+text-align:center;
+}
+.adj-nav-progress{
+    width:100%;
+    height:100%;
+    background-color:#FFFFFF;
+    z-index:500;
+    opacity: 0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.adj-nav-progress img{
+	left:315px;
+	top:100px;
+	display:block;
+	position:absolute;
+}
+
+
+
+.a_size
+{
+	width:60px;
+}
+.butt-bg {		
+	background-color:#e4ecb2;		
+	text-align:center;
+	padding:6px 0;
+}
+
+.a_wrapper {
+	width:393px;
+	height:428px;
+	margin:0 auto;
+	background-color:#f7fdd2;
+}
+.weight {
+	font-size: 16px;
+	display:inline-block;
+	margin: 0px 2px;
+	text-align: center;
+	color:#000;
+}
+.weight span {
+	display:inline-block;
+	vertical-align:bottom;
+	cursor:pointer;
+}
+	.weight input{
+	vertical-align:top;
+	cursor:pointer;
+	}
+.heading {
+	font:18px Arial, Helvetica, sans-serif;
+	color:#000;
+	height:20px;
+	text-align:center;
+	display:block;	
+	padding:6px 0;
+}
+.heading1 {
+	font:12px Arial, Helvetica, sans-serif;
+	color:#000;
+	text-align:center;
+	display:block;
+	padding:6px 0;	
+}
+.img-box {		
+	display:block;
+	text-align:center;
+}
+
+.redio-butt {
+	padding-top:4px;
+}

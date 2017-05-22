@@ -1,0 +1,2162 @@
+<style>
+.stonecontent {
+	margin-top:16px;
+	font:11px Arial, Helvetica, sans-serif;
+	float:left;
+	width:212px;
+}
+.stonecontent a {
+	color:#000;
+	text-decoration:underline;
+	cursor:pointer;
+}
+</style>
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View 
+ */
+?>
+<?php
+  $cumbs= $this->getLayout()->getBlock('breadcrumbs'); $cumbs=$cumbs->_crumbs; $count_cumbs =  count($cumbs);
+  if($cumbs && is_array($cumbs)) {
+  $i=1;$tracCategory;
+   foreach($cumbs as $_crumbName=>$_crumbInfo){
+	  if($_crumbInfo['link']){
+		if($i!=$count_cumbs-1){$i = $i+1; } else {$tracCategory= $_crumbInfo['label'] ; $i = $i+1;}
+	  }
+   }
+  } 
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $cids = $_product->getCategoryIds();?>
+<script type="text/javascript">
+	var cursku = '<?php echo $_product->getSku();?>';
+	var curid = '<?php echo $_product->getId();?>';
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	if(optionsPrice.priceFormat) {
+		var currencySign = optionsPrice.priceFormat.pattern;
+		currencySign = currencySign.substring(0, currencySign.indexOf('%'));
+	}	
+</script>
+<style type="text/css">
+.simple-shadow-box {
+	position:absolute;
+	z-index:9001;
+	display:none;
+	background:#000000;
+	top:0
+}
+#email-share-box {
+	position:absolute;
+	z-index:9005;
+	display:none;
+	top:100px
+}
+#close_1 {
+	text-decoration:none;
+	color:#999
+}
+#close_1:hover {
+	text-decoration:underline
+}
+.chaintxt {
+	width:350px;
+	font:11px Arial, Helvetica, sans-serif;
+	text-align:center;
+	position:absolute;
+	bottom:5px;
+	left:0;
+	z-index:99;
+}
+.freeringsizer {
+	display:block;
+	font:11px Arial, Helvetica, sans-serif;
+	text-align:right;
+	padding:5px 9px 8px 0;
+}
+.freeringsizer a {
+	text-decoration:underline;
+	color:#000;
+}
+/*Start Request Shipping Label by Pankaj regarding bug id:774*/
+.ui-dialog .ui-dialog-content{
+	padding:0px;
+	padding-top:3px;	
+}
+/*End Request Shipping Label by Pankaj regarding bug id:774*/
+</style>
+
+<!--start tracking for number of clicks by user-->
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('.add-to-cart').click(function(){		
+		track('<?php echo Mage::getBaseUrl().'rnd/cartclick/tracker.php?uid='.Mage::getSingleton("core/session")->getEncryptedSessionId(); ?>' , function(){});		
+	});
+});
+function track(url, callback) {  
+        var xhr;  
+          
+        if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();  
+        else {  
+            var versions = ["MSXML2.XmlHttp.5.0",   
+                            "MSXML2.XmlHttp.4.0",  
+                            "MSXML2.XmlHttp.3.0",   
+                            "MSXML2.XmlHttp.2.0",  
+                            "Microsoft.XmlHttp"]  
+  
+             for(var i = 0, len = versions.length; i < len; i++) {  
+                try {  
+                    xhr = new ActiveXObject(versions[i]);  
+                    break;  
+                }  
+                catch(e){}  
+             } // end for  
+        }  
+          
+        xhr.onreadystatechange = ensureReadiness;  
+          
+        function ensureReadiness() {  
+            if(xhr.readyState < 4) {  
+                return;  
+            }  
+              
+            if(xhr.status !== 200) {  
+                return;  
+            }  
+  
+            // all is well    
+            if(xhr.readyState === 4) {  
+                callback(xhr);  
+            }             
+        }  
+          
+        xhr.open('GET', url, false);  
+        xhr.send('');  
+    } 
+</script>
+<!--End tracking for number of clicks by user-->
+
+<!--Start Request Shipping Label by Pankaj regarding bug id:774-->
+<script type="text/javascript">
+	jQuery(function(){
+		
+		jQuery("#requestlabel-dialog").dialog({
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",			
+			width:450,
+			zIndex:11000,
+			resizable:false,
+   			draggable:false,
+			minHeight:390
+		});
+		 
+		jQuery("#returnshipping-dialog-opener").click(function() {
+			jQuery('#resultsuccess').hide();
+			jQuery('#formrequestlabel').each (function(){  
+				this.reset();
+			});
+            jQuery('#formrequestlabel').show();
+			jQuery("#requestlabel-dialog").dialog("open");
+			if(jQuery("#requestlabel-dialog").data('loaded')!== 'true'){
+				jQuery("#requestlabel-dialog").load('/popup/index/openreturnshippinglabel',function(){					
+					dataForm = new VarienForm('formrequestlabel', true);
+					dataForm.validator.options.onFormValidate = function (result, form){}
+					jQuery('#formrequestlabel').submit(function(){
+						return submitReturnShippingLabel();
+					});
+				}); 
+				jQuery("#requestlabel-dialog").data('loaded','true'); 
+			}
+			return false;
+		 });
+	});
+	
+	function submitReturnShippingLabel(){
+		if(dataForm.validator.validate()===true){
+			jQuery('#LoadingImage').show();
+			jQuery.post('/popup/index/requestreturnshippinglabel',jQuery('#formrequestlabel').serialize(),function(res){	
+				jQuery('#LoadingImage').hide();			
+				jQuery('#resultsuccess').html(res);
+				jQuery('#formrequestlabel').hide();
+                jQuery('#resultsuccess').show();
+			})
+			setTimeout(function(){
+				  jQuery('#requestlabel-dialog').dialog('close');                
+			}, 5000);
+            return false;
+		}
+		return false;
+	}
+</script>
+<!--End Request Shipping Label by Pankaj regarding bug id:774-->
+<script type="text/javascript">
+	jQuery(function(){
+		
+		jQuery('#your_message').keypress(function(e){
+			var limit = 2500;
+			var remainingChars = limit - jQuery(this).val().length;
+			jQuery('#msgCharsLeft').html('<font size="1" face="Verdana" color="#555555"><span>'+remainingChars+' characters remaining</span></font>')
+			if(remainingChars < 1){
+				e.preventDefault();
+				jQuery(this).val(jQuery(this).val().slice(0,limit)).focus();
+			}
+		})
+		
+		
+		jQuery('.qualitypopupbtn').click(function(){
+		    jQuery('.view-more-popup-btn').show();
+			jQuery('.view-more-popup').hide();
+			jQuery('#qualitypopup').show();
+			if(jQuery('#qualitypopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/quality.html',
+				success: function(matter){
+						jQuery('#qualitypopup').html(matter);
+						jQuery('#qualitypopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})
+						
+						jQuery('.view-more-popup-btn').click(function(){
+							jQuery(this).parent().find('.view-more-popup').show();
+							jQuery(this).hide();
+						})
+					}
+				})
+			}
+		})
+		
+		
+		jQuery('.stonesizeround').click(function(){	
+			jQuery('#roundstonepopup').show();
+			if(jQuery('#roundstonepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/stonesize-round.html',
+				success: function(matter){
+						jQuery('#roundstonepopup').html(matter);
+						jQuery('#roundstonepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})
+		
+			
+		jQuery('.stonesize').click(function(){			
+			jQuery('#ovalstonepopup').show();
+			if(jQuery('#ovalstonepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/stonesize.html',
+				success: function(matter){
+						jQuery('#ovalstonepopup').html(matter);
+						jQuery('#ovalstonepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})
+		
+		
+		jQuery('.retailpricepopup').click(function(){			
+			jQuery('#retailpricepopup').show();
+			if(jQuery('#retailpricepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/retailprice.html',
+				success: function(matter){
+						jQuery('#retailpricepopup').html(matter);
+						jQuery('#retailpricepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})
+		
+		
+			jQuery('.internetjeweler').click(function(){			
+			jQuery('#internetjewelerpopup').show();
+			if(jQuery('#internetjewelerpopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/internetjeweler.html',
+				success: function(matter){
+						jQuery('#internetjewelerpopup').html(matter);
+						jQuery('#internetjewelerpopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})
+		
+			jQuery('.valuequality').click(function(){			
+			jQuery('#valuequalitypopup').show();
+			if(jQuery('#valuequalitypopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/valuequality.html',
+				success: function(matter){
+						jQuery('#valuequalitypopup').html(matter);
+						jQuery('#valuequalitypopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})
+		
+		
+		// open review tab when user clicks on .rating
+  jQuery('#show-review-btn').click(function(){
+   showDiveSection('product-review');
+  })
+		
+	})
+	
+</script>
+<form id='pdfform' action="<?php echo Mage::getBaseUrl();?>hprcv/Index/pdf" method="post" target="_blank">
+  <input id="cert_image" type="hidden" name="cert_image" value="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" />
+  <input id="cert_id" type="hidden" name="cert_id" value="<?php echo $_product->getId()?>" />
+  <input id="cert_quality" type="hidden" name="cert_quality" value="<?php echo ($_product->getEmbQualityGrade2())?$_product->getAttributeText('emb_quality_grade2'):'';  ?>" />
+  <input id="cert_metal" type="hidden" name="cert_metal" value="<?php echo ($_product->getMetal())?$_product->getAttributeText('metal'):''; ?>" />
+</form>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="wrapper">
+  <div style="position:relative;" >
+    <div id="overlayText"><?php echo $this->getChildHtml('upsell_products') ?></div>
+    <div style="clear:both;"></div>
+  </div>
+  <div class="wrappermain">
+    <div id="qualitypopup" class="popupboxnew"></div>
+    <div id="roundstonepopup" class="popupboxnew"></div>
+    <div id="ovalstonepopup" class="popupboxnew"></div>
+    <div id="retailpricepopup" class="popupboxnew"></div>
+    <div id="internetjewelerpopup" class="popupboxnew"></div>
+    <div id="valuequalitypopup" class="popupboxnew"></div>
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+      <div class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/>
+      </div>
+      <div class="ppmid">
+        <div id="mid-part-left">
+          <div id="wrapper" style="display: block; ">
+            <div id="fullsize"> <?php echo $this->getChildHtml('video') ?>
+              <div class="product-img-box">
+                <?php 
+				$chkpendant = stripos(strtolower($_product->getName()), 'pendant');
+				if ($chkpendant !== false) {
+				?>
+					<div class="chaintxt">(18 inch <span id="pendantmsg"><?php echo $_product->getAttributeText('metal1_type') ?></span> chain shipped FREE with pendant)</div>
+				<?php
+				}else{
+				?>
+					<div class="chaintxt" style="display:none;"><span id="pendantmsg"></span></div>
+				<?php }?>
+                <?php if($_product->getDiscountPrice() != ''):?>
+                <div class="sale-tag"></div>
+                <?php endif;?>
+                <?php echo $this->getChildHtml('media');  ?> </div>
+              <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+          </div>
+          	<?php /*?><div class="likeusbtn">
+            <?php				   
+				$pinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).$_product->getUrlPath();
+				$pinMediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). "catalog/product".$_product->getImage();							
+				$productTinyURLTweet = Mage::getModel('hprcv/hprcv')->getShortPageURL($pinUrl.'?utm_source=Twitter&utm_medium=Website&utm_campaign=SOCIAL');
+				$productTinyURLFacebook = Mage::getModel('hprcv/hprcv')->getShortPageURL($pinUrl.'?utm_source=Facebook&utm_medium=Website&utm_campaign=SOCIAL');
+				$tweetUrl = 'https://twitter.com/intent/tweet?url='.$productTinyURL;
+			?>
+                <span class="emailtofriend"> <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" title="Send to a Friend" alt="Send to a Friend"></a> </span> <span class="communiteebtntwetter"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="<?php echo $_product->getShortDescription(); ?>" data-url="<?php echo $productTinyURLTweet; ?>" data-lang="en" data-via="Angara.com" data-count="none" title="Tweet on Twitter">Tweet</a> 
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
+                </span> 
+                <!--Started Modified by Pankaj regarding bug id:447-->
+                <span class="communiteebtnpin" style="vertical-align:top;"><a href="/popup/index/productmedia/id/<?php echo $_product->getId(); ?>" class="iframe cboxElement pin-it-button" title="Pinit"><img border="0" src="http://assets.pinterest.com/images/PinExt.png" /></a></span> 
+                <!--Ended Modified by Pankaj regarding bug id:447-->           
+                <span class="communiteebtnfb">
+                <iframe src="//www.facebook.com/plugins/like.php?href=<?php echo $productTinyURLFacebook; ?>&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=198006716882309" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+                </span> <span class="opengrpah"><span id="sa-og" style="vertical-align:top"></span></span> 
+        	</div><?php */?>
+        </div>
+        <div id="mid-part-right">
+          <div id="detailsection">
+		  	<h1 id="newProdTitle"></h1>
+            <h2 id='producttitle_hp'></h2>
+            <div> <?php echo $this->getReviewsSummaryHtml($_product, false, true)?> </div>
+            <div class="spacing" style='display:none' id='spacing_hp'>
+              <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+              <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+              <?php endif;?>
+            </div>
+            <?php //HPRAHI CREATES OPTIONS PART ?>
+            <script>
+var arroptions = new Array();
+var index1 = 0;
+var index2 = 0;
+var curGNorLC = 'GN';
+var curmetaltype = '';
+var notpermittedtoaddtocart = 0;
+var sku_hp = '<?php echo $_product->getSku()?>';
+var default_metal_hp = '<?php if(!isset($_GET['MT'])){echo $_product->getAttributeText('metal1_type');}else{echo $_GET['MT'];}?>';
+var newProdTitle = '<?php echo $_product->getProductNameMothers() ?>';
+var producttitle_hp = '<?php echo $_product->getName() ?>';
+var defaultstonesize_hp = '<?php echo $_product->getGemstoneDimension() ?>';
+<?php
+foreach ($_product->getOptions() as $o) {
+	?>
+	index1 = arroptions.length;
+	arroptions[index1] = new Array();
+	arroptions[index1][arroptions[index1].length] = "<?php echo $o->getType();?>";
+	arroptions[index1][arroptions[index1].length] = "<?php echo $o->getTitle();?>";
+	<?php
+        $values = $o->getValues();
+	$ic =0;
+        foreach ($values as $v) {
+			//var_dump($v);
+		if($ic==0)
+		{
+ 	?>
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getOptionId();?>";
+	<?php
+			$ic = 1;
+		}
+	?>
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getOptionTypeId();?>";
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getSku();?>";
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getTitle();?>";
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getPrice();?>";
+	arroptions[index1][arroptions[index1].length] = "<?php echo $v->getSortOrder();?>";
+	<?php	
+                //var_dump($v->getData());
+        }
+    }
+	
+?>
+var optionid;
+function getoptionindex(name)
+{
+	var i_hp=-1;
+	for(i_hp=0; i_hp<arroptions.length;i_hp++)
+	{
+		if(arroptions[i_hp][1]==name)
+		{
+			return i_hp;
+		}
+	}
+	return -1;
+}
+function changeinoption(typ,val)
+{
+	if(typ=='Number of stones')
+	{
+		i_hp = getoptionindex(typ);
+		optionid = arroptions[i_hp][2];
+		for(i=3;i<arroptions[i_hp].length;i=i+5)
+		{
+			if(val == arroptions[i_hp][i])
+			{
+				var txt = arroptions[i_hp][parseInt(i) + 2];
+				i=1;
+				while(document.getElementById('GN-Stone' + i))
+				{
+					if(i<=txt)
+					{
+					document.getElementById('GN-Stone' + i + 'div').style.display = 'block';
+					document.getElementById('LC-Stone' + i + 'div').style.display = 'block';
+						if(document.getElementById(curGNorLC + '-Stone' + i).selectedIndex == 0)
+						{
+							selectdefaultstone(curGNorLC,i);
+						}
+					}
+					else
+					{
+					document.getElementById('GN-Stone' + i + 'div').style.display = 'none';
+					document.getElementById('LC-Stone' + i + 'div').style.display = 'none';
+					document.getElementById('GN-Stone' + i).selectedIndex = 0;
+					document.getElementById('LC-Stone' + i).selectedIndex = 0;
+					}
+					i++;
+				}
+			}
+		}
+		document.getElementById('select_' + optionid).value = val;
+		syncstonetype();
+	}
+	else if(typ == 'Metal Type')
+	{
+		mt_hp='';
+		document.getElementById('silver-metal').className = 'metaltype';
+		document.getElementById('yellow-metal').className = 'metaltype';
+		document.getElementById('white-metal').className = 'metaltype';
+		document.getElementById('rose-metal').className = 'metaltype';
+		document.getElementById('yellow-metal10k').className = 'metaltype';
+		document.getElementById('white-metal10k').className = 'metaltype';
+		document.getElementById('rose-metal10k').className = 'metaltype';
+		document.getElementById('platinum-metal').className = 'metaltype';
+		if(val=='SL')
+		{
+			document.getElementById('silver-metal').className = 'metaltype metaltype-selected';
+			mt_hp = "Silver";
+		}
+		else if(val == 'YG')
+		{
+			document.getElementById('yellow-metal').className = 'metaltype metaltype-selected';
+			mt_hp = "Yellow Gold";
+		}
+		else if(val == 'WG')
+		{
+			document.getElementById('white-metal').className = 'metaltype metaltype-selected';
+			mt_hp = "White Gold";
+		}
+		else if(val == 'RG')
+		{
+			document.getElementById('rose-metal').className = 'metaltype metaltype-selected';
+			mt_hp = "Rose Gold";
+		}
+		else if(val == 'YG10k')
+		{
+			document.getElementById('yellow-metal10k').className = 'metaltype metaltype-selected';
+			mt_hp = "10k Yellow Gold";
+		}
+		else if(val == 'WG10k')
+		{
+			document.getElementById('white-metal10k').className = 'metaltype metaltype-selected';
+			mt_hp = "10k White Gold";
+		}
+		else if(val == 'RG10k')
+		{
+			document.getElementById('rose-metal10k').className = 'metaltype metaltype-selected';
+			mt_hp = "10k Rose Gold";
+		}
+		
+		else if(val == 'PT')
+		{
+			document.getElementById('platinum-metal').className = 'metaltype metaltype-selected';
+			mt_hp = "Platinum";
+		}		
+		jQuery('#pendantmsg').html(mt_hp); // dynamic change free chain message
+		i_hp = getoptionindex(typ);
+		optionid = arroptions[i_hp][2];
+		for(i=3;i<arroptions[i_hp].length;i=i+5)
+		{
+			if(arroptions[i_hp][parseInt(i) + 2] == mt_hp)
+			{
+				document.getElementById('select_' + optionid).value = arroptions[i_hp][i];
+			}
+		}
+		curmetaltype = val;
+		document.getElementById('metalfield').innerHTML = metalshorttofull(curmetaltype);
+	}
+	else if(typ == 'GenOrLC')
+	{
+		if(curGNorLC == val)
+		{
+			return;
+		}
+		curGNorLC = val;
+		tp_hp='';
+		if(val == 'GN')
+		{
+			tp_hp = 'Genuine';
+			document.getElementById('qgattribute').innerHTML = 'AAA';
+			document.getElementById('GNDIV').className = "stonetype stonetype-selected";
+			document.getElementById('LCDIV').className = "stonetype";
+		}
+		else
+		{
+			tp_hp = 'Lab Created';
+			document.getElementById('qgattribute').innerHTML = 'Lab Created';
+			document.getElementById('GNDIV').className = "stonetype";
+			document.getElementById('LCDIV').className = "stonetype stonetype-selected";
+		}
+		i_hp = getoptionindex(typ);
+		optionid = arroptions[i_hp][2];
+		for(i=3;i<arroptions[i_hp].length;i=i+5)
+		{
+			if(arroptions[i_hp][parseInt(i) + 2] == tp_hp)
+			{
+				document.getElementById('select_' + optionid).value = arroptions[i_hp][i];
+			}
+		}
+		document.getElementById('LC-selectstonediv').style.display = 'none';
+		document.getElementById('GN-selectstonediv').style.display = 'none';
+		document.getElementById(val + '-selectstonediv').style.display = 'block';
+		switchstonetype(val);
+		syncstonetype();
+	}
+	else
+	{
+		syncstonetype();
+	}
+	document.getElementById('gemstonetypetext').innerHTML = arrgemstonetypetext[curGNorLC];
+	rebuildstoneshtml();
+	changeimage_hp();
+	changetitle_hp();
+	opConfig.reloadPrice();
+}
+function changetitle_hp()
+{
+	var gnlctext = "";
+	if(curGNorLC == "LC")
+	{
+		gnlctext = "Lab Created ";
+	}
+	var strmid = '';
+	var cnt = document.getElementById('noofstones').options[document.getElementById('noofstones').selectedIndex].text;
+	for(var i=1;i<=cnt;i++)
+	{
+		var st = document.getElementById(curGNorLC + '-Stone' + i);
+		var val = st.options[st.selectedIndex].text;
+		//strmid = strmid + defaultstonesize_hp + 'mm ' + val + ' ';
+		if(i < cnt)
+		{
+			strmid = strmid + gnlctext + val + ', ';
+		}
+		else
+		{
+			strmid = strmid + gnlctext + val + ' ';
+		}
+	}
+	
+	if(newProdTitle != ''){
+		var newProductstr = newProdTitle;
+		document.getElementById('newProdTitle').innerHTML = newProductstr;
+	}
+	else{
+		var otherProdstr = producttitle_hp + ' in ' + metalshorttofull(curmetaltype);
+		document.getElementById('newProdTitle').innerHTML = otherProdstr;
+	}
+	
+	var str = producttitle_hp + ' With ' + strmid + 'in ' + metalshorttofull(curmetaltype);
+	document.getElementById('producttitle_hp').innerHTML = str;
+	if(document.getElementById('producttitle2_hp')){
+		document.getElementById('producttitle2_hp').innerHTML = str;
+	}
+}
+function metalshorttofull(code)
+{
+	switch(code){
+		case "SL":
+		return "Silver";
+		case "PT":
+		return "Platinum";
+		case "YG":
+		return "14k Yellow Gold";
+		case "WG":
+		return "14k White Gold";
+		case "RG":
+		return "14k Rose Gold";
+		case "YG10k":
+		return "10k Yellow Gold";
+		case "WG10k":
+		return "10k White Gold";
+		case "RG10k":
+		return "10k Rose Gold";
+	}
+}
+function selectdefaultstone(GL,i)
+{
+	var cache_j = 0;
+	title_hp ='GN-Stone' + i;
+	i_hp = getoptionindex(title_hp);
+	if(i_hp != -1)
+	{
+		var optionid = arroptions[i_hp][2];
+		selectedvalue = 0;
+		for(j=3;j<arroptions[i_hp].length;j=j+5)
+		{
+			if(arroptions[i_hp][parseInt(j) + 4] == "0")
+			{
+				cache_j = j;
+				selectedvalue = arroptions[i_hp][j]; 
+			}
+		}
+		if(GL == 'GN')
+		{
+			document.getElementById('select_' + optionid).value = selectedvalue;
+			document.getElementById(GL + '-Stone' + i).value = selectedvalue;
+		}
+		else
+		{
+			title_hp ='LC-Stone' + i;
+			i_hp = getoptionindex(title_hp);
+			optionid = arroptions[i_hp][2];
+			selectedvalue = 0;
+			selectedvalue = arroptions[i_hp][cache_j]; 
+			document.getElementById('select_' + optionid).value = selectedvalue;
+			document.getElementById(GL + '-Stone' + i).value = selectedvalue;
+		}
+	}
+}
+function switchstonetype(val)
+{
+	var cnt = document.getElementById('noofstones').options[document.getElementById('noofstones').selectedIndex].text;
+	var f1 = '';
+	var f2 = '';
+	if(val == 'GN')
+	{
+		f1='GN';f2='LC';
+	}
+	else
+	{
+		f1='LC';f2='GN';
+	}
+	i = 1;
+	while(document.getElementById('GN-Stone' + i))
+	{
+		if(i <= cnt)
+		{
+			var txt = document.getElementById(f2 + '-Stone' + i).options[document.getElementById(f2 + '-Stone' + i).selectedIndex].text;
+			for(var k = 0;k<document.getElementById(f1 + '-Stone' + i).options.length;k++)
+			{
+				var txt2 = document.getElementById(f1 + '-Stone' + i).options[k].text;
+				if(txt == txt2)
+				{
+					document.getElementById(f1 + '-Stone' + i).selectedIndex = k;
+				}
+			}
+			document.getElementById(f2 + '-Stone' + i).selectedIndex = 0;
+		}
+		else
+		{
+			document.getElementById(f1 + '-Stone' + i).selectedIndex = 0;
+			document.getElementById(f2 + '-Stone' + i).selectedIndex = 0;
+		}
+		i++;
+	}
+}
+function syncstonetype()
+{
+	i = 1;
+	while(document.getElementById('GN-Stone' + i))
+	{
+		i_hp = getoptionindex('GN-Stone' + i);
+		optionid = arroptions[i_hp][2];
+		document.getElementById('select_' + optionid).value = document.getElementById('GN-Stone' + i).value;
+		i_hp = getoptionindex('LC-Stone' + i);
+		optionid = arroptions[i_hp][2];
+		document.getElementById('select_' + optionid).value = document.getElementById('LC-Stone' + i).value;
+		i++;
+	}
+}
+function changeimage_hp()
+{
+	
+	//jQuery('.product-img-box #sample-image-text').hide();
+	
+	notpermittedtoaddtocart = 0;
+	var cnt = document.getElementById('noofstones').options[document.getElementById('noofstones').selectedIndex].text;
+	var mt = getMetalcodeforimage();
+	var f1 = '';
+	document.getElementById('mainimage').src = '/media/catalog/product/images/mothers/' + sku_hp + '/' + cnt + '/' + sku_hp + '_' + mt + '.png';
+	for(i=1;i<=8;i++)
+	{
+		if(document.getElementById('stonecount' + i).style.display == 'block'){
+			document.getElementById('imgstonecount' + i).src = '/media/catalog/product/images/mothers/' + sku_hp + '/' + i + '/' + sku_hp + '_' + mt + '.png';
+			document.getElementById('imgstonecount' + i).style.height = '41px';
+			document.getElementById('imgstonecount' + i).style.width = '41px';		
+		}
+	}
+	smst = document.getElementById('smallstonediv');
+	smst.innerHTML = '';
+	if(document.getElementById('gnlc1').checked)
+	{
+		f1 = 'GN';
+	}
+	else
+	{
+		f1 = 'LC';
+	}
+	for(i=1;i<=cnt;i++)
+	{
+		sc = getSmallstonecodeforimage(f1,i);
+		if(sc)
+		{
+			var arrcords = new Array();
+			arrcords = getCords(cnt,i).split(',');
+			// start by hitesh to include lab created images			
+			var suffix = '';
+			if(f1 == 'LC') suffix = '_LC';
+			var sSrc = '/media/catalog/product/images/mothers/' + sku_hp + '/' + cnt + '/' + sku_hp + '_' + sc + '_' + i + suffix + '.png';
+			var str = "<img src='" + sSrc + "' style='position:absolute;left:" + arrcords[0] + "px;top:" + arrcords[1] + "px'>";
+			smst.innerHTML = smst.innerHTML + str;
+			// end hitesh
+			//old
+			/*var sSrc = '/media/catalog/product/images/mothers/' + sku_hp + '/' + cnt + '/' + sku_hp + '_' + sc + '_' + i + '.png';*/
+			//old end
+		}
+		else
+		{
+			notpermittedtoaddtocart = 1;
+		}
+	}
+}
+function checknotpermittedtoaddtocart()
+{
+	if(notpermittedtoaddtocart==1)
+	{
+		alert("Please Select all the stones first.");
+		return false;
+	}
+	return true;
+}
+function getCords(cnt,i)
+{
+	i_hp = getoptionindex('Coordinates');
+	optionid = arroptions[i_hp][2];
+	for(j=3;j<arroptions[i_hp].length;j=j+5)
+	{
+		var cords = arroptions[i_hp][parseInt(j) + 2];
+		if(cords.indexOf(cnt + '|') == 0)
+		{
+			var arrcords = new Array();
+			arrcords = cords.split('|');
+			return arrcords[i];
+		}
+	}
+}
+function getSmallstonecodeforimage(f1,i)
+{
+	var st = document.getElementById(f1 + '-Stone' + i);
+	var val = st.options[st.selectedIndex].text;
+
+	if(val == 'Alexandrite')
+	{
+		return 'AL';
+	}
+	else if(val == 'Amethyst')
+	{
+		return 'AM';
+	}
+	else if(val == 'Aquamarine')
+	{
+		return 'AQ';
+	}
+	else if(val == 'Citrine')
+	{
+		return 'CI';
+	}
+	else if(val == 'Diamond')
+	{
+		return 'DI';
+	}
+	else if(val == 'Emerald')
+	{
+		return 'EM';
+	}
+	else if(val == 'Garnet')
+	{
+		return 'GA';
+	}
+	else if(val == 'Peridot')
+	{
+		return 'PE';
+	}
+	else if(val == 'Pink Tourmaline')
+	{
+		return 'PT';
+	}
+	else if(val == 'Ruby')
+	{
+		return 'RU';
+	}
+	else if(val == 'Blue Sapphire')
+	{
+		return 'SA';
+	}
+	else if(val == 'Tanzanite')
+	{
+		return 'TA';
+	}
+}
+function getstonemonthno(val)
+{
+	if(val == 'Alexandrite')
+	{
+		return '6';
+	}
+	else if(val == 'Amethyst')
+	{
+		return '2';
+	}
+	else if(val == 'Aquamarine')
+	{
+		return '3';
+	}
+	else if(val == 'Citrine')
+	{
+		return '11';
+	}
+	else if(val == 'Diamond')
+	{
+		return '4';
+	}
+	else if(val == 'Emerald')
+	{
+		return '5';
+	}
+	else if(val == 'Garnet')
+	{
+		return '1';
+	}
+	else if(val == 'Peridot')
+	{
+		return '8';
+	}
+	else if(val == 'Pink Tourmaline')
+	{
+		return '10';
+	}
+	else if(val == 'Ruby')
+	{
+		return '7';
+	}
+	else if(val == 'Blue Sapphire')
+	{
+		return '9';
+	}
+	else if(val == 'Tanzanite')
+	{
+		return '12';
+	}
+}
+function getstonetextbymonth(val)
+{
+	if(val == '1')
+	{
+		return 'Garnet';
+	}
+	else if(val == '2')
+	{
+		return 'Amethyst';
+	}
+	else if(val == '3')
+	{
+		return 'Aquamarine';
+	}
+	else if(val == '4')
+	{
+		return 'Diamond';
+	}
+	else if(val == '5')
+	{
+		return 'Emerald';
+	}
+	else if(val == '6')
+	{
+		return 'Alexandrite';
+	}
+	else if(val == '7')
+	{
+		return 'Ruby';
+	}
+	else if(val == '8')
+	{
+		return 'Peridot';
+	}
+	else if(val == '9')
+	{
+		return 'Blue Sapphire';
+	}
+	else if(val == '10')
+	{
+		return 'Pink Tourmaline';
+	}
+	else if(val == '11')
+	{
+		return 'Citrine';
+	}
+	else if(val == '12')
+	{
+		return 'Tanzanite';
+	}
+}
+function getMetalcodeforimage()
+{
+	i_hp = getoptionindex('Metal Type');
+	optionid = arroptions[i_hp][2];
+	var txt = document.getElementById('select_' + optionid).options[document.getElementById('select_' + optionid).selectedIndex].text;
+	if(txt.indexOf('Platinum') > -1)
+	{
+		return 'WG';
+	}
+	else if(txt.indexOf('Rose Gold') > -1)
+	{
+		return 'RG';
+	}
+	else if(txt.indexOf('Silver') > -1)
+	{
+		return 'WG';
+	}
+	else if(txt.indexOf('White Gold') > -1)
+	{
+		return 'WG';
+	}
+	else if(txt.indexOf('Yellow Gold') > -1)
+	{
+		return 'YG';
+	}
+}
+function isIEcheck()
+{
+	browser = navigator.appName;
+	if(browser == 'Microsoft Internet Explorer')
+	{
+		return true;
+	}
+	return false;
+}
+var currentstonecount = 0;
+function changestonecount(i)
+{
+	var val = '';
+	for(var j=0;j<document.getElementById('noofstones').options.length;j++)
+	{
+		if(i == document.getElementById('noofstones').options[j].text)
+		{
+			val = document.getElementById('noofstones').options[j].value;
+		}
+	}
+	document.getElementById('noofstones').value = val;
+	changestonecountclass(i);
+	changeinoption('Number of stones',document.getElementById('noofstones').value);
+}
+function changestonecountclass(i)
+{
+	 //qualitytype qualitytype-selected
+	for(var j=minstonecount;j<=maxstonecount;j++)
+	{
+		document.getElementById('stonecount' + j).className = 'qualitytype';
+	}
+	document.getElementById('stonecount' + i).className = 'qualitytype qualitytype-selected';
+	currentstonecount = i;
+}
+
+/* Start Ring Sizer */
+
+	jQuery.fx.speeds._default = 100;
+	jQuery(function() {
+		jQuery( "#ringsizer-dialog" ).dialog({
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",			
+			width:400,
+			zIndex:11000,
+			dialogClass:'ringsizerwrapper',
+			minHeight:600
+		});
+
+		jQuery( "#ringsize-dialog-opener" ).click(function() {
+			jQuery( "#ringsizer-dialog" ).dialog( "open" );
+			
+			if(jQuery( "#ringsizer-dialog" ).data('loaded')!== 'true'){
+				jQuery( "#ringsizer-dialog" ).load('/popup/index/openringsizer');
+				jQuery( "#ringsizer-dialog" ).data('loaded','true');
+			}
+			
+			return false;
+		});
+	});
+
+/* End Ring Sizer */
+
+
+</script>
+            <style>
+hr{margin:10px 0}
+</style>
+            <div class='customheaddiv'>
+              <?php if( in_array(271, $cids)): ?>
+              <div style="position:relative; padding-top:11px; border-top:1px solid #D3D3D3; margin-top:2px;">
+                <div style='float:left;margin-top:0px !important' class="small-title ringsize">
+                  <label class="required">Ring Size: </label>
+                </div>
+                <div style="float:left;margin:-3px 0 0 3px" id='ringsizediv'></div>
+                <div class="clear"></div>
+                <!--Started Modified by Pankaj regarding bug id:642-->	
+                <span class="freeringsizer"><a id="ringsize-dialog-opener" href="#"><?php /*?>Get a FREE ring sizer shipped to your doorstep<?php */?></a></span>
+                <!--Ended Modified by Pankaj regarding bug id:642-->	
+                <div class="ringsizer" style="position:absolute; top:1px; right:4px;"><a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank">Ring Size Guide</a> <br />
+                  <span style="font-size:11px; color:#ff0000" >One time free resizing</span> </div>
+                <div id="ringsizer-dialog" title="Ring Sizer"></div>
+              </div>
+              <?php endif; ?>
+              <div style="padding-bottom:8px;border-bottom:1px solid #D3D3D3"></div>
+              <div class='noofstonediv'>
+                <div class="small-title"> Number of Gemstones: </div>
+                <div class="qualitybox">
+                  <div  class="qualitytype" style="display:none" id='stonecount1' onclick= 'changestonecount(1)'>
+                    <div><span class="qualitytype-image noofstone1"><img id="imgstonecount1" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Custom Birthstone" title="<?php echo $_product->getName();?> With Custom Birthstone" height="41" width="41" /></span></div>
+                    1 stone</div>
+                  <div  class="qualitytype" style="display:none" id='stonecount2' onclick= 'changestonecount(2)'>
+                    <div><span class="qualitytype-image noofstone2 "><img id="imgstonecount2" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Two Birthstones" title="<?php echo $_product->getName();?> With Two Birthstones" height="41" width="41" /></span></div>
+                    2 stones</div>
+                  <div  class="qualitytype" style="display:none" id='stonecount3' onclick= 'changestonecount(3)'>
+                    <div><span class="qualitytype-image noofstone3"><img id="imgstonecount3" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Three Birthstones" title="<?php echo $_product->getName();?> With Three Birthstones" height="41" width="41" /></span></div>
+                    3 stones</div>
+                  <div  class="qualitytype" style="display:none" id='stonecount4' onclick= 'changestonecount(4)'>
+                    <div><span class="qualitytype-image noofstone4"><img id="imgstonecount4" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Four Birthstones" title="<?php echo $_product->getName();?> With Four Birthstones" height="41" width="41" /></span></div>
+                    4 stones</div>
+                  <div class="qualitytype" style="display:none" id='stonecount5' onclick= 'changestonecount(5)'>
+                    <div><span class="qualitytype-image noofstone5"><img id="imgstonecount5" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Five Birthstones" title="<?php echo $_product->getName();?> With Five Birthstones" height="41" width="41" /></span></div>
+                    5 stones</div>
+                  <div class="qualitytype" style="display:none" id='stonecount6' onclick= 'changestonecount(6)'>
+                    <div><span class="qualitytype-image noofstone6"><img id="imgstonecount6" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Six Birthstones" title="<?php echo $_product->getName();?> With Six Birthstones" height="41" width="41" /></span></div>
+                    6 stones</div>
+                  <div class="qualitytype" style="display:none" id='stonecount7' onclick= 'changestonecount(7)'>
+                    <div><span class="qualitytype-image noofstone7"><img id="imgstonecount7" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Seven Birthstones" title="<?php echo $_product->getName();?> With Seven Birthstones" height="41" width="41" /></span></div>
+                    7 stones</div>
+                  <div class="qualitytype" style="display:none" id='stonecount8' onclick= 'changestonecount(8)'>
+                    <div><span class="qualitytype-image noofstone8"><img id="imgstonecount8" src="/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/ANGARA-place-holder.jpg" alt="<?php echo $_product->getName();?> With Eight Birthstones" title="<?php echo $_product->getName();?> With Eight Birthstones" height="41" width="41" /></span></div>
+                    8 stones</div>
+                  <div style="clear:both"></div>
+                </div>
+                <div class="stonediscription"> </div>
+                <div style="display:none">
+                  <select id='noofstones' onchange="changeinoption('Number of stones',this.value)">
+                  </select>
+                </div>
+              </div>
+              <div class="stypbox">
+                <div class="small-title">Stone Types:</div>
+                <div class="qualitybox">
+                  <div class="stonetype stonetype-selected" id="GNDIV" onclick="document.getElementById('gnlc1').click()">
+                    <div> <span>
+                      <div class="rediobtn">
+                        <input type="radio" id='gnlc1' checked='checked' name='gnlc' onclick="changeinoption('GenOrLC','GN')" />
+                      </div>
+                      <div class="txt">Genuine</div>
+                      </span> </div>
+                  </div>
+                  <div class="stonetype" id="LCDIV" onclick="document.getElementById('gnlc2').click()">
+                    <div> <span>
+                      <div class="rediobtn">
+                        <input type="radio" id='gnlc2'  name='gnlc' onclick="changeinoption('GenOrLC','LC')" />
+                      </div>
+                      <div class="txt">Lab Created</div>
+                      </span> </div>
+                  </div>
+                  <div style="clear:both"></div>
+                  <div id="gemstonetypetext"> </div>
+                </div>
+                <div class="stonediscription"> </div>
+              </div>
+              <!-- TABS -->
+              
+              <div class="stonemetalsection">
+                <div class="small-title">Select Stones &amp; Metal:</div>
+                <div class="stonestab activestone" id='stonestab1' style="display:none"><a href="javascript:changetab(1)">Stone 1</a></div>
+                <div class="stonestab" id='stonestab2' style="display:none"><a href="javascript:changetab(2)">Stone 2</a></div>
+                <div class="stonestab" id='stonestab3' style="display:none"><a href="javascript:changetab(3)">Stone 3</a></div>
+                <div class="stonestab" id='stonestab4' style="display:none"><a href="javascript:changetab(4)">Stone 4</a></div>
+                <div class="stonestab" id='stonestab5' style="display:none"><a href="javascript:changetab(5)">Stone 5</a></div>
+                <div class="stonestab" id='stonestab6' style="display:none"><a href="javascript:changetab(6)">Stone 6</a></div>
+                <div class="stonestab" id='stonestab7' style="display:none"><a href="javascript:changetab(7)">Stone 7</a></div>
+                <div class="stonestab" id='stonestab8' style="display:none"><a href="javascript:changetab(8)">Stone 8</a></div>
+                <div class="stonestab" id='metaltab'><a href="javascript:changetabtometal()">Metal</a></div>
+                <div class="clear"></div>
+                <div class="stonetabline"></div>
+                <div class="stoneslist" id='stoneslist' style='display:block'>
+                  <ul>
+                    <li><a id='stone1' href="javascript:changestone(1)"><img src="/skin/frontend/angara/mothers/images/january-garnet.jpg" alt="Garnet" title="Garnet" /></a>Jan</li>
+                    <li><a id='stone2' href="javascript:changestone(2)"><img src="/skin/frontend/angara/mothers/images/february-amethyst.jpg"  alt="Amethyst" title="Amethyst"/></a>Feb</li>
+                    <li><a id='stone3' href="javascript:changestone(3)"><img src="/skin/frontend/angara/mothers/images/march-aquamarine.jpg"  alt="Aquamarine" title="Aquamarine"/></a>Mar</li>
+                    <li><a id='stone4' href="javascript:changestone(4)"><img src="/skin/frontend/angara/mothers/images/april-diamond.jpg"  alt="Diamond" title="Diamond"/></a>Apr</li>
+                    <li><a id='stone5' href="javascript:changestone(5)"><img src="/skin/frontend/angara/mothers/images/may-emerald.jpg"  alt="Emerald" title="Emerald"/></a>May</li>
+                    <li><a id='stone6' href="javascript:changestone(6)"><img src="/skin/frontend/angara/mothers/images/june-alexandrite.jpg"  alt="Alexandrite" title="Alexandrite"/></a>Jun</li>
+                    <li><a id='stone7' href="javascript:changestone(7)"><img src="/skin/frontend/angara/mothers/images/july-ruby.jpg"  alt="Ruby" title="Ruby"/></a>Jul</li>
+                    <li><a id='stone8' href="javascript:changestone(8)"><img src="/skin/frontend/angara/mothers/images/august-peridot.jpg"  alt="Peridot" title="Peridot"/></a>Aug</li>
+                    <li><a id='stone9' href="javascript:changestone(9)"><img src="/skin/frontend/angara/mothers/images/september-sapphire.jpg"  alt="Sapphire" title="Sapphire"/></a>Sep</li>
+                    <li><a id='stone10' href="javascript:changestone(10)"><img src="/skin/frontend/angara/mothers/images/october-opal.jpg"  alt="Pink Tourmaline" title="Pink Tourmaline"/></a>Oct</li>
+                    <li><a id='stone11' href="javascript:changestone(11)"><img src="/skin/frontend/angara/mothers/images/november-topaz.jpg"  alt="Citrine" title="Citrine"/></a>Nov</li>
+                    <li><a id='stone12' href="javascript:changestone(12)"><img src="/skin/frontend/angara/mothers/images/december-turquoise.jpg"  alt="Tanzanite" title="Tanzanite"/></a>Dec</li>
+                  </ul>
+                </div>
+                <div class="metaltype" id='metallist' style='display:none'>
+                  <ul>
+                    <!-- metaltype-selected-->
+                    <li style="display:none"><span id="silver-metal" onclick="changeinoption('Metal Type','SL')"><img src="/skin/frontend/angara/mothers/images/silver.jpg"  alt="Silver" title="Silver"/></span>Silver</li>
+                    <li style="display:none"><span id="yellow-metal10k" onclick="changeinoption('Metal Type','YG10k')"><img src="/skin/frontend/angara/mothers/images/yellow-gold.jpg"  alt="10k Yellow Gold" title="10k Yellow Gold"/></span>10k Yellow Gold</li>
+                    <li style="display:none"><span id="white-metal10k" onclick="changeinoption('Metal Type','WG10k')"><img src="/skin/frontend/angara/mothers/images/white-gold.jpg"  alt="10k White Gold" title="10k White Gold"/></span>10k White Gold</li>
+                    <li style="display:none"><span id="rose-metal10k" onclick="changeinoption('Metal Type','RG10k')"><img src="/skin/frontend/angara/mothers/images/rose-gold.jpg"  alt="10k Rose Gold" title="10k Rose Gold"/></span>10k Rose Gold</li>
+                    <li style="display:none"><span id="yellow-metal" onclick="changeinoption('Metal Type','YG')"><img src="/skin/frontend/angara/mothers/images/yellow-gold.jpg"  alt="Yellow Gold" title="Yellow Gold"/></span>14k Yellow Gold</li>
+                    <li style="display:none"><span id="white-metal" onclick="changeinoption('Metal Type','WG')"><img src="/skin/frontend/angara/mothers/images/white-gold.jpg"  alt="White Gold" title="White Gold"/></span>14k White Gold</li>
+                    <li style="display:none"><span id="rose-metal" onclick="changeinoption('Metal Type','RG')"><img src="/skin/frontend/angara/mothers/images/rose-gold.jpg"  alt="Rose Gold" title="Rose Gold"/></span>14k Rose Gold</li>
+                    <li style="margin-right:0;display:none"><span id="platinum-metal" onclick="changeinoption('Metal Type','PT')"><img src="/skin/frontend/angara/mothers/images/platinum.jpg"  alt="Platinum" title="Platinum"/></span>Platinum</li>
+                  </ul>
+                  <div style="clear:both"></div>
+                </div>
+                <div class="stonecontent" id='stonecontent'><strong>Ruby:</strong> Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Yellow or White Gold - see what other jewelry she has to determine her preference. </div>
+                <div class="clear"></div>
+              </div>
+              <?php if ($_product->getDescription()): ?>
+              <div class="productdescription">
+                <div class="small-title">About This Design:</div>
+                <div class="discripmom"><?php echo $_product->getDescription() ?></div>
+              </div>
+              <?php endif ?>
+            </div>
+            <div class="Select Stones" style="display:none"> Select Stones
+              <div id='GN-selectstonediv'></div>
+              <div id='LC-selectstonediv' style='display:none'></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <script>
+var i_hp=0;
+var optionid;
+var html='';
+i_hp = getoptionindex('Ring Size');
+if(i_hp!=-1){
+optionid = arroptions[i_hp][2];
+html = document.getElementById('select_' + optionid).parentNode.innerHTML;
+document.getElementById('select_' + optionid).parentNode.innerHTML = '';
+document.getElementById('ringsizediv').innerHTML=html;	
+}
+i_hp = getoptionindex('Number of stones');
+optionid = arroptions[i_hp][2];
+var maxstonecount = 0;
+var minstonecount = 1000;
+var sel = document.getElementById('noofstones');
+var defaultstonecount_hp = '';
+var defaultstonecount_hp_text = '3';
+var defaultstonecount_hp_geturl = '<?php if(isset($_GET['SC'])){echo $_GET['SC'];}?>';
+for(i=3;i<arroptions[i_hp].length;i=i+5)
+{
+	var elOptNew = document.createElement('option');
+	elOptNew.text = arroptions[i_hp][parseInt(i) + 2];
+	elOptNew.value = arroptions[i_hp][i];
+	if(isIEcheck()){sel.add(elOptNew);}else{sel.appendChild(elOptNew);}
+	if(parseInt(arroptions[i_hp][parseInt(i) + 2]) < parseInt(minstonecount))
+	{
+		minstonecount = arroptions[i_hp][parseInt(i) + 2];
+	}
+	if(parseInt(arroptions[i_hp][parseInt(i) + 2]) > parseInt(maxstonecount))
+	{
+		maxstonecount = arroptions[i_hp][parseInt(i) + 2];
+	}
+	document.getElementById('stonecount' + arroptions[i_hp][parseInt(i) + 2]).style.display = 'block';
+	if(defaultstonecount_hp_geturl == '')
+	{
+		if(arroptions[i_hp][parseInt(i) + 3] == "0.0000")
+		{
+			defaultstonecount_hp = arroptions[i_hp][i];
+			defaultstonecount_hp_text = arroptions[i_hp][parseInt(i) + 2];
+		}
+	}
+	else
+	{
+		if(arroptions[i_hp][parseInt(i) + 2] == defaultstonecount_hp_geturl)
+		{
+			defaultstonecount_hp = arroptions[i_hp][i];
+			defaultstonecount_hp_text = arroptions[i_hp][parseInt(i) + 2];
+		}
+	}
+}
+document.getElementById('noofstones').value = defaultstonecount_hp;
+changestonecountclass(defaultstonecount_hp_text);
+
+i_hp = getoptionindex('Metal Type');
+optionid = arroptions[i_hp][2];
+selectedvalue = 0;
+for(i=3;i<arroptions[i_hp].length;i=i+5)
+{
+	
+	var txt = arroptions[i_hp][parseInt(i) + 2];
+	if(txt == 'Platinum')
+	{
+		document.getElementById('platinum-metal').parentNode.style.display = 'block';
+	}
+	else if(txt == 'Rose Gold')
+	{
+
+		document.getElementById('rose-metal').parentNode.style.display = 'block';
+	}
+	else if(txt == 'Silver')
+	{
+		document.getElementById('silver-metal').parentNode.style.display = 'block';
+	}
+	else if(txt == 'White Gold')
+	{
+		document.getElementById('white-metal').parentNode.style.display = 'block';
+	}
+	else if(txt == 'Yellow Gold')
+	{
+		document.getElementById('yellow-metal').parentNode.style.display = 'block';
+	}
+	else if(txt == '10k Yellow Gold')
+	{
+		document.getElementById('yellow-metal10k').parentNode.style.display = 'block';
+	}
+	else if(txt == '10k White Gold')
+	{
+		document.getElementById('white-metal10k').parentNode.style.display = 'block';
+	}
+	else if(txt == '10k Rose Gold')
+	{
+		document.getElementById('rose-metal10k').parentNode.style.display = 'block';
+	}
+	
+	var str_hp_teststr = arroptions[i_hp][parseInt(i) + 2];
+	if(default_metal_hp.indexOf(str_hp_teststr) > -1)
+	{
+		selectedvalue = arroptions[i_hp][i]; 
+		document.getElementById('select_' + optionid).value = selectedvalue;
+		txt = arroptions[i_hp][parseInt(i) + 2];
+		if(txt == 'Platinum')
+		{
+			document.getElementById('platinum-metal').className = 'metaltype metaltype-selected';
+			curmetaltype = 'PT';
+		}
+		else if(txt == 'Rose Gold')
+		{
+			document.getElementById('rose-metal').className = 'metaltype metaltype-selected';
+			curmetaltype = 'RG';
+		}
+		else if(txt == 'Silver')
+		{
+			document.getElementById('silver-metal').className = 'metaltype metaltype-selected';
+			curmetaltype = 'SL';
+		}
+		else if(txt == 'White Gold')
+		{
+			document.getElementById('white-metal').className = 'metaltype metaltype-selected';
+			curmetaltype = 'WG';
+		}
+		else if(txt == 'Yellow Gold')
+		{
+			document.getElementById('yellow-metal').className = 'metaltype metaltype-selected';
+			curmetaltype = 'YG';
+		}
+		else if(txt == '10k Yellow Gold')
+		{
+			document.getElementById('yellow-metal10k').className = 'metaltype metaltype-selected';
+			curmetaltype = 'YG10k';
+		}
+		else if(txt == '10k White Gold')
+		{
+			document.getElementById('white-metal10k').className = 'metaltype metaltype-selected';
+			curmetaltype = 'WG10k';
+		}
+		else if(txt == '10k Rose Gold')
+		{
+			document.getElementById('rose-metal10k').className = 'metaltype metaltype-selected';
+			curmetaltype = 'RG10k';
+		}
+	}
+}
+
+i_hp = getoptionindex('GenOrLC');
+optionid = arroptions[i_hp][2];
+document.getElementById('select_' + optionid).selectedIndex = 1;// to default select the genuine option
+
+for(i=1;i<=maxstonecount;i++)
+{
+	title_hp = 'GN-Stone' + i;
+	i_hp = getoptionindex(title_hp);
+	if(i_hp != -1)
+	{
+		optionid = arroptions[i_hp][2];
+		html = "<div id='" + title_hp + "div' style='display:block'>GN Stone" + i + ": <select id='" + title_hp + "' onchange='changeinoption(\"" + title_hp + "\",this.value)'></select></div>";
+		document.getElementById('GN-selectstonediv').innerHTML = document.getElementById('GN-selectstonediv').innerHTML + html;
+		sel = document.getElementById(title_hp);
+		selectedvalue = 0;
+		var elOptNew = document.createElement('option');
+		elOptNew.text = "Please Select";
+		elOptNew.value = "";
+		if(isIEcheck()){sel.add(elOptNew);}else{sel.appendChild(elOptNew);}
+		for(j=3;j<arroptions[i_hp].length;j=j+5)
+		{
+			var elOptNew = document.createElement('option');
+			elOptNew.text = arroptions[i_hp][parseInt(j) + 2];
+			elOptNew.value = arroptions[i_hp][j];
+			if(isIEcheck()){sel.add(elOptNew);}else{sel.appendChild(elOptNew);}
+		}
+		
+	}
+	
+
+
+	title_hp = 'LC-Stone' + i;
+	i_hp = getoptionindex(title_hp);
+	if(i_hp != -1)
+	{
+		optionid = arroptions[i_hp][2];
+		html = "<div id='" + title_hp + "div' style='display:block'>LC Stone" + i + ": <select id='" + title_hp + "' onchange='changeinoption(\"" + title_hp + "\",this.value)'></select></div>";
+		document.getElementById('LC-selectstonediv').innerHTML = document.getElementById('LC-selectstonediv').innerHTML + html;
+		sel = document.getElementById(title_hp);
+		selectedvalue = 0;
+		var elOptNew = document.createElement('option');
+		elOptNew.text = "Please Select";
+		elOptNew.value = "";
+		if(isIEcheck()){sel.add(elOptNew);}else{sel.appendChild(elOptNew);}
+		for(j=3;j<arroptions[i_hp].length;j=j+5)
+		{
+			var elOptNew = document.createElement('option');
+			elOptNew.text = arroptions[i_hp][parseInt(j) + 2];
+			elOptNew.value = arroptions[i_hp][j];
+			if(isIEcheck()){sel.add(elOptNew);}else{sel.appendChild(elOptNew);}
+		}
+		
+	}
+}
+for(i=1;i<=maxstonecount;i++)
+{
+	title_hp = 'GN-Stone' + i;
+	i_hp = getoptionindex(title_hp);
+	if(i_hp != -1)
+	{
+		optionid = arroptions[i_hp][2];
+		selectedvalue = 0;
+		for(j=3;j<arroptions[i_hp].length;j=j+5)
+		{
+			if(arroptions[i_hp][parseInt(j) + 4] == "0")
+			{
+				selectedvalue = arroptions[i_hp][j]; 
+			}
+		}
+		document.getElementById('GN-Stone' + i).value = selectedvalue;
+		document.getElementById('select_' + optionid).value = selectedvalue;
+	}
+}
+
+//tabs code
+var arrstonecontent = new Array();
+arrstonecontent[0] = "Select a stone";
+arrstonecontent[1] = "<strong>Garnet:</strong> Top 10% of garnets in terms of quality. Deep brownish red, slightly included and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-birthstones.html'>Read More</a>...";
+arrstonecontent[2] = "<strong>Amethyst:</strong> Top 10% of amethysts in terms of quality. Deep purple, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-birthstones.html'>Read More</a>...";
+arrstonecontent[3] = "<strong>Aquamarine:</strong> Top 10% of aquamarines in terms of quality. Medium sea blue, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-aquamarine.html'>Read More</a>...";
+arrstonecontent[4] = "<strong>Diamond:</strong> Top 10% of diamonds in terms of quality. H Color, SI1 Clarity and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/diamond-buying-guide.html'>Read More</a>...";
+arrstonecontent[5] = "<strong>Emerald:</strong> Top 10% of emeralds in terms of quality. Medium green, slightly included and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-emerald.html'>Read More</a>...";
+arrstonecontent[6] = "<strong>Alexandrite:</strong> Top 10% of alexandrite in terms of quality. Medium green, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-birthstones.html'>Read More</a>...";
+arrstonecontent[7] = "<strong>Ruby:</strong> Top 10% of rubies in terms of quality. Medium red, very slightly included and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-ruby.html'>Read More</a>...";
+arrstonecontent[8] = "<strong>Peridot:</strong> Top 10% of peridots in terms of quality. Bottle green, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-peridot.html'>Read More</a>...";
+arrstonecontent[9] = "<strong>Sapphire:</strong> Top 10% of sapphires in terms of quality. Medium blue, slightly included and exhibits high brilliance.  This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-sapphire.html'>Read More</a>...";
+arrstonecontent[10] = "<strong>Pink Tourmaline:</strong> Top 10% of pink tourmaline in terms of quality. Medium pink, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-birthstones.html'>Read More</a>...";
+arrstonecontent[11] = "<strong>Citrine:</strong> Top 10% of citrines in terms of quality. Deep yellow orange, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-birthstones.html'>Read More</a>...";
+arrstonecontent[12] = "<strong>Tanzanite:</strong> Top 10% of tanzanites in terms of quality. Deep violet blue, eye clean and high brilliance. This quality is comparable to that used by the top 5th Avenue or Rodeo Drive Jewelers.<br/><a href='/jewelry-guide/about-tanzanite.html'>Read More</a>...";
+var arrmetaltypetext = new Array();
+arrmetaltypetext['SL'] = "<strong>Silver:</strong> The same great look as white gold at a lower price. Angara uses the highest standard available, .925 sterling silver. Silver is lighter to wear than gold.";
+arrmetaltypetext['PT'] = "<strong>Platinum:</strong> The most durable and premium metal for fine jewelry. Platinum feels more substantial to wear due to its greater weight.";
+arrmetaltypetext['WG'] = "<strong>White-gold:</strong> White gold has been the most popular choice for fine jewelry over the last twenty years as it blends well with diamonds.";
+arrmetaltypetext['YG'] = "<strong>Yellow-gold:</strong> Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Yellow or White Gold - see what other jewelry she has to determine her preference. ";
+arrmetaltypetext['RG'] = "<strong>Rose-gold:</strong> Glowing and rich, rose gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Rose or Yellow Gold - see what other jewelry she has to determine her preference. ";
+arrmetaltypetext['WG10k'] = "<strong>White-gold:</strong> White gold has been the most popular choice for fine jewelry over the last twenty years as it blends well with diamonds.";
+arrmetaltypetext['YG10k'] = "<strong>Yellow-gold:</strong> Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Yellow or White Gold - see what other jewelry she has to determine her preference. ";
+arrmetaltypetext['RG10k'] = "<strong>Rose-gold:</strong> Glowing and rich, rose gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Rose or Yellow Gold - see what other jewelry she has to determine her preference. ";
+
+var curstonetab = 1;
+var arrgemstonetypetext = new Array();
+arrgemstonetypetext['GN'] = "<strong>Genuine:</strong>  Natural gemstones that are mined from the earth.  AAA quality (top 10% of all gemstones, comparable to quality found in the top 5th Avenue jewelers).";
+arrgemstonetypetext['LC'] = "<strong>Lab Created:</strong>  Man made gemstones that are created artificially in a laboratory.";
+function rebuildstoneshtml()
+{
+	if(currentstonecount < curstonetab && curstonetab != 9)
+	{
+		curstonetab = 1;
+	}
+	for(var i = 1;i<=currentstonecount;i++)
+	{
+		document.getElementById('stonestab' + i).style.display = 'block';
+	}
+	for(i = parseInt(currentstonecount) + 1;i<=8;i++)
+	{
+		document.getElementById('stonestab' + i).style.display = 'none';
+	}
+	changetab(curstonetab);
+}
+function changestone(mnth)
+{
+	var txt = getstonetextbymonth(mnth);
+	var id = curGNorLC + '-Stone' + curstonetab;
+	selecttextinselect(id,txt);
+	selectmonthstone(mnth);
+	changeinoption(id,document.getElementById(id).value);
+}
+function changetab(j)
+{
+	if(j==9)
+	{
+		changetabtometal();
+		return;
+	}
+	document.getElementById('metaltab').className = 'stonestab';
+	for(var i = 1;i<=8;i++)
+	{
+		document.getElementById('stonestab' + i).className = 'stonestab';
+	}
+	document.getElementById('stonestab' + j).className = 'stonestab activestone';
+	curstonetab = j;
+	var txt = getselectedtext(curGNorLC + '-Stone' + curstonetab);
+	var mnth = getstonemonthno(txt);
+	selectmonthstone(mnth);
+	document.getElementById('stoneslist').style.display = 'block';
+	document.getElementById('metallist').style.display = 'none';
+}
+function selectmonthstone(mnth)
+{
+	for(var i=1;i<=12;i++)
+	{
+		document.getElementById('stone' + i).className = '';
+	}
+	if(mnth)
+	{
+		document.getElementById('stone' + mnth).className = 'selectedstone';
+	}
+	changestonetext(mnth);
+}
+function getselectedtext(id)
+{
+	return document.getElementById(id).options[document.getElementById(id).selectedIndex].text;
+}
+function selecttextinselect(id,val)
+{
+	var ele = document.getElementById(id);
+	for(var i=0;i<ele.options.length;i++)
+	{
+		if(ele.options[i].text == val)
+		{
+			ele.value = ele.options[i].value;
+		}
+	}
+}
+function changetabtometal()
+{
+	curstonetab = 9;
+	for(var i = 1;i<=8;i++)
+	{
+		document.getElementById('stonestab' + i).className = 'stonestab';
+	}
+	document.getElementById('metaltab').className = 'stonestab activestone';
+	document.getElementById('stoneslist').style.display = 'none';
+	document.getElementById('metallist').style.display = 'block';
+	document.getElementById('stonecontent').innerHTML = arrmetaltypetext[curmetaltype];
+}
+function changestonetext(mnth)
+{
+ if(mnth)
+  if(curGNorLC == 'GN')
+  {
+   document.getElementById('stonecontent').innerHTML = arrstonecontent[mnth];
+  }
+  else
+  {
+   document.getElementById('stonecontent').innerHTML = "";
+  }
+ else
+ document.getElementById('stonecontent').innerHTML = arrstonecontent[0];
+}
+
+//tabs code end
+changeinoption('Number of stones',document.getElementById('noofstones').value);
+
+</script>
+          <?php //HPRAHI CODE ENDS?>
+          <div id="pricesection"> <?php echo $this->getChildHtml('product_type_data') ?> <?php echo $this->getChildHtml('addtocart') ?> </div>
+          <div style="clear:both"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+		
+		jQuery(function(){
+			jQuery('#product_addtocart_form').submit(function(){
+				if(typeof ClickTaleExec != 'undefined'){
+					ClickTaleExec('productAddToCartForm.submit()');
+				}
+			})
+		})
+		
+	
+		function trackShoppingCart(res, form){
+			if(res){
+					_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart',"<?php echo $_product->getSku() ?>", undefined, true]);
+				}
+		}
+		
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+		_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview',"<?php echo $_product->getSku() ?>", undefined,  true]);
+		var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+		
+        productAddToCartForm.submit = function(button, url) {
+			
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+</script>
+    <div class="ppbottom">
+      <div id="detailstab" style="display:block;">
+        <ul>
+          <li id="productdescription" class="activeted1"><a href="javascript:void(0);" onclick="showDiveSection('product-description');" onmouseover="showDiveSection('product-description');">Product Details</a></li>
+          <?php if(trim( $this->getChildHtml('view_more_options')) != ''): ?>
+          <li id="viewmoreoptions" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('more-options');" onmouseover="showDiveSection('more-options');">View More Options</a></li>
+          <?php endif;?>
+          <li id="shippingreturns" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('shipping-returns');" onmouseover="showDiveSection('shipping-returns');">Shipping &amp; Returns</a></li>
+          <li id="angaradifference" class="difference"><a href="javascript:void(0);" onclick="showDiveSection('angara-difference');" onmouseover="showDiveSection('angara-difference');">The Angara Difference</a></li>
+          <li id="productreview" class="alltab"><a href="javascript:void(0);" onclick="showDiveSection('product-review');" onmouseover="showDiveSection('product-review');">Product Reviews</a></li>
+        </ul>
+      </div>
+      <div class="productalldetail">
+        <div id="product-description" class="descriptiontab" style="display: block; ">
+          <div style="margin-bottom:25px;">
+            <div class="heading2"><span id='producttitle2_hp'></span> 
+            <span class="writeareviewlink"  style="text-decoration:underline;font-size:12px;font-weight:normal;margin-left:10px; cursor:pointer;">Write a Review</span>
+            </div>
+            <?php /*?><h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>                 
+                        <?php if(
+							($_product->getAttributeText('emb_stone_name3')=="Diamond" || $_product->getAttributeText('emb_stone_name3') =='')
+							&&
+							($_product->getAttributeText('emb_stone_name2')=="Diamond" || $_product->getAttributeText('emb_stone_name2') =='')
+							&&
+							($_product->getAttributeText('emb_stone_name')=="Diamond" || $_product->getAttributeText('emb_stone_name') =='')) : ?>
+						<div class="headingtag">
+							<?php if ($_product->getDescription()): ?>
+							<?php echo $_product->getDescription() ?>
+							<?php endif ?>
+						</div>
+                        <?php endif?><?php */?>
+            <div style="clear:both"></div>
+          </div>
+          <div class="item-details-box-wrapper">
+            <?php
+					if($_product->getGemstoneCaratWeight()){
+						$tmp_width = '290px';
+					}else{
+						$tmp_width = '180px';
+					}                    
+					?>
+            <div id="details-heading-top" style="width:<?php echo $tmp_width?>">
+              <div class="detail-box-title">Product Details:</div>
+              <div class="field">
+                <div class="fieldtitle">Angara Item #:</div>
+                <div class="fieldvalue"><?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php if($_product->getMetal1Type()): ?>
+              <div class="field">
+                <div class="fieldtitle">Metal:</div>
+                <div class="fieldvalue" id='metalfield'><?php echo $_product->getAttributeText('metal1_type') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getGemstoneType()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Type:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_type') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+							if($_product->getGemstoneShape ()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Shape:</div>
+                <div class="fieldvalue" style="width:78px;"><?php echo $_product->getAttributeText('gemstone_shape') ?></div>
+                <div style="clear:both"></div>
+
+              </div>
+              <?php endif;
+                            if($_product->getGemstoneCaratWeight()): ?>
+              <div class="field">
+                <div class="fieldtitle">Approx ct Total Weight:</div>
+                <div class="fieldvalue"><?php echo $_product->getData('gemstone_carat_weight') ?> cts</div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+							if($_product->getGemstoneColor ()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Color:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_color') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+                            if($_product->getGemstoneClarity ()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Clarity:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_clarity') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+							if($_product->getGemstoneDimension()): ?>
+              <div class="field">
+                <div class="fieldtitle">Approx Dimensions:</div>
+                <div class="fieldvalue" style="width:68px;"><?php echo $_product->getData('gemstone_dimension') ?> mm</div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+							if($_product->getGemstoneBrilliance ()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Brilliance:</div>
+                <div class="fieldvalue" style="width:78px;"><?php echo $_product->getAttributeText('gemstone_brilliance') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;
+							if($_product->getGemstoneEnhancement ()): ?>
+              <div class="field">
+                <div class="fieldtitle">Gemstone Enhancement:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('gemstone_enhancement') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif;?>
+              <div class="field">
+                <div class="fieldtitle">Quality Grade:</div>
+                <div class="fieldvalue" id='qgattribute'>AAA</div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+            <?php if($_product->getEmbStoneName()): ?>
+            <div id="details-heading-top" style="width:280px;padding-left:35px;">
+              <div class="detail-box-title">
+                <?php if($_product->getAttributeText('emb_stone_name')=="Diamond" || $_product->getAttributeText('emb_stone_name')=="Simulated Diamond"): ?>
+                Diamond
+                <?php else:?>
+                Gemstone
+                <?php endif?>
+                Information: </div>
+              <?php if($_product->getEmbNumberOfStones1()): ?>
+              <div class="field">
+                <div class="fieldtitle">Number of <?php echo $_product->getAttributeText('emb_shape1') ?>
+                  <?php if($_product->getData('emb_number_of_stones1') > 1){?>
+                  <?php if($_product->getAttributeText('emb_stone_name')=="Ruby"){echo "Rubies";} elseif($_product->getAttributeText('emb_stone_name')=="Lab Created Ruby"){echo "Lab Created Rubies";} else{echo $_product->getAttributeText('emb_stone_name')."s";}?>
+                  <?php }else{echo $_product->getAttributeText('emb_stone_name');}?>
+                  :<!--<span class="help-icon" about="<?php echo $_product->getAttributeText('emb_shape1') ?>"></span>--></div>
+                <div class="fieldvalue"><?php echo $_product->getData('emb_number_of_stones1') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getEmbDimension1()): ?>
+              <div class="field">
+                <div class="fieldtitle"> Approximate Dimensions:
+                  <?php
+										if(
+											strtolower($_product->getAttributeText('emb_stone_name'))=='blue sapphire'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='ruby'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='emerald'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='tanzanite'
+										   ){
+									 ?>
+                  <span class="approx-dim-help popupicon <?php if($_product->getAttributeText('emb_shape1')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>" id="<?php echo strtolower($_product->getAttributeText('emb_stone_name')) ?>"> </span>
+                  <?php  } ?>
+                </div>
+                <div class="fieldvalue"><?php echo $_product->getData('emb_dimension1') ?> mm</div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getEmbCaratWeight1()): ?>
+              <div class="field">
+                <div class="fieldtitle">Approximate Carat Total Weight:
+                  <?php
+										if(
+											strtolower($_product->getAttributeText('emb_stone_name'))=='blue sapphire'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='ruby'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='emerald'
+											|| strtolower($_product->getAttributeText('emb_stone_name'))=='tanzanite'
+										   ){
+									 ?>
+                  <span class="app-ctw-help popupicon <?php if($_product->getAttributeText('emb_shape1')=="Oval"){echo "stonesize";}else{echo "stonesizeround";}?>" id="<?php echo strtolower($_product->getAttributeText('emb_stone_name')) ?>"> </span>
+                  <?php  } ?>
+                </div>
+                <div class="fieldvalue"><?php echo $_product->getData('emb_carat_weight1') ?> cts</div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getEmbColor1()): ?>
+              <div class="field">
+                <div class="fieldtitle">Min Color:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('emb_color1') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getEmbClarity1()): ?>
+              <div class="field">
+                <div class="fieldtitle">Min Clarity:</div>
+                <div class="fieldvalue"><?php echo $_product->getAttributeText('emb_clarity1') ?></div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+              <?php if($_product->getEmbQualityGrade1()): ?>
+              <div class="field">
+                <div class="fieldtitle"> Quality Grade: <span class="<?php if(strtolower($_product->getAttributeText('emb_stone_name'))=='blue sapphire' || strtolower($_product->getAttributeText('emb_stone_name'))=='diamond' || strtolower($_product->getAttributeText('emb_stone_name'))=='ruby' || strtolower($_product->getAttributeText('emb_stone_name'))=='emerald' || strtolower($_product->getAttributeText('emb_stone_name'))=='tanzanite'){echo 'popupicon qualitypopupbtn quality-popup-help" id="'.strtolower($_product->getAttributeText('emb_stone_name'));}?>"></span> </div>
+                <div class="fieldvalue quality-type-text">
+                  <?php 
+									if($_product->getAttributeText('emb_quality_grade1')=='A' || 
+									  $_product->getAttributeText('emb_quality_grade1')=='AA' ||
+									  $_product->getAttributeText('emb_quality_grade1')=='AAA' ||
+									  $_product->getAttributeText('emb_quality_grade1')=='AAAA')										
+									{
+									   echo 'Natural ';
+									}
+									echo $_product->getAttributeText('emb_quality_grade1') 
+									?>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+              <?php endif?>
+            </div>
+            <?php endif ?>
+			<?php 
+			if($_product->getCustomProductDetails()){
+				echo $_product->getCustomProductDetails();
+			}
+			?>
+          </div>
+          <div id="help-icon-tooltip">
+            <div id="help-content"></div>
+          </div>
+          <script type="text/javascript">
+								document.getElementById('gnlc1').click();	//	Modified by Vaseem for bt 248
+								jQuery(function(){									
+									// view new certificate
+									function viewnewcert(product){
+										//alert(product);
+									}
+									jQuery.getJSON('/skin/frontend/angara/default/staticdata/gemstones.json', function(gemstones) {									
+									jQuery('.help-icon, .help-text').each(function(){	
+												var about = jQuery(this).attr('about');
+												var content = null;
+												if(about == null){
+													if(!jQuery(this).hasClass('help-text'))
+														jQuery(this).hide(); // hide this useless !@#$ crap help icon 
+												}else if(about == 'Oval'){
+													content = gemstones.shapes.oval.description;
+												}else if(about == 'Round'){ 
+													content = gemstones.shapes.round.description;
+												}else if(about == 'Pear'){
+													content = gemstones.shapes.pear.description;
+												}else if(about == 'Trillion'){
+													content = gemstones.shapes.trillion.description;
+												}else if(about == 'Marquise'){
+													content = gemstones.shapes.marquise.description;
+												}else if(about == 'Princess'){
+													content = gemstones.shapes.princess.description;
+												}else if(about == 'Emerald'){
+													content = gemstones.shapes.emerald.description;
+												}else if(about == 'Cushion'){
+													content = gemstones.shapes.cushion.description;
+												}else if(about == 'Emeraldcut'){
+													content = gemstones.shapes.emeraldcut.description;
+												}else if(about == 'Ascher'){
+													content = gemstones.shapes.ascher.description;
+												}else if(about == 'Heart'){
+													content = gemstones.shapes.heart.description;
+												}else if(about == 'Baguette'){
+													content = gemstones.shapes.baguette.description;
+												}else if(about == 'whitegold18k'){
+													content = gemstones.metals.whitegold18k.description;
+												}else if(about == 'yellowgold18k'){
+													content = gemstones.metals.yellowgold18k.description;
+												}else if(about == 'whitegold14k'){
+													content = gemstones.metals.whitegold14k.description;
+												}else if(about == 'yellowgold14k'){
+													content = gemstones.metals.yellowgold14k.description;
+												}else if(about == 'whitegold10k'){
+													content = gemstones.metals.whitegold10k.description;
+												}else if(about == 'silver'){
+													content = gemstones.metals.silver.description;
+												}else if(about == 'sterlingsilver'){
+													content = gemstones.metals.sterlingsilver.description;
+												}else if(about == 'sterlingsilver925'){
+													content = gemstones.metals.sterlingsilver925.description;
+												}else if(about == 'platinum'){
+													content = gemstones.metals.platinum.description;
+												}else if(about == 'emeralda'){
+													content = gemstones.quality.emeralda.description;
+												}else if(about == 'emeraldaa'){
+													content = gemstones.quality.emeraldaa.description;
+												}else if(about == 'emeraldaaa'){
+													content = gemstones.quality.emeraldaaa.description;
+												}else if(about == 'emeraldaaaa'){
+													content = gemstones.quality.emeraldaaaa.description;
+												}else if(about == 'rubya'){
+													content = gemstones.quality.rubya.description;
+												}else if(about == 'rubyaa'){
+													content = gemstones.quality.rubyaa.description;
+												}else if(about == 'rubyaaa'){
+													content = gemstones.quality.rubyaaa.description;
+												}else if(about == 'rubyaaaa'){
+													content = gemstones.quality.rubyaaaa.description;
+												}else if(about == 'sapphirea'){
+													content = gemstones.quality.sapphirea.description;
+												}else if(about == 'sapphireaa'){
+
+													content = gemstones.quality.sapphireaa.description;
+												}else if(about == 'sapphireaaa'){
+													content = gemstones.quality.sapphireaaa.description;
+												}else if(about == 'sapphireaaaa'){
+													content = gemstones.quality.sapphireaaaa.description;
+												}else if(about == 'tanzanitea'){
+													content = gemstones.quality.tanzanitea.description;
+												}else if(about == 'tanzaniteaa'){
+													content = gemstones.quality.tanzaniteaa.description;
+												}else if(about == 'tanzaniteaaa'){
+													content = gemstones.quality.tanzaniteaaa.description;
+												}else if(about == 'tanzaniteaaaa'){
+													content = gemstones.quality.tanzaniteaaaa.description;
+												}else if(about == 'diamonda'){
+													content = gemstones.quality.diamonda.description;
+												}else if(about == 'diamondaa'){
+													content = gemstones.quality.diamondaa.description;
+												}else if(about == 'diamondaaa'){
+													content = gemstones.quality.diamondaaa.description;
+												}else if(about == 'diamondaaaa'){
+													content = gemstones.quality.diamondaaaa.description;
+												}else if(about == 'amethysta'){
+													content = gemstones.quality.amethysta.description;
+												}else if(about == 'amethystaa'){
+													content = gemstones.quality.amethystaa.description;
+												}else if(about == 'amethystaaa'){
+													content = gemstones.quality.amethystaaa.description;
+												}else if(about == 'amethystaaaa'){
+													content = gemstones.quality.amethystaaaa.description;
+												}else if(about == 'opala'){
+													content = gemstones.quality.opala.description;
+												}else if(about == 'opalaa'){
+													content = gemstones.quality.opalaa.description;
+												}else if(about == 'opalaaa'){
+													content = gemstones.quality.opalaaa.description;
+												}else if(about == 'opalaaaa'){
+													content = gemstones.quality.opalaaaa.description;
+												}else if(about == 'garneta'){
+													content = gemstones.quality.garneta.description;
+												}else if(about == 'garnetaa'){
+													content = gemstones.quality.garnetaa.description;
+												}else if(about == 'garnetaaa'){
+													content = gemstones.quality.garnetaaa.description;
+												}else if(about == 'garnetaaaa'){
+													content = gemstones.quality.garnetaaaa.description;
+												}else if(about == 'aquamarinea'){
+													content = gemstones.quality.aquamarinea.description;
+												}else if(about == 'aquamarineaa'){
+													content = gemstones.quality.aquamarineaa.description;
+												}else if(about == 'aquamarineaaa'){
+													content = gemstones.quality.aquamarineaaa.description;
+												}else if(about == 'aquamarineaaaa'){
+													content = gemstones.quality.aquamarineaaaa.description;
+												}else if(about.indexOf('pearla',(about.length-6)) !=-1){
+													content = gemstones.quality.pearla.description;
+												}else if(about.indexOf('pearlaa',(about.length-7)) !=-1){
+
+													content = gemstones.quality.pearlaa.description;
+												}else if(about.indexOf('pearlaaa',(about.length-8)) !=-1){
+													content = gemstones.quality.pearlaaa.description;
+												}else if(about.indexOf('pearlaaaa',(about.length-9)) !=-1){
+													content = gemstones.quality.pearlaaaa.description;
+												}else if(about == 'peridota'){
+													content = gemstones.quality.peridota.description;
+												}else if(about == 'peridotaa'){
+													content = gemstones.quality.peridotaa.description;
+												}else if(about == 'peridotaaa'){
+													content = gemstones.quality.peridotaaa.description;
+												}else if(about == 'peridotaaaa'){
+													content = gemstones.quality.peridotaaaa.description;
+												}else if(about == 'citrinea'){
+													content = gemstones.quality.citrinea.description;
+												}else if(about == 'citrineaa'){
+													content = gemstones.quality.citrineaa.description;
+												}else if(about == 'citrineaaa'){
+													content = gemstones.quality.citrineaaa.description;
+												}else if(about == 'citrineaaaa'){
+													content = gemstones.quality.citrineaaaa.description;
+
+												}
+												else{
+													if(!jQuery(this).hasClass('help-text'))
+														jQuery(this).hide(); // hide this useless !@#$ crap help icon 
+												}
+												
+												jQuery(this).data('content',content);
+
+									})
+									
+									
+										//alert(gemstones.shapes)
+										//alert(gemstones.shapes.oval.description)
+										jQuery('.help-icon').click(
+											function(e){
+												e.stopPropagation();
+												
+												content = jQuery(this).data('content');
+												
+												jQuery('#help-icon-tooltip').find('#help-content').html(content);
+												jQuery(this).append(jQuery('#help-icon-tooltip').fadeIn())
+											}
+										)
+										
+										jQuery('.help-text').hover(
+											function(e){
+												content = jQuery(this).data('content');
+												if(jQuery.trim(content)!=''){
+													jQuery('#help-icon-tooltip').find('#help-content').html(content);
+													jQuery(this).append(jQuery('#help-icon-tooltip').show())
+												}
+											},
+											function(){
+												jQuery('#help-icon-tooltip').hide();
+											}
+										)
+									})
+
+									
+									jQuery('body').click(function(){
+										jQuery('#help-icon-tooltip').fadeOut();
+									})
+								})
+							</script>
+          <div style="clear:both"></div>
+			<div class="text-message">Note: - Image of product may have been enlarged and/or enhanced.</div>
+        </div>
+        <?php if(trim( $this->getChildHtml('view_more_options')) != ''): ?>
+        <div id="more-options" class="descriptiontab" style="display: none;"> 
+          <!-- Put needed Upsell products here  --> 
+          <?php echo $this->getChildHtml('view_more_options');?>
+          <div style="clear:both"></div>
+        </div>
+        <?php endif; ?>
+        <div id="shipping-returns" class="producttxtlink" style="display: none; ">
+          <div class="headingtag"><b>Return Policy:</b></div>
+          <?php /*Start Request Shipping Label by Pankaj regarding bug id:774*/?>
+          <div id="requestlabel-dialog" title="Request For Return Shipping Label"></div>
+        If you are not 100% satisfied with your purchase, you can return it for a full refund within 30 days of the purchase date. Returns, including free gift(s), must be unworn and in the state that you received them.<br><br>
+          We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply submit a form by <a id="returnshipping-dialog-opener" href="#" style="text-decoration:underline;">clicking here</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.<br><br>
+           For international returns, return shipping and insurance are the responsibility of the customer.<br><br>
+          <?php /*End Request Shipping Label by Pankaj regarding bug id:774*/?>
+          <div class="headingtag"><b>Shipping Policy:</b></div>
+           We ship FREE to 67 countries - We offer FREE FedEx Ground shipping within the USA and FedEx International Shipping worldwide at no cost. Upgraded shipping options are available at Checkout for nominal fees. If you need the item to be shipped faster than the shipping date indicated above, please call 888 926 4272 to speak to one of our Angara Advisors or click <a href="https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/" target="_blank">Live Chat</a>. A tracking number will be sent to your email upon shipment. </div>
+        <div id="angara-difference" class="producttxtlink" style="display: none;">
+          <div class="headingtag"><b>The Internet's Family Jeweler:</b></div>
+          We live and breathe gemstones and fine jewelry.  We are family owned and have been in the gemstone business for 3 generations.  As with a traditional family jeweler experience, we will work with you to find or create the jewelry piece of your dreams.  If you cannot find  the gemstone or fine jewelry piece that you are looking for on the website, simply call us at 888 926 4272 and our team will find or create your piece.  If we can't source it, it probably doesn't exist.
+          <?php /* if(strtolower($_product->getAttributeText('emb_stone_name3'))=="blue sapphire" || strtolower($_product->getAttributeText('emb_stone_name2'))=="blue sapphire" || strtolower($_product->getAttributeText('emb_stone_name'))=="blue sapphire"): ?>
+          <span class="internetjeweler" style="cursor:pointer; text-decoration:underline;">Our Customers Say It Best</span>
+          <?php endif; */ ?>
+          <br>
+          <br>
+          <div class="headingtag"><b>Direct From The Source:</b></div>
+          With manufacturing and sourcing offices in  Jaipur, India (commonly known as the World's Gemstone Capital),  Thailand (where the majority of the world's rubies and sapphires are cut and polished), and the USA, we are able to source the best quality gemstones directly from the mines and manufacturers.  Further, we manufacture the large majority of our gemstone jewelry - thus, we cut out all middlemen and are able to offer unparalleled prices. Independent surveys have verified that our jewelry prices are approximately 40% lower than those of our competition. <br>
+          <br>
+          <div class="headingtag"><b>Exceptional Value And Quality, Guaranteed By A 110% Refund Policy:</b></div>
+          We guarantee exceptional value and quality. We will refund up to 110% of the purchase price if an accredited, GIA trained jewelry appraiser, values your jewelry for less than 125% of the purchase price up to a dollar amount of $250.
+          <?php /* if(strtolower($_product->getAttributeText('emb_stone_name3'))=="blue sapphire" || strtolower($_product->getAttributeText('emb_stone_name2'))=="blue sapphire" || strtolower($_product->getAttributeText('emb_stone_name'))=="blue sapphire"): ?>
+          <span class="valuequality" style="cursor:pointer; text-decoration:underline;">Our Customers Say It Best</span>
+          <?php endif; */ ?>
+          <br>
+          <br>
+          <div class="headingtag"><b>30-Day Money Back Guarantee:</b></div>
+          If you don't love it, simply send it back in its original condition for a full refund. Return shipping is FREE.
+          <br><br>
+          <div class="headingtag"><b>Higher Quality:</b></div>
+          Our jewelry is meant to last for generations.  The focus is on maximizing beauty rather than on saving gold or gemstone weight by reducing quality.  While our competitors have reduced weight to 2-3 grams for most products as gold costs have gone up, our average product weight remains at 3-5 grams.  Even if this philosophy and commitment to fine jewelry costs us more, we believe that the customer will be much happier as a result. <br>
+          <br>
+        </div>
+        <div id="product-review" style="display: none;">
+          <div class="customer-review">
+            <div><?php echo $this->getChildHtml('reviews') ?></div>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+jQuery('html,body').animate({scrollTop:135},1000);
+</script>
+<link rel="stylesheet" href="/skin/frontend/angara/default/css/colorbox.css" />
+<script src="/skin/frontend/angara/default/js/jquery.colorbox.js"></script> 
+<script>
+	jQuery(document).ready(function($){		
+		jQuery(".iframe").colorbox({iframe:true, width:"75%", height:"80%"});
+		//Example of preserving a JavaScript event for inline calls.
+		jQuery("#click").click(function(){ 
+			jQuery('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+			return false;
+		});
+	});
+</script> 
+<script language="javascript">
+	jQuery(function(){
+		if(typeof(s)!='undefined')
+			s.t();
+	})
+</script>
+<!--Started Modified by Pankaj regarding bug id:447-->
+<?php /*?><script type="text/javascript" src="/skin/frontend/angara/default/js/pinmarklet.js"></script><?php */?>
+<?php 	//	Code Added by Vaseem to fix IE 7 issue starts
+	/*if (!stristr($_SERVER['HTTP_USER_AGENT'], "msie 7")){?>
+	<!--<script type="text/javascript" src="/skin/frontend/angara/default/js/pinit.js"></script>-->
+<?php } */?>
+<?php /*?><script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script><?php */?>
+<!--Ended Modified by Pankaj regarding bug id:447-->

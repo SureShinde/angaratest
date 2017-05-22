@@ -1,0 +1,10 @@
+<?php foreach ($this->getTotals() as $_code => $_total){ ?>
+	<?php if ($_total->getBlockName()){ //echo $_total->getBlockName();?>
+    	<?php echo $this->getChildHtml($_total->getBlockName(), false); ?>
+    <?php }else{?>
+    	<tr class="<?php //echo $_code?>">
+          <td width="217" height="40" valign="middle" style="padding-left:15px; font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333; border-right:1px solid #333;" <?php //echo $this->getLabelProperties()?>  class="edit"><?php echo $_total->getLabel();?></td>
+          <td width="110" height="40" valign="middle"  style=" padding-left:15px;font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333;" <?php //echo $this->getValueProperties()?>  class="edit"><?php echo $this->formatValue($_total) ?></td>
+    	</tr>
+	<?php }	?>
+<?php }		//	endforeach?>

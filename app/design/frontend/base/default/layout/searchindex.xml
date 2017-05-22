@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mirasvit_searchindex.css</stylesheet></action>
+        </reference>
+    </default>
+
+    <catalogsearch_result_index translate="label">
+        <reference name="content">
+            <remove name="search.result" />
+            <block type="searchindex/results" name="search_result" template="searchindex/results.phtml">
+                <block type="catalog/product_list" name="search_result_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <!-- <action method="setColumnCount"><count>3</count></action> -->
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+
+                <block type="searchindex/result_category" name="searchindex_result_category" template="searchindex/result/category.phtml">
+                    <action method="setIsVisible"><value>0</value></action>
+                </block>
+
+                <block type="searchindex/result_cms" name="searchindex_result_cms" template="searchindex/result/cms.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <block type="searchindex/result_awblog" name="searchindex_result_awblog" template="searchindex/result/awblog.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <block type="searchindex/result_maction" name="searchindex_result_maction" template="searchindex/result/maction.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <block type="searchindex/result_wordpress" name="searchindex_result_wordpress" template="searchindex/result/wordpress.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <block type="searchindex/result_terms" name="searchindex_result_terms" template="searchindex/result/terms.phtml">
+                    <action method="setIsVisible"><value>0</value></action>
+                </block>
+
+                <block type="searchindex/result_clnews" name="searchindex_result_clnews" template="searchindex/result/clnews.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <block type="searchindex/result_simpleforum" name="searchindex_result_simpleforum" template="searchindex/result/simpleforum.phtml">
+                    <block type="page/html_pager" name="pager" />
+                </block>
+
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

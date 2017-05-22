@@ -1,0 +1,243 @@
+<?php
+ /* @var $this Mage_Catalog_Block_Product_View_Abstract */
+$_product = $this->getProduct();
+$freeProdSku = array('fr','fb','fe','fp');
+$strLowerFreeProd = strtolower(substr($_product->getSku(), 0, 2));
+$_taxHelper = $this->helper('tax');
+$_coreHelper = Mage::helper('core');
+echo $this->getChildHtml('product_type_data_extra');
+?>
+<?php
+	$selectedOption = $this->getRequest()->getParam('easyopt',1);
+	$selectedOption = (int)($selectedOption - 1);
+?>
+<div class="row relative-placeholder" <?php if(in_array(96, $_product->getCategoryIds())): ?> style="height:80px;"<?php endif;?>> 
+    <div class="col-xs-12 price-emi-or-sep">
+		<div class="col-sm-12 pr-box no-padding max-margin-bottom">
+		<div class="price-holder text-center pull-left text-left">
+			<?php echo $this->getPriceHtml($_product);?>
+        </div>
+
+		<?php 
+		$categories = $this->getProduct()->getCategoryIds();
+		/* excluding specific categories from easy pay */ 
+		if(!in_array(96, $categories) && !$_product->getIsBuildYourOwn() && !in_array($strLowerFreeProd, $freeProdSku)): 
+			$_easyPayOptions = $_taxHelper->getEasyPayOptions($_product, $_taxHelper->getPrice($_product, $_product->getFinalPrice())); ?>
+				<div class="or-sep relative-placeholder text-center pull-left text-left"><span>or</span></div>
+				<div class="easy-pay text-center pull-left text-left">		
+					<label for="#easy-pay-box" class="fontsize-type4 color-three">Easy Pay Installments</label>
+					<i id="easy-pay-info" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="bottom" data-trigger="click" data-toggle="tooltip" title="
+						<div class='block-sub-heading high-margin-bottom'>What is Easy Pay?</div>
+						<ul class='list-style-disc'>
+							<li>Pay in 2 or 3 equal monthly Interest FREE installments.</li>
+							<li class='low-padding-bottom'>First payment is charged at the time of purchase.</li>
+							<li class='low-padding-bottom'>The order is processed for shipment immediately upon checkout.</li>
+							<li class='low-padding-bottom'>Your credit card will be charged for 2 or 3 equal installments starting <?php echo Mage::helper('function')->freeReturnDays();?> days from the date of purchase.
+							<li class='low-padding-bottom'>No interest or additional fees are charged by Angara.</li>
+							<li>The merchandise remains the property of Angara until the full payment is made and Angara reserves the right to collect the same or send a collection agency if a payment is not made.</li>
+						</ul>">
+					</i>
+					<select id="easy-pay-box" class="form-control" name="easyopt">
+					<?php 
+					foreach($_easyPayOptions as $key => $val): ?>
+						<option value="<?php echo $key; ?>" <?php if($key == $selectedOption): ?> selected="selected" <?php endif; ?>><?php echo ($key + 1) . ' payment(s) of ' . $_coreHelper->currency($val, true, false) ?></option>
+					<?php 
+					endforeach; ?>
+					</select>
+				</div>				
+				<div class="clearfix"></div>			
+		<?php 
+		else:
+			if(!in_array($strLowerFreeProd, $freeProdSku)){?>
+			<style>
+			.product-retail-price-range, .product-retail-price {display:none;}
+			</style>
+			<?php
+			}	
+		endif; ?>
+		</div>
+		<div class="clearfix pr-box-fix"></div>
+		<?php if(!in_array(96, $_product->getCategoryIds()) && !in_array($strLowerFreeProd, $freeProdSku)): ?>	
+        	<?php //S:VA	view special offer	
+			$couponData				=	Mage::helper('function')->getCurrentOfferCouponCode();
+			$couponPercentage		=	$couponData['coupon_perc'];
+			$offerCouponCode		=	$couponData['coupon_code'];
+			?>
+            <div class="sp-offer text-center max-margin-bottom">
+				<div class="full-width">
+                <span class="text-bold"><?php if($couponPercentage != '0%') { ?>Special Offer:<?php } else { ?>Free Jewelry Gift<?php } ?></span><?php if($couponPercentage != '0%') { ?><span id="view-offer-price" class="apricot-text text-bold"></span><?php } ?><?php //echo $couponPercentage.' off';?> <span class="text-bold">with Code</span> <span class="text-bold apricot-coupon-code"><?php echo $offerCouponCode;?></span > <?php /* <span id="special-offer-click" class="apricot-bg">+</span> */ ?>
+				<?php 	//	S:RV
+				$offerText	=	Mage::helper('function')->getOfferText();
+				if($offerText){
+					$offerData 		= 	$this->getLayout()->createBlock('promotions/offer')->getOfferHeaderImage();
+					//prd($offerData);
+					$image_path		=	$offerData['image_path'];
+					$image_title	=	$offerData['image_title'];
+					$image_alt_text	=	$offerData['image_alt_text'];
+				?>
+				<i class="fa fa-plus-circle apricot-text clickable prod-offer-tooltip" data-html="true" data-placement="left" data-trigger="click" data-toggle="tooltip" title="<img width='285' height='auto' src='<?php echo $image_path;?>' alt='<?php echo $image_alt_text;?>' title='<?php echo $image_title;?>' class='img-responsive'/>"></i>
+				<?php } //	E:RV	?>
+				</div>
+
+				<?php 
+					$skuArray	=	Mage::helper('function')->getSkuFromCoupon();
+					$offerSku	=	'';	
+					if(in_array($_product->getSku(), $skuArray)){							
+						$offerSku	=	1;
+					} 
+				?>				
+				<?php /* Ticker Start */
+				if($offerSku != 1){
+					$channel 		= 	Mage::getSingleton('core/session')->getVisitorChannel();
+					if($channel && $channel->getHomeHeroBannerDesktop()){
+						$bannerDesktop 	= 	Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerDesktop());
+						$tickerHtml		=	Mage::helper('function')->getHomePageTickerHtml($bannerDesktop->getTickerTime());
+						if($tickerHtml){
+						$tickerState = true; ?>
+						<?php //$channel = Mage::getSingleton('core/session')->getVisitorChannel(); ?>
+						<?php if($channel && $channel->getHomeHeroBannerDesktop()): ?>
+							<?php //$bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerDesktop()); ?>
+							<?php if($tickerState == true){ ?>
+								<style>
+									.sp-offer{padding:10px 5px 5px; min-height:105px;}
+									.product-page-ticker{background:#000000; margin-top:10px; position:relative; max-width:274px; height:37px}
+									.sp-offer .tickr-width{width: 100%;     padding-left: 80px;}
+									.sp-offer .tickr-holder{transform:scale(0.75); -webkit-transform:scale(0.75); -moz-transform:scale(0.75)}
+									.sp-offer .tickr-style{font-weight:bold;font-size:15px; float:none; margin:0px auto; color:#ffffff; background:transparent;text-align: center; width:194px;}
+									.sp-offer .ofrend, .sp-offer .text-format {display:block;}
+									.sp-offer .text-format + span{position:absolute; right:-35px; top:20px; width:auto!important;}
+									
+									.sp-offer .text-format + span .hrs{margin-right:27px;}
+									.sp-offer .text-format + span .min{}
+									.sp-offer .text-format + span .sec{}
+									
+									.sp-offer .ofrend{
+										font-size: 20px;
+										font-weight: normal;
+										padding-bottom: 5px;
+										position: absolute;
+										left: -35px;
+										top: 13px;
+										color: #fa505a;
+									}
+									.sp-offer .daydigits{display:none;}
+									.sp-offer .hourdigits, .sp-offer .minutedegites, .sp-offer .secondigits{
+										height: 50px;
+										width: 50px;
+										display: inline-block;
+										text-align: center;
+										line-height: 50px;
+										color:#ffffff;
+										font-size: 30px;
+										font-weight: normal;
+									}
+									.sp-offer .text-format span{float:left}
+									.sp-offer span.daydigits + span { display: none;}
+									.sp-offer span.hourdigits + span, .sp-offer span.minutedegites + span{width:22px; display: block; float: left; font-size: 28px; line-height: 50px; opacity: 0;} 
+									.sp-offer .text-format + span span{width:50px; float:left; margin-right:23px; font-weight:400; font-size:13px;}
+									.sp-offer .text-format + span span:last-child{margin-right:0px;}
+									<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+										@media(max-width:768px){
+											.img-title-holder{
+												min-height:510px!important;
+											}
+											body[class*='-rings'] .img-title-holder, body[class*='-ring'] .img-title-holder{
+												min-height:650px!important;
+											}
+										}
+									<?php } ?>
+								</style>
+								<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+								<div class="product-page-ticker fl full-width">
+									<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerDesktop->getTickerTime());?>
+								</div>
+							<?php } 
+						endif;
+					}
+					}
+				}
+				/* Ticker Ends */ ?>				
+            </div>
+            <div id="special-offer-details-holder"></div>
+        <?php endif;?>
+		
+		<?php if($_product->getIsBuildYourOwn()){ ?>
+			<div id="product_options_ring_size" class="high-margin-top"></div>
+		<?php } ?>
+		
+<?php /*?>Code added by Vaseem Starts<?php */?>
+<style>.ticker-border{text-align:center; border-radius:3px;}</style>
+<?php if( Mage::helper('function')->getHappyHours()  && Mage::helper('function')->showTimerPP()>0 ){
+?>
+
+<script type="text/javascript">
+	jQuery(function(){
+		var client_time 	= 	new Date();
+		var client_end_time = 	(new Date(client_time.getTime() + <?php echo Mage::helper('function')->showTimerPP();?>));
+		
+		ticker 			= 	jQuery('#offer-ticker');
+		ticker.hours 	= 	jQuery('<span class="hourdigits"></span>');
+		ticker.minutes 	= 	jQuery('<span class="minutedegites"></span>');
+		ticker.seconds 	= 	jQuery('<span class="secondigits"></span>');
+		ticker.append(ticker.hours);
+		ticker.append(jQuery('<span class="colondigit">:</span>'));
+		ticker.append(ticker.minutes);
+		ticker.append(jQuery('<span class="colondigit">:</span>'));
+		ticker.append(ticker.seconds);
+
+		//	Clear the previous variable after ajax request in popup
+		if(typeof myFunc != 'undefined'){
+			window.clearInterval(myFunc);	
+		}
+		
+		myFunc	=	setInterval(function(){
+			var client_time = new Date();	//	Tue Aug 13 2013 10:30:23 GMT+0530 (India Standard Time)
+			//console.log(client_time);console.log(client_end_time);
+			var difference 	= client_end_time - client_time;
+			//	This is the time you want to show the timer	ie 5 seconds = 5000 ms
+			//var difference = 20*60*1000;			//	mili seconds
+			if(difference > 0){
+				ticker.hours.text( zeroPad(parseInt(difference/(1000*60*60))) );
+				ticker.minutes.text( zeroPad(parseInt(difference/(1000*60))%60) );
+				ticker.seconds.text( zeroPad(parseInt(difference/(1000))%60) );
+			}
+			else{
+				ticker.hide();
+				//	Clear the previous variable after ajax request in popup
+				if(typeof myFunc != 'undefined'){
+					window.clearInterval(myFunc);	
+				}
+			}
+			
+		},1000);
+	})
+	
+	function zeroPad (number) {
+		// Pad a number with a zero, to make it 2 digits
+		return ((number < 10) ? "0" : "") + String(number);
+	}
+</script>
+<div class="low-margin-left pull-left" style="margin-top:18px;"><span class="block-inline-display fontsize-type0 hidden-xs">Ends In:</span> <span id="offer-ticker" class="ticker-border valign-middle block-inline-display min-padding-left min-padding-right text-bold  fontsize-type3 text-on-dark showcase-bg-green text-on-dark"></span></div>
+
+<?php } ?>
+<?php /*?>Code added by Vaseem Ends<?php */?>
+        <div class="clearfix"></div>     
+		<?php if($_product->getIsBuildYourOwn()){ 
+			if($_product->getByoModel()->hasSettingSelected()){ ?>
+				<div class="absolute-placeholder" style="width:130%; z-index:10; top:35px; display:none;" id="special-offer-details">
+			<?php }else{ ?>
+				<div class="absolute-placeholder" style="width:100%; z-index:10; top:105px; display:none;" id="special-offer-details">
+			<?php } ?>
+		<?php }else{ ?>
+		<div class="absolute-placeholder" style="width:96%; z-index:10; top:95px; display:none;" id="special-offer-details">
+		<?php } ?>
+			<div class="col-xs-12" style="padding:0px;">
+				<div class="showcase-bg-white" style="border:1px solid #d3d3d3; box-shadow:-2px 3px 6px -3px #999999">
+					<div id="spinner-offer" class="high-padding-top high-padding-bottom" style="display:none; width:100%; text-align:center;"><i class="fa fa-spinner fa-2x fa-spin"></i></div>      	
+					<div class="clearfix"><i id="close-special-offer" class="fa fa-times close fontsize-type5" style="position: absolute; right: -10px; top: -10px; display: block; width: 18px; height: 18px; font-size: 0px; background: url('/skin/frontend/ress/default/images/sprite.jpg') no-repeat; opacity: 1; background-position: -229px -151px; border-radius: 11px;"></i></div>
+					<div id="special-offer-text" class="" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+<?php 
+$element = $this->getElement();
+$category_ids=array();
+
+?>
+
+<script src="<?php echo Mage::getBaseUrl('js'); ?>extjs/ext-tree.js" type="text/javascript"></script>
+<script src="<?php echo Mage::getBaseUrl('js'); ?>extjs/fix-defer.js" type="text/javascript"></script>
+<script src="<?php echo Mage::getBaseUrl('js'); ?>extjs/ext-tree-checkbox.js" type="text/javascript"></script>
+<link media="all" href="<?php echo Mage::getBaseUrl('js'); ?>extjs/resources/css/ext-all.css" type="text/css" rel="stylesheet"></link>
+<link media="all" href="<?php echo Mage::getBaseUrl('js'); ?>extjs/resources/css/ytheme-magento.css" type="text/css" rel="stylesheet"></link>
+<input class="category_ids" name="<?php echo $element->getName();?>" id="<?php echo $element->getHtmlId()?>" type="hidden" value="<?php echo $this->getIdsString();?>"/>
+<div id="<?php echo $element->getHtmlId()?>_tree" class="tree"></div>
+
+<?php if($this->getRootNode() && $this->getRootNode()->hasChildren()): ?>
+<script type="text/javascript">
+Ext.EventManager.onDocumentReady(function() {
+    var categoryLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php echo $this->getLoadTreeUrl()?>'
+    });
+
+    categoryLoader.createNode = function(config) {
+        config.uiProvider = Ext.tree.CheckboxNodeUI;
+        var node;
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+        return node;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.category = node.attributes.id;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    var gtree = new Ext.tree.TreePanel('<?php echo $element->getHtmlId()?>_tree', {
+        animate:true,
+        loader: categoryLoader,
+        enableDD:false,
+        containerScroll: true,
+        rootUIProvider: Ext.tree.CheckboxNodeUI,
+        selModel: new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible: '<?php echo $this->getRootNode()->getIsVisible() ?>'
+    });
+
+    gtree.on('check', function(node) {
+        if(node.attributes.checked) {
+            categoryAdd(node.id);
+        } else {
+            categoryRemove(node.id);
+        }
+        varienElementMethods.setHasChanges(node.getUI().checkbox);
+    }, gtree);
+	
+	gtree.on('check', ncheckHandler, gtree);
+
+    // set the root node
+    var root = new Ext.tree.TreeNode({
+        text: '<?php echo $this->jsQuoteEscape($this->getRootNode()->getName()) ?>',
+        draggable:false,
+        checked:'<?php echo $this->getRootNode()->getChecked() ?>',
+        id:'<?php echo $this->getRootNode()->getId() ?>',
+        disabled: <?php echo ($this->getRootNode()->getDisabled() ? 'true' : 'false') ?>,
+        uiProvider: Ext.tree.CheckboxNodeUI
+    });
+
+    gtree.setRootNode(root);
+    bildCategoryTree(root, <?php echo $this->getTreeJson() ?>);
+    gtree.addListener('click', categoryClick.createDelegate(this));
+
+    // render the gtree
+    gtree.render();
+    root.expand();
+    //tree.expandAll();
+});
+
+function bildCategoryTree(parent, config){
+    if (!config) return null;
+
+    if (parent && config && config.length){
+        for (var i = 0; i < config.length; i++){
+            config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+            var node;
+            var _node = Object.clone(config[i]);
+            if (_node.children && !_node.children.length) {
+                delete(_node.children);
+                node = new Ext.tree.AsyncTreeNode(_node);
+            } else {
+                node = new Ext.tree.TreeNode(config[i]);
+            }
+            parent.appendChild(node);
+            node.loader = node.getOwnerTree().loader;
+            if(config[i].children){
+                bildCategoryTree(node, config[i].children);
+            }
+        }
+    }
+}
+
+function categoryClick(node, e){
+    if (node.disabled) {
+        return;
+    }
+    node.getUI().check(!node.getUI().checked());
+    varienElementMethods.setHasChanges(Event.element(e), e);
+};
+function categoryAdd(id) {
+    var ids = $('<?php echo $element->getHtmlId()?>').value.split(',');
+    ids.push(id);
+    $('<?php echo $element->getHtmlId()?>').value = ids.join(',');
+}
+function categoryRemove(id) {
+    var ids = $('<?php echo $element->getHtmlId()?>').value.split(',');
+    // bug #7654 fixed
+    while (-1 != ids.indexOf(id)) {
+        ids.splice(ids.indexOf(id), 1);
+    }
+    $('<?php echo $element->getHtmlId()?>').value = ids.join(',');
+}
+function ncheckHandler(node)
+{
+    if ( node.attributes.checked && node.parentNode ) {
+        var nn = node.parentNode;
+        this.removeListener('check', ncheckHandler);
+        /* do {
+            if (nn.parentNode == null) {
+                break;
+            } else {
+                nn.ui.check(true);
+            }
+        } while (nn = nn.parentNode ); */
+        this.on('check', ncheckHandler);
+    }
+    if ( !node.isLeaf() && node.hasChildNodes() ) {
+        this.removeListener('check', ncheckHandler);
+        /* processChildren(node, node.attributes.checked); */
+        this.on('check', ncheckHandler);
+    }
+}
+function processChildren(node, state)
+{
+    if ( !node.hasChildNodes() ) return false;
+    for(var i = 0; i < node.childNodes.length; i++ ) {
+        node.childNodes[i].ui.check(state);
+        if ( node.childNodes[i].hasChildNodes() ) {
+            processChildren(node.childNodes[i], state);
+        }
+    }
+    return true;
+}
+</script>
+<?php endif; ?>

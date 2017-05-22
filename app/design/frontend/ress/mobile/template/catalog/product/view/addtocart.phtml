@@ -1,0 +1,39 @@
+<?php
+/**
+ * Magento
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$_product = $this->getProduct();
+$buttonTitle 	= 	$this->__('Add to Cart');
+
+if($_product->isSaleable()): ?>
+	<div class="row">
+		<div class="col-xs-6">
+            <div class="add-to-cart">
+            <?php 
+			if(!$_product->isGrouped()): ?>
+                <input type="hidden" name="qty" id="qty" maxlength="12" value="<?php echo ($qty = $this->getProductDefaultQty()*1)?$qty:1; ?>" />
+                <button type="button" title="<?php echo $buttonTitle; ?>"  class="btn btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this)"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle; ?></button>
+                <?php 
+				echo $this->getChildHtml('', true, true);
+			else: ?>
+                <button type="button" title="<?php echo $buttonTitle; ?>"  class="btn-cart add-to-cart btn-primary btn-block fontsize-type5 no-shadow" onclick="productAddToCartForm.submit(this)"><i class="fa fa-shopping-cart low-padding-right"></i> <?php echo $buttonTitle; ?></button>
+                <?php 
+				echo $this->getChildHtml('', true, true);
+			endif; ?>
+            </div>
+        </div>
+        <?php
+        if($_product->isConfigurable()){?>
+            <div class="col-xs-6" id="customize-product">
+                <button type="button" title="Customize" class="btn btn-dark-brown btn-block fontsize-type5 no-shadow">CUSTOMIZE</button>
+            </div>
+        <?php
+        }?>
+    </div>
+<?php 
+endif; ?>

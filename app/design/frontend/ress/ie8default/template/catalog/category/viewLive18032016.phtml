@@ -1,0 +1,218 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+ 
+$_helper    = $this->helper('catalog/output');
+$_category  = $this->getCurrentCategory();
+preg_match('/Yellow Sapphire|Blue Sapphire|Pink Sapphire|White Sapphire|Green Amethyst|Black Diamond|Blue Diamond|Diamond|Tanzanite|Akoya Cultured Pearl|Amethyst|Citrine|Aquamarine|Black Onyx|Black Tahitian Cultured Pearl|Emerald|Ruby|Blue Topaz|Carnelian|Peridot|Freshwater Cultured Pearl|Garnet|Lapis Lazuli|Opal|Pink Tourmaline|Rose Quartz|Turquoise|Moissanite|Sapphire/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$mainStone = $matches[0];
+}
+else{
+	$mainStone = 'mixed';
+}
+
+// NOTE: earring contains ring (using space before ring)
+preg_match('/ ring|earring|pendant|^ring/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$jewelryType = trim($matches[0]);
+}
+else{
+	$jewelryType = 'mixed';
+} ?>
+
+<div class="cs-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($mainStone)));?> jt-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($jewelryType)));?>">
+	<?php	
+	echo $this->getMessagesBlock()->getGroupedHtml();
+	if($_imgUrl): 
+		echo $_imgHtml;
+	endif; 
+	
+	if($this->isContentMode() || $this->isMixedMode()):
+		if(Mage::app()->getRequest()->getParam('content') != 'no'):?>			
+            <div class="container showcase-bg-white" data-remove-classes="container">
+                <?php // S:VA	Social Sharing icons added 
+				$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+				if(strstr($currentUrl,'jewelry-guide')){?>
+					<style>.social-share a.twitter{background:url('/skin/frontend/ress/default/images/twitter.png');}</style>
+                    <div class="social-share" style="width:100%;float:left;height:25px;">
+                        <div style="float:left; margin-right:10px;"><a style="display:block; height:20px; width:56px; font-size:0px;" class="twitter popup" href="http://twitter.com/share?text=<?php echo $_category->getMetaTitle()?>">Tweet</a></div>
+                        <script>
+                        jQuery(document).ready(function() {
+                          	jQuery('.popup').click(function(event) {
+                            	var width  = 575,
+                                height = 400,
+                                left   = (jQuery(window).width()  - width)  / 2,
+                                top    = (jQuery(window).height() - height) / 2,
+                                url    = this.href,
+                                opts   = 'status=1' +
+                                         ',width='  + width  +
+                                         ',height=' + height +
+                                         ',top='    + top    +
+                                         ',left='   + left;
+                            
+                            	window.open(url, 'twitter', opts);
+                            	return false;
+                          	});
+                        });
+                        </script>				
+                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-555c45cb760fa438" async="async"></script>
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                <?php 
+				} // E:VA	Social Sharing icons added ?>
+               	<div><?php echo $this->getCmsBlockHtml(); ?></div>
+            </div>
+        <?php 
+		endif;
+	endif;
+	
+	if(!$this->isContentMode()):
+		// specific for build your own header
+		$byoCategories = array('469','470');?>
+		<div class="container showcase-bg-white high-padding-top <?php if(in_array($_category->getId(),$byoCategories)){?>design-your-own<?php }?><?php if($_category->getId() == 470){?> dyo-ring<?php }else if($_category->getId() == 469){?> dyo-pendant<?php }?>" data-remove-classes="container">
+			<?php
+			$_imgHtml   = '';
+			if($_imgUrl = $_category->getImageUrl()){
+				$_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+				$_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+			}?>
+			<div class="page-title category-title" itemtype="http://schema.org/Product" itemscope="">
+				<h1 class="no-margin high-padding-bottom"><span itemprop="name"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name');?></span></h1>
+				<?php //	Added by Vaseem to show average rating, min max price of category products
+				$review			= 	$this->getLayout()->createBlock('testimonials/Items')->getReviewsForCategory($_category->getId(),'10000');
+				$reviewsCount	=	count($review);
+				$averageRating	=	$_helper->categoryAttribute($_category, $_category->getAverageRating(), 'average_rating');
+				if( $averageRating > 3 && $reviewsCount > 20 ){
+					$reviewsCount	=	$reviewsCount + '465';
+					$collection = $_category->getProductCollection();
+					Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);//filters only active products
+					Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($collection);//filter visible products
+					$countCategoryProducts = $collection->count(); ?>
+					<script>
+					jQuery(function(){
+						if(jQuery('#adj-nav-price-from---price').length){ 
+							var minPrice	=	jQuery( "#adj-nav-price-from---price" ).attr( 'placeholder');
+							jQuery( "#category_min_price span.price" ).text(minPrice);
+						}
+						if(jQuery('#adj-nav-price-to---price').length){ 
+							var maxPrice	=	jQuery( "#adj-nav-price-to---price" ).attr( 'placeholder');
+							jQuery( "#category_max_price  span.price" ).text(maxPrice);
+						}
+					});
+					</script>
+					<?php /*?><div class="low-padding-bottom"><span itemtype="http://schema.org/AggregateRating" itemscope="" itemprop="aggregateRating"><?php echo $_category->getName();?> are rated <span itemprop="ratingValue" class="text-bold"><?php echo $averageRating;?></span> out of <span itemprop="bestRating" class="text-bold">5</span><meta content="1" itemprop="worstRating"> by <span itemprop="ratingCount" class="text-bold"><?php echo $reviewsCount;?></span> reviewers.</span> <span itemtype="http://schema.org/AggregateOffer" itemscope="" itemprop="offers">Expertly crafted <?php echo $_category->getName();?><span itemprop="offerCount" class="none-display"><?php echo $countCategoryProducts;?></span> start at <span itemprop="lowPrice" id="category_min_price" class="text-bold"><?php echo Mage::helper('function')->formatPrice(Mage::helper('function')->getCategoryMinPrice($_category->getId()));?></span><meta content="USD" itemprop="priceCurrency"> - <span itemprop="highPrice" id="category_max_price" class="text-bold"><?php echo Mage::helper('function')->formatPrice(Mage::helper('function')->getCategoryMaxPrice($_category->getId()));?></span><meta content="USD" itemprop="priceCurrency">.</span></div><?php */?>
+				<?php
+				} ?>
+			</div>        
+			<?php 
+			//	S::Showing category description
+			if($_description=trim($this->getCurrentCategory()->getDescription())): ?>
+				<div class="category-description hidden-xs std">
+					<div class="category-des-text">
+						<?php echo $_helper->categoryAttribute($_category, Mage::helper('function')->readMore($_description), 'description'); ?>
+					</div>
+					<script>
+						jQuery(".category-des-text p").css("padding","0px");
+					</script>
+				</div>
+				<script>
+				<?php /*?>jQuery(document).ready(function(){
+					var content    = jQuery(".category-des-text").html().substr(0);
+					var image = content.lastIndexOf('<img');
+					
+					var cdtH = jQuery(".category-des-text").height();
+					if(image < 0){
+						if(cdtH > 30){
+							jQuery(".category-des-text").css("height","18px");
+							jQuery(".read_more").show();
+						}
+					}
+					jQuery(".category-des-text").css("visibility","visible");
+				});<?php */?>
+				jQuery(".read_more").click(function(){
+					jQuery(this).parents(".category-description").find("#category_read_more").show().removeClass('hidden');
+					jQuery(this).hide();
+					jQuery(".read_less").show().removeClass('hidden');
+				});
+				jQuery(".read_less").click(function(){
+					jQuery(this).parents(".category-description").find("#category_read_more").hide().addClass('hidden');
+					jQuery(this).hide();
+					jQuery(".read_more").show();
+				});
+				</script>
+			<?php 
+			endif; 
+			//E::Showing category description
+		
+			// specific for build your own header
+			if(in_array($_category->getId(),$byoCategories)){
+				echo $this->getLayout()->createBlock('buildyourown/header')->setTemplate('buildyourown/header.phtml')->toHTML();
+			}?> 
+			<div id="catalog-filter-controller" data-filter-panel-display-state="none" data-filter-panel-current-tab-index="0" class="relative-placeholder"><?php echo $this->getChildHtml('catalog_filter');?> </div>
+			<?php echo $this->getProductListHtml(); ?> 
+		</div>
+	<?php 
+	endif; ?>
+    <div class="container showcase-bg-white">
+		<div class="row no-gutters showcase-border-bottom max-margin-bottom">			
+			<div class="col-xs-12">
+				<?php				
+				try{
+					$cacheHelper = Mage::helper('helloworld');
+					$key = md5($_category->getId().'category-testimonials'.date('ymd').ceil((date('G') + 1)/6));
+					
+					if ($content = $cacheHelper->getDataFromCache($key)) { 
+						//nothing to do as $content now has the data
+					} 
+					else {
+						$content = $this->getLayout()->createBlock('testimonials/items')
+												->setTemplate('homepage/category_testimonials.phtml')->toHTML();
+						$cacheHelper->setKey($key)->setData($content)->saveDataInCache();
+					}
+					echo $content;
+				}
+				catch(Exception $e){
+					echo $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/category_testimonials.phtml')->toHTML();
+				} ?>
+			</div>
+		</div>
+	</div>
+	<div id="go-to-top-link" class="clickable hide">
+		<button class="button btn-primary"> <i class="fa fa-angle-up fontsize-type7 text-on-dark"></i> </button>
+	</div>
+	<?php 
+	if($_articlePosts = $this->getCurrentCategory()->getCategoryArticlePosts()): ?>
+		<div class="container showcase-bg-white catalog-artical-post"><?php echo $_articlePosts;?></div>
+	<?php 
+	endif; ?>
+	<div class="container" id="flashDeal"></div>
+</div>

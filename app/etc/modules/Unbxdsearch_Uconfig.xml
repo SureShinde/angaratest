@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Unbxdsearch_Uconfig>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Unbxdsearch_Uconfig>
+    </modules>
+</config>

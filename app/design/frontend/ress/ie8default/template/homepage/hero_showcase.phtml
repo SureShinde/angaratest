@@ -1,0 +1,184 @@
+<style>
+#content-showcase { display: block !important }
+.actionbtn { position: absolute; bottom: 45px; left: 124px; }
+.timeleftxt2 { display: inline-block; }
+.hourdigits2 { display: inline-block; min-width: 12px; padding-left: 5px; }
+.minutedegites2 { display: inline-block; min-width: 12px; }
+.secondigits2 { display: inline-block; min-width: 12px; }
+.colondigit2 { display: inline-block; font-size: 18px; }
+.global-offer-wrapper { height: 27px; }
+.actionbtn .btn-sm { line-height: 34px; padding: 0; }
+.slidesjs-container { height: 400px !important; }
+.slidesjs-previous { height: 55px; width: 31px; background: url(/skin/frontend/ress/default/images/sprites/a21.png) -135px -33px no-repeat; cursor: pointer; position: absolute; z-index: 12; left: 12px; top: 173px; text-indent: -9999px; display: none; }
+.slidesjs-previous:hover, .slidesjs-previous:focus { background-position: -15px -33px; transition: none; }
+.slidesjs-next { height: 55px; width: 31px; background: url(/skin/frontend/ress/default/images/sprites/a21.png) -196px -33px no-repeat; cursor: pointer; position: absolute; z-index: 12; right: 12px; top: 173px; text-indent: -9999px; display: none; }
+.slidesjs-next:hover, .slidesjs-next:focus { background-position: -76px -33px; transition: none; }
+.slidesjs-pagination { position: absolute; bottom: 5px; left: 0; right: 0; margin: auto; width: 69px; z-index: 12; }
+.slidesjs-pagination-item a { float: left; background: url(/skin/frontend/ress/default/images/sprites/b21.png) -38px -5px no-repeat; text-indent: -9999px; width: 15px; height: 20px; margin: 0 4px; }
+.slidesjs-pagination-item a.active { background-position: -98px -5px; width: 15px; height: 20px; transition: none; }
+.showcase-bg-hero { background-color: #fff; }
+.countdownticker2 {height:30px; width:186px; position:absolute; bottom:89px; right:785px; text-align:center; font: bold 18px/26px "Arial", Helvetica, serif; color:#000000; display:block; border:dashed 1px; }
+.hero-desktop-banners img{max-width:100%;}
+
+#hero-slider-desktop .slick-dots, #hero-slider-ipad .slick-dots{bottom:0px!important; text-align:center;}
+.main-hero-banner{width:70%}
+.small-hero-banner{width:30%}
+.small-hero-banner .sm-h-1, .small-hero-banner .sm-h-2{width:100%; float:left; position:relative}
+
+.extra-links{position: absolute; left: 0px; right: 0px; height: 40px; bottom: 12px;}
+.extra-links a{display: block; width: 50%; height: 100%; float: left;}
+
+.tickr-holder{position:absolute; top:28%; left:33%; right:initial;}
+.tickr-width{width:320px; margin:0 auto}
+.tickr-style{border:2px dashed #000000;font-weight:bold;padding:3px 15px;font-size:34px;float:left;color:#ffffff; background:#000000;}
+
+@media (min-width: 768px ) and (max-width: 999px) {
+.countdownticker2 { bottom: 74px; right: 146px; }
+.actionbtn { position: absolute; bottom: 45px; left: 44px; }
+.slidesjs-pagination { position: absolute; bottom: 5px; left: 0; right: 0; margin: auto; width: 69px; z-index: 12; }
+.main-hero-banner{width:100%}
+.small-hero-banner{width:100%}
+.small-hero-banner .sm-h-1, .small-hero-banner .sm-h-2{width:50%;}
+.small-hero-banner .sm-h-1{float:left}
+.small-hero-banner .sm-h-2{float:right}
+.extra-links{bottom:8px;}
+}
+@media (max-width: 768px ){
+	.tickr-holder{position:absolute;top:29%; left:36%; right:initial;}
+	.tickr-width{width:230px; margin:0 auto}
+	.tickr-style{border:2px dashed #000000;font-weight:bold;padding:3px 15px;font-size:19px;float:left;color:#ffffff; background:#000000;}
+}
+
+
+</style>
+<!-- #hero-slider-desktop .slick-dots, #hero-slider-ipad .slick-dots{bottom:-10px!important; background:rgba(0,0,0,.2); height:100px;}
+#hero-slider-desktop .slick-dots li, #hero-slider-ipad .slick-dots li{width:33.3333%; text-align:center; float:left;}
+#hero-slider-desktop .slick-dots li.slick-active, #hero-slider-ipad .slick-dots li.slick-active,
+#hero-slider-desktop .slick-dots li:hover, #hero-slider-ipad .slick-dots li:hover{background:rgba(0,0,0,.2);height:100px;}
+#hero-slider-desktop .slick-dots li button, #hero-slider-ipad .slick-dots li button{font-size:15px; display:block; width:100%; height:100px; color:#ffffff}
+#hero-slider-desktop .slick-dots li button:before, #hero-slider-ipad .slick-dots li button:before{display:none!important;}
+-->
+<?php $tickerState = false; ?>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+<?php	$channel = Mage::getSingleton('core/session')->getVisitorChannel();?>
+    
+<div class="container-fluid showcase-border-bottom showcase-bg-hero">
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+		<div class="visible-sm" >
+			<div class="pull-left main-hero-banner">
+				<div id="hero-slider-ipad"  class="relative-placeholder no-margin">
+					
+					<?php if($tickerState == true){ ?>
+						<?php echo Mage::helper('function')->getHomePageTickerHtml();?>
+					<?php } ?>
+					
+					<?php if($channel && $channel->getHomeHeroBannerTablet()):
+						$bannerTablet = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerTablet()); 		 
+						if($bannerTablet):?>
+							<div id="homeBannerTabletSlide1" style="height:400px;"> 
+								<?php if($bannerTablet->getUrl() != ''):?>
+									<a href="<?php echo $bannerTablet->getUrl()?>">
+								<?php endif;?>
+								<?php echo $bannerTablet->getHtml();?>
+								<?php if($bannerTablet->getUrl() != ''):?>
+									</a>
+								<?php endif;?>
+							</div>
+						<?php endif;
+					endif; ?>
+				</div>
+			</div>
+			<div class="pull-left small-hero-banner">
+				<div class="sm-h-1">
+					<a href="/jewelry/aquamarine-jewelry.html?icid=home|main|lsb|03012016"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/promotion/default/hero-banner-small-1.jpg" usemap="#desktopmap2" class="img-responsive center-block"  alt="Aquamarine jewelry" title="Aquamarine jewelry"/></a>
+				</div>
+				
+				<div class="sm-h-2">
+					<a href="/products.html?icid=home|main|usb|03012016"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/promotion/default/hero-banner-small-2.jpg" usemap="#desktopmap" class="img-responsive center-block" alt="10% off + Free Gift" title="10% off + Free Gift"></a>
+				</div>
+			</div>
+		</div>
+	<?php } else { ?>
+		<div class="container no-padding hero-desktop-banners visible-md">
+			<div class="pull-left main-hero-banner" style="min-height:100px;">
+				<div id="hero-slider-desktop" class="relative-placeholder no-margin">
+				
+					<?php if($tickerState == true){ ?>
+						<?php echo Mage::helper('function')->getHomePageTickerHtml();?>
+					<?php } ?>
+					<?php if($channel && $channel->getHomeHeroBannerDesktop()): ?>
+						<?php $bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerDesktop()); ?>
+						<?php if($bannerDesktop): ?>
+							<div id="homeBannerDesktopSlide1">            	
+								<?php if($bannerDesktop->getUrl() != ''):?>
+									<a href="<?php echo $bannerDesktop->getUrl()?>">
+								<?php endif;?>
+								<?php echo $bannerDesktop->getHtml(); ?>
+								<?php if($bannerDesktop->getUrl() != ''):?>
+									</a>
+								<?php endif;?>
+							</div>
+						<?php endif; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="pull-left small-hero-banner">
+				<div class="sm-h-1">
+					<a href="/jewelry/aquamarine-jewelry.html?icid=home|main|lsb|03012016"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/promotion/default/hero-banner-small-1.jpg" usemap="#desktopmap2" class="img-responsive center-block"  alt="Aquamarine jewelry" title="Aquamarine jewelry"/></a>
+				</div>
+				
+				<div class="sm-h-2">
+					<a href="/products.html?icid=home|main|usb|03012016"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/promotion/default/hero-banner-small-2.jpg" usemap="#desktopmap" class="img-responsive center-block" alt="10% off + Free Gift" title="10% off + Free Gift"></a>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	
+	
+	
+	
+	<?php /*?><script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#hero-slider-desktop').slick({
+				arrows			: false,
+				dots			: true,
+				slidesToShow	: 1,
+				slidesToScroll	: 1,
+				autoplay		: true,
+				autoplaySpeed	: 5000,
+				customPaging: function(slider, i) {
+					return '<button class="tab">' + jQuery(slider.$slides[i]).find('.slide-title').text() + '</button>';
+				}
+			});
+		});
+		
+		jQuery(document).ready(function(){
+			jQuery('#hero-slider-ipad').slick({
+				arrows			: false,
+				dots			: true,
+				slidesToShow	: 1,
+				slidesToScroll	: 1,
+				autoplay		: true,
+				autoplaySpeed	: 5000,
+				customPaging: function(slider, i) {
+					return '<button class="tab">' + jQuery(slider.$slides[i]).find('.slide-title').text() + '</button>';
+				}
+			});
+		});
+	</script><?php */?>
+	
+	
+	<?php /*<script src="/skin/frontend/ress/default/js/jquery.slides.js"></script>
+	 <script src="/skin/frontend/ress/default/js/countdown-ticker.js"></script>  
+	<script>
+		jQuery(function() {
+		  jQuery('.slides').slidesjs({		
+			width: 940,
+			height: 400,
+			play: {
+			  interval: 10000
+			}
+		  });
+		});
+	</script> */ ?>
+</div>

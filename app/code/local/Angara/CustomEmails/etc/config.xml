@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_CustomEmails>
+		  <version>0.1.0</version>
+		</Angara_CustomEmails>
+	</modules>
+	<global>
+		<helpers>
+		  <customemails>
+			<class>Angara_CustomEmails_Helper</class>
+		  </customemails>
+		</helpers>
+		<models>
+			<customemails>
+				<class>Angara_CustomEmails_Model</class>
+			</customemails>
+		</models>
+		<events>
+			<sales_order_save_commit_after>
+				<observers>
+					<mail_status_change>
+						<type>singleton</type>
+						<class>customemails/observer</class>
+						<method>invoicedStatusChange</method>
+					</mail_status_change>
+				</observers>
+			</sales_order_save_commit_after>
+		</events>
+		<template>
+			<email>
+				<order_status_change_email_guest module="customemails">
+					<label>Status Mail Invoice</label>
+					<file>sales/order_update_guest.html</file>
+					<type>html</type>
+				</order_status_change_email_guest>
+				<order_status_change_email module="customemails">
+					<label>Status Mail Invoice</label>
+					<file>sales/order_update.html</file>
+					<type>html</type>
+				</order_status_change_email>
+			</email>
+		</template>
+  </global>
+</config> 

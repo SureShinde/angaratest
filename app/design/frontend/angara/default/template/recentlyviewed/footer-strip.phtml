@@ -1,0 +1,61 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items= array();
+if($indx == "")
+{
+	$rw_items = $this->CollectRecentlyViewed();
+}
+$panel_state = $this->checkPanelState();
+if (is_array($rw_items) && count($rw_items) > 0) :
+    ?>
+    <script type="text/javascript">
+      var atwix_base_url = '<?php echo Mage::getBaseUrl();?>';
+    </script>
+
+    <div <?php echo (($panel_state == 'show')? '' : 'style="display: none;"');?> class="rw-wrapper" id="rvi_panel">
+	
+	<div class="rvi_btn btn_hide"></div>
+	
+    <div class="rvi-head"></div>
+        <table border="0" width="100%">
+            <tr>
+                <td width="100%" valign="middle">
+                        <div class="rw-block" id="rcvrwblock">                        
+                        <?php 
+						$prodmodel = Mage::getModel('catalog/product'); 
+						foreach ($rw_items as $rw_item)
+						{                              
+                            $prodmodel->load($rw_item);                              
+							if($prodmodel->getImage()){
+							?>                              
+							<a id='rec_prod_<?php echo $rw_item;?>' href="<?php echo $prodmodel->getProductUrl();?>"><img align="middle" class="rw-thumb" src="<?php echo Mage::helper('function')->getResizedUrl('catalog/product/'.$prodmodel->getImage(),70,70);?>" prod_id="<?php echo $rw_item;?>" alt="" /></a> 
+							<?php 
+							}
+							?>
+                        <?php 
+						} 
+						?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="rw-wrapper-hidden" <?php echo (($panel_state != 'show')? '' : 'style="display: none;"');?> id = "rvi_panel2">
+		<div class="rvi_btn btn_show"></div>
+    	<div class="rvi-head"></div>
+    </div>
+
+<?php endif; ?>
+<script>
+jQuery(function(){
+	jQuery('.btn_show').click(function(){
+		jQuery('#rvi_panel2').fadeOut();
+		jQuery('#rvi_panel').fadeIn();
+	});
+	jQuery('.btn_hide').click(function(){
+		jQuery('#rvi_panel2').fadeIn();
+		jQuery('#rvi_panel').fadeOut();
+	});
+})
+</script>

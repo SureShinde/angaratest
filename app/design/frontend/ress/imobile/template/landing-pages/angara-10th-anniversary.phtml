@@ -1,0 +1,131 @@
+<div class="container showcase-bg-white min-padding-top relative-placeholder">	
+	<div class="main clearfix visible-xs">
+		<div class="bb-custom-wrapper mobile">
+			<div id="bb-bookblock-mobile" class="bb-bookblock mobile">
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_01.jpg" alt="image01"/>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_02.jpg" alt="image02"/> 
+				</div>
+				<div class="bb-item">
+					<a href="/collection/tajmahal-sugarloaf"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_03.jpg" alt="image03"/></a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_04.jpg" alt="image04"/> 
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_05.jpg" alt="image05"/> 
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_06.jpg" alt="image05"/> 
+				</div>
+				<div class="bb-item">
+					<a href="/collection/high-jewelry?icid=10th|magazine|page|7|09142015"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_07.jpg" alt="image05"/> </a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_08.jpg" alt="image05"/> 
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_09.jpg" alt="image05"/> 
+				</div>
+				<div class="bb-item">
+					<a href="/customer-stories?icid=10th|magazine|page|10|09142015"><img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_10.jpg" alt="image05"/> </a>
+				</div>
+				<div class="bb-item">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/magazine/mobile/10th_celebration_11.jpg" alt="image05"/> 
+				</div>
+				
+			</div>
+			<nav>
+				<?php /* <a id="bb-nav-first-mobile" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a> */ ?>
+				<a id="bb-nav-prev-mobile" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+				<a id="bb-nav-next-mobile" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+				<?php /* <a id="bb-nav-last-mobile" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a> */ ?>
+			</nav>
+		</div>
+	</div>
+	<script>
+			var Page = (function() {
+				
+				var config = {
+						$bookBlockMobile : jQuery( '#bb-bookblock-mobile' ),
+						$navNextMobile : jQuery( '#bb-nav-next-mobile' ),
+						$navPrevMobile : jQuery( '#bb-nav-prev-mobile' ),
+						$navFirstMobile : jQuery( '#bb-nav-first-mobile' ),
+						$navLastMobile : jQuery( '#bb-nav-last-mobile' )
+					},
+					init = function() {
+						config.$bookBlockMobile.bookblock( {
+							speed : 800,
+							shadowSides : 0.8,
+							shadowFlip : 0.7
+						} );
+						initEvents();
+					},
+					initEvents = function() {
+						
+						var $slides = config.$bookBlockMobile.children();
+
+						// add navigation events
+						config.$navNextMobile.on( 'click touchstart', function() {
+							config.$bookBlockMobile.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrevMobile.on( 'click touchstart', function() {
+							config.$bookBlockMobile.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirstMobile.on( 'click touchstart', function() {
+							config.$bookBlockMobile.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLastMobile.on( 'click touchstart', function() {
+							config.$bookBlockMobile.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeleft' : function( event ) {
+								config.$bookBlockMobile.bookblock( 'next' );
+								return false;
+							},
+							'swiperight' : function( event ) {
+								config.$bookBlockMobile.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						jQuery( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+									config.$bookBlockMobile.bookblock( 'prev' );
+									break;
+								case arrow.right:
+									config.$bookBlockMobile.bookblock( 'next' );
+									break;
+							}
+						} );
+					};
+
+					return { init : init };
+
+			})();
+		</script>			
+		<script>
+				Page.init();
+		</script>
+</div>

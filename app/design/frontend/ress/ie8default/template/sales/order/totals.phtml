@@ -1,0 +1,51 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var $this Mage_Sales_Block_Order_Totals
+ * @see Mage_Sales_Block_Order_Totals
+ */
+
+?>
+<?php foreach ($this->getTotals() as $_code => $_total): ?>
+
+<?php 	//	S::Code added by Vaseem for EXTRA50 discount 
+$getDiscountText		=	$_total->getLabel();					//	Get the discount text	-	Discount (most10)	or Discount (most10,EXTRA50)
+$getDiscountValue		=	$_total;								//	Get the discount value	- 	$50
+$totalCouponCodeInCart	=	explode(',',$getDiscountText);		//	If customer cancel the auto applied code then we dont need to show special discount
+
+
+if( strstr( $getDiscountText, 'EXTRA50') && count($totalCouponCodeInCart)>1){
+	$specialDiscountCode	=	'EXTRA50';
+	$specialDiscountAmount	=	'50';
+	$getDiscountText		=	str_replace(",EXTRA50", '',$getDiscountText);
+	$getDiscountValue		=	$getDiscountValue-$specialDiscountAmount;
+	$specialDiscount		=	1;
+}
+//	E::Code added by Vaseem for EXTRA50 discount 
+?>
+    <?php if ($_total->getBlockName()): ?>
+        <?php echo $this->getChildHtml($_total->getBlockName(), false); ?>
+    <?php else:?>
+    <tr class="<?php echo $_code?>">
+        <td <?php echo $this->getLabelProperties()?>>
+            <?php if ($_total->getStrong()):?>
+            <strong><?php echo $this->escapeHtml($_total->getLabel());?></strong>
+            <?php else:?>
+            <?php echo $this->escapeHtml($getDiscountText);?>
+            <?php endif?>
+        </td>
+        <td <?php echo $this->getValueProperties()?>>
+            <?php if ($_total->getStrong()):?>
+            <strong><?php echo $this->formatValue($_total) ?></strong>
+            <?php else:?>
+            <?php echo $this->formatValue($_total) ?>
+            <?php endif?>
+        </td>
+    </tr>
+    <?php endif?>
+<?php endforeach?>

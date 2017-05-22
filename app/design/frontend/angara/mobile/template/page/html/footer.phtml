@@ -1,0 +1,75 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$currUR = Mage::getSingleton('cms/page')->getIdentifier()=='home';
+$page = Mage::app()->getFrontController()->getRequest()->getRouteName();
+?>
+
+<div class="footer-container">
+	<div class="footer">
+		<div class="bottommyaccountbox">
+			<a href="<?php echo $this->getUrl(); ?>">
+				<div class="bottommyhome" <?php if($currUR && $page == 'cms'){ ?>style="display:none;"<?php }?>></div>
+			</a>	
+			
+			<div class="bottommyaccount <?php if($currUR && $page == 'cms'){ ?>bottommyaccounthome<?php }?>">
+				<a href="<?php echo Mage::getUrl('customer/account')?>">
+					<span>my accounts</span>
+				</a>
+			</div>
+			
+			<div class="bottommycart <?php if($currUR && $page == 'cms'){ ?>bottommycarthome<?php }?>">
+				<?php
+				//get total items in cart 
+				$total_cart_item = count(Mage::getBlockSingleton('checkout/cart')->getItems()); ?>			
+			
+				<a href="<?php echo $this->getUrl('checkout/cart'); ?>">
+					<span>
+						My cart
+						<?php 
+						if($total_cart_item > 0 && $total_cart_item!='')	
+							echo $this->__('( %s )',$total_cart_item); ?>
+					</span>
+				</a>
+			</div>
+		</div>
+		  
+		<div class="bottomnav">
+			<ul>
+				<li><a href="/privacy-and-security.html">Privacy</a>|</li>
+				<li><a href="/term-of-use.html">Terms</a>|</li>
+				<li><a href="/return-policy.html">Return Policy</a>|</li>
+				<li><a href="/shipping.html">Shipping</a>|</li>
+                <li><a href="/about-us.html">About</a>|</li>
+                <li><a href="/contact-us.html">Contact</a></li>
+			</ul>
+			
+			<div class="clear"></div>
+		</div>
+		
+		<div class="m-copyright">&copy; 2014 Angara.com. All Rights Reserved.</div>
+	</div>
+</div>	

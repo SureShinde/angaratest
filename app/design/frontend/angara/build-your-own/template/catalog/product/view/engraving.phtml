@@ -1,0 +1,104 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<div class="wrapper">
+  <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?> name="prodpage" id="prodpage">
+  <div class="no-display"> 
+  <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" /> 
+  <input type="hidden" name="related_product" id="related-products-field" value="" /> 
+  </div>
+  <div class="shares">
+    <ul>
+      <li class="share">Share:</li>
+      <li class="email"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" target="_new"></a></li>
+      <li class="facebook"><a href="http://www.facebook.com/Angaradotcom" target="_blank"></a></li>
+      <li class="twiter"><a href="http://www.twitter.com/Angara" target="_blank"></a></li>
+    </ul>
+  </div>
+  <div class="wrapperthumb">
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+    <div class="pagethumb customize_tabsel nonemargin"><img src="/skin/frontend/angara/default/images/build-your-own/thumbnail.jpg" /></div>
+  </div>
+  <div class="wrapperbyo">
+    <div class="pagetitle">Engraving</div>
+    <div class="clear"></div>
+    <div class="alldetailbox">
+      <div class="yourtxtbox"> <span class="yourtxt"><strong>Your Text</strong></span> <span class="engravetxt">
+        <input name="" type="text" style="width:176px; height:18px; font:12px Arial, Helvetica, sans-serif, Tahoma;" />
+        </span> <small>(Maximaum 10 Characters Allowed)</small> <span class="yourtxt"><strong>Engraving Price:</strong> $75</span> </div>
+      <div class="engravingfont"> <span class="fontstyle"><a href="#"><img src="/skin/frontend/angara/default/images/build-your-own/engraving-font1.jpg" alt="style1" /></a></span> <span class="fontstyle" style="float:right"><a href="#"><img src="/skin/frontend/angara/default/images/build-your-own/engraving-font2.jpg" alt="style2"   /></a></span> </div>
+      <div class="clear"></div>
+      <div class="engravingnote">Any engraving will make this product not returnable!</div>
+    </div>
+    <!--<div class="productimg"><img src="/skin/frontend/angara/default/images/build-your-own/productimg.jpg" /></div>-->
+    <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+    <div class="productimg">
+        <?php
+            $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </div>
+    <?php else: ?>
+    <div class="productimg">
+        <?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </div>
+    <?php endif; ?>
+    <div class="multioption">
+      <div class="promoreview">
+        <div class="viewmore">Price</div>
+        <div class="flexipricebold">$369.99</div>
+        <div class="expecteship">Estimated ship date <span class="exshipdate">Thursday, February 10 </span></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="actionbutton">
+    	<a href="javascript:document.prodpage.submit();">
+        	<img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" /> 
+        </a>
+        <a href="javascript:document.prodpage.submit();">
+        	<img src="/skin/frontend/angara/default/images/build-your-own/buyit-button.jpg" />
+        </a>    
+    </div>
+    <div class="clear"></div>
+  </div>
+  </form>
+</div>

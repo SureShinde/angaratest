@@ -1,0 +1,86 @@
+<?php
+$_product =	$this->getProduct();
+$productPrice =	$_product->getPrice();
+
+$sku 	= 	$_product->getSku();
+$jewelryTypeID = $_product->getJewelryType();
+if($jewelryTypeID!=''){
+	$jewelryType = $_product->getAttributeText('jewelry_type');					//	Jewelry Type
+}
+
+// Check if attribute is defined or not
+$stone1TypeValue = $_product->getStone1Type();
+	
+if($stone1TypeValue!=''){
+	$stone1Type = $_product->getAttributeText('stone1_type');					//	Center Stone Type
+}
+$productType = Mage::helper('function')->packagingImageST($stone1Type,$sku,$jewelryType);
+/*echo '<br>productType->'.$productType;
+echo '<br>sku->'.$sku;
+echo '<br>jewelryType->'.$jewelryType;*/
+?>
+
+<script type="text/javascript" language="javascript">
+finalboxImage	=	showPkgImage('<?php echo $productType?>',<?php echo $productPrice; ?>);
+
+jQuery(function(){
+	if(finalboxImage!=''){
+		jQuery('#moreviews li#pckImg').show();	
+		jQuery('#moreviews li#pckImg').html(finalboxImage);
+	}
+	else{
+		jQuery('#moreviews li#pckImg').hide();
+	}
+});
+
+function showPkgImage(productType,normalFinalPrice){
+	var boxImage 		= 	'';
+	var boxImageHtml	=	'';
+	
+	if(normalFinalPrice>1000){
+		if(productType=='DiamondRing'){
+			var boxImage = 'brownbox-with-light-r';
+		}
+		else if(productType=='DiamondEarrings' || productType=='DiamondPendant'){
+			var boxImage = 'brownbox-with-light-ep';
+		}
+		else if(productType=='ColorJewelryRing'){
+			var boxImage = 'brownbox-no-light-r';
+		}
+		else if(productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant'){
+			var boxImage = 'brownbox-no-light-ep';
+		}
+		else{
+			var boxImage = '';
+		}
+	}
+	else if(normalFinalPrice>250 && normalFinalPrice<1000){
+		if(productType=='DiamondRing' || productType=='ColorJewelryRing'){
+			var boxImage = 'woodenbox';
+		}
+		else if(productType=='DiamondEarrings' || productType=='DiamondPendant' || productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant'){
+			var boxImage = 'brownbox-no-light-ep';
+		}
+		else{
+			var boxImage = '';
+		}
+	}
+	else if( normalFinalPrice<250 && (productType=='DiamondRing' || productType=='DiamondEarrings' || productType=='DiamondPendant' || productType=='ColorJewelryRing' || productType=='ColorJewelryEarrings' || productType=='ColorJewelryPendant') ){
+		var boxImage = 'orangebox';
+	}
+	else{
+		var boxImage = '';
+	}
+	
+	if(boxImage!=''){
+		//alert(boxImage);
+		<?php if($_product->getEnableZoom()==1){?>
+		boxImage	=	boxImage+'-700';
+		<?php } ?>
+		//alert(boxImage);
+		boxImageHtml = '<span class="thumbs"><img width="56" height="56" alt="'+boxImage+'" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/angara/default/images/packaging_box/';?>'+boxImage+'.jpg" onclick="$(\'image\').src=\'<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/angara/default/images/packaging_box/';?>'+boxImage+'.jpg\';imageswitcher(\'<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/angara/default/images/packaging_box/';?>'+boxImage+'.jpg\')\"></span>';
+		//	Modified by Vaseem for image zoom
+	}
+	return boxImageHtml;
+}
+</script>

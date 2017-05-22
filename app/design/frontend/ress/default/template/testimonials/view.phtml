@@ -1,0 +1,82 @@
+<?php 
+error_reporting(1);
+$review= $this->getReviewsCollection()->getItems();
+$reviewnum=Mage::getModel('testimonials/reviewdetail')->getCollection();
+$review1=$this->getReviewscount();
+$itemscount=$this->getItemscount();
+$tempvar=ceil((count($review1)/$itemscount));
+$page=$this->getRequest()->getParams();
+if(!$page)
+	$page['page']=1; ?>
+
+<div class="reviewwrapper">
+  	<div class="pageheading">Angara Customers Share Their Jewelry Stories</div>
+    <div class="displayoption">
+    	<div class="pages">
+      	<ol>
+        	<li class="pre"><a class="previous" <?php if($page['page']>1){?>href="/testimonials/index/index/page/<?php echo $page['page']-1?>"<?php }?>>Previous</a></li>
+        	<li class="pageno">Page <?php echo $page['page']?> of <?php echo $tempvar;?></li>
+        	<li class="next"><a class="next" <?php if($page['page']<$tempvar){?>href="/testimonials/index/index/page/<?php echo $page['page']+1?>"<?php }?>>Next</a></li>
+      	</ol>
+    	</div>
+  	</div>
+	<?php
+	$testi=$this->getTestimonials();
+	foreach($review as $testimonial){ 
+		$pro = Mage::getModel('catalog/product');
+		$_product=$pro->load($testimonial->getEntityPkValue());
+		if($_product->_data['price']>70){
+			$_votes = $testimonial->getRatingVotes(); ?>
+ 			<div class="reviewholderlist">
+				<span class="reviewproholder">
+					<span class="reviewproimg"><a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product);?>"><img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image');?>" width="172" height="172"></a>
+					</span> 
+					<span class="reviewproname"><a href="<?php echo Mage::helper('catalog/product')->getProductUrl($_product)?>"><?php echo $_product->getName()?></a></span> 
+				</span> 
+				<span class="reviewnoteholder">
+					<span class="reviewtitleholder">
+						<span class="reviewnoteheading"><?php echo $this->htmlEscape($testimonial->getTitle()) ?></span>
+						<span class="reviewprorating">
+  							<table class="ratings-table">
+							 	<col width="1" />
+							  	<col />
+							  	<tbody>
+								<?php 
+								foreach($_votes as $_vote): ?>
+									<tr>
+								 		<td nowrap="nowrap" style="padding:4px 0 0 0">
+											<div class="rating-box">
+									  			<div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+											</div>
+								  			<td valign="middle" style="padding:5px 0 0 5px"><?php printf("%.1f",($_vote->getPercent()* .05))?></td>
+								  		</td>
+									</tr>
+								<?php 
+								endforeach; ?>
+							  	</tbody>
+							</table>
+  						</span> 
+					</span>
+					<span class="reviewcontentbox readingnote"><?php echo nl2br($this->htmlEscape($testimonial->getDetail())) ?><img src="/skin/frontend/angara/default/images/speakicon.png" width="28" height="15"  class="speakicon"/></span>
+					<span class="reviewerdetails">- <?php echo $this->htmlEscape($testimonial->getNickname()) ?><br>
+				  	<?php 
+					$_coreFormat = Mage_Core_Model_Locale::FORMAT_TYPE_FULL;
+				 	$value = $this->__('%s', $this->formatDate($testimonial->getCreatedAt()), 'medium');?>
+   						<small class="reviewdate"><?php echo Mage::helper('core')->formatDate($value, $_coreFormat); ?></small> 		
+					</span>
+				</span>
+    			<div style="clear:both;"></div>
+    		</div>
+		<?php 
+		} 
+	} ?> 
+    <div class="displayoption">
+    	<div class="pages">
+      	<ol>
+        	<li class="pre"><a class="previous" <?php if($page['page']>1){?>href="/testimonials/index/index/page/<?php echo $page['page']-1?>"<?php }?>>Previous</a></li>
+        	<li class="pageno">Page <?php echo $page['page']?> of <?php echo $tempvar;?></li>
+        	<li class="next"><a class="next" <?php if($page['page']<$tempvar){?>href="/testimonials/index/index/page/<?php echo $page['page']+1?>"<?php }?>>Next</a></li>
+      	</ol>
+    	</div>
+  	</div>
+</div>

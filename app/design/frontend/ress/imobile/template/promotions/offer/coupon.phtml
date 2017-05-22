@@ -1,0 +1,41 @@
+<?php 
+$coupon = $this->getCoupon(); 
+$productId = $this->getRequest()->getParam('productId');
+$additionalCost = $this->getRequest()->getParam('additionalCost');
+$_coreHelper = Mage::helper('core'); 
+$freeGifts = $this->getFreeGifts(); ?>
+
+<div class="coupon-block">
+	<div class="coupon-title">
+		<div class="table-cell coupon-code">
+			<span class="coupon"><?php echo $this->getCode();?></span>
+		</div>
+		<div class="table-cell coupon-short-des">
+			<?php echo $coupon->getShortDescription();?>
+		</div>
+		<div class="table-cell toggle-icon">
+			<span><i class="fa fa-plus fa-fw"></i></span>
+		</div>
+	</div>
+	<div class="coupon-detail">
+		<div class="coupon-des" style="<?php if(empty($freeGifts)){ ?> width:100% <?php } ?>">
+			<div class="price">Get this item for <span><?php echo $_coreHelper->currency($this->getAfterDiscountProductPrice($productId, $additionalCost),true,false);?></span></div>
+			<div class="cpn-code">
+				Use Discount Code <span class="coupon"><?php echo $this->getCode();?></span>
+			</div>
+		</div>
+        <?php if(!empty($freeGifts)):?>
+		<div class="free-gift">
+			<div class="title"><i class="fa fa-gift" style="color: #fa505a;" ></i> Free Gift<?php if(count($freeGifts) > 1):?>(s)<?php endif;?></div>
+            <?php 
+			foreach($freeGifts as $freeGift):?>
+                <div class="img"><img width="35" height="35" class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($freeGift, 'image')->resize(49);?>" alt="<?php echo $freeGift->getShortDescription();?> - Angara.com" title="<?php echo $freeGift->getShortDescription();?>" /></div>
+            <?php 
+			endforeach;?>  
+		</div>
+        <?php endif;?>
+		<div class="pro-tnc" style="width: 100%; float: left; font-size: 12px; color: #999999; text-align: center; padding-top: 10px;">
+			<?php echo $coupon->getLongDescription();?>
+		</div>
+	</div>
+</div>

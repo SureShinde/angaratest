@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Shipment>
+      <version>0.1.0</version>
+    </Angara_Shipment>
+  </modules>
+  
+	<!--S:VA	Creating a frontend router to handle functions of IndexController.php -->
+	<frontend>
+		<routers>
+			<shipment>
+				<use>standard</use>
+				<args>
+					<module>Angara_Shipment</module>
+					<frontName>shipment</frontName>
+				</args>
+			</shipment>
+		</routers>
+	</frontend>
+	
+	<!--S:VA	Creating layout handle for admin -->
+    <adminhtml>
+		<!--<layout>
+			<updates>
+				<shipment>
+					<file>shipment.xml</file>
+				</shipment>
+			</updates>
+		</layout>-->
+		
+		<!--S:VA	Creating a child menu item under Sales -> Shipment -->
+		<menu>
+			<sales>
+				<children>
+					<shipment translate="title" module="sales">
+						<title>Shipments</title>
+						<action>adminhtml/sales_shipment</action>
+						<sort_order>30</sort_order>
+							<children>
+								<types module="shipment">
+									<title>Manage Shipment Methods</title>
+									<sort_order>40</sort_order>
+									<action>admin_ship/adminhtml_ship</action>
+								</types>
+							</children>
+					</shipment>
+				</children>
+			</sales>
+		</menu>
+		
+		<!--S:VA	Creating an acl for the child menu item created under Sales -> Shipment -->
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<sales>
+							<children>
+								<shipment translate="title" module="shipment">
+									<title>Shipments</title>
+									<sort_order>10</sort_order>
+									<children>
+										<types module="shipment">
+											<title>Manage Shipment Methods</title>
+											<sort_order>40</sort_order>
+											<action>admin_ship/adminhtml_ship</action>
+										</types>
+									</children>
+								</shipment>
+							</children>
+						</sales>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+
+    </adminhtml>	
+	
+	<!--S:VA	Overriding admin controller-->
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<angara_shipment before="Mage_Adminhtml">Angara_Shipment_Adminhtml</angara_shipment>
+					</modules>
+				</args>
+			</adminhtml>
+			<shipment>
+                <use>admin</use>
+                <args>
+                  <module>Angara_Shipment</module>
+                  <frontName>admin_shipment</frontName>
+                </args>
+            </shipment>
+		</routers>
+	</admin>
+	<!--E:VA-->
+
+  <global>
+    <helpers>
+      <shipment>
+        <class>Angara_Shipment_Helper</class>
+      </shipment>
+    </helpers>
+	
+	<!--S:VA	Added to run the mysql alter script-->
+	<resources>
+	  <shipment_setup>
+		<setup>
+		  <module>Angara_Shipment</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </shipment_setup>
+	  <shipment_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </shipment_write>
+	  <shipment_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </shipment_read>
+	</resources>
+	<!--E:VA-->
+	
+  </global>
+</config> 

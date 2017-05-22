@@ -1,0 +1,324 @@
+<?php //	Code modified by Vaseem for Engraving Work Id 241	?>
+<?php 	$_product 					= 	$this->getProduct();
+		$product = Mage::getModel("catalog/product")->load($_product->getId());
+    $i = 0;
+    foreach ($product->getOptions() as $o) {
+		$optionArray[$i]		=		array('Id'=>$o->getId(),'Title'=>$o->getTitle(),'Sku'=>$o->getSku(),'Price'=>$o->getPrice(),'MaxCharacters'=>$o->getMaxCharacters());
+		$skuArray[]				=		$o->getSku();
+        $i++;
+    }
+	//echo 'product id '.$_product->getId();
+	/*echo '<pre>'; print_r($optionArray);
+	echo '<pre>'; print_r($skuArray);*/
+	if(in_array('engraving',$skuArray)){
+		$key				=		array_search( "engraving", $skuArray); 
+		$engravingOptionId	=		$optionArray[$key]['Id'];
+		$title				=		$optionArray[$key]['Title'];
+		$price				=		$optionArray[$key]['Price'];
+		$maxCharacters		=		$optionArray[$key]['MaxCharacters']-25;
+		$formattedPrice 	= 		Mage::helper('core')->currency($price, true, false);
+		$formattedPrice 	= 		($formattedPrice=='$25.00')?'$25':$formattedPrice;
+
+?>
+<div id="ultimate-engraving" class="engraving-wrapper-block engravingwrapper-ultimate">
+	<span class="certspanbox">
+    <label id="engraveLink">
+           <input name="engravering" type="checkbox" id="engraveringchk" autocomplete="off"/>
+            <span class="appraisaltxt" id="engraveTitle">Add Engraving <?php if($price>0) {echo ' For '.$formattedPrice;}?></span> 
+    </label>  
+    </span>
+<!--[if !IE]><!-->
+<div id="engraving_popup" style="top:-9999px;">
+<div class="layoverlayer"></div> 
+<!--<![endif]-->
+
+<!--[if IE]> 
+<div class="engravingwrapperIE" id="engraveDiv"> 
+<![endif]-->
+<!--[if !IE]><!--> 
+<div class="engravingwrapper" id="engraveDiv"> 
+<!--<![endif]-->
+    <div class="engravingview">
+      <div id="flashContent"> 
+        <!--[if IE]> 
+<object id="engraving" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="495" height="311" allowscriptaccess="always" flashvars=""><param name="movie" value="/skin/frontend/angara/default/flash/engraving.swf" /></object>
+<![endif]--> 
+        <!--[if !IE]><!-->
+<embed id="engraving" src="/skin/frontend/angara/default/flash/engraving.swf" quality="high" bgcolor="#ffffff" width="495" height="311" name="engraving" align="middle" wmode="window" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+<!--<![endif]--> 
+      </div>
+    </div>
+    <div class="engravingoption">
+      <div class="engraving-price"><?php if($price>0) {echo 'ENGRAVING PRICE: '. $formattedPrice;}?></div>
+      <div class="close-popup"></div>
+      <div class="engravingtxtbox">
+        <div class="engravinputbox">
+          <div class="inputboxstyle">
+            <input name="engravedText" type="text" height="28" id="engravedText" maxlength="<?php echo $maxCharacters;?>" value="Your text here" />
+            <input name="engraveFont" type="hidden" height="10" id="engraveFont" value="(SnellRoundhand Script)" />
+          </div>
+          <div class="btnclose" id="clearTxt"><a href="javascript:void(0);"><img src="/skin/frontend/angara/default/images/remove_engraving_txt.png" alt="Remove"  style="border:0;" /></a></div>
+        <div class="clear"></div>
+        </div>
+        </div>
+        <span class="remainingletters">Remaining: <b style="color:#5d5d5d;" id="remainingChar"><?php echo $maxCharacters;?></b></span>
+        <span id="showFontDiv">(SnellRoundhand Script)</span>
+      <div class="fontthumbmail">
+        <div class="fontbox"><a href="javascript:void(0);" class="activefont" rel="(SnellRoundhand Script)" alt="(SnellRoundhand Script)"  onclick="changeFontType('SnellRoundhand Script')"><img src="/skin/frontend/angara/default/images/AdobeGaramondfont.jpg" /></a></div>
+        <div class="fontbox"><a href="javascript:void(0);" rel="(Helvetica 45 Light)" alt="(Helvetica 45 Light)"  onclick="changeFontType('Helvetica 45 Light')"><img src="/skin/frontend/angara/default/images/Aparajitafont.jpg" /></a></div>
+      </div>
+      <div class="continueangraving">
+        <div id="engraveContinue" class="continue-engraving-btn"></div>
+        <?php if($price>0) {?>
+        <div class="refundable">*Engraving cost is non refundable</div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+  
+<!--[if !IE]><!-->
+	</div> 
+<!--<![endif]-->
+<div>
+<a href="javascript:void(0);" id="editEng">Edit</a>
+<a href="javascript:void(0);" id="removeEng">Remove</a>
+</div>
+</div>
+
+<style>
+#engraving_popup
+{
+margin: 0 auto;
+position:fixed;
+padding-bottom: 6px;
+width:100%;
+height:900px;
+z-index:10000;
+top:0;
+left:0;
+}
+
+.layoverlayer
+{
+background: #000;
+margin: 0 auto;
+position:absolute;
+padding-bottom: 6px;
+width: 100%;
+opacity:0.8;
+height: 100%;
+filter: alpha(opacity = 80);
+top:0;
+left:0;
+}
+.engrave-link-image-add
+{
+	width:190px;
+	height:30px;	
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:5px;
+	background:url(/skin/frontend/angara/default/images/engraving-btn.jpg) no-repeat;	
+	cursor:pointer;
+}
+.engrave-link-image-edit
+{
+	width:153px;
+	height:30px;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:5px;
+	background:url(/skin/frontend/angara/default/images/edit-engraving-btn.jpg) no-repeat;	
+	cursor:pointer;
+}
+.engravingwrapper
+{
+width:754px;
+height:311px;
+background-color:#fff;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-khtml-border-radius: 5px;
+border-radius: 5px;
+-moz-box-shadow:0px 0px 5px #797979;
+-webkit-box-shadow: 0px 0px 5px #797979;
+box-shadow: 0px 0px 5px #797979;
+border:1px solid #d8d8d8;
+position:absolute;
+top:-9999px;
+right:306px;
+cursor:default;
+z-index:9999;
+}
+.engravingwrapperIE
+{position:absolute; top:-9999px; width:754px;height:311px;background-color:#fff;border:1px solid #d8d8d8; z-index:8888; left:-475px;}
+.engravingoption
+{
+width:258px;
+float:right;
+
+}
+.engravingview
+{
+float:left;
+width:495px;
+height:311px;
+background:url(/skin/frontend/angara/default/images/engraving-metal.jpg) no-repeat top;
+border-right:solid 1px #bbbbbb;
+position:relative;
+}
+.engraving-price
+{
+background-color:#f6f6f6;
+font:15px/50px Arial, Helvetica, sans-serif;
+color:#585858;
+padding-left:15px;
+text-align:left;
+}
+.engravingtxtbox
+{
+margin:24px 0 0 15px;
+}
+
+.engravinputbox
+{
+width:215px;
+height:30px;
+border:solid 3px #e5e5e5;
+}
+.inputboxstyle
+{
+border:solid 1px #c2c2c2;
+border-right:none;
+width:185px;
+height:28px;
+float:left;
+}
+.inputboxstyle input
+{
+margin:0;
+width:175px;
+height:26px;
+padding:0 5px;
+font:12px/26px Arial, Helvetica, sans-serif;
+border:none;
+}
+.btnclose
+{
+border:solid 1px #c2c2c2;
+border-left:none;
+height:28px;
+width:28px;
+float:right;
+}
+.btnclose a
+{
+background-color:#fff;
+padding:9px;
+width:10px;
+height:10px;
+display:block;
+}
+.btnclose a:hover
+{
+background-color:#dddddd;
+}
+.fontthumbmail
+{
+height:44px;
+padding-left:15px;
+padding-top:22px;
+}
+.fontbox
+{
+margin-right:15px;
+height:44px;
+width:44px;
+float:left;
+}
+
+.fontbox a
+{
+width:36px;
+width:36px;
+border:solid 4px #b2b2b2;
+display:block;
+}
+
+.fontbox a img
+{
+display:block;
+width:32px;
+height:32px;
+border:solid 2px #fff;
+}
+
+.fontbox a:hover
+{
+border:solid 4px #990003;
+}
+.fontbox a.activefont
+{
+border:solid 4px #990003;	
+}
+
+.remainingletters
+{
+padding-top:5px;
+padding-left:15px;
+display:inline-block;
+font:11px Arial, Helvetica, sans-serif;
+color:#bdbcbc;
+text-align:left;
+float:left;
+}
+
+.continueangraving
+{
+margin:22px 0 0 15px;
+height:45px;
+}
+.close-popup
+{
+width:16px;
+height:16px;
+background:url(/skin/frontend/angara/ADVRP/images/appraisalclose.jpg) no-repeat;
+position:absolute;
+cursor:pointer;
+right:5px;
+top:5px;	
+}
+.continue-engraving-btn
+{
+	width:164px;
+	height:45px;
+	background:url(/skin/frontend/angara/default/images/continue-engraving.jpg) no-repeat;
+}
+#showFontDiv
+{
+	float:right;
+	font:bold 11px Arial, Helvetica, sans-serif;
+	display:inline-block;
+	padding-top:5px;
+	padding-right:23px;
+}
+.refundable
+{
+	font:10px Arial, Helvetica, sans-serif;
+	margin:26px 15px 0 0;
+	text-align:right;
+}
+#editEng{display:none; text-decoration:underline; float:left;text-align:center;padding-left:22px;padding-top:5px;}
+#removeEng{display:none; text-decoration:underline;float:left; text-align:center;padding-left:15px;padding-top:5px;}
+.engraving-wrapper-block
+{
+	text-align:left;
+	padding-left:5px;
+	padding-top:5px;
+}
+</style>
+
+<?php	
+	}
+?>
+<?php //	Code modified by Vaseem for Engraving Work Id 241	?>

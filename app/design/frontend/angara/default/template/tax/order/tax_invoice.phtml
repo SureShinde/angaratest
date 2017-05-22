@@ -1,0 +1,55 @@
+<?php
+    $_order  = $this->getOrder();
+    $_source = $this->getSource();
+    $_fullInfo = $_order->getFullTaxInfo();
+    global $taxIter; $taxIter++;
+?>
+<?php  ?>
+
+<?php if ($this->displayFullSummary()): ?>
+<?php $isTop = 1; ?>
+    <?php if ($_fullInfo) foreach ($_fullInfo as $info): ?>
+        <?php if (isset($info['hidden']) && $info['hidden']) continue; ?>
+        <?php
+            $percent    = $info['percent'];
+            $amount     = $info['amount'];
+            $rates      = $info['rates'];
+            $isFirst    = 1;
+        ?>
+        <?php foreach ($rates as $rate): ?>
+        <tr class="summary-details-<?php echo $taxIter; ?> summary-details<?php if ($isTop): echo ' summary-details-first'; endif; ?>"<?php if (!$this->getIsPlaneMode()):?> style="display:none;"<?php endif;?>>
+            <td <?php echo $this->getLabelProperties()?> width="217" height="40" valign="middle" style="padding-left:15px; font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333; border-right:1px solid #333;">
+                <?php echo $rate['title']; ?>
+                <?php if (!is_null($rate['percent'])): ?>
+                    (<?php echo (float)$rate['percent']; ?>%)
+                <?php endif; ?>
+                <br />
+            </td>
+            <?php if ($isFirst): ?>
+                <td <?php echo $this->getValueProperties()?> rowspan="<?php echo count($rates); ?>" width="110" height="40" valign="middle"  style=" padding-left:15px;font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333;">
+                    <?php echo $_order->formatPrice($amount); ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <?php $isFirst = 0; ?>
+        <?php $isTop = 0; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif;?>
+
+<?php if ($this->displayFullSummary() && $_fullInfo && !$this->getIsPlaneMode()): ?>
+<tr class="summary-total" onclick="expandDetails(this, '.summary-details-<?php echo $taxIter;?>')">
+<?php elseif ($this->displayFullSummary() && $_fullInfo && $this->getIsPlaneMode()): ?>
+<tr class="show-details">
+<?php else: ?>
+<tr>
+<?php endif; ?>
+    <td <?php echo $this->getLabelProperties()?> width="217" height="40" valign="middle" style="padding-left:15px; font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333; border-right:1px solid #333;">
+        <?php if ($this->displayFullSummary()): ?>
+            <div class="summary-collapse"><?php echo $this->__('Tax'); ?></div>
+        <?php else: ?>
+            <?php echo $this->__('Tax'); ?>
+        <?php endif;?>
+    </td>
+    <td <?php echo $this->getValueProperties()?> width="110" height="40" valign="middle"  style=" padding-left:15px;font:bold 15px Arial, Helvetica, sans-serif; border-top:1px solid #333;"><?php echo $_order->formatPrice($_source->getTaxAmount()) ?></td>
+</tr>

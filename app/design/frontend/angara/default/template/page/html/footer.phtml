@@ -1,0 +1,150 @@
+<?php //	Header offer strip placed in footer
+/*if($this->getRequest()->getControllerName()!='onepage'){
+	echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_offer_strip')->toHtml();
+}*/
+?>
+<?php echo $this->getLayout()->createBlock('bannerslider/bannerslider')->setTemplate('bannerslider/bannerhome.phtml')->toHTML(); ?>
+<div class="footer-container">
+    <div class="footer">
+        <?php echo $this->getChildHtml(); ?>        
+        <address><?php echo $this->getCopyright() ?></address> 
+		  	
+    </div>
+</div>
+<?php
+$thankPopupReqValues =  Mage::app()->getRequest()->getParams();
+//echo '<pre>'; print_r($thankPopupReqValues); die;
+if(isset($thankPopupReqValues['newslettertype']) && $thankPopupReqValues['newslettertype'] !='') {?> 
+<div id="thanks-wrapper">
+	<div id="thanks-main">
+		<div class="thanku-title">Thank You!</div>
+		<div class="thanks-offer-text">You will be the first to know about exciting products, special offers, latest news updates and much more.</div>
+		<div class="thanks-offer-btn"><a href="JavaScript:void(0);" onclick="closethankspopup()">Continue Shopping</a></div>
+		<div class="thanks-cross-btn"><a href="JavaScript:void(0);" onclick="closethankspopup()">X</a></div>
+	</div>
+</div>
+<?php } ?>
+<?php // Div Added by Vaseem for occasion popup	BT-822 ?>
+<!-- Mask to cover the whole screen -->
+<div id="mask"></div>
+<div id="lightboxBlackOverlay"></div>
+<?php // Div Added by Vaseem for occasion popup	BT-822 ?>
+
+<?php // Re marketing code added by Anil Jain - 22-08-2013 ?>
+<!-- Google Code for Remarketing Tag -->
+<?php
+if($this->getRequest()->getControllerName() == 'cart'){
+	$cartHelper = Mage::helper('checkout/cart');
+	$items = $cartHelper->getCart()->getItems();
+	$skulist = '';
+	$pricelist = '';
+	foreach ($items as $item) {
+		if ($item->getProduct()->getPrice() > 0 && $item->getProduct()->getVisibility()!=1) {
+			$pro_price = $item->getProduct()->getPrice();
+			$pro_skus = $item->getProduct()->getSku();
+			$_prod = Mage::getModel('catalog/product')->loadByAttribute('sku',$pro_skus);
+			$pro_sku = $_prod->getMasterSku();
+			if($skulist == ''){
+				$skulist="'".$pro_sku."'";
+			}else{
+				$skulist.=",'".$pro_sku."'";
+			}
+			if($pricelist == ''){
+				$pricelist=$pro_price;
+			}else{
+				$pricelist.=",".$pro_price;
+			}			
+		}
+	}
+	?>
+	<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: [<?php echo $skulist; ?>],
+		ecomm_pagetype: 'cart',
+		ecomm_totalvalue: [<?php echo $pricelist; ?>]
+		};
+	</script>
+	<?php
+}else if($this->getRequest()->getControllerName()=='product'){
+	if($product = Mage::registry('current_product')){
+		$sku = $product->getSku();
+		$price = $product->getPrice();
+		?>
+        <script type="text/javascript">
+			var google_tag_params = {
+				ecomm_prodid: '<?php echo $sku; ?>',
+				ecomm_pagetype: 'product',
+				ecomm_totalvalue: <?php echo $price; ?>
+			};
+		</script>
+		<?php
+	}
+}else if($this->getRequest()->getControllerName()=='category'){
+	?>
+	<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'category',
+		ecomm_totalvalue: ''
+		};
+	</script>
+	<?php	
+}else if($this->getRequest()->getControllerName()=='index'){
+	?>
+	<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'home',
+		ecomm_totalvalue: ''
+		};
+	</script>
+	<?php	
+}else if($this->getRequest()->getControllerName()=='searchresults'){
+	?>
+	<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'searchresults',
+		ecomm_totalvalue: ''
+		};
+	</script>
+	<?php	
+}/*else if($this->getRequest()->getControllerName()=='onepage' && $this->getRequest()->getActionName()=='success'){
+	// controlled on success page
+}*/else{
+	?>
+	<script type="text/javascript">
+		var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'other',
+		ecomm_totalvalue: ''
+		};
+	</script>
+	<?php
+}
+?>
+<?php /*var googleScript = document.createElement('script');
+	googleScript.setAttribute("type","text/javascript");
+	googleScript.setAttribute("src", '//www.googleadservices.com/pagead/conversion.js');
+	document.getElementsByTagName("head")[0].appendChild(googleScript);*/?>
+<script type="text/javascript">
+/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+/* ]]> */
+</script>
+<?php 
+//$browserVersion =  $_SERVER['HTTP_USER_AGENT'];
+if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.') !== false)
+{ ?>
+<?php } else {?>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<?php } ?>
+<noscript>
+    <div style="display:inline;">
+    	<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1064978809/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+<?php // Re marketing code added by Anil Jain - 22-08-2013 ?>
+<!-- Google Code for Remarketing Tag -->

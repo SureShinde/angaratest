@@ -1,0 +1,26 @@
+<config>
+    <modules>
+        <Webflaresolutions_Producttags>
+            <version>0.1.0</version>
+        </Webflaresolutions_Producttags>
+    </modules>   
+    <global>
+        <models>
+            <webflaresolutions_producttags>
+                <class>Webflaresolutions_Producttags_Model</class>
+            </webflaresolutions_producttags>
+		</models>
+        <resources>
+            <producttags_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </producttags_write>
+            <producttags_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </producttags_read>
+        </resources>
+    </global>
+</config>

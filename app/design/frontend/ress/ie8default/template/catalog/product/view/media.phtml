@@ -1,0 +1,108 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+
+$product = $this->getProduct();
+$helper  = $this->helper('catalog/output');
+$userAgent = Mage::getUserAgent();
+if(strpos(strtolower($product->getAttributeText('stone1_name')),'sapphire') !== false && $product->getAttributeText('jewelry_type') == 'Ring'):?>
+<style>
+<?php if($userAgent['browser_name'] != 'msie'): ?>
+@media (min-width: 999px) {
+	.product-essential .product-img-box #image{}
+}
+<?php else: ?>
+	.product-essential .product-img-box #image{}
+<?php endif; ?>
+</style>
+<?php 
+endif;
+
+// Get the base image path
+$baseImageFile = ($product->getImage() != 'no_selection' and $product->getImage()) ? $product->getImage() : false;
+$galleryImages = array();
+
+// Process the gallery images
+foreach ($this->getGalleryImages() as $image) {
+    if ($baseImageFile and $image->getFile() === $baseImageFile) {
+        //only add images that aren't the baseImage
+        continue;
+    }
+    $galleryImages[] = $image;
+}
+
+$galleryImageSize = array(
+    'x' => 60,
+    'y' => 60,
+); ?>
+<div class="relative-placeholder">
+	<div class="simpleLens-big-image-container">
+	<?php 
+	if($baseImageFile): ?>
+		<div class="product-image product-image-zoom simpleLens-lens-image">
+		   <img itemprop="image" id="image" class="img-responsive simpleLens-big-image" src="<?php echo $this->helper('catalog/image')->init($product, 'image');?>" alt="<?php echo $product->getShortDescription();?> - Angara.com" title="<?php echo $product->getShortDescription();?>">
+		</div>
+	<?php 
+	endif;		
+	// Code Added by Pankaj for Chain Message on product page.
+	if($product->getChain1Length()){?>
+		<div class="text-center small max-padding-bottom">
+		<?php 
+		$exclude_chain_prod_arr = array('SP0359PR','SP0358PR','SP0357PR','SP0355PR','SP0137R','SP0137S','SP0138R','SP0138S','SP0139R','SP0139S','SPY0138R','SP0373D','SP0352PR','SP0371D');
+		if(!in_array($product->getSku(), $exclude_chain_prod_arr)){ 
+		// skip chain message for selected products Ticket: #500?>
+			(<?php echo $product->getChain1Length(); ?> inch <span id="pendantmsg" class="dyn_metal1_type"><?php if($product->getAttributeText('default_metal1_type')){ echo $product->getAttributeText('default_metal1_type'); }else if($product->getAttributeText('metal1_type')){ echo $product->getAttributeText('metal1_type'); }?></span> chain comes FREE with pendant.)
+		<?php 
+		}?>
+		</div>
+	<?php 
+	}          
+	// Code Ended by Pankaj for Chain Message on product page.	
+	if(count($product->getMatchingbandProductIds()) > 0): ?>
+    	<div class="text-center low-margin-top matchingband-container">
+    		<div class="block-inline-display showcase-border-top low-padding-top max-padding-left max-padding-right">   
+			 	<div id="matchingband-link" data-target="#ajaxModal" data-toggle="modal" href="/matchingband/index/index/id/<?php echo $product->getId();?>" class="fontcolor-type1 clickable" ><i class="fa fa-plus fontsize-type0 fontcolor-type1"></i><span class="hover-underline"> <?php echo $this->getMatchingBandText();?></span></div>			
+    		</div>
+    	</div>
+    <?php 
+	endif; ?>
+	</div>    
+	<div class="more-views-box low-margin-top">
+    	<div id="more-views-left" class="pull-left"><i class="fa fa-angle-left low-padding-left hide clickable"></i></div>	
+		<div id="moreviews" class="more-views pull-left">
+			<ul class="list-inline"><li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image'); ?>');" class="clickable active"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image')->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li><?php
+				foreach($galleryImages as $image): ?><li onclick="productThumbnailClicked(this,'<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile()); ?>');" class="clickable"><img itemprop="image" src="<?php echo $this->helper('catalog/image')->init($product, 'image', $image->getFile())->resize($galleryImageSize['x'], $galleryImageSize['y']) ?>" alt="<?php echo $this->htmlEscape($image->getLabel()) ?>"></li><?php endforeach; ?>
+			</ul>
+		</div>
+        <div id="more-views-right" class="pull-right"><i class="fa fa-angle-right low-padding-left hide clickable"></i></div>
+        <div class="clearfix"></div>
+	</div>
+</div>

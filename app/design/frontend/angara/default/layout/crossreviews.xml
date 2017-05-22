@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>          
+		<reference name="head">
+			
+        </reference>
+    </default>
+	
+	<crossreviews_index_index translate="label">
+    	<label>Cross Reviews</label>
+        <reference name="content">			
+            <block type="crossreviews/reviews" name="cross" as="cross" template="crossreviews/view.phtml" /><!--core/template-->
+        </reference>
+    </crossreviews_index_index>
+	<crossreviews_index_stonereviews translate="label">
+    	<label>Cross Reviews</label>
+        <reference name="content">			
+            <block type="crossreviews/reviews" name="stonereviews" as="stonereviews" template="crossreviews/stonereviews.phtml" /><!--core/template-->
+        </reference>
+    </crossreviews_index_stonereviews>
+</layout>

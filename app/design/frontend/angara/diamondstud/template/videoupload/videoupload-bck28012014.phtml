@@ -1,0 +1,130 @@
+<style>
+#playvedio {
+	position:absolute;
+	z-index:980;
+	left:421px;
+	top:74px;
+}
+
+#playvedio a {
+	width:36px;
+	height:38px;
+	display:block;
+}
+
+#playvedio a:hover {
+	width:36px;
+	height:38px;
+	display:block;
+	background-color:#e6e6e6;
+	border-bottom-left-radius:3px;
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-moz-box-shadow:-1px 1px 4px #797979;
+	-webkit-box-shadow:-1px 1px 4px #797979;
+	box-shadow:-1px 1px 4px #797979;
+}
+
+#playvedio a img {
+	height:27px;
+	width:33px;
+	padding:6px 0 0 2px;
+}
+</style>
+
+<?php
+/*
+ * Contus Support Pvt Ltd.
+ * created by Vasanth on nov 02 2010.
+ * vasanth@contus.in
+ * In this page we can include the jw player in frontend.
+ */
+?>
+
+<link rel='stylesheet' href='<?php echo $this->getSkinUrl('css/thickbox.css') ?>' type='text/css' media='all' />
+
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$cids = $_product->getCategoryIds();
+/* $_videoDetails['video'] = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video'); 
+//$_videoDetails['video'] = 'SP0150R.mp4,SP0150R.jpg|SP0150R_B.mp4,SP0150R_B.jpg';
+$video_arr = explode("|",$_videoDetails['video']);
+$number_of_videos = count($video_arr);?>
+
+<div id="playvedio">
+	<a id="playvideoicon" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block';">
+    	<img src="<?php echo $this->getSkinUrl('images/playvedioicon.png') ?>" width="33" height="27" />
+    </a>
+</div>
+
+<?php 
+$videoPath = "http://media.angara.com/productVideos/";
+$thumbPath = Mage::getBaseURL('media').'productVideos/';
+*/ ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jwplayer.js') ?>"></script>  
+ 
+<script>
+	jQuery(function(){
+		jQuery('#light, #fade').appendTo('body');
+	})
+</script>
+
+<div id="light" class="white_content">
+	<div style="color:#000; z-index: 2147483647; position: absolute; top: 522px; left: 15px;">
+	<?php echo 'Stone shown in video is '.$_product->getAttributeText('default_stone1_grade').' quality'; ?>
+    </div>
+	<div>
+		<img src="<?php echo $videoPath."img/tb-close.png";?>" alt="Close" style="position:absolute;top:-25px;right:-25px;z-index:999" onClick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none';playerStop();"/>
+	</div>
+	<div id='mediaspace'></div>
+</div>
+
+<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none';playerStop();"> 
+	<div id="fade" class="black_overlay"></div>
+</a>
+
+<!-- <video class="jwplayer" src="video1.mp4" poster=""></video>-->
+
+<script type='text/javascript'>
+jwplayer('mediaspace').setup({
+	'flashplayer': '<?php echo $this->getSkinUrl('jwplayer/player.swf');?>',	
+    'id': 'mediaspace',
+	'skin': '<?php echo $this->getSkinUrl('slim/slim.zip');?>',
+    'start':'0',
+    'width': '960',
+	'autostart': 'true',	
+	'height': '520',
+	'repeat': 'single',
+	'volume': '50',
+	/*Pankaj S:09/01/2013*/
+	'screencolor': '#FFFFFF',
+	/*'stretching' : 'none',*/
+	/*Pankaj E:09/01/2013*/
+	'controlbar': 'bottom',	 
+	'playlist.position':'left',
+	'playlist.size':'108',
+	'playlist.showtext':'false',
+	'playlist.backgroundcolor':'#EEEEEE',
+	'playlist': [
+	<?php
+	for ($i=0; $i < count($video_arr); $i++) {
+	  /*Retrive uploaded videos from media*/
+	  list($videoName,$thumbName) = explode(',',$video_arr[$i]);	
+	?>
+	  {
+		'file': '<?php echo $videoPath."video/".$videoName;?>',
+		'image': '<?php echo $thumbPath."thumb/".$thumbName;?>'          
+	  },
+  	<?php } ?> ],
+	'plugins' : {
+        'timeslidertooltipplugin-3': {}	
+    }
+});
+</script>
+
+<script type='text/javascript'>
+function playerStop(){
+	jwplayer('mediaspace').stop();
+}
+</script>

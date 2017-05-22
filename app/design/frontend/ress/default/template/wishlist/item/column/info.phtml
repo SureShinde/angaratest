@@ -1,0 +1,94 @@
+<?php
+/* @var Mage_Wishlist_Model_Item $item */
+$item = $this->getItem();
+$product = $item->getProduct();?>
+<style>
+#updater_<?php echo $item->getWishlistItemId();?>{line-height:30px;}
+</style>
+<h1 class="product-name high-padding-bottom">
+	<a href="<?php echo $this->getProductUrl($item);?>" title="<?php echo $this->escapeHtml($product->getShortDescription());?>"><?php echo $this->escapeHtml($product->getShortDescription());?></a>
+</h1>
+
+<textarea id="comment_<?php echo $item->getWishlistItemId();?>" name="description[<?php echo $item->getWishlistItemId();?>]" rows="3" cols="5" placeholder="Leave note/comment" style="resize:none;" title="<?php echo $this->__('Comment');?>"><?php echo ($this->escapeHtml($item->getDescription()));?></textarea>
+
+<div id="updater_<?php echo $item->getWishlistItemId();?>" class="hidden"></div>
+
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+<script>
+	jQuery(function(){
+		jQuery(document).on('click, touchend', function(e){
+			var tag = e.target.nodeName.toLowerCase();
+			if(tag != 'input' && tag != 'textarea'){
+				document.activeElement.blur();
+				//document.activeElement.focusout();
+				/*var inputs = document.querySelectorAll('input');
+				for(var i=0; i < inputs.length; i++) {
+					inputs[i].blur();
+				}*/
+			}	
+		});
+	});
+</script>
+<?php } ?>
+
+<?php $seqHttp	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'); ?>
+<script type="text/javascript">
+jQuery(function(){
+	
+	var  oldValue =	"";
+	jQuery('#comment_<?php echo $item->getWishlistItemId();?>').focus(function(){
+		oldValue = jQuery(this).val();
+	});
+	
+	jQuery('#comment_<?php echo $item->getWishlistItemId();?>').focusout(function(){
+		var va 					= 	jQuery(this);
+		var wishlist_item_id	=	'<?php echo $item->getWishlistItemId();?>';
+		var comment				=	jQuery(this).val();
+		//replacedComment 		= 	comment.replace(/(?:\r\n|\r|\n)/g, '');		//	replace the new line character
+
+		<?php
+		/*$comment	=	$this->escapeHtml($item->getDescription());
+		if( strstr($comment, "\n" )){
+			 $comment	=	str_replace("\n", "", $comment);
+		}*/
+		?>
+		
+		//if(replacedComment!='<?php //echo $comment; ?>'){
+		if( (oldValue != comment) ){
+			if ( va.data('requestRunning') ) {
+				return;
+			}
+			va.data('requestRunning', true);		//	set data that ajax request is running
+			
+			jQuery.ajax({
+				type: 'POST',
+				data: { wishlist_item_id : wishlist_item_id, comment : comment },
+				url: '<?php echo Mage::getUrl("ajax/product/updateComment/",array('_secure'=>$seqHttp))?>',
+				beforeSend: function( xhr ) {
+					jQuery('#updater_<?php echo $item->getWishlistItemId();?>').removeClass('hidden').text('Saving...');
+				},
+				context: document.body
+			}).done(function( html ){
+				//alert(html);
+				jQuery('#updater_<?php echo $item->getWishlistItemId();?>').text('Saved!');
+				setTimeout( "jQuery('#updater_<?php echo $item->getWishlistItemId();?>').addClass('hidden');",1000 );
+				va.data('requestRunning', false);		//	set data to false so that ajax request can be fired again
+			}).fail(function(jqXHR, textStatus){
+				if(textStatus === 'timeout'){     
+					jQuery('#updater_<?php echo $item->getWishlistItemId();?>').html('Error');
+				}
+			});
+		}
+	})
+})   
+</script>
+<?php 
+if($this->getSortedChildren()): ?>
+    <div class="item-manage">
+    <?php 
+	foreach($this->getSortedChildren() as $childName):
+		echo $this->getChildHtml($childName, false);
+	endforeach;?>
+    </div>
+<?php 
+endif; ?>

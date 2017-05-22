@@ -1,0 +1,88 @@
+
+.pageheading
+{
+font-size:22px;
+font-weight:bold;
+color:#000;
+}
+
+.birthstonewrapper
+{
+width:922px;
+margin:0 auto;
+padding:18px;
+background-color:#fff;
+border:solid 1px #D4D4D4;
+}
+
+.birthstoneupper
+{
+margin:10px 0 0 0;
+padding:0 24px 0 24px;
+border:solid 1px #D4D4D4;
+background-color:#f9f9f9;
+}
+
+.birthstonesection
+{
+height:118px;
+padding:18px 0 18px 0;
+}
+
+.birthstonejewely
+{
+width:188px;
+height:118px;
+border:solid 1px #D4D4D4;
+float:left;
+margin-right:88px;
+}
+
+
+.birthstonename
+{
+height:118px;
+float:left;
+}
+
+.viewmore
+{
+padding-top:15px;
+width:72px;
+height:26px;
+
+}
+
+
+.birthstonedetail
+{
+font-size:12px;
+line-height:18px;
+width:260px;
+float:right;
+}
+
+.birthstonedetail a
+{
+color:#000;
+font-weight:bold;
+text-decoration:underline;
+}
+
+
+
+
+.birthstonedivider
+{
+height:1px;
+text-align:center;
+}
+
+
+p
+{
+padding-top:20px;
+font-size:12px;
+color:#000;
+line-height:18px;
+}

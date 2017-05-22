@@ -1,0 +1,49 @@
+<style type="text/css">
+.dismiss-popup{
+	position:absolute; 
+	width:18px; 
+	height:18px; 
+	top:-9px; 
+	right:-9px; 
+	cursor:pointer; 
+	background:url("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/sprite.jpg") no-repeat;
+	background-position: -229px -151px; 
+	border-radius: 11px;
+}
+.message-txtpop{
+	margin:0 auto; 
+	margin-top:135px; 
+	width:330px; 
+	position:relative; 
+	font-size:20px;
+}
+.message-pop{
+	width:534px; 
+	height:319px; 
+	background:#fff; 
+	position:absolute; 
+	top:108px; 
+	left:0; 
+	bottom:0; 
+	right:0; 
+	margin:auto;
+}
+span.text-up
+{
+	display:block;
+	font-size:27px;
+}
+span.text-down
+{
+	display:block;
+	font-size:18px;
+}
+</style>
+<div class="text-center message-pop">
+	<div class="dismiss-popup" data-dismiss="modal"></div>
+	<div class="message-txtpop"><?php echo Mage::getSingleton("core/session")->getData("subspopmsg");?></div>
+</div>
+<?php 
+if(Mage::getSingleton('core/session')->getData('subspopmsg')){
+	Mage::getSingleton('core/session')->unsetData('subspopmsg');
+} ?>

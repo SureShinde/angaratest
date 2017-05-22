@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <angaracart translate="label" module="angaracart">
+            <label>Angara Cart</label>
+            <sort_order>910</sort_order>
+        </angaracart>
+    </tabs>
+    <sections>
+        <angaracart translate="label" module="angaracart">
+            <label>Jewelry Appraisal</label>
+            <tab>angaracart</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<!--<appraisalcost>
+                            <label>Appraisal Cost</label>
+                            <comment>Fix cost in USD.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </appraisalcost>-->
+						<appraisalsku>
+                            <label>Appraisal Sku</label>
+                            <comment>SKU of Jewelry Appraisal.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_input>text</frontend_input>
+                        </appraisalsku>
+                    </fields>
+                </general>
+            </groups>
+        </angaracart>
+    </sections>
+</config>

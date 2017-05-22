@@ -1,0 +1,17 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/filter_price_default.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<ol>
+<?php foreach ($this->getItems() as $_item): ?>
+    <li>
+        <a id="<?php echo $_item->getFilter()->getRequestVar() . '-' . $_item->getValueString()?>" href="#" class="adj-nav-price <?php if ($this->isSelected($_item)) echo 'adj-nav-price-selected';?>" ><?php echo $_item->getLabel() ?></a> (<?php echo $_item->getCount() ?>)
+    </li>
+<?php endforeach ?>
+</ol>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Angara_Ondemand>
+			<version>0.0.1</version>
+		</Angara_Ondemand>
+	</modules>
+	<admin>
+		<routers>
+			<ondemand>
+				<use>admin</use>
+				<args>
+					<module>Angara_Ondemand</module>
+					<frontName>ondemand</frontName>
+				</args>
+			</ondemand>
+		</routers>	
+	</admin>
+	<global>
+		<models>
+        	<ondemand>
+            	<class>Angara_Ondemand_Model</class>
+        	</ondemand>
+    	</models>
+	</global>
+</config>

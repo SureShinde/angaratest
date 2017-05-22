@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <diamondstud_index_index>
+       <reference name="content">
+            <block type="diamondstud/diamondstud" name="diamondstud" template="diamondstud/diamondstud.phtml" />
+        </reference>
+		
+		
+		
+		
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    
+		
+		 <remove name="right"/>
+    <remove name="left"/>
+		
+	  <reference name="head">
+	  
+	   <action method="setTitle"><title>Diamond Studs, Diamond Stud Earrings, Princess Diamond Studs, Round Diamond Studs</title></action>
+       <action method="setKeywords"><title>Diamond Studs, Diamond Stud Earrings, Diamond Earring Studs, Princess Diamond Studs, Round Diamond Studs, White Gold Diamond Studs, Yellow Gold Diamond Studs, Platinum Diamond Studs</title></action>
+      <action method="setDescription"><title>Gorgeous diamond studs at up to 80% off!  Enjoy 30-day returns, easy financing options and FREE shipping on all orders.  Amazing selection and value, only at ANGARA!</title></action>
+	  
+        <action method="addJs"><script>fancybox/jquery.fancybox-1.3.0.js</script></action>
+		<action method="addCss"><stylesheet>css/diamondstuds.css</stylesheet></action>
+	     <action method="addJs"><script>diamondstud/diamondstuds.js</script></action> 
+		 <action method="addCss"><stylesheet>css/lightbox.css</stylesheet></action>
+		   
+      </reference>
+    </diamondstud_index_index>
+	
+	
+	
+	
+	<layout_empty label="translate">
+    <label>emptycontent </label>
+    <template>page/empty.phtml</template>
+    <!-- defining the layout handle is optional -->
+    </layout_empty>
+	
+	
+	<diamondstud_index_gethtml>
+        <reference name="content">
+            <block type="diamondstud/diamondstud" name="diamondstud" template="diamondstud/ajax.phtml" />
+        </reference>
+		
+		
+    <remove name="right"/>
+    <remove name="left"/>
+	 <remove name="head"/>
+	 <remove name="header"/>
+	 <remove name="footer"/>
+	  <remove name="body"/>
+	  
+	 
+	 
+	
+		
+	  
+    </diamondstud_index_gethtml>
+	
+	
+</layout> 

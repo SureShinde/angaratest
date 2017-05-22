@@ -1,0 +1,441 @@
+<style>
+.sort-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 999;
+}
+.close-nav {
+    width: 45px;
+    height: 45px;
+    background: url(/skin/frontend/ress/imobile/images/icon.png) no-repeat center -253px;
+}
+.option-holder .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 45px;
+}
+.option-holder {
+    position: absolute;
+    background: #ffffff;
+    width: 84%;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+    top: 30%;
+    min-height:170px;
+    border-radius: 3px;
+}
+.sort-options .radio-btn {
+    height:16px;
+    width:16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #fa505a;
+}
+.radio-active {
+    height: 10px;
+    width: 10px;
+    background:#fa505a;
+    border-radius: 50%;
+    margin: 3px auto;
+    display: block;
+}
+.sort-txt {
+    font-size: 15px;
+    margin-left: 8px;
+    color: #616161;
+}
+.ActBtn {
+	display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.Act-Btn {
+	padding: 10px;
+    font-weight: 500;
+}
+.sort-icon {background: url(/skin/frontend/ress/imobile/images/sort-icon.png) no-repeat center center;background-size:100%;height:13px;width:19px;}
+</style>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+ 
+$_helper    = $this->helper('catalog/output');
+$_category  = $this->getCurrentCategory();
+preg_match('/Yellow Sapphire|Blue Sapphire|Pink Sapphire|White Sapphire|Green Amethyst|Black Diamond|Blue Diamond|Diamond|Tanzanite|Akoya Cultured Pearl|Amethyst|Citrine|Aquamarine|Black Onyx|Black Tahitian Cultured Pearl|Emerald|Ruby|Blue Topaz|Carnelian|Peridot|Freshwater Cultured Pearl|Garnet|Lapis Lazuli|Opal|Pink Tourmaline|Rose Quartz|Turquoise|Moissanite|Sapphire/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$mainStone = $matches[0];
+}
+else{
+	$mainStone = 'mixed';
+}
+
+// NOTE: earring contains ring (using space before ring)
+preg_match('/ ring|earring|pendant|^ring/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$jewelryType = trim($matches[0]);
+}
+else{
+	$jewelryType = 'mixed';
+} ?>
+
+<div class="cs-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($mainStone)));?> jt-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($jewelryType)));?>">
+	<?php	
+	echo $this->getMessagesBlock()->getGroupedHtml();
+	if($_imgUrl): 
+		echo $_imgHtml;
+	endif;
+	
+	if($this->isContentMode() || $this->isMixedMode()):
+		if(Mage::app()->getRequest()->getParam('content') != 'no'):?>
+        	<div class="container showcase-bg-white" data-remove-classes="container">
+           		<div><?php echo $this->getCmsBlockHtml(); ?></div>
+           	</div>
+        <?php 
+		endif;
+	endif;
+	
+	if(!$this->isContentMode()):?>
+		<div class="container showcase-bg-white high-padding-top" data-remove-classes="container">
+		<?php //catalog page promotion added by ravi
+			//echo $this->getLayout()->createBlock('core/template')->setTemplate('promotions/catalog-promotion.phtml')->toHTML(); ?>
+		<?php
+		$_imgHtml   = '';
+		if($_imgUrl = $_category->getImageUrl()){
+			$_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+			$_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+		}?>
+            <div class="page-title category-title" <?php /*itemtype="http://schema.org/Product" itemscope=""*/?>>
+				
+				
+			
+                <h1 class="no-margin high-padding-bottom"><span <?php /*itemprop="name"*/?>><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name');?></span> <span id="pro-count-destination"><small></small></span></h1>
+            </div>
+
+			
+			
+			<?php // Sorting snippet for mobile
+            $setting_dir = Mage::getBlockSingleton('catalog/product_list_toolbar');?>
+			<div id="catalog-filter-controller" data-filter-panel-display-state="none" data-filter-panel-current-tab-index="0" class="relative-placeholder mT10">
+				<?php echo $this->getChildHtml('catalog_filter');?>
+				<div id="sort-title" class="sort-title center-align">
+					<i class="fa sort-icon fa-fw"></i>Sort
+				</div>
+			</div>
+			
+			
+			
+					<?php if($_helper->categoryAttribute($_category, $_category->getName(), 'name') == 'Rings'){?> 
+					<div class="catalog-slider pT10 pB10">
+						<ul>
+							<li class="fl" >
+								<a href="/rings/sapphire-rings">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/shapir-rings.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Sapphire Rings</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/rings/ruby-rings">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/ruby-rings.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Ruby Rings</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/rings/emerald-rings">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/emerald-rings.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Emerald Rings</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/rings/tanzanite-rings">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/tanzanite-rings.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Tanzanite Rings</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/rings/diamond-rings">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/diamond-rings.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Diamond Rings</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<?php } ?>
+					<?php if($_helper->categoryAttribute($_category, $_category->getName(), 'name') == 'Pendant Necklaces'){?> 
+					<div class="catalog-slider pT10 pB10">
+						<ul>
+								<li class="fl" >
+								<a href="/pendants/sapphire-necklace-pendants">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/sapphire-pendant.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Sapphire Pendants</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/pendants/ruby-necklace-pendants">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/ruby-pendant.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Ruby Pendants</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/pendants/emerald-necklace-pendants">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/emerald-pendant.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Emerald Pendants</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/pendants/tanzanite-necklace-pendants">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/tanzanite-pendant.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Tanzanite Pendants</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/pendants/diamond-necklace-pendants">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/diamond-pendant.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Diamond Pendants</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<?php } ?>
+					<?php if($_helper->categoryAttribute($_category, $_category->getName(), 'name') == 'Earrings'){?>
+					<div class="catalog-slider pT10 pB10">
+						<ul>					
+							<li class="fl" >
+							<a href="/earrings/sapphire-earrings">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/sapphire-earrings.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Sapphire Earrings</span>
+							</a>
+						</li>
+						<li class="fl" >
+							<a href="/earrings/ruby-earrings">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/ruby-earrings.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Ruby Earrings</span>
+							</a>
+						</li>
+						<li class="fl" >
+							<a href="/earrings/emerald-earrings">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/emerald-earrings.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Emerald Earrings</span>
+							</a>
+						</li>
+						<li class="fl" >
+							<a href="/earrings/tanzanite-earrings">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/tanzanite-earrings.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Tanzanite Earrings</span>
+							</a>
+						</li>
+						<li class="fl" >
+							<a href="/earrings/diamond-earrings">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/diamond-earrings.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Diamond Earrings</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+					<?php } ?>
+					<?php if($_helper->categoryAttribute($_category, $_category->getName(), 'name') == 'Bracelets'){?> 
+					<div class="catalog-slider pT10 pB10">
+						<ul>
+							<li class="fl" >
+							<a href="/bracelets/diamond-bracelets">
+								<span class="pro-img fl full-width">
+									<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/diamond-bracelet.jpg" class="img-responsive"/>
+								</span>
+								<span class="pro-title pT10 pB10 pL5 full-width">Diamond Bracelets</span>
+							</a>
+							</li>
+							<li class="fl" >
+								<a href="/bracelets/gemstone-bracelets?filterable_stone_names=4144">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/sapphire-bracelet.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Sapphire Bracelets</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/bracelets/gemstone-bracelets?filterable_stone_names=4143">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/ruby-bracelet.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Ruby Bracelets</span>
+								</a>
+							</li>
+							<li class="fl" >
+								<a href="/bracelets/gemstone-bracelets?filterable_stone_names=4131">
+									<span class="pro-img fl full-width">
+										<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/sub-categories/emerald-bracelet.jpg" class="img-responsive"/>
+									</span>
+									<span class="pro-title pT10 pB10 pL5 full-width">Emerald Bracelets</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<?php } ?>			
+			 
+			<?php echo $this->getProductListHtml();?>
+				
+	<?php // ap: sorting box ?>
+	<?php $dir		=	$this->getRequest()->getParam('dir');
+	      $order	=	$this->getRequest()->getParam('order');
+		  //echo 'order->'.$order;
+		  if($order==''){	$activeClass	=	'radio-active';	}
+	?>  
+		<div class="sort-container hidden">
+			<div class="option-holder">
+				<div class="sort-title full-width">
+					<span class="title fl mL10">Sort Options</span>
+				</div>
+				<div class="sort-options full-width mL10">
+					<div class="full-width"><a id="most-popular" href="<?php echo $setting_dir->getOrderUrl('position', 'asc') ?>" class="fl void"><span class="radio-btn fl"><?php if($dir=="asc" && $order=="position"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn <?php echo $activeClass;?>">
+                <?php endif;?></span></span><div class="fl sort-txt">Most Popular</div></a></div>
+					<div class="full-width pT10 mT10"><a id="low-high" href="<?php echo $setting_dir->getOrderUrl('price', 'asc') ?>" class="fl void"><span class="radio-btn fl"><?php if($dir=="asc" && $order=="price"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn">
+                <?php endif;?></span></span><div class="fl sort-txt">Price Low To High</div></a></div>
+				<div class="full-width pT10 mT10"><a id="high-low" href="<?php echo $setting_dir->getOrderUrl('price', 'desc') ?>" class="fl void"><span class="radio-btn fl"><?php if($dir=="desc" && $order=="price"):?>
+                    <span class="iner-btn radio-active"><?php else:?><span class="iner-btn">
+                <?php endif;?></span></span><div class="fl sort-txt">Price High To Low</div></a></div>
+				</div>
+				<div class="full-width ActBtn">
+					<div class="fr close-icon apricot-text Act-Btn">Cancel</div>
+					<div class="App-btn Act-Btn"><a class="apricot-text" style="text-decoration: none !important;" href="">Apply</a></div>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript">
+		jQuery(function(){
+			jQuery("#sort-title").click(function() {
+				jQuery(".sort-container").removeClass('hidden');
+			});		
+			jQuery( ".sort-container .close-icon" ).click(function() {
+				jQuery(".sort-container").addClass('hidden');
+			});
+			jQuery(".sort-options a").click(function() {
+				jQuery(".iner-btn").removeClass('radio-active');
+				jQuery(this).find(".iner-btn").addClass('radio-active');						
+			});
+			
+			jQuery( "#most-popular,#low-high,#high-low").click(function() {
+				//jQuery('.option-holder').addClass('hidden');
+				jQuery('.catalog-loader').removeClass('hidden');	//	Showing loader
+			});
+			
+			
+			
+			//	set value for remaining two
+			jQuery( "#most-popular").click(function() {
+				var url = '<?php echo $_category->getUrl().'?'?>';
+				var txt = jQuery('#adj-nav-params').val();
+				if(txt==null || txt=='' || !txt.match("order")){
+					txt = 'order=position&dir=asc';						
+				}
+				txt = url+txt.replace('price','position');
+				txt = txt.replace('desc', 'asc');
+				jQuery('#most-popular').attr('href', txt);
+			});
+			
+			// lets replace values
+			jQuery( "#low-high" ).click(function() {
+				var url = '<?php echo $_category->getUrl().'?'?>';
+				var txt = jQuery('#adj-nav-params').val();
+				if(txt==null || txt=='' || !txt.match("order")){
+					txt = 'order=price&dir=asc';						
+				}
+				txt = url+txt.replace('position', 'price');
+				txt = txt.replace('desc', 'asc');
+				jQuery('#low-high').attr('href', txt);
+			});
+			
+			jQuery( "#high-low" ).click(function() {
+				var url = '<?php echo $_category->getUrl().'?'?>';
+				var txt = jQuery('#adj-nav-params').val();
+				if(txt==null || txt=='' || !txt.match("order")){
+					txt = 'order=price&dir=desc';						
+				}
+				txt = url+txt.replace('position', 'price');
+				txt = txt.replace('asc', 'desc');
+				jQuery('#high-low').attr('href', txt);
+			});
+			//sorting
+			
+			//S:AP
+			jQuery(".sort-options a").click(function( event ) {
+				event.preventDefault();
+				var AppUrl = jQuery(this).attr('href');
+				jQuery('.App-btn a').attr('href', AppUrl);
+				jQuery('.catalog-loader').addClass('hide');
+			});
+			jQuery(".sort-container").click(function(event) {
+				var target = jQuery(event.target);
+				if ( target.is(this) ) {
+					jQuery(this).addClass('hidden');
+				}
+			});
+			//E:AP
+		})
+		</script>
+	<?php // ap: sorting box ?>
+	<?php 
+	endif; 
+	// S: Category Testimonals ?>
+	
+	<div id="go-to-top-link" class="clickable hide" style="display:none;bottom:-100px;">
+		<button class="button btn-primary" style="background:#fa505a;height: 30px;width: 30px;"> <i class="fa fa-angle-up fontsize-type7 text-on-dark"></i> </button>
+	</div>
+	
+	<?php 
+	if($_articlePosts = $this->getCurrentCategory()->getCategoryArticlePosts()): ?>
+		<style>.catalog-artical-post h2{margin:0px!important} .catalog-artical-post h3, .catalog-artical-post p{display:none;}</style>
+		<div class="container showcase-bg-white catalog-artical-post clearfix p10" style="background:#fcfcfc; border-bottom:1px solid #dedede;"><?php echo $_articlePosts;?></div>
+		<script>
+			jQuery('.catalog-artical-post h2').append('<i class="fa fa-plus fr" style="font-size:14px; margin-top:6px;"></i>');
+			jQuery('.catalog-artical-post h2').on('click', function(){
+				jQuery(this).parent('.catalog-artical-post').find('h3, p').slideToggle(200);
+				jQuery(this).find('.fa').toggleClass('fa-plus fa-minus');
+			});
+		</script>
+	<?php 
+	endif; ?>
+	
+    <?php /* <div id="categoryTestimonal"></div> */ ?>
+	<?php 
+	// E: Category Testimonals 
+	//echo $this->getLayout()->createBlock('testimonials/items')->setTemplate('homepage/category_testimonials.phtml')->toHTML(); ?>		
+</div>

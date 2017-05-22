@@ -1,0 +1,301 @@
+<style>
+.checkout-footer-top-border{border-top: 2px solid #dddddd;}
+.success-msg{display:none}
+.valentines_heart {
+	display:none !important;
+}
+
+#best-sellers a:hover .hover-bdr .btn, #gemstone-section a:hover .hover-bdr .btn {border:1px solid #fa505a;color:#fa505a;}
+#best-sellers .hover-bdr .btn {color:#000000;border:1px solid #000000;margin-top:8px;}
+#best-sellers .valentine .btn {color:#ffffff;border:1px solid #ffffff;}
+#best-sellers .valentine a:hover .valentine-btn {color:#000000 !important;border:1px solid #000000 !important;}
+
+
+#homepage-latest-reviews .detail-box-bs{bottom:-100%; transition:bottom 500ms; -webkit-transition:bottom 500ms; background: rgba(255,255,255,0.8); padding:10px 30px; text-align: center;}
+#homepage-latest-reviews .slick-slide:hover .detail-box-bs{bottom:0px;}
+#homepage-latest-reviews .detail-box-bs .color999{font-size:14px;}
+.new-arrivals {width:90%;margin:0 auto;}
+.new-arrivals .col-sm-3 {padding-left:15px;padding-right:15px;}
+.white-bg .heading-box .heading, .new-arrivals .heading {
+    font-size:29px;
+    margin:15px 0px;
+    color: #333333;
+	text-align:center;
+	font-weight: 500;
+}
+.sep {
+    position: absolute;
+    height: 2px;
+    background: #dddddd;
+    left: 0px;
+    right: 0px;
+}
+.EcFlex {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #fff;
+    font-size: 21px;
+}
+.ClFlex { 
+	display: flex;
+    justify-content: center;
+    padding: 15px 0px;
+}
+.ClFlex img {
+	max-height:50px;
+}
+
+
+.EcO {opacity:0;right:0;left:0;bottom:0;top:0;background:rgba(250,80,90,0.7);transition:all 600ms ease-in-out;-webkit-transition:all 600ms ease-in-out;}
+.Send {display:none;}
+.new-arrivals a:hover .EcO {opacity:1;transform: scale(1);}
+.new-arrivals a:hover .Send {display:block;}
+.new-arrivals a:hover .Fend {display:none;}
+
+html[data-useragent*='MSIE 9.0'] .ClFlex img,
+html[data-useragent*='MSIE 10.0'] .ClFlex img {
+    margin:0 auto;
+}
+
+html[data-useragent*='MSIE 9.0'] .EcFlex,
+html[data-useragent*='MSIE 10.0'] .EcFlex {
+    margin-top: 40%;
+    text-align: center;
+}
+
+
+@media (max-width:1024px) {
+	
+	#best-sellers .hover-bdr .title,
+	#gemstone-section .hover-bdr .title {
+		font-size:20px;
+		padding-top: 5px;
+	}
+	.EcFlex {font-size:16px;}
+	.ClFlex img {max-height:35px;}
+	.white-bg .heading-box .heading, .new-arrivals .heading {
+    font-size:24px;}
+}
+@media (max-width:768px) {
+	#best-sellers .hover-bdr .title{
+		padding-top:15px;
+	}
+	.EcFlex {font-size:14px;}
+	.ClFlex img {max-height:30px;}
+	.new-arrivals .col-sm-3 {padding-left:8px;padding-right:8px;}
+	.col-sm-3 {width: 25%;float:left;}
+	.white-bg .heading-box .heading, .new-arrivals .heading {
+    font-size:21px;}
+}
+
+<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+@media (max-width:1024px) {
+	#best-sellers .col-md-4,
+	#gemstone-section .col-md-4{
+		width:33.33333333333333%!important;
+	}
+	#best-sellers .col-md-8,
+	#gemstone-section .col-md-8{
+		width:66.66666666666666%!important;
+	}
+}
+<?php } ?>
+</style>
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ 
+	$textRight = 'text-right';
+} ?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+
+<div class="page-title title-buttons green-title">
+	<h1 class="shoppingcarttitle">
+		<div class="container relative-placeholder <?php echo $textRight; ?>">
+			<a href="<?php echo $this->getUrl('');?>" title="Angara Jewelry" class="logo absolute-placeholder pull-left" style="top:-6px;">
+				<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+			</a>
+			<?php echo $this->__('Shopping Cart');?>
+		</div>
+	</h1>
+</div>
+
+
+
+
+
+<div class="container showcase-bg-white">
+
+<div class="col-sm-12 text-center">
+	<div class="block-heading text-bold max-padding-bottom">Your Shopping Cart is Empty.</div>
+	<div class="title-text max-padding-bottom">
+		To begin shopping, view our bestsellers and new arrivals below or click <a href="/products?icid=emptycartpage|clickhere|03072017" class="text-bold" style="text-decoration: underline;">here</a> to view the entire collection.
+	</div>
+</div>
+<div class="clearfix"></div>
+	<span class="sep"></span>
+<div class="clearfix"></div>
+
+<section class="white-bg" style="padding-bottom:0px;">
+	<div class="container">
+		<div class="heading-box">
+			<h2 class="heading">Best Sellers</h2>
+		</div>
+		<div class="content-box">
+			<div id="latest-reviews" class="col-xs-12 has-slider">
+				<div class="showcase-bg-white padding-type-10 HP1">
+					<div class="HP2">
+						<div id="homepage-latest-reviews">
+							<?php 
+							try
+							{
+							$resource = Mage::getSingleton('core/resource');
+							$read = $resource->getConnection('core_read');
+							$sql = "Select * from ang_bestseller";
+							$sqlQuery = $read->query($sql);
+							$iterator=0;
+							while ($row = $sqlQuery->fetch() ) 
+							{
+									$iterator++;
+									$sku=$row['sku'];
+									$obj = Mage::getModel('catalog/product')->getCollection()->addAttributeToSelect(array('url_key','short_description','price','special_price','image'))->addFinalPrice()->addAttributeToFilter('sku',$sku)->getFirstItem();
+									$obj2=new Mage_Catalog_Block_Product();
+									$image = $obj2->helper('catalog/image')->init($obj, 'image')->resize(175);
+									$title=$obj->getShortDescription();
+									$url=$obj->getProductUrl();
+							?>	
+							
+							<div class="relative-placeholder" style="overflow:hidden">
+								<a href="<?php echo $url; ?>?icid=emptycartpage|bestseller-widget|03072017" title="<?php echo $title;?>" class="center-block text-center">
+									<img class="img-responsive bdr-typ-1" style="margin:0 auto; max-width:175px; max-height:175px" src="<?php echo $image ?>" alt="<?php echo $title;?>" title="<?php echo $title;?>"/>
+								</a>
+								<div class="detail-box-bs absolute-placeholder">
+									<a href="<?php echo $url; ?>?icid=emptycartpage|bestseller-widget|03072017">
+										<p class="product-name" itemprop="name"><?php echo $title; ?></p>
+									</a>
+									<span class="apricot-text high-margin-top block-inline-display"><?php echo strip_tags($obj2->getPriceHtmlBestSeller($obj, true, '-similar'),'<span>'); ?></span>
+								</div>
+							</div>
+							<?php }
+							}
+							catch(Exception $e)
+							{ } ?>	
+						</div>
+					</div>
+					<script type="text/javascript">
+					jQuery(function(){
+						var s2s = 0;
+						if(jQuery(window).width() <= 768){
+							s2s = 3;
+						}else if(jQuery(window).width() <= 1024 && jQuery(window).width() > 768){
+							s2s = 4;
+						}else{
+							s2s = 5;
+						}
+						jQuery('#homepage-latest-reviews').slick({
+							arrows			: 	true,
+							dots			: 	false,
+							slidesToShow	: 	s2s,
+							slidesToScroll	: 	1,
+							autoplay		: 	false,
+							autoplaySpeed	: 	5000
+						});
+					});
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="clearfix"></div>
+	<span class="sep"></span>
+<div class="clearfix"></div>
+
+<div class="new-arrivals">
+	<div class="col-sm-12 heading">Shop Our New Arrivals</div>
+	<div class="col-sm-3">
+		<a href="/collection/infinity-jewelry?icid=emptycartpage|explr-collec|infinity|03072017">
+			<div class="full-width relative-placeholder">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/infinity.jpg" alt="Infinity Collection From Angara" title="Infinity Jewelry" />
+				<div class="absolute-placeholder EcO">
+					<div class="EcFlex">Explore Collection</div>
+				</div>
+			</div>
+			<div class="full-width ClFlex">
+				<img class="img-responsive Fend" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/infinity-gry.png" />
+				<img class="img-responsive Send" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/infinity.png" />
+			</div>
+		</a>
+	</div>
+	<div class="col-sm-3">
+		<a href="/collection/knotty-heart-jewelry?icid=emptycartpage|explr-collec|knotty-h|03072017">
+			<div class="full-width relative-placeholder">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/knotty.jpg" alt="Knotty Heart Collection From Angara" title="Knotty Heart Jewelry" />
+				<div class="absolute-placeholder EcO">
+					<div class="EcFlex">Explore Collection</div>
+				</div>
+			</div>
+			<div class="full-width ClFlex">
+				<img class="img-responsive Fend" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/knotty-gry.png" />
+				<img class="img-responsive Send" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/knotty.png" />
+			</div>
+		</a>
+	</div>	
+	<div class="col-sm-3">
+		<a href="/jewelry/coffee-diamond-jewelry?icid=emptycartpage|explr-collec|coffee-d|03072017">
+			<div class="full-width relative-placeholder">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/coffee.jpg" alt="Coffee Diamond Collection From Angara" title="Coffee Diamond Jewelry" />
+				<div class="absolute-placeholder EcO">
+					<div class="EcFlex">Explore Collection</div>
+				</div>
+			</div>
+			<div class="full-width ClFlex">
+				<img class="img-responsive Fend" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/coffee-gry.png" />
+				<img class="img-responsive Send" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/coffee.png" />
+			</div>
+		</a>
+	</div>	
+	<div class="col-sm-3">
+		<a href="/jewelry/two-stone-jewelry?icid=emptycartpage|explr-collec|me-we|03072017">
+			<div class="full-width relative-placeholder">
+				<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/mewe.jpg" alt="Me-We Collection From Angara" title="Two-Stone Jewelry" />
+				<div class="absolute-placeholder EcO">
+					<div class="EcFlex">Explore Collection</div>
+				</div>
+			</div>
+			<div class="full-width ClFlex">
+				<img class="img-responsive Fend" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/mewe-gry.png" />
+				<img class="img-responsive Send" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/empty-cart/mewe.png" />
+			</div>
+		</a>
+	</div>
+</div>
+</div>

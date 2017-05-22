@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<config>
+    <translate>
+        <modules>
+            <Angara_Productbase>
+                <files>
+                    <default>Angara_Productbase.csv</default>
+                </files>
+            </Angara_Productbase>
+        </modules>
+    </translate>
+    <menu>
+        <productbase module="productbase">
+            <title>Angara Productbase</title>
+            <sort_order>100</sort_order>
+            <children>
+                <products module="productbase">
+                    <title>Manage Products</title>
+                    <sort_order>10</sort_order>
+                    <action>productbase/adminhtml_products</action>
+					<children>
+                        <stones module="productbase">
+                            <title>Manage Stones</title>
+                            <action>productbase/adminhtml_stones</action>
+							<children>
+								<names module="productbase">
+									<title>Stone Types</title>
+									<action>productbase/adminhtml_stones_names</action>
+								</names>
+								<shapes module="productbase">
+									<title>Manage Shapes</title>
+									<action>productbase/adminhtml_stones_shapes</action>
+								</shapes>
+								<weights module="productbase">
+									<title>Manage Weights</title>
+									<action>productbase/adminhtml_stones_weights</action>
+								</weights>
+								<stoneprices module="productbase">
+									<title>Manage Prices</title>
+									<action>productbase/adminhtml_stones_prices</action>
+								</stoneprices>
+							</children>
+                        </stones>
+						<metals module="productbase">
+                            <title>Manage Metals</title>
+                            <action>productbase/adminhtml_metals</action>
+                        </metals>
+						<settings module="productbase">
+                            <title>Manage Setting Types</title>
+                            <action>productbase/adminhtml_settings</action>
+                        </settings>
+                    </children>
+                </products>
+                <pricing module="productbase">
+                    <title>Custom Product &amp; Pricing</title>
+                    <sort_order>20</sort_order>
+                    <action>productbase/adminhtml_pricing</action>
+                </pricing>
+                <testing module="productbase">
+                    <title>Test Products</title>
+                    <sort_order>30</sort_order>
+                    <action>productbase/adminhtml_testing</action>
+                </testing>
+                <params module="productbase">
+                    <title>Manage Pricing Parameters</title>
+                    <sort_order>40</sort_order>
+                    <action>productbase/adminhtml_params</action>
+                </params>
+                <settings module="productbase">
+                    <title>Settings</title>
+                    <sort_order>50</sort_order>
+                    <action>adminhtml/system_config/edit/section/productbase</action>
+                </settings>
+            </children>
+        </productbase>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+                <admin>
+                    <children>
+                        <productbase>
+                            <title>Angara Productbase Module</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <products>
+                                    <title>Products manager</title>
+                                </products>
+                                <pricing>
+                                    <title>Price Calculator</title>
+                                </pricing>
+                                <testing>
+                                    <title>Products testing</title>
+                                </testing>
+                                <params>
+                                    <title>Pricing Parameters Adjustment</title>
+                                </params>
+                                <settings>
+                                    <title>Settings</title>
+                                </settings>
+                            </children>
+                        </productbase>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <productbase>
+                                            <title>Angara - Productbase Section</title>
+                                        </productbase>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+        </resources>
+    </acl>
+	<layout>
+		<updates>
+			<productbase>
+				<file>productbase.xml</file>
+			</productbase>
+		</updates>
+	</layout>
+</config>

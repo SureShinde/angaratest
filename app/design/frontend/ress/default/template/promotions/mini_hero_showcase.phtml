@@ -1,0 +1,166 @@
+<?php $pageType = Mage::helper('function')->getPageType(); ?>
+<?php if($pageType != 'product'){ ?>
+<?php
+//$banner = $this->getBanner();?>
+<style>
+.mini-hero-newletter{display:none !important; visibility:hidden}
+/*#content-showcase{display:none;}*/
+#mini-hero-showcase-md {
+    background: none repeat scroll 0 0 #e6f5f5;
+}
+/*.countdownticker2 { background-color: #000; height: 27px; width: 152px; position: absolute; bottom:27px; left:78px; text-align: center; font: bold 14px/27px "Arial", Helvetica, serif; color: #fff;  border-radius: 5px; display:none; }*/
+.countdownticker2 { display:none;height: 30px; width: 150px; position: absolute; bottom: 5px; right: 173px; text-align: center; font: bold 14px/30px "Arial", Helvetica, serif; color: #000000; border-radius: 2px; border: dashed 1px; display:none;}
+.actionbtn{ position: absolute; bottom: 45px; left:124px;}
+.timeleftxt2 { display: inline-block; }
+.hourdigits2 { display:inline-block; min-width:12px; padding-left:5px; }
+.minutedegites2 { display: inline-block; min-width:12px; }
+.secondigits2 { display: inline-block; min-width:12px; }
+.colondigit2 {display:inline-block; font-size:14px;}
+.global-offer-wrapper {height:27px;}
+
+.cat-offer-banner img{max-width:100%!important}
+
+ @media (min-width: 768px ) and (max-width: 999px) {
+	 .countdownticker2{ bottom:6px; right:170px; display:block;}
+	 .actionbtn{ position: absolute; bottom: 45px; left:4px;}
+ }
+
+.tickr-width{width:100%; max-width:1500px; margin: 0 auto; position:relative;}
+.tickr-holder{margin-right:450px;}
+.tickr-style{font-weight:bold;font-size:15px;float:left; position:absolute; right:5px; margin-top:4px; color:#000000; background:transparent;text-align: center; width:186px;}
+.ofrend{display:block; padding: 20px 0px 3px; font-size: 20px; font-weight: normal;}
+.text-format {display:block; padding:0px 0px 3px;}
+.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+.daydigits{display:none;}
+.hourdigits, .minutedegites, .secondigits{
+	height: 40px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    color: #000000;
+    background: transparent;
+    font-size: 40px;
+    font-weight: normal;
+}
+.text-format span{float:left}
+span.daydigits + span { display: none;}
+span.hourdigits + span, span.minutedegites + span{width: 18px; display: block; float: left; font-size: 28px; line-height: 40px;} 
+.text-format + span span{width:50px; float:left; margin-right:18px; font-weight:300; font-size:14px;}
+.text-format + span span:last-child{margin-right:0px;}
+
+
+@media (max-width: 1600px ){
+	.tickr-holder { margin-right: 320px; }
+}
+@media (max-width: 1440px ){
+	.tickr-holder{margin-right:230px;}
+}
+@media (max-width: 1370px ){
+	.tickr-holder{margin-right:210px;}
+}
+@media (max-width: 1280px ){
+	.tickr-holder{margin-right:205px;}
+	.tickr-style{width:153px;}
+	.ofrend, .text-format{padding-top:6px;}
+	span.hourdigits + span, span.minutedegites + span{
+		width:16px;
+		line-height:40px;
+	}
+	.hourdigits, .minutedegites, .secondigits{
+		width:40px;
+		height:40px;
+		line-height:40px;
+	}
+	.text-format + span span{
+		width: 40px;
+		margin-right: 16px;
+		font-size: 11px;
+	}
+}
+@media (max-width: 1024px ){
+	.tickr-holder{margin-right:190px;}
+	.tickr-style{width:123px;}
+	.hourdigits, .minutedegites, .secondigits{
+		width:30px;
+		height:30px;
+		line-height:30px;
+		font-size:25px;
+	}
+	span.hourdigits + span, span.minutedegites + span{
+		line-height:28px;
+		font-size:25px;
+	}
+	.ofrend, .text-format{
+		padding:1px 0px 5px;
+	}
+	.text-format + span span{
+		width: 30px;
+		font-size: 10px;
+	}
+	.ofrend {
+		font-size: 15px;
+		margin-top: 5px;
+	}
+}
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+@media (max-width: 1024px ){
+	.tickr-holder{
+		margin-right:150px;
+	}
+}
+@media (max-width: 768px ){
+	.tickr-holder{margin-right:95px;}
+	.ofrend, .text-format{ padding: 1px 0px 1px; }
+	.hourdigits, .minutedegites, .secondigits,
+	span.hourdigits + span, span.minutedegites + span{line-height: 30px;}
+	.tickr-style{top:-5px;}
+}
+<?php } ?>
+</style>
+<?php $minitickerState = true; ?>
+<?php if($minitickerState == true){ ?>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+<?php } ?>
+
+<div id="content-showcase" class="cat-offer-banner container-fluid">
+    <?php $channel = Mage::getSingleton('core/session')->getVisitorChannel(); 
+	if($channel):?> 
+        <div class="container-fluid" id="catalogBannerDesktop" style="width:100%; float:left">
+			<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+				<?php
+					if(is_object($channel) && $channel->getCatalogBannerDesktop()):
+						$bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerDesktop());	 
+						if($bannerDesktop){?>
+							<div class="relative-placeholder" style="width: 100%;float: left;">
+								<?php if($minitickerState == true){ ?>
+									<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerDesktop->getTickerTime());?>
+								<?php } ?>
+								<?php echo $bannerDesktop->getHtml();?>
+							</div>
+						<?php
+						}
+					endif;
+				
+				?>
+			<?php }else{ ?>
+				<?php
+					if(is_object($channel) && $channel->getCatalogBannerTablet()):
+						$bannerTablet = Mage::getModel('promotions/banner')->load($channel->getCatalogBannerTablet());
+						if($bannerTablet){ ?>    
+							<div class="relative-placeholder"  style="">
+								<?php if($minitickerState == true){ ?>
+									<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerTablet->getTickerTime());?>
+								<?php } ?>
+								<?php echo $bannerTablet->getHtml(); ?>
+							</div>
+						<?php
+						}
+					endif;
+				
+				 ?>
+			<?php } ?>
+        </div>
+	<?php endif;?>
+</div>
+<?php } ?>

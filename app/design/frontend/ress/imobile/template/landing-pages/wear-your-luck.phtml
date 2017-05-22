@@ -1,0 +1,771 @@
+<style>
+.full-width .img-responsive {max-width:100%;}
+
+.details-box h1 {
+	font-size:25px;
+}
+
+
+.exp-btn {
+	    position: absolute;
+    bottom: 8%;
+    padding: 8px;
+    border: 1px solid #000000;
+    margin: 0 auto;
+    text-align: center;
+    width: 150px;
+    left: 0;
+    right: 0;
+}
+
+.exp-btn:hover, .exp-btn.active, .exp-btn:focus {
+	text-decoration: none !important;
+}
+
+.wear-your-luck .details-box h1 {
+    font-size: 22px;
+	border-bottom: 1px solid #000000;
+	display: inline-block;
+	text-transform: uppercase;
+    line-height: 30px;
+	font-family:cinzelregular;
+}
+
+.details-box {
+	padding:20px 0px;
+}
+
+.wear-your-luck .details-justify .sab-head {
+	font-size: 16px;
+    display: block;
+    padding-top: 10px;
+	border-bottom: none;
+    color: #000000;
+    font-weight: 500;
+	padding-bottom:0px;
+}
+
+.img-responsive {
+	width:100%;
+}
+
+.vall, .close {
+	border-bottom:2px solid #ffffff;
+	background:#bcbcbc;
+	text-align:center;
+	font-size:16px;
+	line-height:30px;
+	color:#000000;
+}
+.close {
+	background:#fa505a;
+}
+
+.about-collection .about-title {
+    font-size: 32px;
+}
+
+.wear-your-luck .tab li {
+    width: 25%;
+    padding: 10px;
+	margin-bottom:0px;
+	float:left;
+}
+
+.wear-your-luck .tab li span {
+    font-size: 12px;
+}
+
+.info-popup {
+	z-index:100;
+}
+.find-more-txt, .pro-info {
+	font-size:14px;
+}
+.add-view-btn {
+    padding: 0px 0px;
+    font-size: 14px;
+    text-shadow: none;
+    line-height: 30px;
+    margin: 10px 0px;
+    width: 110px;
+    height: 30px;
+}
+
+.popup-holder {
+	overflow-y: auto;
+    width: 100%;
+    float: left;
+    height: 100%;
+}
+
+.pro-img img {
+    max-height:auto !important;
+}
+@media (max-width:360px) {
+	
+.wear-your-luck .tab li {
+    width:24%;
+}
+	
+}
+@media (max-width:320px) {
+
+.find-more-txt, .pro-info {
+    font-size: 12px;
+}
+
+.wear-your-luck .tab li {
+    width: 33.333334%;
+}
+
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+
+<div class="wyl-main-banner relative-placeholder max-margin-bottom max-padding-bottom" id="wyl--banner">
+	<div class="slide-banner">
+		<a href="/jewelry/wear-your-luck?icid=wearurluckpage|home|hb|04062017" >
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/main-banner.jpg" alt="">
+		</a>
+	</div>
+	<div class="slide-banner">
+		<a href="/jewelry/wear-your-luck?icid=wearurluckpage|home|hb|04062017" >
+			<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/main-banner-two.jpg" alt="">
+		</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#wyl--banner').slick({
+					arrows			: 	false,
+					dots: false,
+					slidesToShow	: 	1,
+					slidesToScroll	: 	1,
+					autoplay: true,
+					autoplaySpeed: 5000,
+					adaptiveHeight: true
+				});
+			});
+</script>
+
+<div class="clearfix"></div>
+<section class="container wear-your-luck no-padding">
+	<div class="about-collection col-xs-12 text-center">
+		<div class="about-title low-margin-bottom">About Collection</div>
+		<div class="about-text">Intricately crafted to enchant, each jewelry piece is unique and significant in its own way. These symbols of good luck and prosperity are adorned with glimmering gems that take the design to new heights. Wear them to attract the good things in life or to simply make a powerful statement of style.</div>
+	</div>
+	<div class="vall no-padding col-xs-12"> View All</div>
+	<div class="close no-padding col-xs-12 hide"> Close <i class="fa fa-close"></i></div>
+    <div class="tab-holder col-xs-12 no-padding max-margin-bottom max-margin-top" style="display:none">
+       <ul class="tab">
+            <li>
+                <a href="javascript:void(0)" data-go-to="#Clover" id="come2top">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover.svg" alt="" />
+					<span class="text-center">Clover</span>
+				</a>
+            </li>
+            <li>
+				<a href="javascript:void(0)" data-go-to="#HorSeShoe">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe.svg" alt="" />
+					<span class="text-center">Horse Shoe</span>
+				</a>
+            </li>
+            <li>
+				<a href="javascript:void(0)" data-go-to="#Hamsa">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/hamsa.svg" alt="" />
+					<span class="text-center">Hamsa</span>
+				</a>
+            </li>
+            <li>
+				<a href="javascript:void(0)" data-go-to="#EvilEye">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/evileye.svg" alt="" />
+					<span class="text-center">Evil Eye</span>
+				</a>
+            </li>
+            <li>
+				<a href="javascript:void(0)" data-go-to="#Key">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/key.svg" alt="" />
+					<span class="text-center">Key</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#Cross">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/cross.svg" alt="" />
+					<span class="text-center">Cross/Faith</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#ShootingStar">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/shootingstar.svg" alt="" />
+					<span class="text-center">Shooting Star</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#StarofDavid">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/starofdavid.svg" alt="" />
+					<span class="text-center">Star of David</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#WishBone">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wishbone.svg" alt="" />
+					<span class="text-center">Wish Bone</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#Peace">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/peace.svg" alt="" />
+					<span class="text-center">Peace</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#Wheel">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wheel.svg" alt="" />
+					<span class="text-center">Wheel</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#YinYang">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/yinyang.svg" alt="" />
+					<span class="text-center">Yin Yang</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#Axe">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/axe.svg" alt="" />
+					<span class="text-center">Axe</span>
+				</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)" data-go-to="#BarnStar">
+					<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/barnstar.svg" alt="" />
+					<span class="text-center">Barn Star</span>
+				</a>
+            </li>
+        </ul>
+    </div> 
+    <div class="clearfix"></div>
+    <div class="col-xs-12 no-padding bg-one full-width" id="Clover">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Discover Good Fortune</h1>
+				<div class="details-justify">
+					<span class="sab-head">Clover</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-1.jpg" alt="Lucky Clover Jewelry" title="Lucky Clover Jewelry" />
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#clover-popup" >Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="HorSeShoe">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1> Luck is Yours</h1>
+				<div class="details-justify">
+					<span class="sab-head">Horseshoe</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-2.jpg" alt="Lucky Horseshoe Jewelry" title="Lucky Horseshoe Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Horseshoe-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Hamsa">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Love & Protection</h1>
+				<div class="details-justify">
+					<span class="sab-head">Hamsa /Fatima hand</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-3.jpg" alt="Hamsa Hand Lucky Jewelry" title="Hamsa Hand Lucky Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Hamsa-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="EvilEye">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Protect Your Aura</h1>
+				<div class="details-justify">
+					<span class="sab-head">Evil Eye</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-4.jpg" alt="Evil Eye Lucky Jewelry" title="Evil Eye Lucky Jewelry">
+			<a href="/p/blue-sapphire-evil-eye-pendant-with-diamond-accents-sp1194sd?icid=wearurluckpage|evil-eye|sp1194sd|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Key">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Unlock New Possibilities</h1>
+				<div class="details-justify">
+					<span class="sab-head">Key</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-5.jpg" alt="Lucky Key Jewelry" title="Lucky Key Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Key-popup" >Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Cross">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Celebrate your faith with endless sparkle!</h1>
+				<div class="details-justify">
+					<span class="sab-head">Faith/Cross</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-6.jpg" alt="Religious lucky Jewelry" title="Religious lucky Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Cross-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="ShootingStar">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Wish upon a Star</h1>
+				<div class="details-justify">
+					<span class="sab-head">Shooting Star</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-7.jpg" alt="Shooting Star Jewelry" title="Shooting Star Jewelry">
+			<a href="/p/cluster-diamond-shooting-star-pendant-sp1197d?icid=wearurluckpage|shooting-star|sp1197d|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="StarofDavid">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Guard Yourself</h1>
+				<div class="details-justify">
+					<span class="sab-head">Star of David</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-8.jpg" alt="Star of David Jewelry" title="Star of David Jewelry">
+			<a href="/p/star-of-david-diamond-pendant-with-milgrain-sp1198d?icid=wearurluckpage|star-of-david|sp1198d|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="WishBone">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Make a Wish</h1>
+				<div class="details-justify">
+					<span class="sab-head">Wishbone</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-9.jpg" alt="Lucky Wishbone Jewelry" title="Lucky Wishbone Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Wishbone-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Peace">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Find Peace</h1>
+				<div class="details-justify">
+					<span class="sab-head">Peace</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-10.jpg" alt="Peace Sign Jewelry" title="Peace Sign Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Peace-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Wheel">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Wheel of Life</h1>
+				<div class="details-justify">
+					<span class="sab-head">Wheel</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-11.jpg" alt="Wheel of Life Jewelry" title="Wheel of Life Jewelry">
+			<a href="/p/round-diamond-wheel-of-life-pendant-sp1201d?icid=wearurluckpage|wheel|sp1201d|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="YinYang">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Find Your Balance</h1>
+				<div class="details-justify">
+					<span class="sab-head">Yin Yang</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-12.jpg" alt="Yin Yang Jewelry" title="Yin Yang Jewelry">
+			<a href="/p/black-and-white-diamond-yin-yang-pendant-sp1202bkdd?icid=wearurluckpage|yin-yang|sp1202bkdd|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width" id="Axe">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Aim Big</h1>
+				<div class="details-justify">
+					<span class="sab-head">Axe</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-13.jpg" alt="Axe Jewelry" title="Axe Jewelry">
+			<a href="/p/prong-set-diamond-axe-pendant-sp1203d?icid=wearurluckpage|axe|sp1203d|04062017" class="exp-btn">Shop Now</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+	<div class="col-xs-12 no-padding full-width max-margin-bottom" id="BarnStar">
+        <div class="col-xs-12 no-paddingl apri-box">
+            <div class="details-box text-center">
+                <h1>Attract Good Luck</h1>
+				<div class="details-justify">
+					<span class="sab-head">Barnstar</span>
+				</div>
+            </div>
+        </div>
+		<div class="col-xs-12 no-padding img-btn-box">
+            <img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/imobile/images/landingpage/wear-your-luck/bg-14.jpg" alt="Lucky Barnstar Jewelry" title="Lucky Barnstar Jewelry">
+			<a href="javascript:void(0)" class="explr-btn exp-btn" popup-id="#Barnstar-popup">Explore Collection</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+</section>
+
+
+<div class="info-popup hide">
+		<img class="img-responsive dismiss-popup" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default//images/optionpopupclose.png" style="position: absolute;right:30px;width:15px;top:30px;cursor: pointer; z-index: 1;">
+		
+		<div class="col-sm-12 no-padding hide popup-holder" id="clover-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/round-emerald-and-diamond-border-clover-pendant-sp0178e?icid=wearurluckpage|clover|sp0178e|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-1.png" alt="Diamond Framed Emerald Clover Pendant Necklace" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/round-emerald-and-diamond-border-clover-pendant-sp0178e?icid=wearurluckpage|clover|sp0178e|04062017">Diamond Framed Emerald Clover Pendant Necklace</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$379 - $1,829</div>
+						<a class="btn add-view-btn" href="/p/round-emerald-and-diamond-border-clover-pendant-sp0178e?icid=wearurluckpage|clover|sp0178e|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-xs-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-1.png" class="img-responsive small-image" data-name="Diamond Framed Emerald Clover Pendant Necklace" data-trackurl="/p/round-emerald-and-diamond-border-clover-pendant-sp0178e?icid=wearurluckpage|clover|sp0178e|04062017" data-price="$379 - $1,829" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-2.png" class="img-responsive small-image" data-name="Round Diamond Clover Station Necklace" data-trackurl="/p/round-diamond-clover-station-necklace-sp1199d?icid=wearurluckpage|clover|sp1199d|04062017" data-price="$439 - $709" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-3.png" class="img-responsive small-image" data-name="Classic Emerald Four Petal Clover Pendant" data-trackurl="/p/classic-emerald-four-petal-flower-pendant-sp0756e?icid=wearurluckpage|clover|sp0756e|04062017" data-price="$329 - $1,279" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-4.png" class="img-responsive small-image" data-name="Round Diamond Clover Dangle Earrings" data-trackurl="/p/leverback-round-diamond-flower-dangle-earrings-se1227d?icid=wearurluckpage|clover|se1227d|04062017" data-price="$739 - $3,129" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-5.png" class="img-responsive small-image" data-name="Solitaire Diamond Clover Bypass Ring" data-trackurl="/p/camellia-flower-diamond-bypass-promise-ring-sr1702d?icid=wearurluckpage|clover|SR1702D|04062017" data-price="$929 - $2,979" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-6.png" class="img-responsive small-image" data-name="Round Emerald Clover Ring with Diamond Accents" data-trackurl="/p/round-emerald-and-diamond-clover-ring-sr0176e?icid=wearurluckpage|clover|sr0176e|04062017" data-price="$839 - $2,119" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/clover-7.png" class="img-responsive small-image" data-name="Pear Shaped Sapphire Clover Stud Earrings with Diamond Halo" data-trackurl="/p/pear-shaped-sapphire-clover-stud-earrings-with-diamond-halo-se1049sd?icid=wearurluckpage|clover|se1049sd|04062017" data-price="$1,129 - $5,519" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Horseshoe-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/gypsy-set-diamond-horseshoe-pendant-sp1189d?icid=wearurluckpage|horseshoe|sp1189d|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe-1.png" alt="Gypsy Set Diamond Horseshoe Pendant" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/gypsy-set-diamond-horseshoe-pendant-sp1189d?icid=wearurluckpage|horseshoe|sp1189d|04062017">Gypsy Set Diamond Horseshoe Pendant</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$309 - $1,149</div>
+						<a class="btn add-view-btn" href="/p/gypsy-set-diamond-horseshoe-pendant-sp1189d?icid=wearurluckpage|horseshoe|sp1189d|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe-1.png" class="img-responsive small-image" data-name="Gypsy Set Diamond Horseshoe Pendant" data-trackurl="/p/gypsy-set-diamond-horseshoe-pendant-sp1189d?icid=wearurluckpage|horseshoe|sp1189d|04062017" data-price="$309 - $1,149" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe-2.png" class="img-responsive small-image" data-name="Pave Set Diamond Horseshoe Stud Earrings" data-trackurl="/p/pave-set-diamond-horseshoe-stud-earrings-se1481d?icid=wearurluckpage|horseshoe|se1481d|04062017" data-price="$289 - $469" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe-3.png" class="img-responsive small-image" data-name="Classic Diamond Horseshoe Pendant Necklace" data-trackurl="/p/classic-diamond-horseshoe-pendant-sp0719d?icid=wearurluckpage|horseshoe|sp0719d|04062017" data-price="$509 - $1,409" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/horseshoe-4.png" class="img-responsive small-image" data-name="Pave-Set Ruby and Diamond Horseshoe Pendant Necklace" data-trackurl="/p/pave-ruby-and-diamond-lucky-horseshoe-charm-pendant-sp0758rd?icid=wearurluckpage|horseshoe|sp0758rd|04062017" data-price="$609 - $1,859" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Hamsa-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/bezel-set-diamond-hamsa-hand-pendant-sp1190d?icid=wearurluckpage|hamsa-hand|SP1190D|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/hamsa-1.png" alt="Bezel Set Diamond Hamsa Hand Pendant" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/bezel-set-diamond-hamsa-hand-pendant-sp1190d?icid=wearurluckpage|hamsa-hand|SP1190D|04062017">Bezel Set Diamond Hamsa Hand Pendant</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$639 - $1,029</div>
+						<a class="btn add-view-btn" href="/p/bezel-set-diamond-hamsa-hand-pendant-sp1190d?icid=wearurluckpage|hamsa-hand|SP1190D|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/hamsa-1.png" class="img-responsive small-image" data-name="Bezel Set Diamond Hamsa Hand Pendant" data-trackurl="/p/bezel-set-diamond-hamsa-hand-pendant-sp1190d?icid=wearurluckpage|hamsa-hand|SP1190D|04062017" data-price="$639 - $1,029" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/hamsa-2.png" class="img-responsive small-image" data-name="Diamond Open Hamsa Hand Pendant" data-trackurl="/p/diamond-open-hamsa-hand-pendant-sp1191d?icid=wearurluckpage|hamsa-hand|SP1191D|04062017" data-price="$479 - $1,079" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Key-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/daisy-key-diamond-pendant-in-two-tone-sp1192d?icid=wearurluckpage|key|SP1192D|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/Key-1.png" alt="Daisy Key Diamond Pendant in Two Tone" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/daisy-key-diamond-pendant-in-two-tone-sp1192d?icid=wearurluckpage|key|SP1192D|04062017">Daisy Key Diamond Pendant in Two Tone</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$229 - $309</div>
+						<a class="btn add-view-btn" href="/p/daisy-key-diamond-pendant-in-two-tone-sp1192d?icid=wearurluckpage|key|SP1192D|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/Key-1.png" class="img-responsive small-image" data-name="Daisy Key Diamond Pendant in Two Tone" data-trackurl="/p/daisy-key-diamond-pendant-in-two-tone-sp1192d?icid=wearurluckpage|key|SP1192D|04062017" data-price="$229 - $309" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/Key-2.png" class="img-responsive small-image" data-name="Diamond Fleur De Lis Key Pendant" data-trackurl="/p/diamond-fleur-de-lis-key-pendant-sp1193d?icid=wearurluckpage|key|SP1193D|04062017" data-price="$739 - $1,259" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Cross-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/round-sapphire-and-diamond-cross-pendant-sp0120sd-n?icid=wearurluckpage|faith|sp0120sd-n|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/cross-1.png" alt="Flat Prong-Set Blue Sapphire and Diamond Cross Pendant" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/round-sapphire-and-diamond-cross-pendant-sp0120sd-n?icid=wearurluckpage|faith|sp0120sd-n|04062017">Flat Prong-Set Blue Sapphire and Diamond Cross Pendant</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$749 - $2,249</div>
+						<a class="btn add-view-btn" href="/p/round-sapphire-and-diamond-cross-pendant-sp0120sd-n?icid=wearurluckpage|faith|sp0120sd-n|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/cross-1.png" class="img-responsive small-image" data-name="Flat Prong-Set Blue Sapphire and Diamond Cross Pendant" data-trackurl="/p/round-sapphire-and-diamond-cross-pendant-sp0120sd-n?icid=wearurluckpage|faith|sp0120sd-n|04062017" data-price="$749 - $2,249" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/cross-2.png" class="img-responsive small-image"  data-name="Gypsy Set Round Ruby Cross Pendant" data-trackurl="/p/round-ruby-cross-pendant-sp0470rb?icid=wearurluckpage|faith|sp0470rb|04062017" data-price="$499" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Wishbone-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/solitaire-moissanite-wishbone-drop-pendant-sp1196ml?icid=wearurluckpage|wishbone|SP1196ML|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wishbone-1.png" alt="Solitaire Moissanite Wishbone Drop Pendant" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/solitaire-moissanite-wishbone-drop-pendant-sp1196ml?icid=wearurluckpage|wishbone|SP1196ML|04062017">Solitaire Moissanite Wishbone Drop Pendant</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$329 - $429</div>
+						<a class="btn add-view-btn" href="/p/solitaire-moissanite-wishbone-drop-pendant-sp1196ml?icid=wearurluckpage|wishbone|SP1196ML|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wishbone-1.png" class="img-responsive small-image" data-name="Solitaire Moissanite Wishbone Drop Pendant" data-trackurl="/p/solitaire-moissanite-wishbone-drop-pendant-sp1196ml?icid=wearurluckpage|wishbone|SP1196ML|04062017" data-price="$329 - $429" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wishbone-2.png" class="img-responsive small-image" data-name="Pave Set Diamond Sideways Wishbone Necklace" data-trackurl="/p/pave-set-diamond-sideways-wishbone-necklace-sp1195d?icid=wearurluckpage|wishbone|SP1195D|04062017" data-price="$359 - $559" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/wishbone-3.png" class="img-responsive small-image" data-name="Round Diamond Wishbone Stud Earrings" data-trackurl="/p/round-diamond-wishbone-stud-earrings-se1376d?icid=wearurluckpage|wishbone|SE1376D|04062017" data-price="$139 - $199" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Peace-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/tapered-shank-diamond-peace-sign-ring-sr1828d?icid=wearurluckpage|peace|SR1828D|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/peace-1.png" alt="Tapered-Shank Diamond Peace Sign Ring" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/tapered-shank-diamond-peace-sign-ring-sr1828d?icid=wearurluckpage|peace|SR1828D|04062017">Tapered-Shank Diamond Peace Sign Ring</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$439 - $689</div>
+						<a class="btn add-view-btn" href="/p/tapered-shank-diamond-peace-sign-ring-sr1828d?icid=wearurluckpage|peace|SR1828D|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/peace-1.png" class="img-responsive small-image" data-name="Tapered-Shank Diamond Peace Sign Ring" data-trackurl="/p/tapered-shank-diamond-peace-sign-ring-sr1828d?icid=wearurluckpage|peace|SR1828D|04062017" data-price="$439 - $689" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/peace-3.png" class="img-responsive small-image" data-name="Prong-Set Diamond Peace Sign Pendant" data-trackurl="/p/prong-set-diamond-peace-sign-pendant-sp1200d?icid=wearurluckpage|peace|SP1200D|04062017" data-price="$539 - $889" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/peace-2.png" class="img-responsive small-image" data-name="Diamond Peace Sign Leverback Earrings" data-trackurl="/p/diamond-peace-sign-leverback-earrings-se1480d?icid=wearurluckpage|peace|SE1480D|04062017" data-price="$679 - $1,139" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-sm-12 no-padding hide popup-holder" id="Barnstar-popup">
+			<div class="col-sm-6 no-padding big-img-box">
+				<div class="pro-img full-width">
+					<a href="/p/star-shaped-diamond-cluster-stud-earrings-se1130d?icid=wearurluckpage|barnstar|SE1130D|04062017">
+						<img class="img-responsive" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/barnstar-1.png" alt="Diamond Cluster Star Stud Earrings" />
+					</a>
+				</div>
+				<div class="pro-info text-center">
+					<a class="pro-title full-width" href="/p/star-shaped-diamond-cluster-stud-earrings-se1130d?icid=wearurluckpage|barnstar|SE1130D|04062017">Diamond Cluster Star Stud Earrings</a>
+					<div class="pro-details-btn full-width" >
+						<div class="pro-price apricot-text low-margin-top">$649 - $2,449</div>
+						<a class="btn add-view-btn" href="/p/star-shaped-diamond-cluster-stud-earrings-se1130d?icid=wearurluckpage|barnstar|SE1130D|04062017">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 no-padding small-img-box">
+				<div class="find-more-txt col-xs-12 pull-left low-padding-bottom">Explore more from this collection</div>
+				<div class="find-more-img col-sm-12 no-padding">
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom active">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/barnstar-1.png" class="img-responsive small-image" data-name="Diamond Cluster Star Stud Earrings" data-trackurl="/p/star-shaped-diamond-cluster-stud-earrings-se1130d?icid=wearurluckpage|barnstar|SE1130D|04062017" data-price="$649 - $2,449" />
+					</div>
+					<div class="col-xs-3 collection-img high-padding-top high-padding-bottom">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/landingpage/wear-your-luck/barnstar-2.png" class="img-responsive small-image" data-name="Diamond Open Star Bypass Ring" data-trackurl="/p/round-bypass-diamond-open-star-ring-sr1403d?icid=wearurluckpage|barnstar|SR1403D|04062017" data-price="$689 - $1,429" />
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<script language="javascript">
+jQuery(function(){
+	
+	jQuery('.tab li a, .go2top a').click(function(){
+		var id = jQuery(this).attr('data-go-to');
+		var headerHeight = jQuery("#header").height();
+		
+			jQuery('html, body').animate({
+				scrollTop: jQuery(id).offset().top - headerHeight
+			}, 500);
+	});
+	
+	jQuery('.vall').click(function(){
+		jQuery('.tab-holder').slideToggle( "slow" );
+		jQuery(this).addClass( "hide" );
+		jQuery('.close').removeClass( "hide" );
+		
+	});
+	
+	jQuery('.close').click(function(){
+		jQuery('.tab-holder').slideToggle( "slow" );
+		jQuery(this).addClass( "hide" );
+		jQuery('.vall').removeClass( "hide" );
+	});
+	
+	
+	jQuery('.img-btn-box a.explr-btn').click(function(){
+		var id = jQuery(this).attr('popup-id');
+		jQuery( ".info-popup").removeClass('hide');
+		jQuery(id).removeClass('hide').addClass('popup-flex');
+	});
+	jQuery('.info-popup .dismiss-popup').click(function(){
+		jQuery(".info-popup, .popup-holder").addClass('hide').removeClass('popup-flex');
+	});
+	
+	
+	jQuery('.small-image').click(function(){
+	  jQuery(this).parent('.collection-img').addClass('active').siblings('.collection-img').removeClass('active');
+	  
+	  var proImae = jQuery(this).attr('src');
+	  var proName = jQuery(this).attr('data-name');
+	  var proURL = jQuery(this).attr('data-trackurl');
+	  var proPrice = jQuery(this).attr('data-price');
+	  
+	  jQuery(this).parents('.popup-holder').find('.big-img-box img').attr('src',proImae);
+	  jQuery(this).parents('.popup-holder').find('.big-img-box img').attr('alt',proName);
+	  jQuery(this).parents('.popup-holder').find('.big-img-box .pro-title').text(proName);
+	  jQuery(this).parents('.popup-holder').find('.big-img-box a').attr('href',proURL);
+	  jQuery(this).parents('.popup-holder').find('.pro-details-btn .pro-price').text(proPrice);
+	});
+});
+</script>

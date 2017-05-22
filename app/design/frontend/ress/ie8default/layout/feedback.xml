@@ -1,0 +1,19 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+	<feedback_index_index>   
+		<reference name="root">   
+			<action method="setTemplate"><template>page/1column.phtml</template></action>   
+		</reference>   
+		<reference name="content">   
+			<block type="feedback/index" name="feedback_index" template="feedback/index.phtml"/>   
+		</reference>   
+	</feedback_index_index>   
+  
+	<!--	Layout handle to show feedback form on ajax request	-->
+	<feedback_index_ajax>   
+		<reference name="content">   
+			<block type="feedback/ajax" name="root" output="toHtml" template="feedback/ajax.phtml"/>   
+		</reference>   
+	</feedback_index_ajax> 
+</layout>   
+	

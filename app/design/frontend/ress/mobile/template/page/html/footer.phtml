@@ -1,0 +1,228 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$scripts = array();
+$images = array(); ?>
+
+<footer id="footer" role="contentinfo">
+	<?php echo $this->getChildHtml('footer_showcase'); ?>    
+  	<div class="footer-badge-block showcase-bg-white high-padding-top checkout-footer-top-border">
+    	<div class="container">
+      		<div class="row">
+        		<div class="col-md-12 text-center">
+          			<ul class="list-inline low-margin-bottom low-margin-top">
+					<?php 
+					if(Mage::app()->getRequest()->getModuleName() != 'onepagecheckout'): ?>
+                        <li class="valign-top low-margin-bottom" style="margin-top:-5px;">
+                            <table width="120" border="0" cellpadding="0" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                            <tr>
+                            <td width="120" align="center" valign="top"><script type='text/javascript' src='https://seal.verisign.com/getseal?host_name=www.angara.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en'></script>
+                            <a href="http://www.symantec.com/verisign/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a></td>
+                            </tr>
+                            </table>
+                        </li>
+                        <li class="valign-top low-margin-bottom"><div><?php /* https://www.bbb.org/losangelessiliconvalley/business-reviews/jewelers-retail/angaracom-in-los-angeles-ca-100082531#bbbseal */ ?>
+						<a id="bbblink" class="rbhzbus" href="javascript:void(0)" title="Angara.com, Jewelers Retail, Los Angeles, CA" style="display: block;position: relative;overflow: hidden; width: 100px; height: 48px; margin: 0px; padding: 0px; cursor: default;"><img style="padding: 0px; border: none;" id="bbblinkimg" src="/skin/frontend/ress/default/images/seal-for-100082531.png" width="200" height="48" alt="Angara.com, Jewelers Retail, Los Angeles, CA" /></a></div></li>
+                        <li class="valign-top low-margin-bottom"> 
+                          <script type="text/javascript">var bizrate = {small:"true"};</script> 
+                          <?php $scripts[] = 'https://medals.bizrate.com/medals/js/150815_medal.js'; ?>
+                          <a class="br-button" rel="nofollow"> <img src="https://medals.bizrate.com/medals/dynamic/small/150815_medal.gif" width="112" height="37" border="0" usemap="#150815_medal" alt="See Angara Reviews at Bizrate.com"/>
+                          <map name="150815_medal">
+                            <area shape="poly" coords="1,0,1,36,61,36,61,20,111,20,111,0" href="http://www.bizrate.com/ratings_guide/merchant_detail__mid--150815.html?rf=sur" title="See Angara Reviews at Bizrate.com" target="_blank"  rel="nofollow"/>
+                            <area shape="rect" coords="62,21,111,36" href="http://www.bizrate.com/?rf=sur" title="Bizrate" target="_blank"  rel="nofollow"/>
+                          </map>
+                          </a> </li>            
+                    <?php 
+					endif; ?>
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="cards-badge"></li>           
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="paypal-badge"></li>
+                        <li class="valign-top low-margin-bottom low-margin-left low-margin-right" id="fedex-badge"></li>
+          			</ul>
+                  	<address><?php echo $this->getCopyright() ?></address>
+                </div>
+      		</div>
+    	</div>
+  	</div>
+  	<script>
+	(function(w, d, s) {
+	  function go(){
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		  if (d.getElementById(id)) {return;}
+		  js = d.createElement(s); js.src = url; js.id = id;
+		  fjs.parentNode.insertBefore(js, fjs);
+		};
+		<?php foreach($scripts as $key => $script):?>
+		load('<?php echo $script; ?>', 'script<?php echo $key; ?>');
+		<?php endforeach; ?>
+	  }
+	  if (w.addEventListener) { w.addEventListener("load", go, false); }
+	  else if (w.attachEvent) { w.attachEvent("onload",go); }
+	}(window, document, 'script'));
+	</script>
+  	<!-- BEGIN LivePerson Monitor. -->
+	<script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "609151",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script>
+    <!-- END LivePerson Monitor. --> 
+  	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->  
+	<!-- Google Code for Remarketing Tag -->
+	<?php
+    if($this->getRequest()->getControllerName() == 'cart' && $this->getRequest()->getModuleName() == 'checkout'){   	
+		$cartHelper = Mage::helper('checkout/cart');
+		$items = $cartHelper->getCart()->getItems();
+		$skulist = '';
+		$pricelist = '';
+		foreach($items as $item) {
+			$isVisibleProduct = $item->getProduct()->isVisibleInSiteVisibility();
+			if($item->getProduct()->getPrice() > 0 && $isVisibleProduct) {
+				$pro_price = $item->getProduct()->getPrice();
+				$pro_skus = $item->getProduct()->getData('sku');
+				$_prod = Mage::getModel('catalog/product')->loadByAttribute('sku', $pro_skus);
+				if($skulist == ''){
+					$skulist = "'".$pro_skus."'";
+				}
+				else{
+					$skulist .=",'".$pro_skus."'";
+				}
+				if($pricelist == ''){
+					$pricelist = $pro_price;
+				}
+				else{
+					$pricelist .= ",".$pro_price;
+				}			
+			}
+		}?>
+    	<script type="text/javascript">
+    	var google_tag_params = {
+    	ecomm_prodid: [<?php echo $skulist; ?>],
+    	ecomm_pagetype: 'cart',
+    	ecomm_totalvalue: [<?php echo $pricelist; ?>]
+    	};
+    	</script>
+    <?php
+    }
+    else if($this->getRequest()->getControllerName() == 'product' && $this->getRequest()->getModuleName() == 'catalog'){
+		if($product = Mage::registry('current_product')){
+    		$sku = $product->getSku();
+    		$price = $product->getPrice(); ?>
+    		<script type="text/javascript">
+			var google_tag_params = {
+				ecomm_prodid: '<?php echo $sku; ?>',
+				ecomm_pagetype: 'product',
+				ecomm_totalvalue: <?php echo $price; ?>
+			};
+			</script>
+    	<?php
+    	}
+    }
+    else if($this->getRequest()->getControllerName() == 'category' && $this->getRequest()->getModuleName() == 'catalog'){?>
+		<script type="text/javascript">
+        var google_tag_params = {
+        ecomm_prodid: '',
+        ecomm_pagetype: 'category',
+        ecomm_totalvalue: ''
+        };
+        </script>
+    <?php	
+    }
+    else if($this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getModuleName() == 'cms'){?>
+		<script type="text/javascript">
+        var google_tag_params = {
+        ecomm_prodid: '',
+        ecomm_pagetype: 'home',
+        ecomm_totalvalue: ''
+        };
+        </script>
+    <?php	
+    }
+    else if($this->getRequest()->getControllerName() == 'result' && $this->getRequest()->getModuleName() == 'catalogsearch'){?>
+    	<script type="text/javascript">
+        var google_tag_params = {
+        ecomm_prodid: '',
+        ecomm_pagetype: 'searchresults',
+        ecomm_totalvalue: ''
+        };
+    	</script>
+    <?php	
+    }
+    else{ ?>
+    	<script type="text/javascript">
+        var google_tag_params = {
+        ecomm_prodid: '',
+        ecomm_pagetype: 'other',
+        ecomm_totalvalue: ''
+        };
+    	</script>
+    <?php
+    }?>
+    <script type="text/javascript">
+    /* <![CDATA[ */
+		var google_conversion_id = 1064978809;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+    /* ]]> */
+    </script>
+    <?php //$scripts[] = '//www.googleadservices.com/pagead/conversion.js';?>       
+</footer>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1064978809/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+<!-- Google Code for Remarketing Tag -->
+
+<!-- Start of Neustar Real User Measurements code -->
+<script type="text/javascript">
+	var ns_rum = {};
+	// Optional: uncomment the second line below in order to enable Perceived Load Time (timeout in seconds)
+	// Then add a call to ns_rum.onPerceivedLoad(); in your code to mark the perceived load event for each page that has the RUM tag
+	//ns_rum.perceivedLoadTimeout = 8;
+	var t_pagestart = new Date().getTime(), t_pageend;
+	ns_rum.init = function() {
+		t_pageend = new Date().getTime();
+		var s = document.createElement ('script'); s.id = 'rum'; s.type = 'text/javascript';
+		s.src = ('https:' === document.location.protocol ? 'https://' : 'http://') + 'd2lo2tipcl3aii.cloudfront.net/E6387EE87EF4441995B41E06883655D4/neustar.beacon.js';
+		document.getElementsByTagName('head')[0].appendChild(s);
+	};
+	window.addEventListener ? window.addEventListener('load', ns_rum.init, false) : window.attachEvent ? window.attachEvent('onload', ns_rum.init) : false;
+	ns_rum.errors = [];
+	ns_rum.ogErrorHandler = window.onerror;
+	window.onerror = function rumErrorHandler(msg, url, line) {
+		ns_rum.errors.push({'url': url, 'line': line, 'msg': msg});
+		if (ns_rum.ogErrorHandler) {return ns_rum.ogErrorHandler(msg, url, line);}
+		return false;
+	};
+	ns_rum.onPerceivedLoad = function(description) {
+		if (typeof(ns_rum.perceivedLoadTimeEnd) === "undefined") {
+			ns_rum.perceivedLoadTimeEnd = new Date().getTime();
+			if (typeof(description) !== "undefined") {
+				ns_rum.perceivedLoadTimeDescription = description;
+			}
+		}
+	};
+</script>
+<!-- End of Neustar Real User Measurements code -->
+
+<!-- Google Analytics Code -->
+<?php echo $this->getChildHtml('google_analytics');?>

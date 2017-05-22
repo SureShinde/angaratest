@@ -1,0 +1,133 @@
+<?php
+$_helper    = $this->helper('catalog/output');
+$_category  = $this->getCurrentCategory();
+preg_match('/Yellow Sapphire|Blue Sapphire|Pink Sapphire|White Sapphire|Green Amethyst|Black Diamond|Blue Diamond|Diamond|Tanzanite|Akoya Cultured Pearl|Amethyst|Citrine|Aquamarine|Black Onyx|Black Tahitian Cultured Pearl|Emerald|Ruby|Blue Topaz|Carnelian|Peridot|Freshwater Cultured Pearl|Garnet|Lapis Lazuli|Opal|Pink Tourmaline|Rose Quartz|Turquoise|Moissanite|Sapphire/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$mainStone = $matches[0];
+}
+else{
+	$mainStone = 'mixed';
+}
+// NOTE: earring contains ring (using space before ring)
+preg_match('/ ring|earring|pendant|^ring/i', $_category->getName(), $matches);
+if(isset($matches[0])){
+	$jewelryType = trim($matches[0]);
+}
+else{
+	$jewelryType = 'mixed';
+} ?>
+<div class="cs-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($mainStone)));?> jt-<?php echo strtolower( str_ireplace(' ','-',$this->htmlEscape($jewelryType)));?>">
+	<?php	
+	echo $this->getMessagesBlock()->getGroupedHtml();
+	if($_imgUrl): 
+		echo $_imgHtml;
+	endif; 	
+	if($this->isContentMode() || $this->isMixedMode()):
+		if(Mage::app()->getRequest()->getParam('content') != 'no'):?>			
+            <div class="container showcase-bg-white" data-remove-classes="container">
+                <?php // S:VA	Social Sharing icons added 
+				$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+				if(strstr($currentUrl,'jewelry-guide')){?>
+					<style>.social-share a.twitter{background:url('/skin/frontend/ress/default/images/old-twitter.png');}</style>
+                    <div class="social-share" style="width:100%;float:left;height:25px;">
+                        <div style="float:left; margin-right:10px;"><a style="display:block; height:20px; width:56px; font-size:0px;" class="twitter popup" href="http://twitter.com/share?text=<?php echo $_category->getMetaTitle()?>">Tweet</a></div>
+                        <script>
+                        jQuery(document).ready(function() {
+                          	jQuery('.popup').click(function(event) {
+                            	var width  = 575,
+                                height = 400,
+                                left   = (jQuery(window).width()  - width)  / 2,
+                                top    = (jQuery(window).height() - height) / 2,
+                                url    = this.href,
+                                opts   = 'status=1' +
+                                         ',width='  + width  +
+                                         ',height=' + height +
+                                         ',top='    + top    +
+                                         ',left='   + left;                            
+                            	window.open(url, 'twitter', opts);
+                            	return false;
+                          	});
+                        });
+                        </script>				
+                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-555c45cb760fa438" async="async"></script>
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                <?php 
+				} // E:VA	Social Sharing icons added ?>
+               	<div><?php echo $this->getCmsBlockHtml(); ?></div>
+            </div>
+        <?php 
+		endif;
+	endif;	
+	if(!$this->isContentMode()):
+		// specific for build your own header
+		$byoCategories = array('469','470');?>
+		<div class="container showcase-bg-white high-padding-top <?php if(in_array($_category->getId(),$byoCategories)){?>design-your-own<?php }?><?php if($_category->getId() == 470){?> dyo-ring<?php }else if($_category->getId() == 469){?> dyo-pendant<?php }?>" data-remove-classes="container">
+			<?php
+			$_imgHtml   = '';
+			if($_imgUrl = $_category->getImageUrl()){
+				$_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+				$_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+			}?>
+			
+			<?php if(!in_array($_category->getId(),$byoCategories)){?>
+			<div class="page-title category-title">
+				<h1 class="no-margin high-padding-bottom text-center pull-left">
+					<span class="pull-left"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name');?></span>
+				</h1>
+			</div> 
+			<?php } ?>
+			<?php 
+			//	S::Showing category description
+			if($_description=trim($this->getCurrentCategory()->getDescription())): ?>
+				<div class="category-description hidden-xs std">
+					<div class="category-des-text">
+						<?php echo $_helper->categoryAttribute($_category, Mage::helper('function')->readMore($_description), 'description'); ?>
+					</div>
+					<script>
+						jQuery(".category-des-text p").css("padding","0px");
+					</script>
+				</div>
+				<script>
+				jQuery(".read_more").click(function(){
+					jQuery(this).parents(".category-description").find("#category_read_more").show().removeClass('hidden');
+					jQuery(this).hide();
+					jQuery(".read_less").show().removeClass('hidden');
+				});
+				jQuery(".read_less").click(function(){
+					jQuery(this).parents(".category-description").find("#category_read_more").hide().addClass('hidden');
+					jQuery(this).hide();
+					jQuery(".read_more").show();
+				});
+				</script>
+			<?php 
+			endif; 
+			//E::Showing category description
+		
+			// specific for build your own header
+			if(in_array($_category->getId(),$byoCategories)){
+				echo $this->getLayout()->createBlock('buildyourown/header')->setTemplate('buildyourown/header.phtml')->toHTML();
+			}?> 
+			<div id="catalog-main-box-holder">
+				<div class="catalog-loader hidden">
+					<div class="fa fa-spinner fa-spin fa-5x max-margin-top"></div>
+				</div>
+				<div class="catalog-main-box-holder">
+					<div id="catalog-filter-controller" data-filter-panel-display-state="none" data-filter-panel-current-tab-index="0" class="relative-placeholder"><?php echo $this->getChildHtml('catalog_filter');?> </div>
+					<?php echo $this->getProductListHtml(); ?> 
+				</div>
+			</div>
+		</div>
+	<?php 
+	endif; 
+	?>
+	<div id="go-to-top-link" class="clickable hide">
+		<button class="button btn-primary"> <i class="fa fa-angle-up fontsize-type7 text-on-dark"></i> </button>
+	</div>
+	<?php 
+	if($_articlePosts = $this->getCurrentCategory()->getCategoryArticlePosts()): ?>
+		<div class="container showcase-bg-white catalog-artical-post"><?php echo $_articlePosts;?></div>
+	<?php 
+	endif; ?>
+	<div class="container" id="flashDeal"></div>
+</div>

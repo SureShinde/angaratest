@@ -1,0 +1,63 @@
+<?php
+$urlrcv = Mage::getUrl('*/*');
+$indx = strpos($urlrcv, "/checkout");
+$rw_items = array();
+
+if($indx == ""){
+	$rw_items = $this->CollectRecentlyViewed();
+	foreach($rw_items as $product){		
+		$prod_data = Mage::getModel('catalog/product');
+		$prod_data->load($product);
+		$productCategories = $prod_data->getCategoryIds();
+		/*if($prod_data && in_array(454, $productCategories)):
+			unset($rw_items[array_search($product,$rw_items)]);
+		endif;*/			
+	}
+}
+
+if(count($rw_items) >= 1){ ?>	
+		<div id="recently-view" class="full-width pull-left">
+		<div class="block-sub-heading high-padding-bottom pull-left full-width showcase-border-bottom-1px text-bold">Recently Viewed Products</div>
+		<div id="recently-view-holder" class="item-holder full-width pull-left text-center">	
+        <?php
+        $rw_count_prod = 0;
+        foreach($rw_items as $product){
+            if($rw_count_prod <= 7){
+                $prod_data = Mage::getModel('catalog/product');
+                $prod_data->load($product);				
+				$_helper = $this->helper('catalog/output');
+				$image = $this->helper('catalog/image')->init($prod_data,'image')->resize(150,150);
+				$_coreHelper = $this->helper('core');?>
+				<div class="low-padding low-margin-bottom col-md-3 col-sm-3">
+					 <a href="<?php echo $prod_data->getProductUrl();?>?icid=rv-widget" style="display:inline-block; width:150px"> 
+						<img class="img-responsive" alt="<?php echo $prod_data->getShortDescription();?>" title="<?php echo $prod_data->getShortDescription();?> - Angara.com" src="<?php echo $image;?>">
+					</a>
+					<div class="fontsize-type1 text-bold low-padding-top">
+						<?php $_productNameStripped = $this->stripTags($prod_data->getShortDescription(), null, true); 
+							$remainder = ''; ?>
+							<a href="<?php echo $prod_data->getProductUrl(); ?>?icid=rv-widget" title="<?php echo $_productNameStripped; ?>" class="fontsize-type1"><strong><?php echo Mage::helper('core/string')->truncate($_helper->productAttribute($prod_data, $prod_data->getShortDescription(), 'short_description'), $length = 42, $etc = '...', $remainder, false);?></strong></a>
+					</div>
+					<div class="regular-price"><?php echo $this->getPriceHtml($prod_data, true, '-recent'); ?></div>
+					<div class="text-center low-padding-top hidden"><button href="/catalog/ajax_product/view/id/<?php echo $prod_data->getId(); ?>" onclick="quickView(this, '<?php echo "rv-widget|".$prod_data->getSku(); ?>')" class="btn btn-sm quickview ">Quick View</button>
+						<div class="clearfix"></div>
+					</div>						
+				</div>         
+			<?php				
+            }
+        $rw_count_prod++;
+        }?>
+		</div>
+		<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#recently-view-holder').slick({
+				arrows			: 	true,
+				slidesToShow	: 	4,
+				slidesToScroll	: 	1
+			});
+			window.scrollBy(0,1);
+		});
+		</script>
+		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+	</div>   
+<?php
+}?>

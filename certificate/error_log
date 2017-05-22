@@ -1,0 +1,64 @@
+[05-Nov-2011 11:25:52] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[19-Nov-2011 09:49:33] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[11-Dec-2011 18:28:19] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[12-Dec-2011 18:00:19] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[13-Dec-2011 01:39:36] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[24-Dec-2011 17:59:08] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[26-Dec-2011 00:27:36] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/www/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/www/public_html/certificate/dompdf.php on line 243
+[13-Jul-2012 08:06:09] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[30-Jul-2012 15:36:45] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[04-Aug-2012 21:40:40] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[11-Aug-2012 13:51:07] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[20-Aug-2012 10:15:32] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[20-Aug-2012 15:52:53] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[02-Sep-2012 15:04:06] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[18-Sep-2012 15:07:45] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243
+[23-Oct-2012 10:07:09] PHP Fatal error:  Uncaught exception 'DOMPDF_Exception' with message 'An input file is required (i.e. input_file _GET variable).' in /home/angara/public_html/certificate/dompdf.php:243
+Stack trace:
+#0 {main}
+  thrown in /home/angara/public_html/certificate/dompdf.php on line 243

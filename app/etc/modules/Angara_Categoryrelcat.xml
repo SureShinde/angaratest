@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Angara_Categoryrelcat>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Angara_Categoryrelcat>
+    </modules>
+</config>

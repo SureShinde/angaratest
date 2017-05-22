@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+	<global>
+		<modules>
+			<Hp_Cartpopup>
+					<version>0.1.0</version>
+			</Hp_Cartpopup>
+        </modules>
+		<blocks>
+            <cartpopup><class>Hp_Cartpopup_Block</class></cartpopup>
+        </blocks>
+	</global>
+	<frontend>
+		<routers>
+			<cartpopup>
+				<use>standard</use>
+				<args>
+					  <module>Hp_Cartpopup</module>
+					  <frontName>cartpopup</frontName>
+				</args>
+			</cartpopup>
+		</routers>
+		<layout>
+			<updates>
+				<cartpopup>
+		   		      <file>cartpopup.xml</file>
+				</cartpopup>
+			</updates>
+		</layout>
+    </frontend>
+</config>

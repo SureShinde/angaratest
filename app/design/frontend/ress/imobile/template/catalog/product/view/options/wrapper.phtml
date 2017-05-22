@@ -1,0 +1,47 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<script>
+	/* function closeProductOptions(){
+		jQuery('.product-options-wrapper-inner-box').hide();
+		jQuery('.customize-product-tab-content').each(function(){
+			jQuery(this).addClass('hidden').removeAttr('style');
+		});
+		jQuery('.option-list-tab').each(function(){
+			jQuery(this).removeClass('active').removeAttr('style');
+		});
+	} */
+</script>
+<div class="product-options" id="product-options-wrapper">
+	<div class="product-options-wrapper-inner-box">
+		<div class="product-optns">
+			<?php /* <div class="dismiss-popup" style="position:absolute; top:-9px; right:-9px; cursor:pointer; border-radius:11px; height:18px; width:18px; background:url(/skin/frontend/ress/default/images/sprite.jpg) -229px -151px no-repeat;" onclick="closeProductOptions();"></div> */ ?>
+			<div class="pro-optns">
+				<?php echo $this->getChildHtml('', true, true);?>
+			</div>
+		</div>
+	</div>
+</div>

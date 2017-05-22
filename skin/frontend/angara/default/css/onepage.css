@@ -1,0 +1,583 @@
+.main {
+	margin: 0 auto;
+	margin-bottom: 10px;
+	padding: 15px;
+	background-color: #fff;
+	border: 1px solid #D4D4D4;
+}
+.certpopup {
+	width: 13px;
+	height: 15px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0px;
+	background: url(/skin/frontend/angara/default/images/priceknowmore.jpg) no-repeat;
+}
+.certpopup a.tooltip-cart {
+	width: 13px;
+	height: 15px;
+	cursor: pointer;
+	display: block;
+	position: relative;
+}
+a.tooltip-cart span {
+	position: absolute;
+	top: -91px;
+	left: 4px;
+	width: 243px;
+	opacity: 0;
+	text-decoration: none !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	z-index: 999;
+	display: none;
+}
+a.tooltip-cart:hover span {
+	margin-left: 0;
+	opacity: 1;
+	font: 11px Arial, Helvetica, sans-serif;
+	display: block;
+}
+.taxovertxt {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 8px;
+}
+
+.opc .step-title {
+	background: none #F7F9D2;
+	border: none;
+	border-bottom: 1px solid #D4D2D5;
+	padding: 10px 8px;
+	text-align: right;
+	font-size: 16px;
+}
+.opc .step-title h2 {
+	float: left;
+	font-size: 16px;
+	line-height: 16px;
+	margin: 0;
+	color:#636456;
+}
+.opc .step-title a {
+	display: none;
+	float: right;
+	font-size: 11px;
+	line-height: 16px;
+}
+.opc .step {
+	background: none #fff;
+	border: none;
+	padding: 15px 30px;
+	position: relative;
+}
+
+.opc .gift-messages-form {
+	background: none repeat scroll 0 0 #f0f0f0;
+	border-color: #D4D4D4;
+	border-style: solid;
+	border-width: 1px 0;
+	margin: 0 -30px;
+	padding: 22px 24px 22px 30px;
+}
+.opc .gift-messages-form .inner-box {
+	padding: 5px;
+}
+#opc-review .step {
+	border: 0 none;
+	padding: 0;
+}
+
+.form-list label {
+	color: #000;
+	float: left;
+	position: relative;
+	z-index: 0;
+}
+.form-list label.required {
+}
+.form-list label.required em {
+	color: #000;
+	float: right;
+	font-style: normal;
+	position: absolute;
+	right: -8px;
+	top: 0;
+}
+.product-name a {
+	color: #000;
+}
+a {
+	color: #000;
+	text-decoration: underline;
+}
+.col-main {
+	float: none;
+	clear: both;
+	width: auto;
+	padding: 0;
+}
+
+.cart .page-title h1 {
+	margin: 0;
+}
+.page-title {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	border: none;
+}
+.cart .green-title {
+	padding: 0 0 20px 0;
+}
+.green-title h1 {
+	font-size: 22px;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.page-title h1 {
+	font-size: 22px;
+}
+.cart-product {
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: solid 1px #efefef;
+}
+.cart-product-image {
+	float: left;
+	width: 100px;
+}
+.cart-product-details {
+	float: left;
+	width: 440px;
+	padding-left: 20px;
+}
+.cart-product-sku {
+	margin-bottom: 10px;
+	margin-top: 3px;
+	font-size: 11px;
+	font-style: italic;
+	color: #888888;
+}
+#coupon-code {
+	margin: 0 21px 21px 21px;
+	padding: 12px;
+	background-color: #fafafa;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: solid 1px #f1f1f1;
+	position: relative;
+}
+.small-shipping-text {
+	font-size: 11px;
+	padding: 3px 0 0 0;
+	display: block;
+}
+.cart-cell {
+	border-top: none;
+	margin: 0 21px;
+}
+#checkout-step-login .col2-set .col-2 {
+	border-left: 0px dotted #d3d3d3;
+}
+#shopping-cart-totals-table {
+	width: 100%;
+}
+.checkout-right-gray-box #shopping-cart-totals-table {
+	width: 100%;
+	margin: 0;
+}
+#shopping-cart-totals-table td.a-right {
+	padding: 6px 0 6px 0;
+	color: #4e4e4e;
+}
+#shopping-cart-totals-table td.a-left {
+	padding: 6px 0 6px 0;
+	color: #4e4e4e;
+}
+#shopping-cart-totals-table th {
+	padding: 5px 0;
+}
+.newcart .a-right {
+	text-align: right;
+}
+.newcart .a-left {
+	text-align: left;
+}
+.newcart td.a-left strong {
+	font-size: 13px;
+	color: #4e4e4e;
+	font-weight: normal;
+}
+
+/*Onepage By Hitesh*/
+
+.col2-right-layout .col-main .opc-left {
+	float: left;
+	padding: 0 0 1px;
+	width: 578px;
+}
+.hide-other-steps {
+}
+#onepage-header-steps {
+	border-bottom: 1px solid #C9B988;
+	height: 44px;
+	;
+	margin-bottom: 10px
+}
+.onepage-header-step {
+	float: right;
+	padding: 8px 10px 20px;
+	color: #A79356;
+	font-size: 14px;
+	height: 16px
+}
+.header-step-active {
+	background: url("../images/arrow-u.jpg") no-repeat bottom center transparent
+}
+.staticlinks {
+	display: none
+}
+#shipping-new-address-form {
+	display: none;
+}
+.continue-button {
+	background: url("../images/xc-continuebtn.jpg") no-repeat center center transparent;
+	width: 75px;
+	height: 27px;
+	margin-top: 15px;
+	cursor: pointer;
+}
+.yellow-title {
+	background: #F7F9D2;
+	margin-bottom: 0;
+}
+#opc-login h3, .yellow-title h3 {
+	padding: 10px 8px;
+	font-size: 17px;
+	color: #7C7B67;
+	text-transform: none;
+	border: none;
+	margin: 0
+}
+.grad-login-box {
+	background: url("../images/xc-loginboxbg.jpg") repeat-y center center transparent;
+	padding: 16px;
+	border: 1px solid #EDEDED;
+	border-top: none;
+	color: #666;
+	min-height: 160px;
+	height: auto !important;
+	height: 160px;
+}
+#checkout-step-login .col2-set .col-1, #checkout-step-login .col2-set .col-2 {
+	width: 446px
+}
+.form-list .field {
+	width: auto;
+	margin-bottom: 10px
+}
+.form-list label {
+	width: 120px;
+	font-weight: normal;
+	color: #666;
+	line-height: 20px
+}
+.form-list .input-box {
+	float: left;
+	clear: none;
+	width: auto
+}
+.form-list li {
+	margin-bottom: 0
+}
+.form-list li {
+	margin-bottom: 0
+}
+.field-small-description {
+	font-size: 11px;
+	color: #777;
+	height: 20px
+}
+.opc-right {
+	float: right;
+	width: 335px;
+}
+.special-title {
+	background: #D0D497;
+	margin-bottom: 0;
+}
+.special-title h2 {
+	padding: 10px 8px;
+	color: #333;
+	text-transform: none;
+	border: none;
+	margin: 0;
+	font-size: 16px;
+	line-height: 16px;
+}
+.normal-title {
+	background: #C4C4C4;
+	margin-bottom: 0;
+	margin-top: 26px
+}
+.normal-title h2 {
+	padding: 10px 8px;
+	color: #fff;
+	text-transform: none;
+	border: none;
+	margin: 0;
+	font-size: 16px;
+	line-height: 16px;
+}
+.checkout-right-gray-box {
+	background: url("../images/xc-rightboxbg.jpg") repeat-y center center transparent;
+	padding: 15px;
+	border: 1px solid #EDEDED;
+	border-top: none;
+	color: #333;
+	min-height: 50px;
+	height: auto !important;
+	height: 50px;
+}
+.checkout-right-gray-box ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.checkout-right-gray-box div.contenttxt {
+	font-size: 12px;
+	padding-bottom: 10px;
+	color: #666666;
+}
+.checkout-right-gray-box li {
+	background: url("../images/xc-dots.jpg") no-repeat left top;
+	padding: 0 0 10px 10px;
+	font-size: 12px;
+	color: #666666;
+	line-height: 18px;
+}
+.checkout-right-gray-box li.padnone {
+	padding-bottom: 0;
+}
+.checkout-right-gray-box li a {
+	text-decoration: underline;
+	color: #666666;
+}
+.checkout-right-gray-box .bottomcontent {
+	border-top: 1px dotted #A3A3A3;
+	padding-top: 12px;
+	font-size: 12px;
+	color: #666666;
+	position: relative;
+}
+.order-summary .a-right {
+	text-align: right;
+}
+.order-summary .a-right strong {
+	font-size: 16px;
+	color: #B20400;
+	line-height: 16px
+}
+.order-summary tfoot {
+	margin: 6px 0 !important
+}
+.order-summary {
+	padding: 0 !important
+}
+.grad-login-box li {
+	margin-bottom: 15px;
+}
+button.btn-checkout span {
+	height: 48px;
+	width: 220px;
+	border: 0;
+	background: url(../images/cart-button-bg.jpg) 0 0 no-repeat;
+	font-size: 18px;
+	line-height: 48px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+button.btn-checkout span span {
+	line-height: 43px;
+	padding: 0;
+}
+.trustseal-mid {
+	display: none
+}
+p {
+	margin: 0;
+	padding: 0 0 4px;
+}
+.buttons-set .cartcontinue, .buttons-set .logincart, .buttons-set .billingcart, .buttons-set .create-account, .buttons-set .login-account, .buttons-set .add-recipient-btn, .buttons-set .send-mail-btn {
+	height: 31px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.buttons-set .cartcontinue span, .buttons-set .logincart span, .buttons-set .billingcart span, .buttons-set .create-account span, .buttons-set .login-account span, .buttons-set .add-recipient-btn span, .buttons-set .send-mail-btn span {
+	background: url("../images/allbuttonbgleft.jpg") no-repeat scroll left top transparent;
+	border: medium none;
+	height: 31px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.buttons-set .cartcontinue span span, .buttons-set .logincart span span, .buttons-set .billingcart span span, .buttons-set .create-account span span, .buttons-set .login-account span span, .buttons-set .add-recipient-btn span span, .buttons-set .send-mail-btn span span {
+	background: url("../images/allbuttonbgright.jpg") no-repeat scroll right center transparent;
+	border: 0 none;
+	display: inline-block;
+	line-height: 31px;
+	padding: 0 12px;
+}
+.upper-total-row td {
+	border: 0 none;
+	border-top: 1px dotted #cacbbf;
+	margin-top: 5px;
+}
+
+.form-list li.wide label {
+	color: #666666;
+	line-height: 15px;
+	width: auto;
+	padding-bottom: 5px;
+}
+.form-list li.wide select {
+	width: 490px;
+}
+.form-list li.wide .input-box {
+	width: 490px;
+	margin-bottom: 15px;
+}
+.step .control {
+	margin-bottom: 10px;
+}
+
+.newgiftoption {
+	margin: 10px 0 10px 0;
+	padding-top: 10px;
+	border-top: solid 1px #cccccc;
+}
+.newgiftoption .heading {
+	font-size: 18px;
+	color: #4d4d4f;
+	margin-bottom: 10px;
+	padding: 0;
+}
+.newgiftoption .checkbox1 {
+	float: left;
+	width: 13px;
+	height: 13px;
+}
+.newgiftoption .contentpart {
+	float: left;
+	padding-left: 15px;
+	width: 455px;
+}
+.newgiftoption .content1 {
+	font-size: 12px;
+	color: #4d4d4f;
+}
+.newgiftoption .content2 {
+	display: block;
+	padding: 10px 0;
+	font-size: 11px;
+	color: #9a9898;
+}
+.newgiftoption .msgbox {
+	width: 355px;
+	height: 84px;
+	overflow: auto;
+	border: 1px solid #D4D4D4;
+}
+#newmsgboxwrapper {
+	display: none;
+}
+.item-options {
+	width: auto;
+	color: #292929;
+	font-size: 11px;
+}
+.paypal-logo {
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.whatthis {
+	position: relative;
+}
+.cvv-what-is-this {
+	font-size: 11px;
+	cursor: help;
+	position: absolute;
+	top: 2px;
+	left: 41px;
+	width: 68px
+}
+#checkout-step-payment dt {
+	display: none;
+}
+.opc .buttons-set .please-wait {
+	height: 31px;
+	line-height: 31px;
+}
+.sp-methods .form-list {
+	padding-left: 0;
+}
+#opc-login {
+	display: none
+}
+.why-shop-at-angara {
+	width: 960px;
+	height: 60px;
+	font-size: 13px;
+	line-height: 60px;
+	color: #585858;
+	text-transform: uppercase;
+	background: url(../images/why-shop-angara-bg.jpg) no-repeat;
+	margin-top: 25px;
+}
+
+.mainbodyhome-b {
+	display: none
+}
+
+.discountsection {
+	padding: 50px 0 20px;
+}
+.select_shipping {
+	width: 205px;
+	height: 21px;
+	border: solid 1px #bdbdbd;
+	float: right;
+	color: #964b59;
+}
+
+#memberpricetooltip {
+	-moz-border-radius-bottomright: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+	-moz-border-radius-bottomleft: 5px 5px;
+	border-bottom-left-radius: 5px 5px;
+	background-color: #fff;
+	-moz-box-shadow: 0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 5px #797979;
+	box-shadow: 0px 0px 5px #797979;
+	border: 1px solid #d8d8d8;
+	padding: 6px;
+	font-size: 11px;
+	color: #000;
+	width: 175px;
+	position: absolute;
+	z-index: 999;
+	display: none;
+	text-decoration: none;
+	cursor: default;
+	right: 190px;
+}
+
+.topnav .cart-items{ display:none;}
+.opc .allow .step-title h2{ color:#636456;}
+

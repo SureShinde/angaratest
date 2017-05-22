@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <flashsale_adminhtml_flashsale_index>
+	<reference name="content">
+	  <block type="flashsale/adminhtml_flashsale" name="flashsale" />
+	</reference>
+  </flashsale_adminhtml_flashsale_index>
+</layout>

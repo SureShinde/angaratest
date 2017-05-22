@@ -1,0 +1,486 @@
+<?php 
+$skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$_product = $this->getProduct();
+$product = Mage::getModel("catalog/product")->load($_product->getId());
+$i = 0;
+foreach ($product->getOptions() as $o) {
+	$optionArray[$i] = array('Id'=>$o->getId(),'Title'=>$o->getTitle(),'Sku'=>$o->getSku(),'Price'=>$o->getPrice(),'MaxCharacters'=>$o->getMaxCharacters());
+	$skuArray[] = $o->getSku();
+    $i++;
+}
+
+if(in_array('engraving',$skuArray) &&  !stristr($_SERVER['HTTP_USER_AGENT'], "msie 7" ) ){
+	$key				=		array_search( "engraving", $skuArray); 
+	$engravingOptionId	=		$optionArray[$key]['Id'];
+	$title				=		$optionArray[$key]['Title'];
+	$price				=		$optionArray[$key]['Price'];
+	$maxCharacters		=		$optionArray[$key]['MaxCharacters']-25;
+	$formattedPrice 	= 		Mage::helper('core')->currency($price, true, false);
+	$formattedPrice 	= 		($formattedPrice=='$25.00')?'$25':$formattedPrice;
+
+	//	Code Added by Vaseem for iPad
+	$iPad	=	0;
+	if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){
+		$iPad	=	1;
+	} ?>
+	<div id="ultimate-engraving" class="engraving-wrapper-block engravingwrapper-ultimate">
+		<span class="certspanbox">
+		<label id="engraveLink">
+			<input name="engravering" type="checkbox" id="engraveringchk" autocomplete="off"/>
+			<span class="appraisaltxt" id="engraveTitle">Add Engraving For <?php if($price>0) {echo $formattedPrice;}else{echo 'Free';}?></span> 
+		</label>  
+		</span>
+		<!--[if !IE]><!-->
+		<div id="engraving_popup" style="top:-9999px;">
+			<div class="layoverlayer"></div> 
+			<!--<![endif]-->
+	
+			<!--[if IE]> 
+			<div class="engravingwrapperIE" id="engraveDiv"> 
+			<![endif]-->
+			
+			<!--[if !IE]><!--> 
+			<div class="engravingwrapper" id="engraveDiv"> 
+			<!--<![endif]-->
+				<?php //	Code Added by Vaseem for iPad
+				if($iPad=='0'){?>
+				<div class="engravingview">
+				  <div id="flashContent"> 
+					<!--[if IE]> 
+			<object id="engraving" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="495" height="311" allowscriptaccess="always" flashvars=""><param name="movie" value="/skin/frontend/angara/default/flash/engraving.swf" /></object>
+			<![endif]--> 
+					<!--[if !IE]><!-->
+			<embed id="engraving" src="/skin/frontend/angara/default/flash/engraving.swf" quality="high" bgcolor="#ffffff" width="495" height="311" name="engraving" align="middle" wmode="window" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			<!--<![endif]--> 
+				  </div>
+				</div>
+				<?php }?>
+				<div class="engravingoption">
+				  <div class="engraving-price"><?php if($price>0) {echo 'ENGRAVING PRICE: '. $formattedPrice;}?></div>
+				  <div class="close-popup"></div>
+				  <div class="engravingtxtbox">
+					<div class="engravinputbox">
+					  <div class="inputboxstyle">
+						<input name="engravedText" type="text" height="28" id="engravedText" maxlength="<?php echo $maxCharacters;?>" value="Your text here" />
+						<input name="engraveFont" type="hidden" height="10" id="engraveFont" value="(SnellRoundhand Script)" />
+					  </div>
+					  <div class="btnclose" id="clearTxt"><a href="javascript:void(0);"><img src="<?php echo $skinUrl;?>frontend/angara/default/images/remove_engraving_txt.png" alt="Remove"  style="border:0;" /></a></div>
+					<div class="clear"></div>
+					</div>
+					</div>
+					<span class="remainingletters">Remaining: <b style="color:#5d5d5d;" id="remainingChar"><?php echo $maxCharacters;?></b></span>
+					<span id="showFontDiv">(SnellRoundhand Script)</span>
+				  <div class="fontthumbmail">
+					<div class="fontbox"><a href="javascript:void(0);" class="activefont" rel="(SnellRoundhand Script)" alt="(SnellRoundhand Script)"  onclick="changeFontType('SnellRoundhand Script')"><img src="<?php echo $skinUrl;?>frontend/angara/default/images/AdobeGaramondfont.jpg" /></a></div>
+					<div class="fontbox"><a href="javascript:void(0);" rel="(Helvetica 45 Light)" alt="(Helvetica 45 Light)"  onclick="changeFontType('Helvetica 45 Light')"><img src="<?php echo $skinUrl;?>frontend/angara/default/images/Aparajitafont.jpg" /></a></div>
+				  </div>
+				  <div class="continueangraving">
+					<div id="engraveContinue" class="continue-engraving-btn"></div>
+					<?php if($price>0) {?>
+					<div class="refundable">*Engraving cost is non refundable</div>
+					<?php } ?>
+				  </div>
+				</div>
+			  </div>
+  
+		<!--[if !IE]><!-->
+		</div> 
+		<!--<![endif]-->
+		<div>
+			<a href="javascript:void(0);" id="editEng">Edit</a>
+			<a href="javascript:void(0);" id="removeEng">Remove</a>
+			<div style="clear:both"></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+
+	<style>
+	#engraving_popup {
+		margin: 0 auto;
+		position:fixed;
+		padding-bottom: 6px;
+		width:100%;
+		height:900px;
+		z-index:10000;
+		top:0;
+		left:0;
+	}
+	.layoverlayer {
+		background: #000;
+		margin: 0 auto;
+		position:absolute;
+		padding-bottom: 6px;
+		width: 100%;
+		opacity:0.8;
+		<?php if($iPad=='1'){?>height: 1400px;<?php } else{ ?>height: 100%;<?php } ?>
+		filter: alpha(opacity = 80);
+		top:0;
+		left:0;
+	}
+	.engrave-link-image-add {
+		width:190px;
+		height:30px;	
+		margin:0 auto;
+		margin-top:10px;
+		margin-bottom:5px;
+		background:url(<?php echo $skinUrl;?>frontend/angara/default/images/engraving-btn.jpg) no-repeat;	
+		cursor:pointer;
+	}
+	.engrave-link-image-edit {
+		width:153px;
+		height:30px;
+		margin:0 auto;
+		margin-top:10px;
+		margin-bottom:5px;
+		background:url(<?php echo $skinUrl;?>frontend/angara/default/images/edit-engraving-btn.jpg) no-repeat;	
+		cursor:pointer;
+	}
+	.engravingwrapper {
+		<?php if($iPad=='1'){?>width:258px;<?php } else{ ?>width:754px;<?php } ?>
+		height:311px;
+		background-color:#fff;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		border-radius: 5px;
+		-moz-box-shadow:0px 0px 5px #797979;
+		-webkit-box-shadow: 0px 0px 5px #797979;
+		box-shadow: 0px 0px 5px #797979;
+		border:1px solid #d8d8d8;
+		position:absolute;
+		top:-9999px;
+		right:306px;
+		cursor:default;
+		z-index:9999;
+	}
+	.engravingwrapperIE {
+		position:absolute; top:-9999px; right:141px;width:754px;height:311px;background-color:#fff;border:1px solid #d8d8d8;
+	}
+	.engravingoption {
+		width:258px;
+		float:right;
+	}
+	.engravingview {
+		float:left;
+		width:495px;
+		height:311px;
+		background:url(<?php echo $skinUrl;?>frontend/angara/default/images/engraving-metal.jpg) no-repeat top;
+		border-right:solid 1px #bbbbbb;
+		position:relative;
+	}
+	.engraving-price {
+		background-color:#f6f6f6;
+		font:15px/50px Arial, Helvetica, sans-serif;
+		color:#585858;
+		padding-left:15px;
+		text-align:left;
+	}
+	.engravingtxtbox {
+		margin:24px 0 0 15px;
+	}
+	.engravinputbox {
+		width:215px;
+		height:30px;
+		border:solid 3px #e5e5e5;
+	}
+	.inputboxstyle {
+		border:solid 1px #c2c2c2;
+		border-right:none;
+		width:185px;
+		height:28px;
+		float:left;
+	}
+	.inputboxstyle input {
+		margin:0;
+		width:175px;
+		height:26px;
+		padding:0 5px;
+		font:12px/26px Arial, Helvetica, sans-serif;
+		border:none;
+	}
+	.btnclose {
+		border:solid 1px #c2c2c2;
+		border-left:none;
+		height:28px;
+		width:28px;
+		float:right;
+	}
+	.btnclose a {
+		background-color:#fff;
+		padding:9px;
+		width:10px;
+		height:10px;
+		display:block;
+	}
+	.btnclose a:hover {
+		background-color:#dddddd;
+	}
+	.fontthumbmail {
+		height:44px;
+		padding-left:15px;
+		padding-top:22px;
+	}
+	.fontbox {
+		margin-right:15px;
+		height:44px;
+		width:44px;
+		float:left;
+	}
+	.fontbox a {
+		width:36px;
+		width:36px;
+		border:solid 4px #b2b2b2;
+		display:block;
+	}
+	.fontbox a img {
+		display:block;
+		width:32px;
+		height:32px;
+		border:solid 2px #fff;
+	}
+	.fontbox a:hover {
+		border:solid 4px #990003;
+	}
+	.fontbox a.activefont {
+		border:solid 4px #990003;	
+	}
+	.remainingletters {
+		padding-top:5px;
+		padding-left:15px;
+		display:inline-block;
+		font:11px Arial, Helvetica, sans-serif;
+		color:#bdbcbc;
+		text-align:left;
+		float:left;
+	}
+	.continueangraving {
+		margin:22px 0 0 15px;
+		height:45px;
+	}
+	.close-popup {
+		width:16px;
+		height:16px;
+		background:url(<?php echo $skinUrl;?>frontend/angara/ADVRP/images/appraisalclose.jpg) no-repeat;
+		position:absolute;
+		cursor:pointer;
+		right:5px;
+		top:5px;	
+	}
+	.continue-engraving-btn {
+		width:164px;
+		height:45px;
+		background:url(<?php echo $skinUrl;?>frontend/angara/default/images/continue-engraving.jpg) no-repeat;
+	}
+	#showFontDiv {
+		float:right;
+		font:bold 11px Arial, Helvetica, sans-serif;
+		display:inline-block;
+		padding-top:5px;
+		padding-right:23px;
+	}
+	.refundable {
+		font:10px Arial, Helvetica, sans-serif;
+		margin:26px 15px 0 0;
+		text-align:right;
+	}
+	#editEng{display:none; text-decoration:underline; float:left;text-align:center;padding-left:17px;padding-top:3px;}
+	#removeEng{display:none; text-decoration:underline;float:left; text-align:center;padding-left:15px;padding-top:3px;}
+	.engraving-wrapper-block {
+		text-align:left;
+		padding-left:5px;
+		padding-top:5px;
+	}
+	</style>
+	
+	<script type="text/javascript" language="javascript">
+	function getMovie(movie) {
+		var isIE = navigator.appName.indexOf("Microsoft") != -1;
+		return document.getElementById(movie);
+	}
+	function updateEngravingText(str)
+    {	
+    	getMovie("engraving")._updateEngravingText(str);
+    }
+	function changeFontType(fontType, fontStyle){
+		if(fontStyle){
+			getMovie("engraving")._changeFontType(fontType, fontStyle);
+		}else{
+			getMovie("engraving")._changeFontType(fontType);
+		}
+	}
+	function changeMetal(type){
+		getMovie("engraving")._updateMetal(type);
+	}
+	// Code added by Hitesh
+	
+	//	Opening popup by Vaseem Ansari
+	jQuery(function() {
+		var metalType	=	'white'	;
+		<!--[if !IE]><!-->
+		jQuery('#engraving_popup').appendTo('body');	// Grey box added
+		<!--<![endif]-->
+					
+		//	Function to bind the engraving yellow white image			
+		jQuery(document).bind('variationChanged',function(e1,e2){
+			//alert(e2.id);
+			//alert(e2.value);
+			if(e2.id=='metal1_type'){
+				if(e2.value.match("Yellow")){ // Change in function to match the string by pankaj.
+					metalType	=	'yellow';		
+				}else{
+					metalType	=	'white';
+				}
+			}
+		})
+				
+		jQuery("#engraveLink,#editEng").click(function(event){
+			if(jQuery('#yellow-metal').hasClass('metaltype-selected')){
+				var metalType	=	'yellow'	;
+			}
+			var whichClick = jQuery(this).attr('id');
+			//alert(whichClick);
+			var value = jQuery.trim(jQuery("#engravedText").val());
+			if(value != null && value != 'undefined' && value!='' && value != 'Your text here' && whichClick=='engraveLink'){
+				event.preventDefault();
+			}
+			else{
+				<?php //	Code Added by Vaseem for iPad
+				if($iPad=='0'){?>
+				jQuery(window).scrollTop(jQuery('#detailsection').offset().top);
+				<?php } ?>
+				jQuery('#engraveDiv').css('top','191px');
+				<!--[if !IE]><!-->
+				jQuery('#engraving_popup').css('top','0px');
+				<!--<![endif]-->
+				
+				//	Changing default engraving image
+				if(metalType=='yellow'){
+					changeMetal('Yellow');	
+				}else{
+					changeMetal('White');	
+				}
+			}
+			estimateShipEngraving();		//	Removed by Vaseem as hitesh removed the estimate ship date code
+		});
+	});
+	//	Getting typed value by Vaseem Ansari
+	// # todo what if user chooses not to engrave text?
+	jQuery(function(){
+		var fontValue;
+		var value = 'Your text here';
+			
+		jQuery('#engravedText').focusin(function(){
+			value 		= 	jQuery.trim(jQuery("#engravedText").val());
+			if(value == 'Your text here'){
+				jQuery("#engravedText").val('');
+			}
+		})
+		.focusout(function(){
+			value 		= 	jQuery.trim(jQuery("#engravedText").val());
+			if(value == ''){
+				jQuery("#engravedText").val('Your text here');
+				updateEngravingText('Your text here');
+				jQuery('#remainingChar').text('<?php echo $maxCharacters;?>');
+			}
+		})
+		.bind('paste keyup',function(){
+			value 		= 	jQuery.trim(jQuery("#engravedText").val());
+			fontValue 	= 	jQuery("#engraveFont").val();
+			finalValue	=	value + ' ' + fontValue;
+			
+			// Putting the character limit to text
+			var $this = jQuery(this);
+			if(value.length > <?php echo $maxCharacters;?>)
+			$this.val(value.substr(0, <?php echo $maxCharacters;?>));
+	
+			//	Getting remaining characters by Vaseem Ansari
+			var left = <?php echo $maxCharacters;?> - value.length;
+			jQuery('#remainingChar').text(left);
+			updateEngravingText(value);
+			
+		});
+		
+		// Changing the class for selected font
+		jQuery(".fontbox").click(function(){
+			jQuery(this).each(function(){ 
+				jQuery("a.activefont").removeClass("activefont");
+				jQuery(this).find('a').toggleClass("activefont");
+				
+				fontType	=	jQuery(this).find('a').attr("rel");
+				jQuery("#showFontDiv").html(jQuery(this).find('a').attr("alt"));
+				jQuery("#engraveFont").val(jQuery(this).find('a').attr("alt"));
+				
+				if(value!=null && value!='undefined' && value!=''){		
+					finalValue	=	value + ' ' + fontType;
+					jQuery('#options_<?php echo $engravingOptionId;?>_text').val(finalValue);		//	writing value to custom option input box
+				}
+			});
+		})
+		
+		// Global function to remove text and reset the engraving
+		function removeText(){
+			jQuery('#engravedText').val('Your text here');
+			<?php //	Code Added by Vaseem for iPad
+			if($iPad=='0'){?>
+			updateEngravingText('Your text here');
+			<?php } ?>
+			jQuery('#remainingChar').text(<?php echo $maxCharacters;?>);
+			jQuery('#options_<?php echo $engravingOptionId;?>_text').val('');		//	removing the value to custom option input box
+			jQuery('#removeEng,#editEng').hide();
+			jQuery('#engraveringchk').attr('checked', false);
+			jQuery('#engraveringchk').attr('disabled', false);
+			opConfig.reloadPrice();
+			estimateShipEngraving();
+		}
+		// Clearing the Text
+		jQuery("#clearTxt").click(function(){
+			removeText();
+			value	=	'';
+		});
+		// Closing the dialog box
+		jQuery('.close-popup').click(function(e){
+			e.stopPropagation();
+			jQuery('#engraveDiv').css('top','-9999px');
+			<!--[if !IE]><!-->
+			jQuery('#engraving_popup').css('top','-9999px');
+			<!--<![endif]-->
+			removeText();
+			jQuery('#engraveTitle').html('Add Engraving For <?php if($price>0) {echo $formattedPrice;}else{echo 'Free';}?>');
+		})
+		// Remove engraving
+		jQuery('#removeEng').click(function(e){
+			e.stopPropagation();
+			removeText();
+			jQuery('#engraveTitle').html('Add Engraving For <?php if($price>0) {echo $formattedPrice;}else{echo 'Free';}?>');
+		})
+		
+		jQuery("#engraveContinue").click(function(e){
+			e.stopPropagation();
+			var value = jQuery.trim(jQuery("#engravedText").val());
+			jQuery('#engraveDiv').css('top','-9999px');
+			if(value != null && value != 'undefined' && value!='' && value != 'Your text here'){
+				fontValue 	= 	jQuery("#engraveFont").val();
+				finalValue	=	value + ' ' + fontValue;
+				jQuery('#options_<?php echo $engravingOptionId;?>_text').val(finalValue);		//	writing value to custom option input box
+				jQuery('#removeEng,#editEng').show();
+				jQuery('#engraveTitle').html('Engraving Added');
+				jQuery('#engraveringchk').attr('checked', true);
+				jQuery('#engraveringchk').attr('disabled', true);
+			}
+			else{
+				jQuery('#options_<?php echo $engravingOptionId;?>_text').val('');
+				jQuery('#removeEng,#editEng').hide();
+				jQuery('#engraveTitle').html('Add Engraving For <?php if($price>0) {echo $formattedPrice;}else{echo 'Free';}?>');
+				jQuery('#engraveringchk').attr('checked', false);
+				jQuery('#engraveringchk').attr('disabled', false);
+			}
+			opConfig.reloadPrice();
+			estimateShipEngraving();
+			<!--[if !IE]><!-->
+			jQuery('#engraving_popup').css('top','-9999px');
+			<!--<![endif]-->
+		});
+	});
+	</script>
+<?php	
+}?>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<!--S:VA	Add a new tab in left nav of System Config-->
+									<feedback translate="title" module="feedback">
+										<title>Feedback Configuration</title>
+										<sort_order>1</sort_order>
+									</feedback>
+									
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

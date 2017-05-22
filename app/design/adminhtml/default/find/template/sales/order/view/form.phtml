@@ -1,0 +1,16 @@
+<?php
+$orderId	=	Mage::app()->getRequest()->getParam('order_id');
+$className 	= 	Mage::getConfig()->getBlockClassName('Mage_Adminhtml_Block_Sales_Order_View_Oktoship');
+$block 		= 	new $className();  
+$okToShip 	= 	$block->getOkToShipInfo($orderId);
+if(count($okToShip)>0){
+	if($okToShip['oktoship']==0){
+		$class	=	'order-is-not-ready';			//	no
+	}elseif($okToShip['oktoship']==1){
+		$class	=	'order-ready-to-ship';			//	yes
+	}elseif($okToShip['oktoship']==2){
+		$class	=	'order-cancelled';				//	cancel
+	}
+}
+?>
+<div class="entry-edit <?php echo $class;?>" id="sales_order_view"></div>

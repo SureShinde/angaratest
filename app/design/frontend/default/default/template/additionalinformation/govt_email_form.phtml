@@ -1,0 +1,114 @@
+<div class="block-sub-heading min-padding-bottom">Business or University or Government Email Address:-</div>
+<div class="max-margin-bottom">The easiest way for us to get your order into production is if you are able to send us an email from a business account, such as your place of work. If you're active military or currently enrolled at an University, emails from those accounts are generally acceptable. What won't help us; however, are emails from "free" services such as Yahoo, Gmail, etc. If you have a valid email that we can use to verify your order, please enter it below. The email will only be used for verification of your credit card data and will not be stored in our system or used as part of your Angara.com order.</div>
+
+<div class="padding-type-16 showcase-bg-light max-margin-bottom">
+<div class="row">
+<form name="email-new-form" id="email-new-form">   
+        <div class="col-sm-6 col-md-5"><input type="text" name="govtemail" id="govtemail" class="input-text required-entry validate-email" placeholder="Enter Business or University or Government Email Address" />
+		<input type="hidden" name="ord" value="<?php echo $this->getRequest()->getParam('key');?>" /></div>
+    
+    <div class="col-sm-2"><button type="button" onclick="doAjaxemail();" title="<?php echo $this->__('Submit Request') ?>" class="btn btn-block btn-primary" id="btn-sub-email"><?php echo $this->__('Submit') ?></button></div>
+    <!--<span id="formLoader" style="display:none;">&nbsp;</span>-->
+</form>
+    </div>
+</div>
+<div class="overlay" id="overlay-govt-email" style="display:none;"></div>
+<div class="box" id="boxgovtemail">
+ <a class="boxclose" id="boxclosegovtemail"></a>
+ <h1>You have already fill your data.</h1>
+</div>
+
+<div class="overlay" id="overlay-validate-govt-email" style="display:none;"></div>
+<div class="box" id="boxvalidategovtemail">
+ <a class="boxclose" id="boxclosevalidategovtemail"></a>
+ <h1>Please Enter Valid Business, University or Government e-mail address</h1>
+</div>
+
+<div class="overlay" id="overlay-otp-sent" style="display:none;"></div>
+<div class="box" id="boxotpsent">
+ <a class="boxclose" id="boxcloseotpsent"></a>
+ <h1>Verification Code has already been sent to your business/government/military email address.</h1>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var formIdEmail = 'email-new-form';
+    var myFormEmail = new VarienForm(formIdEmail, true);
+    function doAjaxemail() {
+		jQuery('#btn-sub-email').fadeTo("slow",0.15);
+		jQuery('#btn-sub-email').attr('disabled', 'disabled');
+        if (myFormEmail.validator.validate()) {
+			var postUrlEmail = '<?php echo $this->getUrl("additionalinformation/index/getgovtemail",array('_secure'=>true)); ?>';
+            new Ajax.Updater(
+                { success:'formSuccess' }, postUrlEmail, {
+                    method:'post',
+                    asynchronous:true,
+                    evalScripts:false,
+                    onComplete:function(request, json) {
+                        //Element.hide(formId);
+						//Element.show('formSuccess');
+						if(request.responseText=='please enter valid government email id'){
+							jQuery('#btn-sub-email').fadeTo("slow",1);
+							jQuery('#btn-sub-email').removeAttr('disabled');
+							loadPopUpValidateGovtEmail();
+						}
+						else if(request.responseText=='You have already fill your data'){
+							jQuery('#btn-sub-email').fadeTo("slow",1);
+							jQuery('#btn-sub-email').removeAttr('disabled');
+							loadPopUpGovtEmail();
+						}
+						else if(request.responseText=='We have already sent verification code'){
+							jQuery('#btn-sub-email').fadeTo("slow",1);
+							jQuery('#btn-sub-email').removeAttr('disabled');
+							loadPopUpOtpSent();
+						}
+						else if(request.responseText=='Email sent to govt id!!!'){
+							location.href="<?php echo $this->getUrl("additionalinformation/index/otpcheck?key=".$this->getRequest()->getParam('key'),array('_secure'=>true))?>";
+						}
+                    },
+                    onLoading:function(request, json){
+                        Element.show('formLoader');
+                    },
+                    parameters: $(formIdEmail).serialize(true),
+                }
+            );
+        }
+		else{
+			jQuery('#btn-sub-email').fadeTo("slow",1);
+			jQuery('#btn-sub-email').removeAttr('disabled');
+		}
+    }
+
+//]]>
+/*Custom popup load*/
+	function loadPopUpGovtEmail() {
+        jQuery('#overlay-govt-email').fadeIn('fast',function(){
+            jQuery('#boxgovtemail').animate({'top':'210px'},500);
+        });
+		jQuery('#boxclosegovtemail').click(function(){
+			jQuery('#boxgovtemail').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-govt-email').fadeOut('fast');
+			});
+		});
+	}
+	function loadPopUpValidateGovtEmail() {
+        jQuery('#overlay-validate-govt-email').fadeIn('fast',function(){
+            jQuery('#boxvalidategovtemail').animate({'top':'210px'},500);
+        });
+		jQuery('#boxclosevalidategovtemail').click(function(){
+			jQuery('#boxvalidategovtemail').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-validate-govt-email').fadeOut('fast');
+			});
+		});
+	}
+	function loadPopUpOtpSent() {
+        jQuery('#overlay-otp-sent').fadeIn('fast',function(){
+            jQuery('#boxotpsent').animate({'top':'210px'},500);
+        });
+		jQuery('#boxcloseotpsent').click(function(){
+			jQuery('#boxotpsent').animate({'top':'-300px'},500,function(){
+				jQuery('#overlay-otp-sent').fadeOut('fast');
+			});
+		});
+	}
+</script>

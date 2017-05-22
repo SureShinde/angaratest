@@ -1,0 +1,376 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2010 Artio (http://www.artio.net)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $updateElementId = $this->getData('updateElementId') ?>
+<?php $selectedIds = implode(",", $this->getCategoryIds()) ?>
+<?php $_divId = 'tree-div_' . $updateElementId . '_' . time() ?>
+<div id="<?php echo $_divId ?>" class="tree"></div>
+<input type="hidden" name="<?php echo $updateElementId ?>" id="<?php echo $updateElementId ?>" value="<?php echo $selectedIds ?>" />
+<script type="text/javascript">
+//<![CDATA[
+
+Ext.extend(Ext.tree.CheckboxNodeUI, Ext.tree.TreeNodeUI, {
+	
+    /**
+     * This is virtually identical to Ext.tree.TreeNodeUI.render, modifications are indicated inline
+     */
+    render : function(bulkRender){
+        var n = this.node;
+        var targetNode = n.parentNode ?
+            n.parentNode.ui.getContainer() : n.ownerTree.container.dom; /* in later svn builds this changes to n.ownerTree.innerCt.dom */
+        if(!this.rendered){
+            this.rendered = true;
+            var a = n.attributes;
+
+            // add some indent caching, this helps performance when rendering a large tree
+            this.indentMarkup = "";
+            if(n.parentNode){
+                this.indentMarkup = n.parentNode.ui.getChildIndent();
+            }
+
+            // modification: added checkbox
+            var buf = ['<li class="x-tree-node"><div class="x-tree-node-el ', n.attributes.cls,'">',
+                '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
+                '<img src="', this.emptyIcon, '" class="x-tree-ec-icon">',
+                '<img src="', a.icon || this.emptyIcon, '" class="x-tree-node-icon',(a.icon ? " x-tree-node-inline-icon" : ""),(a.iconCls ? " "+a.iconCls : ""),'" unselectable="on">',
+                '<input class="l-tcb" '+ (n.disabled ? 'disabled="disabled" ' : '') +' type="checkbox" ', (a.checked ? "checked>" : '>'),
+                '<a hidefocus="on" href="',a.href ? a.href : "#",'" ',
+                 a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '>',
+                 '<span unselectable="on">',n.text,"</span></a></div>",
+                '<ul class="x-tree-node-ct" style="display:none;"></ul>',
+                "</li>"];
+
+            if(bulkRender !== true && n.nextSibling && n.nextSibling.ui.getEl()){
+                this.wrap = Ext.DomHelper.insertHtml("beforeBegin",
+                                                            n.nextSibling.ui.getEl(), buf.join(""));
+            }else{
+                this.wrap = Ext.DomHelper.insertHtml("beforeEnd", targetNode, buf.join(""));
+            }
+            this.elNode = this.wrap.childNodes[0];
+            this.ctNode = this.wrap.childNodes[1];
+            var cs = this.elNode.childNodes;
+            this.indentNode = cs[0];
+            this.ecNode = cs[1];
+            this.iconNode = cs[2];
+            this.checkbox = cs[3]; // modification: inserted checkbox
+            this.anchor = cs[4];
+            this.textNode = cs[4].firstChild;
+            if(a.qtip){
+             if(this.textNode.setAttributeNS){
+                 this.textNode.setAttributeNS("ext", "qtip", a.qtip);
+                 if(a.qtipTitle){
+                     this.textNode.setAttributeNS("ext", "qtitle", a.qtipTitle);
+                 }
+             }else{
+                 this.textNode.setAttribute("ext:qtip", a.qtip);
+                 if(a.qtipTitle){
+                     this.textNode.setAttribute("ext:qtitle", a.qtipTitle);
+                 }
+             }
+            } else if(a.qtipCfg) {
+                a.qtipCfg.target = Ext.id(this.textNode);
+                Ext.QuickTips.register(a.qtipCfg);
+            }
+
+            this.initEvents();
+
+            // modification: Add additional handlers here to avoid modifying Ext.tree.TreeNodeUI
+            Ext.fly(this.checkbox).on('click', this.check.createDelegate(this, [null]));
+            n.on('dblclick', function(e) {
+                if( this.isLeaf() ) {
+                    this.getUI().toggleCheck();
+                }
+            });
+
+            if(!this.node.expanded){
+                this.updateExpandIcon();
+            }
+        }else{
+            if(bulkRender === true) {
+                targetNode.appendChild(this.wrap);
+            }
+        }
+    },
+
+    checked : function() {
+        return this.checkbox.checked;
+    },
+
+    /**
+     * Sets a checkbox appropriately.  By default only walks down through child nodes
+     * if called with no arguments (onchange event from the checkbox), otherwise
+     * it's assumed the call is being made programatically and the correct arguments are provided.
+     * @param {Boolean} state true to check the checkbox, false to clear it. (defaults to the opposite of the checkbox.checked)
+     * @param {Boolean} descend true to walk through the nodes children and set their checkbox values. (defaults to false)
+     */
+    check : function(state, descend, bulk) {
+        
+        if (this.node.disabled)
+            return;
+
+        
+        var n = this.node;
+        var tree = n.getOwnerTree();
+        var parentNode = n.parentNode;
+        
+        if(!n.expanded && !n.childrenRendered)
+            n.expand(false, false, this.check.createDelegate(this, arguments));
+
+        if(typeof bulk == 'undefined')
+            bulk = false;
+        
+        if(typeof state == 'undefined' || state === null)
+        {
+            state = this.checkbox.checked;
+            descend = !state;
+            if(state)
+                n.expand(false, false);
+            
+        } 
+        else
+        {
+            this.checkbox.checked = state;
+        }
+        
+        n.attributes.checked = state;
+
+        // do we have parents?
+        //if(parentNode !== null && state)
+            // if we're checking the box, check it all the way up
+            //if( parentNode.getUI().check )
+                //parentNode.getUI().check(state, false, true);
+
+        if(!n.isLeaf())
+        {
+            var cs = n.childNodes;
+
+      		for(var i = 0; i < cs.length; i++)
+       	 		cs[i].getUI().check(state, true, false);
+        }
+        
+        if(!bulk)
+            tree.fireEvent('check', n, state);  
+    },
+
+    toggleCheck : function(state) {
+        this.check(!this.checkbox.checked, true);
+    }
+
+});
+
+
+
+var tree;
+
+/**
+ * Fix ext compatibility with prototype 1.6
+ */
+Ext.lib.Event.getTarget = function(e) {
+    var ee = e.browserEvent || e;
+    return ee.target ? Event.element(ee) : null;
+};
+
+Ext.tree.TreePanel.Enhanced = function(el, config)
+{
+    Ext.tree.TreePanel.Enhanced.superclass.constructor.call(this, el, config);
+};
+
+Ext.extend(Ext.tree.TreePanel.Enhanced, Ext.tree.TreePanel, {
+
+    loadTree : function(config, firstLoad)
+    {
+        var parameters = config['parameters'];
+        var data = config['data'];
+
+        if ((typeof parameters['root_visible']) != 'undefined') {
+            this.rootVisible = parameters['root_visible']*1;
+        }
+
+        var root = new Ext.tree.TreeNode(parameters);
+
+        this.nodeHash = {};
+        this.setRootNode(root);
+
+        if (firstLoad) {
+            this.addListener('click', this.categoryClick.createDelegate(this));
+        }
+
+        this.loader.buildCategoryTree(root, data);
+        this.el.dom.innerHTML = '';
+        // render the tree
+        this.render();
+    },
+
+    categoryClick : function(node, e)
+    {
+        node.getUI().check(!node.getUI().checked());
+    }
+});
+
+Ext.onReady(function()
+{
+    var categoryLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php echo $this->getLoadTreeUrl() ?>'
+    });
+
+    categoryLoader.createNode = function(config) {
+        config.uiProvider = Ext.tree.CheckboxNodeUI;
+        var node;
+        var _node = Object.clone(config);
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+
+        return node;
+    };
+
+    categoryLoader.buildCategoryTree = function(parent, config)
+    {
+        if (!config) return null;
+
+        if (parent && config && config.length){
+            for (var i = 0; i < config.length; i++) {
+                config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+                var node;
+                var _node = Object.clone(config[i]);
+                if (_node.children && !_node.children.length) {
+                    delete(_node.children);
+                    node = new Ext.tree.AsyncTreeNode(_node);
+                } else {
+                    node = new Ext.tree.TreeNode(config[i]);
+                }
+                parent.appendChild(node);
+                node.loader = node.getOwnerTree().loader;
+                if (_node.children) {
+                    this.buildCategoryTree(node, _node.children);
+                }
+            }
+        }
+    };
+
+    categoryLoader.buildHash = function(node)
+    {
+        var hash = {};
+
+        hash = this.toArray(node.attributes);
+
+        if (node.childNodes.length>0 || (node.loaded==false && node.loading==false)) {
+            hash['children'] = new Array;
+
+            for (var i = 0, len = node.childNodes.length; i < len; i++) {
+                if (!hash['children']) {
+                    hash['children'] = new Array;
+                }
+                hash['children'].push(this.buildHash(node.childNodes[i]));
+            }
+        }
+
+        return hash;
+    };
+
+    categoryLoader.toArray = function(attributes) {
+        var data = {};
+        for (var key in attributes) {
+            var value = attributes[key];
+            data[key] = value;
+        }
+
+        return data;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.id = node.attributes.id;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    tree = new Ext.tree.TreePanel.Enhanced('<?php echo $_divId ?>', {
+        animate:          false,
+        loader:           categoryLoader,
+        enableDD:         false,
+        containerScroll:  true,
+        selModel:         new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible:      '<?php echo $this->getRoot()->getIsVisible() ?>',
+        useAjax:          <?php echo $this->getUseAjax() ?>,
+        currentNodeId:    <?php echo (int) $this->getCategoryId() ?>,
+        addNodeTo:        false,
+        rootUIProvider:   Ext.tree.CheckboxNodeUI
+    });
+
+    tree.on('check', function(node, checked) {
+    	if(node.attributes.checked) {
+    		<?php echo $updateElementId ?>CategoryAdd(node.id);
+        } else {
+        	<?php echo $updateElementId ?>CategoryRemove(node.id);
+        }
+        <?php //echo $this->getJsFormObject() ?>//.updateElement.value = this.getChecked().join(', ');
+        varienElementMethods.setHasChanges(node.getUI().checkbox);
+    }, tree);
+
+    // set the root node
+    var parameters = {
+        text:        '<?php echo htmlentities($this->getRoot()->getName()) ?>',
+        draggable:   false,
+        checked:'<?php echo $this->getRoot()->getChecked() ?>',
+        uiProvider: Ext.tree.CheckboxNodeUI,
+        allowDrop:   <?php if ($this->getRoot()->getIsVisible()): ?>true<?php else : ?>false<?php endif; ?>,
+        id:          <?php echo (int) $this->getRoot()->getId() ?>,
+        expanded:    <?php echo (int) $this->getIsWasExpanded() ?>,
+        category_id: <?php echo (int) $this->getCategoryId() ?>
+    };
+
+    tree.loadTree({parameters:parameters, data:<?php echo $this->getTreeJson() ?>},true);
+    tree.addListener('click', <?php echo $updateElementId ?>CategoryClick.createDelegate(this));
+
+});
+
+function <?php echo $updateElementId ?>CategoryClick(node, e){
+    if (node.disabled) {
+        return;
+    }
+    node.getUI().check(!node.getUI().checked());
+    varienElementMethods.setHasChanges(Event.element(e), e);
+};
+function <?php echo $updateElementId ?>CategoryAdd(id) {
+    var ids = $('<?php echo $updateElementId ?>').value.split(',');
+    ids.push(id);
+    $('<?php echo $updateElementId ?>').value = ids.join(',');
+}
+function <?php echo $updateElementId ?>CategoryRemove(id) {
+    var ids = $('<?php echo $updateElementId ?>').value.split(',');
+    // bug #7654 fixed
+    while (-1 != ids.indexOf(id)) {
+        ids.splice(ids.indexOf(id), 1);
+    }
+    $('<?php echo $updateElementId ?>').value = ids.join(',');
+}
+//]]>
+</script>

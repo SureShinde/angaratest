@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_AjaxView>
+      <version>0.1.0</version>
+    </Angara_AjaxView>
+  </modules>
+  <frontend>
+    <routers>
+      <ajaxview>
+        <use>standard</use>
+        <args>
+          <module>Angara_AjaxView</module>
+          <frontName>ajaxview</frontName>
+        </args>
+      </ajaxview>
+    </routers>
+    <layout>
+      <updates>
+        <ajaxview>
+          <file>ajaxview.xml</file>
+        </ajaxview>
+      </updates>
+    </layout>
+  </frontend>
+  <global>
+    <helpers>
+      <ajaxview>
+        <class>Angara_AjaxView_Helper</class>
+      </ajaxview>
+    </helpers>
+    <blocks>
+      <ajaxview>
+        <class>Angara_AjaxView_Block</class>
+      </ajaxview>
+    </blocks>
+    <resources>
+      <ajaxview_setup>
+        <setup>
+          <module>Angara_AjaxView</module>
+        </setup>
+        <connection>
+          <use>core_setup</use>
+        </connection>
+      </ajaxview_setup>
+      <ajaxview_write>
+        <connection>
+          <use>core_write</use>
+        </connection>
+      </ajaxview_write>
+      <ajaxview_read>
+        <connection>
+          <use>core_read</use>
+        </connection>
+      </ajaxview_read>
+    </resources>
+  </global>
+  <admin>
+    <routers>
+      <ajaxview>
+        <use>admin</use>
+        <args>
+          <module>Angara_AjaxView</module>
+          <frontName>ajaxview</frontName>
+        </args>
+      </ajaxview>
+    </routers>
+  </admin>
+  <adminhtml>
+    <!--Creating New Menu in Admin by Vaseem Starts-->
+    <!--<menu>
+      <ajaxview module="ajaxview">
+        <title>Ajax View</title>-->
+        <!--Title of Menu-->
+        <!--<sort_order>100</sort_order>
+        <children>--><!--Sub Menu Items-->
+          <!--<ajaxviewbackend module="ajaxview">
+            <title>Sub Menu 1</title>
+            <sort_order>0</sort_order>
+            <action>ajaxview/adminhtml_ajaxviewbackend</action>-->
+            <!--Data comes from "app\design\adminhtml\default\default\template\ajaxview\ajaxviewbackend.phtml"-->
+          <!--</ajaxviewbackend>
+        </children>
+      </ajaxview>
+    </menu>-->
+    <!--Creating New Menu in Admin by Vaseem Ends-->
+    <acl>
+      <resources>
+        <all>
+          <title>Allow Everything</title>
+        </all>
+        <admin>
+          <children>
+            <ajaxview translate="title" module="ajaxview">
+              <title>AjaxView</title>
+              <sort_order>1000</sort_order>
+              <children>
+                <ajaxviewbackend translate="title">
+                  <title>Ajax View Backend Page Title</title>
+                </ajaxviewbackend>
+              </children>
+            </ajaxview>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+    <layout>
+      <updates>
+        <ajaxview>
+          <file>ajaxview.xml</file>
+        </ajaxview>
+      </updates>
+    </layout>
+  </adminhtml>
+</config>

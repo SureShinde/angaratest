@@ -1,0 +1,35 @@
+<?php
+/*
+ * Contus Support Pvt Ltd.
+ * created by Vasanth on nov 02 2010.
+ * vasanth@contus.in
+ * In this page we can include the jw player in frontend.
+ */
+
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$cids = $_product->getCategoryIds();
+$_videoDetails['video'] = $_helper->productAttribute($_product, $this->htmlEscape($_product->getVideo()), 'video');
+$video_arr = array_filter(explode("|",$_videoDetails['video']),'trim');
+$number_of_videos = count($video_arr); 
+
+$videoPath = Mage::getBaseURL('media').'productVideos/';
+$thumbPath = Mage::getBaseURL('media').'productVideos/'; 
+
+?>
+
+
+<div class="provideo-holder hidden img-3">
+	<div style="text-align:center"> 
+		<video id="angvideo" width="420" preload="auto" controls>
+		<?php 
+		for ($i=0; $i < count($video_arr); $i++) {
+		  /*Retrive uploaded videos from media*/
+			list($videoName,$thumbName) = explode(',',$video_arr[$i]); ?>
+			<source src="<?php echo $videoPath."video/".$videoName; ?>" type="video/mp4">
+		<?php 
+		} ?>
+		Your browser does not support HTML5 video.
+		</video>
+	</div>
+</div>

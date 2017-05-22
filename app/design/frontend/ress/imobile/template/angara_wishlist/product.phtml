@@ -1,0 +1,176 @@
+<style>
+.pp-holder{width:100%; background:#ffffff; margin:0px auto; height:100%; position:relative; overflow:auto;padding:10px;text-align:center;}
+.pp-holder input[type=text],input[type=password]{height:46px;border:1px solid #dedede;width: 80%;margin-bottom:20px;padding-left:20px; font-size:16px; -webkit-appearance: none;}
+input[type=password].validation-failed{margin-bottom:20px;}
+.sign-tptxt {display: inline-block;font-size:16px;color:#8e8e90;line-height:26px;}
+.wish-pop-btn {height: 50px;width: 86%;border: none;color: #ffffff;background: #fa505a;}
+
+.pp-holder input::-webkit-input-placeholder, .pp-holder input:-moz-placeholder,
+.pp-holder input::-moz-placeholder, .pp-holder input:-ms-input-placeholder {color: black;}
+.click a:hover {text-decoration:none;}
+.validation-advice {font-size:14px; margin-left:8%; margin-right:8%; margin-top:-15px; margin-bottom:10px; text-align:left; }
+.error-msg, .error-msg a{color:red; font-size:16px;}
+</style>
+<?php 
+$params		= 	Mage::app()->getRequest()->getParams(); 
+$checkHttp	= 	(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');
+$params 	= 	Mage::app()->getRequest()->getParams(); 
+$productId	=	$params['id'];
+?>
+
+
+<div class="pp-holder">
+  <div class="dismiss-popup p10" data-dismiss="modal" style="position:absolute; top:0px; right:0px; cursor:pointer;">
+    <div style="width:18px; height:18px; background:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/optionpopupclose.png') no-repeat; background-size:18px; border-radius: 11px;;"></div>
+  </div>
+  	<!--	S:VA	Create Account	-->
+	<div class="sign-right" style="margin-top:35px;">
+		<form action="#" id="g-form-register-customer" <?php echo ($productId ? '' : 'style="display:none;"');?>>
+			<div id="create_account_popup_response_error"></div>
+			<p class="sign-tptxt text-bold" style="width:80%;font-size:20px;color:#414b56;"><?php echo ($productId ? 'Sign Up to Create Wishlist' : 'Create an account');?></span></p>               
+			<div>
+				<input name="firstname" id="firstname" class="input-text required-entry" type="text" title="<?php echo $this->__('First Name') ?>" value="" placeholder="First Name"  />
+				<div class="youama-ajaxlogin-error err-firstname err-nofirstname err-dirtyfirstname"></div>
+			</div>
+
+			<div>
+				<input name="lastname" id="lastname" class="input-text required-entry" type="text" title="<?php echo $this->__('Last Name') ?>" value="" placeholder="Last Name"  />
+				<div class="youama-ajaxlogin-error err-lastname err-nolastname err-dirtylastname"></div>
+			</div>
+
+			<input id="gcreate-email-address" placeholder="Email Address" class="sign-text-field input-text validate-email required-entry" type="text" title="Email Address" value="" name="email" type="email" />
+			<div class="clear"></div>
+			<input id="gcreate-password" placeholder="Password" class="input-text required-entry validate-password sign-text-field" type="password" title="Password" name="password"/>
+			<div class="clear"></div>
+			<div class="snlogin-wrap"> 
+				<?php echo ($productId ? '<p class="sign-tptxt text-bold" style="width:80%"><span>Create an account so you will have a place to store your favorites</span></p>' : '');?>
+                <input name="product_id" type="hidden" value="<?php echo $productId;?>" /> 
+				<button type="submit" title="<?php echo $this->__('Create an account') ?>" class="button wish-pop-btn relative-placeholder" id="submit-create-account" style="font-size:20px;">
+					<span>
+						<span><?php echo $this->__('Submit') ?></span>
+					</span>
+					<span id="ajaxlogin-create-loader" class="hidden absolute-placeholder" style="color:#ffffff; font-size:10px; right:10px; top:11px;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span>
+				</button>
+				<p class="sign-tptxt click" style="border-bottom: 1px solid #fa505a;padding-bottom:5px;">
+					<a href="javascript:void(0)" class="apricot-text">I already have an account</a>
+				</p>
+			</div>
+		</form>
+	</div>
+    <!--	E:VA	-->
+    
+    <!--	S:VA	Login Account	-->
+    <div>
+        <div class="sign-left">
+            <form action="#" method="post" id="g-form-login" <?php echo ($productId ? 'style="display:none;"' : '');?>>
+				<div id="login_popup_response_error"></div>
+				<p class="sign-tptxt text-bold" style="width:80%;font-size:20px;color:#414b56;">Sign In</span></p>
+				<input type="text" name="login[username]" value="" id="gregistered-email" placeholder="User Name" class="input-text required-entry validate-email sign-text-field" title="<?php echo $this->__('Email Address') ?>" />
+				<div class="clear"></div>
+				<input type="password" placeholder="Password" name="login[password]" class="input-text required-entry validate-password sign-text-field" id="gregistered-password" title="<?php echo $this->__('Password') ?>" />
+				<div class="clear"></div>
+				<?php echo ($productId ? '<p class="sign-tptxt text-bold" style="width:80%"><span>Sign in to your account to access your favorites.</span></p>' : '');?>
+                <input name="product_id" type="hidden" value="<?php echo $productId;?>" />
+				<button type="submit" class="button wish-pop-btn relative" title="<?php echo $this->__('Log In') ?>" name="submit-login" id="submit-login"  style="font-size:20px;">
+					<span>
+						<span class="snlogin-btn gtm-track"><?php echo $this->__('Submit') ?></span>
+					</span>
+					<span id="ajaxlogin-register-loader" class="hidden absolute" style="color:#ffffff; font-size:10px; right:10px; top:11px;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span>
+				</button>
+				<p><a href="/customer/account/forgotpassword/" class="apricot-text">Forgot password?</a></p>
+				<p class="sign-tptxt click" style="border-bottom: 1px solid #fa505a;padding-bottom:5px;"><a href="javascript:void(0)" class="apricot-text">Create a new account</a></p>
+            </form>
+        </div>
+    </div>
+    <!--	E:VA	-->
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	/* Create Account */
+	var createAccountForm = new VarienForm('g-form-register-customer', true);
+	jQuery('#g-form-register-customer').submit(function(event){
+		event.preventDefault();
+		if(createAccountForm.validator.validate() === true){
+			var data = jQuery('#g-form-register-customer').serialize();
+			jQuery("#create_account_popup_response_error").hide();
+			jQuery('#ajaxlogin-create-loader').removeClass('hidden');
+			jQuery('#submit-create-account').addClass('disabled');
+			
+			jQuery.ajax({
+				  url: "<?php echo $this->getUrl('ajax/account/create',array('_secure'=>$checkHttp)) ?>",
+				  type : 'post',
+				  data: data,
+				  success: function(data){
+					  var parsedJson = jQuery.parseJSON(data);                      
+					  if(parsedJson.message){
+						jQuery("#create_account_popup_response_error").show();
+					  	jQuery('#ajaxlogin-create-loader').addClass('hidden');
+						jQuery('#submit-create-account').removeClass('disabled'); 
+					  	jQuery('#create_account_popup_response_error').html(parsedJson.message).addClass('error-msg');
+					  }
+					  if(parsedJson.success){
+						  jQuery('#create_account_popup_response_error').html(parsedJson.message).addClass('success-msg');
+						 window.location = parsedJson.url;
+					 }
+				  }
+			});
+		}else{
+			jQuery("#create_account_popup_response_error").hide();
+			return false;			
+		}
+	});
+	
+	
+	/* Login Account */
+	jQuery('#gregistered-email').val('');		jQuery('#gregistered-password').val('');
+	var loginForm = new VarienForm('g-form-login', true);
+	jQuery('#g-form-login').submit(function(event) {
+		event.preventDefault();
+		if(loginForm.validator.validate() === true) {
+			var data = jQuery('#g-form-login').serialize();
+			jQuery("#login_popup_response_error").hide();
+			jQuery('#ajaxlogin-register-loader').removeClass('hidden');
+			jQuery('#submit-login').addClass('disabled');
+			jQuery.ajax({
+				url: "<?php echo $this->getUrl('ajax/account/login',array('_secure'=>$checkHttp)) ?>",
+				type : 'post',
+				data: data,
+				success: function(data){
+					var parsedJson = jQuery.parseJSON(data);                      
+					if(parsedJson.message){
+						jQuery("#login_popup_response_error").show();
+					  	jQuery('#ajaxlogin-register-loader').addClass('hidden');
+						jQuery('#submit-login').removeClass('disabled');
+					  	jQuery('#login_popup_response_error').html(parsedJson.message).addClass('error-msg');
+					}
+					if(parsedJson.success){
+						jQuery('#login_popup_response_error').html(parsedJson.message).addClass('success-msg');
+						window.location = parsedJson.url;
+					}
+				}
+			});
+		}else{
+			jQuery("#login_popup_response_error").hide();
+			return false;
+		}
+	});
+	jQuery(".click").click(function(){
+		
+		//jQuery('#g-form-login').fadeToggle(1000,'linear');
+		//jQuery('#g-form-register-customer').fadeToggle(1000,'linear');
+		
+		if(jQuery('#g-form-login').is(':visible')){
+			jQuery('#g-form-login').fadeOut(300,'linear', function(){
+				jQuery('#g-form-register-customer').fadeIn(300,'linear');
+			});
+		}else{
+			jQuery('#g-form-register-customer').fadeOut(300,'linear', function(){
+				jQuery('#g-form-login').fadeIn(300,'linear');
+			});
+		}
+		
+		
+	});
+});
+</script>

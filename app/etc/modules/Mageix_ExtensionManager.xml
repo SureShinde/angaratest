@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mageix_ExtensionManager>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mageix_ExtensionManager>
+    </modules>
+</config>

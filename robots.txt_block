@@ -1,0 +1,92 @@
+#User-agent: Bingbot
+#Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: aranhabot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: web-ceo-online-bot
+Disallow: /
+
+User-agent: Akamai
+Disallow: /
+
+User-agent: spotbot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Baiduspider-image
+Disallow: /
+
+User-agent: Baiduspider-video
+Disallow: /
+
+User-agent: Baiduspider-news
+Disallow: /
+
+User-agent: Baiduspider-favo
+Disallow: /
+
+User-agent: Baiduspider-cpro
+Disallow: /
+
+User-agent: Baiduspider-ads
+Disallow: /
+
+User-agent: Baidu
+Disallow: /
+
+User-Agent: Halebot
+Disallow: /*
+
+User-Agent: Pingdom.com_bot
+Disallow: /*
+
+User-Agent: VoilaBot
+Disallow: /*
+
+# rules
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /wishlist/
+Disallow: /customer/
+Disallow: /store/
+Disallow: /manager/
+Disallow: /*'*
+Disallow: /*catalogsearch*
+Disallow: /*.swf*
+Disallow: /certificate/
+Disallow: /checkout/
+Disallow: /admin
+Disallow: /cba/
+Disallow: /rnd/
+Disallow: /*-dod-*
+Disallow: /country/
+Disallow: /*.svn/
+Disallow: /*.git/
+Disallow: /ajaxact/
+Disallow: /dompdf/
+Disallow: /downloader/
+Disallow: /errors/
+Disallow: /includes/
+Disallow: /index_files/
+Disallow: /*more*
+Disallow: /java/
+Disallow: /fbapp/
+Disallow: /p/*x.html
+Disallow: /*-1.html
+Disallow: /image_thumb.php
+Disallow: /*-bm-*
+Allow: /
+
+Sitemap: http://www.angara.com/sitemap1.xml
+Sitemap: http://www.angara.com/sitemap.xml
+Sitemap: http://www.angara.com/image-sitemap.xml
+Sitemap: http://www.angara.com/sitemap_cms_page.xml

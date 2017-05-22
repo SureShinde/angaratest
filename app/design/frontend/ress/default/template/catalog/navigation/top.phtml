@@ -1,0 +1,760 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<!-- top.phtml start -->
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ 
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+<link rel="stylesheet" type="text/css" href="/skin/frontend/angara/default/css/top-member-skin.css" media="all" />
+
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('.customerdiscountlink').click(
+			function(){
+				jQuery('.customerdiscountbtn').hide();
+				jQuery('.searchbarbox').width('100%');
+				jQuery('html, body').animate({ scrollTop: 0 }, 0);
+				jQuery('#slidingMemberDiv').slideDown(400);				
+			}
+		)
+		jQuery('<img>').src = '/skin/frontend/angara/default/images/new_member_screen/accountloginbg.jpg';	
+		
+		if(jQuery('.submenu').length > 0){
+			jQuery('#countrybox').click(
+				function(){
+					jQuery('html, body').animate({ scrollTop: jQuery(document).height() }, 'slow');
+					jQuery('.account').trigger('click');
+					jQuery('.submenu').show();
+				}
+			)
+		}
+		else{
+			jQuery('.countryflagheader').css('cursor','default');
+		}
+	})
+	
+	function showSelectedMemberFormOption(customertype){
+		if(customertype=='new'){
+			jQuery('#registerblock').show();
+			jQuery('#loginblock').hide();
+			jQuery('#oldmemberlink').show();
+			jQuery('#newmemberlink').hide();
+		}else{
+			jQuery('#registerblock').hide();
+			jQuery('#loginblock').show();
+			jQuery('#oldmemberlink').hide();
+			jQuery('#newmemberlink').show();
+		}		
+	}
+	
+	function executeUrl(urlvaltop){
+		//javascript:executeUrl('rings.html');
+		if(urlvaltop != ''){	
+			window.location.href = '/' + urlvaltop;
+		}else{
+			window.location.href = '/';
+		}	
+	}
+</script>
+<script type="text/javascript" src="/skin/frontend/angara/default/js/menu1.1.js"></script>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('#chromemenu').mastmenu({speed:400});
+	});	
+</script>
+
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top'); ?>
+<?php if($_menu): ?>
+<style>
+.nav { position:absolute; top:0; left:0;height:40px;width:959px;  background:url(../images/topnavright.jpg) right no-repeat; }
+.nav ul { margin:0; padding:0; height:40px; }
+.nav ul li { height:40px; list-style:none; float:left; font-size:18px; color:#999999; position:relative; white-space:nowrap; }
+.nav ul li a {text-decoration:none; font:bold 12px Arial, Helvetica, sans-serif; color:#000; float:left; padding:1px 18px 1px 18px; height:38px; line-height:38px; position:relative; border:none; }
+.nav ul li a img { border:none; }
+.nav ul li.active-link { border-top:solid 1px #eeeeee;  padding-top:0; padding-bottom:0; }
+.nav ul li.active-link-left { border-top:solid 1px #eeeeee;  padding-top:0; padding-bottom:0; }
+.nav ul li.active-link a span { left:-1px; border-left:1px solid #d4d4d4; border-right:none; top:0; bottom:0; height:38px; line-height:38px;padding-top:0; padding-bottom:0; }
+.nav ul li.active-link-left a span { border-left:1px solid #d4d4d4; border-right:none; top:0; bottom:0; height:38px; line-height:38px;padding-top:0; padding-bottom:0; }
+.nav ul li a span { left:-1px; position:absolute; height:20px; top:10px; border-right:1px solid #d4d4d4; line-height:20px; }
+.nav ul li.active-link a.mainlvl { border-right:1px solid; border-color:#d4d4d4; background-color:#fff; padding-right:17px;padding-top:0; padding-bottom:0; }
+.nav ul li.active-link-left a.mainlvl { border-right:1px solid; border-color:#d4d4d4; background-color:#fff; padding-right:17px;padding-top:0; padding-bottom:0; }
+.nav ul li .lvl1 { left:-9999px; width:999px; }
+.nav ul li .lvl1 .lvl2 { display:none }
+.nav ul li.active-link .lvl1 { left:-1px }
+.nav ul li.active-link-left .lvl1 { left:auto; right:0px }
+.collectiontab{width:163px!important; }
+
+.navlist { float:left; padding:4px; }
+.navlist ul { margin:0; padding:0; height:auto; }
+.navlist ul li { display: block; list-style: none outside none; margin: 0; padding: 1px; height:24px; clear:both; position:relative; padding-left:2px }
+.navlist ul li img { float:left; width:12px; vertical-align:middle; }
+.navlist ul li.nonborder { height:27px; border:none; }
+.navlist ul li a { color: #000; display: block; font:12px Arial, Helvetica, sans-serif; height:24px; padding:2px 0 0 3px; line-height:23px; text-decoration:none;  border:none; }
+.navlist ul li span { color: #000; display: inline-block; font:12px Arial, Helvetica, sans-serif; height:24px; padding:2px 0 0 3px; line-height:23px; text-decoration:none; border:none; float:left; cursor:pointer; }
+.navlist ul li span:hover { color:#000; text-decoration:underline; }
+.navlist ul li a:hover { color:#000; text-decoration:underline; }
+.navlist ul li.haslvl2 { }
+/*.navlist ul li.haslvl2 a{background:url(..images/arrow_r.png) right 7px no-repeat transparent;}*/
+.navlist ul li.lvlactive a { background:none; }
+.navlist ul li.lvlactive { border:1px solid #c0c0c0; padding:0; background:none; z-index:5005; padding-left:1px; }
+.navlist ul li .border-hider { display:none; width:3px; position:absolute; background:#fff; z-index:5009; top:0; bottom:0; }
+.navlist ul li.lvlactive .border-hider { display:block; }
+.navlist ul li.lvlactive a { text-decoration:none !important }
+.navlist ul li.lvlactive img { display:none; }
+.navlist ul li.lvlactive .lvl2 { display:block; }
+.navlist2 { background-color:#FFFFFF; z-index:5002; position:absolute; border:1px solid #c0c0c0; top:-1px; padding:0px 9px 6px 6px; font-weight:normal; }
+.lastboxiefix { width:298px }
+.navlist2 ul li { float:none; padding:1px 1px 0 3px; border:none; }
+.navlist2 ul li a { padding:1px 0 0; }
+.navlist2 ul li span { padding:1px 0 0; }
+.navlist2 ul li a:hover { text-decoration:underline !important }
+.navlist2 ul li span:hover { text-decoration:underline !important }
+.has_navlistparts { }
+.navlist2part1 { float:left; width:183px; padding:0; }
+.navlist2part2 { float:left; width:191px; padding:0; }
+.xmasgift-guide {
+	width:244px;
+	float:right;
+	height:42px;
+	background:url(/skin/frontend/angara/default/images/home-banner/last-minute-perfect-gift.png) no-repeat;
+}
+</style>
+
+<div id="wrapper">
+  <div class="wrapper">
+    <div class="topnavbar">
+      <div class="nav" id="chromemenu">
+      <ul>
+          <li><a href="/jewelry.html" class="mainlvl">Gemstones<span></span></a> </li>
+          <li><a href="/rings.html" class="mainlvl">Rings<span></span></a> </li>
+          <li><a href="/engagement-rings.html" class="mainlvl">Engagement<span></span></a> </li>
+          <li><a href="/pendants.html" class="mainlvl">Pendants<span></span></a> </li>
+          <li><a href="/earrings.html" class="mainlvl">Earrings<span></span></a> </li>
+          <li><a href="/collection.html" class="mainlvl new-collection" style="font:bold 14px/38px Arial, Helvetica, sans-serif; color:#c60202">Collections<span></span></a> </li>
+          <li><a href="/mothers-jewelry.html" class="mainlvl" >Mothers Jewelry<span></span></a></li>
+          <li class="open-me-left"><a href="/jewelry-gifts.html" class="mainlvl">Gifts &amp; More<span></span></a> </li>
+          <li class="open-me-left"><a href="/jewelry-guide.html" class="mainlvl">Jewelry Guide<span></span></a> </li>
+      </ul>
+      <!-- second level -->
+      <div class="dropmenudiv lvl1">
+        <div class="navlist">
+           <ul>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/garnet-jewelry.html');"><span>Garnet</span>
+               <img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style=" float:left; vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/amethyst-jewelry.html');"><span>Amethyst</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/aquamarine-jewelry.html');"><span>Aquamarine</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/diamond-jewelry.html');"><span>Diamond</span><img  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/emerald-jewelry.html');"><span>Emerald</span><img  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html">Pearl</a></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/colored-diamond-jewelry.html');"><span>Colored Diamonds</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+           </ul>
+       </div>
+       <div class="navlist">
+           <ul>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/ruby-jewelry.html');"><span>Ruby</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/peridot-jewelry.html');"><span>Peridot</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/sapphire-jewelry.html');"><span>Sapphire</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/opal-jewelry.html');"><span>Opal</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/citrine-jewelry.html');"><span>Citrine</span><img  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+               <li class="populatable" onclick="javascript:executeUrl('jewelry/tanzanite-jewelry.html');"><span>Tanzanite</span><img src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+            </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1">
+       <div class="navlist">
+           <ul>
+           		<li class="populatable" id="sprtnt"><a href="/rings/sapphire-rings.html">Sapphire Rings</a><img alt="Sapphire Rings" title="Sapphire Rings" src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /></li>
+              	<li id="rbrtnt"><a href="/rings/ruby-rings.html">Ruby Rings</a></li>
+              	<li id="emrtnt"><a href="/rings/emerald-rings.html">Emerald Rings</a></li>
+              	<li id="tzrtnt"><a href="/rings/tanzanite-rings.html">Tanzanite Rings</a></li>
+              	<li><a href="/rings/diamond-rings.html">Diamond Rings</a></li>
+              	<li><a href="/rings/colored-diamond-rings.html">Colored Diamond Rings</a></li>             
+              	<li><a href="/rings/gemstone-rings.html">Gemstone Rings</a></li>                
+            </ul>
+       </div>
+       <div class="navlist">
+            <ul>
+             	<li><a href="/rings/aquamarine-rings.html">Aquamarine Rings</a></li> 
+              	<li><a href="/rings/amethyst-rings.html">Amethyst Rings</a></li>
+              	<li><a href="/rings/garnet-rings.html">Garnet Rings</a></li>                          
+              	<li><a href="/rings/peridot-rings.html">Peridot Rings</a></li>
+              	<li><a href="/rings/opal-rings.html">Opal Rings</a></li>
+              	<li><a href="/rings/citrine-rings.html">Citrine Rings</a></li> 
+              	<li><a href="/collection/vintage.html">Vintage Rings</a></li>
+            </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1">
+       <div class="navlist">
+           <ul>
+               	<li><a href="/engagement-rings/sapphire-engagement-rings.html">Sapphire Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/ruby-engagement-rings.html">Ruby Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/emerald-engagement-rings.html">Emerald Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/tanzanite-engagement-rings.html">Tanzanite Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/diamond-engagement-rings.html">Diamond Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/gemstone-engagement-rings.html">Gemstone Engagement Rings</a></li>
+              	<li><a href="/engagement-rings/wedding-ring-set.html">Wedding Ring Set</a></li>
+              	<li><a href="/engagement-rings/diamond-bands.html">Diamond Bands</a></li>
+              	<li><a href="/engagement-rings/wedding-bands.html">Wedding Bands</a></li>
+          </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1">
+       <div class="navlist">
+          <ul>
+              	<li><a href="/pendants/sapphire-necklace-pendants.html">Sapphire Pendants</a></li>
+              	<li><a href="/pendants/ruby-necklace-pendants.html">Ruby Pendants</a></li>
+              	<li><a href="/pendants/emerald-necklace-pendants.html">Emerald Pendants</a></li>
+              	<li><a href="/pendants/tanzanite-necklace-pendants.html">Tanzanite Pendants</a></li>
+              	<li><a href="/pendants/diamond-necklace-pendants.html">Diamond Pendants</a></li>
+              	<li><a href="/pendants/colored-diamond-necklace-pendants.html">Colored Diamond Pendants</a></li>
+              	<li><a href="/pendants/diamond-solitaire-pendants.html">Diamond Solitaire Pendants</a></li>             
+              	<li><a href="/pendants/gemstone-necklace-pendants.html">Gemstone Pendants</a></li>                          
+          </ul>
+       </div>
+       <div class="navlist">
+          <ul>
+           	 	<li><a href="/pendants/aquamarine-necklace-pendants.html">Aquamarine Pendants</a></li> 
+                <li><a href="/pendants/amethyst-necklace-pendants.html">Amethyst Pendants</a></li>
+              	<li><a href="/pendants/garnet-necklace-pendants.html">Garnet Pendants</a></li>                           
+              	<li><a href="/pendants/peridot-necklace-pendants.html">Peridot Pendants</a></li>
+              	<li><a href="/pendants/opal-necklace-pendants.html">Opal Pendants</a></li>
+              	<li><a href="/pendants/citrine-necklace-pendants.html">Citrine Pendants</a></li>
+               	<li><a href="/pendants/journey-necklace-pendants.html">Journey Pendants</a></li> 
+               	<li><a href="/collection/hope-pendants.html">Hope Pendants</a></li>
+          </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1">
+       <div class="navlist">
+          <ul>
+              	<li><a href="/earrings/sapphire-earrings.html">Sapphire Earrings</a></li>
+              	<li><a href="/earrings/ruby-earrings.html">Ruby Earrings</a></li>
+              	<li><a href="/earrings/emerald-earrings.html">Emerald Earrings</a></li>
+              	<li><a href="/earrings/tanzanite-earrings.html">Tanzanite Earrings</a></li>
+              	<li><a href="/earrings/diamond-earrings.html">Diamond Earrings</a></li>
+              	<li><a href="/earrings/diamond-studs.html">Diamond Studs</a></li> 
+               	<li><a href="/earrings/colored-diamond-earrings.html">Colored Diamond Earrings</a></li>              
+              	<li><a href="/earrings/gemstone-earrings.html">Gemstone Earrings</a></li> 
+              	<li><a href="/collection/be-mine.html">Be-mine Hoop Earrings</a></li> 
+          </ul>
+       </div>
+       <div class="navlist">
+          <ul>
+            	<li><a href="/earrings/aquamarine-earrings.html">Aquamarine Earrings</a></li>
+            	<li><a href="/earrings/amethyst-earrings.html">Amethyst Earrings</a></li> 
+              	<li><a href="/earrings/garnet-earrings.html">Garnet Earrings</a></li>                           
+              	<li><a href="/earrings/peridot-earrings.html">Peridot Earrings</a></li>
+              	<li><a href="/earrings/opal-earrings.html">Opal Earrings</a></li>
+              	<li><a href="/earrings/citrine-earrings.html">Citrine Earrings</a></li>              
+              	<li><a href="/earrings/journey-earrings.html">Journey Earrings</a></li>
+              	<li><a href="/collection/exotic-drop-earrings.html">Exotic Drop Earrings</a></li>
+          </ul>
+        </div>
+    </div>
+      <div class="dropmenudiv lvl1 collectiontab" >
+       <div class="navlist">
+          <ul>
+           	 	<li onclick="javascript:executeUrl('bridal-jewelry/bridal-rings.html');"><span>Wow Bridal</span> <small style="font:12px Arial, Helvetica, sans-serif; color:#c60202; padding-left:3px;">(New)</small></li>
+                <li onclick="javascript:executeUrl('collection/tajmahal-sugarloaf.html');"><span>Taj Mahal</span> <small style="font:12px Arial, Helvetica, sans-serif; color:#c60202; padding-left:3px;">(New)</small></li>
+              	<li><a href="/collection/facets.html">Facets</a></li>
+              	<li onclick="javascript:executeUrl('collection/be-mine.html');"><span>Be-mine Hoop Earrings</span></li>
+              	<li onclick="javascript:executeUrl('collection/vintage.html');"><span>Vintage Rings</span></li>
+              	<li onclick="javascript:executeUrl('collection/hope-pendants.html');"><span>Hope Pendants</span></li>
+               	<li onclick="javascript:executeUrl('collection/exotic-drop-earrings.html');"><span>Exotic Drop Earrings</span></li>
+           </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1 motherssection" >
+       <div class="navlist">
+           <ul>
+              	<li><a href="/mothers-jewelry/mother-rings.html">Mothers Rings</a></li>
+              	<li><a href="/mothers-jewelry/mothers-necklace-pendants.html">Mothers Pendants</a></li>
+              	<li><a href="/mothers-jewelry/mothers-earrings.html">Mothers Earrings</a></li>
+              	<li><a href="/mothers-jewelry/gift-sets.html">Gift Sets</a></li>
+            </ul>
+       </div>
+    </div>
+      <div class="dropmenudiv lvl1">
+       <div class="navlist">
+            <ul>
+              	<li class="populatable"><a href="/birthstone-jewelry.html">Birthstone Jewelry</a><img alt="Birthstone Jewelry" title="Birthstone Jewelry"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /> </li>
+              	<li><a href="/jewelry-gifts/anniversary-gifts.html">Anniversary Gifts</a></li>
+              	<li><a href="/jewelry-gifts/birthday-gifts.html">Birthday Gifts</a></li>
+              	<li><a href="/jewelry-gifts/graduation-gifts.html">Graduation Gifts</a></li>
+              	<li><a href="/jewelry-gifts/gift-cards.html">Gift Cards</a></li>
+              	<li><a href="/jewelry-gifts/christmas-gifts.html">Christmas Jewelry Gifts</a></li>
+              	<li><a href="/jewelry-gifts/valentine-gifts.html">Valentine's Gifts</a></li>
+              	<li><a href="/jewelry-gifts/st-patricks-gifts.html">St Patrick's Day Gifts</a></li>
+              	<li><a href="/jewelry-gifts/sweet-16-gifts.html">Sweet 16 Gifts</a></li>             
+              	<li><a href="/jewelry-gifts/thanksgiving-gifts.html">Thanksgiving Gifts</a></li>
+              	<li><a href="/semi-mounts.html">Semi Mounts</a></li>
+            </ul>
+      </div>
+      <div class="navlist">
+            <ul>
+            	<li><a href="/jewelry-gifts/gifts-below-250.html">Gifts Under $250</a></li>
+                <li><a href="/jewelry-gifts/gifts-between-250-500.html">Gifts From $250-$500</a></li>
+                <li><a href="/jewelry-gifts/gifts-above-500.html">Gifts Above $500</a></li>
+                <li><a href="/jewerly-gifts/virtual-gifts.html">Last Minute Gifts</a></li>
+              	<li><a href="/jewelry-gifts/bridal-jewelry.html">Bridal Jewelry</a></li>
+              	<li><a href="/jewelry-gifts/baby-jewelry.html">Baby Jewelry</a></li>
+              	<li><a href="/jewelry-gifts/prom-jewelry.html">Prom Jewelry</a></li>
+              	<li class="populatable"><a href="/lab-jewelry.html">Lab Created Jewelry</a><img alt="Lab Created Jewelry" title="Lab Created Jewelry"  src="/skin/frontend/angara/default/images/secondlvlarrow.png" style="float:left;vertical-align:middle" /> </li>      <li><a href="/jewelry-gifts/top-ten-jewelry.html">Top Ten Jewelry</a></li> 
+              	<li><a href="/jewelry-gifts/gifts-for-her.html">Gifts For Her</a></li>                         
+              	<li><a href="/custom-jewelry.html">Custom Jewelry</a></li>
+            </ul>
+      </div>
+   </div>
+      <div class="dropmenudiv lvl1 lastboxiefix">
+      <div class="navlist">
+            <ul>
+                <li><a href="/jewelry-guide/gemstone-buying-guide.html">About Gemstones</a></li>
+                <li><a href="/jewelry-guide/about-sapphire.html">About Sapphires</a></li>
+                <li><a href="/jewelry-guide/diamond-buying-guide.html">About Diamonds</a></li>
+                <li><a href="/jewelry-guide/about-emerald.html">About Emeralds</a></li>
+                <li><a href="/jewelry-guide/about-ruby.html">About Rubies</a></li>
+                <li><a href="/jewelry-guide/about-tanzanite.html">About Tanzanites</a></li>
+                <li><a href="/jewelry-guide/about-aquamarine.html">About Aquamarines</a></li>
+                <li><a href="/jewelry-guide/about-colored-diamonds.html">About Colored Diamonds</a></li>
+                <li><a href="/jewelry-guide/about-birthstones.html">About Birthstones</a></li>
+                <li><a href="/jewelry-guide/jewelry-care.html">Jewelry Care</a></li>
+            </ul>
+      </div>
+      <div class="navlist">
+            <ul>
+              	<li><a href="/skin/frontend/angara/default/PDF/AngaraRingSizer00.pdf" target="_blank">Angara Ring Sizer</a></li>
+               	<li><a href="/jewelry-guide/tips-to-find-her-ring-size.html">Tips To Find Her Ring Size</a></li>
+              	<li><a href="/jewelry-guide/sapphire-jewelry.html">Sapphire Jewelry</a></li>
+              	<li><a href="/jewelry-guide/diamond-jewelry.html">Diamond Jewelry</a></li>
+              	<li><a href="/jewelry-guide/gemstone-origins.html">Gemstone Origins</a></li>
+              	<li><a href="/jewelry-guide/gemstone-treatment.html">Gemstone Treatment</a></li>
+              	<li><a href="/jewelry-guide/jewelry-glossary.html">Jewelry Glossary</a></li>
+              	<li><a href="/jewelry-guide/about-jewelry-metal.html">About Metal</a></li>
+              	<li><a href="/jewelry-guide/jewelry-articles.html">Jewelry Articles</a></li>
+              <li><a href="/customer-testimonials.html">Customer Testimonials</a></li>
+            </ul>
+      </div>
+   </div>
+   	  <!-- Third Level -->
+      <div class="navlist2 lvl2">
+            <ul>
+                <li onclick="javascript:executeUrl('rings/garnet-rings.html');"><span>Garnet Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/garnet-earrings.html');"><span>Garnet Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/garnet-necklace-pendants.html');"><span>Garnet Pendants</span></li>   
+                <li><a href="/jewelry/garnet-jewelry.html">Garnet Jewelry</a></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul> 
+                <li onclick="javascript:executeUrl('rings/amethyst-rings.html');"><span>Amethyst Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/amethyst-earrings.html');"><span>Amethyst Earrings</span></li>         
+                <li onclick="javascript:executeUrl('pendants/amethyst-necklace-pendants.html');"><span>Amethyst Pendants</span></li>
+                <li><a href="/jewelry/amethyst-jewelry.html">Amethyst Jewelry</a></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul> 
+                <li onclick="javascript:executeUrl('rings/aquamarine-rings.html');"><span>Aquamarine Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/aquamarine-earrings.html');"><span>Aquamarine Earrings</span></li>    
+                <li onclick="javascript:executeUrl('pendants/aquamarine-necklace-pendants.html');"><span>Aquamarine Pendants</span></li>
+                <li><a href="/jewelry/aquamarine-jewelry.html">Aquamarine Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/aquamarine.html');"><span>Loose Aquamarine</span></li>          
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul> 
+                <li onclick="javascript:executeUrl('rings/diamond-rings.html');"><span>Diamond Rings</span></li>            
+                <li onclick="javascript:executeUrl('engagement-rings/diamond-bands.html');"><span>Diamond Bands</span></li>    
+                <li onclick="javascript:executeUrl('earrings/diamond-earrings.html');"><span>Diamond Earrings</span></li>        
+                <li onclick="javascript:executeUrl('earrings/diamond-studs.html');"><span>Diamond Studs</span></li>
+                <li onclick="javascript:executeUrl('pendants/diamond-necklace-pendants.html');"><span>Diamond Pendants</span></li>  
+                <li onclick="javascript:executeUrl('pendants/diamond-solitaire-pendants.html');"><span>Diamond Solitaire Pendants</span></li>            
+                <li onclick="javascript:executeUrl('bracelets/charm-bracelets.html');"><span>Charm Bracelets</span></li>    
+                <li onclick="javascript:executeUrl('bracelets/diamond-bracelets.html');"><span>Diamond Bracelets</span></li>
+                <li><a href="/jewelry/diamond-jewelry.html">Diamond Jewelry</a></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul>
+                <li onclick="javascript:executeUrl('rings/emerald-rings.html');"><span>Emerald Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/emerald-earrings.html');"><span>Emerald Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/emerald-necklace-pendants.html');"><span>Emerald Pendants</span></li>   
+                <li><a href="/jewelry/emerald-jewelry.html">Emerald Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/emerald.html');"><span>Loose Emerald</span></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul>
+                <li onclick="javascript:executeUrl('rings/colored-diamond-rings.html');"><span>Colored Diamond Rings</span></li>
+                <li onclick="javascript:executeUrl('earrings/colored-diamond-earrings.html');"><span>Colored Diamond Earrings</span></li>          
+                <li onclick="javascript:executeUrl('pendants/colored-diamond-necklace-pendants.html');"><span>Colored Diamond Pendants</span></li>   
+                <li><a href="/jewelry/colored-diamond-jewelry.html">Colored Diamond Jewelry</a></li>
+                <li onclick="javascript:executeUrl('natural-color-diamonds.html');"><span>Colored Diamonds</span></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul>   
+                <li onclick="javascript:executeUrl('rings/ruby-rings.html');"><span>Ruby Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/ruby-earrings.html');"><span>Ruby Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/ruby-necklace-pendants.html');"><span>Ruby Pendants</span></li>   
+                <li><a href="/jewelry/ruby-jewelry.html">Ruby Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/ruby.html');"><span>Loose Ruby</span></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul>
+                <li onclick="javascript:executeUrl('rings/peridot-rings.html');"><span>Peridot Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/peridot-earrings.html');"><span>Peridot Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/peridot-necklace-pendants.html');"><span>Peridot Pendants</span></li>   
+                <li><a href="/jewelry/peridot-jewelry.html">Peridot Jewelry</a></li>
+            </ul>
+       </div>
+      <div class="navlist2 lvl2">
+            <ul>   
+                <li onclick="javascript:executeUrl('rings/sapphire-rings.html');"><span>Sapphire Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/sapphire-earrings.html');"><span>Sapphire Earrings</span></li>          
+                <li onclick="javascript:executeUrl('pendants/sapphire-necklace-pendants.html');"><span>Sapphire Pendants</span></li>            <li><a href="/jewelry/sapphire-jewelry.html">Sapphire Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/sapphire.html');"><span>Loose Sapphire</span></li>
+            </ul>
+        </div>
+      <div class="navlist2 lvl2">
+            <ul> 
+                <li onclick="javascript:executeUrl('rings/opal-rings.html');"><span>Opal Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/opal-earrings.html');"><span>Opal Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/opal-necklace-pendants.html');"><span>Opal Pendants</span></li>   
+                <li><a href="/jewelry/opal-jewelry.html">Opal Jewelry</a></li>
+            </ul>
+        </div>
+      <div class="navlist2 lvl2">
+            <ul>         
+                <li onclick="javascript:executeUrl('rings/citrine-rings.html');"><span>Citrine Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/citrine-earrings.html');"><span>Citrine Earrings</span></li>            
+                <li onclick="javascript:executeUrl('pendants/citrine-necklace-pendants.html');"><span>Citrine Pendants</span></li>   
+                <li><a href="/jewelry/citrine-jewelry.html">Citrine Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/citrine.html');"><span>Loose Citrine</span></li>
+            </ul>
+        </div>
+      <div class="navlist2 lvl2">
+            <ul>  
+                <li onclick="javascript:executeUrl('rings/tanzanite-rings.html');"><span>Tanzanite Rings</span></li>            
+                <li onclick="javascript:executeUrl('earrings/tanzanite-earrings.html');"><span>Tanzanite Earrings</span></li>        
+                <li onclick="javascript:executeUrl('pendants/tanzanite-necklace-pendants.html');"><span>Tanzanite Pendants</span></li>            <li><a href="/jewelry/tanzanite-jewelry.html">Tanzanite Jewelry</a></li>
+                <li onclick="javascript:executeUrl('loose-gemstones/tanzanite.html');"><span>Loose Tanzanite</span></li>
+            </ul>
+        </div>
+      <div class="navlist2 lvl2">
+            <ul>            
+                <li><a href="/rings/sapphire-rings/blue-sapphire.html">Blue Sapphire Rings</a></li>
+                <li><a href="/rings/sapphire-rings/pink-sapphire.html">Pink Sapphire Rings</a></li>           
+            </ul>
+        </div>
+      <div class="navlist2 lvl2 has_navlistparts" style="width:396px">
+            <div class="navlist2part1">
+                <ul>
+                    <li><a href="/birthstone-jewelry/january-birthstone-garnet-jewelry.html" rel="nofollow">Garnet - January Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/february-birthstone-amethyst-jewelry.html" rel="nofollow">Amethyst - February Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/march-birthstone-aquamarine-jewelry.html">Aquamarine - March Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/april-birthstone-diamond-jewelry.html">Diamond - April Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/may-birthstone-emerald-jewelry.html">Emerald - May Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/june-birthstone-pearl-jewelry.html" rel="nofollow">Pearl - June Birthstone</a></li>
+                </ul>
+            </div>
+            <div class="navlist2part2">
+                <ul>
+                    <li><a href="/birthstone-jewelry/july-birthstone-ruby-jewelry.html">Ruby - July Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/august-birthstone-peridot-jewelry.html" rel="nofollow">Peridot - August Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/september-birthstone-sapphire-jewelry.html">Sapphire - September Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/october-birthstone-opal-jewelry.html" rel="nofollow">Opal - October Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/november-birthstone-citrine-jewelry.html" rel="nofollow">Citrine - November Birthstone</a></li>
+                    <li><a href="/birthstone-jewelry/december-birthstone-tanzanite-jewelry.html" rel="nofollow">Tanzanite - December Birthstone</a></li>
+                </ul>
+            </div>
+        </div>
+      <div class="navlist2 lvl2 has_navlistparts">
+            <ul>
+                <li><a href="/lab-jewelry/lab-created-sapphire-jewelry.html">Lab Sapphire Jewelry</a></li>
+                <li><a href="/lab-jewelry/lab-created-emerald-jewelry.html">Lab Emerald Jewelry</a></li>
+                <li><a href="/lab-jewelry/lab-created-ruby-jewelry.html">Lab Ruby Jewelry</a></li>
+            </ul>
+        </div>
+  	  </div>    
+	</div>
+    <?php
+    $requrl1 = stripos($_SERVER["REQUEST_URI"], '/cart/');
+   	$requrl2 = stripos($_SERVER["REQUEST_URI"], '/checkout/');
+	?>
+	<div <?php if($requrl1 === false || $requrl2 === false) {?>class="customerdiscountarea" <?php }?>>
+  		<div <?php if($requrl1 === false || $requrl2 === false) {?>class="customerdiscountbox" <?php }?>>
+     		<div <?php if($requrl1 === false || $requrl2 === false) {?>class="searchbarsection" <?php }?>>
+		    <?php
+            	if($requrl1 === false || $requrl2 === false) {?>
+           			<div class="searchbarbox">
+               			<div class="searchbarboxright">
+                    		<div class="searchbarboxleft"></div>
+                    		<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl(); ?>" method="get">
+                        	<div class="searchbarinputbox">			  
+                            	<input id="search" autocomplete="off" type="text" class="inputstyle" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" />									
+                        	</div>
+                            <div class="searchbarbutton">
+                                <button type="submit" title="<?php echo $this->__('Search') ?>"  class="searchtopsitebutton" style="cursor:pointer;"></button>
+                            </div>
+                        	<div id="search_autocomplete" class="search-autocomplete"></div>
+                            <!-- 
+                              changes: removed comment on the line where div(id:search_autocomplete) block 
+                              reason: the div responsible to display autocomplete
+                              author: unbxd
+                            -->
+							<script type="text/javascript">
+                        	//<![CDATA[
+                            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search by keyword, SKU ID, stone, metal, price, etc. e.g. blue sapphire rings over $2000') ?>');
+                            searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+                            /* 
+                            * changes: removed comment on the line javascript calls initAutocomplete function
+                            * reason: To make autocomplete to work
+                            * Author: Unbxd
+                            */
+                            
+                            jQuery(function(){
+                                jQuery('#search').keydown(function(e){
+                                    var code = (e.keyCode ? e.keyCode : e.which);
+                                    var index = jQuery('#search_autocomplete li.selected').index();
+                                    if(code == 38){
+                                        if(!index){
+                                            index = jQuery('#search_autocomplete li').length-1;
+                                        }
+                                        else if(index == 1){
+                                            index = jQuery('#search_autocomplete li').length-1;
+                                        }
+                                        else{
+                                            index--;
+                                        }
+                                        jQuery('#search_autocomplete li').removeClass('selected');
+                                        jQuery('#search_autocomplete li:eq('+(index+1)+')').addClass('selected');
+                                    }
+                                    else if(code == 40){
+                                        if(!index){
+                                            index = 2;
+                                        }
+                                        else if(index == jQuery('#search_autocomplete li').length){
+                                            index = 2;
+                                        }
+                                        else{
+                                            index++;
+                                        }
+                                        jQuery('#search_autocomplete li').removeClass('selected');
+                                        jQuery('#search_autocomplete li:eq('+(index-1)+')').addClass('selected');
+                                    }
+                                    //else if(code ==)
+                                    // up : 38
+                                    // down : 40
+                                });
+                            })
+                            //]]>
+                        	</script>
+                    		</form>
+                    		</div>
+                	</div>
+            <?php 
+		   		}?>    
+				<div class="clearall"></div>
+        	</div> 
+			<div class="xmasgift-guide"><a href="/jewerly-gifts/virtual-gifts.html?icid=top|virtual-gifts"></a></div>	
+			<div class="clearall"></div>
+        	<div class="customerloginsection" id="slidingMemberDiv">
+        		<div class="closesection" onclick="javascript:jQuery('.customerdiscountbtn').show();jQuery('.customerloginsection').hide();"></div>
+                <div class="advantagepoint">
+                    <div class="pointheading">ANGARA Membership Advantages:</div>
+                    <ul>
+                        <li>Get guaranteed discounts, free gifts and more</li>
+                        <li>Personalized shopping experience</li>
+                        <li>Previews of new product lines</li>
+                        <li>Access to one of a kind designs prior to launch on the <span style="line-height:6px; display:block">site</span></li>
+                        <li style=" margin-top:8px;">Faster check out</li>
+                    </ul>
+                </div>
+          		<div class="membersignsection" >
+                    <div class="signupsection"> 
+                        <span id="newmemberlink">
+                            <span class="newmambertxt">New Member 
+                                <span class="signuptxt">Sign Up Here.</span>
+                            </span> 				
+                            <span class="signupmember">
+                                <img src="/skin/frontend/angara/default/images/new_member_screen/signupbtn.png" alt="Sign up" onclick="javascript:showSelectedMemberFormOption('new');" />
+                            </span>
+                        </span>
+                        <span id="oldmemberlink" style="display:none;">
+                            <span class="newmambertxt">Already a Member?
+                                <span class="signuptxt"></span>
+                            </span> 				
+                            <span class="allreadymember">
+                                <a href="javascript:showSelectedMemberFormOption('old');">
+                                    <img src="/skin/frontend/angara/default/images/new_member_screen/locksign.png" style=" vertical-align:baseline; margin:0 3px" /> Login Here
+                                </a> 
+                            </span> 
+                        </span>	
+                    </div>
+                    <div class="loginsection" id="registerblock" style="display:none">
+					<?php 
+                    //echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+                    <form id="register-form-new" method="post" action="http://www2.angara.com/l/17452/2012-11-21/2rcq"><?php /*/customer/account/createpost/*/ ?>
+                    <input type="hidden" name="success_url" value="/" />
+                    <div class="jointoday">Join Today</div>
+                    <div class="inputfieldsection">
+                        <div class="usernamefiend">First name	
+                            <input type="text" name="firstname" id="firstname" title="First Name" value="" class="inputtxtsmall required-entry" />
+                        </div>
+                        <div class="usernamefiend">Last name
+                            <input type="text" name="lastname" id="lastname" title="Last Name" value="" class="inputtxtsmall required-entry" />					
+                        </div>
+                        <div class="clearall"></div>
+                    </div>
+                    <div class="inputfieldsection">
+                        <div class="usernamefiendlogin">Email address
+                            <input type="text" name="email" id="email_address" title="Email Address" value="" class="inputtxtbig validate-email required-entry" />					
+                        </div>
+                        <div class="clearall"></div>
+                    </div>
+                    <div class="inputfieldsection">
+                        <div class="usernamefiend">Password
+                            <input type="password" name="password" id="password" title="Password" value="" class="inputtxtsmall required-entry validate-password-top" />				  
+                        </div>
+                        <div class="usernamefiend">Confirm password
+                            <input type="password" name="confirmation" id="confirmation" title="Confirm Password" value="" class="inputtxtsmall required-entry validate-cpassword-top" />
+                        </div>
+                        <div class="clearall"></div>
+                    </div>
+					<?php /*?>
+                    <div class="newslettersignup">
+                    <label>
+                    <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" checked="checked" class="checkbox" />
+                    <span>Sign Up for Newsletter</span></label>
+                    </div><?php */?>
+                    <div class="promisetxt">We promise never to sell or trade your information. <a href="/privacy-and-security.html" style="font-size:11px; text-decoration:underline; color:#e3e3e3">Privacy policy</a></div>
+                    <div class="submisection"> 
+                        <span class="submitbtn">
+                            <button type="submit" title="Submit" name="send1" id="send1" class="newmemberloginbutton" style="cursor:pointer;"></button>
+                        </span> 
+                        <span class="ortxt">or</span> 
+                        <span class="facebookbtn"> 
+                            <a rel="facebook-connect" title="Connect with Facebook">
+                                <img src="/skin/frontend/angara/default/images/new_member_screen/loginwithfacebook.png" alt="Login with facebook" /> 
+                            </a>
+                        </span> 			  
+                    </div>
+                    </form>
+                    <script>
+                    //<![CDATA[
+                        var dataForm = new VarienForm('register-form-new', true);
+                    //]]> 
+                    </script>
+                </div>			
+                <div class="loginsection" id="loginblock" style="display:block;">              
+                    <div class="jointoday">Member Sign In</div>
+                    <?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+                    <form id="login-form-new" method="post" action="/customer/account/loginPost/">
+                    <input type="hidden" name="success_url" value="/" />		
+                    <div class="inputfieldsection">
+                        <div class="usernamefiendlogin">Email
+                          <input type="text" name="login[username]" id="email" value="" class="inputtxtbig required-entry validate-email" title="Email Address" />
+                        </div>
+                    <div class="clearall"></div>
+                </div>
+                <div class="inputfieldsection">
+                  <div class="usernamefiendlogin">Password
+                     <input type="password" name="login[password]" id="pass" value="" class="inputtxtbig required-entry validate-password-top" title="Password" />
+                  </div>
+                  <div class="clearall"></div>
+                </div>			  
+                <div class="submisection">
+                    <span class="submitbtn">
+                        <button type="submit" title="Login" name="newloginsubmit" id="newloginsubmit" class="newmemberloginbutton" style="cursor:pointer;"></button>
+                    </span>				
+                    <span class="ortxt">or</span> 
+                    <span class="facebookbtn">
+                        <a rel="facebook-connect" title="Connect with Facebook">
+                            <img src="/skin/frontend/angara/default/images/new_member_screen/loginwithfacebook.png" alt="Login with facebook" />
+                        </a>					
+                    </span>				
+                </div>
+                <div class="forgotpassword">
+                    <a href="/customer/account/forgotpassword/" class="f-left">Forgot Your Password?</a>				
+                </div>
+                </form>
+				<script>
+                //<![CDATA[
+                    var dataForm = new VarienForm('login-form-new', true);
+                //]]> 
+                </script>
+            </div>
+          </div>
+       		</div>
+        	<div class="clearall"></div>
+      	</div>
+      	<div class="clearall"></div>
+    </div>
+    <div class="clearall"></div>
+  </div>
+  <div class="clearall"></div>
+</div>
+<?php endif ?>
+<?php
+$requrl1 = stripos($_SERVER["REQUEST_URI"], '/cart/');
+$requrl2 = stripos($_SERVER["REQUEST_URI"], '/checkout/');
+if($requrl1 === false) {
+	if ($this->helper('customer')->isLoggedIn()){?>
+	<script>
+	//jQuery('.customerdiscountbtn').hide();
+	//jQuery('.searchbarbox').width('100%');	
+	</script>
+	<?php
+	}?>
+	<style>.validation-advice{ width:200px; }</style>
+<?php
+}
+//else{
+?>
+<!--Modified started by Pankaj regarding bug id 524-->
+<script>
+//jQuery('.customerdiscountarea').hide();
+/*jQuery('.searchbarbox').hide();
+jQuery('.customerdiscountarea').attr('class','');
+jQuery('.customerdiscountbox').attr('class','');*/
+//jQuery('.customerloginsection').attr('style','width: 928px;');
+</script>
+<!--Modified ended by Pankaj regarding bug id 524-->
+<?php
+//}?>
+<!-- top.phtml end -->

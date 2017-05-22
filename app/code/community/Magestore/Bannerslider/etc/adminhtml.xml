@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+			<bannerslider module="bannerslider">
+				<title>Banner Slider</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="bannerslider">
+						<title>Manage Banners</title>
+						<sort_order>0</sort_order>
+						<action>bannerslider/adminhtml_bannerslider</action>
+					</items>
+				</children>
+			</bannerslider>
+		</menu>
+</config>

@@ -1,0 +1,150 @@
+<style>
+@media (min-width:1650px){
+.valentines_heart { background: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/special/signup-sticker.png) no-repeat ; height: 224px; position: fixed; right:5px; top:-18px; width: 142px; z-index: 1025;}
+.valentines_heart.spoffer-5-state{background: url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/special/5-state-signup-sticker.png) no-repeat;}
+.clickable-area{ width:131px; height:133px; position:absolute; right:6px; top:86px; outline:none; border:none;}
+.valentines_heart.spoffer-5-state a span{position:absolute; width: 100%; text-align: center; color: #1a4f8e; top:58px; font-size: 14px; font-weight:bold}
+}
+@media (max-width:999px){
+	.usp{display:none;}
+}
+.live-chat-link span div{display:inline-block!important; position:initial!important; margin-right:2px!important;}
+.checkout-cart-index .snow-f:before, .onepagecheckout-index-index .snow-f:before{background:none!important}
+.checkout-cart-index .snow-f:after, .onepagecheckout-index-index .snow-f:after{background:none!important}
+</style>
+
+<?php /* #extra-off a{border:1px dashed #000000; border-radius:4px; padding:3px 8px; font-size:14px; text-decoration:none;}
+#extra-off a:hover{border:1px dashed #D83D29;} */ ?>
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+
+if (Mage::getSingleton('customer/session')->isLoggedIn()){
+	$accountUrl = Mage::helper('customer')->getAccountUrl();
+}
+else{
+	$loginUrl = Mage::helper('customer')->getLoginUrl();
+}
+
+$totalCartItems = $this->helper('checkout/cart')->getSummaryCount();
+if(empty($totalCartItems)){
+	$totalCartItems = 0;
+}
+
+$userAgent = Mage::getUserAgent(); ?>
+<?php /*?><div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+	<div class="loading-indicator hide text-center">
+    	<div class="modal-backdrop fade in"></div>
+		<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    </div>
+</div>
+<div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-hidden="true" data-clear-on-close="1">
+	<div class="loading-indicator hide text-center">
+    	<div class="modal-backdrop fade in"></div>
+		<div class="loader fa fa-spinner fa-spin fa-5x max-margin-top"></div>    
+    </div>
+</div><?php */?>
+<div class="snow-f container-fluid">
+	<header role="banner">
+		<div class="top-quick-access pull-left col-sm-12 showcase-border-bottom-1px high-margin-bottom" style="background:#eeeeee;">
+			<div class="container">
+				<div class="row no-gutters">
+					<div class="col-sm-12">
+						<div class="quick-access hidden-xs">
+								<div id="extra-off-holder" class="pull-left visible-md"></div>
+								<script>
+									jQuery("#extra-off").appendTo("#extra-off-holder");
+								</script>
+								<div class="pull-left visible-md">
+									<ul>
+										<li class="low-margin-top low-padding-left low-padding-right min-margin-right"><span class="fontsize-type4"><a rel="nofollow" target="_new" href="/contact-us.html"><i class="fa fa-phone fa-fw text-light-green"></i>1-888-926-4272</a><span class="text-green"> </span></span></li>
+										<li class="low-margin-top"><a id="_lpChatBtn" href='javascript:void(0);' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&amp;referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="low-padding-left max-padding-right fontsize-type4 live-chat-link"><i class="fa fa-comments fa-fw text-light-green"></i>Live Chat</a></li>
+									</ul>
+								</div>
+								<div class="pull-left visible-sm">
+									<ul>
+										<li class="low-margin-top low-padding-left low-padding-right min-margin-right"><span class="fontsize-type4"><a rel="nofollow" target="_new" href="/contact-us.html"><i class="fa fa-phone fa-fw text-light-green"></i>1-888-926-4272</a><span class="text-green"> </span></span></li>
+										<li class="low-margin-top"><a id="_lpChatBtn" href='javascript:void(0);' target='chat609151' onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.comhttp://www.angara.com/store/images/lp/&amp;referrer='+escape(document.location),'chat609151','width=475,height=400,resizable=yes');return false;" class="low-padding-left max-padding-right fontsize-type4 live-chat-link"><i class="fa fa-comments fa-fw text-light-green"></i>Live Chat</a></li>
+									</ul>
+								</div>
+								<div class="pull-right">
+									<ul>
+									<?php if (!Mage::app()->getStore()->isCurrentlySecure()){ ?>
+										<li class="last cart-icon-wrap showcase-bg-white fontsize-type4"><a id="cart-opener" href="<?php echo $this->getUrl('checkout/cart/index');?>"><i class="fa fa-shopping-cart fa-fw text-orange"></i><span class="dyn_cart-items-count"><?php echo $totalCartItems;?></span> Item(s)</a><?php //endif; ?></li>
+									<?php } ?>
+
+										<li class="low-margin-top"><a rel="nofollow" href="<?php echo $this->getUrl('wishlist'); ?>" class="low-padding-left max-padding-right fontsize-type4 head-wishlist"><span class="heart"></span> Wishlist</a></li>
+										
+										<li class="low-margin-top"><?php if(isset($accountUrl)):?><a rel="nofollow" href="<?php echo $accountUrl;?>" class="low-padding-left max-padding-right fontsize-type4"><i class="fa fa-user fa-fw"></i>My Account</a><?php else:?><a rel="nofollow" href="<?php echo $loginUrl;?>" class="low-padding-left max-padding-right fontsize-type4"><i class="fa fa-user fa-fw"></i>Log In</a><?php endif;?></li>
+										<?php
+										if(Mage::app()->getRequest()->getModuleName() != 'checkout' && Mage::app()->getRequest()->getModuleName() != 'onepagecheckout'){ ?>
+										<li class="first low-margin-top" style="height:30px;"><a rel="nofollow" class="country-dropdown-list-trigger low-padding-left max-padding-right fontsize-type4" href="javascript:void(0)"><i class="fa country-list-item countflagspan country-flag country-<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode());?>-smallf" title="Click to Change the Country or Currency"></i></a><div><?php echo $this->getChildHtml('country'); ?></div></li>
+										<?php
+										}
+										else{?>
+										<li class="first low-margin-top max-padding-right" style="height:30px;"><i class="fa country-list-item countflagspan country-flag country-<?php echo strtolower(Mage::getModel('countrymapping/country')->getCountryParamCode());?>-smallf"></i></li>
+										<?php
+										}?>
+									</ul>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="container">
+			<div class="row no-gutters">
+				<div class="col-sm-4 visible-md">
+					<div class="quick-access">
+						<div class="pull-left max-margin-top">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 max-padding-bottom text-center">
+					<a href="<?php echo $this->getUrl('');?>" title="<?php echo $this->getLogoAlt();?>" class="logo"> </a>
+				</div>
+				<div class="col-md-4 col-sm-8 high-padding-top">
+					<div class="col-sm-12 no-padding">
+						<div class="col-sm-10 no-padding pull-right">
+							<div class="quick-access low-padding-bottom"> <?php echo $this->getChildHtml('topSearch');?> </div>
+						</div>
+					</div>
+				</div>
+				<?php echo $this->getChildHtml('topContainer');?> 
+            </div>
+		</div>        
+	</header>
+</div>
+<!--<div class="valentines_heart">
+	<a href="/offers/coupon/apply?code=SAINTP&amp;nochoose=true&amp;url=http://www.angara.com/jewelry-gifts/st-patricks-gifts.html?icid=Home|pop-up|st-patricks-deals|03092015" class="clickable-area" alt="st. patricks day jewelry deals - Angara.com"></a>
+</div>-->
+<?php echo $this->getLayout()->createBlock('core/template')->setTemplate('page/html/topmenu-min.phtml')->toHTML(); ?>
+<div class="container nav-holder" style="height:40px;display:none"></div>

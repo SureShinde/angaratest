@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $newslettertext = "Enter Your Email Address"; ?>
+<script type="text/javascript">
+jQuery.post('/newsletter/subscriber/msg/',showmsgnewsletter11);
+function showmsgnewsletter11(data)
+{
+	arr = new Array();
+	arr = data.split(':');
+	if(arr[0] == '0')
+	{
+		document.getElementById(arr[1] + '-err').innerHTML=arr[2];
+		document.getElementById(arr[1] + '-err').style.display = 'block';
+		if(document.getElementById('div_news_popup') && (arr[1] == '04-Home-Pop-Up-Sign-Up' || arr[1] == '05-Home-Pop-Up-Sign-Up' || arr[1] == '06-Home-Pop-Up-Sign-Up'))
+		{
+			document.getElementById('div_news_popup').style.display = 'block';
+		}
+	}
+	else if(arr[0] == '1')
+	{
+		document.getElementById(arr[1] + '-suc').innerHTML=arr[2];
+		document.getElementById(arr[1] + '-suc').style.display = 'block';
+		if(document.getElementById('div_news_popup') && (arr[1] == '04-Home-Pop-Up-Sign-Up' || arr[1] == '05-Home-Pop-Up-Sign-Up' || arr[1] == '06-Home-Pop-Up-Sign-Up'))
+		{
+			document.getElementById('div_news_popup').style.display = 'block';
+		}
+	}
+}
+function emailvalidate11() 
+   {
+     
+     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+     var address = document.getElementById("newsletter11").value;
+     if(reg.test(address) == false) 
+	 {
+      document.getElementById("newsletter11").value = "Enter Your Email Address";
+      document.getElementById("spnerror11").style.display="block";
+      return false;
+     }
+	 document.getElementById("spnerror11").style.display="none";
+}
+</script>
+<div class="home-block-subscribe"> 
+
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail"> 
+    		<div style="position:relative;"> 
+              <div id="spnerror11" class="usermsgm" style="display:none ;color:red">Invalid Email Address </div>
+              <div id='11-Military-Offer-err' class="usermsgm" style="display:none"></div>  
+			  <div id='11-Military-Offer-suc' class="usermsgm" style="display:none"></div>
+              
+            <div class="emailcaptureinput">            	
+               <input type="text" name="email" id="newsletter11" value="<?php echo $newslettertext; ?>"  class="input-text required-entry validate-email captureinput" onfocus="if(this.value=='<?php echo $newslettertext; ?>') this.value = ''" onblur="if(this.value=='') this.value = '<?php echo $newslettertext; ?>'"  />
+               <input type="hidden" name="ref_url" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+               <input type="hidden" name="newslettertype" value="11-Military-Offer" />
+            </div>
+            <div class="capturebtn">
+                <button type="submit" onclick="return emailvalidate11();">Save More</button>
+            </div>  
+             <div style="clear:both"></div>    
+            </div>     
+    </form>  
+    <script type="text/javascript">	
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+    </script>
+</div>

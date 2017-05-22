@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Demo_Practice>
+            <version>1.0.1</version>
+        </Demo_Practice>
+    </modules>
+	<global>
+		<models>
+			<practice>
+				<class>Demo_Practice_Model</class>
+			</practice>
+		</models>
+	</global>
+	
+	<frontend>
+		<routers>
+			<practice>
+				<use>standard</use>
+				<args>
+					<module>Demo_Practice</module>
+					<frontName>practice</frontName>
+				</args>
+			</practice>
+		</routers>
+	</frontend>
+	
+    <crontab>
+        <jobs>
+			<!--	
+			The following cron will send a test email with list of crons that have been run in 24 hours
+			You can check the entries in 'cron_schedule' table and find 'cron_status'
+			-->
+            <cron_status>
+                <!--<schedule><cron_expr>10 23 * * *</cron_expr></schedule>-->
+				<schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>practice/observer::cronStatus</model></run>
+            </cron_status>	
+			
+			<cron_status_test>
+				<schedule><cron_expr>0 0 * * *</cron_expr></schedule>
+                <run><model>practice/observer::cronStatusTest</model></run>
+            </cron_status_test>			
+        </jobs>
+	</crontab>
+</config>

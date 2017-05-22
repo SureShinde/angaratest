@@ -1,0 +1,1241 @@
+* {
+	padding:0;
+	margin:0;
+}
+
+.clear {
+	clear:both;
+}
+a, img {
+	border:none;
+	outline:none;
+}
+.page-wrapper-studs {
+	width:958px;
+	margin:0 auto;
+	margin-top:15px;
+	border:1px solid #D3D3D3;
+	position:relative;
+	
+}
+/* breadcrumb.css start */
+
+.breadcrumb-studs {
+	margin:15px 0 15px 15px;
+	height:19px;
+}
+.breadcrumb-studs ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.breadcrumb-studs li {
+	float:left;
+	height:19px;
+	font:bold 13px ProximaNova, Arial, Helvetica, sans-serif;
+}
+.breadcrumb-studs li span {
+	padding:0 8px;
+}
+.breadcrumb-studs li a {
+	color:#000;
+	font:normal 13px ProximaNova, Arial, Helvetica, sans-serif;
+	text-decoration:none;
+	float:left;
+}
+#page-header, #page-mid {
+	margin:0 15px 15px 15px;
+}
+.page-wrapper-studs h1.heading {
+	font:28px ProximaNova, Arial, Helvetica, sans-serif;
+	padding:0 0 10px 0;
+	color:#000;
+}
+#media-block {
+	float:left;
+	width:454px;
+	margin-bottom:15px;
+}
+#ulternateviewthumb {
+	float:left;
+	width:74px;
+	height: auto;
+	overflow:hidden;
+	margin-bottom:15px;
+}
+#ulternateviewthumb ul {
+	width:74px;
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+#ulternateviewthumb li {
+	width:74px;
+	height:74px;
+	padding:3px 0;
+}
+#ulternateviewthumb li span.thumbs {
+	width:70px;
+	height:70px;
+	border:solid 1px #cfcfcf;
+	padding:1px;
+	display:inline-block;
+	text-align:center;
+	cursor:pointer;
+}
+#ulternateviewthumb li span.thumbs:hover, #ulternateviewthumb li span.activethumb {
+	width:70px;
+	height:70px;
+	border:solid 2px #f4612e;
+	padding:0;
+	cursor:pointer;
+	display:inline-block;
+}
+#mostpopularitems {
+	margin-left:76px;
+	width:378px;	
+	height:173px;
+	overflow:hidden;
+}
+.mostpopular-title {
+	width:378px;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#000;
+	text-align:center;
+	padding-bottom:10px;
+}
+#mostpopularitems ul {
+	width:348px;
+	padding:0;
+	margin:0;
+	list-style:none;
+	float:left;
+}
+#mostpopularitems li {
+	width:81px;
+	padding:0 3px;
+	float:left;
+	margin-bottom:15px;
+}
+#mostpopularitems li span.thumbs {
+	width:77px;
+	height:77px;
+	border:solid 1px #cfcfcf;
+	padding:1px;
+	display:inline-block;
+	cursor:pointer;
+}
+#mostpopularitems li span.thumbs:hover, #mostpopularitems li span.activethumb {
+	width:77px;
+	height:77px;
+	border:solid 2px #f4612e;
+	padding:0;
+	cursor:pointer;
+	display:inline-block;
+}
+#mostpopularitems .mostpopularitems-price {
+	font:10px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	color:#666666;
+	display:block;
+	padding-top:3px;
+}
+#mostpopularitems .mostpopularitems-name {
+	font:10px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#666666;
+	display:block;
+	padding-top:3px;
+}
+#mainimage-block {
+	float:right;
+	width:350px;
+	height:350px;
+	text-align:center;
+	margin:0 15px 15px 0;
+}
+#price-block {
+	float:left;
+	width:176px;
+	margin-top:100px;
+}
+.price-block-title {
+	width:176px;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#000;
+	text-align:center;
+	padding-bottom:10px;
+}
+.finalprice {
+	font:28px/22px ProximaNova_bold, Arial, Helvetica, sans-serif;
+	text-align:center;
+	color:#000;
+}
+.addtocart {
+	margin-top:20px;
+	width:176px;
+	height:36px;
+	background-color:#f2602f;
+	font:20px/36px ProximaNova_bold, Arial, Helvetica, sans-serif;
+	color:#fff;
+	text-align:center;
+	cursor:pointer;
+	border:none;
+}
+.textlinks {
+	margin-top:35px;
+}
+.textlinks .textlinksparent
+{
+	margin-bottom:22px;
+	color:#666666;
+	text-decoration:none;
+	height:18px;
+	font:13px/18px ProximaNova, Arial, Helvetica, sans-serif;
+	vertical-align:top;
+	background:url(../images/gift-box-free-img.jpg) left no-repeat;
+	padding-left:24px;
+}
+
+.textlinks ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.textlinks ul li {
+	background:url(../images/icons.jpg) left no-repeat;
+	padding-left:24px;
+	margin-bottom:5px;
+}
+.textlinks ul li.wishlist {
+	background-position:0 0;
+	height:18px;
+}
+.textlinks ul li.reduceprice {
+	background-position:0 -18px;
+	height:18px;
+}
+.textlinks ul li.shipdate {
+	background-position:0 -36px;
+	height:18px;
+}
+.textlinks ul li.returns {
+	background-position:0 -54px;
+	height:18px;
+}
+.textlinks ul li.enhancements {
+	background-position:0 -72px;
+	height:18px;
+}
+.textlinks a {
+	color:#666666;
+	text-decoration:underline;
+	height:18px;
+	font:13px/18px ProximaNova, Arial, Helvetica, sans-serif;
+	vertical-align:top;
+}
+#customization-block-wrapper {
+	float:right;
+	width:281px;
+	border:1px solid #cfcfcf;
+}
+.customization-block-tilte {
+	height:41px;
+	background-color:#f2602f;
+	font:20px/41px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	text-align:center;
+	color:#fff;
+	border-bottom:1px solid #cfcfcf;
+}
+.customize-block-slide {
+	height:41px;
+	background-color:#f7f7f7;
+	padding:0 6px;
+	display:block;
+	border-bottom:1px solid #cfcfcf;
+	cursor:pointer;
+}
+.customize-slide-title {
+	padding-top:13px;
+	font:13px ProximaNova, Arial, Helvetica, sans-serif;
+	float:left;
+	color:#000;
+}
+.view-active-range-option {
+	width:75px;
+	height:12px;
+	border:1px solid #cececf;
+	float:right;
+	margin:6px 0 0 0;
+	background:url(../images/range-bar-icon.jpg) center top no-repeat;
+	font:10px ProximaNova, Arial, Helvetica, sans-serif;
+	background-color:#fff;
+	text-align:center;
+	padding-top:15px;
+}
+.view-active-option {
+	height:29px;
+	float:right;
+	margin:6px 0 0 0;
+	font:10px/29px ProximaNova, Arial, Helvetica, sans-serif;
+}
+
+.view-active-option img
+{
+	
+	background-color:#fff;
+	margin-left:5px;
+	width:27px;
+	height:27px;
+	border:1px solid #cececf;
+	vertical-align:middle;
+}
+
+.customization-block-style {
+	border-bottom:1px solid #cfcfcf;
+	padding:11px 11px 20px 11px;
+}
+#diamond-weight-customization-block {
+	display:block;
+}
+#diamond-quality-customization-block {
+	display:block;
+}
+#diamond-shape-customization-block {
+	display:block;
+}
+#metal-type-customization-block {
+	display:block;
+}
+#setting-style-customization-block {
+	display:block;
+	border-top:1px solid #cfcfcf;
+	border-bottom:none;
+}
+.rmvborder {
+	border:none;
+}
+.user-option-block {
+	margin-bottom:20px;
+}
+.user-option-block ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.user-option-block li {
+	width:54px;
+	padding:0 8px 0 0;
+	float:left;
+	text-align:center;
+	font:10px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#000;
+}
+.user-option-block li span.option-title {
+	width:54px;
+	text-align:center;
+	display:inline-block;
+	font:11px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+.user-option-block li span.thumbs {
+	width:50px;
+	height:50px;
+	border:solid 1px #cfcfcf;
+	padding:1px;
+	display:block;
+	margin-bottom:3px;
+	cursor:pointer;
+}
+.user-option-block li span.thumbs:hover, .user-option-block li span.activethumb {
+	width:50px;
+	height:50px;
+	border:solid 2px #f4612e;
+	padding:0;
+	cursor:pointer;
+	margin-bottom:3px;
+	display:block;
+}
+.selected-user-option-description {
+	font:13px/16px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#666666;
+	margin-bottom:35px;
+}
+.selected-option-title {
+	padding-bottom:3px;
+}
+.more-info-text-link a {
+	font:13px/16px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#666666;
+	text-decoration:underline;
+}
+.action-button-block {
+	text-align:center;
+	width:160px;
+	margin:0 auto;
+	margin-bottom:25px;
+}
+.action-button-block .done {
+	background-color:#f2602f;
+	font:18px ProximaNova_bold, Arial, Helvetica, sans-serif;
+	color:#fff;
+	float:right;
+	padding:4px 18px;
+	text-align:center;
+	cursor:pointer;
+}
+.action-button-block .cancel {
+	float:left;
+}
+.action-button-block .cancel a {
+	font:13px/31px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#666666;
+	text-decoration:underline;
+}
+.selection-process-main-heading {
+	font:20px/41px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	padding-left:15px;
+	color:#575757;
+}
+.selections-details-block {
+	padding:20px 15px;
+	background-color:#f6f6f6;
+}
+.selection-process-heading {
+	font:20px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#575757;
+	padding-bottom:30px;
+}
+.selection-process-img-block {
+	margin-bottom:55px;
+}
+.selection-process-content-block {
+	color:#666666;
+	font:13px/21px ProximaNova, Arial, Helvetica, sans-serif;
+	width:620px;
+}
+.accepted-image-box {
+	width:295px;
+	padding-top:60px;
+	height:20px;
+	background-color:#a9a9a9;
+	text-align:center;
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color:#fff;
+	position:relative;
+	background:url(../images/accepted-icon.jpg) #a9a9a9 263px 6px no-repeat;
+	float:left;
+	margin-right:6px;
+	margin-top:123px;
+}
+.rejected-image-box {
+	width:295px;
+	padding-top:60px;
+	height:20px;
+	text-align:center;
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color:#fff;
+	position:relative;
+	background:url(../images/rejected-icon.jpg) #a9a9a9 263px 6px no-repeat;
+	float:left;
+	margin-top:123px;
+}
+.diamond-selections {
+	position:absolute;
+	bottom:30px;
+	left:74px;
+}
+#occasion_content #dialog_occasion {
+	background-color: #FFFFFF;
+	border: 5px solid #D0D0D0;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 0 5px #BEBEBE;
+	text-align: center;
+	width: 255px;
+	height:223px;
+}
+.selection-range-block {
+	width:261px;
+	position:absolute;
+	top:2px;
+	font:11px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#000000;
+	text-align:center;
+}
+.selection-range-block ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+	height: 40px;
+}
+.selection-range-block li {
+	float:left;
+	font:10px/12px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#000000;
+	text-align:center;
+}
+.selection-range-block li.round-shape-weight-range {
+	width:29px;
+}
+.selection-range-block li.princess-shape-weight-range, .selection-range-block li.round-shape-colorclarity-range {
+	width:65px;
+}
+.selection-range-block li.princess-shape-colorclarity-range {
+	width:87px;
+}
+.selection-range-block li span {
+	font:12px ProximaNova_Bold, Arial, Helvetica, sans-serif;
+	color:#000;
+}
+.hover-content {
+	position:relative;
+}
+.popupboxblock {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#fff;
+	-moz-box-shadow:0px 0px 3px #797979;
+	-webkit-box-shadow: 0px 0px 3px #797979;
+	box-shadow: 0px 0px 3px #797979;
+	border:1px solid #d8d8d8;
+	display: none;
+	left:25px;
+	position: absolute;
+	top:20px;
+	z-index:50;
+	width:250px;
+	padding:10px;
+	font:12px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#292929;
+}
+.popupboxblock h1 {
+	font:18px/16px ProximaNova, Arial, Helvetica, sans-serif;
+	padding:0;
+	margin:0;
+	padding-bottom:6px;
+	color:#292929;
+}
+
+/***************************White diamond carat total weight sprite css start***************************/
+
+.White-diamond .ui-slider .ui-slider-handle {
+	background:url(../images/white-diamond-sprite.png) no-repeat;
+	cursor:pointer;
+	height:36px;
+	width:36px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-2000 {
+	background-position:0 0;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-1800 {
+	background-position:0 -41px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-1500 {
+	background-position:0 -82px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-1000 {
+	background-position:0 -123px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-900 {
+	background-position:0 -164px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-750 {
+	background-position:0 -205px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-650 {
+	background-position:0 -246px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-500 {
+	background-position:0 -287px;
+}
+.White-diamond .ui-slider-handle.round-carat-tw-250 {
+	background-position:0 -328px;
+}
+.White-diamond .ui-slider-handle.princess-carat-tw-1000 {
+	background-position:-48px 0;
+}
+.White-diamond .ui-slider-handle.princess-carat-tw-750 {
+	background-position:-48px -41px;
+}
+.White-diamond .ui-slider-handle.princess-carat-tw-500 {
+	background-position:-48px -82px;
+}
+.White-diamond .ui-slider-handle.princess-carat-tw-250 {
+	background-position:-48px -123px;
+}
+.White-diamond .ui-slider-handle.round-quality-GH-VS2 {
+	background-position:-48px -369px;
+}
+.White-diamond .ui-slider-handle.round-quality-GH-SI2 {
+	background-position:-48px -410px;
+}
+.White-diamond .ui-slider-handle.round-quality-IJ-I1 {
+	background-position:-48px -451px;
+}
+.White-diamond .ui-slider-handle.round-quality-KM-I2 {
+	background-position:-48px -492px;
+}
+.White-diamond .ui-slider-handle.princess-quality-GH-VS2 {
+	background-position:-48px -205px;
+}
+.White-diamond .ui-slider-handle.princess-quality-GH-SI2 {
+	background-position:-48px -246px;
+}
+.White-diamond .ui-slider-handle.princess-quality-IJ-I1 {
+	background-position:-48px -287px;
+}
+/***************************White diamond carat total weight sprite css end***************************/
+
+/***************************blue diamond carat total weight sprite css start***************************/
+.Blue-diamond .ui-slider .ui-slider-handle {
+	background-image:url(../images/blue-diamond-sprite.png);
+	cursor:pointer;
+	height:36px;
+	width:36px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-4000 {
+	background-position:0 0;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-3000 {
+	background-position:0 -41px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-2000 {
+	background-position:0 -82px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-1000 {
+	background-position:0 -123px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-750 {
+	background-position:0 -164px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-500 {
+	background-position:0 -205px;
+}
+.Blue-diamond .ui-slider-handle.round-carat-tw-250 {
+	background-position:0 -246px;
+}
+.Blue-diamond .ui-slider-handle.princess-carat-tw-2000 {
+	background-position:-48px 0;
+}
+.Blue-diamond .ui-slider-handle.princess-carat-tw-1000 {
+	background-position:-48px -41px;
+}
+.Blue-diamond .ui-slider-handle.princess-carat-tw-750 {
+	background-position:-48px -82px;
+}
+.Blue-diamond .ui-slider-handle.princess-carat-tw-500 {
+	background-position:-48px -123px;
+}
+.Blue-diamond .ui-slider-handle.princess-carat-tw-250 {
+	background-position:-48px -164px;
+}
+
+.Blue-diamond .ui-slider-handle.round-quality-AAA {
+	background-position:-48px -368px;
+}
+.Blue-diamond .ui-slider-handle.round-quality-AA {
+	background-position:-48px -410px;
+}
+.Blue-diamond .ui-slider-handle.princess-quality-AAA {
+	background-position:-48px -246px;
+}
+.Blue-diamond .ui-slider-handle.princess-quality-AA{
+	background-position:-48px -287px;
+}
+
+
+	
+/***************************blue diamond carat total weight sprite css end***************************/
+
+/***************************black diamond carat total weight sprite css start***************************/
+.Black-diamond .ui-slider .ui-slider-handle {
+	background-image:url(../images/black-diamond-sprite.png);
+	cursor:pointer;
+	height:36px;
+	width:36px;
+}
+.Black-diamond .ui-slider-handle.round-carat-tw-4000, .Black-diamond .ui-slider-handle.round-carat-tw-5000 {
+	background-position:0 0;
+}
+.Black-diamond .ui-slider-handle.round-carat-tw-3000, .Black-diamond .ui-slider-handle.round-carat-tw-3500 {
+	background-position:0 -41px;
+}
+.Black-diamond .ui-slider-handle.round-carat-tw-2000, .Black-diamond .ui-slider-handle.round-carat-tw-2500 {
+	background-position:0 -82px;
+}
+.Black-diamond .ui-slider-handle.round-carat-tw-1000 {
+	background-position:0 -123px;
+}
+.Black-diamond .ui-slider-handle.round-carat-tw-500 {
+	background-position:0 -164px;
+}
+.Black-diamond .ui-slider-handle.princess-carat-tw-4000 {
+	background-position:-48px 0;
+}
+.Black-diamond .ui-slider-handle.princess-carat-tw-3000 {
+	background-position:-48px -41px;
+}
+.Black-diamond .ui-slider-handle.princess-carat-tw-2000 {
+	background-position:-48px -82px;
+}
+.Black-diamond .ui-slider-handle.princess-carat-tw-1000 {
+	background-position:-48px -123px;
+}
+.Black-diamond .ui-slider-handle.princess-carat-tw-500 {
+	background-position:-48px -164px;
+}
+.Black-diamond .ui-slider-handle.round-quality-AAA {
+	background-position:-48px -368px;
+}
+.Black-diamond .ui-slider-handle.round-quality-AA {
+	background-position:-48px -410px;
+}
+.Black-diamond .ui-slider-handle.princess-quality-AAA {
+	background-position:-48px -287px;
+}
+.Black-diamond .ui-slider-handle.princess-quality-AA{
+	background-position:-48px -328px;
+}
+.Black-diamond .ui-slider-handle.round-quality-AA {
+	background-position:-48px -410px;
+}
+.Black-diamond .ui-slider-handle.round-quality-A {
+	background-position:-48px -451px;
+}
+.Black-diamond .ui-slider-handle.princess-quality-AA {
+	background-position:-48px -287px;
+}
+.Black-diamond .ui-slider-handle.princess-quality-A {
+	background-position:-48px -328px;
+}
+/***************************black diamond carat total weight sprite css end***************************/
+
+
+/***************************diamond shape css start***************************/
+.White-diamond .clickable-option-image{background-image:url(../images/white-diamond-sprite.png); cursor:pointer;}
+.White-diamond .option-Round {background-position:-100px 0px; height:50px; width:50px; display:block;}
+.White-diamond .option-Princess {background-position:-100px -50px; height:50px; width:50px; display:block;}
+.Blue-diamond .clickable-option-image{background-image:url(../images/blue-diamond-sprite.png); cursor:pointer;}
+.Blue-diamond .option-Round {background-position:-100px 0px; height:50px; width:50px; display:block;}
+.Blue-diamond .option-Princess {background-position:-100px -50px; height:50px; width:50px; display:block;}
+.Black-diamond .clickable-option-image{background-image:url(../images/black-diamond-sprite.png); cursor:pointer;}
+.Black-diamond .option-Round {background-position:-100px 0px; height:50px; width:50px; display:block;}
+.Black-diamond .option-Princess {background-position:-100px -50px; height:50px; width:50px; display:block;}
+
+/***************************diamond shape sprite css start***************************/
+
+/***************************metal type css start***************************/
+
+.White-diamond .option-Silver, .Blue-diamond .option-Silver, .Black-diamond .option-Silver 
+{background-position:-100px -100px; height:50px; width:50px; display:block;}
+
+.White-diamond .option-14K-Yellow-Gold, .Blue-diamond .option-14K-Yellow-Gold, .Black-diamond .option-14K-Yellow-Gold 
+{background-position:-100px -150px; height:50px; width:50px; display:block;}
+
+.White-diamond .option-14K-White-Gold, .Blue-diamond .option-14K-White-Gold, .Black-diamond .option-14K-White-Gold 
+{background-position:-100px -200px; height:50px; width:50px; display:block;}
+
+.White-diamond .option-Platinum, .Blue-diamond .option-Platinum, .Black-diamond .option-Platinum 
+{background-position:-100px -200px; height:50px; width:50px; display:block;}
+
+
+.White-diamond .small-option-image, .Blue-diamond .small-option-image, .Black-diamond .small-option-image
+{	
+	cursor:pointer;
+	margin-left:5px;
+	width:27px;
+	height:27px;
+	border:1px solid #cececf;
+	display:block;
+	vertical-align:middle;
+	float:right;
+}
+
+.White-diamond .small-option-image{background-image:url(../images/white-diamond-sprite.png); cursor:pointer;}
+.Blue-diamond .small-option-image{background-image:url(../images/blue-diamond-sprite.png); cursor:pointer;}
+.Black-diamond .small-option-image{background-image:url(../images/black-diamond-sprite.png); cursor:pointer;}
+
+.White-diamond .small-option-Round, .Black-diamond .small-option-Round, .Blue-diamond  .small-option-Round
+{
+	background-position:-123px -250px;
+}
+
+.White-diamond .small-option-Princess, .Black-diamond  .small-option-Princess, .Blue-diamond .small-option-Princess
+{
+	background-position:-123px -277px;
+}
+
+.White-diamond .small-option-Silver, .Blue-diamond .small-option-Silver, .Black-diamond .small-option-Silver 
+{background-position:-123px -304px;}
+
+.White-diamond .small-option-14K-Yellow-Gold, .Blue-diamond .small-option-14K-Yellow-Gold, .Black-diamond .small-option-14K-Yellow-Gold 
+{background-position:-123px -331px;}
+
+.White-diamond .small-option-14K-White-Gold, .Blue-diamond .small-option-14K-White-Gold, .Black-diamond .small-option-14K-White-Gold 
+{background-position:-123px -358px;}
+
+.White-diamond .small-option-Platinum, .Blue-diamond .small-option-Platinum, .Black-diamond .small-option-Platinum 
+{background-position:-123px -358px;}
+
+/***************************metal type css end***************************/
+
+
+
+/***************************Black diamond setting style sprite css start***************************/
+.Black-diamond .setting-style-sprite
+{
+	background-image:url(../images/black-diamond-setting-style-sprite.jpg);
+	cursor:pointer;
+	height:50px;
+	width:50px;
+	display:block;
+}
+
+.Black-diamond .setting-style-sprite-small
+{
+	background-image:url(../images/black-diamond-setting-style-sprite-small.jpg);
+	cursor:pointer;
+	margin-left:5px;
+	width:27px;
+	height:27px;
+	border:1px solid #cececf;
+	display:block;
+	vertical-align:middle;
+	float:right;
+}
+/***************************Black diamond setting style sprite css end***************************/
+
+/***************************Blue diamond setting style sprite css start***************************/
+.Blue-diamond .setting-style-sprite
+{
+	background-image:url(../images/blue-diamond-setting-style-sprite.jpg);
+	cursor:pointer;
+	height:50px;
+	width:50px;
+	display:block;
+}
+
+.Blue-diamond .setting-style-sprite-small
+{
+	background-image:url(../images/blue-diamond-setting-style-sprite-small.jpg);
+	cursor:pointer;
+	margin-left:5px;
+	width:27px;
+	height:27px;
+	border:1px solid #cececf;
+	display:block;
+	vertical-align:middle;
+	float:right;
+}
+
+/***************************Blue diamond setting style sprite css end***************************/
+
+
+/***************************white diamond setting style sprite css start***************************/
+.White-diamond .setting-style-sprite
+{
+	background-image:url(../images/setting-style-sprite.jpg);
+	cursor:pointer;
+	height:50px;
+	width:50px;
+	display:block;
+}
+
+.Shape-Princess.Metal-Silver .Setting-4-Prong-Basket {
+	background-position:0 0;
+}
+.Shape-Princess.Metal-14K-White-Gold .Setting-4-Prong-Basket {
+	background-position:-50px 0;
+}
+.Shape-Princess.Metal-14K-Yellow-Gold .Setting-4-Prong-Basket {
+	background-position:-100px 0;
+}
+.Shape-Princess.Metal-Platinum .Setting-4-Prong-Basket {
+	background-position:-150px 0;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-4-Prong-Basket {
+	background-position:0 -50px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-4-Prong-Basket {
+	background-position:-50px -50px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-4-Prong-Basket {
+	background-position:-100px -50px;
+}
+.Shape-Round.Metal-Platinum .Setting-4-Prong-Basket {
+	background-position:-150px -50px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Bezel-Martini {
+	background-position:0 -100px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Bezel-Martini {
+	background-position:-50px -100px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Bezel-Martini {
+	background-position:-100px -100px;
+}
+.Shape-Round.Metal-Platinum .Setting-Bezel-Martini {
+	background-position:-150px -100px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Margarita {
+	background-position:0 -150px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Margarita {
+	background-position:-50px -150px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Margarita {
+	background-position:-100px -150px;
+}
+.Shape-Round.Metal-Platinum .Setting-Margarita {
+	background-position:-150px -150px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Martini {
+	background-position:0 -200px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Martini {
+	background-position:-50px -200px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Martini {
+	background-position:-100px -200px;
+}
+.Shape-Round.Metal-Platinum .Setting-Martini {
+	background-position:-150px -200px;
+}
+
+
+
+/***************************white diamond small setting style sprite css end***************************/
+
+
+.White-diamond .setting-style-sprite-small
+{
+	background-image:url(../images/setting-style-sprite-small.jpg);
+	cursor:pointer;
+	margin-left:5px;
+	width:27px;
+	height:27px;
+	border:1px solid #cececf;
+	display:block;
+	vertical-align:middle;
+	float:right;
+}
+
+.Shape-Princess.Metal-Silver .Setting-Small-4-Prong-Basket {
+	background-position:0 0;
+}
+.Shape-Princess.Metal-14K-White-Gold .Setting-Small-4-Prong-Basket {
+	background-position:-27px 0;
+}
+.Shape-Princess.Metal-14K-Yellow-Gold .Setting-Small-4-Prong-Basket {
+	background-position:-54px 0;
+}
+.Shape-Princess.Metal-Platinum .Setting-Small-4-Prong-Basket {
+	background-position:-81px 0;
+}
+
+
+.Shape-Round.Metal-Silver .Setting-Small-4-Prong-Basket {
+	background-position:0 -27px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Small-4-Prong-Basket {
+	background-position:-27px -27px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Small-4-Prong-Basket {
+	background-position:-54px -27px;
+}
+.Shape-Round.Metal-Platinum .Setting-Small-4-Prong-Basket {
+	background-position:-81px -27px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Small-Bezel-Martini {
+	background-position:0 -54px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Small-Bezel-Martini {
+	background-position:-27px -54px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Small-Bezel-Martini {
+	background-position:-54px -54px;
+}
+.Shape-Round.Metal-Platinum .Setting-Small-Bezel-Martini {
+	background-position:-81px -54px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Small-Margarita {
+	background-position:0 -81px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Small-Margarita {
+	background-position:-27px -81px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Small-Margarita {
+	background-position:-54px -81px;
+}
+.Shape-Round.Metal-Platinum .Setting-Small-Margarita {
+	background-position:-81px -81px;
+}
+
+
+
+.Shape-Round.Metal-Silver .Setting-Small-Martini {
+	background-position:0 -108px;
+}
+.Shape-Round.Metal-14K-White-Gold .Setting-Small-Martini {
+	background-position:-27px -108px;
+}
+.Shape-Round.Metal-14K-Yellow-Gold .Setting-Small-Martini {
+	background-position:-54px -108px;
+}
+.Shape-Round.Metal-Platinum .Setting-Small-Martini {
+	background-position:-81px -108px;
+}
+
+/***************************white diamond setting style sprite css end***************************/
+
+
+.userOptionDisabled {
+	/*opacity: .5*/
+	display:none;
+}
+.clickOverlapper {
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+}
+#slider_dw {
+	margin: 10px auto;
+	width: 236px;
+}
+#slider-dw-range-block{
+	width: 236px;
+	position:relative;
+	margin:0 auto;
+}
+#slider_dq {
+	margin: 10px auto;
+	width: 200px;
+}
+#slider-dq-range-block{
+	width: 200px;
+	position:relative;
+	margin:0 auto;
+}
+.ui-accordion .ui-accordion-content {
+    padding: 20px 10px;
+}
+
+.ui-in-progress{
+	cursor:progress !important;
+}
+
+.user-option-block li.userOptionDisabled span.activethumb {
+
+    border: 1px solid #CFCFCF;
+    cursor: pointer;
+    display: inline-block;
+    height: 50px;
+    margin-bottom: 3px;
+    padding: 1px;
+    width: 50px;
+}
+
+.selection-range-block li.round-shape-weight-range, .selection-range-block li.round-shape-colorclarity-range {
+    width: 36px;
+	position:absolute;
+}
+
+.move-slider-right {
+    height: 20px;
+    position: absolute;
+    right: -10px;
+    top: -8px;
+    width: 20px;
+	background:url(../images/slider-arrow-right.png) 3px 5px no-repeat;
+	cursor:pointer;
+}
+
+.move-slider-left {
+    height: 20px;
+    left: -10px;
+    position: absolute;
+    top: -8px;
+    width: 20px;
+	background:url(../images/slider-arrow-left.png) 3px 5px no-repeat;
+	cursor:pointer;
+	
+}
+
+.userOption{
+	cursor:pointer;
+}
+
+#mask {
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:9000;
+	background-color:#000;
+	display:none;
+}
+#popup_content .window {
+	position:fixed;
+	left:0;
+	top:0;
+	 border: 5px solid #D0D0D0;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 5px #BEBEBE; 
+	display:none;
+	z-index:9999;
+	padding:20px;
+	
+}
+.closelastminutepopup {
+    height: 33px;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 33px;
+    z-index: 10001;
+}
+#popup_content #tpr{
+	width:763px;	
+	padding:10px;
+	background-color:#e9eaee;
+	font:13px/17px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#292929;
+}
+
+#popup_content h1{
+
+	font:18px/16px ProximaNova, Arial, Helvetica, sans-serif;
+	padding:0;
+	margin:0;
+	padding-bottom:10px;
+	color:#000000;
+}
+#popup_content #dwinfo{
+	width:763px;	
+	padding:10px;
+	background-color:#e9eaee;
+	font:13px/17px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#292929;
+}
+#popup_content #dqinfo{
+	width:763px;	
+	padding:10px;
+	background-color:#e9eaee;
+	font:13px/17px ProximaNova, Arial, Helvetica, sans-serif;
+	color:#292929;
+}
+
+.diaqualitypopupbox {
+	z-index:999;
+	width:550px;
+	padding:10px;
+	border:solid 1px #d4d4d4;
+	height:auto!important;
+	background: #fff; 
+	font-family:Arial, Helvetica, sans-serif;
+}
+.clear {
+	clear:both;
+}
+.detailheading {
+	margin-top:3px;
+	width:140px;
+	float:left;
+	padding-right:8px;
+}
+.detailheading span {
+	width:140px;
+	display:block;
+	line-height:16px;
+	font-size:12px;
+	font-weight:bold;
+	color:#000;
+	padding-bottom:15px;
+}
+.detailsdisp {
+	margin:3px 20px 0 0;
+	width:170px;	
+	float:left;
+}
+.detailsdisp span {
+	display:block;
+	line-height:16px;
+	padding-bottom:15px;
+	font-size:12px;
+}
+.detailsdisp span p {
+	margin:0;
+	padding:0;
+	font-size:11px;
+	font-style:italic;
+	padding-bottom:20px;
+}
+.detailsdisp span p small {
+	display:block;
+	padding-top:6px;
+}
+.popupboxheading {
+	font-size:15px;
+	font-weight:bold;
+	width:400px;
+	float:left;
+}
+.qualitydetailrow {
+	width:auto;
+	height:auto;
+	padding-top:
+}
+.qualitystonebox {
+	margin:3px;
+	width:184px;
+	float:left;
+}
+.qualitystonebox span {
+	width:182px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	display:block;
+	padding-bottom:5px;
+}
+.qualitystonebox img {
+	border:solid 1px #d4d4d4;
+	width:182px;
+	height:182px;
+}
+.qualitystonerow {
+	margin:10px 0 5px 146px;
+}
+#catpagestaticbanner
+{
+margin-top:13px;
+}
+
+/* Text Message under Product Image */
+.text-message {
+    color: #939292;
+    font-size: 10px;
+    text-align: left;
+	padding: 12px 0 12px 12px;
+}

@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_Promotions>
+      <version>0.1.6</version>
+    </Angara_Promotions>
+  </modules>
+  <frontend>
+   <routers>
+     <promotions>
+       <use>standard</use>
+	   <args>
+		  <module>Angara_Promotions</module>
+		  <frontName>promotions</frontName>
+	   </args>
+     </promotions>
+    </routers>
+	<layout>
+	  <updates>
+		<promotions>
+		  <file>promotions.xml</file>
+		</promotions>
+	  </updates>
+	</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <promotions>
+        <class>Angara_Promotions_Helper</class>
+      </promotions>
+    </helpers>
+	<blocks>
+	  <promotions>
+		<class>Angara_Promotions_Block</class>
+	  </promotions>
+	</blocks>
+	<models>
+	  <promotions>
+		<class>Angara_Promotions_Model</class>
+		<resourceModel>promotions_mysql4</resourceModel>
+	  </promotions>
+	  <promotions_mysql4>
+		<class>Angara_Promotions_Model_Mysql4</class>
+		<entities>		  
+			  <channel>
+				<table>angara_promotional_channel</table>
+			  </channel>		  
+			  <coupon>
+				<table>angara_promotional_channel_coupon</table>
+			  </coupon>
+			  <banner>
+				<table>angara_promotional_banner</table>
+			  </banner>
+        </entities>
+	  </promotions_mysql4>
+	</models>
+	<resources>
+	  <promotions_setup>
+		<setup>
+		  <module>Angara_Promotions</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </promotions_setup>
+	  <promotions_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </promotions_write>
+	  <promotions_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </promotions_read>
+	</resources>
+    <events>
+	  <checkout_cart_save_before> <!-- identifier of the event we want to catch -->
+        <observers>
+          <checkout_cart_save_before_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>promotions/observer</class> <!-- observers class alias -->
+            <method>applyBestPossiblePromotion</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_cart_save_before_handler>
+        </observers>
+      </checkout_cart_save_before>
+	  <visitor_init> <!-- identifier of the event we want to catch -->
+        <observers>
+          <visitor_init_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>promotions/observer</class> <!-- observers class alias -->
+            <method>initChannel</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </visitor_init_handler>
+        </observers>
+      </visitor_init>
+    </events>
+  </global>
+  <admin>
+	<routers>
+	  <promotions>
+	    <use>admin</use>
+		<args>
+		  <module>Angara_Promotions</module>
+		  <frontName>admin_promotions</frontName>
+		</args>
+	  </promotions>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+		<promo>
+            <children>
+				<channel module="promotions">
+					<title>Manage Shopping Channels</title>
+					<sort_order>300</sort_order>
+					<action>admin_promotions/adminhtml_channel</action>
+				</channel>
+				<coupon module="promotions">
+					<title>Angara Customized Coupons</title>
+					<sort_order>400</sort_order>
+					<action>admin_promotions/adminhtml_coupon</action>
+				</coupon>
+				<banner module="promotions">
+					<title>Manage Banner</title>
+					<sort_order>0</sort_order>
+					<action>admin_promotions/adminhtml_banner</action>
+				</banner>
+            </children>
+         </promo>
+	
+	  <!--<promotions module="promotions">
+		<title>Promotions</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <promotionsbackend module="promotions">
+			<title>Angara Promotions</title>
+			<sort_order>0</sort_order>
+			<action>admin_promotions/adminhtml_promotionsbackend</action>
+		  </promotionsbackend>
+		  <channel module="promotions">
+		    <title>Manage Channel</title>
+			<sort_order>0</sort_order>
+			<action>admin_promotions/adminhtml_channel</action>
+		  </channel>
+		  <coupon module="promotions">
+		    <title>Manage Coupon</title>
+			<sort_order>10</sort_order>
+			<action>admin_promotions/adminhtml_coupon</action>
+		  </coupon>
+		</children>
+	  </promotions>-->
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<promotions translate="title" module="promotions">
+			  <title>Promotions</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <promotionsbackend translate="title">
+			<title>Angara Promotions</title>
+		  </promotionsbackend>
+		  <banner translate="title">
+			<title>Manage Banner</title>
+			<sort_order>10</sort_order>
+		  </banner>
+		  <channel translate="title">
+			<title>Manage Channel</title>
+			<sort_order>20</sort_order>
+		  </channel>
+		  <coupon translate="title">
+			<title>Manage Coupon</title>
+			<sort_order>30</sort_order>
+		  </coupon>
+			  </children>
+			</promotions>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<promotions>
+		  <file>promotions.xml</file>
+		</promotions>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

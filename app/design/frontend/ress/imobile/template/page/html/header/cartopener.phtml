@@ -1,0 +1,7 @@
+<?php 
+	$totalCartItems = Mage::helper('function')->getCartItemsCount();
+	if(empty($totalCartItems)){
+		$totalCartItems = 0;
+	}
+?>
+<a href="<?php echo $this->getUrl('checkout/cart/index');?>"><i class="fa cart"></i><span><?php echo $totalCartItems;?></span></a>

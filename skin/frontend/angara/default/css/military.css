@@ -1,0 +1,168 @@
+.militarywrapper {
+    background-color: #FFFFFF;
+    border: 1px solid #D4D4D4;
+    margin: 0 auto;
+    padding: 19px;
+    width: 920px;
+}
+
+img, a
+{
+border:none;
+outline:none;
+}
+
+.militaryinner {
+    background-color: #FFFFFF;
+    border:1px solid #D4D4D4;   
+    width:918px;
+	background:url(../images/military/m-main-banner.jpg) no-repeat;
+	font:12px Arial, Helvetica, sans-serif, Tahoma;
+}
+
+.mheading
+{
+width:920px;
+height:41px;
+text-align:center;
+background:url(../images/military/m-heading.jpg) no-repeat center top;
+margin-bottom:15px;
+}
+
+.innerpartleft
+{
+height:343px;
+width:525px;
+display:block;
+float:left;
+}
+.innerpartleft a
+{
+height:343px;
+width:525px;
+display:block;
+float:left;
+}
+
+.innerpartright
+{
+width:340px;
+height:343px;
+float:right;
+}
+.breadcrumbs
+{
+width:960px;
+margin:8px 0 8px 0;
+height:19px;
+}
+
+.breadcrumbs ul
+{
+padding:0;
+margin:0;
+width:960px;
+height:19px;
+list-style:none;
+background-color:#f9f9f9;
+}
+
+.breadcrumbs li
+{
+float:left;
+height:19px;
+}
+
+.breadcrumbs li.crumb1
+{
+background-color:#e8e8e8;
+}
+
+.breadcrumbs li.crumb1 a
+{
+background:url(../images/crumb1f.jpg) no-repeat right;
+color:#000;
+font:12px Arial, Helvetica, sans-serif;
+padding:0 30px 0 25px;
+text-decoration:none;
+padding-top:2px;
+height:17px;
+display:block;
+float:left;
+}
+
+.breadcrumbs li.crumb2
+{
+background:url(../images/crumb2b.jpg) no-repeat left;
+background-color:#eeeeee;
+}
+
+.breadcrumbs li.crumb2 a
+{
+background:url(../images/crumb2f.jpg) no-repeat right;
+color:#000;
+font:12px Arial, Helvetica, sans-serif;
+padding:0 30px 0 25px;
+text-decoration:none;
+padding-top:2px;
+height:17px;
+display:block;
+float:left;
+}
+.breadcrumbs li.crumb3
+{
+background:url(../images/crumb3b.jpg) no-repeat left;
+background-color:#f0f0f0;
+}
+
+.breadcrumbs li.crumb3 a
+{
+background:url(../images/crumb3f.jpg) no-repeat right;
+color:#000;
+font:12px Arial, Helvetica, sans-serif;
+padding:0 30px 0 25px;
+text-decoration:none;
+padding-top:2px;
+height:17px;
+display:block;
+float:left;
+}
+
+.breadcrumbs li.crumbblank
+{
+background:url(../images/crumbblank.jpg) no-repeat left;
+width:10px;
+}
+
+.bottomcontent
+{
+width:598px;
+margin:0 auto;
+padding:15px 0 10px 0;
+}
+
+.usermsg
+{
+font:9px Verdana, Arial, Helvetica, sans-serif, Tahoma;
+color:#eb340a;
+padding-top:3px;
+}
+.mcontentpart
+{
+width:918px;
+height:76px;
+}
+
+#footersubscribe
+{display:none;
+}
+
+.usermsgm
+{
+font:9px Verdana, Arial, Helvetica, sans-serif, Tahoma;
+color:#eb340a;
+position:absolute;
+top:-16px;
+width:300px;
+left:0;
+}

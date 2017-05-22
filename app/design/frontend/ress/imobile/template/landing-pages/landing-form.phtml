@@ -1,0 +1,289 @@
+<?php
+$email=$this->getRequest()->getParam('email'); ?>
+<style>
+body {background:#eeeeee; padding-top:0px;}
+.form-holder {background:#ffffff;padding-left:30px;padding-right:30px;padding-top:30px;border-radius: 10px;margin: 16px;}
+input[type="text"],input[type="submit"],select {height:40px;border: 1px solid #ccc;}
+.text-bold {font-size:16px;}
+input[type="submit"] {background: #fa505a;color: #fff;border: none;font-size: 16px;text-shadow: none;border-radius: 3px;}
+.name .val-holder  {width:48%;float:left;}
+.val-holder  {width:30%;float:left;}
+@media (max-width:320px) {
+.name .validation-advice:nth-child(2) {position:absolute;top:102px;right:35px;}
+.validation-advice {font-size:10px;}
+.Bg4Ip {background: #fa505a !important;-webkit-appearance: none;}
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/css/slick-slider.css" media="all" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/slick.min.js"></script>
+<script>
+function switchTab(index){
+	if(index!='')
+	{
+		jQuery("div#advice-required-entry-relationship").remove();
+		jQuery("#relationship").removeClass('validation-failed').addClass('validation-passed');
+	}
+	else
+	{
+		jQuery(".relationship")
+	   .append('<div id="advice-required-entry-relationship" class="validation-advice">This is a required field.</div>');jQuery("#relationship").removeClass('validation-passed').addClass('validation-failed');
+	}
+	
+	if (index == "Married")
+	{
+		jQuery(".hello").addClass("required-entry").removeClass("hidden");
+	} 
+	else if(index == "Engaged")
+	{
+		jQuery(".hello").removeClass("required-entry").removeClass("hidden");
+	}
+	else
+	{
+		jQuery(".hello").removeClass("required-entry").addClass("hidden");
+		
+	}
+}
+</script>
+<div class="form-container">
+<form id="product_xyz_form" method="post" name="email_free" action="newsletter/subscriber/emailFreeShipping">
+<div class="max-padding-bottom max-padding-top high-margin-top text-center" style="font-size:26px;">Update Profile</div>
+	<div class="col-sm-12 form-holder pull-left max-padding-top max-padding-bottom">
+		<div class="full-width max-padding-bottom text-bold">Name</div>
+		<div class="full-width name max-padding-bottom">
+			<div class="val-holder" style="margin-right:4%;">
+				<input  type="text"  id="firstname" name="firstname" value="" title="First Name" placeholder="First Name" class="input-text t1 required-entry">
+			</div>
+			<div class="val-holder">
+				<input  type="text" id="lastname" name="lastname" value="" title="Last Name" placeholder="Last Name" class="input-text t1 required-entry ">
+			</div>
+		</div>
+		<input type="hidden" name="email" value="<?php echo $email;?>">
+		<div class="clearfix"></div>
+		<div class="gender full-width max-padding-bottom">
+			<div class="full-width max-padding-bottom text-bold">Gender</div>
+			<select id="gender" class="full-width required-entry" onchange="genderUpdate(jQuery(this).val())">
+				<option value="">Gender</option>
+				<option name="Male" value="Male">Male</option>
+				<option name="Female" value="Female">Female</option>
+				<option name="Other" value="Other">Other</option>
+			</select>
+		</div>
+		<div class="clearfix"></div>
+		<div class="full-width birthday max-padding-bottom">
+			<div class="full-width max-padding-bottom text-bold">Birthday</div>
+			<div class="DOBMonth val-holder">
+				<select id="DOBMonth" name="DOBMonth" class="full-width required-entry" onchange="dobMonthUpdate(jQuery(this).val())">
+					<option value="">Month</option>
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+			<div class="DOBDay val-holder" style="margin-right:5%;margin-left:5%;">
+				<select  id="DOBDay" name="DOBDay" class="full-width required-entry" onchange="dobDayUpdate(jQuery(this).val())">
+					<option value="">Day</option>
+					<?php for ($i = 1; $i <= 31; $i++) : ?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+					<?php endfor; ?>
+				</select>
+			</div>
+			<div class="DOBYear val-holder">
+				<select id="DOBYear" name="DOBYear" class="full-width required-entry" onchange="dobYearUpdate(jQuery(this).val())">
+					<option value="">Year</option>
+					<?php for ($i = 1945; $i <= 2000; $i++) : ?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+					<?php endfor; ?>
+				</select>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="relationship full-width max-padding-bottom">
+			<div class="full-width max-padding-bottom text-bold">Relationship Status</div>
+			<select id="relationship" class="full-width required-entry" onchange="switchTab(jQuery(this).val())">
+				<option value="">Select Relationship Status</option>
+				<option value="Single">Single</option>
+				<option value="Married">Married</option>
+				<option value="Engaged">Engaged</option>
+				<option value="Relationship">Engaged Soon</option>
+			</select>
+		</div>
+		<div class="clearfix"></div>
+		<div class="full-width hello no-padding hidden">
+			<div class="full-width max-padding-bottom">
+				<div class="full-width max-padding-bottom text-bold">Wedding Date</div>
+				<div class="Month val-holder">
+					<select id="Month" name="Month" class="full-width hello" onchange="monthUpdate(jQuery(this).val())">
+						<option value="">Month</option>
+						<option value="1">January</option>
+						<option value="2">February</option>
+						<option value="3">March</option>
+						<option value="4">April</option>
+						<option value="5">May</option>
+						<option value="6">June</option>
+						<option value="7">July</option>
+						<option value="8">August</option>
+						<option value="9">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select>
+				</div>
+				<div class="Day val-holder" style="margin-right:5%;margin-left:5%;">
+					<select id="Day" name="Day" class="full-width hello" onchange="dayUpdate(jQuery(this).val())">
+						<option value="">Day</option>
+						<?php for ($i = 1; $i <= 31; $i++) : ?>
+							<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+				<div class="val-holder">
+					<select id="Yr" name="Yr" class="col-sm-12 hello" onchange="wedYearUpdate(jQuery(this).val())">
+						<option value="">Year</option>
+					<?php for ($i = 1970; $i <= date('Y'); $i++) : ?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+					<?php endfor; ?>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="full-width max-padding-bottom">
+			<div class="full-width max-padding-bottom text-bold">Zip Code</div>
+			<input  type="text" id="zi" name="zi" value="" placeholder="Enter Zip Code" class="input-text t1 required-entry ">
+		</div>
+		<div class="clearfix"></div>
+		<div class="full-width">
+			<input type="submit" value="SUBMIT" class="btn button full-width Bg4Ip">
+		</div>
+	</div>
+   </form>
+</div>
+<script type="text/javascript">
+	var productxyzForm = new VarienForm('product_xyz_form');
+	
+	$('firstname').observe('blur', function(e){
+		Validation.validate($('firstname'))
+	});
+	$('lastname').observe('blur', function(e){
+		Validation.validate($('lastname'))
+	});
+	$('zi').observe('blur', function(e){
+		Validation.validate($('zi'))
+	});
+	/*$('Yr').observe('blur', function(e){
+		Validation.validate($('Yr'))
+	});*/
+	
+	function genderUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-gender").remove();
+	    	jQuery("#gender").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	jQuery(".gender").append('<div id="advice-required-entry-gender" class="validation-advice">This is a required field.</div>');
+			jQuery("#gender").removeClass('validation-passed').addClass('validation-failed');
+	    }
+	}
+	
+	function dobMonthUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-DOBMonth").remove();
+	    	jQuery("#DOBMonth").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	jQuery(".DOBMonth").append('<div id="advice-required-entry-DOBMonth" class="validation-advice">This is a required field.</div>');
+			jQuery("#DOBMonth").removeClass('validation-passed').addClass('validation-failed');
+	    }
+	}
+	
+	function dobDayUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-DOBDay").remove();
+	    	jQuery("#DOBDay").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	jQuery(".DOBDay").append('<div id="advice-required-entry-DOBDay" class="validation-advice">This is a required field.</div>');
+			jQuery("#DOBDay").removeClass('validation-passed').addClass('validation-failed');
+	    }
+	}
+	
+	function dobYearUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-DOBYear").remove();
+	    	jQuery("#DOBYear").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	jQuery(".DOBYear").append('<div id="advice-required-entry-DOBYear" class="validation-advice">This is a required field.</div>');
+			jQuery("#DOBYear").removeClass('validation-passed').addClass('validation-failed');
+	    }
+	}
+	
+	function monthUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-Month").remove();
+	    	jQuery("#Month").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	if(jQuery("#relationship").val() != '' && jQuery("#relationship").val() != 'Engaged'){
+				jQuery(".Month").append('<div id="advice-required-entry-Month" class="validation-advice">This is a required field.</div>');
+				jQuery("#Month").removeClass('validation-passed').addClass('validation-failed');
+			}	
+	    }
+	}
+	
+	function dayUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-Day").remove();
+	    	jQuery("#Day").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	if(jQuery("#relationship").val() != '' && jQuery("#relationship").val() != 'Engaged'){
+				jQuery(".Day").append('<div id="advice-required-entry-Day" class="validation-advice">This is a required field.</div>');
+				jQuery("#Day").removeClass('validation-passed').addClass('validation-failed');
+			}	
+	    }
+	}
+	
+	function wedYearUpdate(value)
+	{
+	    if(value!='')
+	    {
+	    	jQuery("div#advice-required-entry-Yr").remove();
+	    	jQuery("#Yr").removeClass('validation-failed').addClass('validation-passed');
+	    }
+	    else
+	    {
+	    	if(jQuery("#relationship").val() != '' && jQuery("#relationship").val() != 'Engaged'){
+				jQuery(".Yr").append('<div id="advice-required-entry-Yr" class="validation-advice">This is a required field.</div>');
+				jQuery("#Yr").removeClass('validation-passed').addClass('validation-failed');
+			}	
+	    }
+	}
+</script>

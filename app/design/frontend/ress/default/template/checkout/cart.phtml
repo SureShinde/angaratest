@@ -1,0 +1,306 @@
+<style>
+#main-menu-xs-toggler, #main-menu-search-toggler, #cart-opener{ display:none }
+.checkout-footer-top-border{border-top: 2px solid #dddddd;}
+.gifts-products-wrapper { overflow-x:hidden; overflow-y:auto; max-height:310px; }
+.gifts-products-wrapper .products-list { overflow:hidden; border-bottom:1px solid #D9DDD3; }
+.gifts-products-wrapper .products-list:last-child { border-bottom:none; }
+.gifts-products-wrapper .products-list .item { width:200px; float:left; border-bottom:none; }
+.gifts-products-wrapper .products-list .product-image { width:50px; height:auto; float:left; }
+.gifts-products-wrapper .products-list .product-details { margin-left:60px; }
+.gifts-popup-wrapper { position:fixed; left:50%; top:30%; z-index:1111; margin-left:-340px; width:650px; padding:20px; background:#fff; border:1px dashed #b5b5b5; box-shadow:0 0 5px rgba(0,0,0,0.25); }
+.gifts-popup-overlay { background:#ccc; background:rgba(0,0,0,0.3); position:fixed; top:0; left: 0; width:100%; height:100%; z-index:1000; }
+.gifts-popup-close { position:absolute; right:6px; top:4px; text-decoration:none; font-size:16px; font-weight:bold; line-height:1; color:#888; }
+.gifts-popup-close:hover { color:#444; }
+.showcase-deshed-border-bottom-1px{ border-bottom:1px dashed #D3D3D3 }
+.showcase-deshed-border-bottom-mob-1px{ border-bottom:1px dashed #D3D3D3 }
+.showcase-deshed-border-top-1px{ border-top:1px dashed #D3D3D3 }
+.row-min-height{ min-height:90px;}
+.gift-link-choice-gap{ margin-top:37px;}
+.font-size-gift-txt{ font-size:13px; padding:5px 0 5px 5px; }
+.continueShopping{display: block; float: left; margin: 5px 0px;cursor:pointer}
+@media (max-width: 1024px){ .fullwidth1024 {width:100%;} }
+@media (max-width: 767px){
+	.gift-link-choice-gap{ margin-top:7px;}
+	.gifts-popup-wrapper { position:absolute; left:50%; top:30%; z-index:1111; margin-left:-155px; width:310px; padding:20px; background:#fff; border:1px dashed #b5b5b5; box-shadow:0 0 5px rgba(0,0,0,0.25); }
+	.showcase-deshed-border-bottom-1px{ border-bottom:0; }
+	.gifts-products-wrapper {   max-height:none; }
+	.font-size-gift-txt{ font-size:11px;}
+}
+@media (min-width: 768px ) and (max-width: 999px) {
+ .gift-link-choice-gap{ margin-top:18px;}
+ #AmazonPayButtonMethod{width:100%; text-align:center}
+}
+.valentines_heart {display:none !important;}
+.staticlinks{display:none}
+.topnav .cart-items{ display:none;}
+span.additional-text{display:block; padding-left:20px; position:relative;}
+span.additional-text i.fa{position:absolute;left:0px;right:0px;}
+.shipping-faq a:hover {text-decoration: none;cursor:pointer;}
+.btm24 {margin-bottom:25px;font-size:16px;}
+.text-dark-gray {color:#a1a4a6;}
+.expand-box {margin:0 auto;border-top:1px solid #d2d6d9;max-width: 500px;}
+.pdlr24 {padding-left:24px;padding-right:24px;}
+.lh50 {line-height:50px;}
+.se1 {width: 100%;float: left;}
+.cont-open span{display:block;margin-top:20px;margin-bottom:20px;}
+.text-bold{font-weight:bold;}
+.cont-open ol, .cont-open ul {list-style: initial;padding-left:50px;}
+.cont-open a {color:#fa505a;}
+</style>
+<?php
+$checkHttp	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');
+$has_recurring_item = $this->hasRecurringItem(); 
+$grandtotalwithout_easy = Mage::getBlockSingleton('checkout/cart')->getTotalWithoutInstallments(); ?>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ 
+	$textRight = 'text-right';
+} ?>
+<div class="page-title title-buttons green-title">
+	<h1 class="shoppingcarttitle">
+		<div class="container relative-placeholder <?php echo $textRight; ?>">
+			<a href="<?php echo $this->getUrl('');?>" title="<?php echo $this->getLogoAlt();?>" class="logo absolute-placeholder pull-left">
+				<img src="/skin/frontend/ress/default/images/logo.png" class="img-responsive" alt="Angara The Jewelry Destination" title="Angara Jewelry"/>
+			</a>
+			<?php echo $this->__('Shopping Cart'); ?>
+		</div>
+	</h1>
+</div>
+
+<div class="container showcase-bg-white low-padding-bottom">
+	<div class="row">
+		<div class="col-sm-12"><?php echo $this->getMessagesBlock()->getGroupedHtml(); echo $this->getChildHtml('form_before');?></div>
+	</div>	
+	<?php $customerCoupon = Mage::helper('function')->getCustomerCoupon(); ?>
+	<div class="cart-bottom-border"></div>
+	<form id="updatepost_form" action="<?php echo $this->getUrl('checkout/cart/updatePost', array('_secure'=>$checkHttp));?>" method="post">
+		<div class="cart popup-shopping-cart">
+			<div class="visible-xs">
+				<button type="button" id="cart-top-checkout-button" title="<?php echo $this->__('Proceed To Checkout');?>" class="btn-block  btn-primary" onclick="pushOPGA; window.location='/onepagecheckout/index/index/shipment/'+jQuery('#shipping_option_box input[name=estimate_method]:checked').val();">Proceed to Secure Checkout</button>		</div>
+			<div class="newcart">
+				<div class="">
+                	<div class="cart-detail-box">
+					<div class="col-sm-12 col-xs-12 cart-item-title showcase-border-bottom-1px">
+						<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+							<?php $totalCartItems = Mage::helper('function')->getCartItemsCount();
+							if(empty($totalCartItems)){
+								$totalCartItems = 0;
+							} ?>
+							<div class="col-sm-12 col-xs-12 no-padding text-left">Your Cart - <?php echo $totalCartItems; ?> Item(s)</div>
+						<?php }else{ ?>
+							<div class="col-sm-2 col-xs-2 no-padding text-center">Item</div>
+							<div class="col-md-1 col-md-offset-7 col-xs-1 col-xs-offset-7 col-sm-2 col-sm-offset-6 no-padding text-center">Quantity</div>
+							<div class="col-sm-2 col-xs-2 no-padding text-right">Total</div>
+						<?php } ?>
+					</div>
+					<div class="clearfix"></div>
+					<style>
+						@media (max-width: 767px) {
+							.cart-price .price{	font-size:11px; }
+						}
+						.free-gifts-handler .hldr{color: #ffffff; text-transform: uppercase; font-size: 12px; padding: 6px 10px; float: left; font-weight:bold; border: 1px solid #dedede; border-radius: 4px; cursor:pointer; margin:10px 0px;}
+						.free-gifts-block{display:none;}
+					</style>
+					<?php
+                    $forEachCount=0;
+                    $scriptToDump=''; 
+					$freeGiftManager=0;
+                    $itemCount = count($this->getItems());
+                    echo '<div id="item_container_wrapper">&nbsp;';
+					foreach($this->getItems() as $key => $_item):
+						$itemPrice[]	=	$_item->getPrice();				//	Added by Vaseem
+                    endforeach;
+					echo '</div>';
+                    //echo $scriptToDump;
+					echo $this->getChildHtml('crosssell');
+					//echo '<div id="asheesh_test">&nbsp;</div>';
+					$chooseFreeGiftText	=	"Click here to choose free gift(s)";	
+					if( in_array('0',$itemPrice) ){
+						$chooseFreeGiftText	=	"Don't like your free gift(s)? Click here";	
+					}
+					?>
+					<?php
+					//	Code added by Vaseem
+					if(Mage::helper('gifts')->getGiftsStatus() ){
+						$coupon_code = Mage::getSingleton('checkout/session')->getQuote()->getCouponCode();
+						$getGiftsIds = Mage::helper('gifts')->getGiftsIds();
+						$giftIds 	 = $getGiftsIds['ids'];
+						
+						if(Mage::helper('gifts') && is_array($giftIds) && count($giftIds) && !Mage::helper('gifts')->isGiftUsed() && $coupon_code!='CUSTOMORDER'){
+							if( $this->getRequest()->getModuleName() == 'checkout' ){?>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-xs-2 cart-product-image"><img src="/skin/frontend/ress/default/images/free-gift-icon.jpg" class="img-responsive" width="100" height="100"  /></div>
+                                        <div class="col-xs-10 col-sm-9 cart-product-details gift-link-choice-gap"><div class="gifts-link-wrapper block-inline-display" style="border:dashed 1px #b5b5b5; background-color:#fffce4;"><a href="javascript:;" onclick="jQuery('#gifts_popup').show();chooseOfferClicked(<?php echo $grandtotalwithout_easy;?>);" class="font-size-gift-txt text-uppercase text-green text-bold gifts-link"><?php echo $chooseFreeGiftText;?></a> <i class="fa fa-caret-right valign-middle text-green low-padding-right"></i></div></div>
+                                    </div>
+                                </div>
+							<?php 
+							}
+							else{?>
+                            	<div class="">
+                                    <div class="row">
+                                        <div class="col-xs-2 cart-product-image"><img src="/skin/frontend/ress/default/images/free-gift-icon.jpg" class="img-responsive" width="100" height="100"  /></div>
+                                        <div class="col-xs-10 col-sm-9 cart-product-details gift-link-choice-gap"><div class="gifts-link-wrapper block-inline-display" style="border:dashed 1px #b5b5b5; background-color:#fffce4;"><a href="javascript:;" class="font-size-gift-txt text-green text-uppercase text-bold gifts-link"><?php echo $chooseFreeGiftText;?></a> <i class="fa fa-caret-right valign-middle text-green low-padding-right"></i></div></div>
+                                    </div>
+                                </div>
+                                <div id="lightboxContentGift"></div>
+                           		<script type="text/javascript">
+								jQuery(document).ready(function(){
+									var dataLoaded	=	'';							//	Creating a varible to prevent multiple ajax request
+									jQuery('.gifts-link').click(function() {											
+										jQuery.get('/gifts/index/ajax', function(result){
+											jQuery("#gifts_popup").show();
+											jQuery(".gifts-popup-wrapper").show();
+											jQuery("#lightboxContentGift").html(result);
+										})
+										chooseOfferClicked(<?php echo $grandtotalwithout_easy;?>);
+									});
+									jQuery('.gifts-popup-close').click(function() {
+										jQuery(".gifts_popup").hide();
+									});
+								});
+								</script>
+                        	<?php 
+							} 
+						}	
+					} ?>
+						<?php if(!strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+							<div class="clearfix"></div>
+							<div class="col-sm-12 showcase-border-top-1px">
+								<?php if($this->getContinueShoppingUrl()): ?>
+									<a href="javascript:void(0)" title="<?php echo $this->__('Continue Shopping');?>" class="continueShopping apricot-text" onClick="setLocation('<?php echo $this->getUrl(); ?>')">< Continue Shopping</a>
+								<?php endif; ?>
+							</div>
+						<?php } ?>
+						<div class="clearfix"></div>
+						<div class="col-sm-12 no-padding-left no-padding-right high-padding-top" <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>style="border-top:1px solid #dedede;"<?php } ?> id="cart_help_callout">
+							&nbsp;
+						</div>
+						<div class="clearfix"></div>
+						<div class="cart-summary">
+						<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+							<div style="width:100%; float:left; margin-bottom:10px;">
+								<div class="col-sm-6 no-padding-left">
+									<?php if($this->getContinueShoppingUrl()): ?>
+									<a href="javascript:void(0)" title="<?php echo $this->__('Continue Shopping');?>" style="width:100%; display:block; background:#777777; text-align:center; color:#ffffff; line-height:35px; border-radius:2px; cursor:pointer; font-size: 14px;" onClick="setLocation('<?php echo $this->getUrl(); ?>')">Continue Shopping</a>
+									<?php endif; ?>
+								</div>
+								<div class="col-sm-6 no-padding-right">
+									<button style="width:100%; display:block; background:#fa505a; text-align:center; color:#ffffff; height:35px; border-radius:2px; cursor: pointer; font-size:14px;" onclick="jQuery(this).addClass('disabled'); pushOPGA(); gotocheckout(); return false;" >Checkout</button>
+								</div>
+							</div>
+						<?php } ?>
+						<div class="cart-detail-container">
+                            <div class="padding-type-16 high-padding-top fontsize-type2">
+								<div class="cart-cell"><?php echo $this->getChildHtml('totals'); ?></div>
+								<div class="payment-method-block clearfix">
+									<div class="checkout-types">
+									<?php 
+                                    $methods = $this->getMethods('methods');
+                                    if( in_array('AmazonPayButtonMethod',$methods ) ){
+                                        $methods = array(0 => 'checkout.cart.methods.fire',
+                                                         1 => 'checkout.cart.methods.paypal_express.bottom',
+														 2 => 'checkout.cart.methods.paypaluk_express.bottom',
+                                                         3 => 'AmazonPayButtonMethod',
+														 4 => 'checkout.cart.methods.amazon_cba');
+                                    }else{
+                                        $methods = array(0 => 'checkout.cart.methods.fire',
+                                                         1 => 'checkout.cart.methods.paypal_express.bottom',
+														 2 => 'checkout.cart.methods.paypaluk_express.bottom',
+                                                         3 => 'checkout.cart.methods.amazon_cba');
+                                    }
+                                    $loop = 0;
+										
+									foreach($methods as $method):
+										if($methodHtml = $this->getMethodHtml($method)): ?>
+											<?php if(!$loop == 0):?>
+												<?php if($method == 'checkout.cart.methods.paypal_express.bottom' || $method == 'checkout.cart.methods.paypaluk_express.bottom'):?>
+													<div class="pull-left col-sm-12 col-md-6 high-margin-bottom no-padding text-center">
+												<?php endif; ?>
+												<?php if($method == 'checkout.cart.methods.amazon_cba' || $method == 'AmazonPayButtonMethod'):?>
+													<div class="pull-right col-sm-12 col-md-6 hidden-xs  no-padding <?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>text-center<?php }else{ ?>text-right<?php } ?>">
+												<?php endif; ?>
+											<?php endif;?>
+											
+											<?php					
+                                            echo $methodHtml;
+                                            if($loop == 0){
+                                                if($has_recurring_item){
+                                                    echo '</div>';
+                                                    break;
+                                                }else{
+                                                    echo '<div class="text-center nowrap high-margin-bottom"><strong>Or</strong></div>';	
+                                                }
+                                            }
+                                            $loop++; ?>
+											</div>
+										<?php 
+										endif;
+									endforeach;?>
+									</div>
+                                    <div class="clearfix"></div>
+								</div>							
+								<?php /* 
+								<script type="text/javascript">
+								// <![CDATA[
+								function vrsn_splash(){sw=window.open('https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.angara.com&lang=en','VRSN_Splash','location=yes,status=yes,resizable=yes,scrollbars=yes,width=560,height=500');sw.focus();}
+								// ]]>
+								</script> */ ?>                            	
+                            </div>
+						<?php //:RV ?>
+					</div>					
+						</div>
+							<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+									<div id="shipping-faq-popup-box" style="display:none;">
+										<div class="top-msg">Free shipping and Free returns</div>
+										<div class="shipping-faq-popup-holder">
+											<div class="go2cart" onclick="jQuery('#shipping-faq-popup-box').hide();"><span class="go2cart-txt"><< BACK</span> <span class="go2cart-btn"></span></div>
+												<div class="conctus-box">
+													<h1 class="" style="font-size:24px;line-height:30px;">Shipping FAQ</h1>
+													<div class="btm24" style="font-size:20px;line-height:30px;font-weight:bold;"><p class=""><span>Contact us.</span></p></div>
+													<div class="chat-row btm24"><div class=""><span>Get help via </span>
+													<strong class=""><a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link apricot-text apricot-text"><span>Live chat</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+													<div class="call-row btm24"><div class=""><span>Call us at </span><strong class=""><a href="/contact-us" id="" class="apricot-text" target="_blank"><span>1-888-926-4272</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+													<div class="email-row btm24"><div class=""><span>Write to </span><strong class=""><a href="mailto:customer.service@angara.com" id="" class="apricot-text"><span>customer.service@angara.com</span></a></strong></div><span class="text-dark-gray" >We'll get back to you within 24 hours!</span></div>
+												</div>
+												<section class="expand-box">
+													<div class="se1">
+														<h2 class="px22">
+															<span class="pull-left lh50">Free Shipping and Free Returns</span>
+														</h2>
+													</div>
+													<div class="clearfix"></div>
+													<div class="cont-open">
+														<span>Your order will be shipped via FedEx.</span>
+														<span>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</span>
+														<span>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill out the <a href="/awrma/guest_rma/index/" target="_blank">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</span>
+														<span>For international returns, return shipping and insurance are the responsibility of the customer.</span>
+													</div>
+												</section>
+										</div>
+									</div>
+							<?php } ?>
+					</div>					
+				</div>
+			</div>                        
+		</div>		
+	</form>
+	<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost', array('_secure'=>$checkHttp)) ?>" method="post">
+		<input type="hidden" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
+		<input type="hidden" name="remove" id="remove-coupone" value="0" />
+	</form>
+</div>
+<!-- Google Code for Item in Cart Remarketing List --> 
+<script type="text/javascript">
+	var discountForm = new VarienForm('discount-coupon-form');
+	/* <![CDATA[ */
+	var google_conversion_id = 1064978809;
+	var google_conversion_language = "en";
+	var google_conversion_format = "3";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "BQ2aCOvjmgQQ-ZLp-wM"; var google_conversion_value = 0;
+	/* ]]> */
+</script>
+<?php $schemeCode = Mage::app()->getStore()->isCurrentlySecure()? 'https':'http'; ?> 
+<script type="text/javascript" src="<?php echo $schemeCode; ?>://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display:inline-block; position:absolute;"><img height="1" width="1" style="border-style:none;" alt="" src="<?php echo $schemeCode; ?>://www.googleadservices.com/pagead/conversion/1064978809/?value=0&amp;label=BQ2aCOvjmgQQ-ZLp-wM&amp;guid=ON&amp;script=0"/></div>
+</noscript>

@@ -1,0 +1,120 @@
+<?php 
+$_product = $this->getProduct();
+$freeProdSku = array('fr','fb','fe','fp');
+$strLowerFreeProd = strtolower(substr($_product->getSku(), 0, 2));
+$_helper = $this->helper('catalog/output'); ?>
+
+<div class="full-width max-padding-left max-padding-right">
+<div class="col-sm-12">
+	<div class="col-sm-12 padding-type-0">
+		<div class="clearfix"></div>
+		<div class="row hidden-xs max-margin-bottom fontsize-type-1">
+			<?php 
+			if(!$_product->getIsBuildYourOwn() && !in_array($strLowerFreeProd, $freeProdSku)){ ?>
+				<?php if(!Mage::registry('current_product')->getTrioSku()){ ?>
+				<div class="col-sm-6 padding-type-0"><a id="authenticity-cert" class="apricot-text" href="javascript:void(0)" onclick="getCertificate()">
+					<span class="fa-stack special-merged-icon-20">
+						<i class="fa fa-certificate fa-stack-x"></i> <i class="fa fa-bookmark fa-stack-x low-margin-top min-padding-top px7"></i>
+					</span>
+					View Certificate Of Authenticity</a>
+				</div>
+			<?php 
+				}
+			} ?>
+			<div id="write-review" class="col-sm-6 text-right padding-type-0 pull-right" onclick=""><span class="clickable hover-underline hover-link fontsize-type-1 padding-type-5 apricot-text"><i class="fa fa-pencil-square-o fa-fw text-orange"></i>Write a Review</span></div>
+		</div>
+		<form id="cert_form" action="<?php echo Mage::getBaseUrl();?>hprcv/Index/pdf" method="post" target="_blank">
+			<input id="cert_id" type="hidden" name="certificate_id" value="<?php echo $_product->getId();?>"/>
+		</form>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-6 col-sm-6">
+		<div class="max-margin-bottom">
+			<?php 
+			if($_product->getDescription()){		
+				if($_product->getTypeId() == 'configurable'):
+					echo '<div class="dyn_long_description" itemprop="description">'.strip_tags($_product->getDescription()).'</div>';
+				else:
+					echo '<div itemprop="description">'.strip_tags($_product->getDescription()).'</div>';
+				endif; 
+			}?>
+			<meta itemprop="url" content="<?php echo $_product->getUrlModel()->getUrl($_product, array('_ignore_category'=>true)); ?>" />
+			<meta itemprop="sku" content="<?php echo $_product->getSku() ?>" />
+			<?php /*<meta itemprop="brand manufacturer" content="Angara" />*/?>
+		</div>
+	<div id="details-heading-top">
+		<div class="detail-box-title"><h5 class="no-margin">Product Details:</h5></div>
+		<?php 
+		echo $this->getAttributeHtml('Angara Item #', $_helper->productAttribute($_product, $_product->getSku(), 'sku')); ?> <?php echo $this->getMetalsHtml();			
+		if($_product->getChain1Length()){ 
+			echo $this->getAttributeHtml('Chain Length', $_helper->productAttribute($_product, $_product->getChain1Length().' inches', 'chain1_length')); 
+		}			
+		if($_product->getDefaultBandWidth()!=''){  
+			echo $this->getBandWidthHtml();
+		}	
+		if($_product->getBandHeight()!=''){  
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('band_height')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getBandHeight()),'dyn_band_height','<span class="hidden-xs pull-right popup-icon gmprd-popup low-padding-left"><i id="bandheight_aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="right" data-trigger="click" data-toggle="tooltip" title="The height or thickness of a band is the vertically measurement from the inside against the finger to the top of the band. All measurements are approximate and may vary slightly."></i></span>');
+		}			
+		if($_product->getApproximateMetalWeight()!=''){
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('approximate_metal_weight')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getApproximateMetalWeight()),'dyn_approximate_metal_weight');
+		}			
+		if($_product->getFit()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('fit')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('fit')),'fit');
+		}
+		if($_product->getLength()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('length')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('length')),'length','<span class="hidden-xs pull-right popup-icon gmprd-popup low-padding-left"><i id="bandheight_aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="right" data-trigger="click" data-toggle="tooltip" title="The length is the horizontal measurement. All measurements are approximate and may vary slightly."></i></span>');
+		}
+		if($_product->getDefaultLength()!=''){  
+			echo $this->getLengthHtml();
+		}
+		if($_product->getDiameter()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('diameter')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('diameter')),'diameter','<span class="hidden-xs pull-right popup-icon gmprd-popup low-padding-left"><i id="diameter_aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="right" data-trigger="click" data-toggle="tooltip" title="Diameter is the maximum width of any oval or round bangle, ring or any other round component in jewellery from one end to the other."></i></span>');
+		}
+		if($_product->getWidth()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('width')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('width')),'dyn_width','<span class="hidden-xs pull-right popup-icon gmprd-popup low-padding-left"><i id="bandheight_aa" class="fa fa-question-circle fa-fw text-lighter fontsize-type4 clickable" data-html="true" data-placement="right" data-trigger="click" data-toggle="tooltip" title="The width is determined by vertical measurement of the item at its widest point. All measurements are approximate and may vary slightly."></i></span>');
+		}
+		if($_product->getClaspType()!=''){ 
+			echo $this->getAttributeHtml($_product->getResource()->getAttribute('clasp_type')->getStoreLabel(), $_helper->productAttribute($_product, $_product->getAttributeText('clasp_type')),'clasp_type');
+		}
+		if($_product->getDefaultClaspType()!=''){  
+			echo $this->getClaspTypeHtml();
+		}
+		if($_product->getButterfly1Type()!=''){ 
+			echo $this->getAttributeHtml('Backing Type', $_helper->productAttribute($_product, $_product->getAttributeText('butterfly1_type')),'dyn_butterfly_type');
+		}?>
+	</div>		
+	<?php 
+	//	S:VA	Product tags
+	/*$_tags = new Mage_Tag_Block_Product_List();
+	if(count($_tags->getTags())>0){?>
+	<div class="detail-box-title">Product Tags:</div>
+	<ul class="product-tags">
+		<?php foreach($_tags->getTags() as $tag){?>
+			<li><a href="<?php echo $tag->getTaggedProductsUrl()?>"><?php echo $tag->getName()?></a><span>, </span></li>
+		<?php }?>
+	</ul>
+	<?php }*/ ?>
+</div>
+<div class="col-md-6 col-sm-6">
+	<div class="stones-details-box"> <?php echo $this->getStonesHtml(); ?> </div>
+</div>
+<div class="clearfix"></div>
+</div>
+<?php /*
+if(!in_array(96, $_product->getCategoryIds())):?>
+<div class="col-sm-12 text-light pull-left text-left">
+	<div class="col-sm-12 hide">
+		Note: - Image of product may have been enlarged and/or enhanced.
+	</div>
+</div>
+<?php 
+endif; */ ?>    
+<script type="text/javascript">
+function getCertificate(){
+	if(typeof(variations)!='undefined'){
+		jQuery('#cert_id').val(variations.getCurrentProduct());
+	}
+	jQuery('#cert_form').submit();
+}
+</script>

@@ -1,0 +1,7 @@
+<div style="font-size:1.5em">
+<form action="<?php echo $this->getFormAction(); ?>" method="POST" name="form">
+<input type="submit" value="ENTER"/>
+<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>"/>
+
+</form>
+</div>

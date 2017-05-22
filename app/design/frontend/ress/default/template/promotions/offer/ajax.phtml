@@ -1,0 +1,21 @@
+<?php 
+$coupon = $this->getCoupon(); 
+$productId = $this->getRequest()->getParam('productId');
+$product = Mage::getModel('catalog/product')->load($productId);
+$additionalCost = $this->getRequest()->getParam('additionalCost');
+$flag=0;
+
+if($this->getRequest()->getParam('trio1'))
+{
+	$trio1 = $this->getRequest()->getParam('trio1');
+	
+	$trio2 = $this->getRequest()->getParam('trio2');
+	$trio3 = $this->getRequest()->getParam('trio3');
+	
+	$flag=1;
+}
+$_coreHelper = Mage::helper('core');
+if(!$product->getIsBuildYourOwn()){ ?>
+	<span style="font-size: 18px; color: #fa505a;"><?php if($flag){echo $_coreHelper->currency($this->getAfterDiscountProductPrice($productId, $additionalCost,$trio1,$trio2,$trio3),true,false);}else{echo $_coreHelper->currency($this->getAfterDiscountProductPrice($productId, $additionalCost),true,false);}?></span>
+<?php 
+} ?>

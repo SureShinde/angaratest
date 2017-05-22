@@ -1,0 +1,128 @@
+<style type="text/css">
+<!--
+#returnlabelwrapper {
+	width:99.5%;
+	border:solid 1px #d9d9d9;
+	position:relative;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #eeeded; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #ededec 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ededec)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#ededec 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#ededec 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#ededec 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 0%,#ededec 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededec',GradientType=0 ); /* IE6-9 */
+	-moz-box-shadow:0px 0px 5px #797979;
+	-webkit-box-shadow: 0px 0px 2px #eaeaea;
+	box-shadow: 0px 0px 2px #eaeaea;
+}
+.submitbtnreturnpolicy {
+	width:96px;
+	float:right;
+	padding:0px;	
+	text-align:center;
+	background: #6A2D3A; /* Old browsers */
+	background:#6a2d3a;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-right:26px;
+	height:25px;
+	font:font:bold 12px/22px Arial,Helvetica,sans-serif;
+	cursor:pointer;
+	display:block;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	border-width:0px;
+	margin-top:0px;
+	padding:0px;
+}
+.inputentry {
+	font:12px/18px Arial, Helvetica, sans-serif;
+	padding:0 5px;
+	width:91%;
+	border:1px solid #B6B6B6;
+}
+#returnlabelwrapper form#formrequestlabel .validation-advice {
+	width:100%;
+}
+#requestlabel-dialog {
+	min-height:200px!important;
+}
+#LoadingImage {
+	display:block;
+}
+.validation-failed { border:1px dashed #EB340A !important; background:#FAEBE7 !important; }
+
+#returnlabelformdiv {
+	float:left;
+	padding-top:15px;
+	width:100%;
+	font-size:11px;
+}
+.formdivlabelspan {
+	width:40%;
+}
+.formdivinputspan {
+	float:right; 
+	width:60%; 
+	margin-left:10px;
+}
+#formrequestlabel {
+    margin: 5px;
+}
+.error, .validation-advice {
+    clear: both;
+    color: #DF280A;
+    padding-top: 3px;
+    text-align: left;
+}
+-->
+</style>
+
+<div id="returnlabelwrapper">
+	<div id="resultsuccess" style="display:none;"></div>
+    <form action="/popup/index/requestreturnshippinglabel" method="post" name="formrequestlabel" class="formrequestlabel" id="formrequestlabel">
+        <div style="padding-top:15px;">
+        	<span class="formdivlabelspan">Name:</span>
+            <span class="formdivinputspan"><input name="name" class="required-entry inputentry" type="text" /></span>
+			<div style="clear:both;"></div>
+        </div>
+        <div style="padding-top:15px;">
+        	<span class="formdivlabelspan">Email address:</span>
+            <span class="formdivinputspan"><input name="email" class="required-entry validate-email inputentry" type="text" /></span>
+			<div style="clear:both;"></div>
+        </div>      
+        <div style="padding-top:15px;">
+        	<span class="formdivlabelspan">Order number:</span>
+            <span class="formdivinputspan"><input name="orderno" class="required-entry validate-number inputentry" type="text" /></span>
+			<div style="clear:both;"></div>
+        </div>  
+        <div style="padding-top:15px;">
+        	<span class="formdivlabelspan">Reason for return:</span>
+            <span class="formdivinputspan"><input name="reason" class="required-entry inputentry" type="text" /></span>
+			<div style="clear:both;"></div>
+        </div>     
+        <div id="returnlabelformdiv">
+        	<span style="float:left;"><input name="check" type="checkbox" value="1" checked="checked"/></span>
+          	<span style="float:left; width:75%; padding-left:5px;">Email me a return shipping label</span>
+			<div style="clear:both;"></div>
+        </div>  
+        <div id="returnlabelformdiv">Note: Free return shipping labels are provided for US domestic orders only.</div>      
+        <div class="submitbtnreturnpolicy">
+        	<input type="submit" value="SUBMIT" name="submitreturnlabel" style="text-decoration:none; width: 96px; height:25px; color:#ffffff; background:none; border:none; cursor:pointer">
+            <div style="position:absolute; right:9px; bottom:7px;">
+                <span id="LoadingImage" style="display:none;" align="center">
+                    <img src="/skin/frontend/angara/default/images/ajaxscroll/loader.gif" width="16" height="16"/>
+                </span>
+            </div>                 
+        </div>        
+        <div style="clear:both;"></div>
+   </form>
+   <script>
+	//&lt;![CDATA[
+		var dataForm = new VarienForm('formrequestlabel', true);
+	//]]&gt; 
+   </script>
+</div>

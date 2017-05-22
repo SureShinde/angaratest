@@ -1,0 +1,177 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Edit reminder template
+ *
+ * @see Angara_Reminder_Block_Edit
+ */
+?>
+<?php
+$reminder_id = $this->getRequest()->getParam('id');
+$reminder_arr = Mage::getModel('reminder/reminder')->load($reminder_id);
+//echo $reminder_arr->getData('firstname');
+//echo '<pre>';print_r($reminder_arr->getData());echo '<pre>';exit;			
+?>
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('Edit Reminder') ?></h1>    
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getUpdateUrl($reminder_arr->getData('reminder_id')) ?>" method="post" id="form-validate">
+    <div class="fieldset">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+    <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+		<input type="hidden" name="reminder_id" id="reminder_id" value="<?php echo $reminder_arr->getData('reminder_id'); ?>" />
+        <h2 class="legend"><?php echo $this->__('Edit Information') ?></h2>
+        <ul class="form-list">            
+            <li class="wide">
+                <label for="company">First Name</label>
+                <div class="input-box">
+                    <input type="text" name="firstname" id="firstname" title="First Name" value="<?php echo $reminder_arr->getData('firstname'); ?>" class="input-text required-entry" style="width:150px;" />
+                </div>
+            </li>
+			<li class="wide">
+                <label for="company">Last Name</label>
+                <div class="input-box">
+                    <input type="text" name="lastname" id="lastname" title="Last Name" value="<?php echo $reminder_arr->getData('lastname'); ?>" class="input-text required-entry" style="width:150px;" />
+                </div>
+            </li>
+			<li class="wide">
+                <label for="company">Relation</label>
+                <div class="input-box">
+					<select id="relationship" name="relationship" title="Relation" class="validate-select required-entry" style="width:150px;">
+						<?php
+						foreach($this->getRelationshipOptions() as $kk => $vv){
+							if($reminder_arr->getData('relationship') == $kk){
+								echo '<option value="'.$kk.'" selected="selected">'.$vv.'</option>';	
+							}else{
+								echo '<option value="'.$kk.'">'.$vv.'</option>';
+							}	
+						}
+						?>						
+					</select>
+                </div>
+            </li>
+			<li class="wide">
+                <label for="company">Occasion</label>
+                <div class="input-box">
+					<select id="occasion" name="occasion" title="Occasion" class="validate-select required-entry" style="width:150px;">
+					   	<?php
+						foreach($this->getOccasionOptions() as $kk => $vv){
+							if($reminder_arr->getData('occasion') == $kk){
+								echo '<option value="'.$kk.'" selected="selected">'.$vv.'</option>';	
+							}else{
+								echo '<option value="'.$kk.'">'.$vv.'</option>';
+							}	
+						}
+						?>
+					</select>
+                </div>
+            </li>
+			<li class="wide">
+                <label for="company">Occasion Date</label>
+                <div class="input-box">
+                    <input type="text" name="occasion_date" id="occasion_date" title="occasion_date" value="<?php echo $reminder_arr->getData('occasion_date'); ?>" class="input-text required-entry" style="width:100px;" />
+					<img title="Select date" id="occasion_date_trig" src="/skin/frontend/angara/default/images/grid-cal.gif" class="v-middle">
+                </div>
+            </li>
+			<li class="wide">
+                <label for="company">What is their ring size?</label>
+                <div class="input-box">
+					<select id="ring_size" name="ring_size" title="Ring Size" style="width:150px;">                    
+						<?php
+						foreach($this->getRingOptions() as $kk => $vv){
+							if($reminder_arr->getData('ring_size') == $kk){
+								echo '<option value="'.$kk.'" selected="selected">'.$vv.'</option>';	
+							}else{
+								echo '<option value="'.$kk.'">'.$vv.'</option>';
+							}	
+						}
+						?>
+					</select>
+                </div>
+            </li>	
+			<li class="wide">
+                <label for="company">What is their favorite gemstone?</label>
+                <div class="input-box">
+					<select id="favorite_gemstone" name="favorite_gemstone" title="Favorite Gemstone" style="width:150px;">                    
+						<?php
+						foreach($this->getGemstoneOptions() as $kk => $vv){
+							if($reminder_arr->getData('favorite_gemstone') == $kk){
+								echo '<option value="'.$kk.'" selected="selected">'.$vv.'</option>';	
+							}else{
+								echo '<option value="'.$kk.'">'.$vv.'</option>';
+							}	
+						}
+						?>
+					</select>	
+                </div>
+            </li>	
+			<li class="wide">
+                <label for="company">Comments</label>
+                <div class="input-box">
+					<textarea name="comments" id="comments" class="textarea" style="border:1px solid #B6B6B6;background:none repeat scroll 0 0 #FFFFFF;"><?php echo $reminder_arr->getData('comments'); ?></textarea>
+                </div>
+            </li>				
+        </ul>
+    </div>
+    
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Update Reminder') ?>" class="button billingcart"><span><span><?php echo $this->__('Update Reminder') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+	Calendar.setup({
+	inputField : 'occasion_date',
+	ifFormat : '%Y-%m-%e',
+	button : 'occasion_date_trig',
+	align : 'Bl',
+	singleClick : true
+});
+//]]>
+</script>
+<style>
+.col-main{
+	padding-right:5px;
+}
+.calendar {
+	width: 280px;
+}
+.calendar .nav {
+	position:relative !important;
+}
+</style>

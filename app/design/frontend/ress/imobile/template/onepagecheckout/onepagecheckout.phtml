@@ -1,0 +1,569 @@
+<style>
+.page-title{border-bottom:1px solid #fa505a; margin-bottom:20px; text-align:center;border-top:none;}
+
+.page-title .page-heading span{top:-10px; right:0px; font-size: 25px; color: #333333;}
+html[data-useragent *= 'iPhone'] .page-title .page-heading span{right:initial; left:0px;}
+.relative-box{position:relative}
+.absolute-box{position:absolute}
+.top-order-total{font-size:14px; padding:0px 8% 10px; color:#333333}
+.cart-trash, .cart-pro-remove .remove-item{background:url(/skin/frontend/ress/default/images/optionpopupclose.png) no-repeat center center; background-size:15px; font-size:0px; display:block; width:44px; height:44px;}
+.checkout-step {display: block;margin: 0 auto;background: #fa505a;height: 20px;width: 20px;color: #ffffff;border-radius: 10px;text-align: center;line-height: 22px;margin-bottom:5px;}
+.top-order-total{padding: 0px 8% 20px;}
+.dactv {color:#000000;background:#ffffff;border:1px solid #000000;}
+.marginBottom, .marginBottom1{margin-bottom:23px;}
+#checkout-review-table .showcase-dotted-border-top-1px.last{font-size:18px;}
+</style>
+<script>
+	function setMobileFocus(id){
+		var pos = jQuery('#'+id).offset().top;
+		if(id == 'opc-step2'){
+			var h = jQuery('#'+id).prev('.step-heading.payment').outerHeight();
+			pos = pos - h;
+		}
+		if(jQuery('#opc-step1').hasClass('hidden')){
+			if(jQuery(window).width() <= 767){
+				jQuery('html, body').animate({scrollTop: 0}, 500);
+			} 
+		}
+	};
+	function manageTitle(id){
+		var shipping = jQuery('#onepage-header-step-shipping');
+		var payment = jQuery('#onepage-header-step-payment');
+		var rns = jQuery('#onepage-header-step-rns');
+		if(id == 'opc-step1'){
+			//add active color in shipping
+			shipping.find('.img-circle').removeClass('showcase-bg-darker').addClass('apricot-bg');
+			shipping.find('.pro-bar-title').addClass('apricot-text');
+			//remove active color from other option
+			payment.add(rns).find('.img-circle').removeClass('apricot-bg').addClass('showcase-bg-darker');
+			payment.add(rns).find('.pro-bar-title').removeClass('apricot-text');
+			payment.add(shipping).removeClass('hover-effect');
+			payment.add(shipping).removeAttr('data-id style');
+		}else{
+			payment.find('.img-circle').removeClass('showcase-bg-darker').addClass('apricot-bg');
+			payment.find('.pro-bar-title').addClass('apricot-text');
+			payment.removeClass('hover-effect');
+			payment.removeAttr('data-id style');
+			//remove active color from other option
+			shipping.add(rns).find('.img-circle').removeClass('apricot-bg').addClass('showcase-bg-darker');
+			shipping.add(rns).find('.pro-bar-title').removeClass('apricot-text');
+		}
+		setOpcHeight();
+	}
+	function editButton(id, clickedItem){
+		jQuery('.opc-steps, .edit-btn').addClass('hidden');
+		jQuery('#'+id).removeClass('hidden');
+		if(id != 'opc-step1'){
+			jQuery('.edit-btn').removeClass('hidden');
+			jQuery('.edit-btn[data-id='+id+']').addClass('hidden');
+		}
+		if(clickedItem){
+			clickedItem.addClass('hidden');
+		}
+		manageTitle(id);
+	}
+	function editButton1(id){
+		jQuery('.edit-btn').parent('.step-heading').removeClass('hidden');
+		jQuery('.review-nd-submit, #checkout-preview-load').addClass('hidden');
+		if(id != 'opc-step1'){
+			jQuery('.edit-btn[data-id='+id+']').addClass('hidden');
+		}else{
+			jQuery('.edit-btn').addClass('hidden');
+		}
+		jQuery('#opc-complete-button1').addClass('hidden');
+		jQuery('#opc-complete-button2').addClass('hidden');
+		jQuery('.review-nd-submit').parent('.step-container').removeAttr('style');
+		jQuery('#checkout-preview-load').removeClass('hidden');
+		jQuery('#checkout-preview-table-wrapper').html('');
+		jQuery('#opc-step1').removeClass('hidden');
+		var opc31 = jQuery('#review-submit');
+		var opc41 = jQuery('#order-summary');
+		
+		opc31.addClass('hidden');
+		opc41.addClass('hidden');
+		
+		var opc51 = jQuery('#step-back1');
+		var opc61 = jQuery('#step-back2');
+		var opc71 = jQuery('#step-back2-child');
+		opc51.addClass('active');
+		opc61.removeClass('apricot-text');
+		opc71.addClass('dactv');
+		manageTitle(id);
+		
+		if(id == 'opc-step2') {
+			//to scroll page
+			if(jQuery('#payment_form_verisign').length) {
+				var topOffset = jQuery('#payment_form_verisign').offset().top;
+				jQuery("html, body").animate({scrollTop:topOffset},10);
+			}
+			if(jQuery('#payment_form_paypal_direct').length) {
+				var topOffset = jQuery('#payment_form_paypal_direct').offset().top;
+				jQuery("html, body").animate({scrollTop:topOffset},10);
+			}
+			
+		}
+	}
+	
+	//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+</script>
+<?php 
+$seq_http	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ 
+	$textRight = 'text-right';
+} ?>
+<form id="updatepost_form" action="<?php echo $this->getUrl('checkout/cart/updatePost', array('_secure'=>$seq_http)); ?>" method="post">
+	<div class="sticky-box">
+		<?php /* 
+		<div class="page-title full-width">
+			<h1><?php echo $this->__('YOUR CART');?> - <?php echo $this->helper('checkout/cart')->getSummaryCount();?> Item(s)</h1>
+			<div class="page-heading relative-box">
+				<h1><span class="relative" style="font-size:21px;"><i class="fa fa-lock absolute" style="top: 14px;left: -12px;"></i></span>&nbsp; 100% Secure Checkout</h1>
+				<span class="absolute-box">
+					<a href="javascript:void(0)" class="cart-trash" onClick="setLocation('<?php echo $this->getUrl(); ?>checkout/cart')">X</a>
+				</span>
+			</div>
+		</div>  
+		*/ ?>
+		<?php /*?><div class="top-order-total full-width">
+			<span class="fl edit-btn1 apricot-text" data-id="opc-step1" id="step-back1"><span class="checkout-step">1</span>Shipping & Billing</span>
+			<span class="fr" id="step-back2"><span class="checkout-step dactv" id="step-back2-child" >2</span>Review & Submit </span>
+		</div><?php */?>
+		<div class="full-width text-center text-bold pB10 mB10" style="font-size:20px; border-bottom: 1px solid #dedede">
+			Secure Checkout
+		</div>
+	</div>
+</form>
+
+
+<div class="container showcase-bg-white">
+	<div class="fontsize-type2">
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<?php
+		$seq_http	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on');
+		$browser  = $_SERVER ['HTTP_USER_AGENT'];
+		$is_persistent = Mage::helper('onepagecheckout')->isPersistentMember();
+		?>
+		<script type="text/javascript">
+			var http_type	= '<?php if($seq_http){echo 'https';}else{echo 'http';}?>';
+		</script> 
+		<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/onepagecheckout.js') ?>?v=3.28"></script> 
+		<script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+		<form action="javascript:void(0)" method="POST" id="onepagecheckout_orderform" autocomplete="on">
+			<div class="row opc-steps">
+				<div class="col-sm-4 full-width pL10 pR10">
+					<div class="step-heading shipping">
+						<div class="pull-left text-bold">Shipping Information</div>
+					</div>
+					<div class="showcase-border-thick-green has-subform" data-subform-index="0">
+					<?php echo $this->getChildHtml('billing.address') ?> 
+					<?php //echo $this->getChildHtml('shipping.address') ?>
+                    <div id="onepage-checkout-shipping-method-additional-load"> <?php echo $this->getChildHtml('additional') ?> </div>
+                    </div>
+				</div>
+				<div class="col-sm-4 full-width pL10 pR10">
+					<div class="step-heading billing mT10 pT10">
+						<div class="pull-left text-bold">Billing Information</div>
+					</div>
+					<div class="full-width max-margin-top">
+						<?php echo $this->getChildHtml('shipping.address') ?>
+					</div>
+					<div class="has-subform" data-subform-index="1">
+						<?php echo $this->getChildHtml('shipping.method') ?> 
+						<div class="step-heading billing mT10 pT10">
+							<div class="pull-left text-bold">Payment Information</div>
+						</div>
+						<?php echo $this->getChildHtml('payment.method') ?>
+						<div id="checkout-coupon-discount-load"> <?php echo $this->getChildHtml('coupon') ?> </div>
+						<?php if (Mage::getStoreConfig('onepagecheckout/general/comment')) : ?>
+						<div class="op_block_title"> <?php echo $this->helper('sales')->__('Comment') ?> </div>
+						<div class="form_fields">
+							<div class="full">
+								<div class="data_area" id='comment-block'>
+									<textarea name="order-comment" id="order-comment"><?php echo trim(Mage::getSingleton('customer/session')->getOrderCustomerComment()) ?></textarea>
+								</div>
+							</div>
+						</div>
+						<?php endif; ?>
+						<?php if (Mage::helper('onepagecheckout')->isSubscribeNewAllowed()) : ?>
+						<p class="newsletter">
+							<input type="checkbox" id="newsletter-signup" name="newsletter" value="1" title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="checkbox" />
+							<label for="newsletter-signup"> <?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?> </label>
+						</p>
+						<?php endif; ?>		
+                        <div id="checkout-review-submit">    
+							<?php echo $this->getChildHtml('agreements') ?>
+							<div class="buttons-set" id="review-buttons-container">
+								<button id="btn-order-button" type="submit" title="<?php echo $this->__('Complete Order') ?>" class="button button50px" onclick="if(cardBraintreeValidate()){checkout.save('top'); return false;}"><?php echo $this->__('Complete Order') ?></button>
+								<span id="review-please-wait" class="full-width" style="display:none;float:right;text-align:center">
+									<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /><br><?php echo $this->__('Submitting order information...') ?>
+								</span>
+							</div>
+						</div>				
+					</div>
+				</div>
+				<div class="col-sm-4 full-width pT10">
+					<div class="op-checkout-right-box-holder">
+						<div class="cart-item-block-parent">
+							<div class="step-head">
+                                <div class="pull-left text-bold">Order Summary</div>
+                                <?php /* <a class="pull-right" href="<?php echo $this->getUrl('checkout/cart/'); ?>">Edit</a> */ ?>
+                            </div>
+							<?php	//	S:VA	Order Summary Tab
+							$quote = Mage::helper('checkout')->getQuote();
+							foreach ($quote->getAllVisibleItems() as $_item) {
+								echo $this->getItemHtml($_item);
+							}
+							?> 
+						</div>
+                        <div class="" data-subform-index="2" style="position:relative"><?php echo $this->getChildHtml('review') ?></div>
+						<div class="full-width pL10 pR10 pB10 mB5">
+							<div class="buttons-set" id="review-buttons-container-bottom">
+								<button id="btn-order-button-bottom" type="submit" title="<?php echo $this->__('Complete Order') ?>" class="button button50px" onclick="if(cardBraintreeValidate()){checkout.save('bottom'); return false;}"><?php echo $this->__('Complete Order') ?></button>
+								<span id="review-please-wait-bottom" class="full-width" style="display:none;float:right;text-align:center">
+									<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /><br><?php echo $this->__('Submitting order information...') ?>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<input type='submit' id='opc_submit_form' style='display:none;'/>
+			</div>
+		</form>
+	</div>
+	
+	
+	<?php // Added by AP ?>
+		<div class="full-width pR10 pL10 pB10 text-center"> 
+			<a href="javascript:void(0)" onclick="jQuery('#shipping-faq-popup-box').show();" class="apricot-text">Checkout FAQ ></a>
+		</div>
+		<div id="shipping-faq-popup-box" style="display:none;">
+			<div class="top-msg">Free shipping and Free returns</div>
+			<div class="go2cart" onclick="jQuery('#shipping-faq-popup-box').hide();"><span class="go2cart-txt"><< BACK</span><span class="go2cart-btn"></span></div>
+			<div class="overflow">
+			<div class="shipping-faq-popup-holder">
+				<div class="conctus-box">
+					<h1 class="" style="font-size:24px;line-height:30px;">Checkout FAQ</h1>
+					<div class="btm24" style="font-size:20px;line-height:30px;font-weight:bold;"><p class=""><span>Contact us.</span></p></div>
+					<div class="chat-row btm24"><div class=""><span>Get help via </span><strong class=""><a href="javascript:void(0);" onClick="javascript:window.open('https://server.iad.liveperson.net/hc/609151/?cmd=file&amp;file=visitorWantsToChat&amp;site=609151&amp;byhref=1&amp;imageUrl=https://server.iad.liveperson.nethttp://www.angara.com/store/images/lp/');return true;" class="live-chat-link apricot-text"><span>Live chat</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+					<div class="call-row btm24"><div class=""><span>Call us at </span><strong class=""><a href="tel:1-888-926-4272" id="" class="apricot-text"><span>1-888-926-4272</span></a></strong></div><span class="text-dark-gray" >Mon-Fri, 8am - Midnight EST, Sat-Sun, 11am - 9pm EST</span></div>
+					<div class="email-row btm24"><div class=""><span>Write to </span><strong class=""><a href="mailto:customer.service@angara.com" id="" class="apricot-text"><span>customer.service@angara.com</span></a></strong></div><span class="text-dark-gray" >We'll get back to you within 24 hours!</span></div>
+				</div>
+				<section class="expand-box">
+					<div class="se1">
+						<h2 class="px18">
+							<span class="pull-left lh50">Free Shipping and Free Returns</span>
+							<?php /* <span class="fa fa-plus pull-right lh50 px18"></span> */ ?>
+						</h2>
+					</div>
+					<div class="clearfix"></div>
+					<div class="cont-open">
+						<span>Your order will be shipped via FedEx.</span>
+						<span>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</span>
+						<span>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill out the <a href="/awrma/guest_rma/index/" target="_blank">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</span>
+						<span>For international returns, return shipping and insurance are the responsibility of the customer.</span>
+					</div>
+				</section>
+			</div>
+			</div>
+		</div>
+		<?php /* <script>
+			jQuery('.se1').click(function(){
+				jQuery('.cont-open').slideToggle();
+				jQuery(this).find('.fa-plus, .fa-minus').toggleClass('fa-plus fa-minus');
+			});
+		</script> */ ?>
+	<?php // Added by AP ?>
+	
+	
+	
+	
+	<script>
+		jQuery('.edit-btn').on('click',function(){
+			var id = jQuery(this).attr('data-id');
+			var thisItem = jQuery(this);
+			editButton(id, thisItem);
+		});
+		jQuery(function(){
+			setOpcHeight();
+		});
+		jQuery(window).resize(function(){
+			setOpcHeight();
+		});
+	</script>
+
+	<script type="text/javascript">
+	//<![CDATA[
+	var checkout = new OPC('onepagecheckout_orderform', {
+	save    : '<?php echo $this->getUrl('onepagecheckout/index/saveOrder', array('_secure'=>$seq_http)) ?>',
+	update  : '<?php echo $this->getUrl('onepagecheckout/index/updateCheckout', array('_secure'=>$seq_http)) ?>',
+	success : '<?php echo $this->getUrl('onepagecheckout/index/success', array('_secure'=>$seq_http)) ?>',
+	failure : '<?php echo $this->getUrl('checkout/cart') ?>',
+	persistent : '<?php echo $is_persistent?$this->getUrl('persistent/index/saveMethod', array('_secure'=>$seq_http)):'';?>'
+	}, "<?php echo $this->__('Please agree to all the terms and conditions.') ?>");
+
+	//	S:VA	update checkout for every field
+	var  oldValue =	"";
+	jQuery(".required-entry").focus(function(){
+		oldValue = jQuery(this).val();	
+	});
+	jQuery(".required-entry").blur(function(){
+		var elementId	=	jQuery(this).attr('id');
+		if(elementId !='mmyy_exp' && elementId !='verisign_cc_cid' && elementId !='paypal_direct_cc_cid'){
+			var newValue = jQuery(this).val();
+			if( (oldValue != newValue) ){
+				checkout.update({
+					'shipping-method': 1,
+					'review': 1
+				});
+			}
+		}
+	});
+	//	E:VA
+	
+	<?php if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):?>
+	function show_verifications_error(){
+
+	var w = $('address-verification-results').getWidth();
+	var hh = document.body.getHeight();
+
+	var view = document.viewport.getDimensions();
+
+	var ww = view.width;
+	var d	= (ww - w)/2;
+
+	<?php if (!preg_match('/MSIE 8/i', $browser) && !preg_match('/MSIE 7/i', $browser)):?>
+	var y = window.pageYOffset+70;
+	$('address-verification-results').setStyle({
+	left: d+'px',
+	top: y+'px'
+	});
+	<?php else:?>
+	$('address-verification-results').setStyle({
+	left: d+'px'
+	});
+	<?php endif;?>
+
+	$('address-verification-results').show();
+
+	<?php $is_mobile	= Mage::helper('onepagecheckout')->isMobile();
+	if(!$is_mobile):?>
+	var el = $('iwdavPopupOverlay');
+	el.setStyle({
+	width: ww+'px',
+	height: hh+'px'
+	});
+
+	el.show();
+	<?php else:?>
+	$('onepagecheckout_orderform').hide(); // hide form for mobile devices 
+	<?php endif;?>
+	}
+	function close_verification()
+	{
+	<?php $is_mobile	= Mage::helper('onepagecheckout')->isMobile();
+	if(!$is_mobile):?>        
+	$("iwdavPopupOverlay").hide();
+	<?php else:?>
+	$('onepagecheckout_orderform').show(); // show form for mobile devices
+	<?php endif;?>
+	$('address-verification-results').hide();
+	}
+	<?php endif; ?>
+
+	document.observe("dom:loaded", function() {
+	var win_triggers	= Array();
+	$$('.checkout-agreements .agree a').each(function(item){
+	var obj	= {
+	el: $$('.' + item.className),
+	event: 'click',
+	window: $(item.className + '-window')
+	};
+	win_triggers.push(obj);
+	});
+	opc_window	= new OPC.Window({triggers: win_triggers});
+	});
+	//]]>
+	</script>
+	<?php if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):
+		$is_mobile	= Mage::helper('onepagecheckout')->isMobile();?>
+		<div style='display:none;left:0;' class="iwdav_modal <?php if($is_mobile){echo ' iwdav_modal_mobile';}?>" id="address-verification-results">
+			<div id="checkout-address-candidates-load"></div>
+		</div>
+		<?php if(!$is_mobile):?>
+			<div id='iwdavPopupOverlay' class='iwdavPopupOverlay' style='display:none;'>&nbsp;</div>
+		<?php endif;?>
+	<?php endif; ?>
+</div>
+<script type="text/javascript">
+if(Prototype.Browser.IE){}else{
+	$('shipping:firstname').observe('blur', function(e){
+    Validation.validate($('shipping:firstname'))
+   });
+   $('shipping:lastname').observe('blur', function(e){
+    Validation.validate($('shipping:lastname'))
+   });
+   	var billEmail = $('billing:email');
+	if (billEmail) {
+		billEmail.observe('blur', function(e){
+			Validation.validate($('billing:email'));
+		});
+	}
+   $('shipping:street1').observe('blur', function(e){
+    Validation.validate($('shipping:street1'))
+   });
+   $('shipping:region_id').observe('blur', function(e){
+    Validation.validate($('shipping:region_id'))
+   });
+   $('shipping:city').observe('blur', function(e){
+    Validation.validate($('shipping:city'))
+   });
+    $('shipping:postcode').observe('blur', function(e){
+    Validation.validate($('shipping:postcode'))
+   });
+   $('shipping:telephone').observe('blur', function(e){
+    Validation.validate($('shipping:telephone'))
+   });
+   if($('verisign_cc_number')) {
+	   $('verisign_cc_number').observe('blur', function(e){
+		Validation.validate($('verisign_cc_number'))
+	   });
+   }
+   if($('paypal_direct_cc_number')) {
+	   $('paypal_direct_cc_number').observe('blur', function(e){
+		Validation.validate($('paypal_direct_cc_number'))
+	   });
+   }
+   /* if($('verisign_expiration')) {
+	   $('verisign_expiration').observe('blur', function(e){
+		Validation.validate($('verisign_expiration'))
+	   });
+   }
+   if($('paypal_direct_expiration')) {
+	   $('paypal_direct_expiration').observe('blur', function(e){
+		Validation.validate($('paypal_direct_expiration'))
+	   });
+   }  */
+   if($('mmyy_exp')) {
+	   $('mmyy_exp').observe('blur', function(e){
+		Validation.validate($('mmyy_exp'))
+	   });
+   }
+   if($('verisign_cc_cid')) {
+	   $('verisign_cc_cid').observe('blur', function(e){
+		Validation.validate($('verisign_cc_cid'))
+		if(Validation.validate($('verisign_cc_cid')) == false){
+			jQuery('#mmyy_exp').parents('li').addClass('marginBottom1');
+		}else{
+			jQuery('#mmyy_exp').parents('li').removeClass('marginBottom1');
+		}
+	   });
+   }
+   if($('paypal_direct_cc_cid')) {
+	   $('paypal_direct_cc_cid').observe('blur', function(e){
+		Validation.validate($('paypal_direct_cc_cid'))
+		if(Validation.validate($('paypal_direct_cc_cid')) == false){
+			jQuery('#mmyy_exp').parents('li').addClass('marginBottom1');
+		}else{
+			jQuery('#mmyy_exp').parents('li').removeClass('marginBottom1');
+		}
+	   });
+   }
+   $('billing:firstname').observe('blur', function(e){
+    Validation.validate($('billing:firstname'))
+   });
+   $('billing:lastname').observe('blur', function(e){
+    Validation.validate($('billing:lastname'))
+   });
+   $('billing:street1').observe('blur', function(e){
+    Validation.validate($('billing:street1'))
+   });
+   $('billing:region_id').observe('blur', function(e){
+    Validation.validate($('billing:region_id'))
+   });
+   $('billing:postcode').observe('blur', function(e){
+    Validation.validate($('billing:postcode'))
+   });
+   $('billing:city').observe('blur', function(e){
+    Validation.validate($('billing:city'))
+   });
+   $('billing:telephone').observe('blur', function(e){
+    Validation.validate($('billing:telephone'))
+   });
+}
+</script>
+<div class="returnPopup hide">
+	<div class="rp-container">
+		<div class="close"></div>
+		<div class="rp-text">
+			<p>If you are not 100% satisfied with your purchase, you can return it for a full refund or exchange it within <?php echo Mage::helper('function')->freeReturnDays();?> days of the shipping date. Returns, including free gift(s), must be unworn and in the state that you received them.</p>
+			<p>We offer FREE return shipping for US domestic orders. To request a return shipping label for your purchase, simply fill the <a id="returnshipping-dialog-opener" target="_blank" href="/awrma/guest_rma/index/" class="clickable fontcolor-type1 text-underline" onclick="s_objectID=&quot;http://www.angara.com/awrma/guest_rma/index/_1&quot;;return this.s_oc?this.s_oc(e):true">Online Return Form</a>. International customers will need to pay for return shipping. Returns may take up to 1 week to process.</p>
+		</div>
+	</div>
+</div>
+<script>
+jQuery(function() {
+	
+	function setSelectionRange(input, selectionStart, selectionEnd) {
+		if (input.setSelectionRange) {
+			input.focus();
+			input.setSelectionRange(selectionStart, selectionEnd);
+		}
+		else if (input.createTextRange) {
+		var range = input.createTextRange();
+		range.collapse(true);
+		range.moveEnd('character', selectionEnd);
+		range.moveStart('character', selectionStart);
+		range.select();
+		}
+	}
+
+	function setCaretToPos (input, pos) {
+		setSelectionRange(input, pos, pos);
+	}
+	
+	jQuery("input[title='Expiration Date']").on('keyup', function(e){
+		var a = jQuery(this).val(),
+		b = "/",
+		start = this.selectionStart,
+        end = this.selectionEnd;
+		if(jQuery(this).val().length >= 2/* && e.keyCode != '229'*/ && e.keyCode != '8'){
+			var position = 2;
+			if(a.charAt(2) != '/'){
+				if(a.charAt(0) == '/' || a.charAt(1) == '/' || a.charAt(3) == '/' || a.charAt(4) == '/'){
+					a = a.replace('/','');
+					var output = [a.slice(0, position), b, a.slice(position)].join('');
+					jQuery(this).val(output);
+				}else{
+					var output = [a.slice(0, position), b, a.slice(position)].join('');
+					jQuery(this).val(output);
+					start = start+1;
+					end = end+1;
+				}
+			}
+		}/*else{
+			if(a.charAt(0) == '/' || a.charAt(1) == '/'){
+				jQuery(this).val('0'+a);
+			}
+		}*/
+		
+		//to maintain cursor position
+		this.setSelectionRange(start, end);
+		
+		
+		if (jQuery(this).val().length == 5){
+			var data = jQuery(this).val();
+			var arr = data.split('/');
+			jQuery('input[data-id=mm]').val(parseInt(arr[0]));
+			jQuery('input[data-id=yy]').val('20'+arr[1]);
+			if($('verisign_cc_cid')) {
+				jQuery('#verisign_cc_cid').focus();
+			}
+			if($('paypal_direct_cc_cid')) {
+				jQuery('#paypal_direct_cc_cid').focus();
+			}
+		}
+	});
+});
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzuRGKkHcxNohNBAPVgjXGvl-pIgAjnY&libraries=places&callback=initAutocomplete"
+        async="async" defer="defer"></script>

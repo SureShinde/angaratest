@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Unbxdsearch_Uconfig>
+            <version>0.1.0</version>
+        </Unbxdsearch_Uconfig>
+    </modules>
+
+    <frontend>
+	<routers>
+		<uconfig>
+			<use>standard</use>
+		        <args>
+                       <module>Unbxdsearch_Uconfig</module>
+                           <frontName>uconfig</frontName>
+                 </args>
+		</uconfig>
+	</routers>
+    </frontend>
+
+<global>
+        
+        
+        
+        <models>
+            <uconfig>
+                <class>Unbxdsearch_Uconfig_Model</class>
+                <resourceModel>uconfig_mysql4</resourceModel>
+            </uconfig>
+			 
+            <uconfig_mysql4>
+                <class>Unbxdsearch_Uconfig_Model_Mysql4</class>
+                <entities>
+                    <conf>
+                        <table>unbxd_uconfig_conf</table>
+                    </conf>                   
+                </entities>
+            </uconfig_mysql4>
+        </models>
+        
+        
+         <resources>
+            <uconfig_setup>
+                <setup>
+                    <module>Unbxdsearch_Uconfig</module>
+                </setup>	
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </uconfig_setup>
+            <uconfig_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </uconfig_write>
+            <uconfig_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </uconfig_read>
+        </resources>
+  </global>
+  
+  <admin>
+        <routers>
+            <the_name_of_this_element_is_not_important_it_should_be_unique>
+                <use>admin</use>
+                <args>
+                    <module>Unbxdsearch_Uconfig</module>
+                    <frontName>uconfig</frontName>
+                </args>
+            </the_name_of_this_element_is_not_important_it_should_be_unique>
+        </routers>
+    </admin>	
+  
+</config>
+
+    

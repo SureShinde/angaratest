@@ -1,0 +1,98 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/layer.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+<?php if($this->canShowOptions()): ?>
+
+	<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+	<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+	<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+	
+	<div class="refine-title center-align" id="refine"><i class="fa fa-filter fa-fw"></i> Filters</div>
+	
+	<div id="filter-panel" class="hidden">
+		<div class="filter-heading fl">
+			<span class="title fl mL10">Refine</span><span class="fr close-nav" onclick="filterClose();"></span>
+		</div>
+		<div class="filter-holder">
+			<div class="filter-action">
+				<?php //if ($state[1] AND $this->bNeedClearAll()): ?>
+					<?php /*?><div class="col-xs-8 col-md-10 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i> Refine</div><?php */?>
+					<div class="clear-filter fl"><a id="clear-all" class="adj-nav-clearall center-align" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>">Clear All</a></div>
+					<?php /*else: ?>
+					<div class="col-xs-12 padding-type-8 fontsize-type3 text-left clickable" data-toggle="collapse" data-to-toggle="#filter-panel"><i class="fa fa-filter fa-fw"></i> Refine<span id="catalog-filter-toggle"><i class="fa fa-angle-down fa-fw pull-right"></i></span></div>
+				<?php *///endif ?>
+				<div class="apply-filter fl pull-right"><a id="apply" class="adj-nav-apply center-align">Apply</a></div>
+			</div>
+			
+			<?php $_filters = $this->getFilters() ?>
+			<div class="filters">
+				<?php foreach ($_filters as $_filter): ?>
+				<?php if($_filter->getName() != 'Category'): ?>
+				<?php $colSize = 2; if($_filter->getName() == 'Price' || $_filter->getName() == 'Style') $colSize = 1;?>
+				<?php //	S:VA	Hide attributes with less than 1 options	
+				if($_filter->getItemsCount()>1 || $_filter->getName() == 'Price') {?>
+                    <div class="catalog-filter clickable">
+                        <div class="catalog-filter-nav-item" id="filter-<?php echo $_filter->getVar()?>"><?php echo $_filter->getName();?></div>
+                    </div>
+                <?php } ?>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+			<div class="">
+				<?php foreach ($_filters as $_filter): ?>
+				<?php if($_filter->getName() != 'Category'): ?>
+				<?php //	S:VA	Hide attributes with less than 1 options	
+				if($_filter->getItemsCount()>1 || $_filter->getName() == 'Price') {?>
+                	<div id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="catalog-filter-content" style="display:none;"> <?php echo $_filter->getHtml() ?> </div>
+                <?php } ?>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<?php /* <div id="applied-filter-list-container" class="row high-margin-top no-gutters text-left small hidden">
+		<div class="col-md-1 col-sm-2">
+				<div class="low-padding-top low-padding-left nowrap">Applied Filters: </div>
+		</div>
+		<div class="col-md-11  col-sm-10">
+				<div id="applied-filter-list"></div>
+		</div>
+	</div> */ ?>
+	<script type="text/javascript">adj_nav_init();</script> 
+<?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+		if ('function' == typeof(sns_layer_add_attr)){
+			sns_layer_add_attr();
+		}
+		adj_nav_toolbar_init();
+	
+		jQuery(document).ready(function(){
+			//to set height main head navigation
+			var wHeight = jQuery(window).height();
+			jQuery('#filter-panel').css('height','100%');
+			jQuery('#filter-panel .filter-holder, #filter-panel .filter-holder .filters, #filter-panel .filter-holder .catalog-filter-content').css('height','100%');
+		});
+	
+	//	Show filter panel in left
+		jQuery('#refine').click(function(){
+			jQuery('body, html').css('overflow-y','hidden');
+			jQuery('#products-grid, header, .page-title, #catalogBannerMobile, .catalog-slider').css('opacity','0');
+			jQuery('#filter-panel').removeClass('hidden');
+		});
+	
+	jQuery( "#clear-all" ).click(function() {
+		jQuery('#adj-nav-params').val('');	
+		jQuery('span.iner-btn').removeClass('radio-active');	
+		jQuery('#most-popular span.iner-btn').addClass('radio-active');		//	Select Most Popular						
+	});
+</script> 

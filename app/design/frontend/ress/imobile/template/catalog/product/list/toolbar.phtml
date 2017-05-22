@@ -1,0 +1,62 @@
+<?php /*?><script type="text/javascript">
+function adj_nav_toolbar_make_request_hp(val){
+	setLocation(val);
+}
+function setLocation_hp(val){
+	setLocation(val);
+}
+</script><?php */?>
+
+<?php /*
+if($this->getCollection()->getSize()):
+	//if($this->getFirstNum() == 1): 
+		// Sorting dropdown on catalog page ?>
+		<div class="sort-box">
+			<select onchange="setLocation_hp(this.value);catalogSortByChange(this.options[this.selectedIndex].text);" class="uppercase">
+				<option value="<?php echo $this->getOrderUrl('position', 'asc');?>"<?php if($this->isOrderCurrent('position') || $this->isOrderCurrent('relevance')){?> selected="selected"<?php }?>><?php echo $this->__('Most Popular') ?></option>
+				<option value="<?php echo $this->getOrderUrl('price', 'asc');?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'){?> selected="selected"<?php }?>><?php echo $this->__('Price: Low to High') ?></option>
+				<option value="<?php echo $this->getOrderUrl('price', 'desc');?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'){?> selected="selected"<?php }?>><?php echo $this->__('Price: High to Low') ?></option>
+			</select>
+		</div>
+        <div class="list-grid-view">					
+		<?php 
+		// Modes on catalog page
+        if($this->isEnabledViewSwitcher()): ?>
+            <div class="view-holder">
+                <span id="pro-count-source" class="hidden"><?php echo $this->getCollection()->getSize();?></span>
+                <?php 
+				if($this->isModeActive('list')): ?>
+                    <span class="fa fa-list fa-fw color-of-action"></span>
+                <?php 
+                else: ?>
+                    <a href="<?php echo $this->getModeUrl('list') ?>"><span class="fa fa-list fa-fw text-primary"></span></a>
+                <?php 
+                endif;
+                if($this->isModeActive('grid')): ?>
+                    <span class="fa fa-th fa-fw color-of-action"></span>
+                <?php 
+                else: ?>
+                    <a href="<?php echo $this->getModeUrl('grid') ?>"><span class="fa fa-th fa-fw text-primary"></span></a>
+                <?php 
+                endif; ?>
+            </div>
+        <?php 
+        endif; ?>
+        </div>    
+	<?php 
+	//endif; ?>
+	<div class="toolbar hidden">
+		<div class="pager"><?php echo $this->getPagerHtml(); ?></div>
+	</div>
+<?php 
+endif; */?>
+
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('#pro-count-destination small').html('');		
+	var proCount = '<?php echo $this->getCollection()->getSize();?>';
+	if(proCount.length > 0){
+		jQuery('#pro-count-destination small').append('('+proCount+')');
+	}
+});
+</script>

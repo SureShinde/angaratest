@@ -1,0 +1,82 @@
+<script type="text/javascript">// <![CDATA[
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({wrap: 'circular'});
+});
+// ]]></script>
+
+<div class="container showcase-bg-white">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="bs-callout bs-callout-danger"><i class="fa fa-warning fontsize-type6"></i> Seems like the tech guy on the other end messed up.. or are you trying some broken link? In any case, same techie is now working hard to make everything work fine for you and is thanking you for the patience!!</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 has-slider max-margin-bottom">
+      <?php	$_coreHelper = Mage::helper('core');
+		$_imageHelper = Mage::helper('catalog/image');		
+		$top10jewelrySkus = array('SR0160S', 'SE0102AQ', 'SP0155R', 'SR0218E_N', 'SP0547S', 'SE0118E', 'SE0126S', 'SP0158T', 'SE0139R', 'SP0102E')		
+		?>
+      <div class="bottomcontentpart visible-md">
+        <div class="headingstyle">
+          <h3 class="high-margin-bottom">TOP SELLERS</h3>             
+          <div class="ress-slider-wrapper showcase-bg-light" style="height:178px">
+         	 <div class="ress-slider ress-slider-horizontal" data-items-to-show="6"  data-slider-type="indexable"  data-total-items="<?php echo count($top10jewelrySkus);?>">
+          <div id="mycarousel" class="jcarousel-skin-tango">
+            <?php foreach($top10jewelrySkus as $sku){ 
+			$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+		?>
+            <div class="ress-slider-item pull-left padding-type-15 low-padding-bottom text-center"><a href="<?php echo $product->getProductUrl();?>" class="block-display"><img src="<?php echo $_imageHelper->init($product, 'small_image')->resize(120); ?>" alt="<?php echo $_coreHelper->stripTags($product->getName(), null, true); ?>" width="131" height="131" /><br />
+              <span class="block-display low-padding-top"><?php echo $_coreHelper->currency($product->getFinalPrice() ,true,true); ?></span> </a></div>
+            <?php } ?>            
+          </div>
+          </div>
+          </div>
+          <div class="high-padding-right high-padding-left text-right" style="height:28px">         
+				<div class="low-padding-top">
+					<?php for($itemIndex = 0; $itemIndex < count($top10jewelrySkus) - 5; $itemIndex++): ?>
+					<i class="fa fa-circle<?php echo ($itemIndex==0)?"":"-o"?> ress-slider-index clickable" data-item-index="<?php echo $itemIndex; ?>"></i>
+					<?php endfor; ?>
+				</div>
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row max-padding-bottom">
+    <div class="col-sm-4 col-xs-12 max-margin-bottom">
+      <div class="showcase-box-side-shadow padding-type-3 no-route-links-box">
+        <h3 class="showcase-bg-dark no-margin padding-type-5 high-padding-left">Top Sellers</h3>  
+          <ul class="list-unstyled padding-type-15">
+            <li><a href="/rings/sapphire-rings.html">Sapphire Rings</a></li>           
+            <li><a href="/rings/ruby-rings.html">Ruby Rings</a></li>            
+            <li><a href="/pendants/sapphire-necklace-pendants.html">Sapphire Pendants</a></li>
+			<li><a href="/pendants/ruby-necklace-pendants.html">Ruby Pendants</a></li>			
+            <li><a href="/earrings/emerald-earrings.html">Emerald Earrings</a></li>
+			<li><a href="/jewelry/moissanite-jewelry.html">Moissanite Jewelry</a></li>
+			<li><a href="/engagement-rings/gemstone-engagement-rings.html">Gemstone Engagement Rings</a></li>
+          </ul>       
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-12 max-margin-bottom">
+      <div class="showcase-box-side-shadow padding-type-3 no-route-links-box">
+        <h3 class="showcase-bg-dark no-margin padding-type-5  high-padding-left">Top Categories</h3>        
+          <ul class="list-unstyled padding-type-15">           
+            <li><a href="/rings.html">Rings</a></li>
+            <li><a href="/earrings.html">Earrings</a></li>
+            <li><a href="/pendants.html">Pendants</a></li>
+            <li><a href="/birthstone-jewelry.html">Birthstone Jewelry</a></li>
+			<li><a href="/wedding-rings.html">Wedding Bands</a></li>
+          </ul>        
+      </div>
+    </div>
+    <div  class="col-sm-4 col-xs-12 max-margin-bottom">
+      <div class="showcase-box-side-shadow padding-type-3 no-route-links-box">
+        <h3 class="showcase-bg-dark no-margin padding-type-5 high-padding-left">Deals &amp; Offers</h3>
+        <div class="padding-type-15">
+          <a href="/coupons.html"><img src="/skin/frontend/ress/default/images/deal-and-offers.jpg" class="img-responsive" alt="Deals and Offers"  title="Deals and Offers" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

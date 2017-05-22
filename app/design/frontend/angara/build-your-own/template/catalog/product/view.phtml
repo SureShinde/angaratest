@@ -1,0 +1,1040 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+  $cumbs= $this->getLayout()->getBlock('breadcrumbs'); $cumbs=$cumbs->_crumbs; $count_cumbs =  count($cumbs);
+  if($cumbs && is_array($cumbs)) {
+  $i=1;$tracCategory;
+   foreach($cumbs as $_crumbName=>$_crumbInfo){
+	  if($_crumbInfo['link']){
+		if($i!=$count_cumbs-1){$i = $i+1; } else {$tracCategory= $_crumbInfo['label'] ; $i = $i+1;}
+	  }
+   }
+  } 
+?>
+<div id="price_loading" style="background-color: #FFFFFF;;bottom: 0;left: 0;opacity: 0.6;filter: alpha(opacity = 60);-moz-opacity:0.6;position: fixed;right: 0;top: 0;z-index: 9999;display:none;"><span style="text-align:center;height: 100%;left: 0;opacity: 0.8;position: absolute;top: 300px;width: 100%;z-index: 500;"><img src="/skin/frontend/angara/default/images/adj-nav-progress.gif" /></span></div>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+if(isset($_SESSION['product_quality_price'])){
+	unset($_SESSION['product_quality_price']);
+}
+if(isset($_SESSION['product_engraving_type'])){
+	unset($_SESSION['product_engraving_type']);
+}
+function getStoneTypeCodeVal($type=NULL)
+{
+	//echo 'type: '.$type;
+	$code='';
+	switch (strtolower($type)) {
+		case 'emerald':
+			$code='em';
+			break;
+		case 'ruby':
+			$code='ru';
+			break;
+		case 'blue sapphire':
+			$code='sa';
+			break;
+		case 'lab created sapphire':
+			$code='sa';	
+			break;
+		case 'tanzanite':
+			$code='tz';
+			break;					
+	}
+	return $code;	
+}
+function getStoneShapeCodeVal($shape=NULL)
+{
+	//echo ' shape: '.$shape;
+	$code='';
+	switch (strtolower($shape)) {		
+		case 'cushion':
+			$code='cu';
+			break;
+		case 'emerald cut':
+			$code='em';
+			break;
+		case 'heart':
+			$code='hr';
+			break;
+		case 'marquise':
+			$code='mq';
+			break;
+		case 'oval':
+			$code='ov';
+			break;
+		case 'pear':
+			$code='pe';
+			break;
+		case 'round':
+			$code='rd';
+			break;
+		case 'square':
+			$code='sq';
+			break;
+		case 'trillion':
+			$code='tr';
+			break;									 
+	}
+	//echo ' code:  '.$code;
+	return $code;	
+}
+if(isset($_SESSION['code_arr']) && !empty($_SESSION['code_arr'])){
+	unset($_SESSION['code_arr']);
+}
+?>
+
+<?php
+$_SESSION['code_arr']['stone_type_code'] = getStoneTypeCodeVal($_product->getAttributeText('emb_stone_name2'));
+$_SESSION['code_arr']['stone_shape_code'] = getStoneShapeCodeVal($_product->getAttributeText('emb_shape2'));
+$_SESSION['code_arr']['stone_shape_code_ss_img'] = getStoneShapeCodeVal($_product->getAttributeText('emb_shape1'));
+$_SESSION['code_arr']['product_default_stone_shape'] = $_product->getAttributeText('emb_shape2');
+$_SESSION['code_arr']['product_default_stone_size'] = $_product->getData('emb_dimension2');
+
+$_SESSION['code_arr']['product_default_side_stone'] = $_product->getAttributeText('emb_stone_name2');
+
+$_SESSION['code_arr']['product_side_stone_val'] = $_product->getAttributeText('emb_stone_name');
+
+$_SESSION['code_arr']['product_default_metal'] = $_product->getAttributeText('metal');
+$_SESSION['code_arr']['product_default_grade'] = $_product->getAttributeText('emb_quality_grade2');
+
+$_SESSION['code_arr']['product_number_of_stone'] = $_product->getData('emb_number_of_stones2');
+
+// new variables
+$_SESSION['code_arr']['product_yg_weight'] = $_product->getData('emb_fourteen_yg_weight'); 
+$_SESSION['code_arr']['product_wg_weight'] = $_product->getData('emb_fourteen_wg_weight');
+$_SESSION['code_arr']['product_sl_weight'] = $_product->getData('emb_sl_weight');
+$_SESSION['code_arr']['product_pl_weight'] = $_product->getData('emb_pl_weight');
+$_SESSION['code_arr']['product_extra_labor_cost'] = $_product->getData('emb_extra_cost');
+//print_r($_SESSION['code_arr']);
+?>
+<style>
+.col-main {
+	float:none !important;
+}
+
+.col-main
+{
+min-height: 300px;
+height:auto !important;
+height:300px;
+width:auto;
+}
+.spacing{   
+    padding-top:0;
+}
+
+.spacing dl {
+    border-top:0;
+    padding-top:0;
+}
+.alldetailboxmain .spacing{   
+    padding-top:10px;
+}
+
+.alldetailboxmain .spacing dl {
+    border-top:1px solid #D3D3D3;
+    padding-top:10px;
+}
+.alldetailboxmain {
+	width:416px!important;
+	padding:13px 6px 0 7px!important;
+	padding:13px 0px 0 1px;
+	width:428px;
+	height:337px;
+	background-color: #F6F6F6;
+	border: 1px solid #E7E7E7;
+	float:left;
+	margin-right:18px;
+}
+
+</style>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+		var currencySign = optionsPrice.priceFormat.pattern;
+		currencySign = currencySign.substring(0, currencySign.indexOf('%'));
+</script>
+<script type="text/javascript">
+	jQuery(function(){		
+		jQuery('#your_message').keypress(function(e){
+			var limit = 2500;
+			var remainingChars = limit - jQuery(this).val().length;
+			jQuery('#msgCharsLeft').html('<font size="1" face="Verdana" color="#555555"><span>'+remainingChars+' characters remaining</span></font>')
+			if(remainingChars < 1){
+				e.preventDefault();
+				jQuery(this).val(jQuery(this).val().slice(0,limit)).focus();
+			}
+		})		
+	})	
+</script>
+<?php
+//echo $this->helper('core/url')->getCurrentUrl();
+//echo '<pre>';print_r($this->getRequest());echo '</pre>';
+$all_steps_arr = array('select_stone_size','select_side_stone','select_stone_quality','select_metal_type','engraving');
+if(isset($_REQUEST['build_step']) && !empty($_REQUEST['build_step']) && in_array(@$_REQUEST['build_step'],$all_steps_arr))
+{
+?>
+<?php $_options = Mage::helper('core')->decorateArray($_product->getOptions()) ?>
+<?php //echo '<pre>';print_r($_options);echo 'anil jain</pre>';?>
+<div class="wrapper">
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form" name="prodpage">
+  <div class="no-display"> 
+  <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" /> 
+  <input type="hidden" name="related_product" id="related-products-field" value="" />
+  <input type="hidden" name="product_quality_price" id="product_quality_price" value="0" />
+  <input type="hidden" name="product_engraving_type" id="product_engraving_type" value="" />  
+  <input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/> 
+  </div>  
+  <div class="wrapperthumb">
+  	<div class="shares customstep2">
+        <ul>
+          <li class="share">Share:</li>
+          <li class="email"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" ></a></li>
+          <li class="facebook"><a href="http://www.facebook.com/Angaradotcom" target="_blank"></a></li>
+          <li class="twiter"><a href="http://www.twitter.com/Angara" target="_blank"></a></li>
+        </ul>
+    </div>    
+<!-- step thumb code start here -->	
+<?php 
+$p=1;	
+$steps_arr = array();
+?>   
+<?php foreach($_options as $_option): ?>
+	<?php $optionType = $_option->getType(); ?>
+	<?php //echo $optionType.'=='; ?>            
+	<?php $values = $_option->getValues(); ?>		
+	<?php
+	$skuArr = '';
+	$product_option_type = '';	
+	if(count($values)>0)
+	{
+		foreach ($values as $k => $v):
+			$skuArr[] = $v->getSku();					
+			if (stripos($v->getSku(), 'CS') !== false) {					
+				$product_option_type = 'stone_size';				
+			}elseif (stripos($v->getSku(), 'SS') !== false) {
+				$product_option_type = 'side_stone';				
+			}elseif (stripos($v->getSku(), 'SQ') !== false) {
+				$product_option_type = 'stone_quality';				
+			}elseif (stripos($v->getSku(), 'MT') !== false) {
+				$product_option_type = 'metal_type';				
+			}else {
+				$product_option_type = 'ring_size';				
+			}
+		endforeach;
+	}else{
+		if($optionType=='field')
+		{	
+			$product_option_type = 'engraving';			
+		}
+	}
+	$steps_arr[] = $product_option_type;
+	?>
+	<?php //echo '<pre>';print_r($skuArr);echo '</pre>';?>
+	<?php
+	if(isset($_REQUEST['build_step_last']))
+	{
+	?>
+		<?php 
+		if($product_option_type!='ring_size')
+		{
+		?>  				
+				<?php
+				if($product_option_type!='engraving')
+				{
+					$selthumb = ($p==1?'display:block;':'display:none;');
+				?>					
+                    <a href="javascript:changeStepByThumb(<?php echo $p; ?>);">
+                    <div class="pagethumb">
+                    	<div class="activethumb" style="<?php echo $selthumb;?>" id="prod_options_step_thumb_<?php echo $p;?>">
+							<?php echo str_replace('_',' ',$product_option_type); ?>
+                        </div>
+                    	<div class="alldetailboxthumb">
+                        <?php
+                        $x=1;
+                        foreach ($values as $k => $v):                            
+							$skuname_arr = explode('-',$v->getSku());
+							$sub_img_suff = strtolower($skuname_arr[count($skuname_arr)-1]);
+							
+							if($product_option_type=='metal_type'){																
+								$item_thumbimg_name = $sub_img_suff.'.jpg';								
+							}elseif($product_option_type=='side_stone'){																
+								$item_thumbimg_name = 'ss-'.$sub_img_suff.'-'.@$_SESSION['code_arr']['stone_shape_code_ss_img'].'.jpg';	
+								//ss-stonename-shape.jpg
+							}else{
+								$item_thumbimg_name = @$_SESSION['code_arr']['stone_type_code'].'-'.@$_SESSION['code_arr']['stone_shape_code'].'-'.$sub_img_suff.'.jpg';							
+							}
+                        ?> 
+                        <div class="selectoptionthumb"><img src="/media/build_your_images/<?php echo $item_thumbimg_name; ?>" width="18" height="18" />
+                            <div class="selectoptionspricethumb">
+                                <div class="flexisizethumb">5X4mm</div>
+                                <div class="flexipricethumb">+$550</div>
+                            </div>
+                        </div>
+                        <?php
+                            $x++;
+                        endforeach;						
+                        ?>                         
+                        </div>
+						<div class="productimgthumb">
+                        	<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(74); ?>" width="74" height="74" />
+                        </div>
+                    </div>
+                    </a>
+				<?php
+				}else{
+				?>
+					<a href="javascript:changeStepByThumb(<?php echo $p; ?>);">
+                    <div class="pagethumb nonemargin">
+                    	<div class="activethumb" style="<?php echo $selthumb;?>" id="prod_options_step_thumb_<?php echo $p;?>">
+							<?php echo str_replace('_',' ',$product_option_type); ?>
+                        </div>	
+                        <div class="alldetailboxthumb">
+          <div class="yourtxtboxthumb"> <span class="yourtxtthumb"><strong>Your Text</strong></span> <span class="engravetxtthumb">
+            <input type="text" style="width:26px; height:18px; font:12px Arial, Helvetica, sans-serif, Tahoma;" readonly="readonly" />
+            </span> <small class="smallthumb">(Maximaum 10 Characters Allowed)</small> 
+            <span class="yourtxtthumb" id="yourtxtboxthumb"><strong>Engraving Price:</strong></span> </div>
+          <div class="engravingfontthumb"> 
+          	<span class="fontstylethumb">
+            	<img src="/skin/frontend/angara/default/images/build-your-own/engraving-font1.jpg" alt="style1" width="15" height="15" />
+            </span> 
+          	<span class="fontstylethumb" style="float:right" >
+            	<img src="/skin/frontend/angara/default/images/build-your-own/engraving-font2.jpg" alt="style2"width="15" height="15" />
+            </span> 
+          </div>
+          <div class="clear"></div>
+          <div class="engravingnotethumb">Any engraving will make this product not returnable!</div>
+        </div>
+						<div class="productimgthumb"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(74); ?>" width="74" height="74" /></div>
+                    </div>    
+                    </a>
+				<?php	
+				}
+				?>
+			<?php $p++; ?>	
+		<?php
+		}
+		?>
+	<?php
+	}
+	?>
+<?php endforeach; ?>
+<!-- step thumb code end here -->	
+  </div>
+  <div class="wrapperbyo">
+  	<div class="spacing"> <!-- To show ring size options etc. -->
+		<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+        	<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+    </div>   
+    <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+    <div class="productimg">
+      	<?php
+			$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+			echo $_helper->productAttribute($_product, $_img, 'image');
+		?>
+        <div class="clear"></div><div class="sampleimg"><strong>Sample Image:</strong> Actual creation will be modified according to selections made.</div>
+    </div>
+    <?php else: ?>
+    <div class="productimg">
+		<?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(265).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+        <div class="clear"></div><div class="sampleimg"><strong>Sample Image:</strong> Actual creation will be modified according to selections made.</div>
+    </div>
+    <?php endif; ?>
+    <div class="multioption">
+      <div class="promoreview">
+        <div class="viewmore">Price</div>
+        <div class="flexipricebold" id="display_pricebox"><?php echo $this->getChildHtml('product_type_data') ?></div>
+        <div class="expecteship"><?php echo $this->__('Estimated ship date') ?> <span class="exshipdate">
+          <?php 	// Code Added by Vaseem Ends
+			echo $estimatedDate	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime());
+			// Code Added by Vaseem Ends
+		 ?>
+			<!--<?php echo $_product->getId().'build your own';?>-->
+          </span> 
+          </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="actionbutton" id="pagination_act">
+        <a href="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>">
+            <img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /> 
+        </a>
+        <a href="javascript:changeStep(2,'next');">
+            <img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" />
+        </a>
+    </div>
+    <div class="clear"></div>
+  </div>
+  </div>
+</form>
+<?php
+	//echo $this->getChildHtml($_REQUEST['build_step']);
+}else{
+?>
+<div class="wrapper">
+  <form enctype="multipart/form-data" id="product_addtocart_form" method="post" action="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>">
+    <input type="hidden" name="build_step" id="build_step" value="select_stone_size" />
+    <input type="hidden" name="build_step_last" id="build_step_last" value="customize_now" />
+	<input type="hidden" name="product_quality_price" id="product_quality_price" value="0" />
+  	<input type="hidden" name="product_engraving_type" id="product_engraving_type" value="" />    
+	<input type="hidden" name="category" value = "<?php echo $tracCategory ?>"/> 
+    <div class="wrappermain">
+    	<div class="shares customstep1">
+          <ul>
+            <li class="share">Share:</li>
+            <li class="email"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" target="_new"></a></li>
+            <li class="facebook"><a href="http://www.facebook.com/Angaradotcom" target="_blank"></a></li>
+            <li class="twiter"><a href="http://www.twitter.com/Angara" target="_blank"></a></li>
+          </ul>
+        </div>
+      <div class="alldetailboxmain">
+        <h1><?php echo $_product->getName() ?></h1>
+        <div class="pro-discrip"><?php //echo $_product->getShortDescription() ?></div>
+        <!--<div class="pro-price">$369.99</div>--> 
+        <?php echo $this->getChildHtml('product_type_data') ?>
+        <div>
+          <div class="spacing"> <!-- To show ring size options etc. -->
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            <?php endif;?>
+          </div>         
+          <div class="clear"></div>
+        </div>
+        <div class="customizenow">          
+          <input type="image" name="addToCartSubmit" img="" src="/skin/frontend/angara/default/images/build-your-own/customize-button.jpg" alt="Customize Now" style="margin:0px; padding:0px">
+        </div>
+      </div>
+      <?php echo $this->getChildHtml('media') ?> </div>
+  </form>  		 
+</div>
+<?php
+}
+?>
+<script type="text/javascript">
+	//<![CDATA[				
+		jQuery(function(){
+			jQuery('#product_addtocart_form').submit(function(){
+				if(typeof ClickTaleExec != 'undefined'){
+					ClickTaleExec('productAddToCartForm.submit()');
+				}
+			})
+		})			
+	
+		function trackShoppingCart(res, form){
+			if(res){
+					_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'shoppingcart', "<?php echo $_product->getSku() ?>", undefined,  true]);
+				}
+		}
+		
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+		_gaq.push(['_trackEvent', "<?php echo $tracCategory;?>", 'productview', "<?php echo $_product->getSku() ?>", undefined, true]);
+		var productAddToCartFormValidator = new Validation('product_addtocart_form', {onFormValidate: trackShoppingCart});
+		
+		productAddToCartForm.submit = function(button, url) {
+			
+			if (this.validator.validate()) {
+				var form = this.form;
+				var oldUrl = form.action;
+
+				if (url) {
+				   form.action = url;
+				}
+				var e = null;
+				try {
+					this.form.submit();
+				} catch (e) {
+				}
+				this.form.action = oldUrl;
+				if (e) {
+					throw e;
+				}
+
+				if (button && button != 'undefined') {
+					button.disabled = true;
+				}
+			}
+		}.bind(productAddToCartForm);
+
+		productAddToCartForm.submitLight = function(button, url){
+			if(this.validator) {
+				var nv = Validation.methods;
+				delete Validation.methods['required-entry'];
+				delete Validation.methods['validate-one-required'];
+				delete Validation.methods['validate-one-required-by-name'];
+				if (this.validator.validate()) {
+					if (url) {
+						this.form.action = url;
+					}
+					this.form.submit();
+				}
+				Object.extend(Validation.methods, nv);
+			}
+		}.bind(productAddToCartForm);
+	//]]>	
+</script>
+<script>	
+	/*	
+	if (em2 != null) {
+		var custom_step_first = 'prod_options-stone_size';
+	}		
+	*/
+	// currency conversion factor
+	<?php $temp_price =  1;
+		$currentCurrencyCode =   Mage::app()->getStore()->getCurrentCurrencyCode(); 
+		$baseCurrencyCode =  Mage::app()->getStore()->getBaseCurrencyCode();?>
+ 
+		var convFactor =	"<?php echo Mage::helper('directory')->currencyConvert($temp_price, $baseCurrencyCode, $currentCurrencyCode);	?>";
+		
+	// currency conversion factor
+	var custom_step_number = 1;	
+	var default_pg_url = '<?php echo $this->helper('core/url')->getCurrentUrl(); ?>';
+	function changeStep(act_step,button_type)
+	{
+		if(act_step==0){
+			window.location.href = default_pg_url;			
+		}else if(act_step==1){
+			//alert('hi');
+			/*act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(act_step+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';*/
+			act_html = '<a href="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(act_step+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';
+			document.getElementById('pagination_act').innerHTML = act_html;			
+		}else if(act_step==2){
+			act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(act_step+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';
+			document.getElementById('pagination_act').innerHTML = act_html;
+		}else if(act_step==3){
+			if(steps_code=='no_ss_eng'){	
+				act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:document.prodpage.submit();"><img src="/skin/frontend/angara/default/images/build-your-own/buyit-button.jpg" border="0" /></a>';
+				document.getElementById('pagination_act').innerHTML = act_html;
+			}else{
+				act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(act_step+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';
+				document.getElementById('pagination_act').innerHTML = act_html;		
+			}
+		}else if(act_step==4){
+			if(steps_code=='all'){			
+				act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(act_step+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';
+				document.getElementById('pagination_act').innerHTML = act_html;		
+			}else{
+				act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:document.prodpage.submit();"><img src="/skin/frontend/angara/default/images/build-your-own/buyit-button.jpg" border="0" /></a>';
+				document.getElementById('pagination_act').innerHTML = act_html;						
+			}
+		}else if(act_step==5){
+			act_html = '<a href="javascript:changeStep('+(act_step-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:document.prodpage.submit();"><img src="/skin/frontend/angara/default/images/build-your-own/buyit-button.jpg" border="0" /></a>';
+			document.getElementById('pagination_act').innerHTML = act_html;			
+		}
+		
+		if(button_type=='pre'){
+			document.getElementById('prod_options_'+custom_step_number).style.display = 'none';
+			document.getElementById('prod_options_'+(custom_step_number-1)).style.display = 'block';	
+			custom_step_number = custom_step_number - 1;	
+		}else{
+			document.getElementById('prod_options_'+custom_step_number).style.display = 'none';
+			document.getElementById('prod_options_'+(custom_step_number+1)).style.display = 'block';
+			custom_step_number = custom_step_number + 1;
+		}
+		
+		for(j=1;j<=tot_steps;j++)
+		{	
+			if('prod_options_step_thumb_'+act_step == 'prod_options_step_thumb_'+j) {	
+				document.getElementById('prod_options_step_thumb_'+j).style.display = 'block';
+			}else{
+				document.getElementById('prod_options_step_thumb_'+j).style.display = 'none';
+			}
+		}
+	}
+	var tab1_price = 0;
+	var tab2_price = 0;
+	var tab3_price = 0;
+	var tab4_price = 0;
+	var new_product_original_price = product_original_price; //0
+	var temp_product_price = product_original_price;
+	//document.getElementById('product_quality_price').value = temp_product_price;
+	document.getElementById('product_engraving_type').value = 'Brush Script';
+	
+	function prodCustomOptionChange(prod_option_id,prod_option_name,counter,tot_count,mainid,extra_cost,tabnumber,step_name,price_calculation)
+	{
+		if(price_calculation=='percentage'){
+			if(step_name == 'Stone Quality'){	
+				extra_cost = (temp_product_price * extra_cost)/100;		
+			}else{
+				extra_cost = (new_product_original_price * extra_cost)/100;
+			}
+		}else{
+			extra_cost = extra_cost;
+		}
+		document.getElementById(prod_option_id).checked = true;
+		for(j=1;j<=tot_count;j++)
+		{			
+			if('img_options_'+mainid+'_'+j == 'img_'+prod_option_id){
+				document.getElementById('img_'+prod_option_id).className = 'active';
+			}else{
+				document.getElementById('img_options_'+mainid+'_'+j).className = '';
+			}
+		}		
+		
+		// price calculation
+		if(extra_cost==''){
+			extra_cost = 0;
+		}
+		if(tabnumber==1){
+			tab1_price = extra_cost;	
+		}else if(tabnumber==2){
+			tab2_price = extra_cost;
+		}else if(tabnumber==3){
+			tab3_price = extra_cost;
+		}else if(tabnumber==4){
+			tab4_price = extra_cost;			
+		}
+		//alert(product_original_price+'  '+tab1_price+'  '+tab2_price+'  '+tab3_price+'  '+tab4_price);
+		new_product_original_price = product_original_price + (tab1_price + tab2_price + tab3_price + tab4_price);
+		document.getElementById('display_pricebox').innerHTML = '<font style="color:#B32D2C">'+ currencySign +roundNumber(new_product_original_price,2)+'</font>';	
+				
+		if(steps_code=='all' || steps_code=='no_eng'){	
+			temp_product_price = product_original_price + (tab1_price + tab2_price);
+		}else{
+			temp_product_price = product_original_price + (tab1_price);
+		}
+		//document.getElementById('product_quality_price').value = temp_product_price;		
+		//alert(temp_product_price);
+	}
+	
+	var temp_eng_text = '';
+	var eng_font_type = 0;
+	function selectEngravingStyle(font_type)
+	{
+		//eng_font_type = font_type;
+		if(font_type==0){
+			document.getElementById('fonttype0').className = 'active';								
+			document.getElementById('fonttype1').className = '';
+			document.getElementById('product_engraving_type').value = 'Brush Script';
+		}else{
+			document.getElementById('fonttype0').className = '';								
+			document.getElementById('fonttype1').className = 'active';
+			document.getElementById('product_engraving_type').value = 'Times Roman';
+		}
+	}
+	var eng_price_flag = 0;
+	var eng_price = 0;
+	function OnChangeEngravingText(eng_text_val)
+	{
+		//alert(new_product_original_price);
+		if (document.getElementById(engraving_inputbox_id) != null) {
+			//alert(document.getElementById(engraving_inputbox_id).value);
+			if(document.getElementById(engraving_inputbox_id).value!=''){	
+				if(eng_price_flag==0){	
+					tmp_product_original_price = (new_product_original_price + 75)*convFactor;				
+					eng_price_flag = 1;
+					eng_price = 75*convFactor;
+				}
+			}else{
+				if(eng_price_flag==1){	
+					tmp_product_original_price = (new_product_original_price)*convFactor;
+					eng_price_flag = 0;
+					eng_price = 0;
+				}
+			}
+		}
+		document.getElementById('display_pricebox').innerHTML = '<font style="color:#B32D2C;font-weight:bold;">'+ currencySign +roundNumber(tmp_product_original_price,2)+'</font>';		
+	}
+	function changeStepByThumb(step_num)
+	{
+		for(i=1;i<=tot_steps;i++)
+		{
+			if(i==step_num){				
+				document.getElementById('prod_options_'+i).style.display = 'block';	
+				document.getElementById('prod_options_step_thumb_'+i).style.display = 'block';				
+			}else{
+				document.getElementById('prod_options_'+i).style.display = 'none';
+				document.getElementById('prod_options_step_thumb_'+i).style.display = 'none';				
+			}
+			
+			if(step_num==tot_steps){	
+				act_html = '<a href="javascript:changeStep('+(step_num-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:document.prodpage.submit();"><img src="/skin/frontend/angara/default/images/build-your-own/buyit-button.jpg" border="0" /></a>';
+				document.getElementById('pagination_act').innerHTML = act_html;
+			}else{
+				//alert(step_num);
+				if(step_num==1){					
+					act_html = '<a href="<?php echo $this->helper('core/url')->getCurrentUrl(); ?>"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(step_num+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';	
+				}else{
+					act_html = '<a href="javascript:changeStep('+(step_num-1)+',\'pre\');"><img src="/skin/frontend/angara/default/images/build-your-own/previous-button.jpg" border="0" /></a><a href="javascript:changeStep('+(step_num+1)+',\'next\');"><img src="/skin/frontend/angara/default/images/build-your-own/next-button.jpg" border="0" /></a>';	
+				}				
+				document.getElementById('pagination_act').innerHTML = act_html;		
+			}
+		}
+		custom_step_number = step_num;
+	}
+	function roundNumber(rnum, rlength) { // Arguments: number to round, number of decimal places
+		newnumber = Math.round(rnum*Math.pow(10,rlength))/Math.pow(10,rlength);
+		return parseFloat(newnumber); // Output the result to the form field (change for your purposes)
+	}
+	
+	
+	
+	// new rnd 20-09-2011	
+	var sel_stone_size = '<?php if(isset($_SESSION['code_arr']['product_default_stone_size']) && !empty($_SESSION['code_arr']['product_default_stone_size'])){ echo $_SESSION['code_arr']['product_default_stone_size']; }else{ echo ''; } ?>';
+	var sel_side_stone = '<?php if(isset($_SESSION['code_arr']['product_default_side_stone']) && !empty($_SESSION['code_arr']['product_default_side_stone'])){ echo $_SESSION['code_arr']['product_default_side_stone']; }else{ echo ''; } ?>';
+	var sel_metal_type = '<?php if(isset($_SESSION['code_arr']['product_default_metal']) && !empty($_SESSION['code_arr']['product_default_metal'])){ echo $_SESSION['code_arr']['product_default_metal']; }else{ echo ''; } ?>';	
+	var sel_stone_grade = '<?php if(isset($_SESSION['code_arr']['product_default_grade']) && !empty($_SESSION['code_arr']['product_default_grade'])){ echo $_SESSION['code_arr']['product_default_grade']; }else{ echo ''; } ?>';
+	var sel_stone_shape = '<?php if(isset($_SESSION['code_arr']['product_default_stone_shape']) && !empty($_SESSION['code_arr']['product_default_stone_shape'])){ echo $_SESSION['code_arr']['product_default_stone_shape']; }else{ echo ''; } ?>';	
+	
+	var yg_weight = '<?php if(isset($_SESSION['code_arr']['product_yg_weight']) && !empty($_SESSION['code_arr']['product_yg_weight'])){ echo $_SESSION['code_arr']['product_yg_weight']; }else{ echo ''; } ?>';
+	var wg_weight = '<?php if(isset($_SESSION['code_arr']['product_wg_weight']) && !empty($_SESSION['code_arr']['product_wg_weight'])){ echo $_SESSION['code_arr']['product_wg_weight']; }else{ echo ''; } ?>';
+	var sl_weight = '<?php if(isset($_SESSION['code_arr']['product_sl_weight']) && !empty($_SESSION['code_arr']['product_sl_weight'])){ echo $_SESSION['code_arr']['product_sl_weight']; }else{ echo ''; } ?>';
+	var pl_weight = '<?php if(isset($_SESSION['code_arr']['product_pl_weight']) && !empty($_SESSION['code_arr']['product_pl_weight'])){ echo $_SESSION['code_arr']['product_pl_weight']; }else{ echo ''; } ?>';
+	var side_stone_cost = 0;
+	var extra_labor_cost = '<?php if(isset($_SESSION['code_arr']['product_extra_labor_cost']) && !empty($_SESSION['code_arr']['product_extra_labor_cost'])){ echo $_SESSION['code_arr']['product_extra_labor_cost']; }else{ echo '0'; } ?>';
+	
+	var product_number_of_stone = '<?php if(isset($_SESSION['code_arr']['product_number_of_stone']) && !empty($_SESSION['code_arr']['product_number_of_stone'])){ echo $_SESSION['code_arr']['product_number_of_stone']; }else{ echo '1'; } ?>';
+			
+	if(steps_code == 'all' || steps_code == 'no_eng'){
+		var side_stone_val = 'yes';
+	}else{
+		var side_stone_val = 'no';
+	}
+	function calculateAmountByAjax(prod_option_id,prod_option_name,counter,tot_count,mainid,extra_cost,tabnumber,step_name,price_calculation,sel_val)
+	{	
+		try{
+			hp_imagechange(step_name,sel_val);
+		}catch(ex){	
+		}
+		if(step_name == 'Stone Size'){
+			sel_stone_size = sel_val;
+		}else if(step_name == 'Side Stone'){
+			//sel_side_stone = sel_val;
+			side_stone_cost = extra_cost;			
+		}else if(step_name == 'Stone Quality'){
+			sel_stone_grade = sel_val;
+		}else if(step_name == 'Metal Type'){
+			sel_metal_type = sel_val;
+		}
+		//alert(step_name+': '+' stone size: '+sel_stone_size+', side stone: '+sel_side_stone+', metal type: '+sel_metal_type+', stone grade: '+sel_stone_grade);
+				
+		if(price_calculation=='percentage'){
+			if(step_name == 'Stone Quality'){			
+				extra_cost = (temp_product_price * extra_cost)/100;		
+			}else{
+				extra_cost = (new_product_original_price * extra_cost)/100;
+			}
+		}else{
+			extra_cost = extra_cost;
+		}
+		document.getElementById(prod_option_id).checked = true;
+		for(j=1;j<=tot_count;j++)
+		{			
+			if('img_options_'+mainid+'_'+j == 'img_'+prod_option_id){
+				document.getElementById('img_'+prod_option_id).className = 'active';
+			}else{
+				document.getElementById('img_options_'+mainid+'_'+j).className = '';
+			}
+		}		
+		
+		// price calculation
+		if(extra_cost==''){
+			extra_cost = 0;
+		}
+		if(tabnumber==1){
+			tab1_price = extra_cost;	
+		}else if(tabnumber==2){
+			tab2_price = extra_cost;
+		}else if(tabnumber==3){
+			tab3_price = extra_cost;
+		}else if(tabnumber==4){
+			tab4_price = extra_cost;			
+		}
+		
+		extra_params = 'shape='+sel_stone_shape+'&stone='+sel_side_stone+'&size='+sel_stone_size+'&metal='+sel_metal_type+'&grade='+sel_stone_grade+'&side_stone='+side_stone_val+'&yg_weight='+yg_weight+'&wg_weight='+wg_weight+'&pl_weight='+pl_weight+'&sl_weight='+sl_weight+'&side_stone_cost='+side_stone_cost+'&extra_labor_cost='+extra_labor_cost+'&number_of_stone='+product_number_of_stone;		
+		//alert(extra_params);
+		rnd_num = parseInt(Math.random()*9999999);
+		ajax_url = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/ajaxact/ajax_byoj_price.php?'+extra_params+'&rnd='+rnd_num;	
+		
+		document.getElementById('price_loading').style.display = 'block';
+		var http = false;
+		if(navigator.appName == "Microsoft Internet Explorer") {
+			http = new ActiveXObject("Microsoft.XMLHTTP");
+		} else {
+		  	http = new XMLHttpRequest();
+		}
+		http.open("GET", ajax_url);
+		http.onreadystatechange=function() {
+			if(http.readyState == 4) {
+				//alert(http.responseText);
+				new_product_original_price = parseFloat(http.responseText);
+				final_prod_price = new_product_original_price + eng_price;
+				// currecy conversion of the price
+				final_prod_price = final_prod_price * convFactor;
+				//currency conversion of price 				
+				document.getElementById('display_pricebox').innerHTML = '<font style="color:#B32D2C;font-weight:bold;">'+ currencySign +roundNumber(final_prod_price,2)+'</font>';								
+				if(sel_val == 'Silver') {				
+					matel_msg_note='<strong>Silver:</strong> The same great look as white gold at a lower price. Angara uses the highest standard available, .925 sterling silver. Silver is lighter to wear than gold.';					
+				}else if(sel_val == 'Yellow Gold') {				
+					matel_msg_note='<strong>14K Yellow Gold:</strong> Glowing and rich, yellow gold adds more color to the jewelry piece. If buying as a gift, please note that women generally have a clear preference for Yellow or White Gold - see what other jewelry she has to determine her preference.';
+				}else if(sel_val == 'White Gold') {
+					matel_msg_note='<strong>14K White Gold:</strong> The standard for fine jewelry. 14K White gold has been the most popular choice for fine jewelry over the last twenty years as it blends well with diamonds.';				
+				}else if(sel_val == 'Platinum') {
+					matel_msg_note='<strong>Platinum:</strong> The most durable and premium metal for fine jewelry. Platinum feels more substantial to wear due to its greater weight.';				
+				}				  
+				document.getElementById('matel_msg').innerHTML = matel_msg_note;
+				document.getElementById('price_loading').style.display = 'none';
+			}
+		}
+		http.send(null);
+		
+		if(steps_code=='all' || steps_code=='no_eng'){	
+			temp_product_price = product_original_price + (tab1_price + tab2_price);
+		}else{
+			temp_product_price = product_original_price + (tab1_price);
+		}
+		//document.getElementById('product_quality_price').value = temp_product_price;
+	}
+	// end 20-09-2011
+	//HPRAHI CODE
+	var hp_globalimg = '';
+	var hp_baseurl = "<?php echo Mage::getBaseUrl();?>";
+	var cur_sku = "<?php echo $_product->getData('sku')?>";
+	var cur_sku_par = cur_sku.substr(0,cur_sku.length - 1);
+	var product_default_stone_size = "<?php echo $_SESSION['code_arr']['product_default_stone_size'];?>" + ' mm';
+	var product_default_side_stone = "<?php echo $_SESSION['code_arr']['product_default_side_stone'];?>";
+	var product_default_grade = "<?php echo $_SESSION['code_arr']['product_default_grade'];?>";
+	var product_default_metal = "<?php echo $_SESSION['code_arr']['product_default_metal'];?>";
+	var sidestoneflag = 0;
+	var arrstonesize = new Array();
+	var arrsidestone = new Array();
+	var arrstonequality = new Array();
+	var arrmetaltype = new Array();
+	var arrstep = new Array();
+	var maxstonesize = '0';
+	var cursize = '350px';
+	var curmetal = '';
+	var cursidestone = '';
+	var curquality = '';
+	<?php
+		if(isset($steps_arr)){
+			for($icnt=0;$icnt < count($steps_arr);$icnt++)
+			{
+				if($steps_arr[$icnt]=='side_stone')
+				{
+					?>
+					sidestoneflag = 1;
+					<?php
+				}
+				?>
+				arrstep[arrstep.length] = "<?php echo $steps_arr[$icnt];?>";
+				<?php
+			}
+		
+			foreach($_options as $_option)
+			{
+				$values = $_option->getValues();
+				foreach ($values as $k => $v){
+					$skuArr[] = $v->getSku();					
+					if (stripos($v->getSku(), 'CS') !== false) {					
+						$product_option_type = 'stone_size';
+					}elseif (stripos($v->getSku(), 'SS') !== false) {
+						$product_option_type = 'side_stone';	
+					}elseif (stripos($v->getSku(), 'SQ') !== false) {
+						$product_option_type = 'stone_quality';
+					}elseif (stripos($v->getSku(), 'MT') !== false) {
+						$product_option_type = 'metal_type';
+					}else {
+						$product_option_type = 'ring_size';
+					}
+					
+					if($product_option_type=='stone_size'){
+						?>
+						arrstonesize[arrstonesize.length] = "<?php echo $v->getDefaultTitle();?>";
+						<?php
+					}
+					else if($product_option_type=='side_stone'){
+						?>
+						arrsidestone[arrsidestone.length] = "<?php echo $v->getDefaultTitle();?>";
+						<?php
+					}
+					else if($product_option_type=='stone_quality'){
+						?>
+						arrstonequality[arrstonequality.length] = "<?php echo $v->getDefaultTitle();?>";
+						<?php
+					}
+					else if($product_option_type=='metal_type'){
+						?>
+						arrmetaltype[arrmetaltype.length] = "<?php echo $v->getDefaultTitle();?>";
+						<?php
+					}
+				}
+			}
+		}
+	?>
+	function hp_imagechange_helper()
+	{
+		hp_globalimg = document.getElementById('image').src;
+		product_default_metal = hp_metaltype(product_default_metal);
+		for(var i=0;i<arrstonesize.length;i++)
+		{
+			str = arrstonesize[i];
+			arr1 = str.split(' ');
+			arr = arr1[0].split('x');
+			if(parseInt(maxstonesize) < parseInt(arr[0]))
+			{
+				maxstonesize = arr[0];
+			}
+		}
+		hp_setimagesize(product_default_stone_size);
+		if(sidestoneflag==1)
+		{
+			hp_imgurl(product_default_side_stone,product_default_grade,product_default_metal);
+		}
+		else
+		{
+			hp_imgurl('NA',product_default_grade,product_default_metal);
+		}
+	}
+	function hp_imgurl(sidestone,quality,metal)
+	{
+		curmetal = metal;
+		curquality = quality;
+		cursidestone = sidestone;
+		str = hp_buildimgurl(sidestone,quality,metal);
+		var oImg=new Image;
+		oImg.src=str;
+		oImg.onload=function(){document.getElementById('image').src = str;}
+   		oImg.onerror=function(){}
+	}
+	function hp_buildimgurl(sidestone,quality,metal)
+	{
+		metal = hp_metaltype(metal);
+		sidestone = sidestone.toUpperCase();
+		str = hp_baseurl + 'buildyourownimgs/' + cur_sku_par + '/' + cur_sku + '_' + sidestone + '_' + quality + '_' + metal + '.jpg';
+		return str;
+	}
+	function hp_setimagesize(str)
+	{
+		arr1 = str.split(' ');
+		arr = arr1[0].split('x');
+		wid = arr[0]/maxstonesize*350;
+		wid = parseInt(wid);
+		document.getElementById('image').style.width = wid + 'px';
+		document.getElementById('image').style.height = wid + 'px';
+		cursize = wid;
+		mr = parseInt((350 - wid)/2);
+		document.getElementById('image').style.margin = mr + 'px 0 0 ' + mr + 'px';
+	}
+	function hp_imagechange(step,val)
+	{
+		if(step == 'Stone Size')
+		{
+			hp_setimagesize(val);
+		}
+		else if(step == 'Side Stone')
+		{
+			hp_imgurl(val,curquality,curmetal);
+		}
+		else if(step == 'Stone Quality')
+		{
+			hp_imgurl(cursidestone,val,curmetal);
+		}
+		else if(step == 'Metal Type')
+		{
+			hp_imgurl(cursidestone,curquality,val);
+		}
+	}
+	function hp_metaltype(str)
+	{
+		if(str.indexOf('Yellow Gold')>-1)
+		{
+			str = "YG";
+		}
+		if(str.indexOf('White Gold')>-1)
+		{
+			str = "WG";
+		}
+		if(str.indexOf('Platinum')>-1)
+		{
+			str = "PT";
+		}
+		if(str.indexOf('Silver')>-1)
+		{
+			str = "SL";
+		}
+		return str;
+	}
+	function hp_stepimgload(step)
+	{
+		//stone_size side_stone stone_quality metal_type engraving
+		//arrsidestone arrstonequality arrmetaltype
+		if(arrstep[step] == 'side_stone') 
+		{
+			var picss = new Array();
+			for(var i=0;i < arrsidestone.length;i++)
+			{
+				str = hp_buildimgurl(arrsidestone[i],curquality,curmetal);
+				var cnt = picss.length;
+				picss[cnt] = new Image()
+				picss[cnt] = str;
+			}
+		}
+		else if(arrstep[step] == 'stone_quality') 
+		{
+			
+			var picsq = new Array();
+			for(var i=0;i < arrstonequality.length;i++)
+			{
+				str = hp_buildimgurl(cursidestone,arrstonequality[i],curmetal);
+				var cnt = picsq.length;
+				picsq[cnt] = new Image()
+				picsq[cnt] = str;
+			}
+		}
+		else if(arrstep[step] == 'metal_type') 
+		{
+			var picmt = new Array();
+			for(var i=0;i < arrmetaltype.length;i++)
+			{
+				str = hp_buildimgurl(cursidestone,curquality,arrmetaltype[i]);
+				var cnt = picmt.length;
+				picmt[cnt] = new Image()
+				picmt[cnt] = str;
+			}
+		}
+	}
+	hp_imagechange_helper();
+</script>
+
+<script language="javascript">
+	jQuery(function(){
+		if(typeof(s)!='undefined')
+			s.t();
+	})
+</script>

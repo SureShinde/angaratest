@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Angara_UtilityBackend>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+	  <depends>
+		<Mage_Adminhtml />
+		<Mage_Catalog />
+      <Mage_Rss/>
+
+	  </depends>
+    </Angara_UtilityBackend>
+  </modules>
+</config>

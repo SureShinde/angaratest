@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Customy
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Customy EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.customy.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@customy.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.customy.com/ for more information
+ * or send an email to sales@customy.com
+ *
+ * @copyright  Copyright (c) 2011 Triple Dev Studio (http://www.customy.com/)
+ * @license    http://www.customy.com/LICENSE-1.0.html
+ */
+-->
+<config>
+    <modules>
+        <Customy_Tracking>
+            <version>1.4.0</version>
+        </Customy_Tracking>
+    </modules>
+    <global>
+        <blocks>
+            <tracking>
+                <class>Customy_Tracking_Block</class>
+            </tracking>
+        </blocks>
+        <helpers>
+            <tracking>
+                <class>Customy_Tracking_Helper</class>
+            </tracking>
+        </helpers>
+        <models>
+            <tracking>
+                <class>Customy_Tracking_Model</class>
+            </tracking>
+            
+            <!-- Fix magento 1.7 bug with undef variable. you could remove this fix out of extension -->
+            <usa>
+                <rewrite>
+                    <shipping_carrier_fedex>Customy_Tracking_Model_Rewrite_Mage_Usa_Model_Shipping_Carrier_Fedex</shipping_carrier_fedex>
+                </rewrite>
+            </usa>
+            
+        </models>
+    </global>
+    
+    <frontend>
+        <routers>
+            <tracking>
+                <use>standard</use>
+                <args>
+                    <module>Customy_Tracking</module>
+                    <frontName>tracking</frontName>
+                </args>
+            </tracking>
+        </routers>
+        <layout>
+            <updates>
+                <tracking>
+                    <file>tracking.xml</file>
+                </tracking>
+            </updates>
+        </layout>  
+        <translate>
+            <modules>
+                <Customy_Tracking>
+                    <files>
+                        <default>Customy_Tracking.csv</default>
+                    </files>
+                </Customy_Tracking>
+            </modules>
+        </translate>
+        <events>
+            <controller_action_layout_load_before>
+                <observers>
+                    <customy_tracking_add_links>
+                        <class>tracking/observer</class>
+                        <method>beforeLoadLayout</method>
+                    </customy_tracking_add_links>
+                </observers>
+            </controller_action_layout_load_before>
+        </events>
+    </frontend>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Customy_Tracking>
+                    <files>
+                        <default>Customy_Tracking.csv</default>
+                    </files>
+                </Customy_Tracking>
+            </modules>
+        </translate>    
+    </adminhtml>
+    
+    <!--<admin>
+        <routers>
+            <tracking>
+                <use>admin</use>
+                <args>
+                    <module>Customy_Tracking</module>
+                    <frontName>tracking</frontName>
+                </args>
+            </tracking>
+        </routers>
+    </admin>-->
+    <default>
+        <tracking>
+            <settings>
+                <enabled>1</enabled>
+				<useajax>1</useajax>
+                <errmess></errmess>
+                <toplinks_enable>1</toplinks_enable>
+                <footerlinks_enable>1</footerlinks_enable>
+            </settings>
+			
+			<links>
+				<upsrequest><![CDATA[http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=]]></upsrequest>
+                <uspsrequest><![CDATA[http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum=]]></uspsrequest>
+                <fedexrequest><![CDATA[http://www.fedex.com/Tracking?action=track&tracknumbers=]]></fedexrequest>
+                <dhlrequest><![CDATA[http://track.dhl-usa.com/TrackByNbr.asp?ShipmentNumber=]]></dhlrequest>			
+			</links>
+			
+			<integrations>
+				<use_xtento_urls>0</use_xtento_urls>				
+				<use_webshopapps_urls>0</use_webshopapps_urls>				
+			</integrations>
+			
+        </tracking>
+    </default>
+</config>

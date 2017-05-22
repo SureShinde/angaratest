@@ -1,0 +1,381 @@
+<?php 
+$tickerState = false; 
+$offerTickerHtml =	Mage::helper('function')->getOfferCatalogTickerHtml();
+
+//if($tickerState == true && !$offerTickerHtml){
+if($tickerState == true){ ?>
+	<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/js/countdown-timer.js"></script>
+<?php } ?>
+<?php	$channel = Mage::getSingleton('core/session')->getVisitorChannel();?>
+<script>
+	function scrollTotop(){
+		//:RV - Auto scroll on page load
+		jQuery('html, body').animate({
+		scrollTop: jQuery('#gemstone-section').offset().top - 75 }, 1000);
+	}
+</script>
+<style>
+	#promotion-box{
+		position:absolute; top:21%; right:20px; /* left:0px; */
+	}
+	#promotion-box img{
+		max-width:100%; 
+	} 
+	.before-christmas {width:200px;height:36px;color:#fa505a;bottom:40px;left:89px;}
+	.tickr-width{width: 100%; position: absolute; float: left; top:19%; left: 0px; right: 0px;}
+	.tickr-holder{}
+	.tickr-style{
+	    font-weight: bold;
+		font-size: 15px;
+		position: absolute;
+		left: 50%;
+		margin-top: 4px;
+		color: #000000;
+		background:transparent;
+		text-align: center;
+		width: 186px;
+		margin-left: -93px;
+		transform:scale(1.5);
+		-webkit-transform:scale(1.5);
+		-moz-transform:scale(1.5);
+	}
+	.ofrend, .text-format {display:block; padding: 0px 0px 0px;}
+	.ofrend, .text-format, .text-format + span  {width:100%; float:left}
+	.ofrend{font-size: 20px; font-weight: normal; display:none; /* position: absolute; left: -170px; top: 11px; */}
+	.daydigits{display:none;}
+	.hourdigits, .minutedegites, .secondigits{
+		height: 40px;
+		width: 50px;
+		display: inline-block;
+		text-align: center;
+		line-height: 40px;
+		color: #000000;
+		background: transparent;
+		font-size: 35px;
+		font-weight: normal;
+	}
+	.text-format span{float:left}
+	span.daydigits + span { display: none;}
+	span.hourdigits + span, span.minutedegites + span{width: 18px; display: block; float: left; font-size: 28px; line-height: 40px;} 
+	.text-format + span span{width:50px; float:left; margin-right:18px; font-weight:300; font-size:8px;}
+	.text-format + span span:last-child{margin-right:0px;}
+	
+	.hbtext {
+			top:54%;
+			right:12.5%;
+			width:20.31%;
+			}
+	.hbtext span.btn {
+		background: transparent;
+		color: #000000;
+		text-align: center;
+		border: 1px solid;
+		height:60px;
+		font-size:26px;
+		line-height:56px;
+		width:100%;
+	}
+	.hbtext .ext-ofr-text{font-size:23px;font-weight:500;width:410px;}
+	.hbtext span.btn:hover{color:#fa505a;border:1px solid #fa505a;}
+	
+	.code-info{font-size: 28px; color: #000000; position: absolute; left:7.6%; right: 0px; top:38%; text-align: center;width:560px;} 	
+	.code-info .joy{font-size: 55px;font-family: cinzelregular;border-bottom: 1px solid #000000;}
+	.code-info .free{font-size: 22px;padding-top: 10px;} 	
+	.code-info .mom{font-size:20px;margin-top:10px;} 	
+	.code-info .c-code{display: inline-block;} 	
+	.code-info .sn-btn{display: inline-block; border: 1px solid #000000; padding:5px 20px; margin-top:15px; font-weight: 400;font-size:21px; font-weight: 500;color: #000;} 	
+	.code-info .sn-btn:hover{color:#fa505a; border-color:#fa505a}
+	
+	.code-info .sn-btn:hover, .code-info .sn-btn:focus, .code-info .sn-btn.active {
+		text-decoration:none;
+	}
+	
+	a.cta-btn{display: inline-block; text-decoration:none!important; border: 1px solid #000000; padding: 0px 15px; line-height: 40px; margin-left: 40px; font-size: 20px; line-height:40px;}
+	a.cta-btn:focus, a.cta-btn:active{color:#000000!important;}
+	a.cta-btn:hover{text-decoration:none!important; border-color:#fa505a; color:#fa505a!important;}
+	
+	@media(max-width:1680px){
+		code-info {
+			width: 500px;
+		}
+		.code-info .joy {
+			font-size:51px;
+		}
+		
+	}
+	@media(max-width:1500px){
+		.code-info {
+			width:470px;
+		}
+		
+		.code-info .joy {
+			font-size:48px;
+		}
+		.code-info .free {
+			font-size: 20px;
+			padding-top: 5px;
+		}
+		.code-info .sn-btn {
+			padding: 5px 20px;
+			font-size: 17px;
+		}
+	}
+	@media(max-width:1440px){
+		.code-info {
+			width:450px;
+		}
+		
+		.code-info .joy {
+			font-size:46px;
+		}
+	}
+	@media(max-width:1368px){
+		.code-info {
+			width: 430px;
+		}
+		.code-info .joy {
+			font-size: 44px;
+		}
+	}
+	@media(max-width:1280px){
+		
+		.code-info {
+			width:410px;
+		}
+		.code-info .joy {
+			font-size:42px;
+		}
+			
+	}
+	
+
+	@media(max-width:1440px){
+		#promotion-box img{
+			/* max-width:58%; */
+		} 
+	}
+	@media(max-width:1260px){
+		#promotion-box{top:16%;}
+		@-moz-document url-prefix() { }
+	}
+	@media (max-width:1024px){
+		.hbtext .ext-ofr-text {width:240px; margin-left:-15px;}
+		.tickr-width{top:15.5%;}
+		.tickr-style {
+			transform:scale(1.2);
+			-webkit-transform:scale(1.2);
+			-moz-transform:scale(1.2);
+		}
+		
+		.code-info {
+			width: 350px;
+		}
+		.code-info .joy {
+			font-size: 34px;
+		}
+		
+		.code-info .free {
+			font-size: 14px;
+			padding-top: 5px;
+		}
+		
+		.code-info .sn-btn {
+			padding: 3px 10px;
+			font-size: 14px;
+		}
+		
+		#promotion-box{
+		<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+			top:19%;
+		<?php }else{?>
+			top:13%;
+		<?php } ?>
+		}
+		#promotion-box img{
+			max-width:450px;
+		}
+	}
+	@media(max-width:768px){
+		.code-info {
+			width: 330px;
+		}
+		.code-info .joy {
+			font-size: 32px;
+		}
+		.code-info .free {
+			font-size: 14px;
+			padding-top: 5px;
+		}
+		.code-info .sn-btn {
+			padding: 3px 10px;
+			font-size: 12px;
+		}
+	}
+	<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	@media(max-width:768px){
+		#promotion-box{
+			top:12.5%;
+		}
+		#promotion-box img{
+			max-width:320px;
+		}
+		.tickr-width{top:31px;}
+		.tickr-holder{}
+		.tickr-style{width: 127px; left:50%; margin-left:-63px;
+			/* transform:scale(1.5);
+			-webkit-transform:scale(1.5);
+			-moz-transform:scale(1.5); */
+		}
+		.hourdigits, .minutedegites, .secondigits{
+			width:30px;
+			height:30px;
+			line-height:30px;
+			font-size:25px;
+		}
+		span.hourdigits + span, span.minutedegites + span{
+			line-height:30px;
+			font-size:20px;
+		}
+		.ofrend, .text-format{
+			padding:1px 0px 0px;
+		}
+		.text-format + span span{
+			width: 30px;
+			font-size:7px;
+			margin-top: -4px;
+		}
+		.ofrend {
+			font-size: 15px;
+			margin-top: 5px;
+			/* position: absolute; left: -120px; top:0px; */
+		}
+	}
+	<?php }else{ ?>
+	@media(max-width:650px){
+		.tickr-style{
+			left:300px;
+		}
+	}
+	<?php } ?>
+	
+</style>
+<?php if(strstr($_SERVER['HTTP_USER_AGENT'],'iPad')){ ?>
+	<div class="container-fluid showcase-bg-hero hero-banner-box pull-left relative-placeholder" style="width:100%">
+		<a href="/products?icid=home|main|hb|05152017">
+			<img id="bannerImage2" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/Hero-Banner_1024x594-05152017.jpg" class="center-block" alt="Explore gemstone Jewelry">
+		</a>
+		<div class="code-info">
+			<span class="block-display joy">SPRING BRINGS JOY</span>
+			<span class="block-display free">Free Jewelry Gift + Free Shipping</span>
+			<a href="/products?icid=home|main|hb|shpnow|05152017" class="sn-btn">Shop Jewelry</a>
+		</div>
+	</div>
+	
+	<div id="promotion-box">
+		<?php if($channel && $channel->getHomeHeroBannerTablet()):
+		$bannerTablet = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerTablet()); 		 
+		if($bannerTablet):?>
+				<?php if($bannerTablet->getUrl() != ''):?>
+					<?php //echo $bannerTablet->getUrl()?>
+					<a href="<?php echo $bannerTablet->getUrl(); ?>">
+				<?php endif;?>
+				
+				<?php echo $bannerTablet->getHtml();?>
+				<?php if($tickerState == true){ ?>
+					<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerTablet->getTickerTime());?>
+				<?php } ?>
+				
+				<?php if($bannerTablet->getUrl() != ''):?>
+					</a>
+				<?php endif;?>
+		<?php endif;
+		endif; ?>
+		<!--<a href=""><img class="img-responsive" src="/skin/frontend/ress/default/images/homepage/new-skeleton/offer-banner.png" alt="offer-banner"/></a>-->
+	</div>
+	
+<?php } else { ?>
+	<div class="container-fluid showcase-bg-hero hero-banner-box pull-left" style="width:100%; position:relative; min-height:200px;overflow:hidden">
+		<style>
+			.banner-btn{position: absolute; bottom: 10%; z-index: 2; left: 50%; width: 300px; border: 1px solid #ffffff; border-radius: 3px; text-align: center; font-size: 26px; line-height: 40px; max-width: 650px; color: #ffffff; margin-left: -140px; padding: 5px 20px;}
+			.two-banner:hover .banner-btn{border:1px solid #000000;color:#000000;}
+			.banner-btn:hover{color:#fa505a !important;border:1px solid #fa505a !important;}
+			@media(max-width:1024px){
+				.banner-btn{height:40px; font-size:18px; line-height:40px; padding:0px;}
+			}
+			@-webkit-keyframes bounce {
+				0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+				50% {-webkit-transform: translateY(-20px);}
+				50% {-webkit-transform: translateY(-10px);}
+			} 
+			@keyframes bounce {
+				0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+				50% {transform: translateY(-20px);}
+				50% {transform: translateY(-10px);}
+			} 
+			.bounce {
+				-webkit-animation: bounce 1s infinite;
+				animation: bounce 1s infinite;
+			}
+		</style>
+		<a class="two-banner" class="banner-box relative-placeholder" href="/products?icid=home|main|hb|05152017">
+			<img id="bannerImage2" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>frontend/ress/default/images/homepage/new-skeleton/Hero-Banner_1920x850-05152017.jpg" class="center-block" alt="Explore gemstone Jewelry">
+		</a>
+		<div class="code-info">
+			<span class="block-display joy">SPRING BRINGS JOY</span>
+			<span class="block-display free">Free Jewelry Gift + Free Shipping</span>
+			<a href="/products?icid=home|main|hb|shpnow|05152017" class="sn-btn">Shop Jewelry</a>
+		</div>
+		<?php /* <script>
+			function scrollWindow(){
+				jQuery('html, body').animate({
+				scrollTop: jQuery('.angara-in-press').offset().top - jQuery('.nav-header').outerHeight()}, 1000);
+			}
+		</script>
+		<div onclick="scrollWindow()" class="bounce" style="position:fixed;right: 50%;bottom:10px;font-size:50px;color:#ffffff;cursor:pointer;margin-right: -25px;">
+			<img src="/skin/frontend/ress/default/images/Down_Arrow_PINK_9_6.png" width="50" height="50"/>
+		</div> */ ?>
+	</div>
+	
+	<div id="promotion-box" style="max-width:38%">
+		<?php if($channel && $channel->getHomeHeroBannerDesktop()): ?>
+			<?php $bannerDesktop = Mage::getModel('promotions/banner')->load($channel->getHomeHeroBannerDesktop()); ?>
+			<?php if($bannerDesktop): ?>      	
+					<?php if($bannerDesktop->getUrl() != ''):?>
+						<a href="<?php echo $bannerDesktop->getUrl(); ?>">
+					<?php endif;?>
+					
+					<?php echo $bannerDesktop->getHtml(); ?>
+					<?php if($tickerState == true){ ?>
+						<?php echo Mage::helper('function')->getHomePageTickerHtml($bannerDesktop->getTickerTime());?>
+					<?php } ?>
+					
+					<?php if($bannerDesktop->getUrl() != ''):?>
+						</a>
+					<?php endif;?>
+			<?php endif; ?>
+		<?php endif;?>
+		<!--<a href=""><img class="img-responsive" src="/skin/frontend/ress/default/images/homepage/new-skeleton/offer-banner.png" alt="offer-banner"/></a>-->
+	</div>
+<?php } ?>
+
+<script>
+	function setOfferText(){
+		var explorewidth =  jQuery('.hbtext').width();
+		var ofrtextwidth = jQuery('.ext-ofr-text').width();
+		var marginpx = (ofrtextwidth - explorewidth) / 2;
+		if (ofrtextwidth > explorewidth){
+		jQuery('.ext-ofr-text').css({'margin-left': -marginpx + 'px',});
+		}
+	}
+	jQuery(function(){
+		setOfferText()
+	});
+	jQuery( window ).resize(function(){
+		setOfferText()
+	});
+</script>
+<?php /*
+<div class="xyz col-sm-12 pull-left" style="text-align: center; padding: 30px 10px; font-size: 22px;">
+	10% Off on Select Gifts For Mom + Free Jewelry Gift + Free 2 Day Shipping 
+	<a href="/mothers-jewelry?icid=home|main|hb|shp-gift-for-mom|05082017" class="cta-btn">Shop Gifts for Mom</a>
+</div> */ ?>

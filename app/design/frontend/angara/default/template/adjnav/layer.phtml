@@ -1,0 +1,344 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro for Magento 20/04/11
+ * Package:     AdjustWare_Nav_2.1.1_0.1.4_8_74006
+ * Purchase ID: QgBMpw5YKeeQ8cDxt9xj7DfR5rzlpaEBHoIuAZvOxv
+ * Generated:   2011-06-08 07:09:19
+ * File path:   app/design/frontend/default/default/template/adjnav/layer.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<style>
+.default-adjnav{
+ 	background: url("/skin/frontend/angara/default/images/adj-nav-progress.gif") no-repeat scroll center 108px #FFFFFF;
+    text-indent: -999px;
+}
+</style>
+<?php
+/*
+ * Adding javascript include
+ */
+if ('ajax' != Mage::app()->getRequest()->getControllerName())
+{
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+    ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+<?php
+    else:
+    ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-13.js');?>"></script>
+<?php
+    endif;
+}
+?>
+<?php
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+?>
+
+
+
+<script type="text/javascript">
+	var currentcategory_hp = "<?php echo Mage::registry('current_category')->getName();?>";
+	function qualitypopuphelper_hp()
+	{
+		var suburl_hp ='';		
+		if(currentcategory_hp.indexOf("Blue Sapphire")>-1)
+			{
+				suburl_hp = "sapphire";
+			}
+			if(currentcategory_hp.indexOf("Ruby")>-1)
+			{
+				suburl_hp = "ruby";
+			}
+			if(currentcategory_hp.indexOf("Emerald")>-1)
+			{
+				suburl_hp = "emerald";
+			}
+			if(currentcategory_hp.indexOf("Tanzanite")>-1)
+			{
+				suburl_hp = "tanzanite";
+			}
+			return suburl_hp;
+	}
+	
+	jQuery(function(){
+		jQuery('.qualitypopupbtn').click(function(e){
+			e.stopPropagation();			
+			var suburl_hp = qualitypopuphelper_hp();			
+		    jQuery('.view-more-popup-btn').show();
+			jQuery('.view-more-popup').hide();
+			jQuery('#roundstonepopup').hide();
+			jQuery('#qualitypopup').show();
+			
+			if(jQuery('#qualitypopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/' + suburl_hp + 'quality.html',
+				success: function(matter){
+						jQuery('#qualitypopup').html(matter);
+						jQuery('#qualitypopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})						
+						jQuery('.view-more-popup-btn').click(function(){
+							jQuery(this).parent().find('.view-more-popup').show();
+							jQuery(this).hide();
+						})
+					}
+				})
+			}
+		})
+		
+		
+		jQuery('.stonesizeround').click(function(e){
+			var suburl_hp = qualitypopuphelper_hp();	
+			e.stopPropagation();
+			jQuery('#qualitypopup').hide();
+			jQuery('#roundstonepopup').show();
+			
+			if(jQuery('#roundstonepopup').data('loaded')!='yes'){
+				jQuery.ajax({
+				url:'/skin/frontend/angara/default/staticdata/r-' + suburl_hp + 'stonesize.html',
+				success: function(matter){
+						jQuery('#roundstonepopup').html(matter);
+						jQuery('#roundstonepopup').data('loaded','yes');
+						jQuery('.popupboxcross').click(function(){
+							jQuery('.popupboxnew').hide();
+						})				
+					}
+				})
+			}
+		})				
+
+		})
+	</script>
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+
+<div class="block block-layered-nav adj-nav">
+<script>
+if(typeof mboxvar!= 'undefined'){
+	jQuery('.proddetails').each(function(){
+		var thiss=jQuery(this).find('#cat-price-range');
+		if(thiss.length>0){
+			var price=thiss.html().split(' -');
+			var len=price.length;
+			price[0]=price[0]+'.00';
+			price[1]=price[1]+'.00';
+			var text='';
+			if(len>1)text=' -'+price[1];
+			jQuery(this).find('#cat-price-range').html(price[0]+text);
+		}
+		else jQuery(this).find('.singlepricerange').html(jQuery(this).find('.singlepricerange').html()+'.00');
+	});
+}
+</script>
+  <div id="qualitypopup" class="popupboxnew"></div>
+  <div id="roundstonepopup" class="popupboxnew"></div>
+  <!--<div class="block-title">
+        <strong><span><?php echo $this->__('Shop by')?></span></strong>
+    </div>-->
+  <div class="block-content"> <?php echo $this->getStateHtml() ?>
+    <?php if($this->canShowOptions()): ?>
+    <div class="narrow-by">
+      <input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+      <input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+      <input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+      <dl id="narrow-by-list">
+        <?php $obj = new Mage_Catalog_Block_Navigation(); ?>
+        
+        <?php if ($state[1] AND $this->bNeedClearAll()): ?>
+        <div class="actions adj-clear-all"><a onclick="return false;" class="adj-nav-clearall" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><?php echo $this->__('Clear All') ?></a></div>
+        <?php endif ?>
+        <?php $_filters = $this->getFilters() ?>
+        <?php $nn = 0; ?>
+		<?php foreach ($_filters as $_filter): ?>
+		<?php 
+		// added by anil jain to hide duplicate Gemstone Type filter from left nav - 07-12-2011
+		if(strtolower($this->__($_filter->getName())) == 'gemstone type'){
+			if($nn > 0){
+				continue;	
+			}
+			$nn++;
+		}
+		// added by anil jain to hide duplicate Gemstone Type filter from left nav - 07-12-2011
+		?>
+        <?php if (($_filter->getItemsCount()>1 || $_filter->getName() == "Price") && $_filter->getName() != "Category" && $_filter->getVar() !='metal_type' && $_filter->getVar() !='emb_quality_grade2'): ?>
+        <dt class="adj-nav-dt">
+          <?php if ($clearUrl = $_filter->getClearUrl()): ?>
+          <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
+          <?php endif ?>
+          <?php echo $this->__($_filter->getName()) ?>
+          <?php
+		  	//echo Mage::registry('current_category')->getName();	exit;
+			$qlty_chrt_pop = Mage::registry('current_category')->getName();
+			if (stripos($qlty_chrt_pop, 'sapphire')!==false || stripos($qlty_chrt_pop, 'ruby')!==false || stripos($qlty_chrt_pop, 'emerald')!==false || stripos($qlty_chrt_pop, 'tanzanite')!==false) {
+				if($_filter->getName()=='Quality'){
+					echo '<span class="popupicon qualitypopupbtn" id="popupicon_quality_hp"></span>';
+				}else if($_filter->getName()=='Total Carat Weight'){                  
+					//echo '<span class="popupicon stonesizeround"></span>';                        
+				}	
+			}			
+			?>
+          <script>
+						if(qualitypopuphelper_hp() == '')
+						{
+							if(typeof(popupicon_quality_hp) != "undefined"){ 	
+								document.getElementById('popupicon_quality_hp').style.display = 'none';
+							}	
+						}
+						
+					</script>
+          <div class="arrow"></div>
+        </dt>
+        <dd <?php echo $this->getHeightStyle()?> id="adj-nav-filter-<?php echo $_filter->getVar()?>"><?php echo $_filter->getHtml() ?></dd>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        <?php if($_relSearch=$obj->getCurrentCategory()->getCategoryRelSearch()): ?>
+        <dt class="adj-nav-dt even">Top Searches
+          <div class="arrow"></div>
+        </dt>
+        <dd id="adj-nav-filter-related_category" class="even">
+          <ol>
+            <?php echo $_relSearch ?>
+          </ol>
+        </dd>
+        <?php endif; 
+		if($_buyGuides=$obj->getCurrentCategory()->getCategoryBuyGuides()):
+		?>
+        <dt class="adj-nav-dt even">Buying Guides
+          <div class="arrow"></div>
+        </dt>
+        <dd id="adj-nav-filter-related_category" class="even">
+          <ol>
+            <?php echo $_buyGuides; ?>
+          </ol>
+        </dd>
+        <?php endif; ?>
+        <?php if($_relCats=$obj->getCurrentCategory()->getCategoryRelatedCategories()): ?>
+        <dt class="adj-nav-dt even">Related Categories
+          <div class="arrow"></div>
+        </dt>
+        <dd id="adj-nav-filter-related_category" class="even">
+          <ol>
+            <?php echo $_relCats; ?>
+          </ol>
+        </dd>
+        <?php endif; ?>
+      </dl>
+      <script type="text/javascript">
+            decorateDataList('narrow-by-list');
+            adj_nav_init();
+            </script>
+    </div>
+    <?php endif; ?>
+  </div>
+  <div class="adj-nav-progress" style="display:none"></div>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+if ('function' == typeof(sns_layer_add_attr))
+{
+    sns_layer_add_attr();
+}
+adj_nav_toolbar_init();
+</script>
+<?php
+    else:
+?>
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+<div class="box layered-nav adj-nav">
+  <div class="head">
+    <h3><?php echo $this->__('Shop by')?></h3>
+  </div>
+  <div class="border-creator">
+    <?php if($this->canShowOptions()): ?>
+    <div class="narrow-by">
+      <input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+      <input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+      <input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+      <dl id="narrow-by-list">
+        <?php if ($state[1] AND $this->bNeedClearAll()): ?>
+        <div class="actions adj-clear-all"><a onclick="return false;" class="adj-nav-clearall" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><?php echo $this->__('Clear All') ?></a></div>
+        <?php endif ?>
+        <?php $_filters = $this->getFilters() ?>
+        <?php foreach ($_filters as $_filter): ?>
+        <?php if ($_filter->getItemsCount()): ?>
+        <dt class="adj-nav-dt">
+          <?php if ($clearUrl = $_filter->getClearUrl()): ?>
+          <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
+          <?php endif ?>
+          <?php echo Mage::helper('catalog')->__($_filter->getName()) ?> </dt>
+        <dd <?php echo $this->getHeightStyle()?> id="adj-nav-filter-<?php echo $_filter->getVar()?>"><?php echo $_filter->getHtml() ?></dd>
+        <?php endif; ?>
+        <?php endforeach; ?>
+      </dl>
+      <script type="text/javascript">
+            decorateDataList('narrow-by-list');
+            adj_nav_init();
+            </script>
+    </div>
+    <?php endif; ?>
+  </div>
+  <div class="adj-nav-progress" style="display:none"></div>
+</div>
+<?php endif; ?>
+<?php
+    endif;
+?>
+<script type="text/javascript">
+jQuery(function(){
+	
+		/* Adjust heights of left or main column to equalize both */
+		var cm_oheight = jQuery('.col-main').outerHeight();
+		var cln_oheight = jQuery('.catleftnav').outerHeight();
+		//if(cln_oheight>cm_oheight){
+			//jQuery('.col-main').css('min-height',jQuery('.catleftnav').height() - 20 );
+		//}
+		//else{
+			jQuery('.catleftnav').css('min-height',jQuery('.col-main').height() + 20 );
+		//}
+	
+	/* adjust handle images*/
+	jQuery('.handle').css('padding-right','100%')
+	jQuery('.handle:last').addClass('handle-right');
+	
+	
+	jQuery('#narrow-by-list').find('dd').each(function(){
+		if(jQuery(this).find('li').length > 5){
+			var item = jQuery(this);
+			var haschecked = false;
+			jQuery(this).find('li:gt(4)').each(function(){
+				if(jQuery(this).find('.adj-nav-attribute-selected').length>0){
+					haschecked = true;
+				}
+			})
+			<?php 	//	Code Added by Vaseem to fix IE 7 issue starts
+				if (!stristr($_SERVER['HTTP_USER_AGENT'], "msie 7")){?>
+			if(!haschecked){
+				jQuery(this).find('li:gt(4)').hide();
+				jQuery('<div class="more-filter-link">More...</div>').appendTo(jQuery(this)).toggle(function(){
+						item.find('li:gt(4)').show(400);
+						jQuery(this).text('Less...')
+					},
+					function(){
+						item.find('li:gt(4)').hide(400);
+						jQuery(this).text('More...')
+					}
+				)
+			}
+			else{
+				jQuery('<div class="more-filter-link">Less...</div>').appendTo(jQuery(this)).toggle(function(){
+						item.find('li:gt(4)').hide(400);
+						jQuery(this).text('More...')
+					},
+					function(){
+						item.find('li:gt(4)').show(400);
+						jQuery(this).text('Less...')
+					}
+				)
+			}
+			<?php } ?>
+		}
+	})	
+
+})
+</script>

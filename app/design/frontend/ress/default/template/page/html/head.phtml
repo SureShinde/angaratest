@@ -1,0 +1,236 @@
+<title>
+<?php
+$urlCurrent = Mage::helper('core/url')->getCurrentUrl();
+$current_page = Mage::helper('page/data')->getCurrentPage(); 
+$pages = Mage::helper('page/data')->getPages();
+//$next_page=Mage::helper('page/data')->getNextPage($current_page);
+//$prev_page=Mage::helper('page/data')->getPrevPage($current_page);
+if(Mage::app()->getRequest()->getParam('showdeal') != 'true')
+{
+	$title=$this->getTitle();
+	$flag=0;
+
+	if(Mage::registry('current_product')) 
+	{
+		if(Mage::registry('current_product')->getTitleSuffix())
+		{
+			$title= $title.' | Angara';
+			$flag=1;
+			
+		}
+    }
+    else if(Mage::registry('current_category'))
+    {
+        // get page no
+    	if($current_page>1){    	  			
+			$title=$title.' - Page '.$current_page.' | Angara';
+			$flag=1;
+		}
+		else{
+			$flag=0;
+		}
+	}
+	else if(Mage::app()->getRequest()->getRouteName()=='cms')
+    {
+       	if(Mage::getSingleton('cms/page')->getTitleSuffix())
+		{
+			$title=$title.' | Angara';
+			$flag=1;
+		}
+	}
+	
+	if($flag==0)
+	{
+		echo $title.' | Angara';
+	}                                                                                    
+	else
+	{
+		echo $title;
+	}
+}
+else
+{
+	echo 'Valentine Jewelry Gifts | Angara';
+} ?>
+</title>
+<?php 
+$pageType = Mage::helper('function')->getPageType();?>
+<meta property="fb:app_id" content=118485508205347 />
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType()?>" />
+<meta name="description" content="<?php if(($pages > 1)&&($current_page!=1)):?><?php echo 'Page '.$current_page.' - '.htmlspecialchars($this->getDescription())?><?php else: ?><?php echo htmlspecialchars($this->getDescription())?><?php endif; ?>"/>
+<?php /*if($current_page == 1){?><?php echo '<meta name="keywords" content='.'"'.htmlspecialchars($this->getKeywords()).'"/>'?><?php }else if($current_page>1){?><?php echo '<meta name="keywords" content=" "/>';?><?php }*/?>
+
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+<meta content='True' name='HandheldFriendly' />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta charset="UTF-8"/>
+<?php
+$product = Mage::registry('current_product');
+if($product){
+	if($product->getId() && $product->getTypeId() == 'configurable'){	
+		if($product->hasTrioSku() && strlen($product->getTrioSku()) > 0){
+			$block = Mage::getBlockSingleton('Ayasoftware_SimpleProductPricing_Catalog_Block_Product_View_Type_Configurable')->setProduct($product);
+		} else { 
+			$block = Mage::getBlockSingleton('Mage_Catalog_Block_Product_View_Type_Configurable')->setProduct($product);
+		}	
+		$block->getJsonConfig();
+		$selectedProduct = Mage::registry('current_selected_product');
+		$product->setPrice($selectedProduct->getPrice());
+		$product->setFinalPrice($selectedProduct->getFinalPrice());
+		$product->setMsrp($selectedProduct->getMsrp());
+		$product->setImage($selectedProduct->getImage());
+		$product->setMediaGalleryImages($selectedProduct->getMediaGalleryImages());
+		Mage::unregister('current_product');
+		Mage::register('current_product',$product);
+	} else {
+		$selectedProduct = $product;
+	}	
+
+	$_coreHelper = $this->helper('core');
+	$socialDescription	=	htmlspecialchars(trim(Mage::helper('core')->stripTags($selectedProduct->getDescription())));
+	if(!$socialDescription){
+		$socialDescription	=	htmlspecialchars($selectedProduct->getMetaTitle()); 
+	}	
+	if(!$socialDescription){
+		$socialDescription	=	htmlspecialchars($selectedProduct->getShortDescription()); 
+	}
+	?>
+<meta property="og:site_name" content="Angara" />
+<meta property="og:title" content="<?php echo $selectedProduct->getShortDescription();//$this->getTitle(); ?>" />
+<meta property="og:description" content="<?php echo $socialDescription; ?>" />
+<meta property="og:url" content="<?php echo $selectedProduct->getProductUrl();?>" />
+<meta property="og:type" content="product" />
+<meta property="og:image" content="<?php echo Mage::getBaseUrl().'media/catalog/product/'.$selectedProduct->getImage();?>" />
+<meta property="og:price:amount" content="<?php echo $selectedProduct->getPrice(); ?>" />
+<meta property="og:price:standard_amount" content="<?php echo $selectedProduct->getMsrp(); ?>" />
+<meta property="og:price:currency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
+<meta property="og:availability" content="instock" />
+<meta name="twitter:card" content="product">
+<meta name="twitter:site" content="@Angara">
+<meta name="twitter:title" content="<?php echo $selectedProduct->getShortDescription();//$this->getTitle(); ?>">
+<meta name="twitter:description" content="<?php echo $socialDescription; ?>">
+<meta name="twitter:creator" content="@Angara">
+<meta name="twitter:url" content="<?php echo $selectedProduct->getProductUrl();?>" />
+<meta name="twitter:image" content="<?php echo Mage::getBaseUrl().'media/catalog/product/'.$selectedProduct->getImage();?>">
+<meta name="twitter:image:width" content="200">
+<meta name="twitter:data1" content="<?php echo $_coreHelper->currency($this->htmlEscape($selectedProduct->getPrice()),true,false);?>">
+<meta name="twitter:label1" content="Price">
+<meta name="twitter:data2" content="<?php echo $product->getSku();?>">
+<meta name="twitter:label2" content="SKU"> 
+<?php
+}
+else{?>
+<meta property="og:site_name" content="Angara" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="<?php echo $urlCurrent;?>" />
+<meta property="og:title" content="<?php echo $title;?>" />
+<meta property="og:description" content="<?php echo trim($this->getDescription());?>" />
+
+<meta name="twitter:card" content="website">
+<meta name="twitter:site" content="@Angara">
+<meta name="twitter:title" content="<?php echo $title;?>">
+<meta name="twitter:description" content="<?php echo trim($this->getDescription());?>">
+<meta name="twitter:url" content="<?php echo $urlCurrent;?>" />
+<?php	
+} ?>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<?php /*<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->*/?>
+<?php header("Vary: User-Agent");?>
+<?php echo $this->getCssJsHtml() ?><?php echo $this->getChildHtml()?><?php echo $this->helper('core/js')->getTranslatorScript() ?><?php echo $this->getIncludes() ?>
+<?php /*<!--[if lt IE 9]>
+  <script type='text/javascript' src="/skin/frontend/ress/default/js/ie8/html5.js"></script>
+  <script type='text/javascript' src="/skin/frontend/ress/default/js/ie8/respond.js"></script>
+<![endif]-->*/?>
+
+<?php 
+$currentUrl =  Mage::helper('page/data')->explodeCurrentUrl();
+$nextUrl	=	Mage::helper('page/data')->getNextPageUrl($currentUrl[0],$current_page);
+$prevUrl	=	Mage::helper('page/data')->getPrevPageUrl($currentUrl[0],$current_page);
+$lastString	=	substr($currentUrl[0], strlen($currentUrl[0])-1, strlen($currentUrl[0]));
+$currentUrlString	=	$currentUrl[0];
+if($lastString=='/'){
+	$currentUrlString	=	substr($currentUrl[0],0,-1);
+}
+?>
+<?php if($pageType == 'category' || $pageType == 'catalogsearch'){?>
+
+<?php if($current_page==1){ ?><link rel="next" href="<?php echo $nextUrl?>"/><?php ?><?php }else if(($pages-$current_page>0)&&($current_page>2)){?><link rel="prev" href="<?php echo $prevUrl?>"/><link rel="next" href="<?php echo $nextUrl?>"/><?php }else if(($pages-$current_page>0)&&($current_page==2)){?><link rel="prev" href="<?php echo $currentUrlString;?>"/><link rel="next" href="<?php echo $nextUrl?>"/><?php }else if(($pages>1)&&($pages==$current_page)){?><link rel="prev" href="<?php echo $prevUrl?>"/><?php }?>   <?php }?>
+
+<link rel="dns-prefetch" href="http://cdn.angara.com">
+<link rel="dns-prefetch" href="http://payments.amazon.com">
+<link rel="dns-prefetch" href="http://facebook.com">
+<link rel="dns-prefetch" href="http://angara.tt.omtrdc.net">
+<link rel="dns-prefetch" href="http://images-na.ssl-images-amazon.com">
+<link rel="dns-prefetch" href="http://nsg.symantec.com">
+<link rel="dns-prefetch" href="http://server.iad.liveperson.net">
+<link rel="dns-prefetch" href="http://seal-sanjose.bbb.org">
+<link rel="dns-prefetch" href="http://google-analytics.com">
+<link rel="dns-prefetch" href="http://seal.websecurity.norton.com">
+<link rel="dns-prefetch" href="http://googleads.g.doubleclick.net">
+<link rel="dns-prefetch" href="http://googleadservices.com">
+<link rel="dns-prefetch" href="http://medals.bizrate.com">
+<link rel="dns-prefetch" href="http://google.com">
+<link rel="dns-prefetch" href="http://d2lo2tipcl3aii.cloudfront.net">
+<link rel="dns-prefetch" href="http://metrics.angara.com">
+<link rel="dns-prefetch" href="http://seal.verisign.com">
+<link rel="dns-prefetch" href="http://s-static.ak.facebook.com">
+<link rel="dns-prefetch" href="http://connect.facebook.net">
+<link rel="dns-prefetch" href="http://static.ak.facebook.com">
+
+<?php
+if($pageType == 'home'){?>
+	<script type="application/ld+json">
+	{
+		<?php // site search ?>
+		"@context"	: "http://schema.org",
+		"@type"		: "WebSite",
+		"url"		: "<?php echo Mage::getBaseUrl();?>",
+		"potentialAction": {
+			"@type"		: "SearchAction",
+			"target"	: "<?php echo Mage::getBaseUrl();?>catalogsearch/result/?q={search_term_string}",
+			"query-input"	: "required name=search_term_string"
+		},
+		<?php // customer service ?>
+		"@type" 	: "Organization",
+		"name" 		: "Angara",
+		"url" 		: "<?php echo Mage::getBaseUrl();?>",
+		"legalName"	: "Angara INC",
+		"logo" 		: "<?php echo Mage::getBaseUrl();?>skin/frontend/ress/default/images/logo.png",
+		"brand"		: "Angara",
+		"description"	: "<?php echo htmlspecialchars($this->getDescription())?>",
+		"contactPoint" 	: [{
+			"@type" 	: "ContactPoint",
+			"telephone"	: "+1-888-926-4272",
+			"contactType" : "customer service"
+		}],
+		"location": [
+		{
+		  "@type": "PostalAddress",
+		  "streetAddress": "550 South Hill St, Suite 1015",
+		  "addressLocality": "Los Angeles",
+		  "addressRegion": "CA",
+		  "postalCode": "90013"
+		}],
+		<?php // social profiles ?>
+		"sameAs" : [
+			"https://www.facebook.com/Angaradotcom",
+			"https://twitter.com/angara",
+			"https://plus.google.com/+Angara",
+			"http://www.youtube.com/user/angarainc",
+			"https://www.pinterest.com/angarajewelry"
+		]	
+	}
+	</script>
+<?php 
+}?>	

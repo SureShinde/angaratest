@@ -1,0 +1,56 @@
+<?php if (Mage::getStoreConfigFlag('ajaxscroll/general/enabled')): ?>
+<?php
+	$urlImg = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'md/ajaxscroll/'.Mage::getStoreConfig('ajaxscroll/general/topb_icon');	
+	$loading_bar = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'md/ajaxscroll/'.Mage::getStoreConfig('ajaxscroll/general/loading_icon');
+	$loading_img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'md/ajaxscroll/'.Mage::getStoreConfig('ajaxscroll/general/loading_img');
+?>
+<?php 
+// Get the default setting for grid or list mode
+$productListMode = Mage::getStoreConfig('catalog/frontend/list_mode');
+$grid_per_page = Mage::getStoreConfig('catalog/frontend/grid_per_page');
+$list_per_page = Mage::getStoreConfig('catalog/frontend/list_per_page');
+if ($productListMode == 'grid-list'){
+	$productListMode = 'grid';
+	$per_page = $grid_per_page;
+}elseif($productListMode == 'list-grid'){
+	$productListMode = 'list';
+	$per_page = $list_per_page;
+}	
+// Check if this setting is overwritten by the user
+if ($this->getRequest()->getParam('mode')) {
+	if($this->getRequest()->getParam('mode') == 'grid'){
+		$productListMode = 'grid';
+		$per_page = $grid_per_page;
+	}else{
+		$productListMode = 'list';
+		$per_page = $list_per_page;
+	}
+}
+?>
+<?php if (Mage::getStoreConfig('ajaxscroll/general/enabled_top')){ ?>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery(document).ready(function() {
+	/*jQuery().UItoTop({ easingType: 'easeOutQuart' });*/
+	
+});
+</script>
+<?php }?>
+<script type="text/javascript">
+var img='<img style="padding: 10px;" class="scroll_loading" src="<?php echo $loading_img; ?>" />';
+var ft = '0';
+jQuery(document).ready(function() {
+	jQuery.ajaxscroll({
+		container : '.category-products',
+		<?php if ($productListMode == 'grid'): ?>
+		item: '.products-grid-new',
+		<?php else: ?>
+		item: '.products-list',
+		<?php endif; ?>
+		pagination: '.displayoption .pages',
+		next: '.i-next',
+		loader: '<span  style="height:40px; font:bold 12px/40px Arial, Helvetica, sans-serif; text-align:center; width:712px; border:1px solid #D4D4D4; border-top:0; display:block" class="scroll_loading"><img width="30" height="30" style="padding:4px 5px 0 0" src="/skin/frontend/angara/default/images/home-banner/more-result-loader.gif" />Loading more Results</span>'
+	});
+});
+</script>
+<?php endif; ?>

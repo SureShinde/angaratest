@@ -1,0 +1,332 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<style>
+.shipdateicon, .insruanceicon
+{width:13px;
+height:13px;
+background:url(/skin/frontend/angara/default/images/priceknowmore.jpg) center center no-repeat;
+display:inline-block;
+vertical-align:top;
+cursor:pointer;
+position:relative;}
+
+#estimatedshipdate {
+    display: none;
+    left:-296px;
+    position: absolute;
+    top:12px;
+    z-index:50;
+}
+
+#insurancepopupbox {
+    display: none;
+    right: 5px;
+    position: absolute;
+    bottom:3px;
+    z-index:50;
+}
+.ppwishlist{
+width:199px;
+text-align:right;
+padding-right:13px;
+margin-top:3px;
+color:#1E1E1E;
+font:normal 13px Arial, Helvetica, sans-serif;
+}
+
+.ppwishlist .addedwl
+{
+height:27px;
+background-color:#e6e6e6;
+font:bold 13px/27px Arial, Helvetica, sans-serif;
+color:#000;
+display:block;
+}
+.motherofficon{
+	width:13px;
+	height:13px;
+	background:url(/skin/frontend/angara/default/images/priceknowmore.jpg) center center no-repeat;
+	display:inline-block;
+	vertical-align:top;
+	cursor:pointer;
+	position: relative;
+}
+.motheroffdate {
+    display: none;
+    left:-194px;
+    position: absolute;
+    top:12px;
+    z-index:50;
+}
+</style>
+<script language="javascript">
+
+jQuery(function(){
+	jQuery('.shipdateicon').hover(function(){
+		estimateddate();
+	});
+	jQuery('.motherofficon').hover(function(){
+		motheroffer();
+	});
+});
+function estimateddate(){
+if (document.getElementById("estimatedshipdate").style.display=='block'){
+dispPayment='none';
+}else{
+dispPayment='block';
+}
+document.getElementById("estimatedshipdate").style.display=dispPayment;
+}
+function motheroffer(){
+if (document.getElementById("mother-help").style.display=='block'){
+dispPayment='none';
+}else{
+dispPayment='block';
+}
+document.getElementById("mother-help").style.display=dispPayment;
+}
+jQuery(function(){
+	jQuery('.insruanceicon').hover(function(){
+		insurancepop();
+	})
+})
+function insurancepop(){
+if (document.getElementById("insurancepopupbox").style.display=='block'){
+dispPayment='none';
+}else{
+dispPayment='block';
+}
+document.getElementById("insurancepopupbox").style.display=dispPayment;
+}
+
+</script>
+
+
+<?php $_product = $this->getProduct(); ?>
+<?php if(!isset($cids))
+	$cids = $this->getProduct()->getCategoryIds();?>
+<?php // ignoring gift cards (id:96)
+if(!in_array(96, $cids)): ?>
+<?php 
+	$appraisal_price = $this->helper('core')->currency(65,true,false);
+	$appraisal_price = ($appraisal_price=='$65.00')?'$65':$appraisal_price;
+	$pmain_sku = $_product->getSku();
+	$presku = strtolower(substr($pmain_sku, 0, 3)); // SD_
+?>
+	<?php
+	if($presku != 'sd_' && $presku != 'SD_')
+	{
+	?>
+	<div class="appraisalcert">
+		<span class="certspanbox">
+			<label onclick="">
+			   <input name="appraisal" type="checkbox" id="jewelryappraisal" autocomplete="off"/><?php // Code Added by Vaseem for BT 346?>
+				<span class="appraisaltxt">Add Jewelry Appraisal for <?php echo ($appraisal_price=='$65')?$appraisal_price:'<br />'.$appraisal_price; ?></span>   
+			</label>
+		</span>
+		<span class="certpopup"><img src="/skin/frontend/angara/default/images/priceknowmore.jpg" width="13" height="13"></span>
+		<div class="appraisalcertimg">Add Jewelry Appraisal for <?php echo $appraisal_price ?>
+			<div class="appraisalclose"></div>
+		</div>
+	</div>
+	<?php
+	}
+	?>
+<?php endif; ?>
+
+<?php /*Added by Saurabh for insurance module for issue 0000248*/ ?>
+<!--<div class="appraisalcert">
+    <span class="certspanbox">
+        <label onclick="">
+           <input name="insurance" type="checkbox"/>
+            <span class="appraisaltxt">Total Protection Warranty</span>   
+        </label>
+    </span>
+     <span class="insruanceicon">
+     <div id="insurancepopupbox">
+<div class="popup-mid" style="width:270px; text-align:left; font:12px/17px Arial, Helvetica, sans-serif;">
+Total Protection Warranty protects your jewelry for the next 5 years to ensure it looks brand new whenever you wear it. <a href="/total-protection-warranty.html" target="_blank"; style="color:#000; text-decoration:underline;">Click here</a> to Know more. </div>
+</div>     
+     </span>    
+    
+</div>-->
+<?php /*End Added by Saurabh for insurance module for issue 0000248*/ ?>
+
+<?php //	Code modified by Vaseem for Engraving Work Id 241
+	echo $this->getLayout()->createBlock('catalog/product/view')->setProduct($_product)->setTemplate('catalog/product/view/engraving_popup.phtml')->toHtml(); 
+	 //	Code modified by Vaseem for Engraving Work Id 241	
+?>
+
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+<div id="addcart" class="addcart">
+    <div class="add-to-cart">
+        <div style='display:none;'>
+		    <?php if(!$_product->isGrouped()): ?>
+            <label for="qty"><?php echo $this->__('Qty:') ?></label>
+	        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+	        <?php endif; ?>
+	        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        </div>
+        <input style="margin:0px; padding:0px" type="image" alt="Add to cart" src="/skin/frontend/angara/default/images/addcart.jpg" img="" name="addToCartSubmit" onclick="return checknotpermittedtoaddtocart();">
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+</div>
+
+<!-- Start Add to wishlist link -->
+<?php 
+//Update Started by Pankaj regarding bug id :417
+$_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+
+<div class="ppwishlist">
+<?php 
+if($this->helper('wishlist')->isAllow()){
+	$customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+	
+	if(!empty($customerId) && $this->helper('customer')->isLoggedIn()){ 	
+		
+       $wishlist = Mage::getModel('wishlist/item')->getCollection();
+        $wishlist->getSelect()
+                  ->join(array('t2' => 'wishlist'),
+                         'main_table.wishlist_id = t2.wishlist_id',
+                         array('wishlist_id','customer_id'))
+                         ->where('main_table.product_id='.$_product->getId().' AND t2.customer_id='.$customerId);
+        $count = $wishlist->count();
+		
+		if($count!=0){ 
+			echo "<span class='addedwl'>Added In Your Wishlist.</span>";
+		}
+		else{ 
+			//echo "<a href='".$_wishlistSubmitUrl ."'><img alt='Add to Wishlist' src='/skin/frontend/angara/default/images/addtowishlistbtn.jpg' /></a>";
+			echo "<a id='wishlist-link' href='".$_wishlistSubmitUrl ."'>Add to wishlist</a>";
+		}
+	}
+	else{?>
+		<?php /*?><a href="javascript:;" onclick="setWishlistUrlSession('<?php echo $_wishlistSubmitUrl; ?>');" class="customerdiscountlink"><img alt='Add to Wishlist' src='/skin/frontend/angara/default/images/addtowishlistbtn.jpg' /></a><?php */?>
+        <a id="wishlist-link" href="javascript:;" onclick="setWishlistUrlSession('<?php echo $_wishlistSubmitUrl; ?>');" class="customerdiscountlink" style="text-decoration:underline;">Add to wishlist</a>
+	<?php
+	}
+} 
+//Update Ended by Pankaj regarding bug id :417
+?>
+</div>
+<!-- End Add to wishlist link -->
+
+<div class="estimatedtime">
+<?php /*?><b><?php echo $this->__('Estimated ship date') ?> <span class="shipdateicon">
+<div id="estimatedshipdate">
+<div class="popup-mid" style="width:270px; text-align:left; font:12px/17px Arial, Helvetica, sans-serif;">
+Our products are all made to order. Based on the selection of stone size, stone quality, metal etc. we manufacture each piece of custom made jewelry from scratch. The date mentioned here is the date we estimate that your unique piece of jewelry will be ready for shipment. Shipping costs are typically free, but if you need the item to ship soon, you can choose faster shipping options on the next page.
+</div>
+</div>
+</span></b>
+<br/>
+	<div id="expected-shipping-date-original">
+	<?php 	// Code Added by Vaseem Ends
+	echo $estimatedDate	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime());
+	// Code Added by Vaseem Ends
+*/?>
+<?php // Code Added by Vaseem for BT 346
+$day0	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime());
+$day1	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime()+1);
+$day2	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime()+2);
+$day3	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime()+3);
+$day4	=	Mage::helper('function')->skipUsaHolidays($_product->getVendorLeadTime()+4);
+?>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('#jewelryappraisal').click(function(){
+		estimateShipEngraving();
+	});
+});
+
+function estimateShipEngraving(){
+	if(jQuery('#jewelryappraisal').is(":checked")){
+		// Start Code Updated by Pankaj for BT 634
+		if(jQuery('#engraveringchk').is(":checked")){
+			jQuery('#expected-shipping-date-original').html('<?php echo $day3;?>');
+			jQuery('#expected-shipping-date-extended').html('<?php echo $day4;?>');
+		}else{
+			jQuery('#expected-shipping-date-original').html('<?php echo $day2;?>');
+			jQuery('#expected-shipping-date-extended').html('<?php echo $day3;?>');
+		}
+		jQuery('#nonjewelry').show();
+		// End Code Updated by Pankaj for BT 634
+	}else{
+		if(jQuery('#engraveringchk').is(":checked")){
+			jQuery('#expected-shipping-date-original').html('<?php echo $day1;?>');
+			jQuery('#expected-shipping-date-extended').html('<?php echo $day2;?>');
+		}else{
+			jQuery('#expected-shipping-date-original').html('<?php echo $day0;?>');
+			jQuery('#expected-shipping-date-extended').html('<?php echo $day1;?>');
+		}
+		jQuery('#nonjewelry').hide();
+	}
+}
+
+</script>
+<?php /* // Code Added by Vaseem for BT 346?>
+	</div><?php */?>
+    <div class="clear"></div>
+	<div id="valentineDate" style="color:#DE513E; font-size:11px;">
+		<?php 
+		if($_product->getVendorLeadTime() <= 2){?>
+		<img height="12" width="17" src="/skin/frontend/angara/default/images/arrives-catelog-visible.png" class="vdayimgtop" alt="Valentine Gifts"><span id="mother-text">Guaranteed Delivery Before <br />Mother's Day*</span>
+		<span id="mother-help" class="motherofficon"><div class="motheroffdate"><div class="popup-mid" style="width:171px; text-align:left; font:11px/17px Arial, Helvetica, sans-serif; color:#000;">*Applicable to US customers only.<br />If you like this product to ship internationally before Mother's Day, please call 1-888-926-4272.</div></div></span>
+		<?php 
+		}
+		else{?>
+			<span id="mother-text">Call 1-888-926-4272 to Confirm Guaranteed Mother’s Day Delivery.</span>
+		<?php
+		}?>
+	</div>
+</div>
+<?php endif; ?>
+<script>
+jQuery(function(){
+	jQuery('.certpopup').click(function(){
+		jQuery('.appraisalcertimg').show();
+	})
+	jQuery('.appraisalclose').click(function(){jQuery('.appraisalcertimg').hide();})
+})
+
+function getShipmentDate()
+{
+	var id = '';
+	if(document.getElementById('cert_id'))
+	{
+		id = document.getElementById('cert_id').value;
+	}
+	//jQuery.post('/catalog/product/getfinalshipmentdate/',{id:id},shippingdateval);	
+}
+function shippingdateval(dataval)
+{	
+	//document.getElementById('expected-shipping-date-original').innerHTML = dataval;
+}
+getShipmentDate();
+</script>

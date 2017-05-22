@@ -1,0 +1,43 @@
+<?php $pageType = Mage::helper('function')->getPageType(); ?>
+<?php if($pageType == 'product'){ ?>
+	<?php if($crumbs && is_array($crumbs)){?>
+    	<?php /*	S:VA	Code added to show hidden breadcrumb for getting schema benefits only	*/	?>
+    	<ul class="hidden" itemscope itemtype="http://schema.org/BreadcrumbList">
+			<?php 
+            $i=1;
+            foreach($crumbs as $_crumbName=>$_crumbInfo){ ?>
+                <li class="<?php echo $_crumbName;?>" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <?php 
+                if($_crumbInfo['link']): ?>
+                    <a itemprop="item" href="<?php echo $_crumbInfo['link'];?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']);?>"><span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']);?></span></a>
+                    <meta itemprop="position" content="<?php echo $i;?>" />
+                <?php 
+                elseif($_crumbInfo['last']): ?>
+                    <strong itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']);?></strong>
+                    <meta itemprop="position" content="<?php echo $i;?>" />
+                <?php 
+                else: 
+                    echo $this->htmlEscape($_crumbInfo['label']);
+                endif; ?>
+                </li>
+            <?php $i++;
+			} ?>
+        </ul>
+		
+    <?php /*   Back Link
+		$totalBCLink	=	count($crumbs);
+		$i=1;	
+		foreach($crumbs as $_crumbName=>$_crumbInfo){ 
+			if( $i == ($totalBCLink -1) ){ ?>
+				<?php if($_crumbInfo['link']){ ?>
+					<a href="<?php echo $_crumbInfo['link'];?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']);?>" itemprop="url" style="display:block; position:absolute; font-size:45px; color:#585858; font-weight:200; left:0px; width:50px; text-align:center; top:-3px;">
+						<i class="fa fa-angle-left"></i>
+					</a>
+				<?php }
+			}
+			$i++;
+		} 
+	*/ 
+	}
+}
+?>
